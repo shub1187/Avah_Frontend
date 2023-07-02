@@ -1,0 +1,139 @@
+[
+    {
+        "id":"1",
+        "first_name":"fdfd",
+        "email":"asd@gmail.com",
+        "is_active":true,
+        "role":"Dealer",
+        "updated_at":"8-12-2022",
+        "location":"India"
+    },
+    {
+        "id":"2",
+        "first_name":"asda",
+        "email":"fdsdfs@gmail.com",
+        "is_active":false,
+        "role":"Dealer",
+        "updated_at":"10-1-2022",
+        "location":"Usa"
+
+    },
+    {
+        "id":"3",
+        "first_name":"HHFDHD",
+        "email":"aa@gmail.com",
+        "is_active":true,
+        "role":"Dealer",
+        "updated_at":"2-10-2022",
+        "location":"Dubai"
+    },
+    {
+        "id":"4",
+        "first_name":"FSA",
+        "email":"ssraees@gmail.com",
+        "is_active":true,
+        "role":"Dealer",
+        "updated_at":"1-9-2022",
+        "location":"canada"
+
+    },
+    {
+        "id":"5",
+        "first_name":"SAF",
+        "email":"g@gmail.com",
+        "is_active":false,
+        "role":"Dealer",
+        "updated_at":"2-6-2022",
+        "location":"moscow"
+
+    },
+    {
+        "id":"6",
+        "first_name":"DGS",
+        "email":"h@gmail.com",
+        "is_active":true,
+        "role":"Dealer",
+        "updated_at":"12-12-2022",
+        "location":"Dubai"
+    },
+    {
+        "id":"7",
+        "first_name":"DSG",
+        "email":"jhg@gmail.com",
+        "is_active":false,
+        "role":"Dealer",
+        "updated_at":"12-1-2022",
+        "location":"Dubai"
+
+    },
+    {
+        "id":"8",
+        "first_name":"SAF",
+        "email":"raees@gmail.com",
+        "is_active":true,
+        "role":"Dealer",
+        "updated_at":"12-2-2022",
+        "location":"Dubai"
+
+    },
+    {
+        "id":"9",
+        "first_name":"jhk",
+        "email":"raefges@gmail.com",
+        "is_active":true,
+        "role":"Dealer",
+        "updated_at":"12-7-2022",
+        "location":"nepal"
+
+    },
+    {
+        "id":"10",
+        "first_name":"jlk",
+        "email":"lkj@gmail.com",
+        "is_active":false,
+        "role":"Dealer",
+        "updated_at":"12-5-2022",
+        "location":"dubai"
+
+    },
+    {
+        "id":"11",
+        "first_name":"ewq",
+        "email":"ewq@gmail.com",
+        "is_active":true,
+        "role":"Dealer",
+        "updated_at":"1-6-2022",
+        "location":"france"
+
+    },
+    {
+        "id":"12",
+        "first_name":"xz",
+        "email":"xz@gmail.com",
+        "is_active":true,
+        "role":"Dealer",
+        "updated_at":"10-4-2022",
+        "location":"abu dhabi"
+
+    },
+    {
+        "id":"13",
+        "first_name":"hj",
+        "email":"jhjh@gmail.com",
+        "is_active":true,
+        "role":"Dealer",
+        "updated_at":"11-4-2022",
+        "location":"india"
+
+    },
+    {
+        "id":"14",
+        "first_name":"Raees",
+        "email":"yty@gmail.com",
+        "is_active":true,
+        "role":"Dealer",
+        "updated_at":"12-4-2022",
+        "location":"Saudi"
+
+    }
+]

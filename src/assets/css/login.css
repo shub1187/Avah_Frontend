@@ -1,0 +1,353 @@
+/* body {
+  background-color: #fff;
+} */
+
+.nav-link {
+  cursor: pointer;
+}
+.nav-cursor {
+  cursor: pointer;
+}
+
+.login-form .card {
+  width: 100%;
+  border: none;
+  max-width: 500px;
+  padding-top: 110px;
+}
+
+.login-form .btn-dark {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+
+.login-form .btn-dark:hover {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+
+.login-form .nav-pills {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.login-form .nav-pills .nav-link {
+  border-radius: 0px;
+  border-bottom: 1px solid #0d6efd40;
+}
+
+.login-form #pills-tab .nav-item {
+  min-width: 31%;
+  background: #fff;
+}
+
+.home-page.login-page #header {
+  position: absolute;
+  top: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 2px 15px rgba(18, 66, 101, 0.08);
+  left: 80px;
+  z-index: 999;
+}
+
+.home-page.login-page #header .nav-item:last-child {
+  padding-right: 20px;
+}
+
+.home-page.login-page #header .navbar-nav {
+  margin-left: 160px;
+}
+
+.nav-link.signup-btn {
+  background: #000;
+  color: #fff;
+  min-width: 124px;
+  text-align: center;
+}
+
+.home-page.login-page #footer {
+  background: #fff;
+  padding: 0;
+  width: 100%;
+}
+
+.home-page.login-page .login-form-left {
+  position: relative;
+  max-width: 600px;
+}
+
+.home-page.login-page #footer .nav-link {
+  color: #8F8F8E;
+  font-size: 16px;
+  padding: 10px 20px;
+  line-height: 22px;
+}
+
+.login-form .form {
+  padding: 10px;
+}
+
+.login-form .form input {
+  margin-bottom: 12px;
+}
+
+
+.form input:focus {
+  box-shadow: none;
+}
+
+.login-form .form button {
+  margin-top: 20px;
+}
+
+.login-form .form-control {
+  padding: 12px 10px;
+  color: #c9c9c9;
+  border-radius: 9px !important;
+  margin-bottom: 20px;
+  background: #fff;
+  border: 1px solid #dcdcdc;
+}
+
+.login-form .twitter,
+.login-form .apple,
+.login-form .facebook {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #E2E8F0;
+  margin: 5px;
+  display: inline-flex;
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-body.text-center {
+  max-width: 400px;
+  margin: 0px auto;
+  padding: 25px;
+}
+
+.login-form .modal-body.text-center h2 {
+  color: #AD4970;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 30px 0px 20px;
+  line-height: 34px;
+  font-family: 'Jost*', sans-serif;
+}
+
+.login-form .modal-body p {
+  font-size: 17px;
+  color: #2D3748;
+}
+
+.custom-file-button input[type="file"] {
+  margin-left: -2px !important;
+}
+
+.custom-file-button input[type="file"]::-webkit-file-upload-button {
+  display: none;
+}
+
+.custom-file-button input[type="file"]::file-selector-button {
+  display: none;
+}
+
+.custom-file-button:hover label {
+  background-color: #dde0e3;
+  cursor: pointer;
+}
+
+.input-group.custom-file-button:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating) {
+  border-top-right-radius: 9px;
+  border-bottom-right-radius: 9px;
+}
+
+label.input-group-text {
+  position: absolute;
+  right: 0px;
+  z-index: 99;
+  min-height: 49px;
+  border-radius: 0;
+}
+
+.login-form .bi {
+  color: #AD4970;
+  font-size: 21px;
+  text-align: center;
+}
+
+.login-form h2 {
+  color: #AD4970;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 30px 0px 20px;
+  font-family: 'Poppins', sans-serif;
+}
+.login-form .errorMessage {
+  color: red;
+  font-size: 18px;
+  font-family: 'Jost';
+  text-align: center;
+  margin: 30px 0px 20px;
+  }
+
+.login-form h4 {
+  color: #000;
+  font-size: 19px;
+  font-weight: 500;
+  margin: 20px 0px 20px;
+}
+
+.login-form p {
+  font-size: 17px;
+  color: #A0AEC0;
+  text-align: center;
+  font-weight: 400;
+}
+
+.login-form .btn.btn-login {
+  text-transform: capitalize;
+  font-size: 20px;
+  font-weight: 400;
+  background-image: linear-gradient(to right, #D6384C 0%, #773562 51%, #D6384C 100%);
+  width: 300px;
+  border: 0;
+  min-height: 52px;
+  color: #fff;
+}
+
+.login-form .nav-pills .nav-link {
+  text-transform: capitalize;
+  font-size: 19px;
+  font-weight: 400;
+  background-image: linear-gradient(to bottom, #D6384C 0%, #773562 51%, #773562 100%);
+  min-width: 33.3%;
+  border: 0;
+  min-height: 48px;
+  color: #fff;
+}
+
+.nav-pills .nav-link.active {
+  background: #EBEBEB;
+  color: #AD4970;
+}
+
+.nav-pills .nav-link.active a {
+  color: #AD4970;
+}
+
+.login-form-bg {
+  background-image: url("../img/layer.jpg");
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-size: cover;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.login-form-bg .logo {
+  max-width: 250px;
+}
+
+.navbar-brand-trans img {
+  width: 101px;
+}
+
+.navbar-brand-trans {
+  margin-left: 20px;
+}
+
+body.home-page.login-page .other-login .intro {
+  margin-top: 142px;
+}
+
+
+
+/*--------------------------------------------------------------
+# responsive on mobile devices
+--------------------------------------------------------------*/
+@media screen and (min-width: 1600px) {
+  .fix-bottom-footer {
+    position: fixed;
+    bottom: 0;
+    z-index: 99;
+    width: 49%;
+    background: #fff;
+  }
+}
+
+@media screen and (max-width: 1700px) {
+  .home-page.login-page #footer .nav-link {
+    padding: 10px 20px 20px 0px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .home-page.login-page #header .navbar-nav {
+    margin-left: 20px;
+  }
+  .login-form-bg .logo {
+    max-width: 180px;
+  }
+  .home-page.login-page #header .nav-item {
+    padding: 3px 10px;
+  }
+
+  .home-page.login-page #footer .nav-link {
+    padding: 10px 20px 0px 0px;
+  }
+
+  .login-form #pills-tab .nav-item {
+    min-width: 25%;
+  }
+  .login-form .card {
+    padding-top: 55px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .home-page.login-page #header {
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: #fff;
+  }
+  body.home-page.login-page .other-login .intro {
+    margin-top: 100px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .login-form-bg {
+    display: none !important;
+  }
+  .home-page.login-page #header {
+    position: inherit;
+    width: 100%;
+    margin-top: 10px;
+  }
+  body.home-page.login-page .other-login .intro {
+    margin-top: 0;
+  }
+  .login-form .card {
+    max-width: auto;
+    padding-top: 0;
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  .login-form #pills-tab .nav-item {
+    min-width: 100%;
+  }
+  .login-form .btn.btn-login {
+    width: 100%;
+  }
+}
