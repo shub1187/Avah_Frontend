@@ -22,7 +22,7 @@
 export const FETCH_LOGIN_SUCCESS_SP = 'FETCH_LOGIN_SUCCESS_SP'
 
 
-const BASE_URL = 'http://159.89.161.169:3008'
+const BASE_URL = 'http://localhost:3008'
 const folder='/api/serviceprovider/'
 const url=BASE_URL+folder
 

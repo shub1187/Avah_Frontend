@@ -18,8 +18,28 @@ function App() {
       <Routes>
 
 
+      {
+          localStorage.getItem('TYPE_OF_USER') == "1" ||localStorage.getItem('TYPE_OF_USER')==null ?
+
+            localStorage.getItem('isLoggedIn') != "true"  ?
+              <Route path="/" element={<LoginComponent />} /> :
+
               <Route path="/" element={<MainLayout />}> {routes}</Route>
            
+              :
+
+            localStorage.getItem('isLoggedInSP') != "true" ?
+              <Route path="/" element={<LoginComponent />} /> :
+
+              <Route path="/" element={<MainLayout />}> {spRoutes}</Route>
+        }
+
+        {
+           localStorage.getItem('TYPE_OF_USER') == "1" ?
+           <Route path="/dashboard" element={<MainLayout />}> {routes}</Route>
+           :
+           <Route path="/dashboard" element={<MainLayout />}> {spRoutes}</Route>
+        }
         
 
         

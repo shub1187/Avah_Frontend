@@ -24,11 +24,11 @@ function PaginationPage(props) {
 
   let columns = useMemo(() => props.column, [])
   // let data = useMemo(() => pageState?.queryPageSortBy, [pageState?.queryPageSortBy])
-  let preprocessedData = props.data.map((d)=>({
+  let preprocessedData = props.data?.map((d)=>({
     ...d,
     updated_at:new Date(d.updated_at)
   }))
-  let data = useMemo(()=>preprocessedData,[])
+  let data = useMemo(()=>preprocessedData??[],[])
   console.log("RAEES",data)
   const [currentPage, setCurrentPage] = useState(1)
   const [searchPage, setSearchPage] = useState(false)
