@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginAction, SPLoginAction } from './LoginAction';
 import Loader from '../../components/common/Loader';
-import { Box, Button, InputLabel, MenuItem, TextField, ThemeProvider, createTheme } from '@mui/material';
-
-
+import { Box, Button, InputLabel, MenuItem, TextField, ThemeProvider, createTheme, CircularProgress } from '@mui/material';
+import LoginDialog from 'components/Dialog/LoginDialog/Index';
 const theme = createTheme({
     components:{
         MuiTextField:{
@@ -15,7 +14,7 @@ const theme = createTheme({
                             '& .MuiSelect-select': {
                               borderColor: 'lightgrey',
                             },
-                          },
+                        },
                         '&.Mui-disabled': {
                             '& fieldset': {
                               borderColor: 'lightgrey',
@@ -24,10 +23,11 @@ const theme = createTheme({
                         '& fieldset': {
                             borderColor: 'lightgrey',
                           },
-                          '&.Mui-focused fieldset': {
+                        '&.Mui-focused fieldset': {
                           borderColor: 'lightgrey',
                         },
                       },
+            
                 }
             }
         },
@@ -49,13 +49,17 @@ const theme = createTheme({
     }
 })
 
+
 function LoginComponent() {
     const  loginState  = useSelector((state) => state.appState.login);
 
-
+    const [loginDialogOpen,setLoginDialogOpen]= useState(false)
+    const loginDialogOpenFunction = ()=>{
+        setLoginDialogOpen(false)
+    }
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
+    console.log(loginDialogOpen,"RAEES")
 
     const [spName, spSetName] = useState("")
     const [spEmail, spSetEmail] = useState("")
@@ -66,6 +70,9 @@ function LoginComponent() {
     const [spBusinessAddress, setSpBusinessAddress] = useState("")
     const [spBusinessType, setSpBusinessType] = useState("Vendor")
 
+    const goToLoginPageButtonAfterRegister=()=>{
+        setSignUp(false);
+    }
     const [signUp,setSignUp] = useState(false)
 
     const [error, setErrorMessage] = useState("")
@@ -76,7 +83,6 @@ function LoginComponent() {
 
     const dispatch = useDispatch()
     const [setLoader, bindLoader, closeLoader] = Loader('')
-
     useEffect(() => {
 
        if(loginState.isLoading==1 ){
@@ -197,7 +203,7 @@ function LoginComponent() {
                                                 </li>
                                                 <li className="nav-item text-center">
                                                     <a className={`nav-link  ${page=="dealers" ? "" : "active"} btl`} id="pills-home-dealer" data-toggle="pill" 
-                                                    role="tab" href="#pills-home"
+                                                    role="tab" href="#pills-dealer"
                                                         aria-controls="pills-dealer" aria-selected="false" onClick={()=>{SetPage("dealers");setSignUp(false)}}>Dealers</a>
                                                 </li>                                               
 
@@ -271,7 +277,7 @@ function LoginComponent() {
                                                                     <div className="col-12 text-center">
 
                                                                         <button
-                                                                            onClick={() => { loginButton() }}
+                                                                            onClick={() => { loginButton();setLoginDialogOpen(true) }}
                                                                             type="submit"
                                                                             className="btn btn-login mt-4 mb-4">Register</button>
 
@@ -307,9 +313,9 @@ function LoginComponent() {
                                                              />
                                                         </div> */}
                                                         <div className="col-12">
-                                                            <label htmlFor="inputEmail4" className="form-label">Email</label>
+                                                            <label htmlFor="inputEmailSp" className="form-label">Email</label>
                                                             <input type="email" placeholder="Enter Your Email ID" 
-                                                            className="inputfield" id="inputEmail4"  value={spEmail} onChange={(e) => {
+                                                            className="inputfield" id="inputEmailSp"  value={spEmail} onChange={(e) => {
                                                                 spSetEmail(e.target.value)
                                                             }} />
                                                         </div>
@@ -491,7 +497,7 @@ function LoginComponent() {
                                                             </Box>
                                                             <div className="col-12 text-center">
                                                                 <button type="submit"
-                                                                    className="btn btn-login mt-4 mb-4"  onClick={() => { spLoginButton() }}>Register </button>
+                                                                    className="btn btn-login mt-4 mb-4"  onClick={() => { spLoginButton();setLoginDialogOpen(true) }}>Register </button>
                                                             </div>
                                                         </div>
 
@@ -617,7 +623,7 @@ function LoginComponent() {
                                                 </div>
                                             </div>
                                         </div>
-
+                                        {loginDialogOpen ? <LoginDialog goToLoginPageButtonAfterRegister={goToLoginPageButtonAfterRegister} loginDialogOpenFunction={loginDialogOpenFunction}/>:null}                
                                     </div>
                                 </div>
                                 <footer id="footer">
@@ -662,7 +668,6 @@ function LoginComponent() {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- Template Main JS File --> */}
             </div>
-
                 {bindLoader()}
         </div>
     )
