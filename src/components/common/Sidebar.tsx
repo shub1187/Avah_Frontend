@@ -6,8 +6,12 @@ import appRoutes from "../../routes/appRoutes";
 import SidebarItem from "./SidebarItem";
 import SidebarItemCollapse from "./SidebarItemCollapse";
 import spAppRoutes from "../../routes/spRoutes";
+import { useEffect,useState } from "react";
 
 const Sidebar = () => {
+  // const [checkRole,setCheckRole] = useState("");
+  const getRole = localStorage.getItem("TYPE_OF_USER");
+  // setCheckRole(getRole);
   return (
     <Drawer
       variant="permanent"
@@ -38,6 +42,8 @@ const Sidebar = () => {
         </Toolbar>
           <div className="mx-3">
             {   
+
+            getRole == "1" ?  
                appRoutes.map((route, index) => (
                 route.sidebarProps ? (
                   route.child ? (
@@ -46,7 +52,19 @@ const Sidebar = () => {
                     <SidebarItem item={route}   key={index} />
                   )
                 ) : null
-              ))
+              )) 
+              :
+              getRole == "2" ?
+              spAppRoutes.map((route, index) => (
+                route.sidebarProps ? (
+                  route.child ? (
+                    <SidebarItemCollapse item={route} key={index} />
+                  ) : (
+                    <SidebarItem item={route}   key={index} />
+                  )
+                ) : null
+              )) :
+              null
             }        
 
          

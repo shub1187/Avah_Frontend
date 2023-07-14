@@ -80,16 +80,16 @@ const spAppRoutes: RouteType[] = [
     ]
   },
   
-  {
-   path: "/dashboard/spares",
-    element: <SparePage />,
-    state: "spares",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Spares",
-      icon: require('./../assets/img/sidebar/role.png')
-    }
-  },
+  // {
+  //  path: "/dashboard/spares",
+  //   element: <SparePage />,
+  //   state: "spares",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Spares",
+  //     icon: require('./../assets/img/sidebar/role.png')
+  //   }
+  // },
   {
    path: "/dashboard/labour",
     element: <DashboardIndex />,
