@@ -6,7 +6,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import LoginButtonTheme from 'components/Button/LoginButtonTheme';
 import { useEffect, useState } from 'react';
-export default function LoginDialog({ loginDialogOpenFunction ,goToLoginPageButtonAfterRegister }) {
+export default function RegisterDialogForCustomer({ loginDialogOpenFunction ,goToLoginPageButtonAfterRegister }) {
   const [open, setOpen] = useState(true);
   const [loading, setLoading] = useState(true)
   const handleClickOpen = () => {
@@ -18,7 +18,7 @@ export default function LoginDialog({ loginDialogOpenFunction ,goToLoginPageButt
     return ()=>clearTimeout(a)
   },[])
   const handleClose = () => {
-    setOpen(false);
+    // setOpen(false);
     loginDialogOpenFunction()
   };
 
@@ -54,7 +54,7 @@ export default function LoginDialog({ loginDialogOpenFunction ,goToLoginPageButt
             display={"flex"} 
             flexDirection={"column"} 
             alignItems={"center"} 
-            fontWeight={"bold"} 
+            fontWeight={"700"} 
             fontSize="36px" 
             color={"#AD4970"} 
             id="alert-dialog-title">
@@ -66,7 +66,7 @@ export default function LoginDialog({ loginDialogOpenFunction ,goToLoginPageButt
               </Box>
           </DialogTitle>
           <DialogContent sx={{display:"flex",justifyContent:"center"}}>
-            <DialogContentText fontColor={"rgb(45,55,72)"} fontWeight={"700"} fontSize={"26px"} id="alert-dialog-description">
+            <DialogContentText color={"rgb(45,55,72)"} fontWeight={"500"} fontSize={"26px"} id="alert-dialog-description">
                   Please Login to continue
             </DialogContentText>
           </DialogContent>

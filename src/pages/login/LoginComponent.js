@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LoginAction, SPLoginAction } from './LoginAction';
 import Loader from '../../components/common/Loader';
 import { Box, Button, InputLabel, MenuItem, TextField, ThemeProvider, createTheme, CircularProgress } from '@mui/material';
-import LoginDialog from 'components/Dialog/LoginDialog/Index';
+import RegisterDialogForCustomer from 'components/Dialog/RegisterDialogForCustomer/Index';
+import RegisterDialogForServiceProviderAndDealers from 'components/Dialog/RegisterDialogForServiceProviderAndDealer';
 const theme = createTheme({
     components:{
         MuiTextField:{
@@ -57,6 +58,10 @@ function LoginComponent() {
     const loginDialogOpenFunction = ()=>{
         setLoginDialogOpen(false)
     }
+    const [serviceProviderAndDealersLoginDialogOpen,setServiceProviderAndDealersLoginDialogOpen]= useState(false)
+    const serviceProviderAndDealersLoginDialogOpenFunction = ()=>{
+        setServiceProviderAndDealersLoginDialogOpen(false)
+    }
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     console.log(loginDialogOpen,"RAEES")
@@ -82,17 +87,17 @@ function LoginComponent() {
     const [page, SetPage] = useState("customer")
 
     const dispatch = useDispatch()
-    const [setLoader, bindLoader, closeLoader] = Loader('')
-    useEffect(() => {
+    // const [setLoader, bindLoader, closeLoader] = Loader('')
+    // useEffect(() => {
 
-       if(loginState.isLoading==1 ){
-        closeLoader()
-       }else{
-        if(loginState.isLoading==0)
-       { setLoader()}
-       }
+    //    if(loginState.isLoading==1 ){
+    //     closeLoader()
+    //    }else{
+    //     if(loginState.isLoading==0)
+    //    { setLoader()}
+    //    }
     
-      }, [loginState.isLoading]);
+    //   }, [loginState.isLoading]);
     const loginButton = () => {
 
 
@@ -236,7 +241,7 @@ function LoginComponent() {
                                                                 <div className="col-12">
                                                                     <label htmlFor="Name" className="form-label">Name</label>
                                                                     <input type="text" placeholder="Enter Your Name"
-                                                                    className="inputfield" id="inputPassword4"
+                                                                    className="inputfield" id="inputName4"
                                                                     value={spName} onChange={(e) => {
                                                                         spSetName(e.target.value)
                                                                     }}
@@ -259,7 +264,7 @@ function LoginComponent() {
                                                                 <div className="col-12">
                                                                     <label htmlFor="inputPassword4" className="form-label">Confirm Password</label>
                                                                     <input type="password" placeholder="Re-enter Your Password" className="inputfield"
-                                                                        id="inputPassword4" value={spRePassword} onChange={(e) => {
+                                                                        id="inputconfirmPassword4" value={spRePassword} onChange={(e) => {
                                                                             spSetRePassword(e.target.value)
                                                                         }} />
                                                                 </div>
@@ -497,7 +502,7 @@ function LoginComponent() {
                                                             </Box>
                                                             <div className="col-12 text-center">
                                                                 <button type="submit"
-                                                                    className="btn btn-login mt-4 mb-4"  onClick={() => { spLoginButton();setLoginDialogOpen(true) }}>Register </button>
+                                                                    className="btn btn-login mt-4 mb-4"  onClick={() => { spLoginButton();setServiceProviderAndDealersLoginDialogOpen(true) }}>Register </button>
                                                             </div>
                                                         </div>
 
@@ -623,7 +628,8 @@ function LoginComponent() {
                                                 </div>
                                             </div>
                                         </div>
-                                        {loginDialogOpen ? <LoginDialog goToLoginPageButtonAfterRegister={goToLoginPageButtonAfterRegister} loginDialogOpenFunction={loginDialogOpenFunction}/>:null}                
+                                        {loginDialogOpen ? <RegisterDialogForCustomer goToLoginPageButtonAfterRegister={goToLoginPageButtonAfterRegister} loginDialogOpenFunction={loginDialogOpenFunction}/>:null}                
+                                        {serviceProviderAndDealersLoginDialogOpen ? <RegisterDialogForServiceProviderAndDealers goToLoginPageButtonAfterRegister={goToLoginPageButtonAfterRegister} loginDialogOpenFunction={serviceProviderAndDealersLoginDialogOpenFunction} />:null}      
                                     </div>
                                 </div>
                                 <footer id="footer">
@@ -668,7 +674,7 @@ function LoginComponent() {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- Template Main JS File --> */}
             </div>
-                {bindLoader()}
+                {/* {bindLoader()} */}
         </div>
     )
 }

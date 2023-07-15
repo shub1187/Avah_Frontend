@@ -16,18 +16,19 @@ import SpEmployeePage from "../serviceprovider/page/dashboard/user/page/SpEmploy
 import CommonLayout from "../serviceprovider/page/dashboard/CommonLayout";
 import SparePage from "../serviceprovider/page/dashboard/spares/SparePage";
 import DashboardIndex from "../serviceprovider/page/dashboard/DashboardIndex";
+import ServiceProviderHome from "pages/serviceProviderHome";
 
 const spAppRoutes: RouteType[] = [
   {
     index: true,
-    element: <Homepage />,
+    element: <ServiceProviderHome />,
     state: "home",
     tabIndex:"0",
   },
   
   {
    path: "/dashboard/home",
-    element: <Homepage />,
+    element: <ServiceProviderHome />,
     state: "home",
     tabIndex:"0",
     sidebarProps: {
