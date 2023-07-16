@@ -97,6 +97,8 @@ function LoginComponent() {
     //    { setLoader()}
     //    }
     
+      }, [loginState.isLoading]);
+    const loginButton = (e) => {
     //   }, [loginState.isLoading]);
     const loginButton = () => {
 
@@ -109,32 +111,29 @@ function LoginComponent() {
         } else {
             console.log("LoginActionPAge")
             setErrorMessage("")
-            let body={"username":email,"password":password}
+
+            let body={"username":email,"password":password,"role":page}
             dispatch(LoginAction(body))
         }
     }
 
-
-
     const spLoginButton = () => {
-
-
         // console.log("buttonlicnaksdnkajs")
         if (spEmail.length <= 0) {
             setErrorMessage("Enter email id")
         } else if (spPassword.length <= 0) {
             setErrorMessage("Enter password")
         }
-        else if(spBusinessName.length <=0){
-            setErrorMessage("Enter Buisness Name")
-        }
-        else if(spBusinessContactNumber.length <=0){
-            setErrorMessage("Enter Buisness Contact Number")
-        }
+        // else if(spBusinessName.length <=0){
+        //     setErrorMessage("Enter Buisness Name")
+        // }
+        // else if(spBusinessContactNumber.length <=0){
+        //     setErrorMessage("Enter Buisness Contact Number")
+        // }
         else {
             console.log("LoginActionPAge")
             setErrorMessage("")
-            let body={"email":spEmail,"password":spPassword}
+            let body={"email":spEmail,"password":spPassword,"role":page}
             dispatch(SPLoginAction(body))
         }
     }
@@ -202,9 +201,9 @@ function LoginComponent() {
                                                         aria-controls="pills-home" aria-selected="false" onClick={()=>{SetPage("customer");setSignUp(false)}}>Admin</a>
                                                 </li>
                                                 <li className="nav-item text-center">
-                                                    <a className={`nav-link  ${page=="Service Provider" ? "" : "active"} btr`} id="pills-profile-tab"
+                                                    <a className={`nav-link  ${page=="service provider" ? "" : "active"} btr`} id="pills-profile-tab"
                                                     data-toggle="pill" role="tab" href="#pills-profile"
-                                                        aria-controls="pills-profile" aria-selected="false" onClick={()=>{SetPage("Service Provider");setSignUp(false)}}> Service Provider</a>
+                                                        aria-controls="pills-profile" aria-selected="false" onClick={()=>{SetPage("service provider");setSignUp(false)}}> Service Provider</a>
                                                 </li>
                                                 <li className="nav-item text-center">
                                                     <a className={`nav-link  ${page=="dealers" ? "" : "active"} btl`} id="pills-home-dealer" data-toggle="pill" 
@@ -320,15 +319,15 @@ function LoginComponent() {
                                                         <div className="col-12">
                                                             <label htmlFor="inputEmailSp" className="form-label">Email</label>
                                                             <input type="email" placeholder="Enter Your Email ID" 
-                                                            className="inputfield" id="inputEmailSp"  value={spEmail} onChange={(e) => {
-                                                                spSetEmail(e.target.value)
+                                                            className="inputfield" id="inputEmailSp"  value={email} onChange={(e) => {
+                                                                setEmail(e.target.value)
                                                             }} />
                                                         </div>
                                                         <div className="col-12">
                                                             <label htmlFor="inputPassword" className="form-label">Password</label>
                                                             <input type="password" placeholder="Re-enter Your Password" className="inputfield"
-                                                             id="inputPassword4" value={spPassword} onChange={(e) => {
-                                                                spSetPassword(e.target.value)
+                                                             id="inputPassword4" value={password} onChange={(e) => {
+                                                                setPassword(e.target.value)
                                                             }} />
                                                         </div>
                                                         {/* <div className="col-12">
@@ -369,7 +368,7 @@ function LoginComponent() {
                                                     <ThemeProvider theme={theme}>
                                                     <Box role="tabpanel" aria-labelledby="pills-profile-tab">
                                                         <div>
-                                                        <h2>Welcome {page==="dealers"?"Dealer":"Service Provider"} </h2>
+                                                        <h2>Welcome {page==="dealers"?"Dealer":"service provider"} </h2>
                                                             <Box sx={{marginBottom:"10px"}}>
                                                                 <InputLabel sx={{color:"black"}}>Your Name</InputLabel>
                                                                 <TextField 
@@ -515,7 +514,7 @@ function LoginComponent() {
                                                 <div className="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                                     <div className="row">
                                                         <div className="col-12 intro text-center">
-                                                            <h2>Welcome {page==="dealers"?"Dealer":"Service Provider"} </h2>
+                                                            <h2>Welcome {page==="dealers"?"Dealer":"service provider"} </h2>
                                                             <h4>Sign in Via</h4>
                                                             <div className="social-links text-center text-md-right pt-3 pt-md-0">
                                                                 <a href="#" className="twitter"><i className="bi bi-facebook"></i></a>
