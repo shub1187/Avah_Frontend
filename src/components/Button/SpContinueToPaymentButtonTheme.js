@@ -7,8 +7,8 @@ const SpContinueToPaymentButtonTheme = createTheme({
                 root:{
                     backgroundColor:"black",
                     fontSize:"14px",
-                    height:"46px",
-                    width:"357px",
+                    height:"45px",
+                    width:"282px",
                     color:"white",
                     fontWeight:"700",
                     border: 'none',

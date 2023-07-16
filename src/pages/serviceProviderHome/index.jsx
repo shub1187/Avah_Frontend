@@ -52,9 +52,9 @@ const ServiceProviderHome = (props) => {
         <Grid container spacing={4}>
           <Grid item xs={8}>
                 <Grid spacing={2} container>
-                  <Grid xl={4} md={6} item><SpRevenueSingleCard/></Grid>
-                  <Grid xl={4} md={6} item><SpRevenueSingleCard/></Grid>
-                  <Grid xl={4} md={6} item><SpRevenueSingleCard/></Grid>
+                  <Grid sm={12} md={6} xl={4} item><SpRevenueSingleCard/></Grid>
+                  <Grid sm={12} md={6} xl={4} item><SpRevenueSingleCard/></Grid>
+                  <Grid sm={12} md={6} xl={4} item><SpRevenueSingleCard/></Grid>
                 </Grid>
                 <Grid justifyContent={"center"} marginTop={2} spacing={4} container>
                   <Grid xl={8} md={12} item><SpRevenueSplitCard/></Grid>
@@ -65,9 +65,9 @@ const ServiceProviderHome = (props) => {
           </Grid>
           <Grid item xs={4}>
             <Grid spacing={2} direction={"row"} container>
-              <Grid xs={12} item><SpLatestActivityCard/></Grid>
-              <Grid xs={12} item><SpQuickPayment/></Grid>
-              <Grid xs item><SpRating/></Grid>
+              <Grid sm={12} item><SpLatestActivityCard/></Grid>
+              <Grid sm={12} item><SpQuickPayment/></Grid>
+              <Grid sm={12} item><SpRating/></Grid>
             </Grid>
           </Grid>
         </Grid>
