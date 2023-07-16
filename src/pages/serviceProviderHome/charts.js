@@ -66,7 +66,7 @@ const ApexCharts = () => {
         { name: 'Line 1', data: newSeriesData1 },
         { name: 'Line 2', data: newSeriesData2 },
       ]);
-    }, 5000);
+    }, 2000);
 
     return () => {
       clearInterval(interval);
