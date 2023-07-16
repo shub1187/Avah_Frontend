@@ -87,18 +87,18 @@ function LoginComponent() {
     const [page, SetPage] = useState("customer")
 
     const dispatch = useDispatch()
-    // const [setLoader, bindLoader, closeLoader] = Loader('')
-    // useEffect(() => {
+    const [setLoader, bindLoader, closeLoader] = Loader('')
+    useEffect(() => {
 
-    //    if(loginState.isLoading==1 ){
-    //     closeLoader()
-    //    }else{
-    //     if(loginState.isLoading==0)
-    //    { setLoader()}
-    //    }
+       if(loginState.isLoading==1 ){
+        closeLoader()
+       }else{
+        if(loginState.isLoading==0)
+       { setLoader()}
+       }
     
       }, [loginState.isLoading]);
-    const loginButton = (e) => {
+    // const loginButton = (e) => {
     //   }, [loginState.isLoading]);
     const loginButton = () => {
 
