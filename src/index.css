@@ -22,7 +22,7 @@ body {
 .app-bar2 {
 
   background: linear-gradient(180deg, #D9374B 0%, #c22f40 70.83%);
-  box-shadow: 0px 2.5px 2.5px rgba(0, 0, 0, 0.01);
+  /* box-shadow: 0px 2.5px 2.5px rgba(0, 0, 0, 0.01); */
   height: 5rem;
 }
 
