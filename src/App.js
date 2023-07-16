@@ -47,7 +47,7 @@ function App() {
            localStorage.getItem('TYPE_OF_USER') == "2" ?
            <>
           <Route path="/dashboard" element={<ServiceProviderLayout />}> {spRoutes}</Route>
-          {/* <Route path="/" element={<ServiceProviderLayout />}> {spRoutes}</Route> */}
+          <Route path="/" element={<ServiceProviderLayout />}> {spRoutes}</Route>
          </>
           :
           <Route path="/" element={<LoginComponent />} /> 
