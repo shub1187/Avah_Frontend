@@ -7,6 +7,7 @@ import { store } from './redux/store';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import './assets/css/login.css'
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,7 +17,10 @@ root.render(
     <>
     <Provider store={store}>
       <CssBaseline />
+      <BrowserRouter>
       <App />
+      </BrowserRouter>
+
     </Provider>
     </>
  // </React.StrictMode>

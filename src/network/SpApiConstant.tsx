@@ -28,7 +28,7 @@ const url=BASE_URL+folder
 
 let numPagePer=10
 export const LOGIN_URL_SP = url + "login"
-
+export const REGISTER_URL_SP = url + "login"
 export const USER_URL_SP=(pageNo:string) => url+`getAllUsers?page=${pageNo}&numberPerPage=${numPagePer}`
 export const SEARCH_URL_SP=(pageNo:string,props:string) => url+`getUserSearch?page=${pageNo}&numberPerPage=${numPagePer}&searchText=`+props
 

@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
+import { getYear } from 'date-fns'
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginAction, SPLoginAction } from './LoginAction';
 import Loader from '../../components/common/Loader';
 import { Box, Button, InputLabel, MenuItem, TextField, ThemeProvider, createTheme, CircularProgress } from '@mui/material';
 import RegisterDialogForCustomer from 'components/Dialog/RegisterDialogForCustomer/Index';
 import RegisterDialogForServiceProviderAndDealers from 'components/Dialog/RegisterDialogForServiceProviderAndDealer';
+import SpRegisterAPI from 'services/SpRegisterAPI';
 const theme = createTheme({
     components:{
         MuiTextField:{
@@ -65,16 +67,25 @@ function LoginComponent() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     console.log(loginDialogOpen,"RAEES")
-
-    const [spName, spSetName] = useState("")
-    const [spEmail, spSetEmail] = useState("")
-    const [spPassword, spSetPassword] = useState("")
-    const [spRePassword, spSetRePassword] = useState("")
+    const businessTypes = [
+        'Sole Proprietorship',
+        'Partnership',
+        'Limited Liability Partnership',
+        'Private Limited Companies',
+        'Public Limited Companies',
+        'One-Person Companies',
+        'Section 8 Company',
+        'Joint-Venture Company',
+      ];
+      
+    const [spName, setSpName] = useState("")
+    const [spEmail, setSpEmail] = useState("")
+    const [spPassword, setSpPassword] = useState("")
+    const [spRePassword, setSpRePassword] = useState("")
     const [spBusinessName, setSpBusinessName] = useState("")
     const [spBusinessContactNumber, setSpBusinessContactNumber] = useState("")
     const [spBusinessAddress, setSpBusinessAddress] = useState("")
-    const [spBusinessType, setSpBusinessType] = useState("Vendor")
-
+    const [spBusinessType, setSpBusinessType] = useState(''); // Set "Vendor" as the default value
     const goToLoginPageButtonAfterRegister=()=>{
         setSignUp(false);
     }
@@ -85,6 +96,7 @@ function LoginComponent() {
 
 
     const [page, SetPage] = useState("customer")
+    console.log(spName,spEmail,spPassword,spRePassword,spBusinessName,spBusinessType,spBusinessContactNumber,spBusinessAddress,page,'RAEES')
 
     const dispatch = useDispatch()
     const [setLoader, bindLoader, closeLoader] = Loader('')
@@ -111,10 +123,12 @@ function LoginComponent() {
         } else {
             console.log("LoginActionPAge")
             setErrorMessage("")
-
+            setEmail("")
+            setPassword("")
             let body={"username":email,"password":password,"role":page}
             dispatch(LoginAction(body))
         }
+
     }
 
     const spLoginButton = () => {
@@ -133,15 +147,42 @@ function LoginComponent() {
         else {
             console.log("LoginActionPAge")
             setErrorMessage("")
+            setSpEmail("")
+            setSpPassword("")
             let body={"email":spEmail,"password":spPassword,"role":page}
             dispatch(SPLoginAction(body))
         }
     }
 
+    const spRegisterButton = async()=>{
+        let body = {
+            "name":spName,"email":spEmail,"password":spPassword,"cnfPassword":spRePassword,
+            "business_name":spBusinessName,"business_type":spBusinessType,"business_contact":spBusinessContactNumber,
+            "business_address":spBusinessAddress,
+            "role":page,"approval_status":false
+        }
+        try{
+            let response = await SpRegisterAPI(body)
+            setSpName('');
+            setSpEmail('');
+            setSpPassword('');
+            setSpRePassword('');
+            setSpBusinessName('');
+            setSpBusinessContactNumber('');
+            setSpBusinessAddress('');
+            setSpBusinessType('');
+        }
+        catch(e){
+            console.log(e)
+        }
 
+    }
+
+    const currentDate = new Date();
+    const currentYear = getYear(currentDate);
     return (
         <div>
-
+            <ThemeProvider theme={theme}>
             <div className="home-page login-page ">
                 <section className="login-form">
                     <div className="container-fluid">
@@ -198,7 +239,7 @@ function LoginComponent() {
                                                 <li className="nav-item text-center">
                                                     <a className={`nav-link  ${page=="customer" ? "" : "active"} btl`} id="pills-home-tab" data-toggle="pill" 
                                                        href="#pills-home"
-                                                        aria-controls="pills-home" aria-selected="false" onClick={()=>{SetPage("customer");setSignUp(false)}}>Admin</a>
+                                                        aria-controls="pills-home" aria-selected="false" onClick={()=>{SetPage("customer");setSignUp(false)}}>Customer</a>
                                                 </li>
                                                 <li className="nav-item text-center">
                                                     <a className={`nav-link  ${page=="service provider" ? "" : "active"} btr`} id="pills-profile-tab"
@@ -237,36 +278,62 @@ function LoginComponent() {
                                                                     <div className="col-12">
                                                                         <p>Enter your email and password to sign in</p>
                                                                     </div>
-                                                                <div className="col-12">
-                                                                    <label htmlFor="Name" className="form-label">Name</label>
-                                                                    <input type="text" placeholder="Enter Your Name"
-                                                                    className="inputfield" id="inputName4"
-                                                                    value={spName} onChange={(e) => {
-                                                                        spSetName(e.target.value)
+
+                                                                <Box mb={2}>
+                                                                <InputLabel sx={{color:"black",marginBottom:1}}>Name</InputLabel>
+                                                                <TextField 
+                                                                    fullWidth
+                                                                    size='small'
+                                                                    placeholder='Enter Your Name'
+                                                                    onChange={(e) => {
+                                                                        setSpName(e.target.value)
                                                                     }}
-                                                                    />
-                                                                </div>
-                                                                <div className="col-12">
-                                                                    <label htmlFor="inputEmail4" className="form-label">Email</label>
-                                                                    <input type="email" placeholder="Enter Your Email ID" 
-                                                                    className="inputfield" id="inputEmail4"  value={spEmail} onChange={(e) => {
-                                                                        spSetEmail(e.target.value)
-                                                                    }} />
-                                                                </div>
-                                                                <div className="col-12">
-                                                                    <label htmlFor="inputPassword" className="form-label">Password</label>
-                                                                    <input type="password" placeholder="Re-enter Your Password" className="inputfield"
-                                                                    id="inputPassword4" value={spPassword} onChange={(e) => {
-                                                                        spSetPassword(e.target.value)
-                                                                    }} />
-                                                                </div>
-                                                                <div className="col-12">
-                                                                    <label htmlFor="inputPassword4" className="form-label">Confirm Password</label>
-                                                                    <input type="password" placeholder="Re-enter Your Password" className="inputfield"
-                                                                        id="inputconfirmPassword4" value={spRePassword} onChange={(e) => {
-                                                                            spSetRePassword(e.target.value)
-                                                                        }} />
-                                                                </div>
+                                                                    id="inputName4"
+                                                                    value={spName}
+                                                                />
+                                                                </Box>
+                                                                <Box mb={2}>
+                                                                        <InputLabel sx={{color:"black",marginBottom:1}}>Email</InputLabel>
+                                                                        <TextField 
+                                                                            fullWidth
+                                                                            size='small'
+                                                                            placeholder='Enter Your Email ID'
+                                                                            onChange={(e) => {
+                                                                                setSpEmail(e.target.value)
+                                                                            }}
+                                                                            type="email"
+                                                                            id="inputEmail4"
+                                                                            value={spEmail}
+                                                                        />
+                                                                </Box>
+                                                                <Box mb={2}>
+                                                                        <InputLabel sx={{color:"black",marginBottom:1}}>Password</InputLabel>
+                                                                        <TextField 
+                                                                            fullWidth
+                                                                            size='small'
+                                                                            placeholder='Enter Your Password'
+                                                                            onChange={(e) => {
+                                                                                setSpPassword(e.target.value)
+                                                                            }}
+                                                                            type="password"
+                                                                            id="inputPassword4"
+                                                                            value={spPassword}
+                                                                        />
+                                                                </Box>
+                                                                <Box mb={2}>
+                                                                        <InputLabel sx={{color:"black",marginBottom:1}}>Confirm Password</InputLabel>
+                                                                        <TextField 
+                                                                            fullWidth
+                                                                            size='small'
+                                                                            placeholder='Re-enter Your Password'
+                                                                            onChange={(e) => {
+                                                                                setSpRePassword(e.target.value)
+                                                                            }}
+                                                                            type="password"
+                                                                            id="inputconfirmPassword4"
+                                                                            value={spRePassword}
+                                                                        />
+                                                                </Box>
                                                                     <div className="col-12">
                                                                         <div className="form-check">
                                                                             <input className="form-check-input" type="checkbox" id="gridCheck" />
@@ -312,29 +379,43 @@ function LoginComponent() {
                                                             <input type="text" placeholder="Enter Your Name"
                                                              className="inputfield" id="inputPassword4"
                                                              value={spName} onChange={(e) => {
-                                                                spSetName(e.target.value)
+                                                                setSpName(e.target.value)
                                                             }}
                                                              />
                                                         </div> */}
-                                                        <div className="col-12">
-                                                            <label htmlFor="inputEmailSp" className="form-label">Email</label>
-                                                            <input type="email" placeholder="Enter Your Email ID" 
-                                                            className="inputfield" id="inputEmailSp"  value={email} onChange={(e) => {
-                                                                setEmail(e.target.value)
-                                                            }} />
-                                                        </div>
-                                                        <div className="col-12">
-                                                            <label htmlFor="inputPassword" className="form-label">Password</label>
-                                                            <input type="password" placeholder="Re-enter Your Password" className="inputfield"
-                                                             id="inputPassword4" value={password} onChange={(e) => {
-                                                                setPassword(e.target.value)
-                                                            }} />
-                                                        </div>
+                                                        <Box mb={2}>
+                                                                <InputLabel sx={{color:"black",marginBottom:1}}>Email</InputLabel>
+                                                                <TextField 
+                                                                    fullWidth
+                                                                    size='small'
+                                                                    placeholder='Enter Your Email ID'
+                                                                    onChange={(e) => {
+                                                                        setEmail(e.target.value)
+                                                                    }}
+                                                                    value={email}
+                                                                    type="email"
+                                                                    id='inputEmailSp'
+                                                                />
+                                                            </Box>
+                                                            <Box mb={2}>
+                                                                <InputLabel sx={{color:"black",marginBottom:1}}>Password</InputLabel>
+                                                                <TextField 
+                                                                    fullWidth
+                                                                    size='small'
+                                                                    placeholder='Enter Your Password'
+                                                                    onChange={(e) => {
+                                                                        setPassword(e.target.value)
+                                                                    }}
+                                                                    value={password}
+                                                                    type='password'
+                                                                    id='inputPassword4'
+                                                                />
+                                                            </Box>
                                                         {/* <div className="col-12">
                                                             <label htmlFor="inputPassword4" className="form-label">Confirm Password</label>
                                                             <input type="password" placeholder="Re-enter Your Password" className="inputfield"
                                                                 id="inputPassword4" value={spRePassword} onChange={(e) => {
-                                                                    spSetRePassword(e.target.value)
+                                                                    setSpRePassword(e.target.value)
                                                                 }} />
                                                         </div> */}
                                                             <Box sx={{display:"flex",justifyContent:"space-between"}} className="col-12">
@@ -365,29 +446,28 @@ function LoginComponent() {
                                                 : 
                                                 signUp?
                                                 <>
-                                                    <ThemeProvider theme={theme}>
                                                     <Box role="tabpanel" aria-labelledby="pills-profile-tab">
                                                         <div>
                                                         <h2>Welcome {page==="dealers"?"Dealer":"service provider"} </h2>
-                                                            <Box sx={{marginBottom:"10px"}}>
+                                                            <Box mb={2}>
                                                                 <InputLabel sx={{color:"black"}}>Your Name</InputLabel>
                                                                 <TextField 
                                                                     size='small'
                                                                     placeholder='Enter Your Name'
                                                                     onChange={(e) => {
-                                                                        spSetName(e.target.value)
+                                                                        setSpName(e.target.value)
                                                                     }}
                                                                     value={spName}
                                                                     sx={{width:"49%"}}
                                                                 />
                                                             </Box>
-                                                            <Box sx={{marginBottom:"10px"}}>
+                                                            <Box mb={2}>
                                                                 <InputLabel sx={{color:"black"}}>Email ID</InputLabel>
                                                                 <TextField 
                                                                     size='small'
                                                                     placeholder='Enter Your Email ID'
                                                                     onChange={(e) => {
-                                                                        spSetEmail(e.target.value)
+                                                                        setSpEmail(e.target.value)
                                                                     }}
                                                                     value={spEmail}
                                                                     sx={{width:"49%"}}
@@ -414,6 +494,7 @@ function LoginComponent() {
                                                                         onChange={(e) => {
                                                                             setSpBusinessContactNumber(e.target.value)
                                                                         }}
+                                                                        type="number"
                                                                         value={spBusinessContactNumber}
                                                                         sx={{width:"100%"}}
                                                                     />
@@ -443,17 +524,23 @@ function LoginComponent() {
                                                                     fullWidth
                                                                     size='small'
                                                                     sx={{width:"98%"}}
+                                                                    placeholder='VENDOR'
                                                                     value={spBusinessType}
                                                                     select
-                                                                    onChange={setSpBusinessType}
+                                                                    onChange={(e)=>setSpBusinessType(e.target.value)}
                                                                 >
-                                                                    <MenuItem
+                                                                    {businessTypes?.map((type) => (
+                                                                    <MenuItem key={type} value={type} aria-label={type}>
+                                                                        {type}
+                                                                    </MenuItem>
+                                                                    ))}
+                                                                    {/* <MenuItem
                                                                         key={spBusinessType}
                                                                         value={spBusinessType}
                                                                         aria-label={spBusinessType}
                                                                     >
                                                                         {spBusinessType}
-                                                                    </MenuItem>
+                                                                    </MenuItem> */}
                                                                 </TextField>
                                                                 </Box>
                                                                 <Box width={"50%"}>
@@ -480,7 +567,7 @@ function LoginComponent() {
                                                                         size='small'
                                                                         placeholder='Enter Your Password'
                                                                         onChange={(e) => {
-                                                                            spSetPassword(e.target.value)
+                                                                            setSpPassword(e.target.value)
                                                                         }}
                                                                         value={spPassword}
                                                                         sx={{width:"98%"}}
@@ -492,7 +579,7 @@ function LoginComponent() {
                                                                         size='small'
                                                                         placeholder='Re-enter Your Password'
                                                                         onChange={(e) => {
-                                                                            spSetRePassword(e.target.value)
+                                                                            setSpRePassword(e.target.value)
                                                                         }}
                                                                         value={spRePassword}
                                                                         sx={{width:"100%"}}
@@ -501,13 +588,12 @@ function LoginComponent() {
                                                             </Box>
                                                             <div className="col-12 text-center">
                                                                 <button type="submit"
-                                                                    className="btn btn-login mt-4 mb-4"  onClick={() => { spLoginButton();setServiceProviderAndDealersLoginDialogOpen(true) }}>Register </button>
+                                                                    className="btn btn-login mt-4 mb-4"  onClick={() => { spRegisterButton();setServiceProviderAndDealersLoginDialogOpen(true) }}>Register </button>
                                                             </div>
                                                         </div>
 
                                                     </Box>    
 
-                                                    </ThemeProvider>
                                                                                                 
                                                 </>
                                                 :
@@ -533,31 +619,45 @@ function LoginComponent() {
                                                             <input type="text" placeholder="Enter Your Name"
                                                              className="inputfield" id="inputPassword4"
                                                              value={spName} onChange={(e) => {
-                                                                spSetName(e.target.value)
+                                                                setSpName(e.target.value)
                                                             }}
                                                              />
                                                         </div> */}
-                                                        <div className="col-12">
+                                                        {/* <div className="col-12">
                                                             <label htmlFor="inputEmail4" className="form-label">Email</label>
                                                             <input type="email" placeholder="Enter Your Email ID" 
                                                             className="inputfield" id="inputEmail4"  value={spEmail} onChange={(e) => {
-                                                                spSetEmail(e.target.value)
+                                                                setSpEmail(e.target.value)
                                                             }} />
-                                                        </div>
-                                                        <div className="col-12">
-                                                            <label htmlFor="inputPassword" className="form-label">Password</label>
-                                                            <input type="password" placeholder="Re-enter Your Password" className="inputfield"
-                                                             id="inputPassword4" value={spPassword} onChange={(e) => {
-                                                                spSetPassword(e.target.value)
-                                                            }} />
-                                                        </div>
-                                                        {/* <div className="col-12">
-                                                            <label htmlFor="inputPassword4" className="form-label">Confirm Password</label>
-                                                            <input type="password" placeholder="Re-enter Your Password" className="inputfield"
-                                                                id="inputPassword4" value={spRePassword} onChange={(e) => {
-                                                                    spSetRePassword(e.target.value)
-                                                                }} />
                                                         </div> */}
+                                                        <Box mb={2}>
+                                                                <InputLabel sx={{color:"black",marginBottom:1}}>Email</InputLabel>
+                                                                <TextField 
+                                                                    fullWidth
+                                                                    size='small'
+                                                                    placeholder='Enter Your Email'
+                                                                    onChange={(e) => {
+                                                                        setSpEmail(e.target.value)
+                                                                    }}
+                                                                    type="email"
+                                                                    id="inputEmail4"
+                                                                    value={spEmail}
+                                                                />
+                                                        </Box>
+                                                        <Box mb={2}>
+                                                                <InputLabel sx={{color:"black",marginBottom:1}}>Password</InputLabel>
+                                                                <TextField 
+                                                                    fullWidth
+                                                                    size='small'
+                                                                    placeholder='Enter Your Password'
+                                                                    onChange={(e) => {
+                                                                        setSpPassword(e.target.value)
+                                                                    }}
+                                                                    type="password"
+                                                                    id="inputPassword4"
+                                                                    value={spPassword}
+                                                                />
+                                                        </Box>
                                                         <Box sx={{display:"flex",justifyContent:"space-between"}} className="col-12">
                                                             <div className="form-check">
                                                                 <input className="form-check-input" type="checkbox" id="gridCheck" />
@@ -626,6 +726,7 @@ function LoginComponent() {
                                                     </form>
                                                 </div>
                                             </div>
+
                                         </div>
                                         {loginDialogOpen ? <RegisterDialogForCustomer goToLoginPageButtonAfterRegister={goToLoginPageButtonAfterRegister} loginDialogOpenFunction={loginDialogOpenFunction}/>:null}                
                                         {serviceProviderAndDealersLoginDialogOpen ? <RegisterDialogForServiceProviderAndDealers goToLoginPageButtonAfterRegister={goToLoginPageButtonAfterRegister} loginDialogOpenFunction={serviceProviderAndDealersLoginDialogOpenFunction} />:null}      
@@ -633,7 +734,7 @@ function LoginComponent() {
                                 </div>
                                 <footer id="footer">
                                     <nav className="navbar mt-5  fix-bottom-footer">
-                                        <div className="copyright"> © 2021 Made with Love By <span className="pink-text">AVAH Services</span> </div>
+                                        <div className="copyright"> © {currentYear} Made with Love By <span className="pink-text">AVAH Services</span> </div>
                                         <div className="footer-navlinks">
                                             <ul className="nav justify-content-center">
                                                 <li className="nav-item">
@@ -674,6 +775,7 @@ function LoginComponent() {
   <!-- Template Main JS File --> */}
             </div>
                 {/* {bindLoader()} */}
+                </ThemeProvider>
         </div>
     )
 }
