@@ -290,6 +290,8 @@ function LoginComponent() {
                                                                     }}
                                                                     id="inputName4"
                                                                     value={spName}
+                                                                    required
+
                                                                 />
                                                                 </Box>
                                                                 <Box mb={2}>
@@ -304,6 +306,7 @@ function LoginComponent() {
                                                                             type="email"
                                                                             id="inputEmail4"
                                                                             value={spEmail}
+                                                                            required
                                                                         />
                                                                 </Box>
                                                                 <Box mb={2}>
@@ -318,6 +321,8 @@ function LoginComponent() {
                                                                             type="password"
                                                                             id="inputPassword4"
                                                                             value={spPassword}
+                                                                            required
+
                                                                         />
                                                                 </Box>
                                                                 <Box mb={2}>
@@ -332,6 +337,8 @@ function LoginComponent() {
                                                                             type="password"
                                                                             id="inputconfirmPassword4"
                                                                             value={spRePassword}
+                                                                            required
+
                                                                         />
                                                                 </Box>
                                                                     <div className="col-12">
