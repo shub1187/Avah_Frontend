@@ -12,9 +12,39 @@ import axios from 'axios';
 
 const ServiceProviderPage = (props) => {
   console.log("---------------ServiceProviderPage----**-------------------")
-  const data =axios.get("http://localhost:3008/api/admin/getAllServiceProviders").then()
-  .catch(e=>console.log(e))
-  
+  const [data, setData] = useState([]);
+  console.log("ln 16 Shub",data)
+  useEffect(() => {
+    const apiCall = async () => {
+      try {
+        // Get the bearer token from local storage
+        const token = localStorage.getItem('access_token');
+        
+        // Set up the headers with the authorization token
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+
+     
+          const params = {
+            page: 1,
+            limit: 10,
+          }
+       
+        // Make the GET request with the headers
+        const response = await axios.get("http://localhost:3008/api/admin/getAllServiceProviders", { headers,params });
+        
+        const responseData = response.data.data; // Access data from the response object
+        console.log("ln 32 Shub",responseData);
+        setData(responseData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    apiCall();
+  }, []);
+   
   const dispatch = useDispatch()
   const userState = useSelector((state) => state.appState.user);
   const pageState = useSelector((state) => state.appState.pagination);

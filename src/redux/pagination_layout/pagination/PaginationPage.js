@@ -24,12 +24,14 @@ function PaginationPage(props) {
 
   let columns = useMemo(() => props.column, [])
   // let data = useMemo(() => pageState?.queryPageSortBy, [pageState?.queryPageSortBy])
-  let preprocessedData = props.data?.map((d)=>({
-    ...d,
-    updated_at:new Date(d.updated_at)
-  }))
-  let data = useMemo(()=>preprocessedData??[],[])
-  console.log("RAEES",data)
+  // let preprocessedData = props.data?.map((d)=>({
+  //   ...d,
+  //   updated_at:new Date(d.updated_at)
+  // }))
+  let data = props.data?.results || [];
+  console.log("ln 32 shub",data)
+  // let data = useMemo(()=>preprocessedData??[],[])
+  // console.log("RAEES",data)
   const [currentPage, setCurrentPage] = useState(1)
   const [searchPage, setSearchPage] = useState(false)
 
@@ -58,21 +60,21 @@ function PaginationPage(props) {
 
   }, [pageState.isLoading, userState.loading]);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (pageState.reloadPage) {
-      pagination()
-    }
-    if (pageState.isFirstLoad) {
-      if (typeOfUser)
-        dispatch(PaginationStart(FETCH_REQUEST))
-      else
-        dispatch(SpPaginationStart(FETCH_REQUEST))
-      pagination()
-    }
+  //   if (pageState.reloadPage) {
+  //     pagination()
+  //   }
+  //   if (pageState.isFirstLoad) {
+  //     if (typeOfUser)
+  //       dispatch(PaginationStart(FETCH_REQUEST))
+  //     else
+  //       dispatch(SpPaginationStart(FETCH_REQUEST))
+  //     pagination()
+  //   }
 
 
-  }, [pageState.isFirstLoad, pageState.reloadPage,]);
+  // }, [pageState.isFirstLoad, pageState.reloadPage,]);
 
   useEffect(() => {
 

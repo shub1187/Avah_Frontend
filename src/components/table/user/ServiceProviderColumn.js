@@ -22,21 +22,21 @@ export const ServiceProviderColumn = [
         Header: "STATUS",
         accessor: "sp_status",
         Cell: ({ value }) => {            
-            return  value=='0'? <p className='inactivestatus'>Inactive</p> :<p className='activestatus'>Active</p>
+            return  value=='inactive'? <p className='inactivestatus'>Inactive</p> :<p className='activestatus'>Active</p>
         },
     },
     {
         Header: "ROLE",
         accessor: "role",
-    },
-    {
-        Header: "LAST ACTIVITY",
-        accessor: "updated_at",
-        Cell: ({ value }) => { 
-            return format(new Date(value), 'dd/MM/yyyy')
-
-        }
     }
+    // {
+    //     Header: "LAST ACTIVITY",
+    //     accessor: "updated_at",
+    //     Cell: ({ value }) => { 
+    //         return format(new Date(value), 'dd/MM/yyyy')
+
+    //     }
+    // }
 
 ]
 
