@@ -159,7 +159,7 @@ function LoginComponent() {
             "name":spName,"email":spEmail,"password":spPassword,"cnfPassword":spRePassword,
             "business_name":spBusinessName,"business_type":spBusinessType,"business_contact":spBusinessContactNumber,
             "business_address":spBusinessAddress,
-            "role":page,"approval_status":false
+            "role":page,"approval_status":false,"sp_status":"inactive"
         }
         try{
             let response = await SpRegisterAPI(body)
