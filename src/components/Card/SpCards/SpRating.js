@@ -21,7 +21,7 @@ const bull = (
 
 export default function SpRating({text}) {
   return (
-    <Card elevation={4} sx={{maxWidth: "407px",minHeight:"120px" ,borderRadius:"19px"}}>
+    <Card elevation={4} sx={{maxWidth: "408px",minHeight:"120px" ,borderRadius:"19px"}}>
     <CardContent>
         <Grid container m={2}>
             <Grid item lg={5} >

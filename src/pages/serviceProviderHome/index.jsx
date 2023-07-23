@@ -1,5 +1,5 @@
 import { Box, Card, Grid, Paper, ThemeProvider, Typography } from '@mui/material';
-import ServiceProviderDashboardIconCards from 'components/Card/ServiceProviderDashboardIconCards';
+import ServiceProviderDashboardIconCards from 'components/Card/SpCards/ServiceProviderDashboardIconCards';
 import React from 'react';
 import createAppointmentIcon from 'assets/img/serviceProviderDashboard/createAppointmentIcon.png'
 import createJobCardIcon from 'assets/img/serviceProviderDashboard/createJobCardIcon.png'
@@ -9,11 +9,11 @@ import serviceDueIcon from 'assets/img/serviceProviderDashboard/serviceDueIcon.p
 import pendingServicesIcon from 'assets/img/serviceProviderDashboard/pendingServicesIcon.png'
 import totalCustomersIcon from 'assets/img/serviceProviderDashboard/totalCustomersIcon.png'
 import serviceProviderTheme from './theme';
-import SpRevenueSingleCard from 'components/Card/spRevenueSingleCard';
-import SpRevenueSplitCard from 'components/Card/spRevenueSplitCard';
-import SpLatestActivityCard from 'components/Card/SpLatestActivityCard';
-import SpQuickPayment from 'components/Card/SpQuickPayment';
-import SpRating from 'components/Card/SpRating';
+import SpRevenueSingleCard from 'components/Card/SpCards/spRevenueSingleCard';
+import SpRevenueSplitCard from 'components/Card/SpCards/spRevenueSplitCard';
+import SpLatestActivityCard from 'components/Card/SpCards/SpLatestActivityCard';
+import SpQuickPayment from 'components/Card/SpCards/SpQuickPayment';
+import SpRating from 'components/Card/SpCards/SpRating';
 import ApexCharts from './charts';
 const ServiceProviderHome = (props) => {
   return (
@@ -52,9 +52,9 @@ const ServiceProviderHome = (props) => {
         <Grid container spacing={4}>
           <Grid item xs={8}>
                 <Grid spacing={2} container>
-                  <Grid xl={4} md={6} item><SpRevenueSingleCard/></Grid>
-                  <Grid xl={4} md={6} item><SpRevenueSingleCard/></Grid>
-                  <Grid xl={4} md={6} item><SpRevenueSingleCard/></Grid>
+                  <Grid sm={12} md={6} xl={4} item><SpRevenueSingleCard/></Grid>
+                  <Grid sm={12} md={6} xl={4} item><SpRevenueSingleCard/></Grid>
+                  <Grid sm={12} md={6} xl={4} item><SpRevenueSingleCard/></Grid>
                 </Grid>
                 <Grid justifyContent={"center"} marginTop={2} spacing={4} container>
                   <Grid xl={8} md={12} item><SpRevenueSplitCard/></Grid>
@@ -65,9 +65,9 @@ const ServiceProviderHome = (props) => {
           </Grid>
           <Grid item xs={4}>
             <Grid spacing={2} direction={"row"} container>
-              <Grid xs={12} item><SpLatestActivityCard/></Grid>
-              <Grid xs={12} item><SpQuickPayment/></Grid>
-              <Grid xs item><SpRating/></Grid>
+              <Grid sm={12} item><SpLatestActivityCard/></Grid>
+              <Grid sm={12} item><SpQuickPayment/></Grid>
+              <Grid sm={12} item><SpRating/></Grid>
             </Grid>
           </Grid>
         </Grid>
