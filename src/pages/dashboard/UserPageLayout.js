@@ -45,11 +45,11 @@ function NavTabs(props) {
         value={props.a}
         aria-label="secondary tabs example"
       >
-        <Tab value="0" label="Customers" href="/dashboard/user/customer" />
-        <Tab value="1" label="Service Providers" href="/dashboard/user/service_providers" />
-        <Tab value="2" label="Dealers" href="/dashboard/user/dealers"
+        <Tab value="0" label="Customers" href="/admin/dashboard/user/customer" />
+        <Tab value="1" label="Service Providers" href="/admin/dashboard/user/service_providers" />
+        <Tab value="2" label="Dealers" href="/admin/dashboard/user/dealers"
         />
-        <Tab value="3" label="Moderators" href="/dashboard/user/moderators"/>
+        <Tab value="3" label="Moderators" href="/admin/dashboard/user/moderators"/>
       </Tabs>
     </Box>
   );
