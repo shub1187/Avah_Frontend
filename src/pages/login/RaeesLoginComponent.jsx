@@ -1,7 +1,11 @@
-import { Box, Button, Grid, TextField, ThemeProvider, Typography } from '@mui/material'
+import { Box, Button, Chip, Grid, TextField, ThemeProvider, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import LogoImage from "assets/img/logo.png"
 import LoginButtonTheme from 'components/Button/LoginButtonTheme'
+import AppleLogo from 'assets/img/loginComponent/appleLogo.png'
+import FacebookLogo from 'assets/img/loginComponent/facebookLogo.png'
+import GoogleLogo from 'assets/img/loginComponent/googleLogo.png'
+
 const RaeesLoginComponent = () => {
     const [formField,setFormField] = useState({})
     const [login,setLogin] = useState(true)
@@ -107,16 +111,24 @@ const RaeesLoginComponent = () => {
                             {
                                 login?
                                     <>
-                                        <Grid spacing={2} justifyContent={"center"} container>
+                                        <Grid spacing={1} justifyContent={"center"} container>
                                             <ThemeProvider theme={LoginButtonTheme("43px","174px")}>
                                                 <Grid item><Button>Customer</Button></Grid>
                                                 <Grid item><Button>Service Provider</Button></Grid>
                                                 <Grid item><Button>Dealers</Button></Grid>
                                             </ThemeProvider>
                                         </Grid>
-                                        <>
-                                        {createTextfield(loginTextfield)}
-                                        </>
+                                        <Grid flexDirection={"column"} alignItems={"center"} container>
+                                            <Grid  item><Typography>Welcome Back</Typography></Grid>
+                                            <Grid item><Typography>Sign In Via</Typography></Grid>
+                                            <Grid justifyContent={"center"} container>
+                                                <Grid item><Box height={"4rem"} width={"4rem"} borderRadius={"10px"} border={"1px solid grey"} display={"flex"} alignItems={"center"} justifyContent={"center"}><img src={FacebookLogo} alt="" /></Box></Grid>
+                                                <Grid item><Box height={"4rem"} width={"4rem"} borderRadius={"10px"} border={"1px solid grey"} display={"flex"} alignItems={"center"} justifyContent={"center"}><img src={AppleLogo} alt="" /></Box></Grid>
+                                                <Grid item><Box height={"4rem"} width={"4rem"} borderRadius={"10px"} border={"1px solid grey"} display={"flex"} alignItems={"center"} justifyContent={"center"}><img src={GoogleLogo} alt="" /></Box></Grid>
+                                            </Grid>
+
+
+                                        </Grid>
                                     </>
                                     :
                                     <>
