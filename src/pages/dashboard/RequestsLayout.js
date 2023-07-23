@@ -132,7 +132,7 @@ const handleApprove = (rowId) => {
     <div>
         <PaginationPage
             currentPage="RequestPage"
-            column={[]}
+            column={RequestsColumn}
             onAddUserClick={() => setAddUserDialog(true)}
             data={data??[]}
             onActionClick={(row) => {
