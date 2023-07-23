@@ -124,29 +124,32 @@ function PaginationPage(props) {
     useRowSelect,
     hooks => {
       //<SelectRow {...row.getToggleRowSelectedProps()} />
-      hooks.visibleColumns.push(columns => [
-        ...columns,
-        {
-
-          id: 'selection',
-          Header: "ACTION",
-
-
-          Cell: ({ row }) =>
-
-            <div className="tb-dropdown" style={{ 'float': 'left' }}>
-              <button className='dot-tran-btn'  >...</button>
-
-              <div className="tb-dropdown-content">
-                {props.onActionClick(row)}
+      if(!props.RequestLayout){
+        hooks.visibleColumns.push(columns => [
+          ...columns,
+          {
+  
+            id: 'selection',
+            Header: "ACTION",
+  
+  
+            Cell: ({ row }) =>
+  
+              <div className="tb-dropdown" style={{ 'float': 'left' }}>
+                <button className='dot-tran-btn'  >...</button>
+  
+                <div className="tb-dropdown-content">
+                  {props.onActionClick(row)}
+                </div>
+  
               </div>
+  
+  
+          },
+  
+        ])
+      }
 
-            </div>
-
-
-        },
-
-      ])
     }
 
   )

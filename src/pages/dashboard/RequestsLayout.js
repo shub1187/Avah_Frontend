@@ -79,10 +79,10 @@ const RequestsLayout = (props) => {
         Header: 'ACTIONS',
         Cell: ({ row }) => (
           <Box display={'flex'}>
-            <Button onClick={() => handleApprove(row.id)} color="success">
+            <Button variant='outlined' onClick={() => handleApprove(row.id)} color="success">
               APPROVE
             </Button>
-            <Button onClick={() => handleDeny(row.id)} color="error">
+            <Button variant='outlined' onClick={() => handleDeny(row.id)} color="error">
               DENY
             </Button>
           </Box>
@@ -137,6 +137,7 @@ const handleApprove = (rowId) => {
             data={data??[]}
             onActionClick={(row) => {
             }}
+            RequestLayout={true}
         />
         {/* {bindAddUserDialog("ServiceProviderPage")}
         {bindProfileDialog("ServiceProviderPage")} */}
