@@ -9,8 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import AddUserDialog from './user/common/dialog/AddUserDialog';
 import UserProfileDialog from './user/common/dialog/UserProfileDialog';
-import { RowProvider } from 'components/table/admin/requestsColumn';
-import PaginationRequestTable from 'redux/pagination_layout/pagination/paginationRequestTable';
+import { Box, Button } from '@mui/material';
+import PaginationPage from 'redux/pagination_layout/pagination/PaginationPage';
+
+
 const RequestsLayout = (props) => {
   console.log("---------------ServiceProviderPage----**-------------------")
   const [data, setData] = useState([]);
@@ -128,10 +130,9 @@ const handleApprove = (rowId) => {
 
   return (
     <div>
-    <RowProvider>
-        <PaginationRequestTable
+        <PaginationPage
             currentPage="RequestPage"
-            column={RequestsColumn}
+            column={[]}
             onAddUserClick={() => setAddUserDialog(true)}
             data={data??[]}
             onActionClick={(row) => {
@@ -139,8 +140,6 @@ const handleApprove = (rowId) => {
         />
         {/* {bindAddUserDialog("ServiceProviderPage")}
         {bindProfileDialog("ServiceProviderPage")} */}
-
-    </RowProvider>
 
 
     </div>
