@@ -3,10 +3,6 @@ import { format } from 'date-fns'
 export const CustomerColumn = [
   
     {
-        Header: "ID",
-        accessor: "id",
-    },
-    {
         Header: "NAME",
         accessor: "first_name",
     },

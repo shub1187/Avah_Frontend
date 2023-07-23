@@ -7,11 +7,14 @@ import PaginationPage from '../../../../redux/pagination_layout/pagination/Pagin
 import AddUserDialog from '../common/dialog/AddUserDialog';
 import UserProfileDialog from '../common/dialog/UserProfileDialog';
 import ServiceProviderColumnData from '../../../../components/table/user/data/ServiceProviderColumn.json'
+import axios from 'axios';
 
 
 const ServiceProviderPage = (props) => {
   console.log("---------------ServiceProviderPage----**-------------------")
-
+  const data =axios.get("http://localhost:3008/api/admin/getAllServiceProviders").then()
+  .catch(e=>console.log(e))
+  
   const dispatch = useDispatch()
   const userState = useSelector((state) => state.appState.user);
   const pageState = useSelector((state) => state.appState.pagination);
@@ -49,7 +52,7 @@ const ServiceProviderPage = (props) => {
         currentPage="ServiceProviderPage"
         column={ServiceProviderColumn}
         onAddUserClick={() => setAddUserDialog(true)}
-        data={ServiceProviderColumnData}
+        data={data??[]}
         onActionClick={(row) => {
           return (<div>
 
