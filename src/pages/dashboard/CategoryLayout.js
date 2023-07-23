@@ -24,9 +24,9 @@ function NavTabs(props) {
         value={props.a}
         aria-label="secondary tabs example"
       >
-        <Tab value="0" label="Manufacturers" href="/dashboard/vehicle_settings/manufacturers" />
-        <Tab value="1" label="Models" href="/dashboard/vehicle_settings/models" />
-        <Tab value="2" label="Fuel Type" href="/dashboard/vehicle_settings/fuel_type"
+        <Tab value="0" label="Manufacturers" href="/admin/dashboard/vehicle_settings/manufacturers" />
+        <Tab value="1" label="Models" href="/admin/dashboard/vehicle_settings/models" />
+        <Tab value="2" label="Fuel Type" href="/admin/dashboard/vehicle_settings/fuel_type"
         />
       </Tabs>
     </Box>
