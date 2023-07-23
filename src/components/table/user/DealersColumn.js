@@ -2,10 +2,7 @@ import { format } from 'date-fns'
 
 export const DealersColumn = [
   
-    {
-        Header: "ID",
-        accessor: "id",
-    },
+
     {
         Header: "NAME",
         accessor: "first_name",

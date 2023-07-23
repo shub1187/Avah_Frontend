@@ -7,11 +7,44 @@ import PaginationPage from '../../../../redux/pagination_layout/pagination/Pagin
 import AddUserDialog from '../common/dialog/AddUserDialog';
 import UserProfileDialog from '../common/dialog/UserProfileDialog';
 import ServiceProviderColumnData from '../../../../components/table/user/data/ServiceProviderColumn.json'
+import axios from 'axios';
 
 
 const ServiceProviderPage = (props) => {
   console.log("---------------ServiceProviderPage----**-------------------")
+  const [data, setData] = useState([]);
+  console.log("ln 16 Shub",data)
+  useEffect(() => {
+    const apiCall = async () => {
+      try {
+        // Get the bearer token from local storage
+        const token = localStorage.getItem('access_token');
+        
+        // Set up the headers with the authorization token
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
 
+     
+          const params = {
+            page: 1,
+            limit: 10,
+          }
+       
+        // Make the GET request with the headers
+        const response = await axios.get("http://localhost:3008/api/admin/getAllServiceProviders", { headers,params });
+        
+        const responseData = response.data.data; // Access data from the response object
+        console.log("ln 32 Shub",responseData);
+        setData(responseData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    apiCall();
+  }, []);
+   
   const dispatch = useDispatch()
   const userState = useSelector((state) => state.appState.user);
   const pageState = useSelector((state) => state.appState.pagination);
@@ -49,7 +82,7 @@ const ServiceProviderPage = (props) => {
         currentPage="ServiceProviderPage"
         column={ServiceProviderColumn}
         onAddUserClick={() => setAddUserDialog(true)}
-        data={ServiceProviderColumnData}
+        data={data??[]}
         onActionClick={(row) => {
           return (<div>
 
