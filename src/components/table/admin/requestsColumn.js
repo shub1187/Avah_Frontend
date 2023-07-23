@@ -32,21 +32,27 @@ export const RequestsColumn = [
         accessor: "business_type",
     },
     {
-        Header: "STATUS",
-        accessor: "sp_status",
-        Cell: ({ value }) => {            
-            return  (<>
-            <Box display={"flex"}>
-                <Button onClick={()=>{}} color="success">APPROVE</Button>
-                <Button onClick={()=>{}} color="error">DENY</Button>
-            </Box>
-            </>)
-        },
+        Header:"DOCUMENT",
+        accessor:"document"
     },
     {
         Header: "ROLE",
         accessor: "role",
-    }
+    },
+    {
+        Header: 'ACTIONS',
+        Cell: ({ row }) => (
+          <Box display={'flex'}>
+            <Button onClick={() => handleApprove(row.id)} color="success">
+              APPROVE
+            </Button>
+            <Button onClick={() => handleDeny(row.id)} color="error">
+              DENY
+            </Button>
+          </Box>
+        ),
+    },
+
     // {
     //     Header: "LAST ACTIVITY",
     //     accessor: "updated_at",

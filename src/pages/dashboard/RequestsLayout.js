@@ -4,11 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { RELOAD_PAGE, RESET_PAGE } from '../../../../network/ApiConstant';
 // import { PaginationAction, PaginationStart } from '../../../../redux/pagination_layout/pagination/PaginationAction';
 // import PaginationPage from '../../../../redux/pagination_layout/pagination/PaginationPage';
-import PaginationPage from 'redux/pagination_layout/pagination/PaginationPage';
 // import AddUserDialog from '../common/dialog/AddUserDialog';
 // import UserProfileDialog from '../common/dialog/UserProfileDialog';
 import axios from 'axios';
-import { RequestsColumn } from 'components/table/admin/requestsColumn';
 import AddUserDialog from './user/common/dialog/AddUserDialog';
 import UserProfileDialog from './user/common/dialog/UserProfileDialog';
 import { RowProvider } from 'components/table/admin/requestsColumn';
@@ -49,8 +47,66 @@ const RequestsLayout = (props) => {
   const [reload, setReload] = useState(true)
   let pageName="ServiceProviderPage"
   
+  const RequestsColumn = [
+  
+    {
+        Header: "NAME",
+        accessor: "name",
+    },
+    {
+        Header: "EMAIL",
+        accessor: "email",
+    },
+    {
+        Header: "BUSINESS NAME",
+        accessor: "business_name",
+    },
+    {
+        Header: "BUSINESS TYPE",
+        accessor: "business_type",
+    },
+    {
+        Header:"DOCUMENT",
+        accessor:"document"
+    },
+    {
+        Header: "ROLE",
+        accessor: "role",
+    },
+    {
+        Header: 'ACTIONS',
+        Cell: ({ row }) => (
+          <Box display={'flex'}>
+            <Button onClick={() => handleApprove(row.id)} color="success">
+              APPROVE
+            </Button>
+            <Button onClick={() => handleDeny(row.id)} color="error">
+              DENY
+            </Button>
+          </Box>
+        ),
+    },
 
+    // {
+    //     Header: "LAST ACTIVITY",
+    //     accessor: "updated_at",
+    //     Cell: ({ value }) => { 
+    //         return format(new Date(value), 'dd/MM/yyyy')
 
+    //     }
+    // }
+
+]
+
+const handleApprove = (rowId) => {
+    // Perform the approve action using the rowId (e.g., make an API call)
+    console.log('Approve row with ID:', rowId);
+  };
+
+  const handleDeny = (rowId) => {
+    // Perform the deny action using the rowId (e.g., make an API call)
+    console.log('Deny row with ID:', rowId);
+  };
 //   useEffect(() => {
 //     console.log("---------------ServiceProviderPage----------------page page-------" )
 //     dispatch(PaginationStart(RESET_PAGE))
