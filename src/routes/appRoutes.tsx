@@ -26,7 +26,7 @@ const appRoutes: RouteType[] = [
   },
   
   {
-   path: "admin/dashboard/home",
+   path: "/admin/dashboard/home",
     element: <Homepage />,
     state: "home",
     tabIndex:"0",
@@ -36,7 +36,7 @@ const appRoutes: RouteType[] = [
     }
   },
   {
-   path: "admin/dashboard/user",
+   path: "/admin/dashboard/user",
     element: <UserPageLayout />,
     tabIndex:"0",
     state: "user",
@@ -54,7 +54,7 @@ const appRoutes: RouteType[] = [
       },
       {
         
-       path: "admin/dashboard/user/customer",
+       path: "/admin/dashboard/user/customer",
         element: <CustomersPage />,
         index: true,
         tabIndex:"1",
@@ -67,7 +67,7 @@ const appRoutes: RouteType[] = [
         },
       },
       {
-       path: "admin/dashboard/user/service_providers",
+       path: "/admin/dashboard/user/service_providers",
         element: <ServiceProviderPage />,
         tabIndex:"2",
         childView:true,
@@ -78,7 +78,7 @@ const appRoutes: RouteType[] = [
         }
       },
       {
-       path: "admin/dashboard/user/dealers",
+       path: "/admin/dashboard/user/dealers",
         element: <DealersPage />,
         state: "user.dealers",
         tabIndex:"3",
@@ -91,7 +91,7 @@ const appRoutes: RouteType[] = [
         }
       },
       {
-        path: "admin/dashboard/user/moderators",
+        path: "/admin/dashboard/user/moderators",
          element: <ModeratorsPage />,
          state: "user.moderators",
          tabIndex:"2",
@@ -138,7 +138,7 @@ const appRoutes: RouteType[] = [
   //   ]
   // },
   {
-   path: "admin/dashboard/roles",
+   path: "/admin/dashboard/roles",
     element: <DashboardIndex />,
     state: "roles",
     tabIndex:"0",
@@ -148,7 +148,7 @@ const appRoutes: RouteType[] = [
     }
   },
   {
-   path: "admin/dashboard/vehicle_settings",
+   path: "/admin/dashboard/vehicle_settings",
     element: <VehicleSettingsLayout />,
     state: "vehicle_settings",
     tabIndex:"0",
@@ -166,7 +166,7 @@ const appRoutes: RouteType[] = [
       },
       {
         
-       path: "admin/dashboard/vehicle_settings/manufacturers",
+       path: "/admin/dashboard/vehicle_settings/manufacturers",
         element: <ManufacturersPage />,
          childView:true,
         tabIndex:"1",
@@ -178,7 +178,7 @@ const appRoutes: RouteType[] = [
         },
       },
       {
-       path: "admin/dashboard/vehicle_settings/models",
+       path: "/admin/dashboard/vehicle_settings/models",
         element: <ModelsPage />,
          childView:true,
         tabIndex:"1",
@@ -189,7 +189,7 @@ const appRoutes: RouteType[] = [
         }
       },
       {
-       path: "admin/dashboard/vehicle_settings/fuel_type",
+       path: "/admin/dashboard/vehicle_settings/fuel_type",
         element: <FuelTypePage />,
         state: "vehicle_settings.fuel_type",
         tabIndex:"2",
@@ -205,7 +205,7 @@ const appRoutes: RouteType[] = [
   }
   ,
   {
-   path: "admin/dashboard/category",
+   path: "/admin/dashboard/category",
     element: <CategoryLayout />,
     state: "category",
     tabIndex:"0",
@@ -223,7 +223,7 @@ const appRoutes: RouteType[] = [
       },
       {
         
-       path: "admin/dashboard/category/category",
+       path: "/admin/dashboard/category/category",
         element: <CategoryComponent />,
          childView:true,
         tabIndex:"1",
@@ -238,7 +238,7 @@ const appRoutes: RouteType[] = [
   }
   ,
   {
-   path: "admin/dashboard/subcategory",
+   path: "/admin/dashboard/subcategory",
     element: <CategoryLayout />,
     state: "subcategory",
     tabIndex:"0",
@@ -256,7 +256,7 @@ const appRoutes: RouteType[] = [
       },
       {
         
-       path: "admin/dashboard/subcategory/subcategory",
+       path: "/admin/dashboard/subcategory/subcategory",
         element: <SubCategoryComponent />,
          childView:true,
         tabIndex:"1",
@@ -271,7 +271,7 @@ const appRoutes: RouteType[] = [
   }
   ,
   {
-   path: "admin/dashboard/service_category",
+   path: "/admin/dashboard/service_category",
     element: <CategoryLayout />,
     state: "service_category",
     tabIndex:"0",
@@ -289,7 +289,7 @@ const appRoutes: RouteType[] = [
       },
       {
         
-       path: "admin/dashboard/service_category/service_category",
+       path: "/admin/dashboard/service_category/service_category",
         element: <ServiceCategoryComponent />,
         childView:true,
         tabIndex:"1",
@@ -304,7 +304,7 @@ const appRoutes: RouteType[] = [
   }
   ,
   {
-   path: "admin/dashboard/requests",
+   path: "/admin/dashboard/requests",
     element: <DashboardIndex />,
     state: "requests",
     tabIndex:"0",
@@ -316,7 +316,7 @@ const appRoutes: RouteType[] = [
 
   ,
   {
-   path: "admin/dashboard/package",
+   path: "/admin/dashboard/package",
     element: <DashboardIndex />,
     state: "package",
     tabIndex:"0",
@@ -327,7 +327,7 @@ const appRoutes: RouteType[] = [
   }
   ,
   {
-   path: "admin/dashboard/Orders",
+   path: "/admin/dashboard/Orders",
     element: <DashboardIndex />,
     state: "Orders",
     tabIndex:"0",
@@ -338,7 +338,7 @@ const appRoutes: RouteType[] = [
   }
   ,
   {
-   path: "admin/dashboard/service_records",
+   path: "/admin/dashboard/service_records",
     element: <DashboardIndex />,
     state: "service_records",
     tabIndex:"0",
@@ -349,7 +349,7 @@ const appRoutes: RouteType[] = [
   },
 
   {
-   path: "admin/dashboard/reports",
+   path: "/admin/dashboard/reports",
     element: <DashboardIndex />,
     state: "reports",
     tabIndex:"0",
@@ -359,7 +359,7 @@ const appRoutes: RouteType[] = [
     }
   },
   {
-   path: "admin/dashboard/reviews",
+   path: "/admin/dashboard/reviews",
     element: <DashboardIndex />,
     state: "reviews",
     tabIndex:"0",
@@ -369,7 +369,7 @@ const appRoutes: RouteType[] = [
     }
   }
   ,  {
-   path: "admin/dashboard/notification",
+   path: "/admin/dashboard/notification",
     element: <DashboardIndex />,
     state: "notification",
     tabIndex:"0",
@@ -379,7 +379,7 @@ const appRoutes: RouteType[] = [
     }
   },
   {
-   path: "admin/dashboard/banner",
+   path: "/admin/dashboard/banner",
     element: <DashboardIndex />,
     state: "banner",
     tabIndex:"0",
@@ -389,7 +389,7 @@ const appRoutes: RouteType[] = [
     }
   }
   , {
-   path: "admin/dashboard/webpage",
+   path: "/admin/dashboard/webpage",
     element: <DashboardIndex />,
     state: "webpage",
     tabIndex:"0",
@@ -398,7 +398,7 @@ const appRoutes: RouteType[] = [
       icon:require('./../assets/img/sidebar/webpage.png')
     }
   }, {
-   path: "admin/dashboard/support_tickets",
+   path: "/admin/dashboard/support_tickets",
     element: <DashboardIndex />,
     state: "support_tickets",
     tabIndex:"0",
@@ -408,7 +408,7 @@ const appRoutes: RouteType[] = [
     }
   },
   {
-   path: "admin/dashboard/settings",
+   path: "/admin/dashboard/settings",
     element: <DashboardIndex />,
     state: "settings",
     tabIndex:"0",

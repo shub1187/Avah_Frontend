@@ -19,15 +19,15 @@ function App() {
   const navigate = useNavigate();
   const typeOfUser = localStorage.getItem('TYPE_OF_USER');
 
-  useEffect(() => {
-    // Check if isAdminPage is true and typeOfUser is "1", then redirect to /admin/dashboard
-    if (isAdminPage && typeOfUser === "1") {
-      navigate('/admin/dashboard');
-    }
-    else{
-      navigate('/admin')
-    }
-  }, [isAdminPage, typeOfUser]);
+  // useEffect(() => {
+  //   // Check if isAdminPage is true and typeOfUser is "1", then redirect to /admin/dashboard
+  //   if (isAdminPage && typeOfUser === "1") {
+  //     navigate('/admin/dashboard/home');
+  //   }
+  //   else{
+  //     navigate('/admin')
+  //   }
+  // }, [isAdminPage, typeOfUser]);
   return (
     // <BrowserRouter>
       <Routes>
@@ -53,6 +53,8 @@ function App() {
            isAdminPage && localStorage.getItem('TYPE_OF_USER') == "1" ?
            <>              
              <Route path="/admin/dashboard" element={<MainLayout />}> {routes}</Route>
+             <Route path="/admin/" element={<MainLayout />}> {routes}</Route>
+
            </>
 
            :
