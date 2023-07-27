@@ -190,6 +190,7 @@ const handleApprove =async (rowId) => {
             data={data??[]}
             onActionClick={(row) => {
             }}
+            RequestLayout ={true}
         />
         {/* {bindAddUserDialog("ServiceProviderPage")}
         {bindProfileDialog("ServiceProviderPage")} */}
