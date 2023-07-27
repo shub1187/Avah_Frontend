@@ -16,6 +16,7 @@ import CategoryComponent from "../pages/dashboard/category/CategoryComponent";
 import SubCategoryComponent from "../pages/dashboard/category/SubCategoryComponent";
 import ServiceCategoryComponent from "../pages/dashboard/category/ServiceCategoryComponent";
 import DashboardIndex from "../serviceprovider/page/dashboard/DashboardIndex";
+import RequestsLayout from "pages/dashboard/RequestsLayout";
 
 const appRoutes: RouteType[] = [
   {
@@ -305,7 +306,7 @@ const appRoutes: RouteType[] = [
   ,
   {
    path: "/admin/dashboard/requests",
-    element: <DashboardIndex />,
+    element: <RequestsLayout />,
     state: "requests",
     tabIndex:"0",
     sidebarProps: {

@@ -28,7 +28,8 @@ function PaginationPage(props) {
   //   ...d,
   //   updated_at:new Date(d.updated_at)
   // }))
-  let data = props.data?.results || [];
+  let data = useMemo(() =>  props.data?.results || [], [props.data])
+  // let data = props.data?.results || [];
   console.log("ln 32 shub",data)
   // let data = useMemo(()=>preprocessedData??[],[])
   // console.log("RAEES",data)
@@ -124,31 +125,33 @@ function PaginationPage(props) {
     useRowSelect,
     hooks => {
       //<SelectRow {...row.getToggleRowSelectedProps()} />
-      hooks.visibleColumns.push(columns => [
-        ...columns,
-        {
-
-          id: 'selection',
-          Header: "ACTION",
-
-
-          Cell: ({ row }) =>
-
-            <div className="tb-dropdown" style={{ 'float': 'left' }}>
-              <button className='dot-tran-btn'  >...</button>
-
-              <div className="tb-dropdown-content">
-                {props.onActionClick(row)}
+      if (!props.RequestLayout){
+        hooks.visibleColumns.push(columns => [
+          ...columns,
+          {
+  
+            id: 'selection',
+            Header: "ACTION",
+  
+  
+            Cell: ({ row }) =>
+  
+              <div className="tb-dropdown" style={{ 'float': 'left' }}>
+                <button className='dot-tran-btn'  >...</button>
+  
+                <div className="tb-dropdown-content">
+                  {props.onActionClick(row)}
+                </div>
+  
               </div>
+  
+  
+          },
+  
+        ])
 
-            </div>
-
-
-        },
-
-      ])
+      }    
     }
-
   )
   // 
   const { pageIndex, pageSize } = state
