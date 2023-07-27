@@ -16,7 +16,9 @@ import PaginationPage from 'redux/pagination_layout/pagination/PaginationPage';
 const RequestsLayout = (props) => {
   console.log("---------------ServiceProviderPage----**-------------------")
   const [data, setData] = useState([]);
-  console.log("ln 16 Shub",data)
+
+
+  // console.log("ln 16 Shub",data)
   useEffect(() => {
     const apiCall = async () => {
       try {
@@ -78,11 +80,11 @@ const RequestsLayout = (props) => {
     {
         Header: 'ACTIONS',
         Cell: ({ row }) => (
-          <Box display={'flex'}>
-            <Button variant='outlined' onClick={() => handleApprove(row.id)} color="success">
+          <Box display={'flex'} justifyContent={'space-between'} >
+            <Button variant="outlined"   onClick={() => handleApprove(row)} color="success">
               APPROVE
             </Button>
-            <Button variant='outlined' onClick={() => handleDeny(row.id)} color="error">
+            <Button onClick={() => handleDeny(row.id)} color="error">
               DENY
             </Button>
           </Box>
@@ -100,14 +102,65 @@ const RequestsLayout = (props) => {
 
 ]
 
-const handleApprove = (rowId) => {
+const handleApprove =async (rowId) => {
     // Perform the approve action using the rowId (e.g., make an API call)
-    console.log('Approve row with ID:', rowId);
+    console.log('Approve row with ID:', rowId.original.email);
+
+    try {
+      // Get the bearer token from local storage
+      const token = localStorage.getItem('access_token');
+      
+      // Set up the headers with the authorization token
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };       
+
+       // Data to be sent in the request body
+  const requestBody = {
+    sp_status: 'active', // Replace 'active' with the desired value
+    approval_status: true, // Replace 'true' with the desired value
+    email: rowId.original.email, // Replace 'example@example.com' with the desired value
+  };
+      // Make the GET request with the headers
+      const response = await axios.post("http://localhost:3008/api/admin/approveServiceProvider",requestBody,{ headers });
+      
+      const responseData = response.data; // Access data from the response object
+      console.log("ln 142 revert from backend ",responseData)
+      // setData(responseData);
+    } catch (error) {
+      console.log(error);
+    }
+
   };
 
-  const handleDeny = (rowId) => {
-    // Perform the deny action using the rowId (e.g., make an API call)
-    console.log('Deny row with ID:', rowId);
+  const handleDeny = async (rowId) => {
+   // Perform the approve action using the rowId (e.g., make an API call)
+   console.log('Approve row with ID:', rowId.original.email);
+
+   try {
+     // Get the bearer token from local storage
+     const token = localStorage.getItem('access_token');
+     
+     // Set up the headers with the authorization token
+     const headers = {
+       Authorization: `Bearer ${token}`,
+     };       
+
+      // Data to be sent in the request body
+ const requestBody = {
+   sp_status: 'inactive', // Replace 'active' with the desired value
+   approval_status: false, // Replace 'true' with the desired value
+   email: rowId.original.email, // Replace 'example@example.com' with the desired value
+ };
+     // Make the GET request with the headers
+     const response = await axios.post("http://localhost:3008/api/admin/approveServiceProvider",requestBody,{ headers });
+     
+     const responseData = response.data; // Access data from the response object
+     console.log("ln 142 revert from backend ",responseData)
+     // setData(responseData);
+   } catch (error) {
+     console.log(error);
+   }
   };
 //   useEffect(() => {
 //     console.log("---------------ServiceProviderPage----------------page page-------" )
@@ -137,7 +190,6 @@ const handleApprove = (rowId) => {
             data={data??[]}
             onActionClick={(row) => {
             }}
-            RequestLayout={true}
         />
         {/* {bindAddUserDialog("ServiceProviderPage")}
         {bindProfileDialog("ServiceProviderPage")} */}
