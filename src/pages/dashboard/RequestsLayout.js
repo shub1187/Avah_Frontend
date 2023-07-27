@@ -84,8 +84,8 @@ const RequestsLayout = (props) => {
             <Button variant="outlined"   onClick={() => handleApprove(row)} color="success">
               APPROVE
             </Button>
-            <Button onClick={() => handleDeny(row.id)} color="error">
-              DENY
+            <Button variant="outlined" onClick={() => handleDeny(row.id)} color="error">
+              REJECT
             </Button>
           </Box>
         ),
