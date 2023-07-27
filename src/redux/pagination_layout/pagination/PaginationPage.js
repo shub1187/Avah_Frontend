@@ -150,12 +150,8 @@ function PaginationPage(props) {
   
         ])
 
-      }
-     
+      }    
     }
-
-    }
-
   )
   // 
   const { pageIndex, pageSize } = state
