@@ -92,12 +92,17 @@ function LoginComponent({role}) {
     const [signUp,setSignUp] = useState(false)
 
     const [error, setErrorMessage] = useState("")
+    const [errory,setErrory] = useState(false)
 
 
 
     const [page, SetPage] = useState("admin")
     console.log(spName,spEmail,spPassword,spRePassword,spBusinessName,spBusinessType,spBusinessContactNumber,spBusinessAddress,page,'RAEES')
+    useEffect(()=>{
+        let vam = setTimeout(()=>setErrory(false),2000)
 
+        return()=>clearTimeout(vam)
+    },[errory])
     const dispatch = useDispatch()
     const [setLoader, bindLoader, closeLoader] = Loader('')
     useEffect(() => {
@@ -117,9 +122,9 @@ function LoginComponent({role}) {
 
         // console.log("buttonlicnaksdnkajs")
         if (email.length <= 0) {
-            setErrorMessage("Enter email id")
+            setErrory(true)
         } else if (password.length <= 0) {
-            setErrorMessage("Enter password")
+            setErrory(true)
         } else {
             console.log("LoginActionPAge")
             setErrorMessage("")
@@ -154,29 +159,6 @@ function LoginComponent({role}) {
         }
     }
 
-    const spRegisterButton = async()=>{
-        let body = {
-            "name":spName,"email":spEmail,"password":spPassword,"cnfPassword":spRePassword,
-            "business_name":spBusinessName,"business_type":spBusinessType,"business_contact":spBusinessContactNumber,
-            "business_address":spBusinessAddress,
-            "role":page,"approval_status":false
-        }
-        try{
-            let response = await SpRegisterAPI(body)
-            setSpName('');
-            setSpEmail('');
-            setSpPassword('');
-            setSpRePassword('');
-            setSpBusinessName('');
-            setSpBusinessContactNumber('');
-            setSpBusinessAddress('');
-            setSpBusinessType('');
-        }
-        catch(e){
-            console.log(e)
-        }
-
-    }
 
     const currentDate = new Date();
     const currentYear = getYear(currentDate);
@@ -265,6 +247,8 @@ function LoginComponent({role}) {
                                                                     value={email}
                                                                     type="email"
                                                                     id='inputEmailSp'
+                                                                    error={errory && !email.length?true:false}
+                                                                    helperText={errory && !email.length?"Email Required":""}
                                                                 />
                                                             </Box>
                                                             <Box mb={2}>
@@ -279,6 +263,8 @@ function LoginComponent({role}) {
                                                                     value={password}
                                                                     type='password'
                                                                     id='inputPassword4'
+                                                                    error={errory && !password.length?true:false}
+                                                                    helperText={errory && !password.length?"Password Required":""}
                                                                 />
                                                             </Box>
                                                         {/* <div className="col-12">

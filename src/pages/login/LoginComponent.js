@@ -66,7 +66,7 @@ function LoginComponent() {
     }
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    console.log(loginDialogOpen,"RAEES")
+    // console.log(loginDialogOpen,"RAEES")
     const businessTypes = [
         'Sole Proprietorship',
         'Partnership',
@@ -92,11 +92,15 @@ function LoginComponent() {
     const [signUp,setSignUp] = useState(false)
 
     const [error, setErrorMessage] = useState("")
-
-
-
+    const [errory,setErrory] = useState(false)
     const [page, SetPage] = useState("customer")
-    console.log(spName,spEmail,spPassword,spRePassword,spBusinessName,spBusinessType,spBusinessContactNumber,spBusinessAddress,page,'RAEES')
+    // console.log(email,email.length,password.length,password,spName,spEmail,spPassword,spRePassword,spBusinessName,spBusinessType,spBusinessContactNumber,spBusinessAddress,page,'RAEES')
+    // console.log(errory,"RAEES","ERRORY")
+    useEffect(()=>{
+        let vam = setTimeout(()=>setErrory(false),2000)
+
+        return()=>clearTimeout(vam)
+    },[errory])
 
     const dispatch = useDispatch()
     const [setLoader, bindLoader, closeLoader] = Loader('')
@@ -117,16 +121,20 @@ function LoginComponent() {
 
         // console.log("buttonlicnaksdnkajs")
         if (email.length <= 0) {
-            setErrorMessage("Enter email id")
+            setErrory(true)
+            // setErrorMessage("Enter email id")
         } else if (password.length <= 0) {
-            setErrorMessage("Enter password")
+            setErrory(true)
+            // setErrorMessage("Enter password")
         } else {
-            console.log("LoginActionPAge")
-            setErrorMessage("")
+            // console.log("LoginActionPAge")
+            // setErrorMessage("")
             setEmail("")
             setPassword("")
             let body={"username":email,"password":password,"role":page}
             dispatch(LoginAction(body))
+            // setErrory(true)
+
         }
 
     }
@@ -134,9 +142,9 @@ function LoginComponent() {
     const spLoginButton = () => {
         // console.log("buttonlicnaksdnkajs")
         if (spEmail.length <= 0) {
-            setErrorMessage("Enter email id")
+            setErrory(true)
         } else if (spPassword.length <= 0) {
-            setErrorMessage("Enter password")
+            setErrory(true)
         }
         // else if(spBusinessName.length <=0){
         //     setErrorMessage("Enter Buisness Name")
@@ -145,12 +153,14 @@ function LoginComponent() {
         //     setErrorMessage("Enter Buisness Contact Number")
         // }
         else {
-            console.log("LoginActionPAge")
-            setErrorMessage("")
+            // console.log("LoginActionPAge")
+            // setErrorMessage("")
             setSpEmail("")
             setSpPassword("")
             let body={"email":spEmail,"password":spPassword,"role":page}
             dispatch(SPLoginAction(body))
+            // setErrory(true)
+
         }
     }
 
@@ -162,21 +172,71 @@ function LoginComponent() {
             "role":page,"approval_status":false,"sp_status":"inactive"
         }
         try{
-            let response = await SpRegisterAPI(body)
-            setSpName('');
-            setSpEmail('');
-            setSpPassword('');
-            setSpRePassword('');
-            setSpBusinessName('');
-            setSpBusinessContactNumber('');
-            setSpBusinessAddress('');
-            setSpBusinessType('');
+            if (spEmail.length <= 0) {
+                setErrory(true)
+            } else if (spName.length <= 0) {
+                setErrory(true)
+            }else if (spRePassword.length <= 0) {
+                setErrory(true)
+            }else if (spBusinessName.length <= 0) {
+                setErrory(true)
+            }else if (spBusinessContactNumber.length <= 0) {
+                setErrory(true)
+            }else if (spBusinessAddress.length <= 0) {
+                setErrory(true)
+            }
+            else{
+                let response = await SpRegisterAPI(body)
+                setSpName('');
+                setSpEmail('');
+                setSpPassword('');
+                setSpRePassword('');
+                setSpBusinessName('');
+                setSpBusinessContactNumber('');
+                setSpBusinessAddress('');
+                setSpBusinessType('');
+                setServiceProviderAndDealersLoginDialogOpen(true)
+
+            }
+
         }
         catch(e){
             console.log(e)
         }
 
     }
+    const spRegisterForCustomer = async()=>{
+        let body={"email":spEmail,"password":spPassword,"role":page}
+        if(spName.length<=0){
+            setErrory(true)
+        }
+        else if(spEmail.length<=0){
+            setErrory(true)
+        }
+        else if (spPassword.length<=0){
+            setErrory(true)
+        }
+        else if(spRePassword.length<=0){
+            setErrory(true)  
+        }
+        else{
+            setLoginDialogOpen(true)
+
+        }
+    }
+    const clearOutAllfield=()=>{
+        setSpName('');
+        setSpEmail('');
+        setSpPassword('');
+        setSpRePassword('');
+        setSpBusinessName('');
+        setSpBusinessContactNumber('');
+        setSpBusinessAddress('');
+        setSpBusinessType('');
+        setEmail("")
+        setPassword("")
+    }
+
 
     const currentDate = new Date();
     const currentYear = getYear(currentDate);
@@ -220,7 +280,7 @@ function LoginComponent() {
                                             <a className="nav-link">Blogs</a>
                                         </li>
                                         <li className="nav-item">
-                                            <a onClick={()=>setSignUp(!signUp)} className="nav-link signup-btn">{signUp?<>LOGIN</>:<>SIGN UP</>}</a>
+                                            <a onClick={()=>{setSignUp(!signUp);setErrorMessage("");clearOutAllfield()}} className="nav-link signup-btn">{signUp?<>LOGIN</>:<>SIGN UP</>}</a>
                                         </li>
                                     </ul>
 
@@ -239,17 +299,17 @@ function LoginComponent() {
                                                 <li className="nav-item text-center">
                                                     <a className={`nav-link  ${page=="customer" ? "" : "active"} btl`} id="pills-home-tab" data-toggle="pill" 
                                                        href="#pills-home"
-                                                        aria-controls="pills-home" aria-selected="false" onClick={()=>{SetPage("customer");setSignUp(false)}}>Customer</a>
+                                                        aria-controls="pills-home" aria-selected="false" onClick={()=>{SetPage("customer");setSignUp(false);setErrorMessage("");clearOutAllfield()}}>Customer</a>
                                                 </li>
                                                 <li className="nav-item text-center">
                                                     <a className={`nav-link  ${page=="service provider" ? "" : "active"} btr`} id="pills-profile-tab"
                                                     data-toggle="pill" role="tab" href="#pills-profile"
-                                                        aria-controls="pills-profile" aria-selected="false" onClick={()=>{SetPage("service provider");setSignUp(false)}}> Service Provider</a>
+                                                        aria-controls="pills-profile" aria-selected="false" onClick={()=>{SetPage("service provider");setSignUp(false);setErrorMessage("");clearOutAllfield()}}> Service Provider</a>
                                                 </li>
                                                 <li className="nav-item text-center">
                                                     <a className={`nav-link  ${page=="dealers" ? "" : "active"} btl`} id="pills-home-dealer" data-toggle="pill" 
                                                     role="tab" href="#pills-dealer"
-                                                        aria-controls="pills-dealer" aria-selected="false" onClick={()=>{SetPage("dealers");setSignUp(false)}}>Dealers</a>
+                                                        aria-controls="pills-dealer" aria-selected="false" onClick={()=>{SetPage("dealers");setSignUp(false);setErrorMessage("");clearOutAllfield()}}>Dealers</a>
                                                 </li>                                               
 
                                                 </ul>
@@ -290,8 +350,8 @@ function LoginComponent() {
                                                                     }}
                                                                     id="inputName4"
                                                                     value={spName}
-                                                                    required
-
+                                                                    error={errory && !spName.length?true:false}
+                                                                    helperText={errory && !spName.length?"Name Required":""}
                                                                 />
                                                                 </Box>
                                                                 <Box mb={2}>
@@ -306,7 +366,8 @@ function LoginComponent() {
                                                                             type="email"
                                                                             id="inputEmail4"
                                                                             value={spEmail}
-                                                                            required
+                                                                            error={errory && !spEmail.length?true:false}
+                                                                            helperText={errory && !spEmail.length?"Email Required":""}
                                                                         />
                                                                 </Box>
                                                                 <Box mb={2}>
@@ -321,7 +382,8 @@ function LoginComponent() {
                                                                             type="password"
                                                                             id="inputPassword4"
                                                                             value={spPassword}
-                                                                            required
+                                                                            error={errory && !spPassword.length?true:false}
+                                                                            helperText={errory && !spPassword.length?"Password Required":""}
 
                                                                         />
                                                                 </Box>
@@ -337,8 +399,8 @@ function LoginComponent() {
                                                                             type="password"
                                                                             id="inputconfirmPassword4"
                                                                             value={spRePassword}
-                                                                            required
-
+                                                                            error={errory && !spRePassword.length?true:false}
+                                                                            helperText={errory && !spRePassword.length?"Password Required":""}
                                                                         />
                                                                 </Box>
                                                                     <div className="col-12">
@@ -355,7 +417,7 @@ function LoginComponent() {
                                                                     <div className="col-12 text-center">
 
                                                                         <button
-                                                                            onClick={() => { loginButton();setLoginDialogOpen(true) }}
+                                                                            onClick={() => { spRegisterForCustomer()  }}
                                                                             type="submit"
                                                                             className="btn btn-login mt-4 mb-4">Register</button>
 
@@ -402,6 +464,8 @@ function LoginComponent() {
                                                                     value={email}
                                                                     type="email"
                                                                     id='inputEmailSp'
+                                                                    error={errory && !email.length?true:false}
+                                                                    helperText={errory && !email.length?"Email Required":""}
                                                                 />
                                                             </Box>
                                                             <Box mb={2}>
@@ -416,6 +480,8 @@ function LoginComponent() {
                                                                     value={password}
                                                                     type='password'
                                                                     id='inputPassword4'
+                                                                    error={errory && !password.length?true:false}
+                                                                    helperText={errory && !password.length?"Enter your password":""}
                                                                 />
                                                             </Box>
                                                         {/* <div className="col-12">
@@ -466,6 +532,8 @@ function LoginComponent() {
                                                                     }}
                                                                     value={spName}
                                                                     sx={{width:"49%"}}
+                                                                    error={errory && !spName.length?true:false}
+                                                                    helperText={errory && !spName.length?"Name Required":""}
                                                                 />
                                                             </Box>
                                                             <Box mb={2}>
@@ -478,6 +546,8 @@ function LoginComponent() {
                                                                     }}
                                                                     value={spEmail}
                                                                     sx={{width:"49%"}}
+                                                                    error={errory && !spEmail.length?true:false}
+                                                                    helperText={errory && !spEmail.length?"Email Required":""}
                                                                 />
                                                             </Box>
                                                             <Box sx={{width:"100%",display:"flex",justifyContent:"space-between",marginBottom:"5px"}}>
@@ -491,6 +561,8 @@ function LoginComponent() {
                                                                         }}
                                                                         value={spBusinessName}
                                                                         sx={{width:"98%"}}
+                                                                        error={errory && !spBusinessName.length?true:false}
+                                                                        helperText={errory && !spBusinessName.length?"Business Name Required":""}
                                                                     />
                                                                 </Box>
                                                                 <Box sx={{marginBottom:"10px",width:"100%"}}>
@@ -504,6 +576,8 @@ function LoginComponent() {
                                                                         type="number"
                                                                         value={spBusinessContactNumber}
                                                                         sx={{width:"100%"}}
+                                                                        error={errory && !spBusinessContactNumber.length?true:false}
+                                                                        helperText={errory && !spBusinessContactNumber.length?"Business Contact Required":""}
                                                                     />
                                                                 </Box>
                                                             </Box>
@@ -521,6 +595,8 @@ function LoginComponent() {
                                                                     sx={{width:"100%"}}
                                                                     multiline
                                                                     rows={2}
+                                                                    error={errory && !spBusinessAddress.length?true:false}
+                                                                    helperText={errory && !spBusinessAddress.length?"Business Address Required":""}
 
                                                                 />
                                                             </Box>
@@ -578,6 +654,8 @@ function LoginComponent() {
                                                                         }}
                                                                         value={spPassword}
                                                                         sx={{width:"98%"}}
+                                                                        error={errory && !spPassword.length?true:false}
+                                                                        helperText={errory && !spPassword.length?"Password Required":""}
                                                                     />
                                                                 </Box>
                                                                 <Box sx={{marginBottom:"5px",width:"100%"}}>
@@ -590,12 +668,14 @@ function LoginComponent() {
                                                                         }}
                                                                         value={spRePassword}
                                                                         sx={{width:"100%"}}
+                                                                        error={errory && !spRePassword.length?true:false}
+                                                                        helperText={errory && !spRePassword.length?"Password Required":""}
                                                                     />
                                                                 </Box>
                                                             </Box>
                                                             <div className="col-12 text-center">
                                                                 <button type="submit"
-                                                                    className="btn btn-login mt-4 mb-4"  onClick={() => { spRegisterButton();setServiceProviderAndDealersLoginDialogOpen(true) }}>Register </button>
+                                                                    className="btn btn-login mt-4 mb-4"  onClick={() => { spRegisterButton() }}>Register </button>
                                                             </div>
                                                         </div>
 
@@ -649,6 +729,8 @@ function LoginComponent() {
                                                                     type="email"
                                                                     id="inputEmail4"
                                                                     value={spEmail}
+                                                                    error={errory && !spEmail.length?true:false}
+                                                                    helperText={errory && !spEmail.length?"Email Required":""}
                                                                 />
                                                         </Box>
                                                         <Box mb={2}>
@@ -663,6 +745,8 @@ function LoginComponent() {
                                                                     type="password"
                                                                     id="inputPassword4"
                                                                     value={spPassword}
+                                                                    error={errory && !spPassword.length?true:false}
+                                                                    helperText={errory && !spPassword.length?"Password Required":""}
                                                                 />
                                                         </Box>
                                                         <Box sx={{display:"flex",justifyContent:"space-between"}} className="col-12">
@@ -678,7 +762,7 @@ function LoginComponent() {
                                                         </Box>
                                                         <div className="col-12 text-center">
                                                             <button type="submit"
-                                                                className="btn btn-login mt-4 mb-4"  onClick={() => { spLoginButton() }}>Login </button>
+                                                                className="btn btn-login mt-4 mb-4"  onClick={() => { spLoginButton()  }}>Login </button>
                                                         </div>
                                                     </div>
 
@@ -735,7 +819,7 @@ function LoginComponent() {
                                             </div>
 
                                         </div>
-                                        {loginDialogOpen ? <RegisterDialogForCustomer goToLoginPageButtonAfterRegister={goToLoginPageButtonAfterRegister} loginDialogOpenFunction={loginDialogOpenFunction}/>:null}                
+                                        {loginDialogOpen && !errory ? <RegisterDialogForCustomer goToLoginPageButtonAfterRegister={goToLoginPageButtonAfterRegister} loginDialogOpenFunction={loginDialogOpenFunction}/>:null}                
                                         {serviceProviderAndDealersLoginDialogOpen ? <RegisterDialogForServiceProviderAndDealers goToLoginPageButtonAfterRegister={goToLoginPageButtonAfterRegister} loginDialogOpenFunction={serviceProviderAndDealersLoginDialogOpenFunction} />:null}      
                                     </div>
                                 </div>

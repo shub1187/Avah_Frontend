@@ -71,7 +71,7 @@ export default function RegisterDialogForCustomer({ loginDialogOpenFunction ,goT
             </DialogContentText>
           </DialogContent>
           <DialogActions sx={{justifyContent:"center",marginBottom:"5rem"}}>
-              <ThemeProvider theme={LoginButtonTheme}>
+              <ThemeProvider theme={LoginButtonTheme("43px","300px")}>
                   <Button onClick={()=>{handleClose();goToLoginPageButtonAfterRegister()}} sx={{textTransform:"none"}}>Login</Button>
               </ThemeProvider>
             </DialogActions>
