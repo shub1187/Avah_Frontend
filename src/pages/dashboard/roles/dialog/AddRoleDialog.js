@@ -14,7 +14,11 @@ function AddRoleDialog() {
     const [open, setOpen] = React.useState(false);
     const [scroll, setScroll] = React.useState('paper');
     const [type, setType] = React.useState('');
-
+    const [fuelTypeSelect ,setFuelTypeSelect] = React.useState([])
+    console.log(fuelTypeSelect)
+    const fuelTypeSet = (val)=>{
+        setFuelTypeSelect(val)
+    }
     const descriptionElementRef = React.useRef(null);
     React.useEffect(() => {
         if (open) {
@@ -51,6 +55,7 @@ function AddRoleDialog() {
 
     const [brandName, setBrandName] = useState("")
     const [brandId, setBrandId] = useState("")
+    console.log("check ln 54",brandId)
     const [error, setErrorMessage] = useState("")
     const [bindSelectDropDown] = SearchDropDown()
 
@@ -93,7 +98,7 @@ function AddRoleDialog() {
 
         function handleSelect(data) {
             console.log('argument from Child: ', data);
-            setBrandId(data.id)
+            setBrandId(data.brand_name)
         }
 
 
@@ -123,7 +128,7 @@ function AddRoleDialog() {
                 </div>
                 { modelFuelSelect?
                     <Box width={'100%'}>
-                        <MultipleSelect/>
+                        <MultipleSelect fuelTypeSet={fuelTypeSet}/>
                     </Box>
                     :""
                 }
@@ -177,7 +182,7 @@ function AddRoleDialog() {
                         //        setErrorMessage("Enter Address")
                         //    } 
 
-                        if (type == "ModelsPage" && brandId.length <= 0) {
+                        if (type == "ModelsPage" && brandId?.length <= 0) {
                             setErrorMessage("Choose brand id")
                         }
                         else if (brandName.length <= 0) {
@@ -193,10 +198,16 @@ function AddRoleDialog() {
                                     "brand_code": "", "brand_name": brandName
                                 }
                             }
+                            else if (type == "FuelTypePage") {
+                                body = {
+                                    "fuel_name": brandName
+                                }
+                            }
                             else if (type == "ModelsPage") {
                                 body = {
-                                    "brand_id": brandId,
-                                    "model_code": "", "model_name": brandName
+                                    "brand_name": brandId,
+                                  "model_name": brandName,
+                                  "fuel_type": fuelTypeSelect
                                 }
                             }
                             else if (type == "CategoryPage") {

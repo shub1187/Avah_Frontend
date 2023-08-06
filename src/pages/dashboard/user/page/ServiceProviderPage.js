@@ -13,7 +13,7 @@ import axios from 'axios';
 const ServiceProviderPage = (props) => {
   console.log("---------------ServiceProviderPage----**-------------------")
   const [data, setData] = useState([]);
-  console.log("ln 16 Shub",data)
+  // console.log("ln 16 Shub",data)
   useEffect(() => {
     const apiCall = async () => {
       try {
@@ -33,9 +33,9 @@ const ServiceProviderPage = (props) => {
        
         // Make the GET request with the headers
         const response = await axios.get("http://localhost:3008/api/admin/getAllServiceProviders", { headers,params });
-        
+        // console.log("ln 36",response)
         const responseData = response.data.data; // Access data from the response object
-        console.log("ln 32 Shub",responseData);
+        console.log("ln check-02",responseData);
         setData(responseData);
       } catch (error) {
         console.log(error);

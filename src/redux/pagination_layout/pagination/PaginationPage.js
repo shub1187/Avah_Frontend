@@ -30,7 +30,7 @@ function PaginationPage(props) {
   // }))
   let data = useMemo(() =>  props.data?.results || [], [props.data])
   // let data = props.data?.results || [];
-  console.log("ln 32 shub",data)
+  // console.log("ln 32 shub",data)
   // let data = useMemo(()=>preprocessedData??[],[])
   // console.log("RAEES",data)
   const [currentPage, setCurrentPage] = useState(1)

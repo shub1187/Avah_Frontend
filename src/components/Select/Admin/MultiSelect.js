@@ -1,3 +1,4 @@
+import  { useEffect, useMemo, useState } from 'react';
 import * as React from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -7,6 +8,8 @@ import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import { createTheme,ThemeProvider, styled } from '@mui/material';
+import axios from 'axios';
+
     
 const theme = createTheme({
     components:{
@@ -42,15 +45,50 @@ const MenuProps = {
   },
 };
 
-const names = [
-    'petrol',
-    'diesel',
-    'cng',
-    'electric'
-];
+// const names = [
+//     'petrol',
+//     'diesel',
+//     'cng',
+//     'electric'
+// ];
 
-export default function MultipleSelectCheckmarks() {
+export default function MultipleSelectCheckmarks({fuelTypeSet}) {
+  const [names,setNames] = useState([])
+  // UseEffect to load the data in multiselect
+// const [data, setData] = useState([]);
+// console.log("ln 28 Shub Manufacture page",data)
+useEffect(() => {
+  const apiCall = async () => {
+    try {
+      // Get the bearer token from local storage
+      const token = localStorage.getItem('access_token');     
+      // Set up the headers with the authorization token
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+        const params = {
+          page: 1,
+          limit: 10,
+        }    
+      // Make the GET request with the headers
+      const response = await axios.get("http://localhost:3008/api/admin/getAllFuelTypes", { headers,params });
+      // console.log("ln 44",response)
+      const responseData = response.data.data.results; // Access data from the response object
+      console.log("ln Multiselect page",responseData);
+      const resultArray= responseData.map(item => item.fuel_name);
+    console.log("This is checking",resultArray)
+      // setData(responseData);
+      setNames( resultArray)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  apiCall();
+}, []);
+
+
   const [personName, setPersonName] = React.useState([]);
+  console.log(personName)
   const handleChange = (event) => {
     const {
       target: { value },
@@ -59,6 +97,7 @@ export default function MultipleSelectCheckmarks() {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
+    fuelTypeSet(value)
   };
 
   return (

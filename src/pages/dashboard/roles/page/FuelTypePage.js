@@ -6,7 +6,7 @@ import PaginationPage from '../../../../redux/pagination_layout/pagination/Pagin
 import AddRoleDialog from '../dialog/AddRoleDialog';
 import RoleProfileDialog from '../dialog/RoleProfileDialog';
 import { FuelColumn } from '../../../../components/table/role/ManufactureColumn';
-
+import axios from 'axios';
 
 
 const FuelTypePage = (props) => {
@@ -23,7 +23,35 @@ const FuelTypePage = (props) => {
     dispatch(PaginationStart(RESET_PAGE))
   },[])
 
-
+//UseEffect to load the table data 
+const [data, setData] = useState([]);
+// console.log("ln 28 Shub Manufacture page",data)
+useEffect(() => {
+  const apiCall = async () => {
+    try {
+      // Get the bearer token from local storage
+      const token = localStorage.getItem('access_token');     
+      // Set up the headers with the authorization token
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+        const params = {
+          page: 1,
+          limit: 10,
+        }    
+      // Make the GET request with the headers
+      const response = await axios.get("http://localhost:3008/api/admin/getAllFuelTypes", { headers,params });
+      // console.log("ln 44",response)
+      const responseData = response.data.data; // Access data from the response object
+      console.log("ln check-02",responseData);
+ 
+      setData(responseData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  apiCall();
+}, []);
   useEffect(() => {
 
 
@@ -46,6 +74,7 @@ const FuelTypePage = (props) => {
         onAddUserClick={() => {
           setAddRoleDialog(pageName)
         }}
+        data={data??[]}
         onActionClick={(row) => {
 
           return (<div>
