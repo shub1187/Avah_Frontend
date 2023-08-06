@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { CreateUser } from '../../user/common/UserAction';
 import SearchDropDown from '../../common/SearchDropDown';
 import { da } from 'date-fns/locale';
+import { Box } from '@mui/material';
+import MultipleSelect from 'components/Select/Admin/MultiSelect';
 
 function AddRoleDialog() {
 
@@ -57,18 +59,18 @@ function AddRoleDialog() {
         let title = ""
         let name = ""
         let errorMsg = ""
-
+        let modelFuelSelect = false
         if (type == "ManufacturersPage") {
             title = "ADD Manufacturer"
             name = "Brand NAME"
             errorMsg = "Enter Brand Name"
-
         }
         else if (type == "ModelsPage") {
             title = "ADD Models"
             name = "Model NAME "
             errorMsg = "Enter Model  Name"
             idName="Brand Id"
+            modelFuelSelect=true
         }
 
         else if (type == "FuelTypePage") {
@@ -119,6 +121,12 @@ function AddRoleDialog() {
                         }}
                     />
                 </div>
+                { modelFuelSelect?
+                    <Box width={'100%'}>
+                        <MultipleSelect/>
+                    </Box>
+                    :""
+                }
 
                 {/* <div className="col-md-6">
                <label htmlFor="inputEmail4" className="d-label-name">Business EMAIL</label>

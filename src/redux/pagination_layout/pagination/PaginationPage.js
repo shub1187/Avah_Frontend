@@ -194,9 +194,9 @@ function PaginationPage(props) {
 
         </div>
         {/* ------------------Add button--------------- */}
-        {/* <div className="column" style={{ 'width': '20%' }}>
+        <div className="column" style={{ 'width': '20%' }}>
           <button className='custombutton' onClick={() => { props.onAddUserClick() }} >+ {ConfigName(menuname)}</button>
-        </div> */}
+        </div>
       </div>
 
 
