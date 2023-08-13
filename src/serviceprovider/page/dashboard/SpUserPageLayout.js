@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 const SpUserPageLayout = () => {
 
    const { appState } = useSelector((state) => state.appState.appState);
-
+  console.log(appState,"RAEES")
   // console.log("tabIndex---> " + "-------dd--------------------**-----------------------------------------" + appState)
   let value = "0"
   if (appState == "user.employees") {

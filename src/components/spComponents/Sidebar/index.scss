@@ -1,0 +1,30 @@
+.active {
+    // background-color: blue; /* Change this to the desired active color */
+    // color: black; /* Change this to the desired text color */
+    
+
+}
+  
+// .inactive {
+//     background-color: inherit; /* Change this to the default background color */
+//     color: inherit; /* Change this to the default text color */
+//   }
+.someList {
+  width: 100%;
+  max-width: 360px;
+  background-color: white;
+
+
+  // & .MuiListItemButton-root:hover {
+  //   background-image: linear-gradient(to bottom, rgb(233,56,72) , rgb(119,53,98));
+
+  //   &,
+  //   .MuiListItemIcon-root {
+  //     color: white;
+  //   }
+  // }
+  // & .Mui-selected {
+  //   background-color: #2e8b57;
+  //   color: red
+  // };
+}

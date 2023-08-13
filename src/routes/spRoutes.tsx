@@ -16,7 +16,7 @@ import SpEmployeePage from "../serviceprovider/page/dashboard/user/page/SpEmploy
 import CommonLayout from "../serviceprovider/page/dashboard/CommonLayout";
 import SparePage from "../serviceprovider/page/dashboard/spares/SparePage";
 import DashboardIndex from "../serviceprovider/page/dashboard/DashboardIndex";
-import ServiceProviderHome from "pages/serviceProviderHome";
+import ServiceProviderHome from "pages/serviceProvider/Home";
 
 const spAppRoutes: RouteType[] = [
   {
@@ -38,7 +38,7 @@ const spAppRoutes: RouteType[] = [
   },
   {
    path: "/dashboard/user",
-    element: <SpUserPageLayout />,
+    element: <></>,
     tabIndex:"0",
     state: "user",
     sidebarProps: {

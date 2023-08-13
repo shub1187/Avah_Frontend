@@ -1,5 +1,5 @@
 import { Box, Card, Grid, Paper, ThemeProvider, Typography } from '@mui/material';
-import ServiceProviderDashboardIconCards from 'components/Card/SpCards/ServiceProviderDashboardIconCards';
+import ServiceProviderDashboardIconCards from 'components/spComponents/Card/SpHomeCards/ServiceProviderDashboardIconCards';
 import React from 'react';
 import createAppointmentIcon from 'assets/img/serviceProviderDashboard/createAppointmentIcon.png'
 import createJobCardIcon from 'assets/img/serviceProviderDashboard/createJobCardIcon.png'
@@ -9,13 +9,17 @@ import serviceDueIcon from 'assets/img/serviceProviderDashboard/serviceDueIcon.p
 import pendingServicesIcon from 'assets/img/serviceProviderDashboard/pendingServicesIcon.png'
 import totalCustomersIcon from 'assets/img/serviceProviderDashboard/totalCustomersIcon.png'
 import serviceProviderTheme from './theme';
-import SpRevenueSingleCard from 'components/Card/SpCards/spRevenueSingleCard';
-import SpRevenueSplitCard from 'components/Card/SpCards/spRevenueSplitCard';
-import SpLatestActivityCard from 'components/Card/SpCards/SpLatestActivityCard';
-import SpQuickPayment from 'components/Card/SpCards/SpQuickPayment';
-import SpRating from 'components/Card/SpCards/SpRating';
+import SpRevenueSingleCard from 'components/spComponents/Card/SpHomeCards/spRevenueSingleCard';
+import SpRevenueSplitCard from 'components/spComponents/Card/SpHomeCards/spRevenueSplitCard';
+import SpLatestActivityCard from 'components/spComponents/Card/SpHomeCards/SpLatestActivityCard';
+import SpQuickPayment from 'components/spComponents/Card/SpHomeCards/SpQuickPayment';
+import SpRating from 'components/spComponents/Card/SpHomeCards/SpRating';
 import ApexCharts from './charts';
+import useFetch from 'hooks/useFetch';
+import axios from 'axios';
 const ServiceProviderHome = (props) => {
+  const {data} = useFetch('https://jsonplaceholder.typicode.com/todos/1')
+  console.log(data,"RAEES")
   return (
     <>
       <ThemeProvider theme={serviceProviderTheme}>
@@ -59,7 +63,7 @@ const ServiceProviderHome = (props) => {
                 <Grid justifyContent={"center"} marginTop={2} spacing={4} container>
                   <Grid xl={8} md={12} item><SpRevenueSplitCard/></Grid>
                 </Grid>
-                <Card sx={{marginTop:"100px"}} elevation={4} >
+                <Card sx={{marginTop:"100px"}} ele vation={4} >
                   <ApexCharts/>
                 </Card>
           </Grid>
