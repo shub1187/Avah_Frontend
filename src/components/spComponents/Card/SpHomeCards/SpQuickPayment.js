@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid, Paper, ThemeProvider } from '@mui/material';
-import SpContinueToPaymentButtonTheme from 'components/Button/SpContinueToPaymentButtonTheme';
+import SpContinueToPaymentButtonTheme from 'components/LoginRegisterComponents/Button/SpContinueToPaymentButtonTheme';
 import SpQuickPaymentCard1 from "assets/img/serviceProviderDashboard/QuickPaymentIcon/spQuickPaymentMasterCard1.png"
 import SpQuickPaymentCard2 from "assets/img/serviceProviderDashboard/QuickPaymentIcon/spQuickPaymentMasterCard2.png"
 import SpQuickPaymentCancelSubscription from './SpQuickPaymentCancelSubscription';

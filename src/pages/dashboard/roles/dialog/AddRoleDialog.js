@@ -7,7 +7,7 @@ import { CreateUser } from '../../user/common/UserAction';
 import SearchDropDown from '../../common/SearchDropDown';
 import { da } from 'date-fns/locale';
 import { Box } from '@mui/material';
-import MultipleSelect from 'components/Select/Admin/MultiSelect';
+import MultipleSelect from 'components/AdminComponents/Select/Vehicle Settings/MultiSelectFuelType';
 
 function AddRoleDialog() {
 

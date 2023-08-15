@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LoginAction, SPLoginAction } from './LoginAction';
 import Loader from '../../components/common/Loader';
 import { Box, Button, InputLabel, MenuItem, TextField, ThemeProvider, createTheme, CircularProgress } from '@mui/material';
-import RegisterDialogForCustomer from 'components/Dialog/RegisterDialogForCustomer/Index';
-import RegisterDialogForServiceProviderAndDealers from 'components/Dialog/RegisterDialogForServiceProviderAndDealer';
+import RegisterDialogForCustomer from 'components/LoginRegisterComponents/Dialog/RegisterDialogForCustomer/Index';
+import RegisterDialogForServiceProviderAndDealers from 'components/LoginRegisterComponents/Dialog/RegisterDialogForServiceProviderAndDealer';
 import SpRegisterAPI from 'services/SpRegisterAPI';
 const theme = createTheme({
     components:{

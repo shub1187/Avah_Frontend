@@ -52,7 +52,7 @@ const MenuProps = {
 //     'electric'
 // ];
 
-export default function MultipleSelectCheckmarks({fuelTypeSet}) {
+export default function MultiSelectFuelType({fuelTypeSet}) {
   const [names,setNames] = useState([])
   // UseEffect to load the data in multiselect
 // const [data, setData] = useState([]);

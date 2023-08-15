@@ -1,14 +1,14 @@
 import { Avatar, Drawer, List, Stack, Toolbar } from "@mui/material";
-import assets from "../../assets";
-import colorConfigs from "../../configs/colorConfigs";
-import sizeConfigs from "../../configs/sizeConfigs";
-import appRoutes from "../../routes/appRoutes";
-import SidebarItem from "./SidebarItem";
-import SidebarItemCollapse from "./SidebarItemCollapse";
-import spAppRoutes from "../../routes/spRoutes";
-import { useEffect,useState } from "react";
-import NestedList from "components/spComponents/Sidebar";
-import { HomeIcon, UserIcon } from "assets/img/sidebar/Icons";
+import assets from "../../../assets";
+import colorConfigs from "../../../configs/colorConfigs";
+import sizeConfigs from "../../../configs/sizeConfigs";
+import appRoutes from "../../../routes/appRoutes";
+import SidebarItem from "../SidebarItem";
+import SidebarItemCollapse from "../SidebarItemCollapse";
+import spAppRoutes from "../../../routes/spRoutes";
+import ServiderProviderSidebar, { SpSideBarList } from "./SidebarForSp/SidebarForSp";
+
+
 
 const Sidebar = () => {
   // const [checkRole,setCheckRole] = useState("");
@@ -57,16 +57,17 @@ const Sidebar = () => {
               )) 
               :
               getRole == "2" ?
-              spAppRoutes.map((route, index) => (
-                route.sidebarProps ? (
-                  route.child ? (
-                    <SidebarItemCollapse item={route} key={index} />
-                  ) : (
-                    <SidebarItem item={route}   key={index} />
-                  )
-                ) : null
-              )) :
-              null
+              // spAppRoutes.map((route, index) => (
+              //   route.sidebarProps ? (
+              //     route.child ? (
+              //       <SidebarItemCollapse item={route} key={index} />
+              //     ) : (
+              //       <SidebarItem item={route}   key={index} />
+              //     )
+              //   ) : null
+              // )) :
+              // null
+              <ServiderProviderSidebar/>:null
             }        
 
          

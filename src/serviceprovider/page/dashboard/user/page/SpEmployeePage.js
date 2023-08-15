@@ -1,18 +1,18 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SpPaginationStart } from '../../../../pagination_layout/pagination/SpPaginationAction';
-import { Pagination } from '@mui/material';
+import { Pagination, ThemeProvider, createTheme } from '@mui/material';
 import { CustomerColumn } from '../../../../../components/table/user/CustomerColumn';
 import SpAddUserDialog from '../common/dialog/SpAddUserDialog';
 import SpUserProfileDialog from '../common/dialog/SpUserProfileDialog';
 import { RELOAD_PAGE, RESET_PAGE } from '../../../../../network/ApiConstant';
 import PaginationPage from '../../../../../redux/pagination_layout/pagination/PaginationPage';
 import AddEmployeeDialog from '../common/dialog/AddEmployeeDialog';
-
+import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderTable';
 
 
 const SpEmployeePage = (props) => {
-
+  const theme = createTheme()
   const dispatch = useDispatch()
   const userState = useSelector((state) => state.appState.user);
   const pageState = useSelector((state) => state.appState.pagination);
@@ -41,33 +41,38 @@ const SpEmployeePage = (props) => {
   }, [pageState.isFirstLoad, userState.reloadUserDetails, userState.userCreatedDetails]);
 
   return (
-    <div>
+    <>
+    <ThemeProvider theme={theme}>
+      <ServiceProvidertable/>
+    </ThemeProvider>
+    </>
+    // <div>
 
-      <PaginationPage
-        currentPage={pageName}
-        column={CustomerColumn}
-        onAddUserClick={() => {
-          setAddUserDialog()
-        }}
-        onActionClick={(row) => {
+    //   <PaginationPage
+    //     currentPage={pageName}
+    //     column={CustomerColumn}
+    //     onAddUserClick={() => {
+    //       setAddUserDialog()
+    //     }}
+    //     onActionClick={(row) => {
 
-          return (<div>
+    //       return (<div>
 
-            <h2 onClick={() => setProfileDialog(row.values.id, "viewProfile",pageName)} className='menu-td'>View Profile </h2>
-            <h2 onClick={() => setProfileDialog(row.values.id, "editProfile",pageName)} className='menu-td'>Edit Profile</h2>
-            <h2 onClick={() => setProfileDialog(row.values.id, "resetPassword",pageName)} className='menu-td'>Reset Password</h2>
-            <h2 onClick={() => setProfileDialog(row.values.id, "delete",pageName)} className='menu-td'>Delete</h2>
+    //         <h2 onClick={() => setProfileDialog(row.values.id, "viewProfile",pageName)} className='menu-td'>View Profile </h2>
+    //         <h2 onClick={() => setProfileDialog(row.values.id, "editProfile",pageName)} className='menu-td'>Edit Profile</h2>
+    //         <h2 onClick={() => setProfileDialog(row.values.id, "resetPassword",pageName)} className='menu-td'>Reset Password</h2>
+    //         <h2 onClick={() => setProfileDialog(row.values.id, "delete",pageName)} className='menu-td'>Delete</h2>
 
-          </div>)
-        }}
+    //       </div>)
+    //     }}
 
-      />
+    //   />
 
 
-      {bindAddUserDialog(pageName)}
-      {bindProfileDialog(pageName)}
+    //   {bindAddUserDialog(pageName)}
+    //   {bindProfileDialog(pageName)}
 
-    </div>
+    // </div>
   );
 };
 

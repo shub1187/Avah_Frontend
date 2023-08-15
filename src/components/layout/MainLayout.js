@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Box, Toolbar } from "@mui/material";
 import colorConfigs from "../../configs/colorConfigs";
 import sizeConfigs from "../../configs/sizeConfigs";
-import Sidebar from "../common/Sidebar";
+import Sidebar from "../common/Sidebar/SidebarLayout";
 import Topbar from "../common/Topbar";
 import { useSelector } from "react-redux";
 // import { RootState } from "../../redux/store";

@@ -1,7 +1,7 @@
 import { Box, Button, Checkbox, Chip, Grid, InputLabel, TextField, ThemeProvider, ToggleButton, ToggleButtonGroup, Typography, createTheme } from '@mui/material'
 import React, { useState } from 'react'
 import LogoImage from "assets/img/logo.png"
-import LoginButtonTheme from 'components/Button/LoginButtonTheme'
+import LoginButtonTheme from 'components/LoginRegisterComponents/Button/LoginButtonTheme'
 import AppleLogo from 'assets/img/loginComponent/appleLogo.png'
 import FacebookLogo from 'assets/img/loginComponent/facebookLogo.png'
 import GoogleLogo from 'assets/img/loginComponent/googleLogo.png'

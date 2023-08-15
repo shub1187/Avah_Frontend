@@ -34,7 +34,7 @@ const useFetch = (url) => {
         try{
             const {data, status} = await axios.get(url)
             console.log(data,status,"RAEES",'useFetch')
-            if(data && status==200 && (data?.[0].httpCode ===200 ||data.httpCode ===200)){
+            if(data && status==200 ){
                 setData(data)
                 setError('')
             }

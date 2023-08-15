@@ -1,6 +1,5 @@
 import React from 'react'
-import createTextfield from 'components/spComponents/Textfield'
-import FormDialog from '.'
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 
 const CreateCustomerDialog = () => {
     const [open, setOpen] = React.useState(false);
@@ -76,7 +75,7 @@ const CreateCustomerDialog = () => {
             To subscribe to this website, please enter your email address here. We
             will send updates occasionally.
           </DialogContentText>
-          <TextField
+          {/* <TextField
             autoFocus
             margin="dense"
             id="name"
@@ -84,7 +83,7 @@ const CreateCustomerDialog = () => {
             type="email"
             fullWidth
             variant="standard"
-          />
+          /> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

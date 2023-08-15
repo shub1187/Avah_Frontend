@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes, useLocation ,useNavigate} from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
 import LoginComponent from "./pages/login/LoginComponent";
-import { routes, spRoutes } from "./routes";
+import { raeesRoute, routes, spRoutes } from "./routes";
 import ServiceProviderLayout from "./components/layout/ServiceProviderLayout";
 import AdminLoginComponent from "pages/login/AdminLoginComponent";
 import RaeesLoginComponent from "pages/login/RaeesLoginComponent";
@@ -15,19 +15,26 @@ function App() {
   console.log(localStorage.getItem('isLoggedInSP'))
   const location = useLocation();
   const isAdminPage = location.pathname.includes('/admin');
+  const isSpPage = location.pathname.includes('/dashboard')
   console.log(isAdminPage,"RAEES")
   const navigate = useNavigate();
   const typeOfUser = localStorage.getItem('TYPE_OF_USER');
-
-  // useEffect(() => {
-  //   // Check if isAdminPage is true and typeOfUser is "1", then redirect to /admin/dashboard
-  //   if (isAdminPage && typeOfUser === "1") {
-  //     navigate('/admin/dashboard/home');
-  //   }
-  //   else{
-  //     navigate('/admin')
-  //   }
-  // }, [isAdminPage, typeOfUser]);
+console.log(raeesRoute,"RAEES")
+  useEffect(() => {
+    // Check if isAdminPage is true and typeOfUser is "1", then redirect to /admin/dashboard
+    if (isAdminPage && typeOfUser === "1") {
+      navigate('/admin/dashboard/home');
+    }
+    else if(isAdminPage){
+      navigate('/admin')
+    }
+    else if(typeOfUser==="2"){
+      navigate('/dashboard/home')
+    }
+    else{
+      navigate('/login')
+    }
+  }, [typeOfUser,isAdminPage]);
   return (
     // <BrowserRouter>
       <Routes>
@@ -63,11 +70,13 @@ function App() {
            :
            localStorage.getItem('TYPE_OF_USER') == "2" ?
            <>
-          <Route path="/dashboard" element={<ServiceProviderLayout />}> {spRoutes}</Route>
-          <Route path="/" element={<ServiceProviderLayout />}> {spRoutes}</Route>
+          {/* <Route path="/dashboard" element={<ServiceProviderLayout />}> {spRoutes}</Route>
+          <Route path="/" element={<ServiceProviderLayout />}> {spRoutes}</Route> */}
+          <Route path="/" element={<ServiceProviderLayout />}> {raeesRoute}</Route>
+
          </>
           :
-          <Route path="/" element={<LoginComponent />} /> 
+          <Route path="/login" element={<LoginComponent />} /> 
 
           //  <Route path="/dashboard" element={<ServiceProviderLayout />}> {spRoutes}</Route>
         }
