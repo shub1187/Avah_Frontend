@@ -42,12 +42,13 @@ const CreateEmployeeDialog = ({height,width,color}) => {
   }
     const handleSubmit = async()=>{
       try{
+        
           setStatus({loading:true,message:'',isVisible:true})
-          const payload = {
-              status:'Active '  // Active or Inactive
-          }
+          // const payload = {
+          //     status:'Active '  // Active or Inactive
+          // }
           const obj = {
-              payload:payload,
+              payload:formData,
               method:"POST",
               url:"http://localhost:3008/api/serviceprovider/createEmployee"
           }
@@ -134,13 +135,13 @@ const CreateEmployeeDialog = ({height,width,color}) => {
         },
         {
             label: 'Pincode',
-            name: "pincode",
+            name: "pin_code",
             type: 'number',
             fullWidth:true
         },
         {
             label: 'PAN Number',
-            name: "panNumber",
+            name: "pan_number",
             type: 'number'
         },
         {
@@ -277,7 +278,7 @@ const CreateEmployeeDialog = ({height,width,color}) => {
         </div>
       </Dialog>
       {status.loading && <SkeletonLoading />}
-            {(!status.loading && status.error ) &&<Snackbar open={snackbar} autoHideDuration={1000} onClose={handleSnackBarFunction}  color='error'><Alert severity='error'>{status.error}</Alert></Snackbar>}
+            {(!status.loading && status.error ) &&<Snackbar open={snackbar} autoHideDuration={2000} onClose={handleSnackBarFunction}  color='error'><Alert severity='error'>{status.error}</Alert></Snackbar>}
     </div>
   )
 }

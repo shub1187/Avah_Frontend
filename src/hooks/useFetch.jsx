@@ -53,11 +53,19 @@ const useFetch = (url) => {
 const useFetchFunction = ()=>{
     const fetchData = async ({url,method,payload})=>{
         try{
+            let sp_id =  localStorage.getItem('sp_id');
+            let headers = {}
+            if(sp_id){
+            const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
+             headers = { Authorization: `Bearer ${token}`  };      
+            }
             const axiosRequest = {
                 method:method?.toLowerCase()==='get' ? "GET" : "POST",
-                url
-            }
+                url,
+                headers : headers,
 
+            }
+                payload = {...payload, sp_id: sp_id}
             const {status,data} = await axios({...axiosRequest, data: method?.toLowerCase()==="post" && payload})
 
             if(data && status ==200){
