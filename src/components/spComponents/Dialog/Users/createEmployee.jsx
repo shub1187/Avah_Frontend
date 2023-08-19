@@ -1,15 +1,27 @@
-import React,{useState} from 'react'
-import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
+import React,{useState, useEffect} from 'react'
+import { Alert, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Snackbar, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
 import CreateTextFields from 'components/common/Textfield';
 import { useFetch } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
-
+import { useFetchFunction } from 'hooks/useFetch';
+import SkeletonLoading from 'components/common/Skeleton';
 const CreateEmployeeDialog = ({height,width,color}) => {
     const [open, setOpen] = React.useState(false);
-    const [toggle,setToggle] = useState('individual')
-
+    const {fetchData} = useFetchFunction()
+    const [status,setStatus] = useState({
+      isVisible:false,
+      message:"",
+      loading:false,
+      error:'',
+      responseStatus:''
+  })
+    const [snackbar,handleSnackBar] = useState(true)
     const [formData, setFormData] = useState({});
   console.log(formData,"RAEES")
+
+    useEffect(()=>{
+        if(!status.loading && status.error)handleSnackBar(true)
+    },[status.error])
     const handleFieldChange = (fieldName, value) => {
       setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
     };
@@ -21,10 +33,40 @@ const CreateEmployeeDialog = ({height,width,color}) => {
     const handleClose = () => {
       setOpen(false);
     };
-    const handleSubmit = ()=>{
-    console.log(formData);
-    setFormData({})
-    }
+    // const handleSubmit = ()=>{
+
+    // }
+    
+    const handleSnackBarFunction = ()=>{
+      handleSnackBar(false)
+  }
+    const handleSubmit = async()=>{
+      try{
+          setStatus({loading:true,message:'',isVisible:true})
+          const payload = {
+              status:'Active '  // Active or Inactive
+          }
+          const obj = {
+              payload:payload,
+              method:"POST",
+              url:"http://localhost:3008/api/serviceprovider/createEmployee"
+          }
+
+          const {isSuccess,data,error} = await fetchData(obj)
+          if(error && !isSuccess){
+              throw new Error(error)
+          }
+          if(data && isSuccess){
+              setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
+          }
+          console.log(formData);
+          setFormData({})
+      }
+      catch(error){
+          setStatus({error:error?.message,message:'',loading:false})
+          setFormData({})
+      }
+  }
     // const theme = createTheme({
       // palette:{
       //   mainy:{
@@ -234,6 +276,8 @@ const CreateEmployeeDialog = ({height,width,color}) => {
         </DialogActions>
         </div>
       </Dialog>
+      {status.loading && <SkeletonLoading />}
+            {(!status.loading && status.error ) &&<Snackbar open={snackbar} autoHideDuration={1000} onClose={handleSnackBarFunction}  color='error'><Alert severity='error'>{status.error}</Alert></Snackbar>}
     </div>
   )
 }
