@@ -4,11 +4,29 @@ import MaterialTable, { MTableToolbar } from "material-table";
 import './ServiceProviderTable.css'
 import { useState } from "react";
 import CreateCustomerDialog from "../Dialog/Users/createCustomer";
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import ActionDialog from "../Dialog/ActionDialog";
+import SkeletonLoading from "components/common/Skeleton";
+import CreateEmployeeDialog from "../Dialog/Users/createEmployee";
+import AddLabourDialog from "../Dialog/Labour/AddLabour";
+import AddServiceDialog from "../Dialog/Service/AddServiceDialog";
+import CreateSpareDialog from "../Dialog/Spares/AddSparesDialog";
 
-const ServiceProvidertable = ()=>{
+const ServiceProvidertable = ({DialogButton,columnss})=>{
   const [dataLength,setDataLength] = useState(0)
-  
   const theme = createTheme({
+    palette:{
+      addUser:{
+        main:'#000000',
+        contrastText:"#ffffff"
+      },
+      options:{
+        main:'#ad4970',
+        contrastText:"#ffffff"
+
+      }
+    },
       components:{
         MuiToolbar:{
           styleOverrides:{
@@ -32,6 +50,23 @@ const ServiceProvidertable = ()=>{
             }
           }
         },
+        MuiTextField:{
+          styleOverrides:{
+            root:{
+              '& .MuiOutlinedInput-root': {
+                // '& fieldset': {
+                //   borderColor: 'white',
+                // },
+                // '&:hover fieldset': {
+                //   borderColor: 'white',
+                // },
+                '&.Mui-focused fieldset': {
+                  borderColor: 'rgb(173,73,112)',
+                },
+              },
+            }
+          }
+        }
       },
     })
   const columns = [
@@ -39,12 +74,13 @@ const ServiceProvidertable = ()=>{
     { title: "Age", field: "age" },
     { title: "Country", field: "country",render:(rowData)=>{return rowData.country=="Russia" ||rowData.country=="Australia" || rowData.country=="Canada"?<div style={{color:'green'}}>{rowData.country}</div>:<div style={{color:'red'}}>{rowData.country}</div>} },
     { title: "Year", field: "year" ,render:(rowData)=><Box display={'flex'}><Button variant="outlined" color="success">Enter</Button><Button variant="outlined" color="error">Reject</Button></Box>},
-    { title: "Date", field: 'date' ,render:(rowData)=><CreateCustomerDialog/>},
+    { title: "Date", field: 'date' ,render:(rowData)=><CreateCustomerDialog color={'options'}/>},
     { title: "Sport", field: 'sport' },
     { title: "Gold", field: 'gold' },
     { title: "Silver", field: 'silver' },
     { title: "Bronze", field: 'bronze' },
-    { title: "Total", field: 'total' },
+    { title: "Total", field: 'total' ,render:(rowData)=><Box display={'flex'}><SentimentVeryDissatisfiedIcon/></Box>},
+    { title :"Action", field:'action',render:(rowData)=><ActionDialog status edit view changePassword/>}
   ]
 
 
@@ -57,28 +93,46 @@ const ServiceProvidertable = ()=>{
     options={{debounceInterval:700,emptyRowsWhenPaging:false,
        rowStyle: {backgroundColor: "rgb(244, 248, 249)" },
        headerStyle:{backgroundColor:'rgb(244, 248, 249)',color:"black",fontSize:"14px",fontWeight:'bold',borderBottom:'5px solid rgb(230,230,230)'},
-       searchFieldStyle:{marginLeft:'-50px'},
-       actionsCellStyle:{backgroundColor:"rgb(244, 248, 249)",color:'blue'}
+       searchFieldStyle:{marginLeft:'-50px'},       
   }}
   // page={page}
   // totalCount={count}
     components={{
       Toolbar: (props) => (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-start",
-            background: "rgb(244, 248, 249)",
-            height: "65px",
-            width:'575px',
-            marginBottom:4
-          }}
-        >
-              {props.searchField}
-          <MTableToolbar {...props} />
-        </div>
+        <>
+        <Box display={'flex'} justifyContent={'space-between'}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-start",
+              background: "rgb(244, 248, 249)",
+              height: "65px",
+              width:'575px',
+              marginBottom:4
+            }}
+          >
+                {props.searchField}
+            <MTableToolbar {...props} />
+          </div>
+          <div>
+            {/* <Button
+            variant="contained"
+            sx={{height:'65px', width:'275px'}}
+            color="addUser"
+            onClick={()=> <CreateCustomerDialog/>}
+            >Add Employee
+            </Button> */}
+            <CreateCustomerDialog height={'65px'} width={'270px'} color={'addUser'}/>
+            <CreateEmployeeDialog height={'65px'} width={'270px'} color={'addUser'}/>
+            <AddLabourDialog height={'65px'} width={'270px'} color={'addUser'}/>
+            <AddServiceDialog height={'65px'} width={'270px'} color={'addUser'}/>
+            <CreateSpareDialog height={'65px'} width={'270px'} color={'addUser'}/>
+          </div>
+        </Box>
+        </>
       ),
     }}
+    isLoading={false}
     data={async (query) => {
       console.log(query,"RAEES")
       try {
@@ -94,7 +148,7 @@ const ServiceProvidertable = ()=>{
         const response = await axios.get(url);
         const data = response.data; // Adjust this based on your API response structure
         setDataLength(data.length)
-        console.log(data,"RAEES","RAEESULLA")
+        console.log(data,"RAEES")
         return {
           data: data, // Change this to match your data structure
           page: query.page,

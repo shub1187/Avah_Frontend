@@ -15,7 +15,7 @@ import SpLatestActivityCard from 'components/spComponents/Card/SpHomeCards/SpLat
 import SpQuickPayment from 'components/spComponents/Card/SpHomeCards/SpQuickPayment';
 import SpRating from 'components/spComponents/Card/SpHomeCards/SpRating';
 import ApexCharts from './charts';
-import useFetch from 'hooks/useFetch';
+import {useFetch,useFetchFunction} from 'hooks/useFetch';
 import axios from 'axios';
 const ServiceProviderHome = (props) => {
   const {data} = useFetch('https://jsonplaceholder.typicode.com/todos/1')

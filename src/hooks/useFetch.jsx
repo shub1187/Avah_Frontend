@@ -49,4 +49,27 @@ const useFetch = (url) => {
   return { data, loading ,error, reFetch}
 }
 
-export default useFetch
+
+const useFetchFunction = ()=>{
+    const fetchData = async ({url,method,payload})=>{
+        try{
+            const axiosRequest = {
+                method:method?.toLowerCase()==='get' ? "GET" : "POST",
+                url
+            }
+
+            const {status,data} = await axios({...axiosRequest, data: method?.toLowerCase()==="post" && payload})
+
+            if(data && status ==200){
+                return {isSuccess:true,data}
+            }
+        }
+        catch(error){
+            return {isSuccess:false, error:error.message}
+        }
+    }
+    return {
+        fetchData
+    }
+}
+export {useFetch,useFetchFunction}

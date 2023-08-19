@@ -3,9 +3,8 @@ import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogCont
 import CreateTextFields from 'components/common/Textfield';
 import { useFetch } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
-import FileInputTextField from 'components/common/Textfield/FileTextfield';
 
-const CreateCustomerDialog = ({height,width,color}) => {
+const CreateEmployeeDialog = ({height,width,color}) => {
     const [open, setOpen] = React.useState(false);
     const [toggle,setToggle] = useState('individual')
 
@@ -34,7 +33,7 @@ const CreateCustomerDialog = ({height,width,color}) => {
       //   }
       // }
     // })
-    const customerTextfield = [
+    const employeeTextField = [
         {
             label:'Name',
             name:"name",
@@ -63,9 +62,9 @@ const CreateCustomerDialog = ({height,width,color}) => {
 
         },
         {
-            label: 'Tax Number',
-            name: "taxNumber",
-            type: 'number',
+            label: 'Role',
+            name: "role",
+            type: 'text',
             fullWidth:true
 
         },
@@ -95,6 +94,22 @@ const CreateCustomerDialog = ({height,width,color}) => {
             label: 'Pincode',
             name: "pincode",
             type: 'number',
+            fullWidth:true
+        },
+        {
+            label: 'PAN Number',
+            name: "panNumber",
+            type: 'number'
+        },
+        {
+            label: 'Password',
+            name: "password",
+            type: 'password'
+        },
+        {
+            label: 'Re-enter Password',
+            name: "reEnterPassword",
+            type: 'rePassword',
             fullWidth:true
         },
     ]
@@ -154,12 +169,6 @@ const CreateCustomerDialog = ({height,width,color}) => {
     fullWidth:true
   },
   {
-    label: 'Custom',
-    name: "custom",
-    type: 'text',
-    fullWidth:true
-  },
-  {
     label: 'Address',
     name: "address",
     type: 'text',
@@ -191,69 +200,33 @@ const CreateCustomerDialog = ({height,width,color}) => {
   return (
     <div>
       <Button sx={{height:height,width:width}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
-        Customer
+        ADD NEW EMPLOYEE
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth='lg'>
       <div style={{width: 1200}}>
 
-        <DialogTitle >CREATE CUSTOMER</DialogTitle>
+        <DialogTitle >CREATE EMPLOYEE</DialogTitle>
         <DialogContent>
-          <Box display={'flex'} justifyContent={'center'}>
-            <Button sx={{minHeight:'52px', minWidth:"235px"}} variant={toggle==='individual'?'contained':'outlined'} color='options' onClick={()=>setToggle('individual')}>INDIVIDUAL</Button>
-            <Button sx={{minHeight:'52px', minWidth:"235px"}}  variant={toggle==='business'?'contained':'outlined'} color='options' onClick={()=>setToggle('business')}>BUSINESS</Button>
-          </Box>
-          {toggle==='individual' &&
             <Grid container xs={12} mt={3}>
-              <Grid item xs={5.5} mr={4}>
-                  <CreateTextFields  fields={customerTextfield.slice(0,5)} onChange={handleFieldChange}  formField={formData}/>
-                  {/* <TextField values={formData[]}/> */}
+              <Grid item xs={3.6} mr={4}>
+                  <CreateTextFields  fields={employeeTextField.slice(0,5)} onChange={handleFieldChange}  formField={formData}/>
               </Grid>
-              <Grid item xs={6} >
+              <Grid item xs={3.6} mr={4}>
                 <Grid container xs={12}>
-                  <Grid  xs={12} item><CreateTextFields fields={customerTextfield.slice(5,6)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  <Grid  xs={5.7} item mr={2}><CreateTextFields fields={customerTextfield.slice(6,7)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(7,8)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={5.7} item mr={2}><CreateTextFields fields={customerTextfield.slice(8,9)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(9,10)} onChange={handleFieldChange}  formField={formData}/></Grid>
+                <CreateTextFields  fields={employeeTextField.slice(5,6)} onChange={handleFieldChange}  formField={formData}/>
+                  <Grid  xs={5.7} item mr={2}><CreateTextFields fields={employeeTextField.slice(6,7)} onChange={handleFieldChange}  formField={formData}/></Grid>
+                  <Grid  xs={5.7} item><CreateTextFields fields={employeeTextField.slice(7,8)} onChange={handleFieldChange}  formField={formData}/></Grid>
+                  <Grid  xs={5.7} item mr={2}><CreateTextFields fields={employeeTextField.slice(8,9)} onChange={handleFieldChange}  formField={formData}/></Grid>
+                  <Grid  xs={5.7} item><CreateTextFields fields={employeeTextField.slice(9,10)} onChange={handleFieldChange}  formField={formData}/></Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={3.6} mr={4}>
+                <Grid container xs={12}>
+                  <Grid  xs={12} item><CreateTextFields fields={employeeTextField.slice(10,13)} onChange={handleFieldChange} formField={formData}/></Grid>
                   <Grid xs={12}><ControlledRadioButtonsGroup onChange={handleFieldChange} title={'STATUS'} formField={formData} name={'status'}/></Grid>
                 </Grid>
               </Grid>
             </Grid>
-          }
-          {toggle==='business' &&
-            <Grid container xs={12} mt={3}>
-              <Grid item xs={3.6} mr={4}>
-                  <CreateTextFields  fields={businessTextfield.slice(0,5)} onChange={handleFieldChange}  formField={formData}/>
-                  <FileInputTextField/>
-              </Grid>
-              <Grid item xs={3.6} mr={4}>
-                  <CreateTextFields  fields={businessTextfield.slice(5,9)} onChange={handleFieldChange}  formField={formData}/>
-                  <Grid xs={12}><ControlledRadioButtonsGroup onChange={handleFieldChange} title={'STATUS'} formField={formData} name={'status'}/></Grid>
-              </Grid>
-              <Grid item xs={3.6} mr={4}>
-                <Grid container xs={12}>
-                  <Grid  xs={12} item><CreateTextFields fields={businessTextfield.slice(8,9)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  <Grid  xs={5.7} item mr={2}><CreateTextFields fields={customerTextfield.slice(6,7)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(7,8)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={5.7} item mr={2}><CreateTextFields fields={customerTextfield.slice(8,9)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(9,10)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                </Grid>
-              </Grid>
-            </Grid>
-          }
-          {/* <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText> */}
-          {/* <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          /> */}
         </DialogContent>
         <DialogActions>
           <Button color='options' onClick={handleClose}>Cancel</Button>
@@ -265,4 +238,4 @@ const CreateCustomerDialog = ({height,width,color}) => {
   )
 }
 
-export default CreateCustomerDialog
+export default CreateEmployeeDialog

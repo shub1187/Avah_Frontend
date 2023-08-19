@@ -1,29 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, InputLabel, TextField } from "@mui/material";
 
-const CreateTextFields = ({ fields }) => {
-  const [formField, setFormField] = useState({});
+const CreateTextFields = ({ fields , onChange, formField}) => {
+//   const [formField, setFormField] = useState({});
 
-  const handleChange = (fieldName, value) => {
-    setFormField((prev) => ({ ...prev, [fieldName]: value }));
-  };
-
+//   const handleChange = (fieldName, value) => {
+//     setFormField((prev) => ({ ...prev, [fieldName]: value }));
+//   };
+useEffect(() => {
+  fields.forEach((field) => {
+    if (!formField.hasOwnProperty(field.name)) {
+      onChange(field.name, '');
+    }
+  });
+}, []);
   return (
     <>
       {fields.map((field) => {
-        if (!formField.hasOwnProperty(field.name)) {
-          setFormField((prev) => ({ ...prev, [field.name]: "" }));
-        }
+        // if (!formField.hasOwnProperty(field.name)) {
+        //     onChange(field.name, '')
+        // //   setFormField((prev) => ({ ...prev, [field.name]: "" }));
+        // }
         return (
           <Box key={field.name} mb={2}>
             <InputLabel sx={{ color: "black", marginBottom: 1 }}>
               {field.label}
             </InputLabel>
             <TextField
-              size="small"
-              fullWidth={field.fullWidth}
+            //   size="small"
+              fullWidth
               value={formField[field.name] || ""}
-              onChange={(e) => handleChange(field.name, e.target.value)}
+              onChange={(e) => onChange(field.name, e.target.value)}
+              rows={field.row}
+              multiline
+              type={field.type}
             />
           </Box>
         );
