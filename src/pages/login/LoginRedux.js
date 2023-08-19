@@ -63,10 +63,11 @@ export const LoginRedux = (state = initialState, props) => {
 
             case FETCH_LOGIN_SUCCESS_SP:
                 var token = payload.token;
+                var sp_id = payload.sp_id;
                 localStorage.setItem('TYPE_OF_USER', "2");
                 localStorage.setItem('access_tokenSP', token);
                 localStorage.setItem('isLoggedInSP', "true");
-        
+                localStorage.setItem('sp_id', sp_id);      
                 return {
                     ...state,
                     isLoading: 1,

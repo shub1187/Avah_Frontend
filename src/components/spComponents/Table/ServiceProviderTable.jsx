@@ -15,6 +15,9 @@ import CreateSpareDialog from "../Dialog/Spares/AddSparesDialog";
 
 const ServiceProvidertable = ({DialogButton,columnss})=>{
   const [dataLength,setDataLength] = useState(0)
+  const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
+  const sp_id = localStorage.getItem('sp_id'); // Retrieve the token from local storage
+  
   const theme = createTheme({
     palette:{
       addUser:{
@@ -89,7 +92,7 @@ const ServiceProvidertable = ({DialogButton,columnss})=>{
     <ThemeProvider theme={theme}>
     <MaterialTable
     title=""
-    columns={columns}
+    columns={columnss}
     options={{debounceInterval:700,emptyRowsWhenPaging:false,
        rowStyle: {backgroundColor: "rgb(244, 248, 249)" },
        headerStyle:{backgroundColor:'rgb(244, 248, 249)',color:"black",fontSize:"14px",fontWeight:'bold',borderBottom:'5px solid rgb(230,230,230)'},
@@ -122,11 +125,12 @@ const ServiceProvidertable = ({DialogButton,columnss})=>{
             onClick={()=> <CreateCustomerDialog/>}
             >Add Employee
             </Button> */}
-            <CreateCustomerDialog height={'65px'} width={'270px'} color={'addUser'}/>
+            {/* <CreateCustomerDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <CreateEmployeeDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <AddLabourDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <AddServiceDialog height={'65px'} width={'270px'} color={'addUser'}/>
-            <CreateSpareDialog height={'65px'} width={'270px'} color={'addUser'}/>
+            <CreateSpareDialog height={'65px'} width={'270px'} color={'addUser'}/> */}
+            <DialogButton/>
           </div>
         </Box>
         </>
@@ -136,7 +140,8 @@ const ServiceProvidertable = ({DialogButton,columnss})=>{
     data={async (query) => {
       console.log(query,"RAEES")
       try {
-        let url = "https://my-json-server.typicode.com/raeesmohamed/mockjson/olympic?";
+        let url = `http://localhost:3008/api/serviceprovider/getAllEmployee?sp_id=${sp_id}&`;
+       
         if(query.search){
           url+=`q=${query.search}`
         }
@@ -145,10 +150,11 @@ const ServiceProvidertable = ({DialogButton,columnss})=>{
         }
         url+=`&_page=${query.page+1}`
         url+=`&_limit=${query.pageSize}`
-        const response = await axios.get(url);
-        const data = response.data; // Adjust this based on your API response structure
-        setDataLength(data.length)
-        console.log(data,"RAEES")
+        const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
+        const response = await axios.get(url,{headers});
+        const data = response.data.data.results; // Adjust this based on your API response structure
+        // setDataLength(data.length)
+        console.log(data,"ln 151 RAEES")
         return {
           data: data, // Change this to match your data structure
           page: query.page,
