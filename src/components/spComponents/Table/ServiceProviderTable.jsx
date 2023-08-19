@@ -130,7 +130,7 @@ const ServiceProvidertable = ({DialogButton,columnss})=>{
             <AddLabourDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <AddServiceDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <CreateSpareDialog height={'65px'} width={'270px'} color={'addUser'}/> */}
-            <DialogButton/>
+            <DialogButton />
           </div>
         </Box>
         </>

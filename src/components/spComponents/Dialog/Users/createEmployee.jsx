@@ -101,7 +101,18 @@ const CreateEmployeeDialog = ({height,width,color}) => {
             label: 'Gender',
             name: "gender",
             type: 'text',
-            fullWidth:true
+            fullWidth:true,
+            select:true,
+            selectArray:[
+              {
+                label:'Male',
+                value:"male"
+              },
+              {
+                label:'Female',
+                value:"female"
+              },
+            ]
 
         },
         {
@@ -256,7 +267,7 @@ const CreateEmployeeDialog = ({height,width,color}) => {
               </Grid>
               <Grid item xs={3.6} mr={4}>
                 <Grid container xs={12}>
-                <CreateTextFields  fields={employeeTextField.slice(5,6)} onChange={handleFieldChange}  formField={formData}/>
+                <Grid xs={12} item><CreateTextFields  fields={employeeTextField.slice(5,6)} onChange={handleFieldChange} formField={formData}/></Grid>
                   <Grid  xs={5.7} item mr={2}><CreateTextFields fields={employeeTextField.slice(6,7)} onChange={handleFieldChange}  formField={formData}/></Grid>
                   <Grid  xs={5.7} item><CreateTextFields fields={employeeTextField.slice(7,8)} onChange={handleFieldChange}  formField={formData}/></Grid>
                   <Grid  xs={5.7} item mr={2}><CreateTextFields fields={employeeTextField.slice(8,9)} onChange={handleFieldChange}  formField={formData}/></Grid>

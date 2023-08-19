@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, InputLabel, TextField } from "@mui/material";
+import { Box, InputLabel, MenuItem, TextField } from "@mui/material";
 
 const CreateTextFields = ({ fields , onChange, formField}) => {
 //   const [formField, setFormField] = useState({});
@@ -34,7 +34,15 @@ useEffect(() => {
               rows={field.row}
               multiline
               type={field.type}
-            />
+              select={field.select}
+            >
+              {field.selectArray && field.selectArray.map((textfield)=>{
+                return(
+                <MenuItem key={textfield.label} value={textfield.value}>
+                  {textfield.label}
+                </MenuItem>
+            )})}
+            </TextField>
           </Box>
         );
       })}
