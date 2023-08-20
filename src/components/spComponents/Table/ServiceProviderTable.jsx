@@ -72,6 +72,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
         }
       },
     })
+    // For future refernce just to cross check 
   const columns = [
     { title: "Athlete", field: "athlete" },
     { title: "Age", field: "age" },
@@ -130,7 +131,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
             <AddLabourDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <AddServiceDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <CreateSpareDialog height={'65px'} width={'270px'} color={'addUser'}/> */}
-            <DialogButton />
+            <DialogButton height={'65px'} width={'270px'} color={'addUser'} />
           </div>
         </Box>
         </>
@@ -140,7 +141,6 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
     data={async (query) => {
       console.log(query,"RAEES")
       try {
-        // let url = `http://localhost:3008/api/serviceprovider/getAllEmployee?sp_id=${sp_id}&`;
         let url = `${URL}?sp_id=${sp_id}&`;
 
         if(query.search){

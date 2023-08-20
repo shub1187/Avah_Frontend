@@ -46,7 +46,7 @@ const CreateAppointmentDialog = ({height,width,color}) => {
             const obj = {
                 payload:formData,
                 method:"POST",
-                url:"http://localhost:3008/api/serviceprovider/createEmployee"
+                url:"http://localhost:3008/api/serviceprovider/createAppointment"
             }
   
             const {isSuccess,data,error} = await fetchData(obj)
@@ -79,6 +79,23 @@ const CreateAppointmentDialog = ({height,width,color}) => {
             fullWidth: true
 
         },
+        {
+          label: 'Vehicle Type',
+          name: "vehicle_type",
+          type: 'text',
+          fullWidth: true,
+          select:true,
+          selectArray:[
+              {
+                label:'Personal',
+                value:"personal"
+              },
+              {
+                  label:'Commercial',
+                  value:"commercial"
+              }
+            ]
+      },
         {
             label: 'Brand',
             name: "brand",
@@ -116,7 +133,7 @@ const CreateAppointmentDialog = ({height,width,color}) => {
         },
         {
             label: 'Pickup And Drop',
-            name: "pickup_&_drop",
+            name: "pickup_drop",
             type: 'text',
             fullWidth: true,
             select:true,
@@ -155,7 +172,7 @@ const CreateAppointmentDialog = ({height,width,color}) => {
             selectArray:[
                 {
                   label:'To Start',
-                  value:"to_start"
+                  value:"To Start"
                 }
               ]
 
@@ -173,7 +190,7 @@ const CreateAppointmentDialog = ({height,width,color}) => {
         <DialogContent>
             <Grid container xs={12} mt={3}>
               <Grid item xs={3.6} mr={4}>
-                  <CreateTextFields  fields={appointmentList.slice(0,4)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  fields={appointmentList.slice(0,5)} onChange={handleFieldChange}  formField={formData}/>
                   {/* <TextField values={formData[]}/> */}
               </Grid>
               <Grid item xs={3.6} mr={4}>
@@ -181,16 +198,16 @@ const CreateAppointmentDialog = ({height,width,color}) => {
                 
                     {/* <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(4,5)} onChange={handleFieldChange} formField={formData}/></Grid> */}
                     {/* <DatePicker/> */}
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(4,7)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(5,8)} onChange={handleFieldChange} formField={formData}/></Grid>
                 </Grid>
               </Grid>
               <Grid item xs={3.6} >
                 <Grid container xs={12}>
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(7,8)} onChange={handleFieldChange} formField={formData}/></Grid>
-                    <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(8,9)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(9,10)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(10,12)} onChange={handleFieldChange} formField={formData}/></Grid>
-
+                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(8,9)} onChange={handleFieldChange} formField={formData}/></Grid>
+                <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(9,10)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(10,11)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(11,13)} onChange={handleFieldChange} formField={formData}/></Grid>
+                
 
                 </Grid>
               </Grid>
