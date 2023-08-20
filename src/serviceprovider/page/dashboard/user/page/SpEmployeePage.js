@@ -43,7 +43,7 @@ const SpEmployeePage = (props) => {
   return (
     <>
     <ThemeProvider theme={theme}>
-      <ServiceProvidertable DialogButton={CreateEmployeeDialog} columnss={createEmployeeColumn} />
+      <ServiceProvidertable DialogButton={CreateEmployeeDialog} columnss={createEmployeeColumn} URL={'http://localhost:3008/api/serviceprovider/getAllEmployee'}/>
     </ThemeProvider>
     </>
     // <div>

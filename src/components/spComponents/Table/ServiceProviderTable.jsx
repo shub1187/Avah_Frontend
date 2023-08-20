@@ -13,7 +13,7 @@ import AddLabourDialog from "../Dialog/Labour/AddLabour";
 import AddServiceDialog from "../Dialog/Service/AddServiceDialog";
 import CreateSpareDialog from "../Dialog/Spares/AddSparesDialog";
 
-const ServiceProvidertable = ({DialogButton,columnss})=>{
+const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
   const [dataLength,setDataLength] = useState(0)
   const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
   const sp_id = localStorage.getItem('sp_id'); // Retrieve the token from local storage
@@ -140,8 +140,9 @@ const ServiceProvidertable = ({DialogButton,columnss})=>{
     data={async (query) => {
       console.log(query,"RAEES")
       try {
-        let url = `http://localhost:3008/api/serviceprovider/getAllEmployee?sp_id=${sp_id}&`;
-       
+        // let url = `http://localhost:3008/api/serviceprovider/getAllEmployee?sp_id=${sp_id}&`;
+        let url = `${URL}?sp_id=${sp_id}&`;
+
         if(query.search){
           url+=`q=${query.search}`
         }

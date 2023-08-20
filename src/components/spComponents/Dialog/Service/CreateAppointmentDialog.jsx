@@ -1,13 +1,22 @@
 import React,{useState} from 'react'
-import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
+import { Alert, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Snackbar, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
 import CreateTextFields from 'components/common/Textfield';
-import { useFetch } from 'hooks/useFetch';
+import { useFetch, useFetchFunction } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
 import CreateDateFields from 'components/common/Textfield/DateTextfield';
 import { DatePicker } from '@mui/x-date-pickers';
+import SkeletonLoading from 'components/common/Skeleton';
 const CreateAppointmentDialog = ({height,width,color}) => {
     const [open, setOpen] = React.useState(false);
-
+    const {fetchData} = useFetchFunction()
+    const [status,setStatus] = useState({
+      isVisible:false,
+      message:"",
+      loading:false,
+      error:'',
+      responseStatus:''
+  })
+    const [snackbar,handleSnackBar] = useState(true)
     const [formData, setFormData] = useState({});
   console.log(formData,"RAEES")
     const handleFieldChange = (fieldName, value) => {
@@ -21,9 +30,36 @@ const CreateAppointmentDialog = ({height,width,color}) => {
     const handleClose = () => {
       setOpen(false);
     };
-    const handleSubmit = ()=>{
-    console.log(formData);
-    setFormData({})
+    const handleSnackBarFunction = ()=>{
+        handleSnackBar(false)
+    }
+    const handleSubmit = async()=>{
+        try{
+          
+            setStatus({loading:true,message:'',isVisible:true})
+            // const payload = {
+            //     status:'Active '  // Active or Inactive
+            // }
+            const obj = {
+                payload:formData,
+                method:"POST",
+                url:"http://localhost:3008/api/serviceprovider/createEmployee"
+            }
+  
+            const {isSuccess,data,error} = await fetchData(obj)
+            if(error && !isSuccess){
+                throw new Error(error)
+            }
+            if(data && isSuccess){
+                setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
+            }
+            console.log(formData);
+            setFormData({})
+        }
+        catch(error){
+            setStatus({error:error?.message,message:'',loading:false})
+            setFormData({})
+        }
     }
     
     const appointmentList = [
@@ -79,15 +115,25 @@ const CreateAppointmentDialog = ({height,width,color}) => {
             label: 'Pickup And Drop',
             name: "pickup_&_drop",
             type: 'text',
-            fullWidth: true
-
+            fullWidth: true,
+            select:true,
+            selectArray:[
+                {
+                  label:'Company Executive',
+                  value:"company_executive"
+                },
+                {
+                    label:'Self Drive',
+                    value:"self_drive"
+                }
+              ]
         },
 
         {
             label: 'Service Date',
             name: "service_date",
             type: 'date',
-            fullWidth: true
+            fullWidth: true,
 
         },
         {
@@ -98,29 +144,29 @@ const CreateAppointmentDialog = ({height,width,color}) => {
 
         },
         {
-            label: 'Vehicle Number',
-            name: "vehicle_number",
-            type: 'text',
-            fullWidth: true
-
-        },
-        {
             label: 'Status',
             name: "status",
             type: 'text',
-            fullWidth: true
+            fullWidth: true,
+            select:true,
+            selectArray:[
+                {
+                  label:'To Start',
+                  value:"to_start"
+                }
+              ]
 
         },
     ]
   return (
     <div>
       <Button sx={{height:height,width:width}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
-        CREATE APPOINTMNET
+        CREATE APPOINTMENT
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth='lg'>
       <div style={{width: 1200}}>
 
-        <DialogTitle >  CREATE APPOINTMNET</DialogTitle>
+        <DialogTitle >  CREATE APPOINTMENT</DialogTitle>
         <DialogContent>
             <Grid container xs={12} mt={3}>
               <Grid item xs={3.6} mr={4}>
@@ -140,7 +186,7 @@ const CreateAppointmentDialog = ({height,width,color}) => {
                   <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(7,8)} onChange={handleFieldChange} formField={formData}/></Grid>
                     <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(8,9)} onChange={handleFieldChange} formField={formData}/></Grid>
                   <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(9,10)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(10,13)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(10,12)} onChange={handleFieldChange} formField={formData}/></Grid>
 
 
                 </Grid>
@@ -166,6 +212,8 @@ const CreateAppointmentDialog = ({height,width,color}) => {
         </DialogActions>
         </div>
       </Dialog>
+      {status.loading && <SkeletonLoading />}
+            {(!status.loading && status.error ) &&<Snackbar open={snackbar} autoHideDuration={2000} onClose={handleSnackBarFunction}  color='error'><Alert severity='error'>{status.error}</Alert></Snackbar>}
     </div>  )
 }
 
