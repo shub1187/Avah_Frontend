@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { Alert, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Snackbar, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
 import CreateTextFields from 'components/common/Textfield';
 import { useFetch, useFetchFunction } from 'hooks/useFetch';
@@ -9,6 +9,8 @@ import SkeletonLoading from 'components/common/Skeleton';
 const CreateAppointmentDialog = ({height,width,color}) => {
     const [open, setOpen] = React.useState(false);
     const {fetchData} = useFetchFunction()
+    let {data:brandData} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
+    console.log(brandData,"RAEES")
     const [status,setStatus] = useState({
       isVisible:false,
       message:"",
@@ -33,6 +35,7 @@ const CreateAppointmentDialog = ({height,width,color}) => {
     const handleSnackBarFunction = ()=>{
         handleSnackBar(false)
     }
+
     const handleSubmit = async()=>{
         try{
           
