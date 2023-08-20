@@ -8,9 +8,64 @@ import { DatePicker } from '@mui/x-date-pickers';
 import SkeletonLoading from 'components/common/Skeleton';
 const CreateAppointmentDialog = ({height,width,color}) => {
     const [open, setOpen] = React.useState(false);
+    const [formData, setFormData] = useState({});
     const {fetchData} = useFetchFunction()
-    let {data:brandData} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
-    console.log(brandData,"RAEES")
+    // let {data:brandData} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
+    const brandData = [
+        {
+            "Maruti Suzuki": [
+                "Swift",
+                "Ertiga"
+            ]
+        },
+        {
+            "Morris Garage": [
+                "HECTOR",
+                "Rickshaw"
+            ]
+        },
+        {
+            "Hyundai": [
+                "i20"
+            ]
+        },
+        {
+            "Opel": [
+                "Corsa"
+            ]
+        }
+    ]
+    const selectArray = brandData.map((brandEntry) => {
+        const brandName = Object.keys(brandEntry)[0]; // Get the brand name
+        const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_'); // Format the value
+      
+        return {
+          label: brandName,
+          value: formattedBrandValue
+        };
+      });
+    let selectModel = []
+    const selectedBrand = formData.brand ? formData.brand.toLowerCase().replace(/ /g, '_') : ''; // Format selected brand or null if not selected
+
+    if (selectedBrand) {
+        brandData.forEach((brandEntry) => {
+            const brandName = Object.keys(brandEntry)[0];
+            const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_');
+    
+            if (selectedBrand === formattedBrandValue) { // Check for selected brand
+                brandEntry[brandName].forEach((ent) => {
+                    const label = ent;
+                    const formatValue = ent.toLowerCase().replace(/ /g, '_'); // Format model value
+                    selectModel.push({
+                        label: label,
+                        value: formatValue
+                    });
+                });
+            }
+        });
+    } 
+    console.log(selectModel,selectArray)
+
     const [status,setStatus] = useState({
       isVisible:false,
       message:"",
@@ -19,10 +74,17 @@ const CreateAppointmentDialog = ({height,width,color}) => {
       responseStatus:''
   })
     const [snackbar,handleSnackBar] = useState(true)
-    const [formData, setFormData] = useState({});
   console.log(formData,"RAEES")
     const handleFieldChange = (fieldName, value) => {
-      setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
+        if (fieldName === "brand") {
+            setFormData((prevData) => ({
+              ...prevData,
+              [fieldName]: value,
+              model: "" 
+            }));
+          } else {
+            setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
+          }
     };
 
     const handleClickOpen = () => {
@@ -100,15 +162,17 @@ const CreateAppointmentDialog = ({height,width,color}) => {
             label: 'Brand',
             name: "brand",
             type: 'text',
-            fullWidth: true
-
+            fullWidth: true,
+            select:true,
+            selectArray:selectArray
         },
         {
             label: 'Model',
             name: "model",
             type: 'text',
-            fullWidth: true
-
+            fullWidth: true,
+            select:true,
+            selectArray:selectModel
         },
         {
             label: 'Address',
