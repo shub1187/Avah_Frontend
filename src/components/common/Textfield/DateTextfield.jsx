@@ -41,7 +41,7 @@ useEffect(() => {
             </InputLabel>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DatePicker']}>
-                <DatePicker value={formField[field.name] || null} onChange={(e) =>onChange(field.name,format(e.$d,'dd-MM-yyyy'))} slotProps={{ textField: { variant: 'outlined' } }}/>
+                <DatePicker  value={formField[field.name] || null} onChange={(e) =>onChange(field.name,format(e.$d,'dd-MM-yyyy'))} slotProps={{ textField: { variant: 'outlined' } }}/>
                 </DemoContainer>
             </LocalizationProvider>
             {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
