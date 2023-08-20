@@ -137,7 +137,8 @@ const CreateAppointmentDialog = ({height,width,color}) => {
               </Grid>
               <Grid item xs={3.6} >
                 <Grid container xs={12}>
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(7,9)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(7,8)} onChange={handleFieldChange} formField={formData}/></Grid>
+                    <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(8,9)} onChange={handleFieldChange} formField={formData}/></Grid>
                   <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(9,10)} onChange={handleFieldChange} formField={formData}/></Grid>
                   <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(10,13)} onChange={handleFieldChange} formField={formData}/></Grid>
 
