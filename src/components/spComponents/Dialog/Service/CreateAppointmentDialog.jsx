@@ -10,7 +10,7 @@ const CreateAppointmentDialog = ({height,width,color}) => {
     const [open, setOpen] = React.useState(false);
     const {fetchData} = useFetchFunction()
     let {data:brandData} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
-    console.log(brandData,"RAEES")
+    console.log(brandData.data.results,"RAEES")
     const [status,setStatus] = useState({
       isVisible:false,
       message:"",

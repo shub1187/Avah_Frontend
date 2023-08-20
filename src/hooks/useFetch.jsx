@@ -15,10 +15,11 @@ const useFetch = (url) => {
                 let sp_id =  localStorage.getItem('sp_id');
                 let headers = {}
                 if(sp_id){
+                console.log("ln 18", sp_id)
                 const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
                  headers = { Authorization: `Bearer ${token}`  };      
                 }
-                const {data, status} = await axios.get(url,headers)
+                const {data, status} = await axios.get(url,{headers})
                 console.log(data,status,"RAEES",'useFetch')
                 if(data && status==200){
                     setData(data)
