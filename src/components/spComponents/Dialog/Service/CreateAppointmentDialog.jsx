@@ -10,38 +10,40 @@ const CreateAppointmentDialog = ({height,width,color}) => {
     const [open, setOpen] = React.useState(false);
     const [formData, setFormData] = useState({});
     const {fetchData} = useFetchFunction()
-    // let {data:brandData} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
-    const brandData = [
-        {
-            "Maruti Suzuki": [
-                "Swift",
-                "Ertiga"
-            ]
-        },
-        {
-            "Morris Garage": [
-                "HECTOR",
-                "Rickshaw"
-            ]
-        },
-        {
-            "Hyundai": [
-                "i20"
-            ]
-        },
-        {
-            "Opel": [
-                "Corsa"
-            ]
-        }
-    ]
+    let {data} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
+    let brandData = data?.data?.results || []
+    // console.log("ln 15 shub",data?.data?.results)
+    // const brandData = [  // This is dummy data for future refernce
+    //     {
+    //         "Maruti Suzuki": [
+    //             "Swift",
+    //             "Ertiga"
+    //         ]
+    //     },
+    //     {
+    //         "Morris Garage": [
+    //             "HECTOR",
+    //             "Rickshaw"
+    //         ]
+    //     },
+    //     {
+    //         "Hyundai": [
+    //             "i20"
+    //         ]
+    //     },
+    //     {
+    //         "Opel": [
+    //             "Corsa"
+    //         ]
+    //     }
+    // ]
     const selectArray = brandData.map((brandEntry) => {
         const brandName = Object.keys(brandEntry)[0]; // Get the brand name
         const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_'); // Format the value
       
         return {
           label: brandName,
-          value: formattedBrandValue
+          value: brandName
         };
       });
     let selectModel = []
@@ -58,7 +60,7 @@ const CreateAppointmentDialog = ({height,width,color}) => {
                     const formatValue = ent.toLowerCase().replace(/ /g, '_'); // Format model value
                     selectModel.push({
                         label: label,
-                        value: formatValue
+                        value: label
                     });
                 });
             }
@@ -204,11 +206,11 @@ const CreateAppointmentDialog = ({height,width,color}) => {
             selectArray:[
                 {
                   label:'Company Executive',
-                  value:"company_executive"
+                  value:"Company Executive"
                 },
                 {
                     label:'Self Drive',
-                    value:"self_drive"
+                    value:"Self Drive"
                 }
               ]
         },

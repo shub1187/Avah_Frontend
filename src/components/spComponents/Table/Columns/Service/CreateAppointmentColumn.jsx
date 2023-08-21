@@ -6,7 +6,7 @@ export const createAppointmentColumn = [
     { title: "Model", field: "model" },
     { title: "Email", field: "email" },
     { title: "Mobile", field: "mobile" },
-    { title: "Pickup And Drop", field: "pickup_&_drop" },
+    { title: "Pickup And Drop", field: "pickup_drop" },
     { title: "Address", field: "address" },
     { title: "Service Date", field: "service_date" },
     { title: "Booking Date", field: "booking_date" },
