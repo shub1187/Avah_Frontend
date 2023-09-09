@@ -5,7 +5,7 @@ import sizeConfigs from "../../../configs/sizeConfigs";
 import appRoutes from "../../../routes/appRoutes";
 import SidebarItem from "../SidebarItem";
 import SidebarItemCollapse from "../SidebarItemCollapse";
-import spAppRoutes from "../../../routes/spRoutes";
+// import spAppRoutes from "../../../routes/spRoutes";
 import ServiderProviderSidebar, { SpSideBarList } from "./SidebarForSp/SidebarForSp";
 import AvahSideBarImage from 'assets/img/AvahSideBarImage.png'
 import { useState } from "react";

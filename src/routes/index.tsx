@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import PageWrapper from "../components/layout/PageWrapper";
 import appRoutes from "./appRoutes";
 import { RouteType } from "./config";
-import spAppRoutes from "./spRoutes";
+// import spAppRoutes from "./spRoutes";
 import ServiceProviderHome from "pages/serviceProvider/Home";
 import SpCustomersPage from "serviceprovider/page/dashboard/user/page/SpCustomersPage";
 import SpEmployeePage from "serviceprovider/page/dashboard/user/page/SpEmployeePage";
@@ -76,6 +76,6 @@ const generateRouty = (SideBarList:any)=>{
 //   ));
 // };
 export const routes: ReactNode = generateRoute(appRoutes);
-export const spRoutes: ReactNode = generateRoute(spAppRoutes);
+// export const spRoutes: ReactNode = generateRoute(spAppRoutes);
 export const raeesRoute:any = generateRouty(serviceRoutes)
 export const customerRoute:any = generateRouty(customerRoutes)

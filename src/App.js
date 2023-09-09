@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { globalAppTheme } from "components/common/Themes/GlobalAppTheme";
 import CustomerLayout from "components/layout/CustomerLayout";
-import LandingPage from "pages/LandingPage/LandingPage";
+import LandingPage from "pages/Customer/Home/CustomerHome";
 function App() {
   const loginState = useSelector((state) => state.appState.login);
   console.log(localStorage.getItem('TYPE_OF_USER'))
@@ -25,18 +25,18 @@ function App() {
   const typeOfUser = localStorage.getItem('TYPE_OF_USER');
 console.log(raeesRoute,"RAEES")
   useEffect(() => {
-    if (!typeOfUser) {
-      navigate('/landing');
-      return;
-    }
+    // if (!typeOfUser) {
+    //   navigate('/landing');
+    //   return;
+    // }
     // Check if isAdminPage is true and typeOfUser is "1", then redirect to /admin/dashboard
-    if(location.pathname=='/landing'){
-      return
-    }
-    if (isAdminPage && typeOfUser === "1") {
-      navigate('/admin/dashboard/home');
-    }
-    else if(isAdminPage){
+    // if(location.pathname=='/landing'){
+    //   return
+    // }
+    // if (isAdminPage && typeOfUser === "1") {
+    //   navigate('/admin/dashboard/home');
+    // }
+    if(isAdminPage){
       navigate('/admin')
     }
     else if(typeOfUser==="2"){
@@ -70,7 +70,7 @@ console.log(raeesRoute,"RAEES")
 
               <Route path="/" element={<MainLayout />}> {spRoutes}</Route>
         } */}
-           <Route path="/landing" element={<LandingPage/>}></Route>
+           {/* <Route path="/landing" element={<LandingPage/>}></Route> */}
         {
            isAdminPage && localStorage.getItem('TYPE_OF_USER') == "1" ?
            <>              

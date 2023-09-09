@@ -7,7 +7,7 @@ import React from 'react'
 import Carousel from 'react-multi-carousel'
 import "react-multi-carousel/lib/styles.css";
 
-const LandingPage = () => {   
+const CustomerHome = () => {   
     const responsive = {
         superLargeDesktop: {
           // the naming can be any, depends on you.
@@ -82,4 +82,4 @@ const LandingPage = () => {
   )
 }
 
-export default LandingPage
+export default CustomerHome
