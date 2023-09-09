@@ -13,7 +13,7 @@ export const FETCH_LOGIN_SUCCESS = 'FETCH_LOGIN_SUCCESS'
 export const LOGIN_LOADER="Login_Loader"
 export const Logout = 'Logout'
 
-
+export const FETCH_LOGIN_SUCCESS_CUSTOMER ="FETCH_LOGIN_SUCCESS_CUSTOMER"
 export const CREATE_USER = 'CREATE_USER'
 export const GET_USER_DETAIL = 'GET_USER_DETAIL'
 export const SET_USER_STATUS = 'SET_USER_STATUS'

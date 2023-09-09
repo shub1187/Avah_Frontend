@@ -1,5 +1,5 @@
 import { Customer_LOGIN_API_URL } from "network/CustomerApiConstant"
-import { FETCH_LOGIN_SUCCESS, LOGIN_LOADER, LOGIN_URL, Logout } from "../../network/ApiConstant"
+import { FETCH_LOGIN_SUCCESS, FETCH_LOGIN_SUCCESS_CUSTOMER, LOGIN_LOADER, LOGIN_URL, Logout } from "../../network/ApiConstant"
 import { authPostRequestHeader, postRequest } from "../../network/Client"
 import { FETCH_LOGIN_SUCCESS_SP, LOGIN_URL_SP } from "../../network/SpApiConstant"
 
@@ -51,7 +51,7 @@ export const LoginAction = (props) => {
     var apiUrl = Customer_LOGIN_API_URL
   
     var body = props
-    var type = FETCH_LOGIN_SUCCESS_SP 
+    var type = FETCH_LOGIN_SUCCESS_CUSTOMER 
   
     return (dispatch) => {
       dispatch(requestType(LOGIN_LOADER))

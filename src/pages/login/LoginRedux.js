@@ -1,4 +1,4 @@
-import { FETCH_FAILURE, FETCH_LOGIN_SUCCESS, LOGIN_LOADER, Logout } from "../../network/ApiConstant";
+import { FETCH_FAILURE, FETCH_LOGIN_SUCCESS, LOGIN_LOADER, Logout ,FETCH_LOGIN_SUCCESS_CUSTOMER} from "../../network/ApiConstant";
 import { FETCH_LOGIN_SUCCESS_SP } from "../../network/SpApiConstant";
 
 
@@ -74,6 +74,19 @@ export const LoginRedux = (state = initialState, props) => {
                     isLogin:true,
                     
                 };
+                case FETCH_LOGIN_SUCCESS_CUSTOMER:
+                    var token = payload.token;
+                    var sp_id = payload.sp_id;
+                    localStorage.setItem('TYPE_OF_USER', "3");
+                    localStorage.setItem('access_tokenSP', token);
+                    localStorage.setItem('isLoggedInSP', "true");
+                    localStorage.setItem('sp_id', sp_id);      
+                    return {
+                        ...state,
+                        isLoading: 1,
+                        isLogin:true,
+                        
+                    };
                 case FETCH_FAILURE:
                     return{
                         ...state,
