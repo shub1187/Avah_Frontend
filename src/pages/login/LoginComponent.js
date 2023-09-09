@@ -391,8 +391,8 @@ function LoginComponent() {
                                                                             type="password"
                                                                             id="inputPassword4"
                                                                             value={spPassword}
-                                                                            error={errory && !spPassword.length?true:false}
-                                                                            helperText={errory && !spPassword.length?"Password Required":""}
+                                                                            error={errory && !spPassword.length?true:false || errory && spPassword != spRePassword?true:false}
+                                                                            helperText={errory && !spPassword.length?"Password Required":"" || errory && spPassword != spRePassword?"Password Need to Match":""}
 
                                                                         />
                                                                 </Box>
@@ -408,8 +408,8 @@ function LoginComponent() {
                                                                             type="password"
                                                                             id="inputconfirmPassword4"
                                                                             value={spRePassword}
-                                                                            error={errory && !spRePassword.length?true:false}
-                                                                            helperText={errory && !spRePassword.length?"Password Required":""}
+                                                                            error={errory && !spRePassword.length?true:false || errory && spPassword != spRePassword?true:false}
+                                                                            helperText={errory && !spRePassword.length?"Password Required":"" || errory && spPassword != spRePassword?"Password Need to Match":""}
                                                                         />
                                                                 </Box>
                                                                     <div className="col-12">
