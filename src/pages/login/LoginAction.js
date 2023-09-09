@@ -45,3 +45,17 @@ export const LoginAction = (props) => {
     }
   }
   
+
+  export const customerLoginAction = (props) => {
+
+    var apiUrl = LOGIN_URL_SP
+  
+    var body = props
+    var type = FETCH_LOGIN_SUCCESS_SP 
+  
+    return (dispatch) => {
+      dispatch(requestType(LOGIN_LOADER))
+      authPostRequestHeader({ apiUrl, body, dispatch, type })
+    }
+  }
+  

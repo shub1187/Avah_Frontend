@@ -7,6 +7,7 @@ import { Box, Button, InputLabel, MenuItem, TextField, ThemeProvider, createThem
 import RegisterDialogForCustomer from 'components/LoginRegisterComponents/Dialog/RegisterDialogForCustomer/Index';
 import RegisterDialogForServiceProviderAndDealers from 'components/LoginRegisterComponents/Dialog/RegisterDialogForServiceProviderAndDealer';
 import SpRegisterAPI from 'services/SpRegisterAPI';
+import customerRegisterAPI from 'services/CustomerRegisterApi';
 const theme = createTheme({
     components:{
         MuiTextField:{
@@ -205,8 +206,8 @@ function LoginComponent() {
         }
 
     }
-    const spRegisterForCustomer = async()=>{
-        let body={"email":spEmail,"password":spPassword,"role":page}
+    const customerRegister = async()=>{
+        let body={'name':spName,"email":spEmail,"password":spPassword,'cnfPassword':spRePassword,"role":page}
         if(spName.length<=0){
             setErrory(true)
         }
@@ -220,8 +221,13 @@ function LoginComponent() {
             setErrory(true)  
         }
         else{
+            let response = await customerRegisterAPI(body)
+            setSpName('');
+            setSpEmail('');
+            setSpPassword('');
+            setSpRePassword('');
             setLoginDialogOpen(true)
-
+            // dispatch(customerRegisterAction(body))
         }
     }
     const clearOutAllfield=()=>{
@@ -417,7 +423,7 @@ function LoginComponent() {
                                                                     <div className="col-12 text-center">
 
                                                                         <button
-                                                                            onClick={() => { spRegisterForCustomer()  }}
+                                                                            onClick={() => { customerRegister()  }}
                                                                             type="submit"
                                                                             className="btn btn-login mt-4 mb-4">Register</button>
 
