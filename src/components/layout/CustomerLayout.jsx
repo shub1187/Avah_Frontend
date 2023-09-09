@@ -1,6 +1,7 @@
 import { Box, Toolbar } from '@mui/material'
 import Sidebar from 'components/common/Sidebar/SidebarLayout'
 import Topbar from 'components/common/Topbar'
+import sizeConfigs from 'configs/sizeConfigs'
 import { useMobileResponsive } from 'hooks/useMobileResponsive'
 import React, { useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
@@ -19,7 +20,7 @@ const handleDrawerToggle = () => {
           <Box
               component="nav"
               sx={{
-                  // width: sizeConfigs.sidebar.width,
+                  width: sizeConfigs.sidebar.width,
                   flexShrink: 0
               }}
           >
@@ -29,9 +30,10 @@ const handleDrawerToggle = () => {
               component="main"
               sx={{
                   flexGrow: 1,
-                  p: location.pathname === '/dashboard/home' || location.pathname === '/admin/dashboard/home' ? 0 : 3,
-                //   width: `calc(100% - ${sizeConfigs.sidebar.width})`,
+                //   p: location.pathname === '/dashboard/home' || location.pathname === '/admin/dashboard/home' ? 0 : 3,
+                  width: `calc(100% - ${sizeConfigs.sidebar.width})`,
                   minHeight: "100vh",
+                  float:'right'
                 //   backgroundColor: colorConfigs.mainBg
               }}
           >

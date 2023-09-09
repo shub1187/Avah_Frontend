@@ -30,8 +30,9 @@ const TopBarUserIcon = ({ isSelected,logout }) => {
     <img
       src={TopBarHomeUsersImage}
       alt="users"
-      style={{ filter: isSelected ? 'brightness(0) invert(1)' : 'none' }}
+      style={{ filter: isSelected ? 'brightness(0) invert(1)' : 'none' ,cursor:'pointer'}}
       onClick={handleClick}
+
     />
 
   <Popover

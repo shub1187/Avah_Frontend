@@ -41,7 +41,7 @@ const Sidebar = ({isMobile,open,handleDrawerToggle,customer}) => {
     )} */}
     <SwipeableDrawer
       disableScrollLock={true}
-      variant={(isMobile || customer) ? 'temporary' : 'permanent'}  // Change variant based on resolution
+      variant={(isMobile) ? 'temporary' : 'permanent'}  // Change variant based on resolution
       open={open}
       onClose={handleDrawerToggle}
       // variant="permanent"

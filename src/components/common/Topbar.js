@@ -1,4 +1,4 @@
-import { AppBar, Box, Toolbar, Typography,IconButton, useMediaQuery, Grid } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography,IconButton, useMediaQuery, Grid, Button } from "@mui/material";
 import colorConfigs from "../../configs/colorConfigs";
 import sizeConfigs from "../../configs/sizeConfigs";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -45,10 +45,19 @@ const Topbar = ({isMobile,handleDrawerToggle,customer}) => {
               )}
           </Grid>
           <Grid item>
-            <Grid container spacing={2}>
-              <Grid item><TopBarSettingsIcon/></Grid>
-              <Grid item><TopBarHomeNotificationIcon/></Grid>
-              <Grid item><TopBarUserIcon logout={()=>dispatch(LogoutAction())}/></Grid>
+            <Grid container spacing={2} alignItems={'center'}>
+              {customer && (
+                <>
+                  <Grid item><Button sx={{ fontSize: 10, minHeight: 35,color:'rgb(173,73,112)'}} variant='contained' color="whiteBackground">My Location</Button></Grid>
+                  <Grid item><Button sx={{ fontSize: 10, minHeight: 35, mr: 4 ,color:'rgb(173,73,112)'}} variant='contained' color='whiteBackground'>Select City</Button></Grid>
+                </>
+              )
+              }
+              <Grid item><TopBarSettingsIcon /></Grid>
+              <Grid item><TopBarHomeNotificationIcon /></Grid>
+              <Grid item><TopBarUserIcon logout={() => dispatch(LogoutAction())} /></Grid>
+
+
               <Grid item mr={2}>raees</Grid>
             </Grid>
           </Grid>
