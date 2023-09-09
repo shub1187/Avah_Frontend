@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getYear } from 'date-fns'
 import { useDispatch, useSelector } from 'react-redux';
-import { LoginAction, SPLoginAction } from './LoginAction';
+import { CustomerLoginAction, LoginAction, SPLoginAction } from './LoginAction';
 import Loader from '../../components/common/Loader';
 import { Box, Button, InputLabel, MenuItem, TextField, ThemeProvider, createTheme, CircularProgress } from '@mui/material';
 import RegisterDialogForCustomer from 'components/LoginRegisterComponents/Dialog/RegisterDialogForCustomer/Index';
@@ -156,6 +156,8 @@ function LoginComponent() {
         else {
             // console.log("LoginActionPAge")
             // setErrorMessage("")
+            console.log('raees')
+
             setSpEmail("")
             setSpPassword("")
             let body={"email":spEmail,"password":spPassword,"role":page}
@@ -165,6 +167,23 @@ function LoginComponent() {
         }
     }
 
+    const customerLogin = ()=>{
+        if (spEmail.length <= 0) {
+            setErrory(true)
+        } else if (spPassword.length <= 0) {
+            setErrory(true)
+        }
+        else {
+            // console.log("LoginActionPAge")
+            // setErrorMessage("")
+            setSpEmail("")
+            setSpPassword("")
+            let body={"email":spEmail,"password":spPassword,"role":page}
+            dispatch(CustomerLoginAction(body))
+            // setErrory(true)
+
+        }
+    }
     const spRegisterButton = async()=>{
         let body = {
             "name":spName,"email":spEmail,"password":spPassword,"cnfPassword":spRePassword,
@@ -468,13 +487,13 @@ function LoginComponent() {
                                                                     size='small'
                                                                     placeholder='Enter Your Email ID'
                                                                     onChange={(e) => {
-                                                                        setEmail(e.target.value)
+                                                                        setSpEmail(e.target.value)
                                                                     }}
-                                                                    value={email}
+                                                                    value={spEmail}
                                                                     type="email"
                                                                     id='inputEmailSp'
-                                                                    error={errory && !email.length?true:false}
-                                                                    helperText={errory && !email.length?"Email Required":""}
+                                                                    error={errory && !spEmail.length?true:false}
+                                                                    helperText={errory && !spEmail.length?"Email Required":""}
                                                                 />
                                                             </Box>
                                                             <Box mb={2}>
@@ -484,13 +503,13 @@ function LoginComponent() {
                                                                     size='small'
                                                                     placeholder='Enter Your Password'
                                                                     onChange={(e) => {
-                                                                        setPassword(e.target.value)
+                                                                        setSpPassword(e.target.value)
                                                                     }}
-                                                                    value={password}
+                                                                    value={spPassword}
                                                                     type='password'
                                                                     id='inputPassword4'
-                                                                    error={errory && !password.length?true:false}
-                                                                    helperText={errory && !password.length?"Enter your password":""}
+                                                                    error={errory && !spPassword.length?true:false}
+                                                                    helperText={errory && !spPassword.length?"Enter your password":""}
                                                                 />
                                                             </Box>
                                                         {/* <div className="col-12">
@@ -508,18 +527,15 @@ function LoginComponent() {
                                                                     </label>
                                                                 </div>
                                                                 <a style={{textDecoration:"none",cursor:"pointer"}}>
-                                                                    Forgot Password?
+                                                                    Forgot Password?sss
                                                                 </a>
                                                             </Box>
                                                             <div className="errorMessage my-2 ">
                                                                 {error}
                                                             </div>
                                                             <div className="col-12 text-center">
-
-                                                                <button
-                                                                    onClick={() => { loginButton() }}
-                                                                    type="submit"
-                                                                    className="btn btn-login mt-4 mb-4">Login</button>
+                                                            <button type="submit"
+                                                                className="btn btn-login mt-4 mb-4"  onClick={() => { customerLogin()  }}>Login </button>
 
                                                             </div>
                                                         </div>
@@ -772,6 +788,8 @@ function LoginComponent() {
                                                         <div className="col-12 text-center">
                                                             <button type="submit"
                                                                 className="btn btn-login mt-4 mb-4"  onClick={() => { spLoginButton()  }}>Login </button>
+                                                                                                                                   
+
                                                         </div>
                                                     </div>
 

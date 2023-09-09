@@ -1,0 +1,1 @@
+export const Customer_LOGIN_API_URL = 'http://localhost:3008/api/customer/login'

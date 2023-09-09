@@ -1,3 +1,4 @@
+import { Customer_LOGIN_API_URL } from "network/CustomerApiConstant"
 import { FETCH_LOGIN_SUCCESS, LOGIN_LOADER, LOGIN_URL, Logout } from "../../network/ApiConstant"
 import { authPostRequestHeader, postRequest } from "../../network/Client"
 import { FETCH_LOGIN_SUCCESS_SP, LOGIN_URL_SP } from "../../network/SpApiConstant"
@@ -46,9 +47,8 @@ export const LoginAction = (props) => {
   }
   
 
-  export const customerLoginAction = (props) => {
-
-    var apiUrl = LOGIN_URL_SP
+  export const CustomerLoginAction = (props) => {
+    var apiUrl = Customer_LOGIN_API_URL
   
     var body = props
     var type = FETCH_LOGIN_SUCCESS_SP 
@@ -57,5 +57,14 @@ export const LoginAction = (props) => {
       dispatch(requestType(LOGIN_LOADER))
       authPostRequestHeader({ apiUrl, body, dispatch, type })
     }
+    // var apiUrl = Customer_LOGIN_API_URL
+  
+    // var body = props
+    // var type = FETCH_LOGIN_SUCCESS_SP 
+  
+    // return (dispatch) => {
+    //   dispatch(requestType(LOGIN_LOADER))
+    //   authPostRequestHeader({ apiUrl, body, dispatch, type })
+    // }
   }
   
