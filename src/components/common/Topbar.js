@@ -9,6 +9,7 @@ import { imageCongis } from "../../configs/imageConfigs";
 import { LogoutAction } from "../../pages/login/LoginAction";
 import { TopBarHomeNotificationIcon, TopBarSettingsIcon, TopBarUserIcon } from "assets/img/TopBar/icons";
 import MenuIcon from '@mui/icons-material/Menu';
+import { useMobileResponsive } from "hooks/useMobileResponsive";
 
 
 
@@ -31,7 +32,7 @@ const Topbar = ({isMobile,handleDrawerToggle,customer}) => {
   return (
     <AppBar
       sx={{
-        width:(isMobile || customer) ? "100%":`calc(100% - ${sizeConfigs.sidebar.width})`,
+        width:(isMobile ) ? "100%":`calc(100% - ${sizeConfigs.sidebar.width})`,
 
       }}
     >
@@ -40,7 +41,7 @@ const Topbar = ({isMobile,handleDrawerToggle,customer}) => {
       <div className={appbar}>
         <Grid height={'100%'} alignItems={'center'} container justifyContent={'space-between'}>
           <Grid  ml={2} item>
-          {(isMobile || customer) && (
+          {(isMobile ) && (
                 // <Box component={'span'}>
                 <IconButton
                   color="inherit"
@@ -58,8 +59,8 @@ const Topbar = ({isMobile,handleDrawerToggle,customer}) => {
             <Grid container spacing={2} alignItems={'center'}>
               {customer && (
                 <>
-                  <Grid item><Button sx={{ fontSize: 10, minHeight: 35,color:'rgb(173,73,112)'}} variant='contained' color="whiteBackground">My Location</Button></Grid>
-                  <Grid item><Button sx={{ fontSize: 10, minHeight: 35, mr: 4 ,color:'rgb(173,73,112)'}} variant='contained' color='whiteBackground'>Select City</Button></Grid>
+                  {/* <Grid item><Button sx={{ fontSize:isMobile? 8: 10, minHeight: 35,color:'rgb(173,73,112)'}} variant='contained' color="whiteBackground">My Location</Button></Grid>
+                  <Grid item><Button sx={{ fontSize: isMobile? 8: 1010, minHeight: 35, mr: 4 ,color:'rgb(173,73,112)'}} variant='contained' color='whiteBackground'>Select City</Button></Grid> */}
                 </>
               )
               }

@@ -20,7 +20,14 @@ export const CustomerSidebarList = [
     link:'customer/home',
     icon:HomeIcon,
     name:"Home",
+  },
+  {
+    id:2,
+    link:'customer/vehicle',
+    icon:ServiceTypeIcon,
+    name:"Vehicle",
   }
+
 ]
 
 export default function CustomerSideBar() {

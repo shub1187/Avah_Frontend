@@ -31,13 +31,12 @@ const handleDrawerToggle = () => {
               sx={{
                   flexGrow: 1,
                 //   p: location.pathname === '/dashboard/home' || location.pathname === '/admin/dashboard/home' ? 0 : 3,
-                  width: `calc(100% - ${sizeConfigs.sidebar.width})`,
+                  width: isMobile?'none':`calc(100% - ${sizeConfigs.sidebar.width})`,
                   minHeight: "100vh",
                   float:'right'
                 //   backgroundColor: colorConfigs.mainBg
               }}
           >
-              {/* {!isMobile && <Topbar isMobileResolution={isMobile} handleDrawerToggle={handleDrawerToggle} />} */}
               <Toolbar />
               <Outlet />
           </Box>

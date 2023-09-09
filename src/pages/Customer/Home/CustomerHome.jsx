@@ -28,7 +28,7 @@ const CustomerHome = () => {
         }
       }; 
   return (
-    <Box>
+    <Box >
         {/* <Grid alignItems={'center'} justifyContent={'space-between'} container >
             <Grid item><LandingPageLogo/></Grid>
             <Grid item>
