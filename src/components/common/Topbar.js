@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography,IconButton, useMediaQuery, Grid } from "@mui/material";
 import colorConfigs from "../../configs/colorConfigs";
 import sizeConfigs from "../../configs/sizeConfigs";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -7,106 +7,53 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { imageCongis } from "../../configs/imageConfigs";
 import { LogoutAction } from "../../pages/login/LoginAction";
+import { TopBarHomeNotificationIcon, TopBarSettingsIcon, TopBarUserIcon } from "assets/img/TopBar/icons";
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 
 
-const Topbar = () => {
-  //appState.appState=="home"
+const Topbar = ({isMobile,handleDrawerToggle,customer}) => {
   const { appState } = useSelector((state) => state.appState);
   const dispatch=useDispatch()
-
+ console.log(customer)
   let appbar = appState.appState == "home" ? "app-bar2" : "app-bar1"
   return (
     <AppBar
-      position="fixed"
       sx={{
-        width: `calc(100% - ${sizeConfigs.sidebar.width})`,
-        ml: sizeConfigs.sidebar.width,
+        width:(isMobile || customer) ? "100%":`calc(100% - ${sizeConfigs.sidebar.width})`,
 
       }}
     >
-      {/* <Toolbar  > */}
-      {/* <Typography variant="h6">
-          React sidebar with dropdown
-        </Typography> */}
+
 
       <div className={appbar}>
-        <nav className="ps-4 pt-4 ">
+        <Grid height={'100%'} alignItems={'center'} container justifyContent={'space-between'}>
+          <Grid  ml={2} item>
+          {(isMobile || customer) && (
+                // <Box component={'span'}>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  onClick={handleDrawerToggle}
+                  sx={{ display: { sm: 'block', md: customer ?'block':'none' } }}  // Show only on mobile
+                >
+                  <MenuIcon />
+                </IconButton>
+                // </Box>
+              )}
+          </Grid>
+          <Grid item>
+            <Grid container spacing={2}>
+              <Grid item><TopBarSettingsIcon/></Grid>
+              <Grid item><TopBarHomeNotificationIcon/></Grid>
+              <Grid item><TopBarUserIcon logout={()=>dispatch(LogoutAction())}/></Grid>
+              <Grid item mr={2}>raees</Grid>
+            </Grid>
+          </Grid>
 
-          <ol className="breadcrumb  pt-0 m-0 ">
-            <li className="breadcrumb-item mb-0 a-t "><a className="a-t" href="#">Pages</a></li>
-            <li className="breadcrumb-item  a-t" aria-current="page">Dashboard</li>
-          </ol>
-
-          <div className="container-fluid g-0">
-
-            <div className="row">
-
-              <div className="col-auto me-auto me-5">
-                <div className=' a-t2'>Dashboard</div>
-              </div>
-
-              <div className="col-auto pb-0"><ul className="nav nav-contianer">
-                <div className="pb-0 pe-2">
-                  <img className="gfg nav-cursor" style={{ width: 20, height: 20 }}
-                    src={require("../../assets/img/sidebar/setting.png")} />
-                </div>
-
-                <div className="pb-0">
-                  <img className="gfg nav-cursor" style={{ width: 18, height: 20 }}
-                    src={require("../../assets/img/sidebar/notification.png")} />
-                </div>
-
-
-
-                <div className="pb-0 tb-dropdown" style={{ 'float': 'left' }}>
-                  
-                  <div className="row g-0">
-
-                    <div className="col ">
-                      <div className="px-2 nav-cursor" >
-                        <img className="gfg" style={{ width: 18, height: 20 }}
-                          src={require("../../assets/img/sidebar/user.png")} />
-                      </div>
-                    </div>
-
-
-                    <div className=" col nav-cursor top-bar me-3 pt-1">
-                      
-                      {
-                        localStorage.getItem('TYPE_OF_USER')=="1"? "Admin" : "Provider"
-
-                      }
-                      
-                      </div>
-
-                    <div className="tb-dropdown-content m-2 mt-4">
-                      <div className="nav-cursor" onClick={()=>{
-                        dispatch(LogoutAction())
-                      }}>
-                        <h2  className='menu-td'>Logout </h2>
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-
-              </ul>
-
-              </div>
-            </div>
-
-
-
-          </div>
-
-
-        </nav>
-
+        </Grid>
       </div>
       {/* </Toolbar> */}
     </AppBar>

@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
+import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, TextField, ThemeProvider, Typography, createTheme, useMediaQuery } from '@mui/material';
 import CreateTextFields from 'components/common/Textfield';
 import { useFetch } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
@@ -26,6 +26,10 @@ const CreateCustomerDialog = ({height,width,color}) => {
     console.log(formData);
     setFormData({})
     }
+
+    const isMobileResolution = useMediaQuery((theme) =>
+    theme.breakpoints.down('sm')
+    );
     // const theme = createTheme({
       // palette:{
       //   mainy:{
@@ -190,8 +194,8 @@ const CreateCustomerDialog = ({height,width,color}) => {
 ]
   return (
     <div>
-      <Button sx={{height:height,width:width}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
-        Customer
+      <Button sx={{height:isMobileResolution?'50px':height,width:width,fontSize:isMobileResolution?"0.6rem":'0.875rem'}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
+        Create New Customer
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth='lg'>
       <div style={{width: 1200}}>

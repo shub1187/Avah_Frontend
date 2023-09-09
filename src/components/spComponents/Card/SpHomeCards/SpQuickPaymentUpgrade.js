@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Paper } from '@mui/material';
+import { useMobileResponsive } from 'hooks/useMobileResponsive';
 const bull = (
   <Box
     component="span"
@@ -16,8 +17,10 @@ const bull = (
 );
 
 export default function SpQuickPaymentUpgrade({text}) {
+  const {isMobile} = useMobileResponsive()
+
   return (
-    <Card elevation={4} sx={{display:"flex",maxWidth: "170.12px",minHeight:"73px" ,borderRadius:"16px"}}>
+    <Card elevation={4} sx={{display:"flex",maxWidth: isMobile?"100%":"170.12px",minHeight:"73px" ,borderRadius:"16px"}}>
     <CardContent >
         <Box mb={1} sx={{justifyContent:"space-between"}} display={"flex"}>
             <Typography sx={{marginRight:"8px"}} color={"rgb(119,53,98)"} fontWeight={"600"} fontSize={"10px"}>Professional</Typography>

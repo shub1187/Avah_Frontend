@@ -1,29 +1,41 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { Box, Toolbar } from "@mui/material";
+import { Box, Toolbar, useMediaQuery } from "@mui/material";
 import colorConfigs from "../../configs/colorConfigs";
 import sizeConfigs from "../../configs/sizeConfigs";
 import Sidebar from "../common/Sidebar/SidebarLayout";
 import Topbar from "../common/Topbar";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useMobileResponsive } from "hooks/useMobileResponsive";
 // import { RootState } from "../../redux/store";
 
 const ServiceProviderLayout = () => {
   const { appState } = useSelector((state) => state.appState);
+  // const [isMobileResolution,setIsMobileResolution] = useState(false)
+
+  // const MobileResolution = (res)=>{
+  //   setIsMobileResolution(!res)
+  // }
+  const [open, setOpen] = useState(false);
+  const handleDrawerToggle = () => {
+    setOpen(!open);
+  };
+  const {isMobile}=useMobileResponsive()
   const location = useLocation()
   console.log(location,"RAEES")
     return (
     <Box sx={{ display: "flex" }}>
       
-      <Topbar />
+      {isMobile && <Topbar isMobile={isMobile} handleDrawerToggle={handleDrawerToggle}/>}
       
       <Box
         component="nav"
         sx={{
-          width: sizeConfigs.sidebar.width,
+          // width: sizeConfigs.sidebar.width,
           flexShrink: 0
         }}
       >
-        <Sidebar />
+        <Sidebar open={open} handleDrawerToggle={handleDrawerToggle} isMobile={isMobile}/>
       </Box>
       <Box
         component="main"
@@ -35,6 +47,7 @@ const ServiceProviderLayout = () => {
           backgroundColor: colorConfigs.mainBg
         }}
       >
+        {!isMobile && <Topbar isMobileResolution={isMobile} handleDrawerToggle={handleDrawerToggle}/>}
         <Toolbar />
         <Outlet />
       </Box>

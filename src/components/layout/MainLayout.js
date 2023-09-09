@@ -17,7 +17,7 @@ const MainLayout = () => {
       <Box
         component="nav"
         sx={{
-          width: sizeConfigs.sidebar.width,
+          maxWidth:'330px',
           flexShrink: 0
         }}
       >

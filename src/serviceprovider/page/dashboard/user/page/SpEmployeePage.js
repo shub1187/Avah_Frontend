@@ -10,7 +10,7 @@ import PaginationPage from '../../../../../redux/pagination_layout/pagination/Pa
 import AddEmployeeDialog from '../common/dialog/AddEmployeeDialog';
 import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderTable';
 import { createEmployeeColumn } from 'components/spComponents/Table/Columns/Users/CreateEmployeeColumn';
-import CreateEmployeeDialog from 'components/spComponents/Dialog/Users/createEmployee';
+import CreateEmployeeDialog from 'components/spComponents/Dialog/Users/createEmployeeDialog';
 const SpEmployeePage = (props) => {
   const theme = createTheme()
   const dispatch = useDispatch()

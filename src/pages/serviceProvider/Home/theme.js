@@ -1,13 +1,16 @@
 import { createTheme } from '@mui/material'
 import React from 'react'
-
-const serviceProviderTheme = createTheme({
+import { globalAppTheme } from 'components/common/Themes/GlobalAppTheme'
+const serviceProviderHomeTheme = createTheme(globalAppTheme,{
     typography:{
         h5:{
             fontSize:"1.375rem",
             fontWeight:"700"
         },
+        tableTitle:{
+            fontSize:"5rem"
+        }
     }
 })
 
-export default serviceProviderTheme
+export default serviceProviderHomeTheme

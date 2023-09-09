@@ -41,13 +41,13 @@ export default function SpQuickPayment({text}) {
           <Box m={1}>
           <Typography variant='h5'>QUICK PAYMENT</Typography>
           <Grid spacing={0.5} container>
-            <Grid md={12} lg={6} xl ={6} item><SpQuickPaymentCancelSubscription/></Grid>
-            <Grid md={12} lg={6} xl ={6} item><SpQuickPaymentUpgrade/></Grid>
+            <Grid xs={12} md={12} lg={6} xl ={6} item><SpQuickPaymentCancelSubscription/></Grid>
+            <Grid xs={12} md={12} lg={6} xl ={6} item><SpQuickPaymentUpgrade/></Grid>
           </Grid>
           <Typography mt={1} fontWeight={"700"} variant='h6'>PAYMENT METHOD</Typography>
           <Grid spacing={1} container>
-            <Grid md={12} lg={6} xl ={6} item width={"100%"}><img style={{maxWidth:"100%"}} src={SpQuickPaymentCard1} alt="Card Image" /></Grid>
-            <Grid md={12} lg={5.9} xl={6} item width={"100%"}><img  style={{maxWidth:"100%"}} src={SpQuickPaymentCard2} alt="Card Image" /></Grid>
+            <Grid xs={6} md={12} lg={6} xl ={6} item width={"100%"}><img style={{maxWidth:"100%"}} src={SpQuickPaymentCard1} alt="Card Image" /></Grid>
+            <Grid xs={6} md={12} lg={5.9} xl={6} item width={"100%"}><img  style={{maxWidth:"100%"}} src={SpQuickPaymentCard2} alt="Card Image" /></Grid>
           </Grid>
           <Box mt={1} mb={1} display={"flex"} justifyContent={"center"}>
             <Typography fontSize={"20px"} fontWeight={"700"} color={"rgb(173,73,112)"}>$2000 TOTAL</Typography>

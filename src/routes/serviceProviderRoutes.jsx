@@ -1,5 +1,7 @@
 import ServiceProviderHome from 'pages/serviceProvider/Home'
-import AppointmentList from 'pages/serviceProvider/Service/AppointmentList'
+import SpAppointmentPage from 'pages/serviceProvider/Service/AppointmentList'
+import SparesList from 'pages/serviceProvider/Spares/SpSparesPage'
+import SpCustomerPage from 'pages/serviceProvider/Users/Customers/SpCustomerPage'
 import React from 'react'
 import SpCustomersPage from 'serviceprovider/page/dashboard/user/page/SpCustomersPage'
 import SpEmployeePage from 'serviceprovider/page/dashboard/user/page/SpEmployeePage'
@@ -17,7 +19,7 @@ const serviceProviderRoutes = [
           {
             id:21,
             link:'customer',
-            component:<SpCustomersPage/>,
+            component:<SpCustomerPage/>,
           },
           {
             id:22,
@@ -29,6 +31,7 @@ const serviceProviderRoutes = [
       {
         id:3,
         link:'dashboard/spares',
+        component:<SparesList/>
       },
       {
         id:4,
@@ -49,7 +52,7 @@ const serviceProviderRoutes = [
           {
             id:62,
             link:'appointmentList',
-            component:<AppointmentList/>
+            component:<SpAppointmentPage/>
           },
           {
             id:63,

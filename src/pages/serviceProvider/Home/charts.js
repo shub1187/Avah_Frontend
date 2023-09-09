@@ -1,8 +1,10 @@
 import { Box, Button, Typography } from '@mui/material';
+import { useMobileResponsive } from 'hooks/useMobileResponsive';
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 const ApexCharts = () => {
+  const {isMobile} = useMobileResponsive()
   const [series, setSeries] = useState([
     { name: 'Line 1', data: [] },
     { name: 'Line 2', data: [] },
@@ -89,12 +91,12 @@ const ApexCharts = () => {
     <div id="chart">
         <Box sx={{display:"flex",justifyContent:"space-between"}}>
         <Box>
-            <Typography variant='h6'>BUSINESS EARNINGS</Typography>
+            <Typography variant={isMobile?'subtitle2':'h6'}>BUSINESS EARNINGS</Typography>
         </Box>
         <Box >
-            <Button sx={{backgroundImage:"linear-gradient(to bottom, rgb(233,56,72) , rgb(119,53,98))",color:"white",fontWeight:"600",marginRight:"5px"}}>Weekly</Button>
+            {/* <Button sx={{backgroundImage:"linear-gradient(to bottom, rgb(233,56,72) , rgb(119,53,98))",color:"white",fontWeight:"600",marginRight:"5px"}}>Weekly</Button>
             <Button sx={{backgroundImage:"linear-gradient(to bottom, rgb(233,56,72) , rgb(119,53,98))",color:"white",fontWeight:"600",marginRight:"5px"}}>Monthly</Button>
-            <Button sx={{backgroundImage:"linear-gradient(to bottom, rgb(233,56,72) , rgb(119,53,98))",color:"white",fontWeight:"600"}}>Yearly</Button>
+            <Button sx={{backgroundImage:"linear-gradient(to bottom, rgb(233,56,72) , rgb(119,53,98))",color:"white",fontWeight:"600"}}>Yearly</Button> */}
         </Box>
       </Box>
       <ReactApexChart options={options} series={series} type="line" height={350} />

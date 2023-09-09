@@ -8,6 +8,7 @@ import ServiceProviderHome from "pages/serviceProvider/Home";
 import SpCustomersPage from "serviceprovider/page/dashboard/user/page/SpCustomersPage";
 import SpEmployeePage from "serviceprovider/page/dashboard/user/page/SpEmployeePage";
 import serviceRoutes from "./serviceProviderRoutes";
+import customerRoutes from "./customerRoutes";
 
 const generateRoute = (routes: RouteType[]): ReactNode => {
   return routes.map((route, index) => (
@@ -77,3 +78,4 @@ const generateRouty = (SideBarList:any)=>{
 export const routes: ReactNode = generateRoute(appRoutes);
 export const spRoutes: ReactNode = generateRoute(spAppRoutes);
 export const raeesRoute:any = generateRouty(serviceRoutes)
+export const customerRoute:any = generateRouty(customerRoutes)

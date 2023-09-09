@@ -1,4 +1,4 @@
-import { Avatar, Drawer, List, Stack, Toolbar } from "@mui/material";
+import { Avatar, Drawer, IconButton, List, Stack, SwipeableDrawer, Toolbar , useMediaQuery} from "@mui/material";
 import assets from "../../../assets";
 import colorConfigs from "../../../configs/colorConfigs";
 import sizeConfigs from "../../../configs/sizeConfigs";
@@ -7,16 +7,44 @@ import SidebarItem from "../SidebarItem";
 import SidebarItemCollapse from "../SidebarItemCollapse";
 import spAppRoutes from "../../../routes/spRoutes";
 import ServiderProviderSidebar, { SpSideBarList } from "./SidebarForSp/SidebarForSp";
+import AvahSideBarImage from 'assets/img/AvahSideBarImage.png'
+import { useState } from "react";
+import MenuIcon from '@mui/icons-material/Menu';
+import CustomerSideBar from "./SidebarForCutomer/SidebarForCustomer";
 
 
-
-const Sidebar = () => {
+const Sidebar = ({isMobile,open,handleDrawerToggle,customer}) => {
   // const [checkRole,setCheckRole] = useState("");
   const getRole = localStorage.getItem("TYPE_OF_USER");
   // setCheckRole(getRole);
+  // const [open, setOpen] = useState(false);
+
+  // Use the useMediaQuery hook to detect mobile resolution
+  // const isMobileResolution = useMediaQuery((theme) =>
+  //   theme.breakpoints.down('sm')
+  // );
+  // const handleDrawerToggle = () => {
+  //   setOpen(!open);
+  // };
   return (
-    <Drawer
-      variant="permanent"
+    <>
+    {/* {isMobileResolution && (
+      <IconButton
+        color="inherit"
+        aria-label="open drawer"
+        edge="start"
+        onClick={handleDrawerToggle}
+        sx={{ display: { sm: 'block', md: 'none' } }}  // Show only on mobile
+      >
+        <MenuIcon />
+      </IconButton>
+    )} */}
+    <SwipeableDrawer
+      disableScrollLock={true}
+      variant={(isMobile || customer) ? 'temporary' : 'permanent'}  // Change variant based on resolution
+      open={open}
+      onClose={handleDrawerToggle}
+      // variant="permanent"
       sx={{
         width: sizeConfigs.sidebar.width,
         flexShrink: 0,
@@ -36,10 +64,10 @@ const Sidebar = () => {
             direction="row"
             justifyContent="center"
           >
-            <Avatar  sx={{ width: "60%",
-            borderRadius:"0",height:'60%'
+            <Avatar  sx={{ width: "70%",
+            borderRadius:"0",height:'65px'
           
-          }} src={assets.images.logo} />
+          }} src={AvahSideBarImage} />
           </Stack>
         </Toolbar>
           <div className="mx-3">
@@ -67,7 +95,11 @@ const Sidebar = () => {
               //   ) : null
               // )) :
               // null
-              <ServiderProviderSidebar/>:null
+              <ServiderProviderSidebar/>:
+              getRole=="3"?
+              <CustomerSideBar/>
+              :
+              null
             }        
 
          
@@ -77,7 +109,8 @@ const Sidebar = () => {
 
           </div>
       </List>
-    </Drawer>
+    </SwipeableDrawer>
+    </>
   );
 };
 

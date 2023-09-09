@@ -6,10 +6,12 @@ import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
 import CreateDateFields from 'components/common/Textfield/DateTextfield';
 import { DatePicker } from '@mui/x-date-pickers';
 import SkeletonLoading from 'components/common/Skeleton';
-const CreateAppointmentDialog = ({height,width,color}) => {
+import { useMobileResponsive } from 'hooks/useMobileResponsive';
+const CreateAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,borderRadius,my}) => {
     const [open, setOpen] = React.useState(false);
     const [formData, setFormData] = useState({});
     const {fetchData} = useFetchFunction()
+    const {isMobile} = useMobileResponsive()
     let {data} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
     let brandData = data?.data?.results || []
     // console.log("ln 15 shub",data?.data?.results)
@@ -246,20 +248,21 @@ const CreateAppointmentDialog = ({height,width,color}) => {
     ]
   return (
     <div>
-      <Button sx={{height:height,width:width}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
-        CREATE APPOINTMENT
+      <Button sx={{height:height,width:width,fontWeight:"bold",minHeight:minHeight,borderRadius:borderRadius,maxWidth:maxWidth}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
+        <Grid container><Grid my={my} xs={12} item>{img && <img  src={img} alt="Card Image" />}</Grid><Grid fontSize={isMobile && 8} xs={12} item>CREATE APPOINTMENT</Grid></Grid>
+
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth='lg'>
-      <div style={{width: 1200}}>
+      <div style={{width: isMobile?'100%':1200}}>
 
         <DialogTitle >  CREATE APPOINTMENT</DialogTitle>
         <DialogContent>
             <Grid container xs={12} mt={3}>
-              <Grid item xs={3.6} mr={4}>
+              <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>
                   <CreateTextFields  fields={appointmentList.slice(0,5)} onChange={handleFieldChange}  formField={formData}/>
                   {/* <TextField values={formData[]}/> */}
               </Grid>
-              <Grid item xs={3.6} mr={4}>
+              <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>
                 <Grid container xs={12} >
                 
                     {/* <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(4,5)} onChange={handleFieldChange} formField={formData}/></Grid> */}
@@ -267,7 +270,7 @@ const CreateAppointmentDialog = ({height,width,color}) => {
                   <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(5,8)} onChange={handleFieldChange} formField={formData}/></Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={3.6} >
+              <Grid item xs={12} sm={3.6} >
                 <Grid container xs={12}>
                 <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(8,9)} onChange={handleFieldChange} formField={formData}/></Grid>
                 <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(9,10)} onChange={handleFieldChange} formField={formData}/></Grid>

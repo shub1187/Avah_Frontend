@@ -1,14 +1,14 @@
-import { Box, Button, createTheme,TableCell,TableHead,TableRow,ThemeProvider } from "@mui/material";
+import { Box, Button, createTheme,TableCell,TableHead,TableRow,ThemeProvider, useMediaQuery } from "@mui/material";
 import axios from "axios";
 import MaterialTable, { MTableToolbar } from "material-table";
 import './ServiceProviderTable.css'
 import { useState } from "react";
-import CreateCustomerDialog from "../Dialog/Users/createCustomer";
+import CreateCustomerDialog from "../Dialog/Users/createCustomerDialog";
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import ActionDialog from "../Dialog/ActionDialog";
 import SkeletonLoading from "components/common/Skeleton";
-import CreateEmployeeDialog from "../Dialog/Users/createEmployee";
+import CreateEmployeeDialog from "../Dialog/Users/createEmployeeDialog";
 import AddLabourDialog from "../Dialog/Labour/AddLabour";
 import AddServiceDialog from "../Dialog/Service/AddServiceDialog";
 import CreateSpareDialog from "../Dialog/Spares/AddSparesDialog";
@@ -18,6 +18,9 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
   const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
   const sp_id = localStorage.getItem('sp_id'); // Retrieve the token from local storage
   
+  const isMobileResolution = useMediaQuery((theme) =>
+  theme.breakpoints.down('sm')
+  );
   const theme = createTheme({
     palette:{
       addUser:{
@@ -68,8 +71,8 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
                 },
               },
             }
-          }
-        }
+          },
+        },
       },
     })
     // For future refernce just to cross check 
@@ -131,7 +134,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
             <AddLabourDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <AddServiceDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <CreateSpareDialog height={'65px'} width={'270px'} color={'addUser'}/> */}
-            <DialogButton height={'65px'} width={'270px'} color={'addUser'} />
+            <DialogButton height={isMobileResolution?"30px":'50px'} width={isMobileResolution?"100px":'250px'} color={'options'} />
           </div>
         </Box>
         </>
