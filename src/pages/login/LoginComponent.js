@@ -220,6 +220,9 @@ function LoginComponent() {
         else if(spRePassword.length<=0){
             setErrory(true)  
         }
+        else if(spRePassword!=spPassword){
+            setErrory(true)  
+        }
         else{
             let response = await customerRegisterAPI(body)
             setSpName('');
