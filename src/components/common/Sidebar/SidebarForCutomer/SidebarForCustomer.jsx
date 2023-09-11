@@ -9,32 +9,55 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { Link } from 'react-router-dom';
-import { AccountsIcon, BillingsIcon, HomeIcon, LaboursIcon, PackageIcon, ReviewsIcon, ServiceIcon, ServiceTypeIcon, SettingsIcon, SparesIcon, UserIcon } from 'assets/img/sidebar/Icons';
+import { AccountsIcon, BillingsIcon, DashBoardIcons, HomeIcon, LaboursIcon, PackageIcon, ReviewsIcon, ServiceIcon, ServiceTypeIcon, SettingsIcon, SparesIcon, UserIcon } from 'assets/img/sidebar/Icons';
 import './SidebarForCustomer.scss';
 import { useState } from 'react';
 import { Box } from '@mui/material';
-
-export const CustomerSidebarList = [
-  {
-    id:1,
-    link:'customer/home',
-    icon:HomeIcon,
-    name:"Home",
-  },
-  {
-    id:2,
-    link:'customer/vehicle',
-    icon:ServiceTypeIcon,
-    name:"Vehicle",
-  }
-
-]
-
+import { useCustomerContext } from 'hooks/useCustomContext';
+import axios from 'axios'
+import { category_get_full_page_api } from 'network/ApiConstant';
+export const CustomerSidebarList =(customerStatus)=>{
+  return (
+    [
+    {
+      id:1,
+      link:'customer/home',
+      icon:HomeIcon,
+      name:"Home",
+    },
+    {
+      id:2,
+      link:'customer/dashboard',
+      icon:DashBoardIcons,
+      name:"Dashboard",
+    },
+    {
+      id:3,
+      link:'customer/vehicle',
+      icon:ServiceTypeIcon,
+      name:"Vehicle",
+    },
+    {
+      id:4,
+      link:'customer/profile',
+      icon:ServiceTypeIcon,
+      name:customerStatus,//coming from custom context
+    },
+  ]
+  )
+} 
 export default function CustomerSideBar() {
   const [openSublistId, setOpenSublistId] = useState(null);
   const [activeItem, setActiveItem] = useState(null);
   const [activeSubitem, setActiveSubitem] = useState(null);
+  const {customerStatus,updateCustomerStatus} = useCustomerContext() 
 
+  const callApi=async()=>{
+    let a = await axios.get('http://localhost:3008/api/customer/getCustomerProfile')
+  }
+    callApi()
+  // updateCustomerStatus('Complete Your Profile');
+  
   const handleClick = (id) => {
     if (id === openSublistId) {
       setOpenSublistId(null); // Close the clicked sublist
@@ -56,7 +79,7 @@ export default function CustomerSideBar() {
       component="nav"
       aria-labelledby="nested-list-subheader"
     >
-      {CustomerSidebarList.map((list) => (
+      {CustomerSidebarList(customerStatus).map((list) => (
         <React.Fragment key={list.id}>
           <Link to={list.link} style={{ textDecoration: 'none', color: 'black' }}>
             <ListItemButton

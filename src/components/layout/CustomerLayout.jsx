@@ -5,17 +5,17 @@ import sizeConfigs from 'configs/sizeConfigs'
 import { useMobileResponsive } from 'hooks/useMobileResponsive'
 import React, { useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
-
 const CustomerLayout = () => {
-const [open, setOpen] = useState(false);
-const {isMobile}=useMobileResponsive()
-const handleDrawerToggle = () => {
-      setOpen(!open);
-    };
- const location = useLocation()
+    const [open, setOpen] = useState(false);
+    const {isMobile}=useMobileResponsive()
+    const handleDrawerToggle = () => {
+        setOpen(!open);
+        };
+    const location = useLocation()
+    const isLanding = location.pathname==='/customer/home'
   return (
       <Box>
-          <Topbar customer={true} isMobile={isMobile} handleDrawerToggle={handleDrawerToggle} />
+        {!isLanding && <Topbar customer={isLanding} isMobile={isMobile} handleDrawerToggle={handleDrawerToggle} />}
 
           <Box
               component="nav"
@@ -24,20 +24,20 @@ const handleDrawerToggle = () => {
                   flexShrink: 0
               }}
           >
-              <Sidebar customer={true} open={open} handleDrawerToggle={handleDrawerToggle} isMobile={isMobile} />
+              <Sidebar customer={isLanding} open={open} handleDrawerToggle={handleDrawerToggle} isMobile={isMobile} />
           </Box>
           <Box
               component="main"
               sx={{
                   flexGrow: 1,
-                //   p: location.pathname === '/dashboard/home' || location.pathname === '/admin/dashboard/home' ? 0 : 3,
-                  width: isMobile?'none':`calc(100% - ${sizeConfigs.sidebar.width})`,
+                  p: location.pathname === '/customer/dashboard' || location.pathname === '/customer/home' ? 0 : 3,
+                  width: (isMobile || isLanding)?'none':`calc(100% - ${sizeConfigs.sidebar.width})`,
                   minHeight: "100vh",
-                  float:'right'
+                  float:!isMobile && 'right',
                 //   backgroundColor: colorConfigs.mainBg
               }}
           >
-              <Toolbar />
+              {!isLanding && <Toolbar />}
               <Outlet />
           </Box>
       </Box>

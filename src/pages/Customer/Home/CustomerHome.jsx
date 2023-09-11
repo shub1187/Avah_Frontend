@@ -6,6 +6,7 @@ import LandingPageServiceStatusCards from 'components/LandingPageComponents/Card
 import React from 'react'
 import Carousel from 'react-multi-carousel'
 import "react-multi-carousel/lib/styles.css";
+import {Link} from 'react-router-dom'
 
 const CustomerHome = () => {   
     const responsive = {
@@ -29,20 +30,20 @@ const CustomerHome = () => {
       }; 
   return (
     <Box >
-        {/* <Grid alignItems={'center'} justifyContent={'space-between'} container >
+        <Grid alignItems={'center'} justifyContent={'space-between'} container >
             <Grid item><LandingPageLogo/></Grid>
             <Grid item>
                 <Grid container spacing={2}>
-                    <Grid item mt={1}>Home</Grid>
+                    {/* <Grid item mt={1}>Home</Grid>
                     <Grid item mt={1}>Services</Grid>
-                    <Grid item mt={1}>Providers</Grid>
+                    <Grid item mt={1}>Providers</Grid> */}
                     <Grid item><Button sx={{fontSize:10,minHeight:35}} variant='contained' color='darkerpink'>My Location</Button></Grid>
-                    <Grid item><Button sx={{fontSize:10,minHeight:35,mr:4}}variant='contained' color='darkerpink'>Select City</Button></Grid>
-                    <Grid item mr={2}><Button sx={{fontSize:10,minHeight:35}} variant='contained' color="darkerpink">Login/SignUp</Button></Grid>
+                    <Grid item><Button sx={{fontSize:10,minHeight:35}}variant='contained' color='darkerpink'>Select City</Button></Grid>
+                    <Grid item mr={2}><Link to={'/customer/dashboard'}><Button sx={{fontSize:10,minHeight:35}} variant='contained' color="darkerpink">Dashboard</Button></Link></Grid>
 
                 </Grid>
             </Grid>
-        </Grid> */}
+        </Grid>
         <Grid container ><LandingPageFirstImage/></Grid>
         <Grid sx={{position:'relative'}}>
             <Grid justifyContent={'center'} container spacing={0.5} style={{position:'absolute',bottom:'-20px',zIndex:'999'}}>

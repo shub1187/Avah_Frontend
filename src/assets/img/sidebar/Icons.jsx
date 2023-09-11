@@ -9,7 +9,7 @@ import AccountsIconImage from './accounts.png'
 import PackageIconImage from './package.png'
 import ReviewsIconImage from './reviews.png'
 import SettingsIconImage from './settings.png'
-
+import DashboardIcon from '@mui/icons-material/Dashboard';
 // const HomeIcon = ()=><img src={HomeIconImage} alt="home" />
 // const UserIcon = ()=><img src={UserIconImage} alt="home" />
 const HomeIcon = ({ isSelected }) => (
@@ -99,6 +99,9 @@ const HomeIcon = ({ isSelected }) => (
     />
   );
 
+  const DashBoardIcons = ({isSelected}) =>(
+    <DashboardIcon color={isSelected ? 'whiteBackground':'options'}/>
+  )
 export {
     HomeIcon,
     UserIcon,
@@ -110,5 +113,6 @@ export {
     AccountsIcon,
     PackageIcon,
     ReviewsIcon,
-    SettingsIcon
+    SettingsIcon,
+    DashBoardIcons
 }

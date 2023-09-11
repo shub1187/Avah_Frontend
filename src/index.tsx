@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import './assets/css/login.css'
 import { BrowserRouter } from 'react-router-dom';
+import { CustomerProvider } from 'hooks/useCustomContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,6 +16,7 @@ const root = ReactDOM.createRoot(
 root.render(
  // <React.StrictMode>
     <>
+    <CustomerProvider>
     <Provider store={store}>
       <CssBaseline />
       <BrowserRouter>
@@ -22,6 +24,7 @@ root.render(
       </BrowserRouter>
 
     </Provider>
+    </CustomerProvider>
     </>
  // </React.StrictMode>
 );
