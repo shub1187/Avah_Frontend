@@ -12,7 +12,7 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
     const [formData, setFormData] = useState({});
     const {fetchData} = useFetchFunction()
     const {isMobile} = useMobileResponsive()
-    let {data} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
+    let {data} = useFetch('http://localhost:3008/api/customer/getCustomerProfile')
     let brandData = data?.data?.results || []
     // console.log("ln 15 shub",data?.data?.results)
     // const brandData = [  // This is dummy data for future refernce
@@ -133,10 +133,24 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
     
     const profileList = [
         {
+            label: 'Name',
+            name: "name",
+            type: 'text',
+            fullWidth: true,
+            disabled:true
+        },
+        {
             label: 'Address',
             name: "address",
             type: 'text',
             fullWidth: true
+        },
+        {
+            label: 'Email',
+            name: "email",
+            type: 'email',
+            fullWidth: true,
+            disabled:true
         },
         {
             label: 'Mobile Number',
@@ -150,11 +164,15 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
       {/* <Dialog open={open} onClose={handleClose} maxWidth='lg'> */}
       <div style={{width: isMobile?'100%':1200}}>
 
-        <DialogTitle >  PROFILE</DialogTitle>
+        <DialogTitle >  PROFILE<Box component={'span'} ml={4}></Box></DialogTitle>
         <DialogContent>
             <Grid container xs={12} mt={3}>
-              <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>
+              <Grid item xs={12} sm={5} mr={!isMobile && 4}>
                   <CreateTextFields  fields={profileList.slice(0,2)} onChange={handleFieldChange}  formField={formData}/>
+                  {/* <TextField values={formData[]}/> */}
+              </Grid>
+              <Grid item xs={12} sm={5} mr={!isMobile && 4}>
+                  <CreateTextFields  fields={profileList.slice(2,4)} onChange={handleFieldChange}  formField={formData}/>
                   {/* <TextField values={formData[]}/> */}
               </Grid>
             </Grid>
@@ -175,7 +193,7 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
         {/* <DialogActions> */}
         <Box ml={3}>
           <Button color='options' onClick={handleClose}>Cancel</Button>
-          <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
+          <Button variant={'contained'} color='options' onClick={handleSubmit}>{data.button_name=="Complete your Profile"?'Complete your Profile':'Update Your Profile'}</Button>
         </Box>
         {/* </DialogActions> */}
         </div>

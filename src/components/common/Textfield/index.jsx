@@ -35,6 +35,8 @@ useEffect(() => {
               multiline
               type={field.type}
               select={field.select}
+              disabled={field.disabled}
+              required={true}
             >
               {field.selectArray && field.selectArray.map((textfield)=>{
                 return(
