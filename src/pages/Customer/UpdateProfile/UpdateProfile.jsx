@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { Alert, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Snackbar, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Snackbar, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
 import CreateTextFields from 'components/common/Textfield';
 import { useFetch, useFetchFunction } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
@@ -7,6 +7,8 @@ import CreateDateFields from 'components/common/Textfield/DateTextfield';
 import { DatePicker } from '@mui/x-date-pickers';
 import SkeletonLoading from 'components/common/Skeleton';
 import { useMobileResponsive } from 'hooks/useMobileResponsive';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,borderRadius,my}) => {
     const [open, setOpen] = React.useState(false);
     const [formData, setFormData] = useState({});
@@ -140,17 +142,17 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
             disabled:true
         },
         {
-            label: 'Address',
-            name: "address",
-            type: 'text',
-            fullWidth: true
-        },
-        {
             label: 'Email',
             name: "email",
             type: 'email',
             fullWidth: true,
             disabled:true
+        },
+        {
+            label: 'Address',
+            name: "address",
+            type: 'text',
+            fullWidth: true
         },
         {
             label: 'Mobile Number',
@@ -164,16 +166,35 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
       {/* <Dialog open={open} onClose={handleClose} maxWidth='lg'> */}
       <div style={{width: isMobile?'100%':1200}}>
 
-        <DialogTitle >  PROFILE<Box component={'span'} ml={4}></Box></DialogTitle>
+        <DialogTitle >  <Typography fontWeight={'bold'} fontSize={25} sx={{textDecoration:'underline'}}>PROFILE</Typography><Box component={'span'} ml={4}></Box></DialogTitle>
         <DialogContent>
-            <Grid container xs={12} mt={3}>
-              <Grid item xs={12} sm={5} mr={!isMobile && 4}>
-                  <CreateTextFields  fields={profileList.slice(0,2)} onChange={handleFieldChange}  formField={formData}/>
-                  {/* <TextField values={formData[]}/> */}
+            <Grid container xs={12} flexDirection={'column'}>
+              {/* <Grid item xs={12} sm={5} mr={!isMobile && 4}>
+                  <CreateTextFields  fields={profileList.slice(0,1)} onChange={handleFieldChange}  formField={formData}/>
               </Grid>
               <Grid item xs={12} sm={5} mr={!isMobile && 4}>
-                  <CreateTextFields  fields={profileList.slice(2,4)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  fields={profileList.slice(1,2)} onChange={handleFieldChange}  formField={formData}/>
+              </Grid> */}
+            <Typography  my={1} fontWeight={'bold'} fontSize={20}>Name : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'}  component={'span'}>Raees</Typography></Typography>
+            <Typography my={1} fontWeight={'bold'} fontSize={20}>Email : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'} component={'span'}>raees@gmailcom</Typography></Typography>
+
+              <Grid item xs={12} sm={12} mr={!isMobile && 4}>
+              <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                >
+                <Typography fontSize={20} fontWeight={'bold'}>Complete Your Profile</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <CreateTextFields  fields={profileList.slice(2,4)} onChange={handleFieldChange}  formField={formData}/>
+                    <Box>
+                        <Button variant={'contained'} color='options' onClick={handleSubmit}>{data.button_name=="Complete your Profile"?'Complete your Profile':'Update Your Profile'}</Button>
+                    </Box>
+                </AccordionDetails>
                   {/* <TextField values={formData[]}/> */}
+                  </Accordion>
               </Grid>
             </Grid>
           {/* <DialogContentText>
@@ -191,10 +212,7 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
           /> */}
         </DialogContent>
         {/* <DialogActions> */}
-        <Box ml={3}>
-          <Button color='options' onClick={handleClose}>Cancel</Button>
-          <Button variant={'contained'} color='options' onClick={handleSubmit}>{data.button_name=="Complete your Profile"?'Complete your Profile':'Update Your Profile'}</Button>
-        </Box>
+
         {/* </DialogActions> */}
         </div>
       {/* </Dialog> */}
