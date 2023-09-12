@@ -12,6 +12,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,borderRadius,my}) => {
     const [open, setOpen] = React.useState(false);
     const [formData, setFormData] = useState({});
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const {fetchData} = useFetchFunction()
     const {isMobile} = useMobileResponsive()
     let {data} = useFetch('http://localhost:3008/api/customer/getCustomerProfile')
@@ -106,11 +107,19 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
 
     const handleSubmit = async()=>{
         try{
-          
+            setIsSubmitted(true); // Set the form as submitted
             setStatus({loading:true,message:'',isVisible:true})
             // const payload = {
             //     status:'Active '  // Active or Inactive
             // }
+            const requiredFields = profileList.filter((field) => field.required);
+            const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
+        
+            if (emptyRequiredFields.length > 0) {
+              // Display an error message and don't make the API call
+              setStatus({ error: 'Please fill in all required fields.', message: '', loading: false });
+              return;
+            }
             const obj = {
                 payload:formData,
                 method:"POST",
@@ -135,30 +144,20 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
     
     const profileList = [
         {
-            label: 'Name',
-            name: "name",
-            type: 'text',
-            fullWidth: true,
-            disabled:true
-        },
-        {
-            label: 'Email',
-            name: "email",
-            type: 'email',
-            fullWidth: true,
-            disabled:true
-        },
-        {
             label: 'Address',
             name: "address",
             type: 'text',
-            fullWidth: true
+            fullWidth: true,
+            required: true, // Add the required property
+            errormessage: 'Please Fill in your Address', // Add the error message
         },
         {
             label: 'Mobile Number',
             name: "mobile_number",
             type: 'number',
-            fullWidth: true
+            fullWidth: true,
+            required: true, // Add the required property
+            errormessage: 'Please Fill in your Mobile Number', // Add the error message
         },
     ]
   return (
@@ -185,10 +184,10 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
                 aria-controls="panel1a-content"
                 id="panel1a-header"
                 >
-                <Typography fontSize={20} fontWeight={'bold'}>Complete Your Profile</Typography>
+                <Typography fontSize={20} fontWeight={'bold'}>{data.button_name=="Complete your Profile"?'Complete your Profile':'Update Your Profile'}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <CreateTextFields  fields={profileList.slice(2,4)} onChange={handleFieldChange}  formField={formData}/>
+                    <CreateTextFields  fields={profileList} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
                     <Box>
                         <Button variant={'contained'} color='options' onClick={handleSubmit}>{data.button_name=="Complete your Profile"?'Complete your Profile':'Update Your Profile'}</Button>
                     </Box>

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Box, InputLabel, MenuItem, TextField } from "@mui/material";
 
-const CreateTextFields = ({ fields , onChange, formField}) => {
+const CreateTextFields = ({ fields , onChange, formField,isSubmitted }) => {
 //   const [formField, setFormField] = useState({});
 
 //   const handleChange = (fieldName, value) => {
 //     setFormField((prev) => ({ ...prev, [fieldName]: value }));
 //   };
+
 useEffect(() => {
   fields.forEach((field) => {
     if (!formField.hasOwnProperty(field.name)) {
@@ -21,6 +22,7 @@ useEffect(() => {
         //     onChange(field.name, '')
         // //   setFormField((prev) => ({ ...prev, [field.name]: "" }));
         // }
+        const isError = isSubmitted && field.required && !formField[field.name];
         return (
           <Box key={field.name} mb={2}>
             <InputLabel sx={{ color: "black", marginBottom: 1 }}>
@@ -36,7 +38,8 @@ useEffect(() => {
               type={field.type}
               select={field.select}
               disabled={field.disabled}
-              required={true}
+              error={isError}
+              helperText={isError ? field.errormessage : ''}
             >
               {field.selectArray && field.selectArray.map((textfield)=>{
                 return(

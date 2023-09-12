@@ -10,7 +10,8 @@ import FileInputTextField from 'components/common/Textfield/FileTextfield';
 const AddCustomerVehicleDialog = ({height,width,color}) => {
     const [open, setOpen] = React.useState(false);
     const [toggle,setToggle] = useState('individual')
-
+    let {data} = useFetch('http://localhost:3008/api/customer/vehicleRegistration')
+    let brandData = data?.data?.results || []
     const [formData, setFormData] = useState({});
   console.log(formData,"RAEES")
     const handleFieldChange = (fieldName, value) => {
@@ -28,7 +29,35 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
     console.log(formData);
     setFormData({})
     }
+    const selectArray = brandData.map((brandEntry) => {
+      const brandName = Object.keys(brandEntry)[0]; // Get the brand name
+      const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_'); // Format the value
+    
+      return {
+        label: brandName,
+        value: brandName
+      };
+    });
+  let selectModel = []
+  const selectedBrand = formData.brand ? formData.brand.toLowerCase().replace(/ /g, '_') : ''; // Format selected brand or null if not selected
 
+  if (selectedBrand) {
+      brandData.forEach((brandEntry) => {
+          const brandName = Object.keys(brandEntry)[0];
+          const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_');
+  
+          if (selectedBrand === formattedBrandValue) { // Check for selected brand
+              brandEntry[brandName].forEach((ent) => {
+                  const label = ent;
+                  const formatValue = ent.toLowerCase().replace(/ /g, '_'); // Format model value
+                  selectModel.push({
+                      label: label,
+                      value: label
+                  });
+              });
+          }
+      });
+  } 
     const isMobileResolution = useMediaQuery((theme) =>
     theme.breakpoints.down('sm')
     );
@@ -63,27 +92,34 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
 
         },
         {
-            label: 'Brand',
-            name: "brand",
-            type: 'text',
-            fullWidth:true
-
-        },
-        {
-            label: 'Model',
-            name: "model",
-            type: 'text',
-            fullWidth:true,
-        },
+          label: 'Brand',
+          name: "brand",
+          type: 'text',
+          fullWidth: true,
+          select:true,
+          selectArray:selectArray
+      },
+      {
+          label: 'Model',
+          name: "model",
+          type: 'text',
+          fullWidth: true,
+          select:true,
+          selectArray:selectModel
+      },
         {
             label: 'Fuel Type',
             name: "fuel_type",
-            type: 'text'
+            type: 'text',
+            fullWidth: true,
+
         },
         {
             label: 'Registration Number',
             name: "registration_number",
-            type: 'text'
+            type: 'text',
+            fullWidth: true,
+
         }
     ]
 
@@ -105,10 +141,10 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
               <Grid item xs={6} >
                 <Grid container xs={12}>
                   <Grid  xs={12} item><CreateTextFields fields={customerTextfield.slice(5,6)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  <Grid  xs={5.7} item mr={2}><CreateTextFields fields={customerTextfield.slice(6,7)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(7,8)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={5.7} item mr={2}><CreateTextFields fields={customerTextfield.slice(8,9)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(9,10)} onChange={handleFieldChange}  formField={formData}/></Grid>
+                  <Grid  xs={12} item ><CreateTextFields fields={customerTextfield.slice(6,7)} onChange={handleFieldChange}  formField={formData}/></Grid>
+                  {/* <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(7,8)} onChange={handleFieldChange}  formField={formData}/></Grid>
+                  <Grid  xs={5.7} item mr={2}><CreateTextFields fields={customerTextfield.slice(8,9)} onChange={handleFieldChange}  formField={formData}/></Grid> */}
+                  {/* <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(9,10)} onChange={handleFieldChange}  formField={formData}/></Grid> */}
                 </Grid>
               </Grid>
             </Grid>
