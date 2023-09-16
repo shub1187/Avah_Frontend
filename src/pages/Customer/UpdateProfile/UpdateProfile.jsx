@@ -19,7 +19,8 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
     const {isMobile} = useMobileResponsive()
     // let {data} = useFetch('http://localhost:3008/api/customer/getCustomerProfile')
     const [data,setData] = React.useState([]) 
-    useEffect(async ()=>{
+    useEffect(()=>{
+      const func = async()=>{
       const obj = {
         payload:formData,
         method:"POST",
@@ -27,6 +28,8 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
          }
          const {isSuccess,data,error} = await fetchCustomerData(obj)
          setData(data)
+        }
+        func()
       },[])
       console.log("ln 30 UpdateProfile.jsx data: ", data)
 
