@@ -105,8 +105,9 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
             label: 'Vehicle Type',
             name: "vehicle_type",
             type: 'text',
-            fullWidth:true
-
+            fullWidth:true,
+            select:true,
+            selectArray:[{ label: "Personal", value: "personal" }, { label: "Commercial", value: "commercial" }]
         },
         {
           label: 'Brand',
