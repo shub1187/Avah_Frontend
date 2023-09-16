@@ -10,7 +10,10 @@ import FileInputTextField from 'components/common/Textfield/FileTextfield';
 const AddCustomerVehicleDialog = ({height,width,color}) => {
     const [open, setOpen] = React.useState(false);
     const [toggle,setToggle] = useState('individual')
-    let {data} = useFetch('http://localhost:3008/api/customer/vehicleRegistration')
+    let {data} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
+    let {data:fuelType} = useFetch('http://localhost:3008/api/admin/getAllFuelTypes')
+
+    
     let brandData = data?.data?.results || []
     const [formData, setFormData] = useState({});
   console.log(formData,"RAEES")
@@ -25,7 +28,20 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
     const handleClose = () => {
       setOpen(false);
     };
-    const handleSubmit = ()=>{
+    const handleSubmit = async()=>{
+      const obj = {
+        payload:formData,
+        method:"POST",
+        url:"http://localhost:3008/api/customer/profileCompletion"
+    }
+
+    const {isSuccess,data,error} = await fetchCustomerData(obj)
+    if(error && !isSuccess){
+        throw new Error(error)
+    }
+    if(data && isSuccess){
+        setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
+    }
     console.log(formData);
     setFormData({})
     }
@@ -123,7 +139,7 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
         type: 'text',
         fullWidth: true,
         select: true,
-        selectArray: []
+        selectArray: fuelType.data.data.results.fuel_type
       },
     ]
 
