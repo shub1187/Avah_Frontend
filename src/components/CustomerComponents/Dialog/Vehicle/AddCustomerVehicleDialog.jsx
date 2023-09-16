@@ -123,10 +123,12 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
 
         },
         {
-          label: 'Customization',
+          label: 'Engine Customization',
           name: "customization",
           type: 'text',
           fullWidth: true,
+          select:true,
+          selectArray:[{label:"Showroom Fitted", value:"showroom_fitted"},{label:"Externally Modified", value:"externally_modified"}]
       }
     ]
 
