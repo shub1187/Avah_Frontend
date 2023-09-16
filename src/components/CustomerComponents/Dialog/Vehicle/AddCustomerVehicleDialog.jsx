@@ -12,6 +12,12 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
     const [toggle,setToggle] = useState('individual')
     let {data} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
     let {data:fuelType} = useFetch('http://localhost:3008/api/admin/getAllFuelTypes')
+    // const fuelNamesArray = fuelType?.data?.results?.map(fuel => ({ fuel_name: fuel.fuel_name }));
+    const fuelNamesArray = fuelType?.data?.results?.map(item => ({
+      label: item.fuel_name,
+      value: item.fuel_name
+    }));
+    console.log("ln 15",fuelNamesArray)
     const {fetchCustomerData} = useCustomerFetchFunction()
     const [status,setStatus] = useState({
       isVisible:false,
@@ -39,7 +45,7 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
       const obj = {
         payload:formData,
         method:"POST",
-        url:"http://localhost:3008/api/customer/profileCompletion"
+        url:"http://localhost:3008/api/customer/vehicleRegistration"
     }
 
     const {isSuccess,data,error} = await fetchCustomerData(obj)
@@ -107,7 +113,7 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
             type: 'text',
             fullWidth:true,
             select:true,
-            selectArray:[{ label: "Personal", value: "personal" }, { label: "Commercial", value: "commercial" }]
+            selectArray:[{ label: "Personal", value: "Personal" }, { label: "Commercial", value: "Commercial" }]
         },
         {
           label: 'Brand',
@@ -131,7 +137,7 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
         type: 'text',
         fullWidth: true,
         select: true,
-        selectArray: [{ label: "Showroom Fitted", value: "showroom_fitted" }, { label: "Externally Modified", value: "externally_modified" }]
+        selectArray: [{ label: "Showroom Fitted", value: "Showroom Fitted" }, { label: "Externally Modified", value: "Externally Modified" }]
       },
 
       {
@@ -147,7 +153,7 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
         type: 'text',
         fullWidth: true,
         select: true,
-        selectArray: fuelType?.data?.data?.results?.fuel_type
+        selectArray: fuelNamesArray
       },
     ]
 

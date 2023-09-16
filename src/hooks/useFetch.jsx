@@ -13,9 +13,10 @@ const useFetch = (url) => {
             setLoading(true);
             try{
                 let sp_id =  localStorage.getItem('sp_id');
+                let customer_id =  localStorage.getItem('customer_id');
                 let headers = {}
-                if(sp_id){
-                console.log("ln 18", sp_id)
+                if(sp_id || customer_id){
+                console.log("ln 18", customer_id)
                 const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
                  headers = { Authorization: `Bearer ${token}`  };      
                 }
