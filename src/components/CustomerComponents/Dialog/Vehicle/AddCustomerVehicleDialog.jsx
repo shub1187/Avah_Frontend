@@ -127,7 +127,6 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
           name: "customization",
           type: 'text',
           fullWidth: true,
-
       }
     ]
 
@@ -150,6 +149,7 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
                 <Grid container xs={12}>
                   <Grid  xs={12} item><CreateTextFields fields={customerTextfield.slice(5,6)} onChange={handleFieldChange} formField={formData}/></Grid>
                   <Grid  xs={12} item ><CreateTextFields fields={customerTextfield.slice(6,7)} onChange={handleFieldChange}  formField={formData}/></Grid>
+                  <Grid  xs={12} item ><CreateTextFields fields={customerTextfield.slice(7,8)} onChange={handleFieldChange}  formField={formData}/></Grid>
                   {/* <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(7,8)} onChange={handleFieldChange}  formField={formData}/></Grid>
                   <Grid  xs={5.7} item mr={2}><CreateTextFields fields={customerTextfield.slice(8,9)} onChange={handleFieldChange}  formField={formData}/></Grid> */}
                   {/* <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(9,10)} onChange={handleFieldChange}  formField={formData}/></Grid> */}
