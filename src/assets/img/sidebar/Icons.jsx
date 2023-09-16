@@ -10,6 +10,7 @@ import PackageIconImage from './package.png'
 import ReviewsIconImage from './reviews.png'
 import SettingsIconImage from './settings.png'
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 // const HomeIcon = ()=><img src={HomeIconImage} alt="home" />
 // const UserIcon = ()=><img src={UserIconImage} alt="home" />
 const HomeIcon = ({ isSelected }) => (
@@ -100,7 +101,11 @@ const HomeIcon = ({ isSelected }) => (
   );
 
   const DashBoardIcons = ({isSelected}) =>(
-    <DashboardIcon color={isSelected ? 'whiteBackground':'options'}/>
+    <DashboardIcon fontSize={'25px'} color={isSelected ? 'whiteBackground':'options'}/>
+  )
+
+  const AppointmentIcon = ({isSelected}) =>(
+    <CalendarTodayIcon fontSize={'25px'} color={isSelected ? 'whiteBackground':'options'}/>
   )
 export {
     HomeIcon,
@@ -114,5 +119,6 @@ export {
     PackageIcon,
     ReviewsIcon,
     SettingsIcon,
-    DashBoardIcons
+    DashBoardIcons,
+    AppointmentIcon
 }

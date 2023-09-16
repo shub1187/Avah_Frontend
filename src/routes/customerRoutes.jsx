@@ -1,3 +1,4 @@
+import CustomerAppointment from "pages/Customer/Appointment/CustomerAppointment";
 import CustomerDashboard from "pages/Customer/Dashboard/CustomerDashboard";
 import CustomerHome from "pages/Customer/Home/CustomerHome";
 import UpdateCustomerProfile from "pages/Customer/UpdateProfile/UpdateProfile";
@@ -25,6 +26,11 @@ const customerRoutes = [
     },
     {
         id:4,
+        link:'customer/appointment',
+        component:<CustomerAppointment/>
+    },
+    {
+        id:5,
         link:'customer/profile',
         component:<UpdateCustomerProfile/>
 
