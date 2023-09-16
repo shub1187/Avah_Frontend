@@ -77,10 +77,14 @@ export const LoginRedux = (state = initialState, props) => {
                 case FETCH_LOGIN_SUCCESS_CUSTOMER:
                     var token = payload.token;
                     var cust_name = payload.cust_name;
+                    var customer_id = payload.customer_id
+                    var customer_email = payload.customer_email
                     localStorage.setItem('TYPE_OF_USER', "3");
+                    localStorage.setItem('customer_id', customer_id);
+                    localStorage.setItem('customer_email', customer_email);
                     localStorage.setItem('access_tokenSP', token);
                     localStorage.setItem('isLoggedInSP', "true");
-                    localStorage.setItem('sp_id', cust_name);      
+                    localStorage.setItem('cust_name', cust_name);      
                     return {
                         ...state,
                         isLoading: 1,

@@ -61,10 +61,15 @@ const useFetchFunction = ()=>{
     const fetchData = async ({url,method,payload})=>{
         try{
             let sp_id =  localStorage.getItem('sp_id');
+            let customer_id = localStorage.getItem('customer_id');
             let headers = {}
             if(sp_id){
             const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
              headers = { Authorization: `Bearer ${token}`  };      
+            }
+            if (customer_id){
+                const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
+                headers = { Authorization: `Bearer ${token}`  };     
             }
             const axiosRequest = {
                 method:method?.toLowerCase()==='get' ? "GET" : "POST",
@@ -72,7 +77,7 @@ const useFetchFunction = ()=>{
                 headers : headers,
 
             }
-                payload = {...payload, sp_id: sp_id}
+               
             const {status,data} = await axios({...axiosRequest, data: method?.toLowerCase()==="post" && payload})
 
             if(data && status ==200){
@@ -87,4 +92,43 @@ const useFetchFunction = ()=>{
         fetchData
     }
 }
-export {useFetch,useFetchFunction}
+
+const useCustomerFetchFunction = ()=>{
+    const fetchCustomerData = async ({url,method,payload})=>{
+        try{
+            let sp_id =  localStorage.getItem('sp_id');
+            let customer_id = localStorage.getItem('customer_id');
+            let headers = {}
+            if(sp_id){
+            const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
+             headers = { Authorization: `Bearer ${token}`  }; 
+             payload = {...payload, sp_id: sp_id}     
+            }
+            if (customer_id){
+                const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
+                headers = { Authorization: `Bearer ${token}`  };   
+                let customer_email = localStorage.getItem('customer_email');
+                payload = {...payload, email: customer_email}  
+            }
+            const axiosRequest = {
+                method:method?.toLowerCase()==='get' ? "GET" : "POST",
+                url,
+                headers : headers,
+
+            }
+               console.log("ln 83 axios request", axiosRequest)
+            const {status,data} = await axios({...axiosRequest, data: method?.toLowerCase()==="post" && payload})
+
+            if(data && status ==200){
+                return {isSuccess:true,data}
+            }
+        }
+        catch(error){
+            return {isSuccess:false, error:error.message}
+        }
+    }
+    return {
+        fetchCustomerData
+    }
+}
+export {useFetch,useFetchFunction,useCustomerFetchFunction}

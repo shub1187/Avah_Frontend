@@ -16,7 +16,7 @@ import { useState } from "react";
 const CustomerTable = ({DialogButton,columnss,URL})=>{
   const [dataLength,setDataLength] = useState(0)
   const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
-  const sp_id = localStorage.getItem('sp_id'); // Retrieve the token from local storage
+  const customer_id = localStorage.getItem('customer_id'); // Retrieve the token from local storage
   
   const isMobileResolution = useMediaQuery((theme) =>
   theme.breakpoints.down('sm')
@@ -144,7 +144,7 @@ const CustomerTable = ({DialogButton,columnss,URL})=>{
     data={async (query) => {
       console.log(query,"RAEES")
       try {
-        let url = `${URL}?sp_id=${sp_id}&`;
+        let url = `${URL}?customer_id=${customer_id}&`;
 
         if(query.search){
           url+=`q=${query.search}`
@@ -156,9 +156,10 @@ const CustomerTable = ({DialogButton,columnss,URL})=>{
         url+=`&_limit=${query.pageSize}`
         const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
         const response = await axios.get(url,{headers});
-        const data = response.data.data.results; // Adjust this based on your API response structure
+        console.log("ln 161 RAEES", response)
+        const data = response.data.result; // Adjust this based on your API response structure
         // setDataLength(data.length)
-        console.log(data,"ln 151 RAEES")
+       
         return {
           data: data, // Change this to match your data structure
           page: query.page,

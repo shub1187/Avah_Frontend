@@ -7,7 +7,7 @@ import React from 'react'
 const CustomerVehicle = () => {
   return (
     <Box backgroundColor='red' mt={2}>
-            <CustomerTable DialogButton={AddCustomerVehicleDialog} columnss={AddCustomerVehicleColumn}/>
+            <CustomerTable DialogButton={AddCustomerVehicleDialog} columnss={AddCustomerVehicleColumn} URL={"http://localhost:3008/api/customer/getCustomerVehicle"}/>
     </Box>
   )
 }

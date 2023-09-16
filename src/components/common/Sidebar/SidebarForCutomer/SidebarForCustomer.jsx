@@ -33,21 +33,21 @@ export const CustomerSidebarList =(customerStatus)=>{
     },
     {
       id:3,
+      link:'customer/profile',
+      icon:UserIcon,
+      name:"Profile",//coming from custom context
+    },
+    {
+      id:4,
       link:'customer/vehicle',
       icon:ServiceTypeIcon,
       name:"Vehicle",
     },
     {
-      id:4,
+      id:5,
       link:'customer/appointment',
       icon:AppointmentIcon,
       name:"Appointment",
-    },
-    {
-      id:5,
-      link:'customer/profile',
-      icon:UserIcon,
-      name:customerStatus,//coming from custom context
     },
   ]
   )
@@ -58,10 +58,10 @@ export default function CustomerSideBar() {
   const [activeSubitem, setActiveSubitem] = useState(null);
   const {customerStatus,updateCustomerStatus} = useCustomerContext() 
 
-  const callApi=async()=>{
-    let a = await axios.get('http://localhost:3008/api/customer/getCustomerProfile')
-  }
-    callApi()
+  // const callApi=async()=>{
+  //   let a = await axios.get('http://localhost:3008/api/customer/getCustomerProfile')
+  // }
+  //   callApi()
   // updateCustomerStatus('Complete Your Profile');
   
   const handleClick = (id) => {
