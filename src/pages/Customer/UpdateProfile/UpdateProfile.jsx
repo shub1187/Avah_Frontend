@@ -190,9 +190,17 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
               <Grid item xs={12} sm={5} mr={!isMobile && 4}>
                   <CreateTextFields  fields={profileList.slice(1,2)} onChange={handleFieldChange}  formField={formData}/>
               </Grid> */}
-        
-            <Typography  my={1} fontWeight={'bold'} fontSize={20}>Name : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'}  component={'span'}>{profileData?.name??""}</Typography></Typography>
-            <Typography my={1} fontWeight={'bold'} fontSize={20}>Email : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'} component={'span'}>{profileData?.email??""}</Typography></Typography>
+            <Box display='flex'>
+              <Box>
+                <Typography  my={1} fontWeight={'bold'} fontSize={20}>Name : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'}  component={'span'}>{profileData?.name??""}</Typography></Typography>
+                <Typography my={1} fontWeight={'bold'} fontSize={20}>Email : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'} component={'span'}>{profileData?.email??""}</Typography></Typography>
+              </Box>
+              <Box mx={5}>
+                <Typography  my={1} fontWeight={'bold'} fontSize={20}>Address : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'}  component={'span'}>{profileData?.address??""}</Typography></Typography>
+                <Typography my={1} fontWeight={'bold'} fontSize={20}>Mobile Number : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'} component={'span'}>{profileData?.mobile_number??""}</Typography></Typography>
+              </Box>
+            </Box>
+
 
               <Grid item xs={12} sm={12} mr={!isMobile && 4}>
               <Accordion>
