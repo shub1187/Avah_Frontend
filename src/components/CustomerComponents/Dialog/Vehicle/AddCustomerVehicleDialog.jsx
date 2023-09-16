@@ -3,7 +3,7 @@
 import React,{useState} from 'react'
 import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, TextField, ThemeProvider, Typography, createTheme, useMediaQuery } from '@mui/material';
 import CreateTextFields from 'components/common/Textfield';
-import { useFetch } from 'hooks/useFetch';
+import { useCustomerFetchFunction, useFetch } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
 import FileInputTextField from 'components/common/Textfield/FileTextfield';
 
@@ -12,7 +12,14 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
     const [toggle,setToggle] = useState('individual')
     let {data} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
     let {data:fuelType} = useFetch('http://localhost:3008/api/admin/getAllFuelTypes')
-
+    const {fetchCustomerData} = useCustomerFetchFunction()
+    const [status,setStatus] = useState({
+      isVisible:false,
+      message:"",
+      loading:false,
+      error:'',
+      responseStatus:''
+  })
     
     let brandData = data?.data?.results || []
     const [formData, setFormData] = useState({});
