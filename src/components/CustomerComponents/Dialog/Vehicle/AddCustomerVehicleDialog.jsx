@@ -146,7 +146,7 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
         type: 'text',
         fullWidth: true,
         select: true,
-        selectArray: fuelType.data.data.results.fuel_type
+        selectArray: fuelType?.data?.data?.results?.fuel_type
       },
     ]
 
