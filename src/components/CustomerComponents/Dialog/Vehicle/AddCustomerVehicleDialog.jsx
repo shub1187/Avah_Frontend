@@ -112,7 +112,8 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
             name: "fuel_type",
             type: 'text',
             fullWidth: true,
-
+            select:true,
+            selectArray:[]
         },
         {
             label: 'Registration Number',
@@ -120,7 +121,14 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
             type: 'text',
             fullWidth: true,
 
-        }
+        },
+        {
+          label: 'Customization',
+          name: "customization",
+          type: 'text',
+          fullWidth: true,
+
+      }
     ]
 
   return (
