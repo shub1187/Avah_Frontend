@@ -100,36 +100,37 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
           selectArray:selectArray
       },
       {
-          label: 'Model',
-          name: "model",
-          type: 'text',
-          fullWidth: true,
-          select:true,
-          selectArray:selectModel
+        label: 'Model',
+        name: "model",
+        type: 'text',
+        fullWidth: true,
+        select: true,
+        selectArray: selectModel
       },
-        {
-            label: 'Fuel Type',
-            name: "fuel_type",
-            type: 'text',
-            fullWidth: true,
-            select:true,
-            selectArray:[]
-        },
-        {
-            label: 'Registration Number',
-            name: "registration_number",
-            type: 'text',
-            fullWidth: true,
+      {
+        label: 'Engine Customization',
+        name: "customization",
+        type: 'text',
+        fullWidth: true,
+        select: true,
+        selectArray: [{ label: "Showroom Fitted", value: "showroom_fitted" }, { label: "Externally Modified", value: "externally_modified" }]
+      },
 
-        },
-        {
-          label: 'Engine Customization',
-          name: "customization",
-          type: 'text',
-          fullWidth: true,
-          select:true,
-          selectArray:[{label:"Showroom Fitted", value:"showroom_fitted"},{label:"Externally Modified", value:"externally_modified"}]
-      }
+      {
+        label: 'Registration Number',
+        name: "registration_number",
+        type: 'text',
+        fullWidth: true,
+
+      },
+      {
+        label: 'Fuel Type',
+        name: "fuel_type",
+        type: 'text',
+        fullWidth: true,
+        select: true,
+        selectArray: []
+      },
     ]
 
   return (
