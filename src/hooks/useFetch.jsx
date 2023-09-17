@@ -2,9 +2,24 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { Skeleton } from '@mui/material';
+import { Skeleton, ThemeProvider, createTheme } from '@mui/material';
 import SkeletonLoading from 'components/common/Skeleton';
+import { globalAppTheme } from 'components/common/Themes/GlobalAppTheme';
 
+const theme = createTheme(globalAppTheme,{
+    components: {
+      MuiAlert: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "white", // Replace with your desired background color,
+            color:"black",
+            border:'2px solid rgb(173,73,112)',
+            fontSize:'20px'
+          }
+        }
+      }
+    }
+  });
 const useFetch = (url) => {
 
     const [loading,setLoading] = useState(true)
@@ -176,13 +191,20 @@ const useCustomerFetchFunction = ()=>{
         fetchCustomerData,
         // Snackbar component
         snackbar: (
+            <ThemeProvider theme={theme}>
             <Snackbar
+            anchorOrigin={{
+                vertical: "top",
+                horizontal: "center"
+             }}
+            sx={{ height: "100%" }}
             open={openSnackbar}
             autoHideDuration={2000} // 2 seconds
             onClose={() => setOpenSnackbar(false)}
             >
-            <Alert severity={snackbarSeverity}>{snackbarMessage}</Alert>
+            <Alert icon={false} severity='info'>{snackbarMessage}</Alert>
             </Snackbar>
+            </ThemeProvider>
         ),
         loadingIndicator
     }
