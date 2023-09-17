@@ -1,5 +1,9 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import { Skeleton } from '@mui/material';
+import SkeletonLoading from 'components/common/Skeleton';
 
 const useFetch = (url) => {
 
@@ -59,6 +63,9 @@ const useFetch = (url) => {
 
 
 const useFetchFunction = ()=>{
+    const [openSnackbar, setOpenSnackbar] = React.useState(false);
+    const [snackbarMessage, setSnackbarMessage] = React.useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = React.useState('success');
     const fetchData = async ({url,method,payload})=>{
         try{
             let sp_id =  localStorage.getItem('sp_id');
@@ -82,21 +89,45 @@ const useFetchFunction = ()=>{
             const {status,data} = await axios({...axiosRequest, data: method?.toLowerCase()==="post" && payload})
 
             if(data && status ==200){
+                setSnackbarSeverity('success');
+                setSnackbarMessage('Request was successful.');
+                setOpenSnackbar(true);
+                setTimeout(() => {
+                  setOpenSnackbar(false);
+                }, 2000);
                 return {isSuccess:true,data}
             }
         }
         catch(error){
+            setSnackbarSeverity('error');
+            setSnackbarMessage(error.message);
+            setOpenSnackbar(true);
             return {isSuccess:false, error:error.message}
         }
     }
     return {
-        fetchData
-    }
+        fetchData,
+        // Snackbar component
+        snackbar: (
+            <Snackbar
+            open={openSnackbar}
+            autoHideDuration={2000} // 2 seconds
+            onClose={() => setOpenSnackbar(false)}
+            >
+            <Alert severity={snackbarSeverity}>{snackbarMessage}</Alert>
+            </Snackbar>
+        ),
+        }
 }
 
 const useCustomerFetchFunction = ()=>{
+    const [openSnackbar, setOpenSnackbar] = React.useState(false);
+    const [snackbarMessage, setSnackbarMessage] = React.useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = React.useState('success');
+    const [loading, setLoading] = useState(false);
     const fetchCustomerData = async ({url,method,payload})=>{
         try{
+            setLoading(true);
             let sp_id =  localStorage.getItem('sp_id');
             let customer_id = localStorage.getItem('customer_id');
             let headers = {}
@@ -121,15 +152,39 @@ const useCustomerFetchFunction = ()=>{
             const {status,data} = await axios({...axiosRequest, data: method?.toLowerCase()==="post" && payload})
 
             if(data && status ==200){
+                setSnackbarSeverity('success');
+                setSnackbarMessage('Request was successful.');
+                setOpenSnackbar(true);
+                setTimeout(() => {
+                  setOpenSnackbar(false);
+                }, 2000);
                 return {isSuccess:true,data}
             }
         }
         catch(error){
+            setSnackbarSeverity('error');
+            setSnackbarMessage(error.message);
+            setOpenSnackbar(true);
             return {isSuccess:false, error:error.message}
-        }
+        }finally {
+            setLoading(false); // Set loading to false when the API call finishes
+          }
+          
     }
+    const loadingIndicator = loading ? <SkeletonLoading/> : null;
     return {
-        fetchCustomerData
+        fetchCustomerData,
+        // Snackbar component
+        snackbar: (
+            <Snackbar
+            open={openSnackbar}
+            autoHideDuration={2000} // 2 seconds
+            onClose={() => setOpenSnackbar(false)}
+            >
+            <Alert severity={snackbarSeverity}>{snackbarMessage}</Alert>
+            </Snackbar>
+        ),
+        loadingIndicator
     }
 }
 export {useFetch,useFetchFunction,useCustomerFetchFunction}

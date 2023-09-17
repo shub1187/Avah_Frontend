@@ -18,7 +18,7 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
       value: item.fuel_name
     }));
     console.log("ln 15",fuelNamesArray)
-    const {fetchCustomerData} = useCustomerFetchFunction()
+    const {fetchCustomerData,snackbar,loadingIndicator} = useCustomerFetchFunction()
     const [status,setStatus] = useState({
       isVisible:false,
       message:"",
@@ -169,8 +169,12 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
         <DialogContent>
             <Grid container xs={12} mt={3}>
               <Grid item xs={5.5} mr={4}>
-                  <CreateTextFields  fields={customerTextfield.slice(0,5)} onChange={handleFieldChange}  formField={formData}/>
-                  {/* <TextField values={formData[]}/> */}
+                  <CreateTextFields  fields={customerTextfield.slice(0,1)} onChange={handleFieldChange}  formField={formData}/>
+                  <Box mb={1} color={'#ad4970'}>No Hiphen required Eg:MH14TT3066</Box>
+                  <CreateTextFields  fields={customerTextfield.slice(1,2)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  fields={customerTextfield.slice(2,3)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  fields={customerTextfield.slice(3,4)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  fields={customerTextfield.slice(4,5)} onChange={handleFieldChange}  formField={formData}/>
               </Grid>
               <Grid item xs={6} >
                 <Grid container xs={12}>
@@ -202,6 +206,8 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
         </DialogActions>
         </div>
       </Dialog>
+      {snackbar}
+      {loadingIndicator}
     </div>
   )
 }

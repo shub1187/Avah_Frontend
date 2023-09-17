@@ -15,7 +15,7 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
     const [formData, setFormData] = useState({"customer_id":customer_id});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const {fetchData} = useFetchFunction()
-    const {fetchCustomerData} = useCustomerFetchFunction()
+    const {fetchCustomerData,snackbar,loadingIndicator} = useCustomerFetchFunction()
     const {isMobile} = useMobileResponsive()
     // let {data} = useFetch('http://localhost:3008/api/customer/getCustomerProfile')
     const [data,setData] = React.useState([]) 
@@ -99,7 +99,7 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
       error:'',
       responseStatus:''
   })
-    const [snackbar,handleSnackBar] = useState(true)
+    // const [snackbar,handleSnackBar] = useState(true)
   console.log(formData,"RAEES")
     const handleFieldChange = (fieldName, value) => {
         // if (fieldName === "brand") {
@@ -113,16 +113,16 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
           // }
     };
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
+    // const handleClickOpen = () => {
+    //   setOpen(true);
+    // };
   
-    const handleClose = () => {
-      setOpen(false);
-    };
-    const handleSnackBarFunction = ()=>{
-        handleSnackBar(false)
-    }
+    // const handleClose = () => {
+    //   setOpen(false);
+    // };
+    // const handleSnackBarFunction = ()=>{
+    //     handleSnackBar(false)
+    // }
 
     const handleSubmit = async()=>{
         try{
@@ -243,8 +243,10 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
         {/* </DialogActions> */}
         </div>
       {/* </Dialog> */}
-      {status.loading && <SkeletonLoading />}
-            {(!status.loading && status.error ) &&<Snackbar open={snackbar} autoHideDuration={2000} onClose={handleSnackBarFunction}  color='error'><Alert severity='error'>{status.error}</Alert></Snackbar>}
+      {/* {status.loading && <SkeletonLoading />} */}
+            {/* {(!status.loading && status.error ) &&<Snackbar open={snackbar} autoHideDuration={2000} onClose={handleSnackBarFunction}  color='error'><Alert severity='error'>{status.error}</Alert></Snackbar>} */}
+      {snackbar}
+      {loadingIndicator}
     </div>  )
 }
 
