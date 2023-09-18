@@ -1,8 +1,11 @@
+import AddCustomerAppointmentDialog from 'components/CustomerComponents/Dialog/Appointment/AddCustomerAppointmentDialog'
+import AddCustomerAppointmentColumn from 'components/CustomerComponents/Table/Columns/Appointment/AddCustomerAppointmentColymn'
+import CustomerTable from 'components/CustomerComponents/Table/CustomerTable'
 import React from 'react'
 
 const CustomerAppointment = () => {
   return (
-    <div>CustomerAppointment</div>
+    <div><CustomerTable DialogButton={AddCustomerAppointmentDialog} columnss={AddCustomerAppointmentColumn}  URL={'http://localhost:3008/api/serviceprovider/getAllAppointment'}/></div>
   )
 }
 

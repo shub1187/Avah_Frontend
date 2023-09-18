@@ -354,13 +354,13 @@ function LoginComponent() {
                                                                 aria-labelledby="pills-home-tab">
                                                                 <div className="col-12 intro text-center">
                                                                     <h2>Welcome Back</h2>
-                                                                    <h4 className="mt-2 mb-2 w-100">Register With</h4>
+                                                                    {/* <h4 className="mt-2 mb-2 w-100">Register With</h4>
                                                                     <div className="social-links text-center text-md-right pt-3 pt-md-0 mt-2 mb-2">
                                                                         <a href="#" className="twitter"><i className="bi bi-facebook"></i></a>
                                                                         <a href="#" className="apple"><i className="bi bi-apple"></i></a>
                                                                         <a href="#" className="facebook"><i className="bi bi-google"></i></a>
                                                                     </div>
-                                                                    <h4 className="mt-2 mb-2 w-100">or</h4>
+                                                                    <h4 className="mt-2 mb-2 w-100">or</h4> */}
                                                                 </div>
                                                                 <div className="row">
                                                                     <div className="col-12">
@@ -459,13 +459,13 @@ function LoginComponent() {
                                                         aria-labelledby="pills-home-tab">
                                                         <div className="col-12 intro text-center">
                                                             <h2>Welcome Back</h2>
-                                                            <h4 className="mt-2 mb-2 w-100">Sign in Via</h4>
+                                                            {/* <h4 className="mt-2 mb-2 w-100">Sign in Via</h4>
                                                             <div className="social-links text-center text-md-right pt-3 pt-md-0 mt-2 mb-2">
                                                                 <a href="#" className="twitter"><i className="bi bi-facebook"></i></a>
                                                                 <a href="#" className="apple"><i className="bi bi-apple"></i></a>
                                                                 <a href="#" className="facebook"><i className="bi bi-google"></i></a>
                                                             </div>
-                                                            <h4 className="mt-2 mb-2 w-100">or</h4>
+                                                            <h4 className="mt-2 mb-2 w-100">or</h4> */}
                                                         </div>
                                                         <div className="row">
                                                             <div className="col-12">
@@ -713,13 +713,13 @@ function LoginComponent() {
                                                     <div className="row">
                                                         <div className="col-12 intro text-center">
                                                             <h2>Welcome {page==="dealers"?"Dealer":"service provider"} </h2>
-                                                            <h4>Sign in Via</h4>
+                                                            {/* <h4>Sign in Via</h4>
                                                             <div className="social-links text-center text-md-right pt-3 pt-md-0">
                                                                 <a href="#" className="twitter"><i className="bi bi-facebook"></i></a>
                                                                 <a href="#" className="twitter"><i className="bi bi-apple"></i></a>
                                                                 <a href="#" className="facebook"><i className="bi bi-google"></i></a>
                                                             </div>
-                                                            <h4>or</h4>
+                                                            <h4>or</h4> */}
                                                             <div className="row">
                                                             <div className="col-12">
                                                                 <p>Enter your email and password to sign in</p>

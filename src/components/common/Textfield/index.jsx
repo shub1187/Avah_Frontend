@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Box, InputLabel, MenuItem, TextField } from "@mui/material";
+import { Box, IconButton, InputAdornment, InputLabel, MenuItem, TextField } from "@mui/material";
+import SearchIcon from '@mui/icons-material/Search';
 
-const CreateTextFields = ({ fields , onChange, formField,isSubmitted }) => {
+const CreateTextFields = ({ fields , onChange, formField,isSubmitted , onSearchIconClick}) => {
 //   const [formField, setFormField] = useState({});
 
 //   const handleChange = (fieldName, value) => {
@@ -40,7 +41,15 @@ useEffect(() => {
               disabled={field.disabled}
               error={isError}
               helperText={isError ? field.errormessage : ''}
-            >
+              InputProps={{
+                endAdornment: field.rightIcon && (
+                  <InputAdornment position="end" sx={{mr:1}}>
+                    <IconButton onClick={()=>onSearchIconClick(field.name)} >
+                      <SearchIcon/> {/* Replace with your desired icon */}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}            >
               {field.selectArray && field.selectArray.map((textfield)=>{
                 return(
                 <MenuItem key={textfield.label} value={textfield.value}>
@@ -56,30 +65,3 @@ useEffect(() => {
 };
 
 export default CreateTextFields;
-
-// import { Box, InputLabel, TextField } from "@mui/material"
-
-// const createTextfield = (arr)=>{
-    
-// <>
-//     {arr.map((field)=>{
-
-//     if(!formField.hasOwnProperty(field.name)){
-//     setFormField((prev)=>({...prev,[field.name]:""}))
-//     }
-//     return(
-//         <Box mb={2}>
-//         <InputLabel sx={{color:"black",marginBottom:1}}>{field.label}</InputLabel>
-//         <TextField
-//         size='small'
-//         key={field.name}
-//         fullWidth={field.fullWidth}
-        // label={field.label}
-//         value={formField[field.name] || ""}
-//         onChange={(e)=>handleChange(field.name,e.target.value)}
-//         />
-//         </Box>
-//     )})}
-// </>
-// }
-// export default createTextfield

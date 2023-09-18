@@ -13,8 +13,9 @@ const theme = createTheme(globalAppTheme,{
           root: {
             backgroundColor: "white", // Replace with your desired background color,
             color:"black",
-            border:'2px solid rgb(173,73,112)',
-            fontSize:'20px'
+            // border:'2px solid rgb(173,73,112)',
+            fontSize:'22px',
+            fontWeight:"500"
           }
         }
       }
@@ -193,6 +194,7 @@ const useCustomerFetchFunction = ()=>{
         snackbar: (
             <ThemeProvider theme={theme}>
             <Snackbar
+            
             anchorOrigin={{
                 vertical: "top",
                 horizontal: "center"
@@ -202,7 +204,7 @@ const useCustomerFetchFunction = ()=>{
             autoHideDuration={2000} // 2 seconds
             onClose={() => setOpenSnackbar(false)}
             >
-            <Alert icon={false} severity='info'>{snackbarMessage}</Alert>
+            <Alert elevation={4} icon={false} severity='info'>{snackbarMessage}</Alert>
             </Snackbar>
             </ThemeProvider>
         ),
