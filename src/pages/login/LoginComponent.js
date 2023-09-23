@@ -84,6 +84,10 @@ function LoginComponent() {
     const [spPassword, setSpPassword] = useState("")
     const [spRePassword, setSpRePassword] = useState("")
     const [spBusinessName, setSpBusinessName] = useState("")
+    const [spState, setSpState] = useState("")
+    const [spCity, setSpCity] = useState("")
+    const [spPincode, setSpPincode] = useState("")
+
     const [spBusinessContactNumber, setSpBusinessContactNumber] = useState("")
     const [spBusinessAddress, setSpBusinessAddress] = useState("")
     const [spBusinessType, setSpBusinessType] = useState(''); // Set "Vendor" as the default value
@@ -188,7 +192,7 @@ function LoginComponent() {
         let body = {
             "name":spName,"email":spEmail,"password":spPassword,"cnfPassword":spRePassword,
             "business_name":spBusinessName,"business_type":spBusinessType,"business_contact":spBusinessContactNumber,
-            "business_address":spBusinessAddress,
+            "business_address":spBusinessAddress,'city':spCity,'state':spState,'pincode':spPincode,
             "role":page,"approval_status":false,"sp_status":"inactive"
         }
         try{
@@ -215,8 +219,11 @@ function LoginComponent() {
                 setSpBusinessContactNumber('');
                 setSpBusinessAddress('');
                 setSpBusinessType('');
+                setSpPincode('')
+                setSpState("")
+                setSpCity("")
                 setServiceProviderAndDealersLoginDialogOpen(true)
-
+     
             }
 
         }
@@ -561,20 +568,48 @@ function LoginComponent() {
                                                                     helperText={errory && !spName.length?"Name Required":""}
                                                                 />
                                                             </Box>
-                                                            <Box mb={2}>
-                                                                <InputLabel sx={{color:"black"}}>Email ID</InputLabel>
-                                                                <TextField 
-                                                                    size='small'
-                                                                    placeholder='Enter Your Email ID'
-                                                                    onChange={(e) => {
-                                                                        setSpEmail(e.target.value)
-                                                                    }}
-                                                                    value={spEmail}
-                                                                    sx={{width:"49%"}}
-                                                                    error={errory && !spEmail.length?true:false}
-                                                                    helperText={errory && !spEmail.length?"Email Required":""}
-                                                                />
+                                                            <Box sx={{width:"100%",display:"flex",justifyContent:"space-between",marginBottom:"5px"}}>
+                                                                <Box width={'50%'} mb={2} >
+                                                                    <InputLabel sx={{color:"black"}}>Email ID</InputLabel>
+                                                                    <TextField 
+                                                                        size='small'
+                                                                        placeholder='Enter Your Email ID'
+                                                                        onChange={(e) => {
+                                                                            setSpEmail(e.target.value)
+                                                                        }}
+                                                                        value={spEmail}
+                                                                        sx={{width:"98%"}}
+                                                                        error={errory && !spEmail.length?true:false}
+                                                                        helperText={errory && !spEmail.length?"Email Required":""}
+                                                                    />
+                                                                </Box>
+                                                                <Box width={"50%"}>
+                                                                    <InputLabel sx={{color:"black"}}>Business Type</InputLabel>
+                                                                    <TextField
+                                                                        fullWidth
+                                                                        size='small'
+                                                                        sx={{width:"98%"}}
+                                                                        placeholder='VENDOR'
+                                                                        value={spBusinessType}
+                                                                        select
+                                                                        onChange={(e)=>setSpBusinessType(e.target.value)}
+                                                                    >
+                                                                        {businessTypes?.map((type) => (
+                                                                        <MenuItem key={type} value={type} aria-label={type}>
+                                                                            {type}
+                                                                        </MenuItem>
+                                                                        ))}
+                                                                        {/* <MenuItem
+                                                                            key={spBusinessType}
+                                                                            value={spBusinessType}
+                                                                            aria-label={spBusinessType}
+                                                                        >
+                                                                            {spBusinessType}
+                                                                        </MenuItem> */}
+                                                                    </TextField>
+                                                                </Box>
                                                             </Box>
+
                                                             <Box sx={{width:"100%",display:"flex",justifyContent:"space-between",marginBottom:"5px"}}>
                                                                 <Box sx={{marginBottom:"10px",width:"100%"}}>
                                                                     <InputLabel sx={{color:"black"}}>Business Name</InputLabel>
@@ -626,31 +661,62 @@ function LoginComponent() {
                                                                 />
                                                             </Box>
                                                             <Box sx={{display:"flex",justifyContent:"space-between",marginBottom:"10px"}}>
-                                                                <Box width={"50%"}>
-                                                                <InputLabel sx={{color:"black"}}>Business Type</InputLabel>
-                                                                <TextField
-                                                                    fullWidth
-                                                                    size='small'
-                                                                    sx={{width:"98%"}}
-                                                                    placeholder='VENDOR'
-                                                                    value={spBusinessType}
-                                                                    select
-                                                                    onChange={(e)=>setSpBusinessType(e.target.value)}
-                                                                >
-                                                                    {businessTypes?.map((type) => (
-                                                                    <MenuItem key={type} value={type} aria-label={type}>
-                                                                        {type}
-                                                                    </MenuItem>
-                                                                    ))}
-                                                                    {/* <MenuItem
-                                                                        key={spBusinessType}
-                                                                        value={spBusinessType}
-                                                                        aria-label={spBusinessType}
-                                                                    >
-                                                                        {spBusinessType}
-                                                                    </MenuItem> */}
-                                                                </TextField>
+                                                                <Box sx={{marginBottom:"10px",width:'50%'}}>
+                                                                    <InputLabel sx={{color:"black"}}>State</InputLabel>
+                                                                    <TextField
+                                                                        size='small'
+
+                                                                        placeholder='State'
+                                                                        fullWidth
+                                                                        onChange={(e) => {
+                                                                            setSpState(e.target.value)
+                                                                        }}
+                                                                        value={spState}
+                                                                        sx={{width:"98%"}}
+                                                                        error={errory && !spState.length?true:false}
+                                                                        helperText={errory && !spState.length?"State Required":""}
+
+                                                                    />
                                                                 </Box>
+                                                                <Box sx={{marginBottom:"10px",width:'50%'}}>
+                                                                    <InputLabel sx={{color:"black"}}>City</InputLabel>
+                                                                    <TextField
+                                                                        size='small'
+
+                                                                        placeholder='City'
+                                                                        fullWidth
+                                                                        onChange={(e) => {
+                                                                            setSpCity(e.target.value)
+                                                                        }}
+                                                                        value={spCity}
+                                                                        sx={{width:"100%"}}
+                                                                        error={errory && !spCity.length?true:false}
+                                                                        helperText={errory && !spCity.length?"City Required":""}
+
+                                                                    />
+                                                                </Box>
+                                                            </Box>
+
+
+                                                            <Box sx={{display:"flex",justifyContent:"space-between",marginBottom:"10px"}}>
+                                                                <Box sx={{marginBottom:"10px",width:"50%"}}>
+                                                                    <InputLabel sx={{color:"black"}}>Pincode</InputLabel>
+                                                                    <TextField
+                                                                        size='small'
+
+                                                                        placeholder='Pincode'
+                                                                        fullWidth
+                                                                        onChange={(e) => {
+                                                                            setSpPincode(e.target.value)
+                                                                        }}
+                                                                        value={spPincode}
+                                                                        sx={{width:"98%"}}
+                                                                        error={errory && !spPincode.length?true:false}
+                                                                        helperText={errory && !spPincode.length?"Pincode Required":""}
+
+                                                                    />
+                                                                </Box>
+
                                                                 <Box width={"50%"}>
                                                                 <InputLabel sx={{color:"black"}}>Upload Document</InputLabel>
                                                                 <Box display={"flex"}>

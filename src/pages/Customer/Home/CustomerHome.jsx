@@ -3,12 +3,25 @@ import { LandingPageDealersIcon, LandingPageFirstImage, LandingPageLogo, Landing
 import LandingPageLatestActivity from 'components/LandingPageComponents/Cards/LandingPageLatestActivity'
 import LandingPageServiceCards from 'components/LandingPageComponents/Cards/LandingPageServiceCards'
 import LandingPageServiceStatusCards from 'components/LandingPageComponents/Cards/LandingPageServiceStatusCards'
-import React from 'react'
+import CreateAutoCompleteTextfield from 'components/common/Textfield/AutoCompleteTextfield'
+import { useCity } from 'hooks/useCustomContext'
+import { useFetch } from 'hooks/useFetch'
+import React, { useState } from 'react'
 import Carousel from 'react-multi-carousel'
 import "react-multi-carousel/lib/styles.css";
 import {Link} from 'react-router-dom'
 
 const CustomerHome = () => {   
+    // const [city, setCity] = useState('');
+    const { city, setCity } = useCity();
+    const {data} = useFetch('http://localhost:3008/api/customer/getAllCities')
+    data.map((data)=>({'label':data}))
+    const handleSelectCity = (selectedValue) => {
+        const selectedCity = selectedValue ? selectedValue.label : ""; // Extract the string value
+        setCity(selectedCity);
+      };
+    console.log(city)
+    console.log(data)
     const responsive = {
         superLargeDesktop: {
           // the naming can be any, depends on you.
@@ -38,7 +51,8 @@ const CustomerHome = () => {
                     <Grid item mt={1}>Services</Grid>
                     <Grid item mt={1}>Providers</Grid> */}
                     <Grid item><Button sx={{fontSize:10,minHeight:35}} variant='contained' color='darkerpink'>My Location</Button></Grid>
-                    <Grid item><Button sx={{fontSize:10,minHeight:35}}variant='contained' color='darkerpink'>Select City</Button></Grid>
+                    <Grid item><CreateAutoCompleteTextfield options = {data} label={'Select City'} onSelect={handleSelectCity}/></Grid>
+                    {/* <Grid item><Button sx={{fontSize:10,minHeight:35}}variant='contained' color='darkerpink'>Select City</Button></Grid> */}
                     <Grid item mr={2}><Link to={'/customer/dashboard'}><Button sx={{fontSize:10,minHeight:35}} variant='contained' color="darkerpink">Dashboard</Button></Link></Grid>
 
                 </Grid>

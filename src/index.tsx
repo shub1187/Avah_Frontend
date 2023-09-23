@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import './assets/css/login.css'
 import { BrowserRouter } from 'react-router-dom';
-import { CustomerProvider } from 'hooks/useCustomContext';
+import { CityProvider, CustomerProvider } from 'hooks/useCustomContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,6 +17,7 @@ root.render(
  // <React.StrictMode>
     <>
     <CustomerProvider>
+    <CityProvider>
     <Provider store={store}>
       <CssBaseline />
       <BrowserRouter>
@@ -24,6 +25,7 @@ root.render(
       </BrowserRouter>
 
     </Provider>
+    </CityProvider>
     </CustomerProvider>
     </>
  // </React.StrictMode>

@@ -18,5 +18,25 @@ export const CustomerProvider = ({ children }) => {
     <CustomerContext.Provider value={{ customerStatus, updateCustomerStatus }}>
       {children}
     </CustomerContext.Provider>
+  
+  
   );
+};
+
+// Create a context
+const CityContext = createContext();
+
+// Create a context provider component
+export const CityProvider = ({ children }) => {
+  const [city, setCity] = useState(""); // Initialize with an empty string
+
+  return (
+    <CityContext.Provider value={{ city, setCity }}>
+      {children}
+    </CityContext.Provider>
+  );
+};
+
+export const useCity = () => {
+  return useContext(CityContext);
 };
