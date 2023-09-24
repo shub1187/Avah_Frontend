@@ -9,11 +9,19 @@ export default function CreateAutoCompleteTextfield({options,label,onSelect}) {
         disablePortal
         id="combo-box-demo"
         options={options}
+        ListboxProps={
+            {
+              style:{
+                  maxHeight: '10px',
+                  border: '1px solid red'
+              }
+            }
+          }
         // onFocus={(e) => {
         //     e.target.parentElement.style.marginTop = "-8px"; // Adjust margin when focused
         //   }}
         // style={{maxHeight:'50px'}}
-        sx={{ width: 150,backgroundColor:'rgb(145,54,93)',color:'white',borderRadius:1 , "& .MuiInputLabel-root": {
+        sx={{ width: 120,backgroundColor:'rgb(145,54,93)',color:'white',borderRadius:1 , "& .MuiInputLabel-root": {
             // Override the label styles to remove shrink effect
             // transform: "none", // Remove shrink effect
             // color: "white", // Label text color
@@ -36,7 +44,7 @@ export default function CreateAutoCompleteTextfield({options,label,onSelect}) {
                 height: "3px",
               },
           },}}
-        renderInput={(params) => <TextField {...params} label={label}InputLabelProps={{sx: { color: "white",fontSize:12, top: "-0.5vh", "&.MuiInputLabel-shrink": { top: 10,color:'rgb(173,73,112)' } }}}/>}
+        renderInput={(params) => <TextField {...params} label={label}InputLabelProps={{sx: { color: "white",fontSize:12, top: "-0.6vh", "&.MuiInputLabel-shrink": { top: 10,color:'rgb(145,54,93)' } }}}/>}
         onChange={(event, newValue) => {
             onSelect(newValue ? newValue.label : ""); // Pass the selected city as a string
           }}
