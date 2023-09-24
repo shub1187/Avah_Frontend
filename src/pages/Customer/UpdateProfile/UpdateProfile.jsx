@@ -19,6 +19,53 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
     const {isMobile} = useMobileResponsive()
     // let {data} = useFetch('http://localhost:3008/api/customer/getCustomerProfile')
     const [data,setData] = React.useState([]) 
+    const result= [
+      {
+          "Andaman and Nicobar Islands": [
+              "Bamboo Flat",
+              "Nicobar",
+              "Port Blair",
+              "South Andaman"
+          ]
+      },
+      {
+          "Andhra Pradesh": [
+              "Addanki",
+              "Adoni",
+              "Akasahebpet",
+              "Akividu",
+              "Akkarampalle"
+          ]
+      }
+  ]
+  const selectArray = result.map((brandEntry) => {
+    const brandName = Object.keys(brandEntry)[0]; // Get the brand name
+    const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_'); // Format the value
+  
+    return {
+      label: brandName,
+      value: brandName
+    };
+  });
+let selectModel = []
+const selectedBrand = formData.state ? formData.state.toLowerCase().replace(/ /g, '_') : ''; // Format selected brand or null if not selected
+if (selectedBrand) {
+   result.forEach((brandEntry) => {
+        const brandName = Object.keys(brandEntry)[0];
+        const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_');
+
+        if (selectedBrand === formattedBrandValue) { // Check for selected brand
+            brandEntry[brandName].forEach((ent) => {
+                const label = ent;
+                const formatValue = ent.toLowerCase().replace(/ /g, '_'); // Format model value
+                selectModel.push({
+                    label: label,
+                    value: label
+                });
+            });
+        }
+    });
+} 
     useEffect(()=>{
       const func = async()=>{
       const obj = {
@@ -107,6 +154,8 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
           fullWidth: true,
           required: true, // Add the required property
           errormessage: 'State Required', // Add the error message
+          select:true,
+          selectArray:selectArray
       },
       {
         label: 'City',
@@ -115,6 +164,8 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
         fullWidth: true,
         required: true, // Add the required property
         errormessage: 'City Required', // Add the error message
+        select:true,
+        selectArray:selectModel
     },
     {
       label: 'Pincode',
