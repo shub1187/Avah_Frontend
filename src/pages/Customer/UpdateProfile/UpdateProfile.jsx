@@ -56,7 +56,7 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
             const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
         
             if (emptyRequiredFields.length > 0) {
-              setStatus({ error: 'Please fill in all required fields.', message: '', loading: false });
+              // setStatus({ error: 'Please fill in all required fields.', message: '', loading: false });
               return;
             }
             const obj = {

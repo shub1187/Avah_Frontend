@@ -85,8 +85,6 @@ function LoginComponent() {
     const [spPassword, setSpPassword] = useState("")
     const [spRePassword, setSpRePassword] = useState("")
     const [spBusinessName, setSpBusinessName] = useState("")
-    const [spState, setSpState] = useState("")
-    const [spCity, setSpCity] = useState("")
     const [spPincode, setSpPincode] = useState("")
 
     const [spBusinessContactNumber, setSpBusinessContactNumber] = useState("")
@@ -96,6 +94,7 @@ function LoginComponent() {
         setSignUp(false);
     }
     const [signUp,setSignUp] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const [error, setErrorMessage] = useState("")
     const [errory,setErrory] = useState(false)
@@ -180,7 +179,9 @@ function LoginComponent() {
             fullWidth: true,
             select:true,
             selectArray:selectArray,
-            size:true
+            size:true,
+            required:true,
+            errormessage:'Select State'
         },
         {
             label: 'City',
@@ -189,7 +190,9 @@ function LoginComponent() {
             fullWidth: true,
             select:true,
             selectArray:selectModel,
-            size:true
+            size:true,
+            required:true,
+            errormessage:'Select City'
         },
     ]
     useEffect(() => {
@@ -275,10 +278,11 @@ function LoginComponent() {
         let body = {
             "name":spName,"email":spEmail,"password":spPassword,"cnfPassword":spRePassword,
             "business_name":spBusinessName,"business_type":spBusinessType,"business_contact":spBusinessContactNumber,
-            "business_address":spBusinessAddress,'city':spCity,
+            "business_address":spBusinessAddress,
             "role":page,"approval_status":false,"sp_status":"inactive","pin_code":spPincode,...formData
         }
         try{
+            setIsSubmitted(true); // Set the form as submitted
             if (spEmail.length <= 0) {
                 setErrory(true)
             } else if (spName.length <= 0) {
@@ -291,13 +295,8 @@ function LoginComponent() {
                 setErrory(true)
             }else if (spBusinessAddress.length <= 0) {
                 setErrory(true)
-            }else if (spCity.length <= 0) {
-                setErrory(true)
             }
             else if (spPincode.length <= 0) {
-                setErrory(true)
-            }
-            else if (spState.length <= 0) {
                 setErrory(true)
             }
             else{
@@ -311,16 +310,21 @@ function LoginComponent() {
                 setSpBusinessAddress('');
                 setSpBusinessType('');
                 setSpPincode('')
-                setSpState("")
-                setSpCity("")
                 setServiceProviderAndDealersLoginDialogOpen(true)
-     
+                setFormData({})
             }
-
+            const requiredFields = statesArray.filter((field) => field.required);
+            const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
+        
+            if (emptyRequiredFields.length > 0) {
+              // setStatus({ error: 'Please fill in all required fields.', message: '', loading: false });
+              return;
+            }
         }
         catch(e){
             console.log(e)
         }
+        setIsSubmitted(false); // Set the form as submitted
 
     }
     const customerRegister = async()=>{
@@ -684,6 +688,8 @@ function LoginComponent() {
                                                                         value={spBusinessType}
                                                                         select
                                                                         onChange={(e)=>setSpBusinessType(e.target.value)}
+                                                                        error={errory && !spBusinessType.length?true:false}
+                                                                        helperText={errory && !spBusinessType.length?"Business Type Required":""}
                                                                     >
                                                                         {businessTypes?.map((type) => (
                                                                         <MenuItem key={type} value={type} aria-label={type}>
@@ -753,8 +759,8 @@ function LoginComponent() {
                                                             </Box>
                                                             {/* <Box sx={{display:"flex",justifyContent:"space-between",marginBottom:"10px"}}> */}
                                                             <Grid container sm={12}>
-                                                            <Grid sm={5.8}item mr={0.8}><CreateTextFields fields={statesArray.slice(0,1)} onChange={handleFieldChange} formField={formData}/></Grid>
-                                                            <Grid sm={6}item><CreateTextFields fields={statesArray.slice(1,2)} onChange={handleFieldChange} formField={formData}/></Grid>
+                                                            <Grid sm={5.8}item mr={0.8}><CreateTextFields isSubmitted={isSubmitted} fields={statesArray.slice(0,1)} onChange={handleFieldChange} formField={formData}/></Grid>
+                                                            <Grid sm={6}item><CreateTextFields isSubmitted={isSubmitted} fields={statesArray.slice(1,2)} onChange={handleFieldChange} formField={formData}/></Grid>
 
                                                             </Grid>
                                                                 {/* <Box sx={{marginBottom:"10px",width:'50%'}}>
@@ -799,7 +805,7 @@ function LoginComponent() {
                                                                     <InputLabel sx={{color:"black"}}>Pincode</InputLabel>
                                                                     <TextField
                                                                         size='small'
-
+                                                                        type="number"
                                                                         placeholder='Pincode'
                                                                         fullWidth
                                                                         onChange={(e) => {
@@ -839,6 +845,7 @@ function LoginComponent() {
                                                                         onChange={(e) => {
                                                                             setSpPassword(e.target.value)
                                                                         }}
+                                                                        type='password'
                                                                         value={spPassword}
                                                                         sx={{width:"98%"}}
                                                                         error={errory && !spPassword.length?true:false}
@@ -853,6 +860,7 @@ function LoginComponent() {
                                                                         onChange={(e) => {
                                                                             setSpRePassword(e.target.value)
                                                                         }}
+                                                                        type='password'
                                                                         value={spRePassword}
                                                                         sx={{width:"100%"}}
                                                                         error={errory && !spRePassword.length?true:false}
