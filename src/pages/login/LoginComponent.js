@@ -111,7 +111,7 @@ function LoginComponent() {
     const dispatch = useDispatch()
     const [setLoader, bindLoader, closeLoader] = Loader('')
     const [formData, setFormData] = useState({});
-    let {data} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
+    let {data} = useFetch('http://localhost:3008/api/customer/getAllCitiesPerState')
     let brandData = data?.data?.results || []
     const result= [
         {
@@ -132,7 +132,7 @@ function LoginComponent() {
             ]
         }
     ]
-    const selectArray = result.map((brandEntry) => {
+    const selectArray = data?.result?.map((brandEntry) => {
         const brandName = Object.keys(brandEntry)[0]; // Get the brand name
         const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_'); // Format the value
       
@@ -144,7 +144,7 @@ function LoginComponent() {
     let selectModel = []
     const selectedBrand = formData.state ? formData.state.toLowerCase().replace(/ /g, '_') : ''; // Format selected brand or null if not selected
     if (selectedBrand) {
-        result.forEach((brandEntry) => {
+        data?.result?.forEach((brandEntry) => {
             const brandName = Object.keys(brandEntry)[0];
             const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_');
     
@@ -276,7 +276,7 @@ function LoginComponent() {
             "name":spName,"email":spEmail,"password":spPassword,"cnfPassword":spRePassword,
             "business_name":spBusinessName,"business_type":spBusinessType,"business_contact":spBusinessContactNumber,
             "business_address":spBusinessAddress,'city':spCity,
-            "role":page,"approval_status":false,"sp_status":"inactive",...formData
+            "role":page,"approval_status":false,"sp_status":"inactive","pin_code":spPincode,...formData
         }
         try{
             if (spEmail.length <= 0) {
@@ -290,6 +290,14 @@ function LoginComponent() {
             }else if (spBusinessContactNumber.length <= 0) {
                 setErrory(true)
             }else if (spBusinessAddress.length <= 0) {
+                setErrory(true)
+            }else if (spCity.length <= 0) {
+                setErrory(true)
+            }
+            else if (spPincode.length <= 0) {
+                setErrory(true)
+            }
+            else if (spState.length <= 0) {
                 setErrory(true)
             }
             else{
