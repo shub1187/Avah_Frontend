@@ -20,6 +20,25 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
       value: item.fuel_name
     }));
     let brandData = data?.data?.results || []
+    const result= [
+      {
+          "Andaman and Nicobar Islands": [
+              "Bamboo Flat",
+              "Nicobar",
+              "Port Blair",
+              "South Andaman"
+          ]
+      },
+      {
+          "Andhra Pradesh": [
+              "Addanki",
+              "Adoni",
+              "Akasahebpet",
+              "Akividu",
+              "Akkarampalle"
+          ]
+      }
+  ]
     // console.log("ln 15 shub",data?.data?.results)
     // const brandData = [  // This is dummy data for future refernce
     //     {
@@ -45,7 +64,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     //         ]
     //     }
     // ]
-    const selectArray = brandData.map((brandEntry) => {
+    const selectArray = result.map((brandEntry) => {
         const brandName = Object.keys(brandEntry)[0]; // Get the brand name
         const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_'); // Format the value
       
@@ -55,10 +74,10 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         };
       });
     let selectModel = []
-    const selectedBrand = formData.brand ? formData.brand.toLowerCase().replace(/ /g, '_') : ''; // Format selected brand or null if not selected
+    const selectedBrand = formData.select_city ? formData.select_city.toLowerCase().replace(/ /g, '_') : ''; // Format selected brand or null if not selected
 
     if (selectedBrand) {
-        brandData.forEach((brandEntry) => {
+      result.forEach((brandEntry) => {
             const brandName = Object.keys(brandEntry)[0];
             const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_');
     
@@ -86,11 +105,11 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     // const [snackbar,handleSnackBar] = useState(true)
   console.log(formData,"RAEES")
     const handleFieldChange = (fieldName, value) => {
-        if (fieldName === "brand") {
+        if (fieldName === "select_city") {
             setFormData((prevData) => ({
               ...prevData,
               [fieldName]: value,
-              model: "" 
+              select_service_provider: "" 
             }));
           } else {
             setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
@@ -174,7 +193,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           type: 'text',
           fullWidth: true,
           select: true,
-          selectArray: []
+          selectArray: selectArray
         },
         {
           label: 'Select Service Provider',
@@ -182,7 +201,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           type: 'text',
           fullWidth: true,
           select: true,
-          selectArray: []
+          selectArray: selectModel
         },
         {
             label: 'Select Vehicle',
@@ -190,7 +209,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             type: 'text',
             fullWidth: true,
             select:true,
-            selectArray:selectArray,
+            selectArray:[],
             rightIcon:true
         },
         {

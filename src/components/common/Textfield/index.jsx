@@ -39,6 +39,7 @@ useEffect(() => {
               type={field.type}
               select={field.select}
               disabled={field.disabled}
+              size={field.size && 'small'}
               error={isError}
               helperText={isError ? field.errormessage : ''}
               InputProps={{

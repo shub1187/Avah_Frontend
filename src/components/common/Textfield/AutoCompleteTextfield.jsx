@@ -9,14 +9,6 @@ export default function CreateAutoCompleteTextfield({options,label,onSelect}) {
         disablePortal
         id="combo-box-demo"
         options={options}
-        ListboxProps={
-            {
-              style:{
-                  maxHeight: '10px',
-                  border: '1px solid red'
-              }
-            }
-          }
         // onFocus={(e) => {
         //     e.target.parentElement.style.marginTop = "-8px"; // Adjust margin when focused
         //   }}

@@ -3,11 +3,13 @@ import { getYear } from 'date-fns'
 import { useDispatch, useSelector } from 'react-redux';
 import { CustomerLoginAction, LoginAction, SPLoginAction } from './LoginAction';
 import Loader from '../../components/common/Loader';
-import { Box, Button, InputLabel, MenuItem, TextField, ThemeProvider, createTheme, CircularProgress } from '@mui/material';
+import { Box, Button, InputLabel, MenuItem, TextField, ThemeProvider, createTheme, CircularProgress, Grid } from '@mui/material';
 import RegisterDialogForCustomer from 'components/LoginRegisterComponents/Dialog/RegisterDialogForCustomer/Index';
 import RegisterDialogForServiceProviderAndDealers from 'components/LoginRegisterComponents/Dialog/RegisterDialogForServiceProviderAndDealer';
 import SpRegisterAPI from 'services/SpRegisterAPI';
 import customerRegisterAPI from 'services/CustomerRegisterApi';
+import { useFetch } from 'hooks/useFetch';
+import CreateTextFields from 'components/common/Textfield';
 const theme = createTheme({
     components:{
         MuiTextField:{
@@ -56,7 +58,6 @@ const theme = createTheme({
 
 function LoginComponent() {
     const  loginState  = useSelector((state) => state.appState.login);
-
     const [loginDialogOpen,setLoginDialogOpen]= useState(false)
     const loginDialogOpenFunction = ()=>{
         setLoginDialogOpen(false)
@@ -109,6 +110,88 @@ function LoginComponent() {
 
     const dispatch = useDispatch()
     const [setLoader, bindLoader, closeLoader] = Loader('')
+    const [formData, setFormData] = useState({});
+    let {data} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
+    let brandData = data?.data?.results || []
+    const result= [
+        {
+            "Andaman and Nicobar Islands": [
+                "Bamboo Flat",
+                "Nicobar",
+                "Port Blair",
+                "South Andaman"
+            ]
+        },
+        {
+            "Andhra Pradesh": [
+                "Addanki",
+                "Adoni",
+                "Akasahebpet",
+                "Akividu",
+                "Akkarampalle"
+            ]
+        }
+    ]
+    const selectArray = result.map((brandEntry) => {
+        const brandName = Object.keys(brandEntry)[0]; // Get the brand name
+        const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_'); // Format the value
+      
+        return {
+          label: brandName,
+          value: brandName
+        };
+      });
+    let selectModel = []
+    const selectedBrand = formData.state ? formData.state.toLowerCase().replace(/ /g, '_') : ''; // Format selected brand or null if not selected
+    if (selectedBrand) {
+        result.forEach((brandEntry) => {
+            const brandName = Object.keys(brandEntry)[0];
+            const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_');
+    
+            if (selectedBrand === formattedBrandValue) { // Check for selected brand
+                brandEntry[brandName].forEach((ent) => {
+                    const label = ent;
+                    const formatValue = ent.toLowerCase().replace(/ /g, '_'); // Format model value
+                    selectModel.push({
+                        label: label,
+                        value: label
+                    });
+                });
+            }
+        });
+    } 
+    const handleFieldChange = (fieldName, value) => {
+        if (fieldName === "state") {
+            setFormData((prevData) => ({
+              ...prevData,
+              [fieldName]: value,
+              city: "" 
+            }));
+          } else {
+            setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
+          }
+    };
+
+    const statesArray = [
+        {
+            label: 'State',
+            name: "state",
+            type: 'text',
+            fullWidth: true,
+            select:true,
+            selectArray:selectArray,
+            size:true
+        },
+        {
+            label: 'City',
+            name: "city",
+            type: 'text',
+            fullWidth: true,
+            select:true,
+            selectArray:selectModel,
+            size:true
+        },
+    ]
     useEffect(() => {
 
        if(loginState.isLoading==1 ){
@@ -192,8 +275,8 @@ function LoginComponent() {
         let body = {
             "name":spName,"email":spEmail,"password":spPassword,"cnfPassword":spRePassword,
             "business_name":spBusinessName,"business_type":spBusinessType,"business_contact":spBusinessContactNumber,
-            "business_address":spBusinessAddress,'city':spCity,'state':spState,'pincode':spPincode,
-            "role":page,"approval_status":false,"sp_status":"inactive"
+            "business_address":spBusinessAddress,'city':spCity,
+            "role":page,"approval_status":false,"sp_status":"inactive",...formData
         }
         try{
             if (spEmail.length <= 0) {
@@ -534,7 +617,7 @@ function LoginComponent() {
                                                                     </label>
                                                                 </div>
                                                                 <a style={{textDecoration:"none",cursor:"pointer"}}>
-                                                                    Forgot Password?sss
+                                                                    Forgot Password?
                                                                 </a>
                                                             </Box>
                                                             <div className="errorMessage my-2 ">
@@ -660,8 +743,13 @@ function LoginComponent() {
 
                                                                 />
                                                             </Box>
-                                                            <Box sx={{display:"flex",justifyContent:"space-between",marginBottom:"10px"}}>
-                                                                <Box sx={{marginBottom:"10px",width:'50%'}}>
+                                                            {/* <Box sx={{display:"flex",justifyContent:"space-between",marginBottom:"10px"}}> */}
+                                                            <Grid container sm={12}>
+                                                            <Grid sm={5.8}item mr={0.8}><CreateTextFields fields={statesArray.slice(0,1)} onChange={handleFieldChange} formField={formData}/></Grid>
+                                                            <Grid sm={6}item><CreateTextFields fields={statesArray.slice(1,2)} onChange={handleFieldChange} formField={formData}/></Grid>
+
+                                                            </Grid>
+                                                                {/* <Box sx={{marginBottom:"10px",width:'50%'}}>
                                                                     <InputLabel sx={{color:"black"}}>State</InputLabel>
                                                                     <TextField
                                                                         size='small'
@@ -694,8 +782,8 @@ function LoginComponent() {
                                                                         helperText={errory && !spCity.length?"City Required":""}
 
                                                                     />
-                                                                </Box>
-                                                            </Box>
+                                                                </Box> */}
+                                                            {/* </Box> */}
 
 
                                                             <Box sx={{display:"flex",justifyContent:"space-between",marginBottom:"10px"}}>
