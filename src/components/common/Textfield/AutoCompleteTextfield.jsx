@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, InputLabel, MenuItem, TextField,Autocomplete } from "@mui/material";
-export default function CreateAutoCompleteTextfield({options,label,onSelect}) {
+export default function CreateAutoCompleteTextfield({options,label,onSelect,whiteColor,height}) {
     useEffect(() => {
         onSelect(""); // Initialize with an empty string
       }, []);
@@ -8,12 +8,12 @@ export default function CreateAutoCompleteTextfield({options,label,onSelect}) {
       <Autocomplete
         disablePortal
         id="combo-box-demo"
-        options={options}
+        options={options || []}
         // onFocus={(e) => {
         //     e.target.parentElement.style.marginTop = "-8px"; // Adjust margin when focused
         //   }}
         // style={{maxHeight:'50px'}}
-        sx={{ width: 250,backgroundColor:'rgb(145,54,93)',color:'white',borderRadius:1 , "& .MuiInputLabel-root": {
+        sx={{ width: 250,backgroundColor:whiteColor || 'rgb(145,54,93)',color:whiteColor ?'black':'white',borderRadius:1 , "& .MuiInputLabel-root": {
             // Override the label styles to remove shrink effect
             // transform: "none", // Remove shrink effect
             // color: "white", // Label text color
@@ -23,20 +23,20 @@ export default function CreateAutoCompleteTextfield({options,label,onSelect}) {
         //   },
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: "transparent", // Remove border color
+              borderColor: whiteColor ?'':"transparent", // Remove border color
             },
             "&:hover fieldset": {
-              borderColor: "transparent", // Remove border color on hover
+              borderColor: whiteColor ?'':"transparent", // Remove border color on hover
             },
             "&.Mui-focused fieldset": {
-              borderColor: "transparent", // Remove border color when focused
+              borderColor: whiteColor ?'':"transparent", // Remove border color when focused
             },
             "& input": {
                 color: "white", // Change font color to white
-                height: "3px",
+                height: height?'23px':"3px",
               },
           },}}
-        renderInput={(params) => <TextField {...params} label={label}InputLabelProps={{sx: { color: "white",fontSize:12, top: "-0.6vh", "&.MuiInputLabel-shrink": { top: 10,color:'rgb(145,54,93)' } }}}/>}
+        renderInput={(params) => <TextField {...params} label={label}InputLabelProps={{sx: { color:whiteColor ?'black':'white',fontSize:12, top: "-0.6vh", "&.MuiInputLabel-shrink": { top: 10,color:'rgb(145,54,93)' } }}}/>}
         onChange={(event, newValue) => {
             onSelect(newValue ? newValue.label : ""); // Pass the selected city as a string
           }}

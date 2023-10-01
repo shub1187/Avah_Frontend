@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { Alert, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Snackbar, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
+import { Alert, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, MenuItem, Select, Snackbar, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
 import CreateTextFields from 'components/common/Textfield';
 import { useCustomerFetchFunction, useFetch, useFetchFunction } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
@@ -7,18 +7,42 @@ import CreateDateFields from 'components/common/Textfield/DateTextfield';
 import { DatePicker } from '@mui/x-date-pickers';
 import SkeletonLoading from 'components/common/Skeleton';
 import { useMobileResponsive } from 'hooks/useMobileResponsive';
+import CreateAutoCompleteTextfield from 'components/common/Textfield/AutoCompleteTextfield';
+import { useCity } from 'hooks/useCustomContext';
 const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,borderRadius,my}) => {
     const [open, setOpen] = React.useState(false);
     const [formData, setFormData] = useState({});
-    const [searchResults, setSearchResults] = useState([]); // Store search results here
+    const [spList,setSpList] = useState([])
+    const { city, setCity } = useCity();
+    const [selectedServiceProvider, setSelectedServiceProvider] = useState("");
+    const [selectedSpAddress, setSelectedSpAddress] = useState("");
+    console.log(selectedSpAddress)
+    console.log(spList)
     const {fetchCustomerData,snackbar,loadingIndicator} = useCustomerFetchFunction()
     const {isMobile} = useMobileResponsive()
     let {data} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
-    let {data:fuelType} = useFetch('http://localhost:3008/api/admin/getAllFuelTypes')
-    const fuelNamesArray = fuelType?.data?.results?.map(item => ({
-      label: item.fuel_name,
-      value: item.fuel_name
-    }));
+    // let {data:fuelType} = useFetch('http://localhost:3008/api/admin/getAllFuelTypes')
+    // const fuelNamesArray = fuelType?.data?.results?.map(item => ({
+    //   label: item.fuel_name,
+    //   value: item.fuel_name
+    // }));
+    useEffect(()=>{
+      const matchingSP = spList.find((sp) => sp.address === formData.address);
+
+      if (matchingSP) {
+        // Set the address in formData.select_service_provider
+        setFormData({
+          ...formData,
+          address: matchingSP.address,
+        });
+      } else {
+        // If no exact match is found, set an empty string or handle the error as needed
+        setFormData({
+          ...formData,
+          address: "",
+        });
+      }
+    },[formData.select_service_provider])
     let brandData = data?.data?.results || []
     const result= [
       {
@@ -39,6 +63,45 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           ]
       }
   ]
+  const datarrrrrr = {
+    "Navi Mumbai (Maharashtra)": [
+      {
+         id:1,
+          label: "Balaji Auto services",
+          value: "Balaji Auto services",
+          address: "Sector-05, shop no.-885 Brahma chowk Sanpada"
+      },
+      {
+        id:2,
+          label: "Balaji Auto services",
+          value: "Balaji Auto services",
+          address: "Sector-22, Sai Chowk Ghansoli"
+      }
+    ],
+    "Islampur (Bihar)": [
+      {
+        id:3,
+          label: "suyog auto services",
+          value: "suyog auto services",
+          address: "sector-25, near blue diamond"
+      }
+    ]
+  };
+  const cityArray = Object.keys(datarrrrrr).map((cityName) => ({
+    label: cityName
+  }));
+  const handleSelectCity = (selectedValue) => {
+    if(city){
+    const selectedCityData = datarrrrrr[city] || [];
+    setSpList(selectedCityData);
+    }
+    else{
+      setCity(selectedValue);
+      const selectedCityData = datarrrrrr[selectedValue] || [];
+      setSpList(selectedCityData);
+    }
+
+  };
   let vehicleedata= [
     {
         "vehicle_id": 37,
@@ -56,36 +119,6 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         "mobile_number": "7788994455"
     }
 ]
-
-    const selectArray = result.map((brandEntry) => {
-        const brandName = Object.keys(brandEntry)[0]; // Get the brand name
-      
-        return {
-          label: brandName,
-          value: brandName
-        };
-      });
-    let selectModel = []
-    const selectedBrand = formData.select_city ? formData.select_city.toLowerCase().replace(/ /g, '_') : ''; // Format selected brand or null if not selected
-
-    if (selectedBrand) {
-      result.forEach((brandEntry) => {
-            const brandName = Object.keys(brandEntry)[0];
-            const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_');
-    
-            if (selectedBrand === formattedBrandValue) { // Check for selected brand
-                brandEntry[brandName].forEach((ent) => {
-                    const label = ent;
-                    selectModel.push({
-                        label: label,
-                        value: label
-                    });
-                });
-            }
-        });
-    } 
-    console.log(selectModel,selectArray)
-
     const [status,setStatus] = useState({
       isVisible:false,
       message:"",
@@ -143,7 +176,20 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     // const handleSnackBarFunction = ()=>{
     //     handleSnackBar(false)
     // }
+    const handleServiceProviderChange = (event) => {
+      const selectedIndex = event.target.value;
+      setSelectedServiceProvider(selectedIndex);
+      console.log(selectedIndex)
+      // Find the selected service provider's address
+      const selectedSp = spList.find((sp) => sp.id === selectedIndex);
+      if (selectedSp) {
+        setSelectedSpAddress(selectedSp.address);
+        setFormData((prev)=>({...prev,address:selectedSp.address}))
 
+      } else {
+        setSelectedSpAddress("");
+      }
+    };
     const handleSubmit = async()=>{
         try{
           
@@ -172,7 +218,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             setFormData({})
         }
     }
-    
+    // console.log(selectOptionsState,selectArray)
     const appointmentList = [
         // {
         //     label: 'Name',
@@ -186,7 +232,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           type: 'text',
           fullWidth: true,
           select: true,
-          selectArray: selectArray
+          selectArray: []
         },
         {
           label: 'Select Service Provider',
@@ -194,7 +240,16 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           type: 'text',
           fullWidth: true,
           select: true,
-          selectArray: selectModel
+          selectArray: spList
+        },
+        {
+          label: 'Address',
+          name: "address",
+          type: 'text',
+          fullWidth: true,
+          disabled:true,
+          row: 2,
+
         },
         {
             label: 'Select Vehicle',
@@ -312,7 +367,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
       },
       {
             label: 'Pickup Address',
-            name: "pickup_ddress",
+            name: "pickup_address",
             type: 'text',
             fullWidth: true,
             row: 3,
@@ -329,10 +384,25 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         <DialogTitle >  CREATE APPOINTMENT</DialogTitle>
         <DialogContent>
             <Grid container xs={12} mt={3}>
-              <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>       
-                  <CreateTextFields  fields={appointmentList.slice(0,2)} onChange={handleFieldChange}  formField={formData}/>
-                  <CreateTextFields  onSearchIconClick={handleSearchIconClick} fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData}/>
-                  <CreateTextFields  fields={appointmentList.slice(3,5)} onChange={handleFieldChange}  formField={formData}/>
+              <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>  
+                  <Box mb={1} fontSize={18}>Select City</Box>   
+                  <CreateAutoCompleteTextfield whiteColor height options = {cityArray} onSelect={handleSelectCity}/>
+                  <Box mt={1} fontSize={18}>Select Service Provider</Box>   
+                  <Select
+                  sx={{my:1}}
+                  fullWidth
+                    value={selectedServiceProvider}
+                    onChange={handleServiceProviderChange}
+                  >
+                    {spList.map((sp) => (
+                      <MenuItem key={sp.id} value={sp.id}>
+                        {sp.label}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <CreateTextFields  fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  onSearchIconClick={handleSearchIconClick} fields={appointmentList.slice(3,4)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  fields={appointmentList.slice(4,5)} onChange={handleFieldChange}  formField={formData}/>
               </Grid>
               <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>
                 <Grid container xs={12} >
@@ -344,10 +414,11 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
               <Grid item xs={12} sm={3.6} >
                 <Grid container xs={12}>
                 {/* <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(9,10)} onChange={handleFieldChange} formField={formData}/></Grid> */}
-                  <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(10,11)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(11,13)} onChange={handleFieldChange} formField={formData}/></Grid>
+                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(10,11)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(11,12)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(12,14)} onChange={handleFieldChange} formField={formData}/></Grid>
                   {formData.pickup_drop=='Company Executive' &&
-                    <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(13,14)} onChange={handleFieldChange} formField={formData}/></Grid>
+                    <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(14,15)} onChange={handleFieldChange} formField={formData}/></Grid>
                   }
 
                 
@@ -368,3 +439,39 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
 }
 
 export default AddCustomerAppointmentDialog
+
+
+// const data = [
+//   {
+//     label: "Navi Mumbai (Maharashtra)",
+//   value:"Navi Mumbai (Maharashtra)",
+//     ListofServiceProviders: [
+//       {
+//         spDetails: {
+//           name:{key:"Balaji Auto services",value:"Balaji Auto services"} ,
+//           address:{key: "Sector-05, shop no.-885 Brahma chowk Sanpada",value:"Sector-05, shop no.-885 Brahma chowk Sanpada"} ,
+//         },
+//       },
+//       {
+//         spDetails: {
+//           name:{key:"Balaji Auto services",value:"Balaji Auto services"} ,
+//           address:{key:  "Sector-22, Sai Chowk Ghansoli",value: "Sector-22, Sai Chowk Ghansoli"} ,
+//           name: "Balaji Auto services",
+//           address:
+//         },
+//       },
+//     ],
+//   },
+//   {
+//     label: "Islampur (Bihar)",
+//   value:"Islampur (Bihar))",
+//     ListofServiceProviders: [
+//       {
+//         spDetails: {
+//           name:{key:"suyog auto services",value:"suyog auto services"} ,
+//           address:{key: "sector-25, near blue diamond",value: "sector-25, near blue diamond"} ,
+//         },
+//       },
+//     ],
+//   },
+// ];

@@ -12,20 +12,15 @@ import "react-multi-carousel/lib/styles.css";
 import {Link} from 'react-router-dom'
 
 const CustomerHome = () => {   
-    // const [city, setCity] = useState('');
     const { city, setCity } = useCity();
+    console.log(city)
     const {data} = useFetch('http://localhost:3008/api/customer/getAllApprovedSpCities')
 
-    // data?.result?.map((data)=>({'label':data}))
     const handleSelectCity = (selectedValue) => {
-        const selectedCity = selectedValue ? selectedValue.label : ""; // Extract the string value
-        setCity(selectedCity);
+        setCity(selectedValue);
       };
-    // console.log(city)
-    console.log("ln 25",data)
     const responsive = {
         superLargeDesktop: {
-          // the naming can be any, depends on you.
           breakpoint: { max: 4000, min: 3000 },
           items: 5
         },
