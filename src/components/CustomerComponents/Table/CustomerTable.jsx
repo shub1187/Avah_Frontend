@@ -157,7 +157,7 @@ const CustomerTable = ({DialogButton,columnss,URL})=>{
         const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
         const response = await axios.get(url,{headers});
         console.log("ln 161 RAEES", response)
-        const data = response.data.result; // Adjust this based on your API response structure
+        const data = response?.data?.result; // Adjust this based on your API response structure
         // setDataLength(data.length)
        
         return {

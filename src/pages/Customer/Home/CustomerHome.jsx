@@ -14,7 +14,7 @@ import {Link} from 'react-router-dom'
 const CustomerHome = () => {   
     // const [city, setCity] = useState('');
     const { city, setCity } = useCity();
-    const {data} = useFetch('http://localhost:3008/api/customer/getAllCities')
+    const {data} = useFetch('http://localhost:3008/api/customer/getAllApprovedSpCities')
 
     // data?.result?.map((data)=>({'label':data}))
     const handleSelectCity = (selectedValue) => {
