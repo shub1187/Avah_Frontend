@@ -51,7 +51,7 @@ const CustomerHome = () => {
                     {/* <Grid item mt={1}>Home</Grid>
                     <Grid item mt={1}>Services</Grid>
                     <Grid item mt={1}>Providers</Grid> */}
-                    <Grid item><Button sx={{fontSize:10,minHeight:35}} variant='contained' color='darkerpink'>My Location</Button></Grid>
+                    {/* <Grid item><Button sx={{fontSize:10,minHeight:35}} variant='contained' color='darkerpink'>My Location</Button></Grid> */}
                     <Grid item><CreateAutoCompleteTextfield options = {data?.result} label={'Select City'} onSelect={handleSelectCity}/></Grid>
                     {/* <Grid item><Button sx={{fontSize:10,minHeight:35}}variant='contained' color='darkerpink'>Select City</Button></Grid> */}
                     <Grid item mr={2}><Link to={'/customer/dashboard'}><Button sx={{fontSize:10,minHeight:35}} variant='contained' color="darkerpink">Dashboard</Button></Link></Grid>

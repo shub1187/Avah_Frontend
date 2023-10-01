@@ -13,7 +13,7 @@ export default function CreateAutoCompleteTextfield({options,label,onSelect}) {
         //     e.target.parentElement.style.marginTop = "-8px"; // Adjust margin when focused
         //   }}
         // style={{maxHeight:'50px'}}
-        sx={{ width: 120,backgroundColor:'rgb(145,54,93)',color:'white',borderRadius:1 , "& .MuiInputLabel-root": {
+        sx={{ width: 200,backgroundColor:'rgb(145,54,93)',color:'white',borderRadius:1 , "& .MuiInputLabel-root": {
             // Override the label styles to remove shrink effect
             // transform: "none", // Remove shrink effect
             // color: "white", // Label text color
