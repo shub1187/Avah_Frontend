@@ -39,34 +39,26 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           ]
       }
   ]
-    // console.log("ln 15 shub",data?.data?.results)
-    // const brandData = [  // This is dummy data for future refernce
-    //     {
-    //         "Maruti Suzuki": [
-    //             "Swift",
-    //             "Ertiga"
-    //         ]
-    //     },
-    //     {
-    //         "Morris Garage": [
-    //             "HECTOR",
-    //             "Rickshaw"
-    //         ]
-    //     },
-    //     {
-    //         "Hyundai": [
-    //             "i20"
-    //         ]
-    //     },
-    //     {
-    //         "Opel": [
-    //             "Corsa"
-    //         ]
-    //     }
-    // ]
+  let vehicleedata= [
+    {
+        "vehicle_id": 37,
+        "customer_id": "23",
+        "vehicle_number": "BH87YU1241",
+        "vehicle_type": "Personal",
+        "brand": "Hyundai",
+        "model": "i20",
+        "customization": "Externally Modified",
+        "fuel_type": "Hydrogen Gas",
+        "registration_number": "TRYUHS45125POIOMBC",
+        "name": "Sharavni Dhambe",
+        "email": "shravani@gmail.com",
+        "full_address": "Thane Manpada",
+        "mobile_number": "7788994455"
+    }
+]
+
     const selectArray = result.map((brandEntry) => {
         const brandName = Object.keys(brandEntry)[0]; // Get the brand name
-        const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_'); // Format the value
       
         return {
           label: brandName,
@@ -84,7 +76,6 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             if (selectedBrand === formattedBrandValue) { // Check for selected brand
                 brandEntry[brandName].forEach((ent) => {
                     const label = ent;
-                    const formatValue = ent.toLowerCase().replace(/ /g, '_'); // Format model value
                     selectModel.push({
                         label: label,
                         value: label
@@ -120,24 +111,26 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
       // For example, you can use Axios for the API call
       // Update setSearchResults with the API response data
       // setSearchResults(apiResponseData);
-  
-      // You can also update the formData or other state as needed
-      console.log(fieldName)
-      const obj = {
-        payload:formData,
-        method:"POST",
-        url:"http://localhost:3008/api/customer/vehicleRegistration"
-      }
+      setFormData((prev)=>({...prev,...vehicleedata[0]}))
 
-      const {isSuccess,data,error} = await fetchCustomerData(obj)
-      if(error && !isSuccess){
-          throw new Error(error)
-      }
-      if(data && isSuccess){
-          setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
-      }
-      console.log(formData);
-      setFormData({})
+      // You can also update the formData or other state as needed
+      // console.log(fieldName)
+      // const obj = {
+      //   payload:formData,
+      //   method:"POST",
+      //   url:"http://localhost:3008/api/customer/vehicleRegistration"
+      // }
+
+      // const {isSuccess,data,error} = await fetchCustomerData(obj)
+      // if(error && !isSuccess){
+      //     throw new Error(error)
+      // }
+      // if(data && isSuccess){
+      //   setFormData({...prev,...vehicleedata[0]})
+      //     setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
+      // }
+      // console.log(formData);
+      // setFormData({})
     };
 
     const handleClickOpen = () => {
@@ -235,18 +228,18 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             fullWidth: true,
             // select:true,
             // selectArray:selectModel,
-            disabled:true
+            disabled:true,
 
         },
-        {
-            label: 'Address',
-            name: "address",
-            type: 'text',
-            fullWidth: true,
-            row: 4,
-            disabled:true
+        // {
+        //     label: 'Address',
+        //     name: "address",
+        //     type: 'text',
+        //     fullWidth: true,
+        //     row: 3,
+        //     disabled:true
 
-        },
+        // },
         {
             label: 'Email',
             name: "email",
@@ -257,21 +250,32 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         },
         {
             label: 'Mobile',
-            name: "mobile",
+            name: "mobile_number",
             type: 'number',
             fullWidth: true,
             disabled:true
 
 
         },
+        {
+          label: 'Fuel Type',
+          name: "fuel_type",
+          type: 'text',
+          fullWidth: true,
+          // select: true,
+          // selectArray: fuelNamesArray,
+          disabled:true
 
+        },
         {
           label: 'Engine Customization',
           name: "customization",
           type: 'text',
           fullWidth: true,
-          select: true,
-          selectArray: [{ label: "Showroom Fitted", value: "Showroom Fitted" }, { label: "Externally Modified", value: "Externally Modified" }]
+          // select: true,
+          // selectArray: [{ label: "Showroom Fitted", value: "Showroom Fitted" }, { label: "Externally Modified", value: "Externally Modified" }],
+          disabled:true
+
         },
         {
             label: 'Appointment Date',
@@ -306,23 +310,21 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
               }
             ]
       },
-        {
-          label: 'Fuel Type',
-          name: "fuel_type",
-          type: 'text',
-          fullWidth: true,
-          select: true,
-          selectArray: fuelNamesArray
-        },
+      {
+            label: 'Pickup Address',
+            name: "pickup_ddress",
+            type: 'text',
+            fullWidth: true,
+            row: 3,
+      },
     ]
   return (
     <div>
       <Button sx={{height:height,width:width,fontWeight:"bold",minHeight:minHeight,borderRadius:borderRadius,maxWidth:maxWidth}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
         <Grid container><Grid my={my} xs={12} item>{img && <img  src={img} alt="Card Image" />}</Grid><Grid fontSize={isMobile && 8} xs={12} item>CREATE APPOINTMENT</Grid></Grid>
-
       </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth='lg'>
-      <div style={{width: isMobile?'100%':1200}}>
+      <Dialog open={open} onClose={handleClose} maxWidth='md'>
+      {/* <div style={{width: isMobile?'100%':1000}}> */}
 
         <DialogTitle >  CREATE APPOINTMENT</DialogTitle>
         <DialogContent>
@@ -331,53 +333,37 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                   <CreateTextFields  fields={appointmentList.slice(0,2)} onChange={handleFieldChange}  formField={formData}/>
                   <CreateTextFields  onSearchIconClick={handleSearchIconClick} fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData}/>
                   <CreateTextFields  fields={appointmentList.slice(3,5)} onChange={handleFieldChange}  formField={formData}/>
-
-                  {/* <TextField values={formData[]}/> */}
               </Grid>
               <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>
                 <Grid container xs={12} >
                 
-                    {/* <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(4,5)} onChange={handleFieldChange} formField={formData}/></Grid> */}
-                    {/* <DatePicker/> */}
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(5,9)} onChange={handleFieldChange} formField={formData}/></Grid>
+
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(5,10)} onChange={handleFieldChange} formField={formData}/></Grid>
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={3.6} >
                 <Grid container xs={12}>
-                {/* <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(8,9)} onChange={handleFieldChange} formField={formData}/></Grid> */}
                 {/* <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(9,10)} onChange={handleFieldChange} formField={formData}/></Grid> */}
-                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(9,10)} onChange={handleFieldChange} formField={formData}/></Grid>
                   <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(10,11)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(11,14)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(11,13)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  {formData.pickup_drop=='Company Executive' &&
+                    <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(13,14)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  }
+
                 
 
                 </Grid>
               </Grid>
             </Grid>
-          {/* <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText> */}
-          {/* <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          /> */}
         </DialogContent>
         <DialogActions>
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
-        </div>
+        {/* </div> */}
       </Dialog>
       {snackbar}
       {loadingIndicator}
-      {/* {status.loading && <SkeletonLoading />}
-            {(!status.loading && status.error ) &&<Snackbar open={snackbar} autoHideDuration={2000} onClose={handleSnackBarFunction}  color='error'><Alert severity='error'>{status.error}</Alert></Snackbar>} */}
     </div>  )
 }
 
