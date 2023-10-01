@@ -188,7 +188,7 @@ if (selectedBrand) {
                 <Typography my={1} fontWeight={'bold'} fontSize={20}>Email : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'} component={'span'}>{profileData?.email??""}</Typography></Typography>
               </Box>
               <Box mx={5}>
-                <Typography  my={1} fontWeight={'bold'} fontSize={20}>Full Address : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'}  component={'span'}>{profileData?.address??""}</Typography></Typography>
+                <Typography  my={1} fontWeight={'bold'} fontSize={20}>Address : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'}  component={'span'}>{profileData?.address??""}</Typography></Typography>
                 <Typography my={1} fontWeight={'bold'} fontSize={20}>Mobile Number : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'} component={'span'}>{profileData?.mobile_number??""}</Typography></Typography>
               </Box>
             </Box>
