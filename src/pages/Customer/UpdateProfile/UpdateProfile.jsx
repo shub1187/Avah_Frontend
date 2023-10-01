@@ -17,7 +17,7 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
     const {fetchData} = useFetchFunction()
     const {fetchCustomerData,snackbar,loadingIndicator} = useCustomerFetchFunction()
     const {isMobile} = useMobileResponsive()
-    // let {data} = useFetch('http://localhost:3008/api/customer/getCustomerProfile')
+    let {data:profileData} = useFetch('http://localhost:3008/api/customer/getAllCitiesPerState')
     const [data,setData] = React.useState([]) 
     const result= [
       {
@@ -38,7 +38,7 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
           ]
       }
   ]
-  const selectArray = result.map((brandEntry) => {
+  const selectArray = profileData?.result.map((brandEntry) => {
     const brandName = Object.keys(brandEntry)[0]; // Get the brand name
     const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_'); // Format the value
   
@@ -80,7 +80,7 @@ if (selectedBrand) {
       },[])
       console.log("ln 30 UpdateProfile.jsx data: ", data)
 
-      let profileData = data?.result
+      // let profileData = data?.result
 
     const [status,setStatus] = useState({
       isVisible:false,
