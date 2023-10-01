@@ -50,7 +50,7 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
 let selectModel = []
 const selectedBrand = formData.state ? formData.state.toLowerCase().replace(/ /g, '_') : ''; // Format selected brand or null if not selected
 if (selectedBrand) {
-   result.forEach((brandEntry) => {
+  cityData?.result?.forEach((brandEntry) => {
         const brandName = Object.keys(brandEntry)[0];
         const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_');
 
@@ -169,7 +169,7 @@ if (selectedBrand) {
     },
     {
       label: 'Pincode',
-      name: "pincode",
+      name: "pin_code",
       type: 'number',
       fullWidth: true,
       required: true, // Add the required property
@@ -188,7 +188,7 @@ if (selectedBrand) {
                 <Typography my={1} fontWeight={'bold'} fontSize={20}>Email : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'} component={'span'}>{profileData?.email??""}</Typography></Typography>
               </Box>
               <Box mx={5}>
-                <Typography  my={1} fontWeight={'bold'} fontSize={20}>Full Address : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'}  component={'span'}>{profileData?.address??""}</Typography></Typography>
+                <Typography  my={1} fontWeight={'bold'} fontSize={20}>Address : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'}  component={'span'}>{profileData?.address??""}</Typography></Typography>
                 <Typography my={1} fontWeight={'bold'} fontSize={20}>Mobile Number : <Typography fontSize={20} sx={{color:'rgb(173,73,112)'}} fontWeight={'bold'} component={'span'}>{profileData?.mobile_number??""}</Typography></Typography>
               </Box>
             </Box>

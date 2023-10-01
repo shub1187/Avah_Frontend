@@ -5,7 +5,7 @@ import React from 'react'
 
 const CustomerAppointment = () => {
   return (
-    <div><CustomerTable DialogButton={AddCustomerAppointmentDialog} columnss={AddCustomerAppointmentColumn}  URL={'http://localhost:3008/api/serviceprovider/getAllAppointment'}/></div>
+    <div><CustomerTable DialogButton={AddCustomerAppointmentDialog} columnss={AddCustomerAppointmentColumn}  URL={''}/></div>
   )
 }
 
