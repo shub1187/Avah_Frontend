@@ -38,7 +38,7 @@ const UpdateCustomerProfile = ({height,width,color,minHeight,maxWidth,img,border
           ]
       }
   ]
-  const selectArray = profileData?.result.map((brandEntry) => {
+  const selectArray = profileData?.result?.map((brandEntry) => {
     const brandName = Object.keys(brandEntry)[0]; // Get the brand name
     const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_'); // Format the value
   
