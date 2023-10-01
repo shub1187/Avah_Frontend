@@ -6,6 +6,7 @@ import CreateTextFields from 'components/common/Textfield';
 import { useCustomerFetchFunction, useFetch } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
 import FileInputTextField from 'components/common/Textfield/FileTextfield';
+import { useMobileResponsive } from 'hooks/useMobileResponsive';
 
 const AddCustomerVehicleDialog = ({height,width,color}) => {
     const [open, setOpen] = React.useState(false);
@@ -17,6 +18,7 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
       label: item.fuel_name,
       value: item.fuel_name
     }));
+    const {isMobile} = useMobileResponsive()
     console.log("ln 15",fuelNamesArray)
     const {fetchCustomerData,snackbar,loadingIndicator} = useCustomerFetchFunction()
     const [status,setStatus] = useState({
@@ -162,22 +164,22 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
       <Button sx={{height:isMobileResolution?'50px':height,width:width,fontSize:isMobileResolution?"0.6rem":'0.875rem'}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
         Add New Vehicle
       </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth='lg'>
-      <div style={{width: 1200}}>
+      <Dialog open={open} onClose={handleClose} maxWidth='md'>
+      <div style={{width: isMobile?'100%':''}}>
 
         <DialogTitle >Add New Vehicle</DialogTitle>
         <DialogContent>
             <Grid container xs={12} mt={3}>
-              <Grid item xs={5.5} mr={4}>
+              <Grid item xs={12} sm={5.5} mr={!isMobile && 4}>
                   <CreateTextFields  fields={customerTextfield.slice(0,1)} onChange={handleFieldChange}  formField={formData}/>
-                  <Box mb={1} color={'#ad4970'}>No Hiphen required Eg:MH14TT3066</Box>
+                  {/* <Box mb={1} color={'#ad4970'}>No Hiphen required Eg:MH14TT3066</Box> */}
                   <CreateTextFields  fields={customerTextfield.slice(1,2)} onChange={handleFieldChange}  formField={formData}/>
                   <CreateTextFields  fields={customerTextfield.slice(2,3)} onChange={handleFieldChange}  formField={formData}/>
                   <CreateTextFields  fields={customerTextfield.slice(3,4)} onChange={handleFieldChange}  formField={formData}/>
-                  <CreateTextFields  fields={customerTextfield.slice(4,5)} onChange={handleFieldChange}  formField={formData}/>
               </Grid>
-              <Grid item xs={6} >
+              <Grid item xs={12}  sm={5.5}>
                 <Grid container xs={12}>
+                <Grid  xs={12} item><CreateTextFields  fields={customerTextfield.slice(4,5)} onChange={handleFieldChange}  formField={formData}/></Grid>
                   <Grid  xs={12} item><CreateTextFields fields={customerTextfield.slice(5,6)} onChange={handleFieldChange} formField={formData}/></Grid>
                   <Grid  xs={12} item ><CreateTextFields fields={customerTextfield.slice(6,7)} onChange={handleFieldChange}  formField={formData}/></Grid>
                   {/* <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(7,8)} onChange={handleFieldChange}  formField={formData}/></Grid>

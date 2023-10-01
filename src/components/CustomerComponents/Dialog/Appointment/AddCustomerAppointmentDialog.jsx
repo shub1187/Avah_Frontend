@@ -324,7 +324,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         <Grid container><Grid my={my} xs={12} item>{img && <img  src={img} alt="Card Image" />}</Grid><Grid fontSize={isMobile && 8} xs={12} item>CREATE APPOINTMENT</Grid></Grid>
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth='md'>
-      {/* <div style={{width: isMobile?'100%':1000}}> */}
+      <div style={{width: isMobile?'100%':''}}>
 
         <DialogTitle >  CREATE APPOINTMENT</DialogTitle>
         <DialogContent>
@@ -360,7 +360,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
-        {/* </div> */}
+        </div>
       </Dialog>
       {snackbar}
       {loadingIndicator}
