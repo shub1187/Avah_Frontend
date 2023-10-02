@@ -32,7 +32,7 @@ export default function CreateAutoCompleteTextfield({options,label,onSelect,whit
               borderColor: whiteColor ?'':"transparent", // Remove border color when focused
             },
             "& input": {
-                color: "white", // Change font color to white
+                color: whiteColor?'black':"white", // Change font color to white
                 height: height?'23px':"3px",
               },
           },}}

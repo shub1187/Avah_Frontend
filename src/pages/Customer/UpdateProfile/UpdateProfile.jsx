@@ -97,7 +97,7 @@ if (selectedBrand) {
     const handleSubmit = async()=>{
         try{
             setIsSubmitted(true); // Set the form as submitted
-            setStatus({loading:true,message:'',isVisible:true})
+            // setStatus({loading:true,message:'',isVisible:true})
 
             const requiredFields = profileList.filter((field) => field.required);
             const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);

@@ -16,92 +16,83 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     const { city, setCity } = useCity();
     const [selectedServiceProvider, setSelectedServiceProvider] = useState("");
     const [selectedSpAddress, setSelectedSpAddress] = useState("");
-    console.log(selectedSpAddress)
-    console.log(spList)
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const {fetchCustomerData,snackbar,loadingIndicator} = useCustomerFetchFunction()
     const {isMobile} = useMobileResponsive()
-    let {data} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
-    // let {data:fuelType} = useFetch('http://localhost:3008/api/admin/getAllFuelTypes')
-    // const fuelNamesArray = fuelType?.data?.results?.map(item => ({
-    //   label: item.fuel_name,
-    //   value: item.fuel_name
-    // }));
+    // let {data:citiesSpData} = useFetch('http://localhost:3008/api/customer/getSpDetailsPerCity')
+    let {data:customerVehicleList} = useFetch(`http://localhost:3008/api/customer/getCustomerVehicleNumbers?customer_id=${localStorage.getItem('custId')}`)
+    const citiesSpData = {
+      error:'false',
+      data:{
+        "Navi Mumbai (Maharashtra)": [
+          {
+            sp_id: 35,
+            label: "Balaji Auto services",
+            value: "Balaji Auto services",
+            address: "Sector-05, shop no.-885 Brahma chowk Sanpada"
+          },
+          {
+            sp_id: 36,
+            label: "Balaji Auto services",
+            value: "Balaji Auto services",
+            address: "Sector-22, Sai Chowk Ghansoli"
+          }
+        ],
+        "Islampur (Bihar)": [
+          {
+            sp_id: 33,
+            label: "suyog auto services",
+            value: "suyog auto services",
+            address: "sector-25, near blue diamond"
+          }
+        ],
+      }
+    }
     useEffect(()=>{
       const matchingSP = spList.find((sp) => sp.address === formData.address);
-
       if (matchingSP) {
-        // Set the address in formData.select_service_provider
         setFormData({
           ...formData,
           address: matchingSP.address,
         });
       } else {
-        // If no exact match is found, set an empty string or handle the error as needed
         setFormData({
           ...formData,
           address: "",
         });
       }
     },[formData.select_service_provider])
-    let brandData = data?.data?.results || []
-    const result= [
-      {
-          "Andaman and Nicobar Islands": [
-              "Bamboo Flat",
-              "Nicobar",
-              "Port Blair",
-              "South Andaman"
-          ]
-      },
-      {
-          "Andhra Pradesh": [
-              "Addanki",
-              "Adoni",
-              "Akasahebpet",
-              "Akividu",
-              "Akkarampalle"
-          ]
-      }
-  ]
-  const datarrrrrr = {
-    "Navi Mumbai (Maharashtra)": [
-      {
-         id:1,
-          label: "Balaji Auto services",
-          value: "Balaji Auto services",
-          address: "Sector-05, shop no.-885 Brahma chowk Sanpada"
-      },
-      {
-        id:2,
-          label: "Balaji Auto services",
-          value: "Balaji Auto services",
-          address: "Sector-22, Sai Chowk Ghansoli"
-      }
-    ],
-    "Islampur (Bihar)": [
-      {
-        id:3,
-          label: "suyog auto services",
-          value: "suyog auto services",
-          address: "sector-25, near blue diamond"
-      }
-    ]
-  };
-  const cityArray = Object.keys(datarrrrrr).map((cityName) => ({
+
+  const cityArray = Object.keys(citiesSpData?.data || {}).map((cityName) => ({
     label: cityName
   }));
   const handleSelectCity = (selectedValue) => {
     if(city){
-    const selectedCityData = datarrrrrr[city] || [];
+    const selectedCityData = citiesSpData?.data?.[city] || [];
     setSpList(selectedCityData);
     }
     else{
       setCity(selectedValue);
-      const selectedCityData = datarrrrrr[selectedValue] || [];
+      const selectedCityData = citiesSpData?.data?.[selectedValue] || [];
       setSpList(selectedCityData);
     }
 
   };
+  let vehcielList = 
+    {
+      "error": false,
+      "data": [
+          {
+              "label": "TS-55-NM-8995",
+              'value': "TS-55-NM-8995"
+          },
+          {
+              "label": "KA-70-HP-4008",
+              'value': "KA-70-HP-4008"
+          },
+  ]
+  }
+  
   let vehicleedata= [
     {
         "vehicle_id": 37,
@@ -119,14 +110,6 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         "mobile_number": "7788994455"
     }
 ]
-    const [status,setStatus] = useState({
-      isVisible:false,
-      message:"",
-      loading:false,
-      error:'',
-      responseStatus:''
-  })
-    // const [snackbar,handleSnackBar] = useState(true)
   console.log(formData,"RAEES")
     const handleFieldChange = (fieldName, value) => {
         if (fieldName === "select_city") {
@@ -140,30 +123,30 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           }
     };
     const handleSearchIconClick = async(fieldName) => {
-      // API call logic here
-      // For example, you can use Axios for the API call
-      // Update setSearchResults with the API response data
-      // setSearchResults(apiResponseData);
-      setFormData((prev)=>({...prev,...vehicleedata[0]}))
+      // setFormData((prev)=>({...prev,...vehicleedata[0]}))
+      setIsSubmitted(true); // Set the form as submitted
 
-      // You can also update the formData or other state as needed
-      // console.log(fieldName)
-      // const obj = {
-      //   payload:formData,
-      //   method:"POST",
-      //   url:"http://localhost:3008/api/customer/vehicleRegistration"
-      // }
+      const requiredFields = appointmentList.filter((field) => field.required);
+      const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
+  
+      if (emptyRequiredFields.length > 0) {
+        // setStatus({ error: 'Please fill in all required fields.', message: '', loading: false });
+        return;
+      }
+      const obj = {
+        payload:formData.select_vehicle,
+        method:"POST",
+        url:"http://localhost:3008/api/customer/vehicleRegistration"
+      }
 
-      // const {isSuccess,data,error} = await fetchCustomerData(obj)
-      // if(error && !isSuccess){
-      //     throw new Error(error)
-      // }
-      // if(data && isSuccess){
-      //   setFormData({...prev,...vehicleedata[0]})
-      //     setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
-      // }
-      // console.log(formData);
-      // setFormData({})
+      const {isSuccess,data,error} = await fetchCustomerData(obj)
+      if(error && !isSuccess){
+          throw new Error(error)
+      }
+      if(data && isSuccess){
+      setFormData((prev)=>({...prev,...data?.data[0]}))
+      }
+      setIsSubmitted(false); // Set the form as submitted
     };
 
     const handleClickOpen = () => {
@@ -173,31 +156,24 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     const handleClose = () => {
       setOpen(false);
     };
-    // const handleSnackBarFunction = ()=>{
-    //     handleSnackBar(false)
-    // }
+
     const handleServiceProviderChange = (event) => {
       const selectedIndex = event.target.value;
       setSelectedServiceProvider(selectedIndex);
       console.log(selectedIndex)
       // Find the selected service provider's address
-      const selectedSp = spList.find((sp) => sp.id === selectedIndex);
+      const selectedSp = spList.find((sp) => sp.sp_id === selectedIndex);
       if (selectedSp) {
-        setSelectedSpAddress(selectedSp.address);
+        // setSelectedSpAddress(selectedSp.address);
         setFormData((prev)=>({...prev,address:selectedSp.address}))
-
       } else {
-        setSelectedSpAddress("");
+        // setSelectedSpAddress("");
       }
     };
+
     const handleSubmit = async()=>{
         try{
-          
-            setStatus({loading:true,message:'',isVisible:true})
-            // const payload = {
-            //     status:'Active '  // Active or Inactive
-            // }
-            const obj = {
+                const obj = {
                 payload:formData,
                 method:"POST",
                 url:"http://localhost:3008/api/serviceprovider/createAppointment"
@@ -208,24 +184,15 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                 throw new Error(error)
             }
             if(data && isSuccess){
-                setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
             }
             console.log(formData);
             setFormData({})
         }
         catch(error){
-            setStatus({error:error?.message,message:'',loading:false})
             setFormData({})
         }
     }
-    // console.log(selectOptionsState,selectArray)
     const appointmentList = [
-        // {
-        //     label: 'Name',
-        //     name: "name",
-        //     type: 'text',
-        //     fullWidth: true
-        // },
         {
           label: 'Select City',
           name: "select_city",
@@ -257,8 +224,10 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             type: 'text',
             fullWidth: true,
             select:true,
-            selectArray:[],
-            rightIcon:true
+            selectArray:customerVehicleList?.data,
+            rightIcon:true,
+            required: true, // Add the required property
+            errormessage: 'Select Your Vehicle', // Add the error message
         },
         {
           label: 'Vehicle Type',
@@ -272,8 +241,6 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             name: "brand",
             type: 'text',
             fullWidth: true,
-            // select:true,
-            // selectArray:selectArray,
             disabled:true
         },
         {
@@ -281,20 +248,9 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             name: "model",
             type: 'text',
             fullWidth: true,
-            // select:true,
-            // selectArray:selectModel,
             disabled:true,
 
         },
-        // {
-        //     label: 'Address',
-        //     name: "address",
-        //     type: 'text',
-        //     fullWidth: true,
-        //     row: 3,
-        //     disabled:true
-
-        // },
         {
             label: 'Email',
             name: "email",
@@ -317,8 +273,6 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           name: "fuel_type",
           type: 'text',
           fullWidth: true,
-          // select: true,
-          // selectArray: fuelNamesArray,
           disabled:true
 
         },
@@ -327,8 +281,6 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           name: "customization",
           type: 'text',
           fullWidth: true,
-          // select: true,
-          // selectArray: [{ label: "Showroom Fitted", value: "Showroom Fitted" }, { label: "Externally Modified", value: "Externally Modified" }],
           disabled:true
 
         },
@@ -395,34 +347,28 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                     onChange={handleServiceProviderChange}
                   >
                     {spList.map((sp) => (
-                      <MenuItem key={sp.id} value={sp.id}>
+                      <MenuItem key={sp.sp_id} value={sp.sp_id}>
                         {sp.label}
                       </MenuItem>
                     ))}
                   </Select>
                   <CreateTextFields  fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData}/>
-                  <CreateTextFields  onSearchIconClick={handleSearchIconClick} fields={appointmentList.slice(3,4)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  onSearchIconClick={handleSearchIconClick} fields={appointmentList.slice(3,4)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
                   <CreateTextFields  fields={appointmentList.slice(4,5)} onChange={handleFieldChange}  formField={formData}/>
               </Grid>
               <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>
                 <Grid container xs={12} >
-                
-
                   <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(5,10)} onChange={handleFieldChange} formField={formData}/></Grid>
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={3.6} >
                 <Grid container xs={12}>
-                {/* <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(9,10)} onChange={handleFieldChange} formField={formData}/></Grid> */}
                 <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(10,11)} onChange={handleFieldChange} formField={formData}/></Grid>
                   <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(11,12)} onChange={handleFieldChange} formField={formData}/></Grid>
                   <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(12,14)} onChange={handleFieldChange} formField={formData}/></Grid>
                   {formData.pickup_drop=='Company Executive' &&
                     <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(14,15)} onChange={handleFieldChange} formField={formData}/></Grid>
                   }
-
-                
-
                 </Grid>
               </Grid>
             </Grid>
@@ -437,41 +383,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
       {loadingIndicator}
     </div>  )
 }
-
 export default AddCustomerAppointmentDialog
 
 
-// const data = [
-//   {
-//     label: "Navi Mumbai (Maharashtra)",
-//   value:"Navi Mumbai (Maharashtra)",
-//     ListofServiceProviders: [
-//       {
-//         spDetails: {
-//           name:{key:"Balaji Auto services",value:"Balaji Auto services"} ,
-//           address:{key: "Sector-05, shop no.-885 Brahma chowk Sanpada",value:"Sector-05, shop no.-885 Brahma chowk Sanpada"} ,
-//         },
-//       },
-//       {
-//         spDetails: {
-//           name:{key:"Balaji Auto services",value:"Balaji Auto services"} ,
-//           address:{key:  "Sector-22, Sai Chowk Ghansoli",value: "Sector-22, Sai Chowk Ghansoli"} ,
-//           name: "Balaji Auto services",
-//           address:
-//         },
-//       },
-//     ],
-//   },
-//   {
-//     label: "Islampur (Bihar)",
-//   value:"Islampur (Bihar))",
-//     ListofServiceProviders: [
-//       {
-//         spDetails: {
-//           name:{key:"suyog auto services",value:"suyog auto services"} ,
-//           address:{key: "sector-25, near blue diamond",value: "sector-25, near blue diamond"} ,
-//         },
-//       },
-//     ],
-//   },
-// ];
+
