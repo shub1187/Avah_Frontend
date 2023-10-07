@@ -19,35 +19,37 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     const [isSubmitted, setIsSubmitted] = useState(false);
     const {fetchCustomerData,snackbar,loadingIndicator} = useCustomerFetchFunction()
     const {isMobile} = useMobileResponsive()
-    // let {data:citiesSpData} = useFetch('http://localhost:3008/api/customer/getSpDetailsPerCity')
-    let {data:customerVehicleList} = useFetch(`http://localhost:3008/api/customer/getCustomerVehicleNumbers?customer_id=${localStorage.getItem('custId')}`)
-    const citiesSpData = {
-      error:'false',
-      data:{
-        "Navi Mumbai (Maharashtra)": [
-          {
-            sp_id: 35,
-            label: "Balaji Auto services",
-            value: "Balaji Auto services",
-            address: "Sector-05, shop no.-885 Brahma chowk Sanpada"
-          },
-          {
-            sp_id: 36,
-            label: "Balaji Auto services",
-            value: "Balaji Auto services",
-            address: "Sector-22, Sai Chowk Ghansoli"
-          }
-        ],
-        "Islampur (Bihar)": [
-          {
-            sp_id: 33,
-            label: "suyog auto services",
-            value: "suyog auto services",
-            address: "sector-25, near blue diamond"
-          }
-        ],
-      }
-    }
+    let {data:citiesSpData} = useFetch('http://localhost:3008/api/customer/getSpDetailsPerCity')
+    let {data:customerVehicleList} = useFetch(`http://localhost:3008/api/customer/getCustomerVehicleNumbers?customer_id=${localStorage.getItem('customer_id')}`)
+    // let {data:customerVehicleData} = useFetch()
+    
+    // const citiesSpData = {
+    //   error:'false',
+    //   data:{
+    //     "Navi Mumbai (Maharashtra)": [
+    //       {
+    //         sp_id: 35,
+    //         label: "Balaji Auto services",
+    //         value: "Balaji Auto services",
+    //         address: "Sector-05, shop no.-885 Brahma chowk Sanpada"
+    //       },
+    //       {
+    //         sp_id: 36,
+    //         label: "Balaji Auto services",
+    //         value: "Balaji Auto services",
+    //         address: "Sector-22, Sai Chowk Ghansoli"
+    //       }
+    //     ],
+    //     "Islampur (Bihar)": [
+    //       {
+    //         sp_id: 33,
+    //         label: "suyog auto services",
+    //         value: "suyog auto services",
+    //         address: "sector-25, near blue diamond"
+    //       }
+    //     ],
+    //   }
+    // }
     useEffect(()=>{
       const matchingSP = spList.find((sp) => sp.address === formData.address);
       if (matchingSP) {
@@ -135,8 +137,8 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
       }
       const obj = {
         payload:formData.select_vehicle,
-        method:"POST",
-        url:"http://localhost:3008/api/customer/vehicleRegistration"
+        method:"GET",
+        url:`http://localhost:3008/api/customer/vehicleSearch?VehicleNumber=${formData.select_vehicle}`
       }
 
       const {isSuccess,data,error} = await fetchCustomerData(obj)
@@ -144,7 +146,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           throw new Error(error)
       }
       if(data && isSuccess){
-      setFormData((prev)=>({...prev,...data?.data[0]}))
+      setFormData((prev)=>({...prev,...data?.result[0]}))
       }
       setIsSubmitted(false); // Set the form as submitted
     };
@@ -165,7 +167,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
       const selectedSp = spList.find((sp) => sp.sp_id === selectedIndex);
       if (selectedSp) {
         // setSelectedSpAddress(selectedSp.address);
-        setFormData((prev)=>({...prev,address:selectedSp.address}))
+        setFormData((prev)=>({...prev,address:selectedSp.address, sp_id : selectedSp.sp_id}))
       } else {
         // setSelectedSpAddress("");
       }
