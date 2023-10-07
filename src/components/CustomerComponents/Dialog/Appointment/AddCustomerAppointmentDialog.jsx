@@ -69,15 +69,15 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     label: cityName
   }));
   const handleSelectCity = (selectedValue) => {
-    if(city){
-    const selectedCityData = citiesSpData?.data?.[city] || [];
-    setSpList(selectedCityData);
-    }
-    else{
+    // if(city){
+    // const selectedCityData = citiesSpData?.data?.[city] || [];
+    // setSpList(selectedCityData);
+    // }
+    // else{
       setCity(selectedValue);
       const selectedCityData = citiesSpData?.data?.[selectedValue] || [];
       setSpList(selectedCityData);
-    }
+    // }
 
   };
   let vehcielList = 
