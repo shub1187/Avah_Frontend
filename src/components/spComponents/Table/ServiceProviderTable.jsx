@@ -89,7 +89,47 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
     { title: "Total", field: 'total' ,render:(rowData)=><Box display={'flex'}><SentimentVeryDissatisfiedIcon/></Box>},
     { title :"Action", field:'action',render:(rowData)=><ActionDialog status edit view changePassword/>}
   ]
-
+  // put your mock and test here
+  // const mock = {
+  //   "results": [
+  //       {
+  //           "appointment_id": 10,
+  //           "name": "shadab shaikh",
+  //           "vehicle_number": "GJ85UU9988",
+  //           "vehicle_type": "Commercial",
+  //           "brand": "Maruti Suzuki",
+  //           "model": "Swift",
+  //           "customization": "Showroom Fitted",
+  //           "fuel_type": "Electric",
+  //           "email": "shadab@gmail.com",
+  //           "mobile_number": "000025418",
+  //           "pickup_drop": "Self Drive",
+  //           "pickup_address": null,
+  //           "appointment_date": "2023-10-23T18:30:00.000Z",
+  //           "appointment_time": "11am",
+  //           "appointment_status": "approved",
+  //           "estimate_status": "pending"
+  //       },
+  //       {
+  //           "appointment_id": 3,
+  //           "name": "Sakshi Patil",
+  //           "vehicle_number": "MH43AB3133",
+  //           "vehicle_type": "personal",
+  //           "brand": "Maruti Suzuki",
+  //           "model": "Swift",
+  //           "customization": "Showroom Fitted",
+  //           "fuel_type": "Diesel",
+  //           "email": "sakshi@gmailcom",
+  //           "mobile_number": "7755663322",
+  //           "pickup_drop": "Company Executive",
+  //           "pickup_address": "Flat No.-02 Sawan Mansion Plot no-27 Kopar Khairane Navi Mumbai",
+  //           "appointment_date": "2023-08-19T18:30:00.000Z",
+  //           "appointment_time": "11am",
+  //           "appointment_status": "pending",
+  //           "estimate_status": "pending"
+  //       }
+  //   ],
+  // }
 
   return(
     <>
@@ -141,6 +181,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
       ),
     }}
     isLoading={false}
+    // data={mock.results}
     data={async (query) => {
       console.log(query,"RAEES")
       try {

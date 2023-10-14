@@ -15,7 +15,10 @@ const theme = createTheme(globalAppTheme,{
             color:"black",
             // border:'2px solid rgb(173,73,112)',
             fontSize:'22px',
-            fontWeight:"500"
+            fontWeight:"500",
+            minHeight:'100px',
+            textAlign:'center',
+            padding:'20px'
           }
         }
       }
@@ -82,8 +85,11 @@ const useFetchFunction = ()=>{
     const [openSnackbar, setOpenSnackbar] = React.useState(false);
     const [snackbarMessage, setSnackbarMessage] = React.useState('');
     const [snackbarSeverity, setSnackbarSeverity] = React.useState('success');
-    const fetchData = async ({url,method,payload})=>{
+    const [loading, setLoading] = useState(false);
+
+    const fetchData = async ({url,method,payload,noLoading,noSnackbar})=>{
         try{
+            if(!noLoading)setLoading(true);
             let sp_id =  localStorage.getItem('sp_id');
             let customer_id = localStorage.getItem('customer_id');
             let headers = {}
@@ -105,34 +111,55 @@ const useFetchFunction = ()=>{
             const {status,data} = await axios({...axiosRequest, data: method?.toLowerCase()==="post" && payload})
 
             if(data && status ==200){
-                setSnackbarSeverity('success');
-                setSnackbarMessage('Request was successful.');
-                setOpenSnackbar(true);
-                setTimeout(() => {
-                  setOpenSnackbar(false);
-                }, 2000);
+                if(!noSnackbar){
+                    setSnackbarSeverity('success');
+                    setSnackbarMessage('Request was successful.');
+                    setOpenSnackbar(true);
+                    setTimeout(() => {
+                      setOpenSnackbar(false);
+                    }, 2000);
+                }
+
                 return {isSuccess:true,data}
             }
         }
         catch(error){
-            setSnackbarSeverity('error');
-            setSnackbarMessage(error.message);
-            setOpenSnackbar(true);
+            if(!noSnackbar){
+                setSnackbarSeverity('error');
+                setSnackbarMessage(error.message);
+                setOpenSnackbar(true);
+            }
+
             return {isSuccess:false, error:error.message}
         }
+        finally {
+            if(!noLoading)setLoading(false);
+
+        }
     }
+    const loadingIndicator = loading ? <SkeletonLoading/> : null;
+
     return {
         fetchData,
         // Snackbar component
         snackbar: (
+            <ThemeProvider theme={theme}>
             <Snackbar
+            
+            anchorOrigin={{
+                vertical: "top",
+                horizontal: "center"
+             }}
+            sx={{ height: "100%" }}
             open={openSnackbar}
             autoHideDuration={2000} // 2 seconds
             onClose={() => setOpenSnackbar(false)}
             >
-            <Alert severity={snackbarSeverity}>{snackbarMessage}</Alert>
+            <Alert elevation={4} icon={false} severity='info'>{snackbarMessage}</Alert>
             </Snackbar>
+            </ThemeProvider>
         ),
+        loadingIndicator
         }
 }
 

@@ -21,35 +21,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     const {isMobile} = useMobileResponsive()
     let {data:citiesSpData} = useFetch('http://localhost:3008/api/customer/getSpDetailsPerCity')
     let {data:customerVehicleList} = useFetch(`http://localhost:3008/api/customer/getCustomerVehicleNumbers?customer_id=${localStorage.getItem('customer_id')}`)
-    // let {data:customerVehicleData} = useFetch()
-    
-    // const citiesSpData = {
-    //   error:'false',
-    //   data:{
-    //     "Navi Mumbai (Maharashtra)": [
-    //       {
-    //         sp_id: 35,
-    //         label: "Balaji Auto services",
-    //         value: "Balaji Auto services",
-    //         address: "Sector-05, shop no.-885 Brahma chowk Sanpada"
-    //       },
-    //       {
-    //         sp_id: 36,
-    //         label: "Balaji Auto services",
-    //         value: "Balaji Auto services",
-    //         address: "Sector-22, Sai Chowk Ghansoli"
-    //       }
-    //     ],
-    //     "Islampur (Bihar)": [
-    //       {
-    //         sp_id: 33,
-    //         label: "suyog auto services",
-    //         value: "suyog auto services",
-    //         address: "sector-25, near blue diamond"
-    //       }
-    //     ],
-    //   }
-    // }
+
     useEffect(()=>{
       const matchingSP = spList.find((sp) => sp.address === formData.address);
       if (matchingSP) {
@@ -80,38 +52,6 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     // }
 
   };
-  let vehcielList = 
-    {
-      "error": false,
-      "data": [
-          {
-              "label": "TS-55-NM-8995",
-              'value': "TS-55-NM-8995"
-          },
-          {
-              "label": "KA-70-HP-4008",
-              'value': "KA-70-HP-4008"
-          },
-  ]
-  }
-  
-  let vehicleedata= [
-    {
-        "vehicle_id": 37,
-        "customer_id": "23",
-        "vehicle_number": "BH87YU1241",
-        "vehicle_type": "Personal",
-        "brand": "Hyundai",
-        "model": "i20",
-        "customization": "Externally Modified",
-        "fuel_type": "Hydrogen Gas",
-        "registration_number": "TRYUHS45125POIOMBC",
-        "name": "Sharavni Dhambe",
-        "email": "shravani@gmail.com",
-        "full_address": "Thane Manpada",
-        "mobile_number": "7788994455"
-    }
-]
   console.log(formData,"RAEES")
     const handleFieldChange = (fieldName, value) => {
         if (fieldName === "select_city") {
@@ -125,30 +65,28 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           }
     };
     const handleSearchIconClick = async(fieldName) => {
-      // setFormData((prev)=>({...prev,...vehicleedata[0]}))
-      setIsSubmitted(true); // Set the form as submitted
+        setIsSubmitted(true); // Set the form as submitted
 
-      const requiredFields = appointmentList.filter((field) => field.required);
-      const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
-  
-      if (emptyRequiredFields.length > 0) {
-        // setStatus({ error: 'Please fill in all required fields.', message: '', loading: false });
-        return;
-      }
-      const obj = {
-        payload:formData.select_vehicle,
-        method:"GET",
-        url:`http://localhost:3008/api/customer/vehicleSearch?VehicleNumber=${formData.select_vehicle}`
-      }
+        const requiredFields = appointmentList.filter((field) => field.required);
+        const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
+    
+        if (emptyRequiredFields.length > 0) {
+          return;
+        }
+        const obj = {
+          payload:formData.select_vehicle,
+          method:"GET",
+          url:`http://localhost:3008/api/customer/vehicleSearch?VehicleNumber=${formData.select_vehicle}`
+        }
 
-      const {isSuccess,data,error} = await fetchCustomerData(obj)
-      if(error && !isSuccess){
-          throw new Error(error)
-      }
-      if(data && isSuccess){
-      setFormData((prev)=>({...prev,...data?.result[0]}))
-      }
-      setIsSubmitted(false); // Set the form as submitted
+        const {isSuccess,data,error} = await fetchCustomerData(obj)
+        if(error && !isSuccess){
+            throw new Error(error)
+        }
+        if(data && isSuccess){
+        setFormData((prev)=>({...prev,...data?.result[0]}))
+        }
+        setIsSubmitted(false); // Set the form as submitted
     };
 
     const handleClickOpen = () => {
@@ -181,13 +119,14 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                 url:"http://localhost:3008/api/serviceprovider/createAppointment"
             }
   
-            const {isSuccess,data,error} = await fetchCustomerData(obj)
-            if(error && !isSuccess){
-                throw new Error(error)
-            }
-            if(data && isSuccess){
-            }
-            console.log(formData);
+            // const {isSuccess,data,error} = 
+            await fetchCustomerData(obj)
+            // if(error && !isSuccess){
+            //     throw new Error(error)
+            // }
+            // if(data && isSuccess){
+            // }
+            // console.log(formData);
             setFormData({})
         }
         catch(error){
@@ -386,6 +325,3 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     </div>  )
 }
 export default AddCustomerAppointmentDialog
-
-
-

@@ -79,6 +79,11 @@ export const SpSideBarList = [
         link:'dashboard/service/jobCardsList',
         name:"Job Cards List"
       },
+      {
+        id:64,
+        link:'dashboard/service/rejectedAppointment',
+        name:"Rejected Appointments"
+      },
     ]
   },
   {

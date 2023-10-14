@@ -1,18 +1,50 @@
-import { Box } from '@mui/material'
-import React from 'react'
+import { Box, Button } from '@mui/material'
 import ChangePasswordDialog from './ChangePasswordDialog'
 import EditDialog from './EditDialog'
 import StatusDialog from './StatusDialog'
 import ViewDialog from './ViewDialog'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 
-const ActionDialog = ({changePassword,edit,status,view}) => {
+import { useFetchFunction } from 'hooks/useFetch'
+
+const ActionDialog = ({ changePassword, edit, status, view, approve, reject, payload, params, url, noLoading, noSnackbar}) => {
+  const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
+
+  const StatusUpdate=async()=>{
+    try{
+        // const payload = {
+        //     status:'Active '  // Active or Inactive
+        // }
+        const obj = {
+            payload:payload,
+            method:"POST",
+            url:`${url}${params}`,
+            noLoading:noLoading || false,
+            noSnackbar:noSnackbar || false
+        }
+        await fetchData(obj)
+
+    }
+    catch(error){
+        console.log(error)
+    }
+}
   return (
-    <Box display={'flex'}>
+    <>
         {changePassword && <ChangePasswordDialog/>}
         {edit && <EditDialog/>}
         {status && <StatusDialog/>}
         {view && <ViewDialog/>}
-    </Box>
+        {approve && <Button style={{minWidth:'10px'}} onClick={StatusUpdate}>
+                      <CheckCircleIcon style={{color:'rgb(5,131,30)',cursor:'pointer'}}/>
+                     </Button>}
+        {reject && <Button style={{minWidth:'10px'}} onClick={StatusUpdate}>
+                      <CancelIcon style={{color:'rgb(219,9,9)',cursor:'pointer'}}/>
+                     </Button>}
+        {snackbar}
+        {loadingIndicator}
+    </>
   )
 }
 

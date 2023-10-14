@@ -58,6 +58,10 @@ const serviceProviderRoutes = [
             id:63,
             link:'jobCardsList',
           },
+          {
+            id:64,
+            link:'rejectedAppointment',
+          },
         ]
       },
       {
