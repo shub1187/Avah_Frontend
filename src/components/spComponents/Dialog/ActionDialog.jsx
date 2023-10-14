@@ -8,7 +8,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 
 import { useFetchFunction } from 'hooks/useFetch'
 
-const ActionDialog = ({ changePassword, edit, status, view, approve, reject, payload, params, url, noLoading, noSnackbar}) => {
+const ActionDialog = ({ changePassword, edit, status, view, approve, reject, payload, params, url ,finallyUrl, noLoading, noSnackbar}) => {
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
 
   const StatusUpdate=async()=>{
@@ -28,6 +28,16 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, pay
     }
     catch(error){
         console.log(error)
+    }finally{
+      if(finallyUrl){
+        const obj = {
+          method:"GET",
+          url:finallyUrl,
+          noLoading:true,
+          noSnackbar:true
+      }
+        await fetchData(obj)
+      }
     }
 }
   return (

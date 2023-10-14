@@ -14,7 +14,13 @@ export const createAppointmentColumn = [
     { title: "Pickup And Drop", field: "pickup_drop" },
     { title: "Pickup Address", field: "pickup_address" },
     { title: "Appointment Date", field: "appointment_date" },
-    { title: "Appointment Status", field: "appointment_time",render:(rowData)=><Box display='flex'><ActionDialog approve url={'localhost'} params={rowData.appointment_id}/><ActionDialog reject url={'localhostyy'} params={rowData.appointment_id}/></Box>} ,
+    { title: "Appointment Status", field: "appointment_time",
+        render:(rowData)=>
+        <Box display='flex'>
+            <ActionDialog approve url={'localhost'} finallyUrl={`http://localhost:3008/api/serviceprovider/getAllPendingAppointment?sp_id=${localStorage.getItem('sp_id')}`} params={rowData.appointment_id}/>
+            <ActionDialog reject url={'localhostyy'} finallyUrl={`http://localhost:3008/api/serviceprovider/getAllPendingAppointment?sp_id=${localStorage.getItem('sp_id')}`}  params={rowData.appointment_id}/>
+        </Box>
+    } ,
     { title: "Status", field: "estimate_status" },
 ]
 // "appointment_id": 10,

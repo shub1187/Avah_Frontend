@@ -4,7 +4,7 @@ import CreateAppointmentDialog from 'components/spComponents/Dialog/Service/Crea
 import { createAppointmentColumn } from 'components/spComponents/Table/Columns/Service/CreateAppointmentColumn'
 const AppointmentList = () => {
   return (
-    <div><ServiceProvidertable DialogButton={CreateAppointmentDialog} columnss={createAppointmentColumn} URL={'http://localhost:3008/api/serviceprovider/getAllAppointment'}/></div>
+    <div><ServiceProvidertable DialogButton={CreateAppointmentDialog} columnss={createAppointmentColumn} URL={`http://localhost:3008/api/serviceprovider/getAllPendingAppointment?sp_id=${localStorage.getItem('sp_id')}`}/></div>
   )
 }
 
