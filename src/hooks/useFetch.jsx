@@ -117,7 +117,7 @@ const useFetchFunction = ()=>{
                     setOpenSnackbar(true);
                     setTimeout(() => {
                       setOpenSnackbar(false);
-                    }, 2000);
+                    }, 3000);
                 }
 
                 return {isSuccess:true,data}
