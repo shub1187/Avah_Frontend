@@ -7,7 +7,7 @@ const AppointmentList = () => {
   const [tableCalled,setTableCalled] = useState(false)
   const reLoadTable = ()=>setTableCalled((prev)=>!prev)
   return (
-    <div><ServiceProvidertable DialogButton={CreateAppointmentDialog} columnss={createAppointmentColumn(reLoadTable)} URL={`http://localhost:3008/api/serviceprovider/getAllPendingAppointment?sp_id=${localStorage.getItem('sp_id')}`}/></div>
+    <div><ServiceProvidertable DialogButton={CreateAppointmentDialog} columnss={createAppointmentColumn(reLoadTable)} URL={`http://localhost:3008/api/serviceprovider/getAllPendingAppointment`}/></div>
   )
 }
 

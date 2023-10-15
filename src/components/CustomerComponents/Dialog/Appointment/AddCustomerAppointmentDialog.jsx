@@ -103,9 +103,10 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
       console.log(selectedIndex)
       // Find the selected service provider's address
       const selectedSp = spList.find((sp) => sp.sp_id === selectedIndex);
+      console.log("ln 168", selectedSp)
       if (selectedSp) {
         // setSelectedSpAddress(selectedSp.address);
-        setFormData((prev)=>({...prev,address:selectedSp.address, sp_id : selectedSp.sp_id}))
+        setFormData((prev)=>({...prev,address:selectedSp.address, sp_id : selectedSp.sp_id, business_name : selectedSp.value}))
       } else {
         // setSelectedSpAddress("");
       }
@@ -116,7 +117,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                 const obj = {
                 payload:formData,
                 method:"POST",
-                url:"http://localhost:3008/api/serviceprovider/createAppointment"
+                url:"http://localhost:3008/api/customer/createAppointment"
             }
   
             // const {isSuccess,data,error} = 
