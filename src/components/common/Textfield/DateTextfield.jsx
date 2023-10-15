@@ -42,10 +42,10 @@ const handleDateChange = (fieldName, selectedDate) => {
             <InputLabel sx={{ color: "black", marginBottom: 1 }}>
               {field.label}
             </InputLabel>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DesktopDatePicker
                     value={formField[field.name] || null}
-                    minDate={format(new Date(),'dd-MMM-yyyy')}
+                    minDate={dayjs()}
                     onChange={(selectedDate) => handleDateChange(field.name, selectedDate)}
                     renderInput={(params) => <TextField {...params} />}
                     slotProps={{ textField: { fullWidth: true } }}
