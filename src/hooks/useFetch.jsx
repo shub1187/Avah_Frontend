@@ -113,7 +113,7 @@ const useFetchFunction = ()=>{
             if(data && status ==200){
                 if(!noSnackbar){
                     setSnackbarSeverity('success');
-                    setSnackbarMessage('Request was successful.');
+                    setSnackbarMessage(data.message);
                     setOpenSnackbar(true);
                     setTimeout(() => {
                       setOpenSnackbar(false);
