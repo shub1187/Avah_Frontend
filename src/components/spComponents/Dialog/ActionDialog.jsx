@@ -19,7 +19,7 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, pay
         const obj = {
             payload:payload,
             method:"POST",
-            url:`${url}${params}`,
+            url:`${url}${params || ''}`,
             noLoading:noLoading || false,
             noSnackbar:noSnackbar || false
         }
