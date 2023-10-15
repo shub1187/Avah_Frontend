@@ -23,7 +23,9 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, pay
             noLoading:noLoading || false,
             noSnackbar:noSnackbar || false
         }
-        await fetchData(obj)
+        if(url){
+          await fetchData(obj)
+        }
 
     }
     catch(error){

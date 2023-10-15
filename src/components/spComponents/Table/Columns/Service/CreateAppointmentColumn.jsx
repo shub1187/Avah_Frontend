@@ -19,7 +19,7 @@ export const createAppointmentColumn =(reLoadTable)=>( [
     { title: "Estimate Status", field: "estimate_status" },
     {title:'Action',render:(rowData)=>
         <Box display='flex'>
-            <ActionDialog approve url={'localhost'} reLoadTable={reLoadTable} params={rowData.appointment_id}/>
+            <ActionDialog approve url={'http://localhost:3008/api/serviceprovider/approveCustAppointment'} reLoadTable={reLoadTable} params={rowData.appointment_id} payload={{'appointment_id':rowData.appointment_id,'appointment_status ':'approved'}}/>
             <ActionDialog reject url={'localhostyy'} reLoadTable={reLoadTable}  params={rowData.appointment_id}/>
         </Box> }
 ])
