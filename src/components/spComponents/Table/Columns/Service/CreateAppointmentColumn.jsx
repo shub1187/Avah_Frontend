@@ -13,7 +13,7 @@ export const createAppointmentColumn =(reLoadTable)=>( [
     { title: "Email", field: "email" },
     { title: "Mobile", field: "mobile_number" },
     { title: "Pickup And Drop", field: "pickup_drop" },
-    { title: "Pickup Address", field: "pickup_address" },
+    { title: "Pickup Address", field: "pickup_address", width:'30%' },
     { title: "Appointment Date", field: "appointment_date"},
     { title: "Appointment Time", field: "appointment_time"},
     { title: "Appointment Status", field: "appointment_status"},
