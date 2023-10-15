@@ -82,9 +82,9 @@ const useFetch = (url) => {
 
 
 const useFetchFunction = ()=>{
-    const [openSnackbar, setOpenSnackbar] = React.useState(false);
-    const [snackbarMessage, setSnackbarMessage] = React.useState('');
-    const [snackbarSeverity, setSnackbarSeverity] = React.useState('success');
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
     const [loading, setLoading] = useState(false);
 
     const fetchData = async ({url,method,payload,noLoading,noSnackbar})=>{

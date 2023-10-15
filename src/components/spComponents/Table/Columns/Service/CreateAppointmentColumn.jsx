@@ -1,7 +1,7 @@
 import { Box } from "@mui/material"
 import ActionDialog from "components/spComponents/Dialog/ActionDialog"
 
-export const createAppointmentColumn = [
+export const createAppointmentColumn =(reLoadTable)=>( [
     // { title: "Appointment Id", field: "appointment_id" },
     { title: "Name", field: "name" },
     { title: "Vehicle Number", field: "vehicle_number" },
@@ -17,12 +17,12 @@ export const createAppointmentColumn = [
     { title: "Appointment Status", field: "appointment_time",
         render:(rowData)=>
         <Box display='flex'>
-            <ActionDialog approve url={'localhost'} finallyUrl={`http://localhost:3008/api/serviceprovider/getAllPendingAppointment?sp_id=${localStorage.getItem('sp_id')}`} params={rowData.appointment_id}/>
-            <ActionDialog reject url={'localhostyy'} finallyUrl={`http://localhost:3008/api/serviceprovider/getAllPendingAppointment?sp_id=${localStorage.getItem('sp_id')}`}  params={rowData.appointment_id}/>
+            <ActionDialog approve url={'localhost'} reLoadTable={reLoadTable} params={rowData.appointment_id}/>
+            <ActionDialog reject url={'localhostyy'} reLoadTable={reLoadTable}  params={rowData.appointment_id}/>
         </Box>
     } ,
     { title: "Status", field: "estimate_status" },
-]
+])
 // "appointment_id": 10,
 // "name": "shadab shaikh",
 // "vehicle_number": "GJ85UU9988",
