@@ -14,15 +14,17 @@ export const createAppointmentColumn =(reLoadTable)=>( [
     { title: "Pickup And Drop", field: "pickup_drop" },
     { title: "Pickup Address", field: "pickup_address" },
     { title: "Appointment Date", field: "appointment_date"},
-    { title: "Appointment Status", field: "appointment_time",
-        render:(rowData)=>
+    { title: "Appointment Time", field: "appointment_time"},
+    { title: "Appointment Status", field: "appointment_status"},
+    { title: "Estimate Status", field: "estimate_status" },
+    {title:'Action',render:(rowData)=>
         <Box display='flex'>
             <ActionDialog approve url={'localhost'} reLoadTable={reLoadTable} params={rowData.appointment_id}/>
             <ActionDialog reject url={'localhostyy'} reLoadTable={reLoadTable}  params={rowData.appointment_id}/>
-        </Box>
-    } ,
-    { title: "Status", field: "estimate_status" },
+        </Box> }
 ])
+
+
 // "appointment_id": 10,
 // "name": "shadab shaikh",
 // "vehicle_number": "GJ85UU9988",
