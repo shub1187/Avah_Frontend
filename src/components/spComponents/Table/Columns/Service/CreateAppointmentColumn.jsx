@@ -8,6 +8,7 @@ export const createAppointmentColumn =(reLoadTable)=>( [
     { title: "Vehicle Brand", field: "vehicle_type" },
     { title: "Brand", field: "brand" },
     { title: "Model", field: "model" },
+    { title: "Fuel Type", field: "fuel_type" },
     { title: "Customization", field: "customization" },
     { title: "Email", field: "email" },
     { title: "Mobile", field: "mobile_number" },
