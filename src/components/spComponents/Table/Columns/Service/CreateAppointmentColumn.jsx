@@ -13,7 +13,7 @@ export const createAppointmentColumn =(reLoadTable)=>( [
     { title: "Mobile", field: "mobile_number" },
     { title: "Pickup And Drop", field: "pickup_drop" },
     { title: "Pickup Address", field: "pickup_address" },
-    { title: "Appointment Date", field: "appointment_date",render:(rowData)=><Box>{format(rowData.appointment_date,'dd-MMM-yyyy')}</Box> },
+    { title: "Appointment Date", field: "appointment_date"},
     { title: "Appointment Status", field: "appointment_time",
         render:(rowData)=>
         <Box display='flex'>
