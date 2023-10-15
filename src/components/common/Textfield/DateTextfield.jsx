@@ -21,7 +21,7 @@ useEffect(() => {
 const handleDateChange = (fieldName, selectedDate) => {
     if (selectedDate) {
       // Format the selected date to display only the date part
-      const formattedDate = format(selectedDate,'dd-MMM-yyyy');
+      const formattedDate = dayjs(selectedDate).format('YYYY-MM-DD');
 
       // Update the state with the formatted date
       onChange(fieldName, formattedDate);
