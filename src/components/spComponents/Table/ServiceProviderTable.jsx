@@ -90,46 +90,46 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
     { title :"Action", field:'action',render:(rowData)=><ActionDialog status edit view changePassword/>}
   ]
   // put your mock and test here
-  // const mock = {
-  //   "results": [
-  //       {
-  //           "appointment_id": 10,
-  //           "name": "shadab shaikh",
-  //           "vehicle_number": "GJ85UU9988",
-  //           "vehicle_type": "Commercial",
-  //           "brand": "Maruti Suzuki",
-  //           "model": "Swift",
-  //           "customization": "Showroom Fitted",
-  //           "fuel_type": "Electric",
-  //           "email": "shadab@gmail.com",
-  //           "mobile_number": "000025418",
-  //           "pickup_drop": "Self Drive",
-  //           "pickup_address": null,
-  //           "appointment_date": "2023-10-23T18:30:00.000Z",
-  //           "appointment_time": "11am",
-  //           "appointment_status": "approved",
-  //           "estimate_status": "pending"
-  //       },
-  //       {
-  //           "appointment_id": 3,
-  //           "name": "Sakshi Patil",
-  //           "vehicle_number": "MH43AB3133",
-  //           "vehicle_type": "personal",
-  //           "brand": "Maruti Suzuki",
-  //           "model": "Swift",
-  //           "customization": "Showroom Fitted",
-  //           "fuel_type": "Diesel",
-  //           "email": "sakshi@gmailcom",
-  //           "mobile_number": "7755663322",
-  //           "pickup_drop": "Company Executive",
-  //           "pickup_address": "Flat No.-02 Sawan Mansion Plot no-27 Kopar Khairane Navi Mumbai",
-  //           "appointment_date": "2023-08-19T18:30:00.000Z",
-  //           "appointment_time": "11am",
-  //           "appointment_status": "pending",
-  //           "estimate_status": "pending"
-  //       }
-  //   ],
-  // }
+  const mock = {
+    "results": [
+        {
+            "appointment_id": 10,
+            "name": "shadab shaikh",
+            "vehicle_number": "GJ85UU9988",
+            "vehicle_type": "Commercial",
+            "brand": "Maruti Suzuki",
+            "model": "Swift",
+            "customization": "Showroom Fitted",
+            "fuel_type": "Electric",
+            "email": "shadab@gmail.com",
+            "mobile_number": "000025418",
+            "pickup_drop": "Self Drive",
+            "pickup_address": null,
+            "appointment_date": "2023-10-23T18:30:00.000Z",
+            "appointment_time": "11am",
+            "appointment_status": "approved",
+            "estimate_status": "pending"
+        },
+        {
+            "appointment_id": 3,
+            "name": "Sakshi Patil",
+            "vehicle_number": "MH43AB3133",
+            "vehicle_type": "personal",
+            "brand": "Maruti Suzuki",
+            "model": "Swift",
+            "customization": "Showroom Fitted",
+            "fuel_type": "Diesel",
+            "email": "sakshi@gmailcom",
+            "mobile_number": "7755663322",
+            "pickup_drop": "Company Executive",
+            "pickup_address": "Flat No.-02 Sawan Mansion Plot no-27 Kopar Khairane Navi Mumbai",
+            "appointment_date": "2023-08-19T18:30:00.000Z",
+            "appointment_time": "11am",
+            "appointment_status": "pending",
+            "estimate_status": "pending"
+        }
+    ],
+  }
 
   return(
     <>
@@ -181,39 +181,39 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
       ),
     }}
     isLoading={false}
-    // data={mock.results}
-    data={async (query) => {
-      console.log(query,"RAEES")
-      try {
-        let url = `${URL}?sp_id=${sp_id}&`;
+    data={mock.results}
+  //   data={async (query) => {
+  //     console.log(query,"RAEES")
+  //     try {
+  //       let url = `${URL}?sp_id=${sp_id}&`;
 
-        if(query.search){
-          url+=`q=${query.search}`
-        }
-        if(query.orderBy){
-          url+=`&_sort=${query.orderBy.field}&_order=${query.orderDirection}`
-        }
-        url+=`&_page=${query.page+1}`
-        url+=`&_limit=${query.pageSize}`
-        const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
-        const response = await axios.get(url,{headers});
-        const data = response.data.data.results; // Adjust this based on your API response structure
-        // setDataLength(data.length)
-        console.log(data,"ln 151 RAEES")
-        return {
-          data: data, // Change this to match your data structure
-          page: query.page,
-          totalCount:20, // Assuming the total count is the length of the data array
-        };
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        return {
-          data: [],
-          page: query.page,
-          totalCount: 0,
-        };
-      }
-    }}
+  //       if(query.search){
+  //         url+=`q=${query.search}`
+  //       }
+  //       if(query.orderBy){
+  //         url+=`&_sort=${query.orderBy.field}&_order=${query.orderDirection}`
+  //       }
+  //       url+=`&_page=${query.page+1}`
+  //       url+=`&_limit=${query.pageSize}`
+  //       const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
+  //       const response = await axios.get(url,{headers});
+  //       const data = response.data.data.results; // Adjust this based on your API response structure
+  //       // setDataLength(data.length)
+  //       console.log(data,"ln 151 RAEES")
+  //       return {
+  //         data: data, // Change this to match your data structure
+  //         page: query.page,
+  //         totalCount:20, // Assuming the total count is the length of the data array
+  //       };
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //       return {
+  //         data: [],
+  //         page: query.page,
+  //         totalCount: 0,
+  //       };
+  //     }
+  //   }}
   />
   </ThemeProvider>
   </>
