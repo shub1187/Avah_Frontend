@@ -68,7 +68,6 @@ const CreateAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,bord
             }
         });
     } 
-    console.log(selectModel,selectArray)
 
     const [status,setStatus] = useState({
       isVisible:false,
@@ -136,13 +135,15 @@ const CreateAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,bord
             label: 'Name',
             name: "name",
             type: 'text',
-            fullWidth: true
+            fullWidth: true,
+            size:true
         },
         {
             label: 'Vehicle Number',
             name: "vehicle_number",
             type: 'text',
-            fullWidth: true
+            fullWidth: true,
+            size:true
 
         },
         {
@@ -151,6 +152,8 @@ const CreateAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,bord
           type: 'text',
           fullWidth: true,
           select:true,
+          size:true,
+
           selectArray:[
               {
                 label:'Personal',
@@ -168,7 +171,9 @@ const CreateAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,bord
             type: 'text',
             fullWidth: true,
             select:true,
-            selectArray:selectArray
+            selectArray:selectArray,
+            size:true
+
         },
         {
             label: 'Model',
@@ -176,27 +181,35 @@ const CreateAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,bord
             type: 'text',
             fullWidth: true,
             select:true,
-            selectArray:selectModel
+            selectArray:selectModel,
+            size:true
+
         },
         {
             label: 'Address',
             name: "address",
             type: 'text',
             fullWidth: true,
-            row: 4
+            row: 4,
+            size:true
+
         },
         {
             label: 'Email',
             name: "email",
             type: 'email',
-            fullWidth: true
+            fullWidth: true,
+            size:true
+
 
         },
         {
             label: 'Mobile',
             name: "mobile",
             type: 'number',
-            fullWidth: true
+            fullWidth: true,
+            size:true
+
 
         },
         {
@@ -205,6 +218,7 @@ const CreateAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,bord
             type: 'text',
             fullWidth: true,
             select:true,
+            size:true,
             selectArray:[
                 {
                   label:'Company Executive',
@@ -222,13 +236,16 @@ const CreateAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,bord
             name: "service_date",
             type: 'date',
             fullWidth: true,
+            size:true
 
         },
         {
             label: 'Booking Date',
             name: "booking_date",
             type: 'date',
-            fullWidth: true
+            fullWidth: true,
+            size:true
+
 
         },
         {
@@ -237,6 +254,7 @@ const CreateAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,bord
             type: 'text',
             fullWidth: true,
             select:true,
+            size:true,
             selectArray:[
                 {
                   label:'To Start',
@@ -252,11 +270,10 @@ const CreateAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,bord
         <Grid container><Grid my={my} xs={12} item>{img && <img  src={img} alt="Card Image" />}</Grid><Grid fontSize={isMobile && 8} xs={12} item>CREATE APPOINTMENT</Grid></Grid>
 
       </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth='lg'>
-      <div style={{width: isMobile?'100%':1200}}>
-
-        <DialogTitle >  CREATE APPOINTMENT</DialogTitle>
-        <DialogContent>
+      <Dialog open={open} onClose={handleClose} maxWidth='md'>
+      {/* <div style={{width: isMobile?'100%':1200}}> */}
+        <DialogTitle>CREATE APPOINTMENT</DialogTitle>
+        <DialogContent sx={{pt:2,pb:0}}>
             <Grid container xs={12} mt={3}>
               <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>
                   <CreateTextFields  fields={appointmentList.slice(0,5)} onChange={handleFieldChange}  formField={formData}/>
@@ -299,7 +316,7 @@ const CreateAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,bord
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
-        </div>
+        {/* </div> */}
       </Dialog>
       {status.loading && <SkeletonLoading />}
             {(!status.loading && status.error ) &&<Snackbar open={snackbar} autoHideDuration={2000} onClose={handleSnackBarFunction}  color='error'><Alert severity='error'>{status.error}</Alert></Snackbar>}

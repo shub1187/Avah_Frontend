@@ -7,11 +7,12 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 
 import { useFetchFunction } from 'hooks/useFetch'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import CreateTextFields from 'components/common/Textfield'
 
-const ActionDialog = ({ changePassword, edit, status, view, approve, reject, payload, params, url ,reLoadTable, noLoading, noSnackbar}) => {
+const ActionDialog = ({ changePassword, edit, status, view, approve, reject, payload, params, url ,reLoadTable, noLoading, noSnackbar,handleMainClose}) => {
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
+  const timerRef = useRef(null);
 
   //Dialog Popups
   const [open, setOpen] = useState(false);
@@ -65,7 +66,6 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, pay
         }
         setFormData({})
         setOpen(false)
-
     }
     catch(error){
         console.log(error)
@@ -74,6 +74,12 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, pay
     }finally{
       if(reLoadTable){
         reLoadTable()
+      }
+      if(timerRef.current){
+        clearTimeout(timerRef.current);
+      }
+      else{
+        timerRef.current = setTimeout(() => handleMainClose(), 2000);
       }
   }
   setIsSubmitted(false)
@@ -85,20 +91,20 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, pay
         {edit && <EditDialog/>}
         {status && <StatusDialog/>}
         {view && <ViewDialog/>}
-        {approve && <Button style={{minWidth:'10px'}} onClick={StatusUpdate}>
-                      <CheckCircleIcon style={{color:'rgb(5,131,30)',cursor:'pointer'}}/>
+        {approve && <Button variant='outlined' style={{color:'rgb(5,131,30)',borderColor:'rgb(5,131,30)'}} onClick={StatusUpdate}>
+                      <CheckCircleIcon style={{color:'rgb(5,131,30)',cursor:'pointer',marginRight:'5px'}}/> Book
                      </Button>}
         {reject && 
         <>
-          <Button style={{minWidth:'10px'}} onClick={handleClickOpen} >
-            <CancelIcon style={{color:'rgb(219,9,9)',cursor:'pointer'}}/>
+          <Button variant='outlined' style={{color:'rgb(204,16,16)',borderColor:'rgb(204,16,16)'}} onClick={handleClickOpen} >
+            <CancelIcon style={{color:'rgb(204,16,16)',cursor:'pointer',marginRight:'5px'}}/> Reject
           </Button>
           <Dialog  fullWidth open={open} onClose={handleClose} maxWidth='xs'>
             <Box m={4}>
             <CreateTextFields  fields={RejectList} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
             </Box>
           <DialogActions sx={{mt:3}}>
-          <Button color='options' onClick={handleClose}>Cancel</Button>
+          <Button color='options' onClick={handleClose}>CANCEL</Button>
           <Button variant={'contained'} color='options' onClick={StatusUpdate}>SUBMIT</Button>
           </DialogActions>
           </Dialog>

@@ -147,7 +147,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
     components={{
       Toolbar: (props) => (
         <>
-        <Box display={'flex'} justifyContent={'space-between'}>
+        <Box display={'flex'} justifyContent={'space-between'} sx={{background: "rgb(244, 248, 249)"}}>
           <div
             style={{
               display: "flex",
@@ -174,7 +174,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
             <AddLabourDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <AddServiceDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <CreateSpareDialog height={'65px'} width={'270px'} color={'addUser'}/> */}
-            <DialogButton height={isMobileResolution?"30px":'50px'} width={isMobileResolution?"100px":'250px'} color={'options'} />
+            {DialogButton && <DialogButton height={isMobileResolution?"30px":'50px'} width={isMobileResolution?"100px":'250px'} color={'options'} />}
           </div>
         </Box>
         </>
