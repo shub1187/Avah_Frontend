@@ -27,7 +27,7 @@ const MoreActionDialog = ({rowData,ActionDialog}) => {
                 <Box p={1} display={'flex'} flexWrap={"wrap"} flexGrow={1}>
                     {Object.keys(rowData).map((key)=>{
                         if(typeof rowData[key] ==='string'){
-                            return <Box width={'160px'} m={1}><InputLabel>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</InputLabel><TextField size='small' multiline={key=='pickup_address'?true:false} rows={key=='pickup_address' ? 6:1} fullWidth  value={rowData[key]} disabled/></Box>
+                            return <Box width={'200px'} m={1}><InputLabel>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</InputLabel><TextField size='small' multiline={key=='pickup_address' || key =='sp_rejection_note'?true:true} rows={key=='pickup_address' || key =='sp_rejection_note'  ? 3:1} fullWidth  value={rowData[key]} disabled/></Box>
                         }
                     })}
                 </Box>
