@@ -55,7 +55,7 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
 
 
         const obj = {
-            payload:payload,
+            payload:{...payload,...formData},
             method:"POST",
             url:`${url}${params || ''}`,
             noLoading:noLoading || false,
