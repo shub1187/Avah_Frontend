@@ -32,7 +32,7 @@ export const createAppointmentColumn =(reLoadTable)=>( [
                                                                 <ActionDialog
                                                                 key="reject"
                                                                 reject
-                                                                url={'localhostyy'}
+                                                                url={'http://localhost:3008/api/serviceprovider/approveCustAppointment'}
                                                                 reLoadTable={reLoadTable}
                                                                 params={rowData.appointment_id}
                                                                 />
