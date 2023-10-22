@@ -19,9 +19,9 @@ const AppointmentList = () => {
       
       </Box>
       {toggle==='appointment'?
-          <ServiceProvidertable tableCalled={tableCalled} DialogButton={CreateAppointmentDialog} columnss={createAppointmentColumn(reLoadTable)} URL={`http://localhost:3008/api/serviceprovider/getAllPendingAppointment`}/>
+          <ServiceProvidertable DialogButton={CreateAppointmentDialog} columnss={createAppointmentColumn(reLoadTable)} URL={`http://localhost:3008/api/serviceprovider/getAllPendingAppointment`}/>
        :
-       <ServiceProvidertable tableCalled={tableCalled}  columnss={createAppointmentColumn(reLoadTable)} URL={`http://localhost:3008/api/serviceprovider/getAllRejectedAndCancelledAppointment`}/>
+       <ServiceProvidertable  columnss={createAppointmentColumn(reLoadTable)} URL={`http://localhost:3008/api/serviceprovider/getAllRejectedAndCancelledAppointment`}/>
        }
 
     </>
