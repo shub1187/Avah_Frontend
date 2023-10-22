@@ -36,7 +36,14 @@ export const createAppointmentColumn =(reLoadTable)=>( [
                                                                 reLoadTable={reLoadTable}
                                                                 params={rowData.appointment_id}
                                                                 />
-                                                            ]:[]}/>
+                                                            ]:[
+                                                                <ActionDialog
+                                                                key="createEstimate"
+                                                                createEstimate
+                                                                url={'http://localhost:3008/api/serviceprovider/createEstimate'}
+                                                                reLoadTable={reLoadTable}
+                                                                />
+                                                            ]}/>
             {/* {rowData.appointment_status =='approved'?'':
             rowData.appointment_status =='pending'?
             <>

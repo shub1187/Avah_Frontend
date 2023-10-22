@@ -5,12 +5,12 @@ import StatusDialog from './StatusDialog'
 import ViewDialog from './ViewDialog'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
-
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import { useFetchFunction } from 'hooks/useFetch'
 import { useRef, useState } from 'react'
 import CreateTextFields from 'components/common/Textfield'
 
-const ActionDialog = ({ changePassword, edit, status, view, approve, reject, payload, params, url ,reLoadTable, noLoading, noSnackbar,handleMainClose}) => {
+const ActionDialog = ({ changePassword, edit, status, view, approve, reject,createEstimate, payload, params, url ,reLoadTable, noLoading, noSnackbar,handleMainClose}) => {
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
   const timerRef = useRef(null);
 
@@ -109,6 +109,22 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, pay
           </DialogActions>
           </Dialog>
         </>
+        }
+        {createEstimate && 
+          <>
+          <Button variant='outlined' color='info'  onClick={handleClickOpen} >
+            <PlaylistAddIcon style={{color:'rgb(204,16,16)',cursor:'pointer',marginRight:'5px'}}/> Create Estimate
+          </Button>
+          <Dialog  fullWidth open={open} onClose={handleClose} maxWidth='xs'>
+            <Box m={4}>
+            <CreateTextFields  fields={RejectList} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
+            </Box>
+          <DialogActions sx={{mt:3}}>
+          <Button color='options' onClick={handleClose}>CANCEL</Button>
+          <Button variant={'contained'} color='options' onClick={StatusUpdate}>SUBMIT</Button>
+          </DialogActions>
+          </Dialog>
+          </>
         }
         {snackbar}
         {loadingIndicator}
