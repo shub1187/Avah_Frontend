@@ -239,8 +239,18 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           type: 'date',
           fullWidth: true,
           select:true,
-          selectArray:[{ label: "9am", value: "9am" },{ label: "10am", value: "10am" },{ label: "11am", value: "11am" },{ label: "12pm", value: "12pm" },{ label: "1pm", value: "1pm" },{ label: "2pm", value: "2pm" },{ label: "3pm", value: "3pm" },{ label: "4pm", value: "4pm" },{ label: "5pm", value: "5pm" },{ label: "6pm", value: "6pm" }]
-
+          selectArray : [
+            { label: "9 AM", value: "9 AM" },
+            { label: "10 AM", value: "10 AM" },
+            { label: "11 AM", value: "11 AM" },
+            { label: "12 AM", value: "12 AM" },
+            { label: "1 PM", value: "1 PM" },
+            { label: "2 PM", value: "2 PM" },
+            { label: "3 PM", value: "3 PM" },
+            { label: "4 PM", value: "4 PM" },
+            { label: "5 PM", value: "5 PM" },
+            { label: "6 PM", value: "6 PM" }
+          ]
       },
         {
           label: 'Pickup And Drop',
