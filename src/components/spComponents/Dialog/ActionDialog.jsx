@@ -20,6 +20,8 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
   const handleClose = () => {setOpen(false)};
 
   //Formdata Related And Required Checks
+  console.log("ln 23", payload)
+
   const [formData, setFormData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const handleFieldChange = (fieldName, value) => {setFormData((prevData) => ({ ...prevData, [fieldName]: value }))}
@@ -27,7 +29,7 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
   const RejectList = [
     {
     label: 'Reason Of Rejection',
-    name: "reason_of_rejection",
+    name: "sp_rejection_note",
     type: 'text',
     fullWidth: true,
     required: true, // Add the required property
@@ -35,12 +37,12 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
     },
     {
       label: 'Is Reschedule Available?',
-      name: "is_reschedule_available",
+      name: "is_reschedule_allowed",
       fullWidth: true,
       required: true, // Add the required property
       errormessage: 'Confirm Rescheduling', // Add the error message    
       select:true,
-      selectArray:[{label:'Yes',value:'yes'},{label:'No',value:'no'}]
+      selectArray:[{label:'Yes',value:true},{label:'No',value:false}]
  
     }
   ]
