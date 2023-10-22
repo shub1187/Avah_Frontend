@@ -22,7 +22,6 @@ const ServiceProviderLayout = () => {
   };
   const {isMobile}=useMobileResponsive()
   const location = useLocation()
-  console.log(location,"RAEES")
     return (
     <Box sx={{ display: "flex" }}>
       

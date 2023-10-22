@@ -2,7 +2,7 @@ import { Box, Button, createTheme,TableCell,TableHead,TableRow,ThemeProvider, us
 import axios from "axios";
 import MaterialTable, { MTableToolbar } from "material-table";
 import './ServiceProviderTable.css'
-import { useState } from "react";
+import { createRef, useState } from "react";
 import CreateCustomerDialog from "../Dialog/Users/createCustomerDialog";
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
@@ -13,8 +13,8 @@ import AddLabourDialog from "../Dialog/Labour/AddLabour";
 import AddServiceDialog from "../Dialog/Service/AddServiceDialog";
 import CreateSpareDialog from "../Dialog/Spares/AddSparesDialog";
 
-const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
-  const [dataLength,setDataLength] = useState(0)
+const ServiceProvidertable = ({DialogButton,columnss,URL,key})=>{
+  const tableRef = createRef();
   const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
   const sp_id = localStorage.getItem('sp_id'); // Retrieve the token from local storage
   
@@ -162,18 +162,6 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
             <MTableToolbar {...props} />
           </div>
           <div>
-            {/* <Button
-            variant="contained"
-            sx={{height:'65px', width:'275px'}}
-            color="addUser"
-            onClick={()=> <CreateCustomerDialog/>}
-            >Add Employee
-            </Button> */}
-            {/* <CreateCustomerDialog height={'65px'} width={'270px'} color={'addUser'}/>
-            <CreateEmployeeDialog height={'65px'} width={'270px'} color={'addUser'}/>
-            <AddLabourDialog height={'65px'} width={'270px'} color={'addUser'}/>
-            <AddServiceDialog height={'65px'} width={'270px'} color={'addUser'}/>
-            <CreateSpareDialog height={'65px'} width={'270px'} color={'addUser'}/> */}
             {DialogButton && <DialogButton height={isMobileResolution?"30px":'50px'} width={isMobileResolution?"100px":'250px'} color={'options'} />}
           </div>
         </Box>
@@ -181,6 +169,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
       ),
     }}
     isLoading={false}
+    key={key || 'default'}
     // data={mock.results}
     data={async (query) => {
       console.log(query,"RAEES")
@@ -214,6 +203,14 @@ const ServiceProvidertable = ({DialogButton,columnss,URL})=>{
         };
       }
     }}
+    actions={[
+      {
+        icon: 'refresh',
+        tooltip: 'Refresh Data',
+        isFreeAction: true,
+        onClick: () => tableRef.current && tableRef.current.onQueryChange(),
+      }
+    ]}
   />
   </ThemeProvider>
   </>
