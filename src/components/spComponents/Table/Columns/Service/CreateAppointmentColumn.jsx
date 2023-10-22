@@ -20,7 +20,7 @@ export const createAppointmentColumn =(reLoadTable)=>( [
     // { title: "Estimate Status", field: "estimate_status" },
     {title:'Action',render:(rowData)=>
         <Box display='flex'>
-            <MoreActionDialog rowData={rowData} ActionDialog={[
+            <MoreActionDialog rowData={rowData} ActionDialog={rowData.appointment_status =='pending'?[
                                                                 <ActionDialog
                                                                 key="approve"
                                                                 approve
@@ -36,7 +36,7 @@ export const createAppointmentColumn =(reLoadTable)=>( [
                                                                 reLoadTable={reLoadTable}
                                                                 params={rowData.appointment_id}
                                                                 />
-                                                            ]}/>
+                                                            ]:[]}/>
             {/* {rowData.appointment_status =='approved'?'':
             rowData.appointment_status =='pending'?
             <>

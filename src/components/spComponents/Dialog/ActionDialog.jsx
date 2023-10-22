@@ -91,12 +91,12 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, pay
         {edit && <EditDialog/>}
         {status && <StatusDialog/>}
         {view && <ViewDialog/>}
-        {approve && <Button variant='outlined' style={{color:'rgb(5,131,30)',borderColor:'rgb(5,131,30)'}} onClick={StatusUpdate}>
+        {approve && <Button variant='outlined' color='success'  onClick={StatusUpdate}>
                       <CheckCircleIcon style={{color:'rgb(5,131,30)',cursor:'pointer',marginRight:'5px'}}/> Book
                      </Button>}
         {reject && 
         <>
-          <Button variant='outlined' style={{color:'rgb(204,16,16)',borderColor:'rgb(204,16,16)'}} onClick={handleClickOpen} >
+          <Button variant='outlined' color='error'  onClick={handleClickOpen} >
             <CancelIcon style={{color:'rgb(204,16,16)',cursor:'pointer',marginRight:'5px'}}/> Reject
           </Button>
           <Dialog  fullWidth open={open} onClose={handleClose} maxWidth='xs'>
