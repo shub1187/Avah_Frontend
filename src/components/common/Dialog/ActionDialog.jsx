@@ -1,8 +1,8 @@
 import { Box, Button ,Dialog, DialogActions, InputLabel, MenuItem, Select, TextField} from '@mui/material'
-import ChangePasswordDialog from './ChangePasswordDialog'
-import EditDialog from './EditDialog'
-import StatusDialog from './StatusDialog'
-import ViewDialog from './ViewDialog'
+import ChangePasswordDialog from '../../spComponents/Dialog/ChangePasswordDialog'
+import EditDialog from '../../spComponents/Dialog/EditDialog'
+import StatusDialog from '../../spComponents/Dialog/StatusDialog'
+import ViewDialog from '../../spComponents/Dialog/ViewDialog'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';

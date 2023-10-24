@@ -1,13 +1,20 @@
+import { Box } from '@mui/material'
+import ActionDialog from 'components/common/Dialog/ActionDialog'
+import MoreActionDialog from 'components/common/Dialog/MoreActionDialog'
 import React from 'react'
 
 const AddCustomerAppointmentColumn = [
+    { title: "Name", field: "name" },
     { title: "Vehicle Number", field: "vehicle_number" },
-    { title: "Vehicle Type", field: "vehicle_type" },
-    { title: "Brand", field: "brand" },
-    { title: "Model", field: "model" },
-    { title: "Engine Customization", field: "customization" },
-    { title: "Fuel Type", field: "fuel_type" }
+    { title: "Appointment Date", field: "appointment_date"},
+    { title: "Appointment Time", field: "appointment_time"},
+    { title: "Appointment Status", field: "appointment_status"},
+    {title:'Action',render:(rowData)=>
+        <Box display='flex'>
+            <MoreActionDialog 
+                rowData={rowData} 
+            />
+        </Box>
+    }
 ]
-
-
 export default AddCustomerAppointmentColumn

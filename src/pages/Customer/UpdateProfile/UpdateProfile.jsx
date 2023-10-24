@@ -178,7 +178,6 @@ if (selectedBrand) {
     ]
   return (
     <div>
-      <div style={{width: isMobile?'100%':1200}}>
         <DialogTitle >  <Typography fontWeight={'bold'} fontSize={25} sx={{textDecoration:'underline'}}>PROFILE</Typography><Box component={'span'} ml={4}></Box></DialogTitle>
         <DialogContent>
             <Grid container xs={12} flexDirection={'column'}>
@@ -213,7 +212,6 @@ if (selectedBrand) {
             </Grid>
 
         </DialogContent>
-        </div>
       {snackbar}
       {loadingIndicator}
     </div>  )

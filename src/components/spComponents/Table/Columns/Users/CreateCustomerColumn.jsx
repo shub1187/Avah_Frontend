@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material"
-import ActionDialog from "components/spComponents/Dialog/ActionDialog"
+import ActionDialog from "components/common/Dialog/ActionDialog"
 
 export const createCustomerColumn = [
     { title: "Type", field: "type" },

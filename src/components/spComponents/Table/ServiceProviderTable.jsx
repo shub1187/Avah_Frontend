@@ -6,7 +6,7 @@ import { createRef, useState } from "react";
 import CreateCustomerDialog from "../Dialog/Users/createCustomerDialog";
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import ActionDialog from "../Dialog/ActionDialog";
+import ActionDialog from "../../common/Dialog/ActionDialog";
 import SkeletonLoading from "components/common/Skeleton";
 import CreateEmployeeDialog from "../Dialog/Users/createEmployeeDialog";
 import AddLabourDialog from "../Dialog/Labour/AddLabour";

@@ -33,7 +33,7 @@ export default function CreateAutoCompleteTextfield({options,label,onSelect,whit
             },
             "& input": {
                 color: whiteColor?'black':"white", // Change font color to white
-                height: height?'23px':"3px",
+                height: height?'5px':"3px",
               },
           },}}
         renderInput={(params) => <TextField {...params} label={label}InputLabelProps={{sx: { color:whiteColor ?'black':'white',fontSize:12, top: "-0.6vh", "&.MuiInputLabel-shrink": { top: 10,color:'rgb(145,54,93)' } }}}/>}

@@ -47,7 +47,7 @@ const handleDateChange = (fieldName, selectedDate) => {
                     value={formField[field.name] || null}
                     minDate={dayjs()}
                     onChange={(selectedDate) => handleDateChange(field.name, selectedDate)}
-                    slotProps={{ textField: { fullWidth: true,size:field.size && 'small' } }}
+                    slotProps={{ textField: { fullWidth: true,size:'small'} }}
                     
                 />
             </LocalizationProvider>

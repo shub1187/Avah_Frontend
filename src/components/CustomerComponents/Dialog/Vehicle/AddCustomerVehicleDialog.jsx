@@ -165,8 +165,6 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
         Add New Vehicle
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth='md'>
-      <div style={{width: isMobile?'100%':''}}>
-
         <DialogTitle >Add New Vehicle</DialogTitle>
         <DialogContent>
             <Grid container xs={12} mt={3}>
@@ -206,7 +204,6 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
-        </div>
       </Dialog>
       {snackbar}
       {loadingIndicator}

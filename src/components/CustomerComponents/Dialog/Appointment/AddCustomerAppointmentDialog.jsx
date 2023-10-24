@@ -283,16 +283,16 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         <Grid container><Grid my={my} xs={12} item>{img && <img  src={img} alt="Card Image" />}</Grid><Grid fontSize={isMobile && 8} xs={12} item>CREATE APPOINTMENT</Grid></Grid>
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth='md'>
-      <div style={{width: isMobile?'100%':''}}>
 
         <DialogTitle >  CREATE APPOINTMENT</DialogTitle>
-        <DialogContent>
+        <DialogContent  sx={{pt:2,pb:0}}>
             <Grid container xs={12} mt={3}>
               <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>  
                   <Box mb={1} fontSize={18}>Select City</Box>   
                   <CreateAutoCompleteTextfield whiteColor height options = {cityArray} onSelect={handleSelectCity}/>
                   <Box mt={1} fontSize={18}>Select Service Provider</Box>   
                   <Select
+                  size='small'
                   sx={{my:1}}
                   fullWidth
                     value={selectedServiceProvider}
@@ -325,11 +325,10 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
               </Grid>
             </Grid>
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{pt:0}}>
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
-        </div>
       </Dialog>
       {snackbar}
       {loadingIndicator}
