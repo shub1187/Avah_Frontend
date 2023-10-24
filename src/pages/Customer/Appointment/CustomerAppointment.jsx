@@ -11,9 +11,9 @@ const CustomerAppointment = () => {
   return (
     <div>
       {isMobile?
-      <TableCustomerMobileDetails URL={'http://localhost:3008/api/customer/getAllRejectedCancelledAppointment'}/>
+      <TableCustomerMobileDetails URL={'http://localhost:3008/api/customer/getAllPendingApprovedAppointment'}/>
       :
-          <CustomerTable DialogButton={AddCustomerAppointmentDialog} columnss={AddCustomerAppointmentColumn}  URL={'http://localhost:3008/api/customer/getAllRejectedCancelledAppointment'}/>
+          <CustomerTable DialogButton={AddCustomerAppointmentDialog} columnss={AddCustomerAppointmentColumn}  URL={'http://localhost:3008/api/customer/getAllPendingApprovedAppointment'}/>
       }
     </div>
   )
