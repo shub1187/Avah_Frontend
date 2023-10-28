@@ -13,6 +13,8 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
     const [toggle,setToggle] = useState('individual')
     let {data} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
     let {data:fuelType} = useFetch('http://localhost:3008/api/admin/getAllFuelTypes')
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
     // const fuelNamesArray = fuelType?.data?.results?.map(fuel => ({ fuel_name: fuel.fuel_name }));
     const fuelNamesArray = fuelType?.data?.results?.map(item => ({
       label: item.fuel_name,
@@ -44,21 +46,39 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
       setOpen(false);
     };
     const handleSubmit = async()=>{
-      const obj = {
-        payload:formData,
-        method:"POST",
-        url:"http://localhost:3008/api/customer/vehicleRegistration"
-    }
+      try{
+        setIsSubmitted(true); // Set the form as submitted
+        // setStatus({loading:true,message:'',isVisible:true})
+  
+        const requiredFields = customerTextfield.filter((field) => field.required);
+        const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
+    
+        if (emptyRequiredFields.length > 0) {
+          // setStatus({ error: 'Please fill in all required fields.', message: '', loading: false });
+          return;
+        }
+        const obj = {
+          payload:formData,
+          method:"POST",
+          url:"http://localhost:3008/api/customer/vehicleRegistration"
+      }
+  
+      const {isSuccess,data,error} = await fetchCustomerData(obj)
+      if(error && !isSuccess){
+          throw new Error(error)
+      }
+      if(data && isSuccess){
+          setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
+      }
+      console.log(formData);
+      setFormData({})
+      }
+      catch(error){
+        setStatus({error:error?.message,message:'',loading:false})
+        setFormData({})
+      }
+      setIsSubmitted(false)
 
-    const {isSuccess,data,error} = await fetchCustomerData(obj)
-    if(error && !isSuccess){
-        throw new Error(error)
-    }
-    if(data && isSuccess){
-        setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
-    }
-    console.log(formData);
-    setFormData({})
     }
     const selectArray = brandData.map((brandEntry) => {
       const brandName = Object.keys(brandEntry)[0]; // Get the brand name
@@ -106,13 +126,17 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
             label: 'Vehicle Number',
             name: "vehicle_number",
             type: 'number',
-            fullWidth:true
+            fullWidth:true,
+            required: true, // Add the required property
+            errormessage: 'Vehicle Number Required', // Add the error message
 
         },
         {
             label: 'Vehicle Type',
             name: "vehicle_type",
             type: 'text',
+            required: true, // Add the required property
+            errormessage: 'Vehicle Type Required', // Add the error message
             fullWidth:true,
             select:true,
             selectArray:[{ label: "Personal", value: "Personal" }, { label: "Commercial", value: "Commercial" }]
@@ -122,6 +146,8 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
           name: "brand",
           type: 'text',
           fullWidth: true,
+          required: true, // Add the required property
+          errormessage: 'Brand Required', // Add the error message
           select:true,
           selectArray:selectArray
       },
@@ -131,6 +157,8 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
         type: 'text',
         fullWidth: true,
         select: true,
+        required: true, // Add the required property
+        errormessage: 'Model Required', // Add the error message
         selectArray: selectModel
       },
       {
@@ -138,15 +166,19 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
         name: "customization",
         type: 'text',
         fullWidth: true,
+        required: true, // Add the required property
+        errormessage: 'Engine Customization Required', // Add the error message
         select: true,
         selectArray: [{ label: "Showroom Fitted", value: "Showroom Fitted" }, { label: "Externally Modified", value: "Externally Modified" }]
       },
 
       {
-        label: 'Registration Number',
+        label: 'Chassis Number',
         name: "registration_number",
         type: 'text',
         fullWidth: true,
+        required: true, // Add the required property
+        errormessage: 'Chassis Number Required', // Add the error message
 
       },
       {
@@ -155,7 +187,9 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
         type: 'text',
         fullWidth: true,
         select: true,
-        selectArray: fuelNamesArray
+        selectArray: fuelNamesArray,
+        required: true, // Add the required property
+        errormessage: 'Select Fuel Type', // Add the error message
       },
     ]
 
@@ -169,17 +203,17 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
         <DialogContent>
             <Grid container xs={12} mt={3}>
               <Grid item xs={12} sm={5.5} mr={!isMobile && 4}>
-                  <CreateTextFields  fields={customerTextfield.slice(0,1)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  fields={customerTextfield.slice(0,1)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
                   {/* <Box mb={1} color={'#ad4970'}>No Hiphen required Eg:MH14TT3066</Box> */}
-                  <CreateTextFields  fields={customerTextfield.slice(1,2)} onChange={handleFieldChange}  formField={formData}/>
-                  <CreateTextFields  fields={customerTextfield.slice(2,3)} onChange={handleFieldChange}  formField={formData}/>
-                  <CreateTextFields  fields={customerTextfield.slice(3,4)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  fields={customerTextfield.slice(1,2)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
+                  <CreateTextFields  fields={customerTextfield.slice(2,3)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
+                  <CreateTextFields  fields={customerTextfield.slice(3,4)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
               </Grid>
               <Grid item xs={12}  sm={5.5}>
                 <Grid container xs={12}>
-                <Grid  xs={12} item><CreateTextFields  fields={customerTextfield.slice(4,5)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={12} item><CreateTextFields fields={customerTextfield.slice(5,6)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  <Grid  xs={12} item ><CreateTextFields fields={customerTextfield.slice(6,7)} onChange={handleFieldChange}  formField={formData}/></Grid>
+                <Grid  xs={12} item><CreateTextFields  fields={customerTextfield.slice(4,5)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={customerTextfield.slice(5,6)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
+                  <Grid  xs={12} item ><CreateTextFields fields={customerTextfield.slice(6,7)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/></Grid>
                   {/* <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(7,8)} onChange={handleFieldChange}  formField={formData}/></Grid>
                   <Grid  xs={5.7} item mr={2}><CreateTextFields fields={customerTextfield.slice(8,9)} onChange={handleFieldChange}  formField={formData}/></Grid> */}
                   {/* <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(9,10)} onChange={handleFieldChange}  formField={formData}/></Grid> */}
