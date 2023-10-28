@@ -30,6 +30,7 @@ import { Box, Button } from '@mui/material'
 import CreateCustomerDialog from 'components/spComponents/Dialog/Users/createCustomerDialog'
 import { createCustomerColumn } from 'components/spComponents/Table/Columns/Users/CreateCustomerColumn'
 import CustomerTable from 'components/CustomerComponents/Table/CustomerTable'
+import AddCustomerAppointmentDialog from 'components/CustomerComponents/Dialog/Appointment/AddCustomerAppointmentDialog'
 const CustomerAppointment = () => {
   
   const [tableCalled,setTableCalled] = useState(false)
