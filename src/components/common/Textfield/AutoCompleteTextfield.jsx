@@ -9,12 +9,12 @@ export default function CreateAutoCompleteTextfield({options,label,onSelect,whit
         disablePortal
         id="combo-box-demo"
         options={options || []}
-        fullWidth = {fullWidth && true}
+        // fullWidth = {fullWidth}
         // onFocus={(e) => {
         //     e.target.parentElement.style.marginTop = "-8px"; // Adjust margin when focused
         //   }}
         // style={{maxHeight:'50px'}}
-        sx={{ width: !fullWidth?250:'',backgroundColor:whiteColor || 'rgb(145,54,93)',color:whiteColor ?'black':'white',borderRadius:1 , "& .MuiInputLabel-root": {
+        sx={{width:fullWidth ?'100%': 250,backgroundColor:whiteColor || 'rgb(145,54,93)',color:whiteColor ?'black':'white',borderRadius:1 , "& .MuiInputLabel-root": {
             // Override the label styles to remove shrink effect
             // transform: "none", // Remove shrink effect
             // color: "white", // Label text color
