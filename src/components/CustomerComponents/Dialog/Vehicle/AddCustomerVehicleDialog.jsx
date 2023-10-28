@@ -170,7 +170,9 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
         required: true, // Add the required property
         errormessage: 'Engine Customization Required', // Add the error message
         select: true,
-        selectArray: [{ label: "Showroom Fitted", value: "Showroom Fitted" }, { label: "Externally Modified", value: "Externally Modified" }]
+        selectArray: [{ label: "Showroom Fitted", value: "Showroom Fitted" }, { label: "Externally Modified", value: "Externally Modified" }],
+        tooltip:true,
+        tooltipMessage:'Whether the Engine is being serviced by unauthorized service center, Showroom Fitted indicates No, and Externally Modified indicates Yes'
       },
 
       {

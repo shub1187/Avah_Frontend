@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Box, IconButton, InputAdornment, InputLabel, MenuItem, TextField } from "@mui/material";
+import { Box, IconButton, InputAdornment, InputLabel, MenuItem, TextField, Tooltip } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
-
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 const CreateTextFields = ({ fields , onChange, formField,isSubmitted , onSearchIconClick}) => {
 //   const [formField, setFormField] = useState({});
 
@@ -28,6 +28,16 @@ useEffect(() => {
           <Box key={field.name} mb={2}>
             <InputLabel sx={{ color: "black", marginBottom: 1 }}>
               {field.label}
+              {
+                field.tooltip && (
+                  <Tooltip title={field.tooltipMessage ? field.tooltipMessage : ''}>
+                    <IconButton size="small">
+                      <QuestionMarkIcon sx={{fontSize:16}}/>
+                    </IconButton>
+                  </Tooltip>
+                )
+              }
+
             </InputLabel>
             <TextField
             //   size="small"
