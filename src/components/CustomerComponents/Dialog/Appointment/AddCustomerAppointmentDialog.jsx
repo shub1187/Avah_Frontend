@@ -68,8 +68,8 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     { label: "4 PM", value: "4 PM" },
     { label: "5 PM", value: "5 PM" },
     { label: "6 PM", value: "6 PM" },
-    { label: "7 PM", value: "7 PM" },
-    { label: "8 PM", value: "8 PM" }
+    // { label: "7 PM", value: "7 PM" },
+    // { label: "8 PM", value: "8 PM" }
 
   ];
   const currentHour = getHours(new Date()); // Get the current hour
