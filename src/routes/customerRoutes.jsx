@@ -27,8 +27,14 @@ const customerRoutes = [
     {
         id:4,
         link:'customer/appointment',
-        component:<CustomerAppointment/>
-    },
+        subList:[
+            {
+            id:41,
+            link:'approvedAppointment',
+            component:<CustomerAppointment/>
+            },
+        ]
+        },
     {
         id:5,
         link:'customer/profile',

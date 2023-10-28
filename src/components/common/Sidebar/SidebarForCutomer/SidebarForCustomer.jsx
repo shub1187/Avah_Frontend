@@ -45,9 +45,16 @@ export const CustomerSidebarList =(customerStatus)=>{
     },
     {
       id:5,
-      link:'customer/appointment',
+      link:'customer/appointment/approvedAppointment',
       icon:AppointmentIcon,
       name:"Appointment",
+      subList:[
+        {
+          id:51,
+          link:'customer/appointment/approvedAppointment',
+          name:"Appointment List"
+        },
+      ]
     },
   ]
   )
