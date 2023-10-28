@@ -159,6 +159,16 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
 
     const handleSubmit = async()=>{
         try{
+          setIsSubmitted(true); // Set the form as submitted
+          // setStatus({loading:true,message:'',isVisible:true})
+    
+          const requiredFields = appointmentList.filter((field) => field.required);
+          const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
+      
+          if (emptyRequiredFields.length > 0) {
+            // setStatus({ error: 'Please fill in all required fields.', message: '', loading: false });
+            return;
+          }
                 const obj = {
                 payload:formData,
                 method:"POST",
@@ -178,6 +188,8 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         catch(error){
             setFormData({})
         }
+        setIsSubmitted(false)
+        handleClose();
     }
     const appointmentList = [
         {
@@ -186,7 +198,9 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           type: 'text',
           fullWidth: true,
           select: true,
-          selectArray: []
+          selectArray: [],
+          required: true, // Add the required property
+          errormessage: 'Select desired City', // Add the error message
         },
         {
           label: 'Select Service Provider',
@@ -194,7 +208,9 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           type: 'text',
           fullWidth: true,
           select: true,
-          selectArray: spList
+          selectArray: spList,
+          required: true, // Add the required property
+          errormessage: 'Select Service Provider', // Add the error message
         },
         {
           label: 'Address',
@@ -284,6 +300,8 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             name: "appointment_date",
             type: 'date',
             fullWidth: true,
+            required: true, // Add the required property
+            errormessage: 'Select Appointment Date', // Add the error message
 
         },
         {
@@ -292,7 +310,9 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           type: 'date',
           fullWidth: true,
           select:true,
-          selectArray : timeSlot()
+          selectArray : timeSlot(),
+          required: true, // Add the required property
+          errormessage: 'Select Appointment Time', // Add the error message
       },
         {
           label: 'Pickup And Drop',
@@ -300,6 +320,8 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           type: 'text',
           fullWidth: true,
           select:true,
+          required: true, // Add the required property
+          errormessage: 'Select the pickup type', // Add the error message
           selectArray:[
               {
                 label:'Company Executive',
@@ -317,6 +339,8 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             type: 'text',
             fullWidth: true,
             row: 2,
+            required: true, // Add the required property
+            errormessage: 'Enter the Pickup Address', // Add the error message
       },
     ]
   return (
@@ -346,24 +370,24 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                       </MenuItem>
                     ))}
                   </Select>
-                  <CreateTextFields  fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData}/>
-                  <CreateTextFields  fields={appointmentList.slice(3,4)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
+                  <CreateTextFields  fields={appointmentList.slice(3,4)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
                   <CreateTextFields  onSearchIconClick={handleSearchIconClick} fields={appointmentList.slice(4,5)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
               </Grid>
               <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>
                 <Grid container xs={12} >
-                <Grid  xs={12} item><CreateTextFields  fields={appointmentList.slice(5,6)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(6,10)} onChange={handleFieldChange} formField={formData}/></Grid>
+                <Grid  xs={12} item><CreateTextFields  fields={appointmentList.slice(5,6)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(6,10)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={3.6} >
                 <Grid container xs={12}>
-                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(10,11)} onChange={handleFieldChange} formField={formData}/></Grid>
-                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(11,12)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(12,13)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(13,15)} onChange={handleFieldChange} formField={formData}/></Grid>
+                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(10,11)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
+                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(11,12)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
+                  <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(12,13)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(13,15)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
                   {formData.pickup_drop=='Company Executive' &&
-                    <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(15,16)} onChange={handleFieldChange} formField={formData}/></Grid>
+                    <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(15,16)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
                   }
                   {/* {formData.pickup_drop=='Company Executive' &&
                     <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(16,17)} onChange={handleFieldChange} formField={formData}/></Grid>

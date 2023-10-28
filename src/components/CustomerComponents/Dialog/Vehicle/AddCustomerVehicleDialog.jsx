@@ -172,12 +172,12 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
         select: true,
         selectArray: [{ label: "Showroom Fitted", value: "Showroom Fitted" }, { label: "Externally Modified", value: "Externally Modified" }],
         tooltip:true,
-        tooltipMessage:'Whether the Engine is being serviced by unauthorized service center, Showroom Fitted indicates No, and Externally Modified indicates Yes'
+        tooltipMessage:'Showroom fitted means Engine varient provided by manufacturer And Externally modified means if you have customized original engine. Eample: Added outfitted CNG Kit to Petrol Engine'
       },
 
       {
         label: 'Chassis Number',
-        name: "registration_number",
+        name: "chassis_number",
         type: 'text',
         fullWidth: true,
         required: true, // Add the required property
