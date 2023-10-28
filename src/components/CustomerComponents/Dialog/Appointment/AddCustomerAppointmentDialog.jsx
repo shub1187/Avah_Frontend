@@ -161,6 +161,14 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
 
         },
         {
+          label: 'Mobile Number',
+          name: "business_contact",
+          type: 'text',
+          fullWidth: true,
+          disabled:true,
+          row: 1,
+        },
+        {
             label: 'Select Vehicle',
             name: "select_vehicle",
             type: 'text',
@@ -317,9 +325,9 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                 <Grid container xs={12}>
                 <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(10,11)} onChange={handleFieldChange} formField={formData}/></Grid>
                   <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(11,12)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(12,14)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(12,15)} onChange={handleFieldChange} formField={formData}/></Grid>
                   {formData.pickup_drop=='Company Executive' &&
-                    <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(14,15)} onChange={handleFieldChange} formField={formData}/></Grid>
+                    <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(15,16)} onChange={handleFieldChange} formField={formData}/></Grid>
                   }
                 </Grid>
               </Grid>
