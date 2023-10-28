@@ -78,6 +78,7 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
         setFormData({})
       }
       setIsSubmitted(false)
+      handleClose()
 
     }
     const selectArray = brandData.map((brandEntry) => {
