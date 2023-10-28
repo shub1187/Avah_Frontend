@@ -9,6 +9,7 @@ import SkeletonLoading from 'components/common/Skeleton';
 import { useMobileResponsive } from 'hooks/useMobileResponsive';
 import CreateAutoCompleteTextfield from 'components/common/Textfield/AutoCompleteTextfield';
 import { useCity } from 'hooks/useCustomContext';
+import {getHours,format} from 'date-fns'
 const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,borderRadius,my}) => {
     const [open, setOpen] = React.useState(false);
     const [formData, setFormData] = useState({});
@@ -53,6 +54,46 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
 
   };
   console.log(formData,"RAEES")
+
+  const timeSlot = ()=> {
+
+  const time = [
+    { label: "9 AM", value: "9 AM" },
+    { label: "10 AM", value: "10 AM" },
+    { label: "11 AM", value: "11 AM" },
+    { label: "12 PM", value: "12 PM" },
+    { label: "1 PM", value: "1 PM" },
+    { label: "2 PM", value: "2 PM" },
+    { label: "3 PM", value: "3 PM" },
+    { label: "4 PM", value: "4 PM" },
+    { label: "5 PM", value: "5 PM" },
+    { label: "6 PM", value: "6 PM" },
+    { label: "7 PM", value: "7 PM" },
+    { label: "8 PM", value: "8 PM" }
+
+  ];
+  const currentHour = getHours(new Date()); // Get the current hour
+
+  // Filter the time slots based on the current hour
+  const filteredTime = time.filter((slot) => {
+    const slotHour = Number(slot.label.split(' ')[0]);
+    const slotZone = slot.label.split(' ')[1]
+    if(currentHour >=12){ //indicacting its pm
+      if(slotZone ==='PM'){
+        return slotHour > currentHour -12 && slotHour <= 8;
+      }
+    }
+    if(currentHour <=12){
+      if(slotZone ==='AM'){
+        return slotHour > currentHour && slotHour < 12;
+    }
+   }
+    // return slotHour >= currentHour && slotHour <= 8;
+  });
+  // console.log(filteredTime,currentHour12Hour)
+  return filteredTime;
+  }
+  
     const handleFieldChange = (fieldName, value) => {
         if (fieldName === "select_city") {
             setFormData((prevData) => ({
@@ -247,18 +288,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           type: 'date',
           fullWidth: true,
           select:true,
-          selectArray : [
-            { label: "9 AM", value: "9 AM" },
-            { label: "10 AM", value: "10 AM" },
-            { label: "11 AM", value: "11 AM" },
-            { label: "12 AM", value: "12 AM" },
-            { label: "1 PM", value: "1 PM" },
-            { label: "2 PM", value: "2 PM" },
-            { label: "3 PM", value: "3 PM" },
-            { label: "4 PM", value: "4 PM" },
-            { label: "5 PM", value: "5 PM" },
-            { label: "6 PM", value: "6 PM" }
-          ]
+          selectArray : timeSlot()
       },
         {
           label: 'Pickup And Drop',
