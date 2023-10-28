@@ -10,11 +10,11 @@ const CustomerAppointment = () => {
   const {isMobile} = useMobileResponsive()
   return (
     <div>
-      {isMobile?
+      {/* {isMobile?
       <TableCustomerMobileDetails URL={'http://localhost:3008/api/customer/getAllPendingApprovedAppointment'}/>
-      :
+      : */}
           <CustomerTable DialogButton={AddCustomerAppointmentDialog} columnss={AddCustomerAppointmentColumn}  URL={'http://localhost:3008/api/customer/getAllPendingApprovedAppointment'}/>
-      }
+      {/* } */}
     </div>
   )
 }

@@ -4,7 +4,7 @@ import MoreActionDialog from 'components/common/Dialog/MoreActionDialog'
 import React from 'react'
 
 const AddCustomerAppointmentColumn = [
-    { title: "Name", field: "name" },
+    { title: "Service Provider", field: "sp_name" },
     { title: "Vehicle Number", field: "vehicle_number" },
     { title: "Appointment Date", field: "appointment_date"},
     { title: "Appointment Time", field: "appointment_time"},

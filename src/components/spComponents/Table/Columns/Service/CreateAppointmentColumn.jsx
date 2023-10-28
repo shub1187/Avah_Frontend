@@ -9,13 +9,13 @@ export const createAppointmentColumn =(reLoadTable)=>( [
     { title: "Appointment Status", field: "appointment_status"},
     {title:'Action',render:(rowData)=>
         <Box display='flex'>
-            <MoreActionDialog rowData={rowData} ActionDialog={rowData.appointment_status =='pending'?[
+            <MoreActionDialog rowData={rowData} ActionDialog={rowData.appointment_status =='Pending'?[
                                                                 <ActionDialog
                                                                 key="approve"
                                                                 approve
                                                                 url={'http://localhost:3008/api/serviceprovider/approveCustAppointment'}
                                                                 reLoadTable={reLoadTable}
-                                                                payload={{ 'appointment_id': rowData.appointment_id,'appointment_status': 'approved' }}
+                                                                payload={{ 'appointment_id': rowData.appointment_id,'appointment_status': 'Approved' }}
 
                                                                 />
                                                                 ,
@@ -24,10 +24,10 @@ export const createAppointmentColumn =(reLoadTable)=>( [
                                                                 reject
                                                                 url={'http://localhost:3008/api/serviceprovider/approveCustAppointment'}
                                                                 reLoadTable={reLoadTable}
-                                                                payload={{ 'appointment_id': rowData.appointment_id, 'appointment_status': 'rejected by sp' }}
+                                                                payload={{ 'appointment_id': rowData.appointment_id, 'appointment_status': 'Rejected By SP' }}
 
                                                                 />
-                                                            ]:rowData.appointment_status =='approved'?[
+                                                            ]:rowData.appointment_status =='Approved'?[
                                                                 <ActionDialog
                                                                 key="createEstimate"
                                                                 createEstimate

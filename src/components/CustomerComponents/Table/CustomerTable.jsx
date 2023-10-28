@@ -156,12 +156,12 @@ const CustomerTable = ({DialogButton,columnss,URL})=>{
         url+=`&_limit=${query.pageSize}`
         const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
         const response = await axios.get(url,{headers});
-        console.log("ln 161 RAEES", response)
-        const data = response?.data?.result; // Adjust this based on your API response structure
+        console.log("ln 159 response", response)
+        const data = response?.data?.results; // Adjust this based on your API response structure
         // setDataLength(data.length)
        
         return {
-          data: data, // Change this to match your data structure
+          data: data || [], // Change this to match your data structure
           page: query.page,
           totalCount:20, // Assuming the total count is the length of the data array
         };
