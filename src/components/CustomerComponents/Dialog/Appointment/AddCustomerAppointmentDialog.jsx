@@ -106,7 +106,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
       console.log("ln 168", selectedSp)
       if (selectedSp) {
         // setSelectedSpAddress(selectedSp.address);
-        setFormData((prev)=>({...prev,address:selectedSp.address, sp_id : selectedSp.sp_id, business_name : selectedSp.value}))
+        setFormData((prev)=>({...prev,address:selectedSp.address,business_contact:selectedSp.business_contact, sp_id : selectedSp.sp_id, business_name : selectedSp.value,}))
       } else {
         // setSelectedSpAddress("");
       }
