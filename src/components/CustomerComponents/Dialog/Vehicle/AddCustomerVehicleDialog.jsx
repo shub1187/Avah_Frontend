@@ -207,7 +207,7 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
             <Grid container xs={12} mt={3}>
               <Grid item xs={12} sm={5.5} mr={!isMobile && 4}>
                   <CreateTextFields  fields={customerTextfield.slice(0,1)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
-                  {/* <Box mb={1} color={'#ad4970'}>No Hiphen required Eg:MH14TT3066</Box> */}
+                  <Box mb={1} color={'#ad4970'}>No Hiphen required Eg:MH14TT3066</Box>
                   <CreateTextFields  fields={customerTextfield.slice(1,2)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
                   <CreateTextFields  fields={customerTextfield.slice(2,3)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
                   <CreateTextFields  fields={customerTextfield.slice(3,4)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
