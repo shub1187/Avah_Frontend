@@ -64,10 +64,12 @@ export const LoginRedux = (state = initialState, props) => {
             case FETCH_LOGIN_SUCCESS_SP:
                 var token = payload.token;
                 var sp_id = payload.sp_id;
+                var profile_name = payload.profile_name;
                 localStorage.setItem('TYPE_OF_USER', "2");
                 localStorage.setItem('access_tokenSP', token);
                 localStorage.setItem('isLoggedInSP', "true");
-                localStorage.setItem('sp_id', sp_id);      
+                localStorage.setItem('sp_id', sp_id);  
+                localStorage.setItem('profile_name', profile_name);
                 return {
                     ...state,
                     isLoading: 1,
@@ -76,7 +78,7 @@ export const LoginRedux = (state = initialState, props) => {
                 };
                 case FETCH_LOGIN_SUCCESS_CUSTOMER:
                     var token = payload.token;
-                    var cust_name = payload.cust_name;
+                    var profile_name = payload.profile_name;
                     var customer_id = payload.customer_id
                     var customer_email = payload.customer_email
                     localStorage.setItem('TYPE_OF_USER', "3");
@@ -84,7 +86,8 @@ export const LoginRedux = (state = initialState, props) => {
                     localStorage.setItem('customer_email', customer_email);
                     localStorage.setItem('access_tokenSP', token);
                     localStorage.setItem('isLoggedInSP', "true");
-                    localStorage.setItem('cust_name', cust_name);      
+                    // localStorage.setItem('cust_name', cust_name);   
+                    localStorage.setItem('profile_name', profile_name);   
                     return {
                         ...state,
                         isLoading: 1,

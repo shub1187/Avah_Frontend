@@ -69,7 +69,7 @@ const Topbar = ({isMobile,handleDrawerToggle,customer}) => {
               <Grid item><TopBarUserIcon logout={() => dispatch(LogoutAction())} /></Grid>
 
 
-              <Grid item mr={2}>raees</Grid>
+              <Grid item mr={2}>{localStorage.getItem('profile_name')}</Grid>
             </Grid>
           </Grid>
 
