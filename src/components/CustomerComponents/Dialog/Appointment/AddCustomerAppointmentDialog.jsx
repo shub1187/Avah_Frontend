@@ -106,7 +106,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
       console.log("ln 168", selectedSp)
       if (selectedSp) {
         // setSelectedSpAddress(selectedSp.address);
-        setFormData((prev)=>({...prev,address:selectedSp.address,business_contact:selectedSp.business_contact, sp_id : selectedSp.sp_id, business_name : selectedSp.value,}))
+        setFormData((prev)=>({...prev,address:selectedSp.address,sp_mobile:selectedSp.sp_mobile, sp_id : selectedSp.sp_id, business_name : selectedSp.value,}))
       } else {
         // setSelectedSpAddress("");
       }
@@ -161,8 +161,8 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
 
         },
         {
-          label: 'Mobile Number',
-          name: "business_contact",
+          label: 'Service Provider Mobile Number',
+          name: "sp_mobile",
           type: 'text',
           fullWidth: true,
           disabled:true,
@@ -282,7 +282,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             name: "pickup_address",
             type: 'text',
             fullWidth: true,
-            row: 3,
+            row: 2,
       },
     ]
   return (
@@ -290,14 +290,14 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
       <Button sx={{height:height,width:width,fontWeight:"bold",minHeight:minHeight,borderRadius:borderRadius,maxWidth:maxWidth}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
         <Grid container><Grid my={my} xs={12} item>{img && <img  src={img} alt="Card Image" />}</Grid><Grid fontSize={isMobile && 8} xs={12} item>CREATE APPOINTMENT</Grid></Grid>
       </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth='md'>
+      <Dialog open={open} onClose={handleClose} maxWidth='lg'>
 
         <DialogTitle >  CREATE APPOINTMENT</DialogTitle>
         <DialogContent  sx={{pt:2,pb:0}}>
             <Grid container xs={12} mt={3}>
               <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>  
                   <Box mb={1} fontSize={18}>Select City</Box>   
-                  <CreateAutoCompleteTextfield whiteColor height options = {cityArray} onSelect={handleSelectCity}/>
+                  <CreateAutoCompleteTextfield fullWidth whiteColor height options = {cityArray} onSelect={handleSelectCity}/>
                   <Box mt={1} fontSize={18}>Select Service Provider</Box>   
                   <Select
                   size='small'
