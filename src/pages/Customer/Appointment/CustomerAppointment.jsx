@@ -43,7 +43,7 @@ const CustomerAppointment = () => {
       
       </Box>
       {toggle==='appointment'?
-          <CustomerTable key={'appointment'} DialogButton={CreateAppointmentDialog} columnss={createAppointmentColumn()} URL={`http://localhost:3008/api/customer/getAllPendingApprovedAppointment`}/>
+          <CustomerTable key={'appointment'} DialogButton={AddCustomerAppointmentDialog} columnss={createAppointmentColumn()} URL={`http://localhost:3008/api/customer/getAllPendingApprovedAppointment`}/>
        :
        <CustomerTable key={'rejected'} columnss={createAppointmentColumn()} URL={`http://localhost:3008/api/customer/getAllRejectedCancelledAppointment`}/>
         }
