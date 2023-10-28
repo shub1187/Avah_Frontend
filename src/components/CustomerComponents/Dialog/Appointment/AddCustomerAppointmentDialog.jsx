@@ -80,7 +80,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     const slotZone = slot.label.split(' ')[1]
     if(currentHour >=12){ //indicacting its pm
       if(slotZone ==='PM'){
-        return slotHour > currentHour -12 && slotHour <= 8;
+        return slotHour > currentHour -12 && slotHour <= 6;
       }
     }
     if(currentHour <=12){
