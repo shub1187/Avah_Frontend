@@ -15,15 +15,15 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     const [formData, setFormData] = useState({});
     const [spList,setSpList] = useState([])
     const { city, setCity } = useCity();
-    const [selectedServiceProvider, setSelectedServiceProvider] = useState("");
-    const [selectedSpAddress, setSelectedSpAddress] = useState("");
+    const [autocompleteCityName, setAutocompleteCityName] = useState("");
+    const [autocompleteSpName, setAutocompleteSpName] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
     const {fetchCustomerData,snackbar,loadingIndicator} = useCustomerFetchFunction()
     const {isMobile} = useMobileResponsive()
     // let {data:citiesSpData} = useFetch('http://localhost:3008/api/customer/getSpDetailsPerCity')
     let {data:customerVehicleList} = useFetch(`http://localhost:3008/api/customer/getCustomerVehicleNumbers?customer_id=${localStorage.getItem('customer_id')}`)
-
-
+    console.log(spList)
+  
     let citiesSpData = {
       "error": false,
       "data": {
@@ -104,11 +104,13 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         setFormData({
           ...formData,
           address: matchingSP.address,
+          sp_mobile:matchingSP.sp_mobile
         });
       } else {
         setFormData({
           ...formData,
           address: "",
+          sp_mobile:""
         });
       }
     },[formData.select_service_provider])
@@ -122,9 +124,12 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     // setSpList(selectedCityData);
     // }
     // else{
-      setCity(selectedValue);
-      const selectedCityData = citiesSpData?.data?.[selectedValue] || [];
+      setAutocompleteSpName('')
+      setAutocompleteCityName(selectedValue.label)
+      setCity(selectedValue.label);
+      const selectedCityData = citiesSpData?.data?.[selectedValue.label] || [];
       setSpList(selectedCityData);
+      setFormData((prev)=>({...prev,address:'',sp_mobile:''}))
     // }
 
   };
@@ -209,39 +214,26 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         setIsSubmitted(false); // Set the form as submitted
     };
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
+    const handleClickOpen = () => {setOpen(true)};
+    const handleClose = () => {setOpen(false);};
 
-    const handleServiceProviderChange = (event) => {
-      const selectedIndex = event.target.value;
-      setSelectedServiceProvider(selectedIndex);
-      console.log(selectedIndex)
-      // Find the selected service provider's address
-      const selectedSp = spList.find((sp) => sp.sp_id === selectedIndex);
-      console.log("ln 168", selectedSp)
+    const handleServiceProviderChange = (obj) => {
+      setAutocompleteSpName(obj.label)
+      setFormData(p=>({...p,address:'',sp_mobile:''}))
+      const selectedSp = spList.find((sp) => sp.sp_id === obj.sp_id);
+      console.log("ln 168", selectedSp,obj)
       if (selectedSp) {
-        // setSelectedSpAddress(selectedSp.address);
         setFormData((prev)=>({...prev,address:selectedSp.address,sp_mobile:selectedSp.sp_mobile, sp_id : selectedSp.sp_id, business_name : selectedSp.value,}))
-      } else {
-        // setSelectedSpAddress("");
       }
     };
 
     const handleSubmit = async()=>{
         try{
-          setIsSubmitted(true); // Set the form as submitted
-          // setStatus({loading:true,message:'',isVisible:true})
-    
+          setIsSubmitted(true); // Set the form as submitted    
           const requiredFields = appointmentList.filter((field) => field.required);
           const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
-      
+
           if (emptyRequiredFields.length > 0) {
-            // setStatus({ error: 'Please fill in all required fields.', message: '', loading: false });
             return;
           }
                 const obj = {
@@ -250,14 +242,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                 url:"http://localhost:3008/api/customer/createAppointment"
             }
   
-            // const {isSuccess,data,error} = 
             await fetchCustomerData(obj)
-            // if(error && !isSuccess){
-            //     throw new Error(error)
-            // }
-            // if(data && isSuccess){
-            // }
-            // console.log(formData);
             setFormData({})
         }
         catch(error){
@@ -429,23 +414,10 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         <DialogContent  sx={{pt:2,pb:0}}>
             <Grid container xs={12} mt={3}>
               <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>  
-                  <Box mb={1} fontSize={18}>Select City</Box>   
-                  <CreateAutoCompleteTextfield fullWidth whiteColor height options = {cityArray} onSelect={handleSelectCity}/>
+                  <Box mb={1} fontSize={18}>Select City</Box>  
+                  <CreateAutoCompleteTextfield fullWidth whiteColor height options = {cityArray} onChange={handleSelectCity} autocompleteCityName={autocompleteCityName}/> 
                   <Box mt={1} fontSize={18}>Select Service Provider</Box>   
-                  {/* <CreateAutoCompleteTextfield fullWidth whiteColor height options = {spList} onSelect={()=>{}}/> */}
-                  <Select
-                  size='small'
-                  sx={{my:1}}
-                  fullWidth
-                    value={selectedServiceProvider}
-                    onChange={handleServiceProviderChange}
-                  >
-                    {spList.map((sp) => (
-                      <MenuItem key={sp.sp_id} value={sp.sp_id}>
-                        {sp.label}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                  <CreateAutoCompleteTextfield fullWidth whiteColor height options = {spList} onChange={handleServiceProviderChange} autocompleteSpName={autocompleteSpName}/>
                   <CreateTextFields  fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData} />
                   <CreateTextFields  fields={appointmentList.slice(3,4)} onChange={handleFieldChange}  formField={formData} />
                   <CreateTextFields  onSearchIconClick={handleSearchIconClick} fields={appointmentList.slice(4,5)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
@@ -465,9 +437,6 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                   {formData.pickup_drop=='Company Executive' &&
                     <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(15,16)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
                   }
-                  {/* {formData.pickup_drop=='Company Executive' &&
-                    <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(16,17)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  } */}
                 </Grid>
               </Grid>
             </Grid>
