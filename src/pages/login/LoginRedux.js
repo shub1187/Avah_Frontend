@@ -51,6 +51,7 @@ export const LoginRedux = (state = initialState, props) => {
         case FETCH_LOGIN_SUCCESS:
             var token = payload.token;
             localStorage.setItem('TYPE_OF_USER', "1");
+            localStorage.setItem('role', "Administrator");
             localStorage.setItem('access_token', token);
             localStorage.setItem('isLoggedIn', "true");
 
@@ -66,6 +67,7 @@ export const LoginRedux = (state = initialState, props) => {
                 var sp_id = payload.sp_id;
                 var profile_name = payload.profile_name;
                 localStorage.setItem('TYPE_OF_USER', "2");
+                localStorage.setItem('role', "Service Provider");
                 localStorage.setItem('access_tokenSP', token);
                 localStorage.setItem('isLoggedInSP', "true");
                 localStorage.setItem('sp_id', sp_id);  
@@ -82,11 +84,11 @@ export const LoginRedux = (state = initialState, props) => {
                     var customer_id = payload.customer_id
                     var customer_email = payload.customer_email
                     localStorage.setItem('TYPE_OF_USER', "3");
+                    localStorage.setItem('role', "Customer");
                     localStorage.setItem('customer_id', customer_id);
                     localStorage.setItem('customer_email', customer_email);
                     localStorage.setItem('access_tokenSP', token);
-                    localStorage.setItem('isLoggedInSP', "true");
-                    // localStorage.setItem('cust_name', cust_name);   
+                    localStorage.setItem('isLoggedInSP', "true"); 
                     localStorage.setItem('profile_name', profile_name);   
                     return {
                         ...state,

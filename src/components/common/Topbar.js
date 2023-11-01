@@ -70,6 +70,7 @@ const Topbar = ({isMobile,handleDrawerToggle,customer}) => {
 
 
               <Grid item mr={2}>{localStorage.getItem('profile_name')}</Grid>
+              <Grid item mr={2}>{localStorage.getItem('role')}</Grid>
             </Grid>
           </Grid>
 
