@@ -21,82 +21,82 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     const [isSubmitted, setIsSubmitted] = useState(false);
     const {fetchCustomerData,snackbar,loadingIndicator} = useCustomerFetchFunction()
     const {isMobile} = useMobileResponsive()
-    // let {data:citiesSpData} = useFetch('http://localhost:3008/api/customer/getSpDetailsPerCity')
-    // let {data:customerVehicleList} = useFetch(`http://localhost:3008/api/customer/getCustomerVehicleNumbers?customer_id=${localStorage.getItem('customer_id')}`)
+    let {data:citiesSpData} = useFetch('http://localhost:3008/api/customer/getSpDetailsPerCity')
+    let {data:customerVehicleList} = useFetch(`http://localhost:3008/api/customer/getCustomerVehicleNumbers?customer_id=${localStorage.getItem('customer_id')}`)
   
-    let citiesSpData = {
-      "error": false,
-      "data": {
-          "Navi Mumbai (Maharashtra)": [
-              {
-                  "sp_id": 35,
-                  "label": "Balaji Auto services",
-                  "value": "Balaji Auto services",
-                  "address": "Sector-05, shop no.-885 Brahma chowk Sanpada",
-                  "sp_mobile": "1122334455"
-              },
-              {
-                  "sp_id": 36,
-                  "label": "Balaji Auto services",
-                  "value": "Balaji Auto services",
-                  "address": "Sector-22, Sai Chowk Ghansoli",
-                  "sp_mobile": "7788445511"
-              }
-          ],
-          "Islampur (Bihar)": [
-              {
-                  "sp_id": 33,
-                  "label": "suyog auto services",
-                  "value": "suyog auto services",
-                  "address": "sector-25, near blue diamond",
-                  "sp_mobile": "77884455"
-              }
-          ],
-          "Neral (Maharashtra)": [
-              {
-                  "sp_id": 32,
-                  "label": "Anil Auto services",
-                  "value": "Anil Auto services",
-                  "address": "sector-32,  sai chowk",
-                  "sp_mobile": "778894455"
-              }
-          ],
-          "Yellapur (Karnataka)": [
-              {
-                  "sp_id": 30,
-                  "label": "Pranish Auto services",
-                  "value": "Pranish Auto services",
-                  "address": "Sector-77, Daruj",
-                  "sp_mobile": "7788994455"
-              },
-              {
-                  "sp_id": 29,
-                  "label": "Anaya Auto services",
-                  "value": "Anaya Auto services",
-                  "address": "Sector-77, Darjai",
-                  "sp_mobile": "7788994455"
-              }
-          ],
-          "Islampur (West Bengal)": [
-              {
-                  "sp_id": 34,
-                  "label": "sachin auto services",
-                  "value": "sachin auto services",
-                  "address": "sector-17, Kopari Gaon",
-                  "sp_mobile": "77884455"
-              }
-          ],
-          "Udupi (Karnataka)": [
-              {
-                  "sp_id": 28,
-                  "label": "Vikas Auto services",
-                  "value": "Vikas Auto services",
-                  "address": "Sector-07,Belman",
-                  "sp_mobile": "7788994455"
-              }
-          ]
-      }
-  }
+  //   let citiesSpData = {
+  //     "error": false,
+  //     "data": {
+  //         "Navi Mumbai (Maharashtra)": [
+  //             {
+  //                 "sp_id": 35,
+  //                 "label": "Balaji Auto services",
+  //                 "value": "Balaji Auto services",
+  //                 "address": "Sector-05, shop no.-885 Brahma chowk Sanpada",
+  //                 "sp_mobile": "1122334455"
+  //             },
+  //             {
+  //                 "sp_id": 36,
+  //                 "label": "Balaji Auto services",
+  //                 "value": "Balaji Auto services",
+  //                 "address": "Sector-22, Sai Chowk Ghansoli",
+  //                 "sp_mobile": "7788445511"
+  //             }
+  //         ],
+  //         "Islampur (Bihar)": [
+  //             {
+  //                 "sp_id": 33,
+  //                 "label": "suyog auto services",
+  //                 "value": "suyog auto services",
+  //                 "address": "sector-25, near blue diamond",
+  //                 "sp_mobile": "77884455"
+  //             }
+  //         ],
+  //         "Neral (Maharashtra)": [
+  //             {
+  //                 "sp_id": 32,
+  //                 "label": "Anil Auto services",
+  //                 "value": "Anil Auto services",
+  //                 "address": "sector-32,  sai chowk",
+  //                 "sp_mobile": "778894455"
+  //             }
+  //         ],
+  //         "Yellapur (Karnataka)": [
+  //             {
+  //                 "sp_id": 30,
+  //                 "label": "Pranish Auto services",
+  //                 "value": "Pranish Auto services",
+  //                 "address": "Sector-77, Daruj",
+  //                 "sp_mobile": "7788994455"
+  //             },
+  //             {
+  //                 "sp_id": 29,
+  //                 "label": "Anaya Auto services",
+  //                 "value": "Anaya Auto services",
+  //                 "address": "Sector-77, Darjai",
+  //                 "sp_mobile": "7788994455"
+  //             }
+  //         ],
+  //         "Islampur (West Bengal)": [
+  //             {
+  //                 "sp_id": 34,
+  //                 "label": "sachin auto services",
+  //                 "value": "sachin auto services",
+  //                 "address": "sector-17, Kopari Gaon",
+  //                 "sp_mobile": "77884455"
+  //             }
+  //         ],
+  //         "Udupi (Karnataka)": [
+  //             {
+  //                 "sp_id": 28,
+  //                 "label": "Vikas Auto services",
+  //                 "value": "Vikas Auto services",
+  //                 "address": "Sector-07,Belman",
+  //                 "sp_mobile": "7788994455"
+  //             }
+  //         ]
+  //     }
+  // }
   
     useEffect(()=>{
       const matchingSP = spList.find((sp) => sp.address === formData.address);
@@ -251,68 +251,68 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         setIsSubmitted(false)
         handleClose();
     }
-    const customerVehicleList = {
-      "error": false,
-      "data": [
-          {
-              "label": "KA-70-HP-4008",
-              "value": "KA-70-HP-4008"
-          },
-          {
-              "label": "MH-05-LK-8899",
-              "value": "MH-05-LK-8899"
-          },
-          {
-              "label": "PB12POIU7785",
-              "value": "PB12POIU7785"
-          },
-          {
-              "label": "MH75PP1245",
-              "value": "MH75PP1245"
-          },
-          {
-              "label": "AP12PP8754",
-              "value": "AP12PP8754"
-          },
-          {
-              "label": "MH43AB3133",
-              "value": "MH43AB3133"
-          },
-          {
-              "label": "CG47WW1122",
-              "value": "CG47WW1122"
-          },
-          {
-              "label": "CH04PP4585",
-              "value": "CH04PP4585"
-          },
-          {
-              "label": "WB14GH1187",
-              "value": "WB14GH1187"
-          },
-          {
-              "label": "DD14PO1187",
-              "value": "DD14PO1187"
-          },
-          {
-              "label": "OD14PO9988",
-              "value": "OD14PO9988"
-          },
-          {
-              "label": "MH39UI4411",
-              "value": "MH39UI4411"
-          },
-          {
-              "label": "OP88UJ5612",
-              "value": "OP88UJ5612"
-          },
-          {
-              "label": "AP45UY7788",
-              "value": "AP45UY7788"
-          }
-      ]
-  }
-  console.log(spList,customerVehicleList)
+  //   const customerVehicleList = {
+  //     "error": false,
+  //     "data": [
+  //         {
+  //             "label": "KA-70-HP-4008",
+  //             "value": "KA-70-HP-4008"
+  //         },
+  //         {
+  //             "label": "MH-05-LK-8899",
+  //             "value": "MH-05-LK-8899"
+  //         },
+  //         {
+  //             "label": "PB12POIU7785",
+  //             "value": "PB12POIU7785"
+  //         },
+  //         {
+  //             "label": "MH75PP1245",
+  //             "value": "MH75PP1245"
+  //         },
+  //         {
+  //             "label": "AP12PP8754",
+  //             "value": "AP12PP8754"
+  //         },
+  //         {
+  //             "label": "MH43AB3133",
+  //             "value": "MH43AB3133"
+  //         },
+  //         {
+  //             "label": "CG47WW1122",
+  //             "value": "CG47WW1122"
+  //         },
+  //         {
+  //             "label": "CH04PP4585",
+  //             "value": "CH04PP4585"
+  //         },
+  //         {
+  //             "label": "WB14GH1187",
+  //             "value": "WB14GH1187"
+  //         },
+  //         {
+  //             "label": "DD14PO1187",
+  //             "value": "DD14PO1187"
+  //         },
+  //         {
+  //             "label": "OD14PO9988",
+  //             "value": "OD14PO9988"
+  //         },
+  //         {
+  //             "label": "MH39UI4411",
+  //             "value": "MH39UI4411"
+  //         },
+  //         {
+  //             "label": "OP88UJ5612",
+  //             "value": "OP88UJ5612"
+  //         },
+  //         {
+  //             "label": "AP45UY7788",
+  //             "value": "AP45UY7788"
+  //         }
+  //     ]
+  // }
+  // console.log(spList,customerVehicleList)
 
     const appointmentList = [
         {
