@@ -446,20 +446,20 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                       </MenuItem>
                     ))}
                   </Select>
-                  <CreateTextFields  fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
-                  <CreateTextFields  fields={appointmentList.slice(3,4)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
+                  <CreateTextFields  fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData} />
+                  <CreateTextFields  fields={appointmentList.slice(3,4)} onChange={handleFieldChange}  formField={formData} />
                   <CreateTextFields  onSearchIconClick={handleSearchIconClick} fields={appointmentList.slice(4,5)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
               </Grid>
               <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>
                 <Grid container xs={12} >
-                <Grid  xs={12} item><CreateTextFields  fields={appointmentList.slice(5,6)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/></Grid>
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(6,10)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
+                <Grid  xs={12} item><CreateTextFields  fields={appointmentList.slice(5,6)} onChange={handleFieldChange}  formField={formData} /></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(6,10)} onChange={handleFieldChange} formField={formData} /></Grid>
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={3.6} >
                 <Grid container xs={12}>
-                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(10,11)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
-                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(11,12)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
+                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(10,11)} onChange={handleFieldChange} formField={formData} /></Grid>
+                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(11,12)} onChange={handleFieldChange} formField={formData}/></Grid>
                   <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(12,13)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
                   <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(13,15)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
                   {formData.pickup_drop=='Company Executive' &&
