@@ -20,9 +20,84 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     const [isSubmitted, setIsSubmitted] = useState(false);
     const {fetchCustomerData,snackbar,loadingIndicator} = useCustomerFetchFunction()
     const {isMobile} = useMobileResponsive()
-    let {data:citiesSpData} = useFetch('http://localhost:3008/api/customer/getSpDetailsPerCity')
+    // let {data:citiesSpData} = useFetch('http://localhost:3008/api/customer/getSpDetailsPerCity')
     let {data:customerVehicleList} = useFetch(`http://localhost:3008/api/customer/getCustomerVehicleNumbers?customer_id=${localStorage.getItem('customer_id')}`)
 
+
+    let citiesSpData = {
+      "error": false,
+      "data": {
+          "Navi Mumbai (Maharashtra)": [
+              {
+                  "sp_id": 35,
+                  "label": "Balaji Auto services",
+                  "value": "Balaji Auto services",
+                  "address": "Sector-05, shop no.-885 Brahma chowk Sanpada",
+                  "sp_mobile": "1122334455"
+              },
+              {
+                  "sp_id": 36,
+                  "label": "Balaji Auto services",
+                  "value": "Balaji Auto services",
+                  "address": "Sector-22, Sai Chowk Ghansoli",
+                  "sp_mobile": "7788445511"
+              }
+          ],
+          "Islampur (Bihar)": [
+              {
+                  "sp_id": 33,
+                  "label": "suyog auto services",
+                  "value": "suyog auto services",
+                  "address": "sector-25, near blue diamond",
+                  "sp_mobile": "77884455"
+              }
+          ],
+          "Neral (Maharashtra)": [
+              {
+                  "sp_id": 32,
+                  "label": "Anil Auto services",
+                  "value": "Anil Auto services",
+                  "address": "sector-32,  sai chowk",
+                  "sp_mobile": "778894455"
+              }
+          ],
+          "Yellapur (Karnataka)": [
+              {
+                  "sp_id": 30,
+                  "label": "Pranish Auto services",
+                  "value": "Pranish Auto services",
+                  "address": "Sector-77, Daruj",
+                  "sp_mobile": "7788994455"
+              },
+              {
+                  "sp_id": 29,
+                  "label": "Anaya Auto services",
+                  "value": "Anaya Auto services",
+                  "address": "Sector-77, Darjai",
+                  "sp_mobile": "7788994455"
+              }
+          ],
+          "Islampur (West Bengal)": [
+              {
+                  "sp_id": 34,
+                  "label": "sachin auto services",
+                  "value": "sachin auto services",
+                  "address": "sector-17, Kopari Gaon",
+                  "sp_mobile": "77884455"
+              }
+          ],
+          "Udupi (Karnataka)": [
+              {
+                  "sp_id": 28,
+                  "label": "Vikas Auto services",
+                  "value": "Vikas Auto services",
+                  "address": "Sector-07,Belman",
+                  "sp_mobile": "7788994455"
+              }
+          ]
+      }
+  }
+  
     useEffect(()=>{
       const matchingSP = spList.find((sp) => sp.address === formData.address);
       if (matchingSP) {
@@ -357,8 +432,8 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                   <Box mb={1} fontSize={18}>Select City</Box>   
                   <CreateAutoCompleteTextfield fullWidth whiteColor height options = {cityArray} onSelect={handleSelectCity}/>
                   <Box mt={1} fontSize={18}>Select Service Provider</Box>   
-                  <CreateAutoCompleteTextfield fullWidth whiteColor height options = {spList} onSelect={handleServiceProviderChange}/>
-                  {/* <Select
+                  {/* <CreateAutoCompleteTextfield fullWidth whiteColor height options = {spList} onSelect={()=>{}}/> */}
+                  <Select
                   size='small'
                   sx={{my:1}}
                   fullWidth
@@ -370,7 +445,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                         {sp.label}
                       </MenuItem>
                     ))}
-                  </Select> */}
+                  </Select>
                   <CreateTextFields  fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
                   <CreateTextFields  fields={appointmentList.slice(3,4)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
                   <CreateTextFields  onSearchIconClick={handleSearchIconClick} fields={appointmentList.slice(4,5)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
