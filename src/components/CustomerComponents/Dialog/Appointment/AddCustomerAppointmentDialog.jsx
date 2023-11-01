@@ -357,7 +357,8 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                   <Box mb={1} fontSize={18}>Select City</Box>   
                   <CreateAutoCompleteTextfield fullWidth whiteColor height options = {cityArray} onSelect={handleSelectCity}/>
                   <Box mt={1} fontSize={18}>Select Service Provider</Box>   
-                  <Select
+                  <CreateAutoCompleteTextfield fullWidth whiteColor height options = {spList} onSelect={handleServiceProviderChange}/>
+                  {/* <Select
                   size='small'
                   sx={{my:1}}
                   fullWidth
@@ -369,7 +370,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                         {sp.label}
                       </MenuItem>
                     ))}
-                  </Select>
+                  </Select> */}
                   <CreateTextFields  fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
                   <CreateTextFields  fields={appointmentList.slice(3,4)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
                   <CreateTextFields  onSearchIconClick={handleSearchIconClick} fields={appointmentList.slice(4,5)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>

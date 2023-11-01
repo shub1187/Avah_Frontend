@@ -13,7 +13,7 @@ import { useState } from "react";
 // import AddServiceDialog from "../Dialog/Service/AddServiceDialog";
 // import CreateSpareDialog from "../Dialog/Spares/AddSparesDialog";
 
-const CustomerTable = ({DialogButton,columnss,URL})=>{
+const CustomerTable = ({DialogButton,columnss,URL,key})=>{
   const [dataLength,setDataLength] = useState(0)
   const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
   const customer_id = localStorage.getItem('customer_id'); // Retrieve the token from local storage
@@ -107,7 +107,7 @@ const CustomerTable = ({DialogButton,columnss,URL})=>{
     components={{
       Toolbar: (props) => (
         <>
-        <Box display={'flex'} justifyContent={'space-between'}>
+        <Box display={'flex'} justifyContent={'space-between'} sx={{background: "rgb(244, 248, 249)"}}>
           <div
             style={{
               display: "flex",
@@ -134,13 +134,14 @@ const CustomerTable = ({DialogButton,columnss,URL})=>{
             <AddLabourDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <AddServiceDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <CreateSpareDialog height={'65px'} width={'270px'} color={'addUser'}/> */}
-            <DialogButton height={isMobileResolution?"30px":'50px'} width={isMobileResolution?"100px":'250px'} color={'options'} />
+            {DialogButton && <DialogButton height={isMobileResolution?"30px":'50px'} width={isMobileResolution?"100px":'250px'} color={'options'} />}
           </div>
         </Box>
         </>
       ),
     }}
     isLoading={false}
+    key={key || 'default'}
     data={async (query) => {
       console.log(query,"RAEES")
       try {

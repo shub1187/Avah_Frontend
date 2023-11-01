@@ -59,6 +59,7 @@ export const CustomerSidebarList =(customerStatus)=>{
   ]
   )
 } 
+
 export default function CustomerSideBar() {
   const [openSublistId, setOpenSublistId] = useState(null);
   const [activeItem, setActiveItem] = useState(null);

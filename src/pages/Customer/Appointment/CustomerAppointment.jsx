@@ -31,11 +31,13 @@ import CreateCustomerDialog from 'components/spComponents/Dialog/Users/createCus
 import { createCustomerColumn } from 'components/spComponents/Table/Columns/Users/CreateCustomerColumn'
 import CustomerTable from 'components/CustomerComponents/Table/CustomerTable'
 import AddCustomerAppointmentDialog from 'components/CustomerComponents/Dialog/Appointment/AddCustomerAppointmentDialog'
+import { useMobileResponsive } from 'hooks/useMobileResponsive'
+import TableCustomerMobileDetails from 'components/CustomerComponents/MobileView/TableCustomerMobileDetails'
 const CustomerAppointment = () => {
   
   const [tableCalled,setTableCalled] = useState(false)
   const [toggle,setToggle] = useState('appointment')
-
+  const {isMobile} = useMobileResponsive()
   return (
     <>
       <Box pb={2} sx={{backgroundColor:'rgb(244,248,249)'}} display={'flex'} justifyContent={'center'} >
@@ -44,9 +46,13 @@ const CustomerAppointment = () => {
       
       </Box>
       {toggle==='appointment'?
+        isMobile?
+          <TableCustomerMobileDetails/> 
+        :
           <CustomerTable key={'appointment'} DialogButton={AddCustomerAppointmentDialog} columnss={createAppointmentColumn()} URL={`http://localhost:3008/api/customer/getAllPendingApprovedAppointment`}/>
        :
-       <CustomerTable key={'rejected'} columnss={createAppointmentColumn()} URL={`http://localhost:3008/api/customer/getAllRejectedCancelledAppointment`}/>
+      <CustomerTable key={'rejected'} columnss={createAppointmentColumn()} URL={`http://localhost:3008/api/customer/getAllRejectedCancelledAppointment`}/>
+
         }
 
     </>
