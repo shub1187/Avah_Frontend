@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, IconButton, InputAdornment, InputLabel, MenuItem, TextField, Tooltip } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
-const CreateTextFields = ({ fields , onChange, formField,isSubmitted, isIconSubmitted , onSearchIconClick}) => {
+const CreateTextFields = ({ fields , onChange, formField,isSubmitted , onSearchIconClick}) => {
 //   const [formField, setFormField] = useState({});
 
 //   const handleChange = (fieldName, value) => {
@@ -24,7 +24,6 @@ useEffect(() => {
         // //   setFormField((prev) => ({ ...prev, [field.name]: "" }));
         // }
         const isError = isSubmitted && field.required && !formField[field.name];
-        const isIconError = isIconSubmitted && field.required && !formField[field.name]
         return (
           <Box key={field.name} mb={2}>
             <InputLabel sx={{ color: "black", marginBottom: 1 }}>
@@ -51,8 +50,8 @@ useEffect(() => {
               select={field.select}
               disabled={field.disabled}
               size={'small'}
-              error={isError || isIconError}
-              helperText={isError || isIconError ? field.errormessage : ''}
+              error={isError}
+              helperText={isError ? field.errormessage : ''}
               InputProps={{
                 endAdornment: field.rightIcon && (
                   <InputAdornment position="end" sx={{mr:1}}>
