@@ -9,7 +9,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from "dayjs";
 import { format } from "date-fns";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
-const CreateDateFields = ({ fields , onChange, formField}) => {
+const CreateDateFields = ({ fields , onChange, formField,isSubmitted}) => {
 useEffect(() => {
   fields.forEach((field) => {
     if (!formField.hasOwnProperty(field.name)) {
@@ -37,6 +37,8 @@ const handleDateChange = (fieldName, selectedDate) => {
         //     onChange(field.name, '')
         // //   setFormField((prev) => ({ ...prev, [field.name]: "" }));
         // }
+        const isError = isSubmitted && field.required && !formField[field.name];
+
         return (
           <Box key={field.name} mb={2}>
             <InputLabel sx={{ color: "black", marginBottom: 1 }}>
@@ -47,7 +49,7 @@ const handleDateChange = (fieldName, selectedDate) => {
                     value={formField[field.name] || null}
                     minDate={dayjs()}
                     onChange={(selectedDate) => handleDateChange(field.name, selectedDate)}
-                    slotProps={{ textField: { fullWidth: true,size:'small'} }}
+                    slotProps={{ textField: { fullWidth: true,size:'small',error:{isError} ,helperText: isError ?field.errormessage :'' } }}
                     
                 />
             </LocalizationProvider>
