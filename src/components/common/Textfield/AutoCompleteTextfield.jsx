@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Box, InputLabel, MenuItem, TextField,Autocomplete } from "@mui/material";
-export default function CreateAutoCompleteTextfield({options,label,onChange,whiteColor,height,fullWidth, autocompleteCityName,autocompleteSpName}) {
+export default function CreateAutoCompleteTextfield({options,label,onChange,whiteColor,height,fullWidth, autocompleteCityName,autocompleteSpName,autocompleteVehicleName}) {
 
     return (
       <Autocomplete
         disablePortal
         id="combo-box-demo"
         options={options || []}
-        value={autocompleteCityName || autocompleteSpName}
+        value={autocompleteCityName || autocompleteSpName || autocompleteVehicleName}
         sx={{width:fullWidth ?'100%': 250,backgroundColor:whiteColor || 'rgb(145,54,93)',color:whiteColor ?'black':'white',borderRadius:1 ,
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
