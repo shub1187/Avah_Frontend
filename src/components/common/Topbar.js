@@ -69,8 +69,13 @@ const Topbar = ({isMobile,handleDrawerToggle,customer}) => {
               <Grid item><TopBarUserIcon logout={() => dispatch(LogoutAction())} /></Grid>
 
 
-              <Grid item mr={2}>{localStorage.getItem('profile_name')}</Grid>
-              <Grid item mr={2}>{localStorage.getItem('role')}</Grid>
+              <Grid item mr={2}>
+                <Grid container flexDirection={'column'}>
+                  <Grid ml={0.3} mt={1} item mr={2}>{localStorage.getItem('profile_name')}</Grid>
+                  <Grid item mr={2} fontSize={12}>({localStorage.getItem('role')})</Grid>
+                </Grid>
+              </Grid>
+              {/* <Grid item mr={2}>{localStorage.getItem('role')}</Grid> */}
             </Grid>
           </Grid>
 
