@@ -18,6 +18,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     const [selectedServiceProvider, setSelectedServiceProvider] = useState("");
     const [selectedSpAddress, setSelectedSpAddress] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isIconSubmitted,setIsIconSubmitted] = useState(false)
     const {fetchCustomerData,snackbar,loadingIndicator} = useCustomerFetchFunction()
     const {isMobile} = useMobileResponsive()
     // let {data:citiesSpData} = useFetch('http://localhost:3008/api/customer/getSpDetailsPerCity')
@@ -185,7 +186,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           }
     };
     const handleSearchIconClick = async(fieldName) => {
-        setIsSubmitted(true); // Set the form as submitted
+      setIsIconSubmitted(true); // Set the form as submitted
 
         const requiredFields = appointmentList.filter((field) => field.required);
         const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
@@ -206,7 +207,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         if(data && isSuccess){
         setFormData((prev)=>({...prev,...data?.result[0]}))
         }
-        setIsSubmitted(false); // Set the form as submitted
+        setIsIconSubmitted(false); // Set the form as submitted
     };
 
     const handleClickOpen = () => {
@@ -448,7 +449,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                   </Select>
                   <CreateTextFields  fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData} />
                   <CreateTextFields  fields={appointmentList.slice(3,4)} onChange={handleFieldChange}  formField={formData} />
-                  <CreateTextFields  onSearchIconClick={handleSearchIconClick} fields={appointmentList.slice(4,5)} onChange={handleFieldChange}  formField={formData} />
+                  <CreateTextFields  onSearchIconClick={handleSearchIconClick} fields={appointmentList.slice(4,5)} onChange={handleFieldChange}  formField={formData} isIconSubmitted={isIconSubmitted} />
               </Grid>
               <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>
                 <Grid container xs={12} >
