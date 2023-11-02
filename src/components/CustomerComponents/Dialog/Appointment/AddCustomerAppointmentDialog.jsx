@@ -199,9 +199,9 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         //   return;
         // }
         const obj = {
-          payload:formData.select_vehicle,
+          payload:fieldName.label,
           method:"GET",
-          url:`http://localhost:3008/api/customer/vehicleSearch?VehicleNumber=${formData.select_vehicle}`
+          url:`http://localhost:3008/api/customer/vehicleSearch?VehicleNumber=${fieldName.label}`
         }
 
         const {isSuccess,data,error} = await fetchCustomerData(obj)
