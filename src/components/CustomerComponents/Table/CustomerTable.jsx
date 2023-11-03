@@ -3,6 +3,7 @@ import axios from "axios";
 import MaterialTable, { MTableToolbar } from "material-table";
 import './CustomerTable.css'
 import { useState } from "react";
+import DialogWrapper from "components/common/Dialog/DialogWrapper";
 // import CreateCustomerDialog from "../Dialog/Users/createCustomerDialog";
 // import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 // import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
@@ -134,7 +135,7 @@ const CustomerTable = ({DialogButton,columnss,URL,key})=>{
             <AddLabourDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <AddServiceDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <CreateSpareDialog height={'65px'} width={'270px'} color={'addUser'}/> */}
-            {DialogButton && <DialogButton height={isMobileResolution?"30px":'50px'} width={isMobileResolution?"100px":'250px'} color={'options'} />}
+            {DialogButton && <DialogWrapper><DialogButton height={isMobileResolution?"30px":'50px'} width={isMobileResolution?"100px":'250px'} color={'options'} /></DialogWrapper>}
           </div>
         </Box>
         </>
@@ -143,7 +144,6 @@ const CustomerTable = ({DialogButton,columnss,URL,key})=>{
     isLoading={false}
     key={key || 'default'}
     data={async (query) => {
-      console.log(query,"RAEES")
       try {
         let url = `${URL}?customer_id=${customer_id}&`;
 
@@ -157,7 +157,6 @@ const CustomerTable = ({DialogButton,columnss,URL,key})=>{
         url+=`&_limit=${query.pageSize}`
         const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
         const response = await axios.get(url,{headers});
-        console.log("ln 159 response", response)
         const data = response?.data?.results; // Adjust this based on your API response structure
         // setDataLength(data.length)
        

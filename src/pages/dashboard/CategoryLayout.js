@@ -9,7 +9,6 @@ export default function CategoryLayout() {
 
   const { appState } = useSelector((state) => state.appState.appState);
 
-  // console.log("tabIndex---> " + "---------------------------**-----------------------------------------" + appState)
  
   return (  <div>  <> <Outlet /> </> </div> )
 }

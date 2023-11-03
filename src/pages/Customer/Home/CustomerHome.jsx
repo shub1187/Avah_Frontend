@@ -13,7 +13,7 @@ import {Link} from 'react-router-dom'
 
 const CustomerHome = () => {   
     const { city, setCity } = useCity();
-    console.log(city)
+    // console.log(city)
     const {data} = useFetch('http://localhost:3008/api/customer/getAllApprovedSpCities')
 
     const handleSelectCity = (selectedValue) => {
@@ -49,8 +49,12 @@ const CustomerHome = () => {
                     {/* <Grid item><Button sx={{fontSize:10,minHeight:35}} variant='contained' color='darkerpink'>My Location</Button></Grid> */}
                     <Grid item><CreateAutoCompleteTextfield options = {data?.result} label={'Select City'} onSelect={handleSelectCity}/></Grid>
                     {/* <Grid item><Button sx={{fontSize:10,minHeight:35}}variant='contained' color='darkerpink'>Select City</Button></Grid> */}
-                    <Grid item mr={2}><Link to={'/customer/dashboard'}><Button sx={{fontSize:10,minHeight:35}} variant='contained' color="darkerpink">Dashboard</Button></Link></Grid>
-
+                    {!localStorage.getItem('TYPE_OF_USER')?
+                      <Grid item mr={2}><Link to={'/login'}><Button sx={{fontSize:10,minHeight:35}} variant='contained' color="darkerpink">Login</Button></Link></Grid>
+                      :
+                      <Grid item mr={2}><Link to={'/customer/dashboard'}><Button sx={{fontSize:10,minHeight:35}} variant='contained' color="darkerpink">Dashboard</Button></Link></Grid>
+                    } 
+                    {/* <Grid item mr={2}><Link to={'/customer/dashboard'}><Button sx={{fontSize:10,minHeight:35}} variant='contained' color="darkerpink">Login</Button></Link></Grid> */}
                 </Grid>
             </Grid>
         </Grid>

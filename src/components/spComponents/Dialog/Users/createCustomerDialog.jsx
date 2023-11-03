@@ -23,7 +23,6 @@ const CreateCustomerDialog = ({height,width,color}) => {
       setOpen(false);
     };
     const handleSubmit = ()=>{
-    console.log(formData);
     setFormData({})
     }
 

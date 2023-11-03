@@ -60,7 +60,6 @@ const CreateEmployeeDialog = ({height,width,color}) => {
           if(data && isSuccess){
               setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
           }
-          console.log(formData);
           setFormData({})
       }
       catch(error){

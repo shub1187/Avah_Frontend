@@ -14,7 +14,6 @@ const StatusDialog = () => {
     })
 
     const [snackbar,handleSnackBar] = useState(true)
-    console.log("RAEES",status.loading,status.error,snackbar)
 
     const {fetchData} = useFetchFunction()
 

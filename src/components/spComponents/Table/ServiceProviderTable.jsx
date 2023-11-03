@@ -172,7 +172,6 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key})=>{
     key={key || 'default'}
     // data={mock.results}
     data={async (query) => {
-      console.log(query,"RAEES")
       try {
         let url = `${URL}?sp_id=${sp_id}&`;
 
@@ -186,10 +185,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key})=>{
         url+=`&_limit=${query.pageSize}`
         const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
         const response = await axios.get(url,{headers});
-        // console.log("ln 189 response ", response)
         const data = response?.data?.data?.results; // Adjust this based on your API response structure
-        // setDataLength(data.length)
-        // console.log(data,"ln 151 RAEES")
         return {
           data: data || [], // Change this to match your data structure
           page: query.page,

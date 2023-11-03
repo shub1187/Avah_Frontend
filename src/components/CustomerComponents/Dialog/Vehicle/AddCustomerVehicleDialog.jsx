@@ -7,21 +7,23 @@ import { useCustomerFetchFunction, useFetch } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
 import FileInputTextField from 'components/common/Textfield/FileTextfield';
 import { useMobileResponsive } from 'hooks/useMobileResponsive';
+import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
 
 const AddCustomerVehicleDialog = ({height,width,color}) => {
+  const {handleClose,isMobile,isSubmitted,setIsSubmitted,formData,setFormData} = useDialogWrapperContext()
+
     const [open, setOpen] = React.useState(false);
     const [toggle,setToggle] = useState('individual')
     let {data} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
     let {data:fuelType} = useFetch('http://localhost:3008/api/admin/getAllFuelTypes')
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    // const [isSubmitted, setIsSubmitted] = useState(false);
 
     // const fuelNamesArray = fuelType?.data?.results?.map(fuel => ({ fuel_name: fuel.fuel_name }));
     const fuelNamesArray = fuelType?.data?.results?.map(item => ({
       label: item.fuel_name,
       value: item.fuel_name
     }));
-    const {isMobile} = useMobileResponsive()
-    console.log("ln 15",fuelNamesArray)
+    // const {isMobile} = useMobileResponsive()
     const {fetchCustomerData,snackbar,loadingIndicator} = useCustomerFetchFunction()
     const [status,setStatus] = useState({
       isVisible:false,
@@ -32,19 +34,19 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
   })
     
     let brandData = data?.data?.results || []
-    const [formData, setFormData] = useState({});
+    // const [formData, setFormData] = useState({});
   console.log(formData,"RAEES")
     const handleFieldChange = (fieldName, value) => {
       setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
     };
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
+    // const handleClickOpen = () => {
+    //   setOpen(true);
+    // };
   
-    const handleClose = () => {
-      setOpen(false);
-    };
+    // const handleClose = () => {
+    //   setOpen(false);
+    // };
     const handleSubmit = async()=>{
       try{
         setIsSubmitted(true); // Set the form as submitted
@@ -70,7 +72,6 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
       if(data && isSuccess){
           setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
       }
-      console.log(formData);
       setFormData({})
       }
       catch(error){
@@ -113,14 +114,7 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
     const isMobileResolution = useMediaQuery((theme) =>
     theme.breakpoints.down('sm')
     );
-    // const theme = createTheme({
-      // palette:{
-      //   mainy:{
-      //     main:'#ad4970',
-      //     contrastText:"#ffffff"
-      //   }
-      // }
-    // })
+
     const customerTextfield = [
 
         {
@@ -198,10 +192,10 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
 
   return (
     <div>
-      <Button sx={{height:isMobileResolution?'50px':height,width:width,fontSize:isMobileResolution?"0.6rem":'0.875rem'}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
+      {/* <Button sx={{height:isMobileResolution?'50px':height,width:width,fontSize:isMobileResolution?"0.6rem":'0.875rem'}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
         Add New Vehicle
       </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth='md'>
+      <Dialog open={open} onClose={handleClose} maxWidth='md'> */}
         <DialogTitle >Add New Vehicle</DialogTitle>
         <DialogContent>
             <Grid container xs={12} mt={3}>
@@ -217,31 +211,15 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
                 <Grid  xs={12} item><CreateTextFields  fields={customerTextfield.slice(4,5)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/></Grid>
                   <Grid  xs={12} item><CreateTextFields fields={customerTextfield.slice(5,6)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
                   <Grid  xs={12} item ><CreateTextFields fields={customerTextfield.slice(6,7)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/></Grid>
-                  {/* <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(7,8)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={5.7} item mr={2}><CreateTextFields fields={customerTextfield.slice(8,9)} onChange={handleFieldChange}  formField={formData}/></Grid> */}
-                  {/* <Grid  xs={5.7} item><CreateTextFields fields={customerTextfield.slice(9,10)} onChange={handleFieldChange}  formField={formData}/></Grid> */}
                 </Grid>
               </Grid>
             </Grid>
-          {/* <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText> */}
-          {/* <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          /> */}
         </DialogContent>
         <DialogActions>
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
-      </Dialog>
+      {/* </Dialog> */}
       {snackbar}
       {loadingIndicator}
     </div>

@@ -34,6 +34,7 @@ import AddCustomerAppointmentDialog from 'components/CustomerComponents/Dialog/A
 import { useMobileResponsive } from 'hooks/useMobileResponsive'
 import TableCustomerMobileDetails from 'components/CustomerComponents/MobileView/TableCustomerMobileDetails'
 import AddCustomerAppointmentColumn from 'components/CustomerComponents/Table/Columns/Appointment/AddCustomerAppointmentColymn'
+import DialogWrapper from 'components/common/Dialog/DialogWrapper'
 const CustomerAppointment = () => {
   
   const [tableCalled,setTableCalled] = useState(false)
@@ -50,6 +51,7 @@ const CustomerAppointment = () => {
         isMobile?
           <TableCustomerMobileDetails/> 
         :
+          
           <CustomerTable key={'appointment'} DialogButton={AddCustomerAppointmentDialog} columnss={AddCustomerAppointmentColumn} URL={`http://localhost:3008/api/customer/getAllPendingApprovedAppointment`}/>
        :
       <CustomerTable key={'rejected'} columnss={AddCustomerAppointmentColumn} URL={`http://localhost:3008/api/customer/getAllRejectedCancelledAppointment`}/>

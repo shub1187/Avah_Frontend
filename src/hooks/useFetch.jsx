@@ -39,12 +39,10 @@ const useFetch = (url) => {
                 let customer_id =  localStorage.getItem('customer_id');
                 let headers = {}
                 if(sp_id || customer_id){
-                console.log("ln 18", customer_id)
                 const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
                  headers = { Authorization: `Bearer ${token}`  };      
                 }
                 const {data, status} = await axios.get(url,{headers})
-                console.log(data,status,"RAEES",'useFetch')
                 if(data && status==200){
                     setData(data)
                     setError('')
@@ -64,7 +62,6 @@ const useFetch = (url) => {
         setLoading(true);
         try{
             const {data, status} = await axios.get(url)
-            console.log(data,status,"RAEES",'useFetch')
             if(data && status==200 ){
                 setData(data)
                 setError('')
@@ -191,7 +188,6 @@ const useCustomerFetchFunction = ()=>{
                 headers : headers,
 
             }
-               console.log("ln 83 axios request", axiosRequest)
             const {status,data} = await axios({...axiosRequest, data: method?.toLowerCase()==="post" && payload})
 
             if(data && status ==200){

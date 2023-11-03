@@ -14,31 +14,7 @@ const CreateAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,bord
     const {isMobile} = useMobileResponsive()
     let {data} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
     let brandData = data?.data?.results || []
-    // console.log("ln 15 shub",data?.data?.results)
-    // const brandData = [  // This is dummy data for future refernce
-    //     {
-    //         "Maruti Suzuki": [
-    //             "Swift",
-    //             "Ertiga"
-    //         ]
-    //     },
-    //     {
-    //         "Morris Garage": [
-    //             "HECTOR",
-    //             "Rickshaw"
-    //         ]
-    //     },
-    //     {
-    //         "Hyundai": [
-    //             "i20"
-    //         ]
-    //     },
-    //     {
-    //         "Opel": [
-    //             "Corsa"
-    //         ]
-    //     }
-    // ]
+
     const selectArray = brandData.map((brandEntry) => {
         const brandName = Object.keys(brandEntry)[0]; // Get the brand name
         const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_'); // Format the value
@@ -121,7 +97,6 @@ const CreateAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,bord
             if(data && isSuccess){
                 setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
             }
-            console.log(formData);
             setFormData({})
         }
         catch(error){

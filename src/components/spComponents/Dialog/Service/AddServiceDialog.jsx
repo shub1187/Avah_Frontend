@@ -7,7 +7,6 @@ const AddServiceDialog = ({height,width,color}) => {
     const [open, setOpen] = React.useState(false);
 
     const [formData, setFormData] = useState({});
-  console.log(formData,"RAEES")
     const handleFieldChange = (fieldName, value) => {
       setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
     };

@@ -21,7 +21,6 @@ const CreateSpareDialog = ({height,width,color}) => {
       setOpen(false);
     };
     const handleSubmit = ()=>{
-    console.log(formData);
     setFormData({})
     }
     // const theme = createTheme({

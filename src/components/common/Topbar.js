@@ -16,18 +16,8 @@ import { useMobileResponsive } from "hooks/useMobileResponsive";
 
 const Topbar = ({isMobile,handleDrawerToggle,customer}) => {
   const { appState } = useSelector((state) => state.appState);
-  const [location,setLocation] = useState({})
 
-  const success=(pos)=>{
-    console.log(pos)
-  }
-  useEffect(()=>{
-    // if(!('geolocation' in navigator)){
-      navigator.geolocation.getCurrentPosition(success)
-    // }
-  },[])
   const dispatch=useDispatch()
- console.log(customer)
   let appbar = appState.appState == "home" ? "app-bar2" : "app-bar1"
   return (
     <AppBar

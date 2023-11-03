@@ -176,6 +176,7 @@ const TableCustomerMobileDetails = ({URL}) => {
         onChange={(e) => setSearchTerm(e.target.value)}
         sx={{ mb: 2,mt:2 }}
         />
+        <Box display={'flex'} flexWrap={'wrap'}>
         {mock.results
                 .filter((object) => {
                     // Filter based on search term
@@ -185,12 +186,12 @@ const TableCustomerMobileDetails = ({URL}) => {
                   })
         
                 .map((filteredObject)=>(
-                <Card sx={{ minWidth: 275,my:2 }}>
+                <Card sx={{ maxWidth: '49%',my:2,maxHeight:291 ,mr:0.3}}>
                 <CardContent>
                     {Object.keys(filteredObject).map((key)=>(
                         <Grid xs={12} container display={'flex'} justifyContent={'space-between'} >
-                            <Grid item xs={6}><Typography component={'span'} fontWeight={'bold'} fontSize={16}>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} : </Typography></Grid>
-                            <Grid item xs={6}><Typography  component={'span'} fontSize={12}>{filteredObject[key]}</Typography></Grid>
+                            <Grid item xs={6}><Typography component={'span'} fontWeight={'bold'} fontSize={13}>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} : </Typography></Grid>
+                            <Grid item xs={6}><Typography  component={'span'} fontSize={11}>{filteredObject[key]}</Typography></Grid>
                         </Grid>
                     ))}
                 </CardContent>
@@ -200,6 +201,7 @@ const TableCustomerMobileDetails = ({URL}) => {
                 </Card>  )
             )
         }
+        </Box>
     </>
     )
 }

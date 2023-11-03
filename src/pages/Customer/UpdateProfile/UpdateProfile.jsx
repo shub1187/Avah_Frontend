@@ -78,7 +78,6 @@ if (selectedBrand) {
         }
         func()
       },[])
-      console.log("ln 30 UpdateProfile.jsx data: ", data)
 
       let profileData = data?.result
 
@@ -119,7 +118,6 @@ if (selectedBrand) {
             if(data && isSuccess){
                 setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
             }
-            console.log(formData);
             setFormData({})
         }
         catch(error){

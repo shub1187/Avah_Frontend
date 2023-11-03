@@ -54,9 +54,6 @@ const MenuProps = {
 
 export default function MultiSelectFuelType({fuelTypeSet}) {
   const [names,setNames] = useState([])
-  // UseEffect to load the data in multiselect
-// const [data, setData] = useState([]);
-// console.log("ln 28 Shub Manufacture page",data)
 useEffect(() => {
   const apiCall = async () => {
     try {
@@ -72,11 +69,8 @@ useEffect(() => {
         }    
       // Make the GET request with the headers
       const response = await axios.get("http://localhost:3008/api/admin/getAllFuelTypes", { headers,params });
-      // console.log("ln 44",response)
       const responseData = response.data.data.results; // Access data from the response object
-      console.log("ln Multiselect page",responseData);
       const resultArray= responseData.map(item => item.fuel_name);
-    console.log("This is checking",resultArray)
       // setData(responseData);
       setNames( resultArray)
     } catch (error) {
@@ -88,7 +82,6 @@ useEffect(() => {
 
 
   const [personName, setPersonName] = React.useState([]);
-  console.log(personName)
   const handleChange = (event) => {
     const {
       target: { value },

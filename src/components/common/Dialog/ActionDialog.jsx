@@ -20,7 +20,6 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
   const handleClose = () => {setOpen(false)};
 
   //Formdata Related And Required Checks
-  console.log("ln 23", payload)
 
   const [formData, setFormData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);

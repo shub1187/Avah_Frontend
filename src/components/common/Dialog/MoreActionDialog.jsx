@@ -6,7 +6,6 @@ import CreateTextFields from 'components/common/Textfield';
 import { cloneElement } from "react"
 
 const MoreActionDialog = ({rowData,ActionDialog}) => {
-    // console.log(ActionDialog.map((a)=>a.props))
     const [open, setOpen] = useState(false);
     const handleClickOpen = () => {setOpen(true)};
     const handleClose = () => {setOpen(false)};

@@ -22,7 +22,6 @@ import { useMobileResponsive } from 'hooks/useMobileResponsive';
 const CustomerDashboard = (props) => {
   const {data} = useFetch('https://jsonplaceholder.typicode.com/todos/1')
   const {isMobile} = useMobileResponsive()
-  console.log(data,"RAEES")
   return (
     <>
       <ThemeProvider theme={customerHomeTheme}>
