@@ -13,6 +13,7 @@ import {getHours,format,isToday, parse} from 'date-fns'
 const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,borderRadius,my}) => {
     const [open, setOpen] = React.useState(false);
     const [formData, setFormData] = useState({});
+    console.log('ln 16', formData)
     const [spList,setSpList] = useState([])
     const { city, setCity } = useCity();
     const [autocompleteCityName, setAutocompleteCityName] = useState("");
@@ -129,11 +130,11 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
       setCity(selectedValue.label);
       const selectedCityData = citiesSpData?.data?.[selectedValue.label] || [];
       setSpList(selectedCityData);
-      setFormData((prev)=>({...prev,address:'',sp_mobile:''}))
+      setFormData((prev)=>({...prev,address:'',sp_mobile:'',select_city : selectedValue.label}))
     // }
 
   };
-  console.log(formData,"RAEES")
+  // console.log(formData,"RAEES")
 
   const timeSlot = ()=> {
 
@@ -188,7 +189,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     };
     const handleSearchIconClick = async(fieldName) => {
         // setIsSubmitted(true); // Set the form as submitted
-         console.log(fieldName)
+        //  console.log('ln 191',fieldName)
          setAutocompleteVehicleName(fieldName.label)
          if(!fieldName) return
         // const requiredFields = appointmentList.filter((field) => field.required && field.name=='select_vehicle');
@@ -209,7 +210,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             throw new Error(error)
         }
         if(data && isSuccess){
-        setFormData((prev)=>({...prev,...data?.result[0]}))
+        setFormData((prev)=>({...prev,...data?.result[0],select_vehicle : fieldName.label}))
         }
         // setIsSubmitted(false); // Set the form as submitted
     };
@@ -221,9 +222,9 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
       setAutocompleteSpName(obj.label)
       setFormData(p=>({...p,address:'',sp_mobile:''}))
       const selectedSp = spList.find((sp) => sp.sp_id === obj.sp_id);
-      console.log("ln 168", selectedSp,obj)
+      // console.log("ln 168", selectedSp,obj)
       if (selectedSp) {
-        setFormData((prev)=>({...prev,address:selectedSp.address,sp_mobile:selectedSp.sp_mobile, sp_id : selectedSp.sp_id, business_name : selectedSp.value,}))
+        setFormData((prev)=>({...prev,address:selectedSp.address,sp_mobile:selectedSp.sp_mobile, sp_id : selectedSp.sp_id, business_name : selectedSp.value, select_service_provider : obj.label }))
       }
     };
 
@@ -232,7 +233,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           setIsSubmitted(true); // Set the form as submitted    
           const requiredFields = appointmentList.filter((field) => field.required);
           const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
-
+          console.log('ln 235', emptyRequiredFields)
           if (emptyRequiredFields.length > 0) {
             return;
           }
@@ -462,8 +463,8 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             type: 'text',
             fullWidth: true,
             row: 2,
-            required: true, // Add the required property
-            errormessage: 'Enter the Pickup Address', // Add the error message
+            // required: true, // Add the required property
+            // errormessage: 'Enter the Pickup Address', // Add the error message
       },
     ]
   return (
