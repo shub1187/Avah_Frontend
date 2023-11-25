@@ -10,6 +10,7 @@ import { LogoutAction } from "../../pages/login/LoginAction";
 import { TopBarHomeNotificationIcon, TopBarSettingsIcon, TopBarUserIcon } from "assets/img/TopBar/icons";
 import MenuIcon from '@mui/icons-material/Menu';
 import { useMobileResponsive } from "hooks/useMobileResponsive";
+import { logout } from "utils/customFunctions";
 
 
 
@@ -56,7 +57,7 @@ const Topbar = ({isMobile,handleDrawerToggle,customer}) => {
               }
               <Grid item><TopBarSettingsIcon /></Grid>
               <Grid item><TopBarHomeNotificationIcon /></Grid>
-              <Grid item><TopBarUserIcon logout={() => dispatch(LogoutAction())} /></Grid>
+              <Grid item><TopBarUserIcon logout={logout} /></Grid>
 
 
               <Grid item mr={2}>

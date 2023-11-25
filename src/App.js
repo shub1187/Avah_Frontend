@@ -81,7 +81,7 @@ console.log(raeesRoute,"RAEES")
 
            :
            isAdminPage ?
-           <Route path="/admin" element={<AdminLoginComponent/>} /> 
+           <Route path="/admin" element={<RaeesLoginComponent/>} /> 
            :
            localStorage.getItem('TYPE_OF_USER') == "2" ?
            <>
@@ -96,7 +96,8 @@ console.log(raeesRoute,"RAEES")
           <Route path="/" element={<CustomerLayout/>}>{customerRoute}</Route>
           </>
           :
-          <Route path="/login" element={<LoginComponent />} /> 
+          // <Route path="/login" element={<LoginComponent />} /> 
+          <Route path="/login" element={<RaeesLoginComponent />} /> 
 
           //  <Route path="/dashboard" element={<ServiceProviderLayout />}> {spRoutes}</Route>
         }

@@ -14,7 +14,7 @@ import DialogWrapper from "components/common/Dialog/DialogWrapper";
 // import AddServiceDialog from "../Dialog/Service/AddServiceDialog";
 // import CreateSpareDialog from "../Dialog/Spares/AddSparesDialog";
 
-const CustomerTable = ({DialogButton,columnss,URL,key})=>{
+const CustomerTable = ({DialogButton,columnss,URL,key, dialogTitle, dialogButtonName})=>{
   const [dataLength,setDataLength] = useState(0)
   const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
   const customer_id = localStorage.getItem('customer_id'); // Retrieve the token from local storage
@@ -135,7 +135,17 @@ const CustomerTable = ({DialogButton,columnss,URL,key})=>{
             <AddLabourDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <AddServiceDialog height={'65px'} width={'270px'} color={'addUser'}/>
             <CreateSpareDialog height={'65px'} width={'270px'} color={'addUser'}/> */}
-            {DialogButton && <DialogWrapper><DialogButton height={isMobileResolution?"30px":'50px'} width={isMobileResolution?"100px":'250px'} color={'options'} /></DialogWrapper>}
+            {DialogButton && (
+              <DialogWrapper
+                title={dialogTitle}
+                buttonName={dialogButtonName}
+              >
+                <DialogButton
+                 height={isMobileResolution?"30px":'50px'}
+                 width={isMobileResolution?"100px":'250px'}
+                 color={'options'} />
+              </DialogWrapper>)
+            }
           </div>
         </Box>
         </>

@@ -45,7 +45,7 @@ useEffect(() => {
               value={formField[field.name] || ""}
               onChange={(e) => onChange(field.name, e.target.value)}
               rows={field.row}
-              multiline
+              multiline={field.multiine}
               type={field.type}
               select={field.select}
               disabled={field.disabled}
@@ -61,7 +61,7 @@ useEffect(() => {
                   </InputAdornment>
                 ),
               }}            >
-              {field.selectArray && field.selectArray.map((textfield)=>{
+              {(field.selectArray && field.selectArray.length) && field.selectArray?.map((textfield)=>{
                 return(
                 <MenuItem key={textfield.label} value={textfield.value}>
                   {textfield.label}

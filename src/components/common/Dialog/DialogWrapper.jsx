@@ -1,4 +1,4 @@
-import { Button, Dialog } from '@mui/material'
+import { Button, Dialog, DialogTitle } from '@mui/material'
 import { useMobileResponsive } from 'hooks/useMobileResponsive'
 import React, { createContext, useContext, useState } from 'react'
 /**
@@ -18,7 +18,7 @@ const DialogWrapperContext = createContext('hi')
  */
 export const useDialogWrapperContext = ()=> useContext(DialogWrapperContext)
 
-const DialogWrapper = ({children}) => {
+const DialogWrapper = ({children, title , buttonName}) => {
     const [formData, setFormData] = useState({});
 
     const [open,setOpen] = useState(false)
@@ -42,11 +42,14 @@ const DialogWrapper = ({children}) => {
     return (
         <div>
             <DialogWrapperContext.Provider value={DialogWrapperFuntions}>
+            {buttonName && (
+                <Button  variant="contained" color={'success'} onClick={handleOpen}>
+                    {buttonName || ''}
+                </Button>
+            )}
 
-            <Button  variant="contained" color={'success'} onClick={handleOpen}>
-                CREATE APPOINTMENT
-            </Button>
             <Dialog open={open} onClose={handleClose} maxWidth='md'>
+                <DialogTitle >{title || ''}</DialogTitle>
                 {children}
             </Dialog>
             </DialogWrapperContext.Provider>

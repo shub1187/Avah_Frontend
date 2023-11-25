@@ -6,8 +6,8 @@ import Loader from '../../components/common/Loader';
 import { Box, Button, InputLabel, MenuItem, TextField, ThemeProvider, createTheme, CircularProgress, Grid } from '@mui/material';
 import RegisterDialogForCustomer from 'components/LoginRegisterComponents/Dialog/RegisterDialogForCustomer/Index';
 import RegisterDialogForServiceProviderAndDealers from 'components/LoginRegisterComponents/Dialog/RegisterDialogForServiceProviderAndDealer';
-import SpRegisterAPI from 'services/SpRegisterAPI';
-import customerRegisterAPI from 'services/CustomerRegisterApi';
+import SpRegisterAPI from 'url/SpRegisterAPI';
+import customerRegisterAPI from 'url/CustomerRegisterApi';
 import { useFetch } from 'hooks/useFetch';
 import CreateTextFields from 'components/common/Textfield';
 const theme = createTheme({

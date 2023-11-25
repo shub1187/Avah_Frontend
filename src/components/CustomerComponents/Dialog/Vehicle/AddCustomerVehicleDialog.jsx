@@ -1,6 +1,6 @@
 
 
-import React,{useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, TextField, ThemeProvider, Typography, createTheme, useMediaQuery } from '@mui/material';
 import CreateTextFields from 'components/common/Textfield';
 import { useCustomerFetchFunction, useFetch } from 'hooks/useFetch';
@@ -8,112 +8,64 @@ import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
 import FileInputTextField from 'components/common/Textfield/FileTextfield';
 import { useMobileResponsive } from 'hooks/useMobileResponsive';
 import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
+import { getBrandData, getModelData } from 'utils/customFunctions';
+import URL from 'url/apiURL';
 
-const AddCustomerVehicleDialog = ({height,width,color}) => {
-  const {handleClose,isMobile,isSubmitted,setIsSubmitted,formData,setFormData} = useDialogWrapperContext()
+const {getAllFuelTypes,getAllModelPerBrand,vehicleRegistration} = URL.CUSTOMER.VEHICLE
 
-    const [open, setOpen] = React.useState(false);
-    const [toggle,setToggle] = useState('individual')
-    let {data} = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
-    let {data:fuelType} = useFetch('http://localhost:3008/api/admin/getAllFuelTypes')
-    // const [isSubmitted, setIsSubmitted] = useState(false);
+const AddCustomerVehicleDialog = ({ height, width, color }) => {
+    const { handleClose, isMobile, isSubmitted, setIsSubmitted, formData, setFormData } = useDialogWrapperContext()
+    const [vehicleNameAndBrand, setVehicleNameAndBrand] = useState({})
+    const [fuelArray,setFuelArray] = useState([])
+    let {data} = useFetch(getAllModelPerBrand)
+    let { data: fuelType } = useFetch(getAllFuelTypes)
+    const { fetchCustomerData, snackbar, loadingIndicator } = useCustomerFetchFunction()
 
-    // const fuelNamesArray = fuelType?.data?.results?.map(fuel => ({ fuel_name: fuel.fuel_name }));
-    const fuelNamesArray = fuelType?.data?.results?.map(item => ({
-      label: item.fuel_name,
-      value: item.fuel_name
-    }));
-    // const {isMobile} = useMobileResponsive()
-    const {fetchCustomerData,snackbar,loadingIndicator} = useCustomerFetchFunction()
-    const [status,setStatus] = useState({
-      isVisible:false,
-      message:"",
-      loading:false,
-      error:'',
-      responseStatus:''
-  })
-    
-    let brandData = data?.data?.results || []
-    // const [formData, setFormData] = useState({});
-  console.log(formData,"RAEES")
+    useEffect(()=>{
+        let fuelArray = []
+        if(fuelType?.data?.results?.length){
+            fuelArray = fuelType?.data?.results?.map(item => ({
+                label: item.fuel_name,
+                value: item.fuel_name
+            }))
+            setFuelArray(fuelArray)
+        }
+    },[fuelType])
+
+    useEffect(() => {
+        if(data?.data?.results?.length){
+        let brandData = getBrandData(data)
+        setVehicleNameAndBrand({ brandArray: brandData, modelArray: {} })
+        }
+    }, [data?.data?.results])
+
+
+    useEffect(() => {
+        const modelArray = getModelData(data, vehicleNameAndBrand?.brandArray, formData.brand)
+        setVehicleNameAndBrand((prev) => ({ ...prev, modelArray }))
+    }, [formData?.brand])
+
     const handleFieldChange = (fieldName, value) => {
-      setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
+        setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
     };
 
-    // const handleClickOpen = () => {
-    //   setOpen(true);
-    // };
-  
-    // const handleClose = () => {
-    //   setOpen(false);
-    // };
-    const handleSubmit = async()=>{
-      try{
+    const handleSubmit = async () => {
         setIsSubmitted(true); // Set the form as submitted
-        // setStatus({loading:true,message:'',isVisible:true})
-  
         const requiredFields = customerTextfield.filter((field) => field.required);
         const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
-    
-        if (emptyRequiredFields.length > 0) {
-          // setStatus({ error: 'Please fill in all required fields.', message: '', loading: false });
-          return;
-        }
+
         const obj = {
-          payload:formData,
-          method:"POST",
-          url:"http://localhost:3008/api/customer/vehicleRegistration"
-      }
-  
-      const {isSuccess,data,error} = await fetchCustomerData(obj)
-      if(error && !isSuccess){
-          throw new Error(error)
-      }
-      if(data && isSuccess){
-          setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
-      }
-      setFormData({})
-      }
-      catch(error){
-        setStatus({error:error?.message,message:'',loading:false})
+            payload: formData,
+            method: "POST",
+            url: vehicleRegistration
+        }
+
+        await fetchCustomerData(obj)
         setFormData({})
-      }
-      setIsSubmitted(false)
-      handleClose()
-
+        setIsSubmitted(false)
+        setTimeout(()=>handleClose(),2000)
     }
-    const selectArray = brandData.map((brandEntry) => {
-      const brandName = Object.keys(brandEntry)[0]; // Get the brand name
-      const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_'); // Format the value
-    
-      return {
-        label: brandName,
-        value: brandName
-      };
-    });
-  let selectModel = []
-  const selectedBrand = formData.brand ? formData.brand.toLowerCase().replace(/ /g, '_') : ''; // Format selected brand or null if not selected
 
-  if (selectedBrand) {
-      brandData.forEach((brandEntry) => {
-          const brandName = Object.keys(brandEntry)[0];
-          const formattedBrandValue = brandName.toLowerCase().replace(/ /g, '_');
-  
-          if (selectedBrand === formattedBrandValue) { // Check for selected brand
-              brandEntry[brandName].forEach((ent) => {
-                  const label = ent;
-                  const formatValue = ent.toLowerCase().replace(/ /g, '_'); // Format model value
-                  selectModel.push({
-                      label: label,
-                      value: label
-                  });
-              });
-          }
-      });
-  } 
-    const isMobileResolution = useMediaQuery((theme) =>
-    theme.breakpoints.down('sm')
-    );
 
     const customerTextfield = [
 
@@ -121,7 +73,7 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
             label: 'Vehicle Number',
             name: "vehicle_number",
             type: 'number',
-            fullWidth:true,
+            fullWidth: true,
             required: true, // Add the required property
             errormessage: 'Vehicle Number Required', // Add the error message
 
@@ -132,98 +84,92 @@ const AddCustomerVehicleDialog = ({height,width,color}) => {
             type: 'text',
             required: true, // Add the required property
             errormessage: 'Vehicle Type Required', // Add the error message
-            fullWidth:true,
-            select:true,
-            selectArray:[{ label: "Personal", value: "Personal" }, { label: "Commercial", value: "Commercial" }]
+            fullWidth: true,
+            select: true,
+            selectArray: [{ label: "Personal", value: "Personal" }, { label: "Commercial", value: "Commercial" }]
         },
         {
-          label: 'Brand',
-          name: "brand",
-          type: 'text',
-          fullWidth: true,
-          required: true, // Add the required property
-          errormessage: 'Brand Required', // Add the error message
-          select:true,
-          selectArray:selectArray
-      },
-      {
-        label: 'Model',
-        name: "model",
-        type: 'text',
-        fullWidth: true,
-        select: true,
-        required: true, // Add the required property
-        errormessage: 'Model Required', // Add the error message
-        selectArray: selectModel
-      },
-      {
-        label: 'Engine Customization',
-        name: "customization",
-        type: 'text',
-        fullWidth: true,
-        required: true, // Add the required property
-        errormessage: 'Engine Customization Required', // Add the error message
-        select: true,
-        selectArray: [{ label: "Showroom Fitted", value: "Showroom Fitted" }, { label: "Externally Modified", value: "Externally Modified" }],
-        tooltip:true,
-        tooltipMessage:'Showroom fitted means Engine varient provided by manufacturer And Externally modified means if you have customized original engine. Eample: Added outfitted CNG Kit to Petrol Engine'
-      },
+            label: 'Brand',
+            name: "brand",
+            type: 'text',
+            fullWidth: true,
+            required: true, // Add the required property
+            errormessage: 'Brand Required', // Add the error message
+            select: true,
+            selectArray: vehicleNameAndBrand?.brandArray
+        },
+        {
+            label: 'Model',
+            name: "model",
+            type: 'text',
+            fullWidth: true,
+            select: true,
+            required: true, // Add the required property
+            errormessage: 'Model Required', // Add the error message
+            selectArray: vehicleNameAndBrand?.modelArray
+        },
+        {
+            label: 'Engine Customization',
+            name: "customization",
+            type: 'text',
+            fullWidth: true,
+            required: true, // Add the required property
+            errormessage: 'Engine Customization Required', // Add the error message
+            select: true,
+            selectArray: [{ label: "Showroom Fitted", value: "Showroom Fitted" }, { label: "Externally Modified", value: "Externally Modified" }],
+            tooltip: true,
+            tooltipMessage: 'Showroom fitted means Engine varient provided by manufacturer And Externally modified means if you have customized original engine. Eample: Added outfitted CNG Kit to Petrol Engine'
+        },
 
-      {
-        label: 'Chassis Number',
-        name: "chassis_number",
-        type: 'text',
-        fullWidth: true,
-        required: true, // Add the required property
-        errormessage: 'Chassis Number Required', // Add the error message
+        {
+            label: 'Chassis Number',
+            name: "chassis_number",
+            type: 'text',
+            fullWidth: true,
+            required: true, // Add the required property
+            errormessage: 'Chassis Number Required', // Add the error message
 
-      },
-      {
-        label: 'Fuel Type',
-        name: "fuel_type",
-        type: 'text',
-        fullWidth: true,
-        select: true,
-        selectArray: fuelNamesArray,
-        required: true, // Add the required property
-        errormessage: 'Select Fuel Type', // Add the error message
-      },
+        },
+        {
+            label: 'Fuel Type',
+            name: "fuel_type",
+            type: 'text',
+            fullWidth: true,
+            select: true,
+            selectArray: fuelArray,
+            required: true, // Add the required property
+            errormessage: 'Select Fuel Type', // Add the error message
+        },
     ]
 
-  return (
-    <div>
-      {/* <Button sx={{height:isMobileResolution?'50px':height,width:width,fontSize:isMobileResolution?"0.6rem":'0.875rem'}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
-        Add New Vehicle
-      </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth='md'> */}
-        <DialogTitle >Add New Vehicle</DialogTitle>
-        <DialogContent>
-            <Grid container xs={12} mt={3}>
-              <Grid item xs={12} sm={5.5} mr={!isMobile && 4}>
-                  <CreateTextFields  fields={customerTextfield.slice(0,1)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
-                  <Box mb={1} color={'#ad4970'}>No Hiphen required Eg:MH14TT3066</Box>
-                  <CreateTextFields  fields={customerTextfield.slice(1,2)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
-                  <CreateTextFields  fields={customerTextfield.slice(2,3)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
-                  <CreateTextFields  fields={customerTextfield.slice(3,4)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
-              </Grid>
-              <Grid item xs={12}  sm={5.5}>
-                <Grid container xs={12}>
-                <Grid  xs={12} item><CreateTextFields  fields={customerTextfield.slice(4,5)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/></Grid>
-                  <Grid  xs={12} item><CreateTextFields fields={customerTextfield.slice(5,6)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
-                  <Grid  xs={12} item ><CreateTextFields fields={customerTextfield.slice(6,7)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/></Grid>
+    return (
+        <div>
+            <DialogContent>
+                <Grid container xs={12} mt={3}>
+                    <Grid item xs={12} sm={5.5} mr={!isMobile && 4}>
+                        <CreateTextFields fields={customerTextfield.slice(0, 1)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted} />
+                        <Box mb={1} color={'#ad4970'}>No Hiphen required Eg:MH14TT3066</Box>
+                        <CreateTextFields fields={customerTextfield.slice(1, 2)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted} />
+                        <CreateTextFields fields={customerTextfield.slice(2, 3)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted} />
+                        <CreateTextFields fields={customerTextfield.slice(3, 4)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted} />
+                    </Grid>
+                    <Grid item xs={12} sm={5.5}>
+                        <Grid container xs={12}>
+                            <Grid xs={12} item><CreateTextFields fields={customerTextfield.slice(4, 5)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted} /></Grid>
+                            <Grid xs={12} item><CreateTextFields fields={customerTextfield.slice(5, 6)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted} /></Grid>
+                            <Grid xs={12} item ><CreateTextFields fields={customerTextfield.slice(6, 7)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted} /></Grid>
+                        </Grid>
+                    </Grid>
                 </Grid>
-              </Grid>
-            </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button color='options' onClick={handleClose}>Cancel</Button>
-          <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
-        </DialogActions>
-      {/* </Dialog> */}
-      {snackbar}
-      {loadingIndicator}
-    </div>
-  )
+            </DialogContent>
+            <DialogActions>
+                <Button color='options' onClick={handleClose}>Cancel</Button>
+                <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
+            </DialogActions>
+            {snackbar}
+            {loadingIndicator}
+        </div>
+    )
 }
 
 export default AddCustomerVehicleDialog

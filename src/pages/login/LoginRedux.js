@@ -42,8 +42,7 @@ export const LoginRedux = (state = initialState, props) => {
            
 
             localStorage.clear();
-            window.history.replaceState(null, "", "/")
-
+            window.history.replaceState(null, "", "/login")
             window.location.reload();
             return initialState
         }

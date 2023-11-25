@@ -338,7 +338,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth='lg'> */}
 
-        <DialogTitle >  CREATE APPOINTMENT</DialogTitle>
+        {/* <DialogTitle >  CREATE APPOINTMENT</DialogTitle> */}
         <DialogContent  sx={{pt:2,pb:0}}>
             <Grid container xs={12} mt={3}>
               <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>  

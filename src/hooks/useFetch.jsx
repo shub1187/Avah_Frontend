@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { Skeleton, ThemeProvider, createTheme } from '@mui/material';
+import { CircularProgress, Dialog, Skeleton, ThemeProvider, createTheme } from '@mui/material';
 import SkeletonLoading from 'components/common/Skeleton';
 import { globalAppTheme } from 'components/common/Themes/GlobalAppTheme';
 
@@ -134,7 +134,18 @@ const useFetchFunction = ()=>{
 
         }
     }
-    const loadingIndicator = loading ? <SkeletonLoading/> : null;
+    const loadingIndicator = loading ? <Dialog 
+                                            open={true}
+                                            PaperProps={{
+                                                sx: {
+                                                width: "200px",
+                                                height: "100px",
+                                                justifyContent:"center",
+                                                alignItems:"center"
+                                                }
+                                            }}
+                                            ><CircularProgress size="4rem"/>
+                                        </Dialog> : null;
 
     return {
         fetchData,
@@ -165,9 +176,10 @@ const useCustomerFetchFunction = ()=>{
     const [snackbarMessage, setSnackbarMessage] = React.useState('');
     const [snackbarSeverity, setSnackbarSeverity] = React.useState('success');
     const [loading, setLoading] = useState(false);
-    const fetchCustomerData = async ({url,method,payload})=>{
+    const fetchCustomerData = async ({url,method,payload,noLoading,noSnackbar})=>{
         try{
-            setLoading(true);
+            if(!noLoading)setLoading(true);
+            // setLoading(true);
             let sp_id =  localStorage.getItem('sp_id');
             let customer_id = localStorage.getItem('customer_id');
             let headers = {}
@@ -191,23 +203,32 @@ const useCustomerFetchFunction = ()=>{
             const {status,data} = await axios({...axiosRequest, data: method?.toLowerCase()==="post" && payload})
 
             if(data && status ==200){
-                setSnackbarSeverity('success');
-                setSnackbarMessage(data.message);
-                setOpenSnackbar(true);
-                setTimeout(() => {
-                  setOpenSnackbar(false);
-                }, 2000);
+                if(!noSnackbar){
+                    setSnackbarSeverity('success');
+                    setSnackbarMessage(data.message);
+                    setOpenSnackbar(true);
+                    setTimeout(() => {
+                    setOpenSnackbar(false);
+                    }, 2000);
+                }   
                 return {isSuccess:true,data}
             }
         }
         catch(error){
-            setSnackbarSeverity('error');
-            setSnackbarMessage(error.message);
-            setOpenSnackbar(true);
+            if(!noSnackbar){
+                setSnackbarSeverity('error');
+                setSnackbarMessage(error.message);
+                setOpenSnackbar(true);
+            }
             return {isSuccess:false, error:error.message}
-        }finally {
-            setLoading(false); // Set loading to false when the API call finishes
-          }
+        }
+        finally {
+            if(!noLoading)setLoading(false);
+
+        }
+        // finally {
+        //     setLoading(false); // Set loading to false when the API call finishes
+        //   }
           
     }
     const loadingIndicator = loading ? <SkeletonLoading/> : null;

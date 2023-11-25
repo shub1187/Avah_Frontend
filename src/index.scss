@@ -1,4 +1,3 @@
-
 html * {
   font-family: 'Jost';
 }
@@ -6,6 +5,73 @@ html * {
 body {
   font-family: 'Jost';
 }
+
+
+//---------------- ALL GLOBAL VARIABLES ---------------------//
+:root {
+  --purple:rgb(119,53,98);
+  --purple-font:#AD4970;
+  --red:rgb(233,56,72);
+  --light-grey-font:#A0AEC0;
+}
+
+// ---------------- SETTING UP MARGIN AND PADDING FOR RANGE OF 1-100 WHERE 1 IS 0.5rem -------------------//
+$auto: auto;
+$directions: 't', 'b', 'l', 'r';
+$margin-property: ('t': margin-top, 'b': margin-bottom, 'l': margin-left, 'r': margin-right);
+$padding-property: ('t': padding-top, 'b': padding-bottom, 'l': padding-left, 'r': padding-right);
+$max-size: 100;
+
+@for $size from 1 through $max-size {
+
+  @each $direction in $directions {
+
+      .m#{$direction}-#{$size} {
+        @if $size == $auto {
+          #{map-get($margin-property, $direction)}: $auto !important;
+        } @else {
+          #{map-get($margin-property, $direction)}: #{$size * 0.5}rem !important;
+        }
+      }
+
+      .p#{$direction}-#{$size} {
+        @if $size == $auto {
+          #{map-get($padding-property, $direction)}: $auto !important;
+        } @else {
+          #{map-get($padding-property, $direction)}: #{$size * 0.5}rem !important;
+        }
+      }
+  }
+  
+  .m-#{$size}, .p-#{$size}{
+    margin:#{$size * 0.5 rem} !important;
+    padding:#{$size * 0.5rem}!important;
+  }
+
+}
+
+
+//----------------------ALL FLEX PROPERTIES -----------------------//
+.flex {
+  display: flex;
+  &.column {flex-direction: column;}
+  &.wrap{flex-wrap: wrap;}
+  &.jc-flex-start { justify-content: flex-start;}
+  &.jc-flex-end { justify-content: flex-end;}
+  &.jc-center { justify-content: center;}
+  &.jc-space-between { justify-content: space-between;}
+  &.jc-space-evenly { justify-content: space-evenly;}
+  &.jc-space-around { justify-content: space-around;}
+
+  &.ai-flex-start { align-items: flex-start;}
+  &.ai-flex-end { align-items: flex-end;}
+  &.ai-center { align-items: center;}
+  &.ai-stretch { align-items: stretch;}
+  &.ai-baseline { align-items: baseline;}
+
+}
+
+
 
 .nav-contianer {
   --bs-nav-link-padding-x: 1rem !important;
@@ -690,3 +756,5 @@ input.inputfield {
   color:linear-gradient(180deg, #E93848 0%, #843560 100%); ;
 
 }
+
+

@@ -5,10 +5,11 @@ import { Provider } from 'react-redux';
 import App from './App';
 import { store } from './redux/store';
 import reportWebVitals from './reportWebVitals';
-import './index.css';
+import './index.scss';
 import './assets/css/login.css'
 import { BrowserRouter } from 'react-router-dom';
 import { CityProvider, CustomerProvider } from 'hooks/useCustomContext';
+import Appy from 'Appy';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -21,7 +22,8 @@ root.render(
     <Provider store={store}>
       <CssBaseline />
       <BrowserRouter>
-      <App />
+      {/* <App /> */}
+      <Appy/>
       </BrowserRouter>
 
     </Provider>

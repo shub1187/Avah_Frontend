@@ -2,7 +2,7 @@
   background-color: #fff;
 } */
 
-.nav-link {
+/* .nav-link {
   cursor: pointer;
 }
 .nav-cursor {
@@ -268,14 +268,14 @@ label.input-group-text {
 
 body.home-page.login-page .other-login .intro {
   margin-top: 142px;
-}
+} */
 
 
 
 /*--------------------------------------------------------------
 # responsive on mobile devices
 --------------------------------------------------------------*/
-@media screen and (min-width: 1600px) {
+/* @media screen and (min-width: 1600px) {
   .fix-bottom-footer {
     position: fixed;
     bottom: 0;
@@ -350,4 +350,4 @@ body.home-page.login-page .other-login .intro {
   .login-form .btn.btn-login {
     width: 100%;
   }
-}
+} */
