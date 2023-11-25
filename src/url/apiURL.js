@@ -12,7 +12,7 @@ const replaceUrl =(url)=>{
 
 const URL = {
     LOGIN_REGISTER:{
-        login_admin:replaceUrl(`${BASE_URL}/admin/login`),
+        login_admin:replaceUrl(`${BASE_URL}/api/admin/login`),
         login_service_provider:replaceUrl(`${BASE_URL}/api/serviceprovider/login`),
         login_customer : replaceUrl(`${BASE_URL}/api/customer/login`),
         register_service_provider:replaceUrl(`${BASE_URL}/api/serviceprovider/registerServiceProvider`),

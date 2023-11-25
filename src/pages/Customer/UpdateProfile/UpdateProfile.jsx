@@ -19,10 +19,10 @@ const UpdateCustomerProfile = () => {
     const { fetchCustomerData, snackbar, loadingIndicator } = useCustomerFetchFunction()
     const { isMobile } = useMobileResponsive()
     let { data: cityData } = useFetch(getAllCitiesPerState)
-
+    console.log("ln 22",cityData)
     //TO GET ALL THE STATES
     useEffect(() => {
-        if (cityData?.data?.results?.length) {
+        if (cityData?.result?.length) {
             let listOfStates = getStates(cityData?.result)
             setCitiesAndState({ state: listOfStates })
         }

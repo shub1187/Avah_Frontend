@@ -8,7 +8,7 @@ import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
 import FileInputTextField from 'components/common/Textfield/FileTextfield';
 import { useMobileResponsive } from 'hooks/useMobileResponsive';
 import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
-import { getBrandData, getModelData } from 'utils/customFunctions';
+import { getBrandData, getModelData, requiredTextfield } from 'utils/customFunctions';
 import URL from 'url/apiURL';
 
 const {getAllFuelTypes,getAllModelPerBrand,vehicleRegistration} = URL.CUSTOMER.VEHICLE
@@ -20,7 +20,7 @@ const AddCustomerVehicleDialog = ({ height, width, color }) => {
     let {data} = useFetch(getAllModelPerBrand)
     let { data: fuelType } = useFetch(getAllFuelTypes)
     const { fetchCustomerData, snackbar, loadingIndicator } = useCustomerFetchFunction()
-
+    console.log("ln 23",data)
     useEffect(()=>{
         let fuelArray = []
         if(fuelType?.data?.results?.length){
@@ -34,14 +34,14 @@ const AddCustomerVehicleDialog = ({ height, width, color }) => {
 
     useEffect(() => {
         if(data?.data?.results?.length){
-        let brandData = getBrandData(data)
+        let brandData = getBrandData(data?.data?.results)
         setVehicleNameAndBrand({ brandArray: brandData, modelArray: {} })
         }
     }, [data?.data?.results])
 
 
     useEffect(() => {
-        const modelArray = getModelData(data, vehicleNameAndBrand?.brandArray, formData.brand)
+        const modelArray = getModelData(data?.data?.results, vehicleNameAndBrand?.brandArray, formData.brand)
         setVehicleNameAndBrand((prev) => ({ ...prev, modelArray }))
     }, [formData?.brand])
 
@@ -51,8 +51,15 @@ const AddCustomerVehicleDialog = ({ height, width, color }) => {
 
     const handleSubmit = async () => {
         setIsSubmitted(true); // Set the form as submitted
-        const requiredFields = customerTextfield.filter((field) => field.required);
-        const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
+        // const requiredFields = customerTextfield.filter((field) => field.required);
+        // const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
+        let isRequired = requiredTextfield(customerTextfield,formData)
+        if(isRequired) {
+            setTimeout(() => {
+                setIsSubmitted(false)
+            }, [2000]);
+            return
+        }
 
         const obj = {
             payload: formData,

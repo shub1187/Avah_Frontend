@@ -34,7 +34,9 @@ const RaeesLoginComponent = () => {
 
     const loginFunction = async()=>{
         let payload ={...formData,role:activeButton}
-
+        if(isAdminPage){
+            payload = {...formData,role:"admin"}
+        }
         setIsSubmitted(true)
         let isRequired = requiredTextfield(loginTextfield.slice(1,3),formData)
         if(isRequired) {
