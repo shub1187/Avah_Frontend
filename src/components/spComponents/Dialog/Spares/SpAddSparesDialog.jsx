@@ -44,7 +44,7 @@ const SpCreateSpareDialog = ({height,width,color}) => {
     const addSparesTextfield = [
         {
             label:'Spare Name',
-            name:"name",
+            name:"spare_name",
             type:'text',
             fullWidth:true,
             required:true,
@@ -52,7 +52,7 @@ const SpCreateSpareDialog = ({height,width,color}) => {
         },
         {
             label:'HSN/SAC',
-            name:"hsn/sac",
+            name:"hsn_sac",
             type:'text',
             fullWidth:true
 
