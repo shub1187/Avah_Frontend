@@ -4,7 +4,7 @@ import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderT
 
 const SpSparesPage = () => {
   return (
-    <div><ServiceProvidertable title={'ADD SPARES'} buttonName={'ADD SPARES'} key={'spareKey'} DialogButton={SpCreateSpareDialog} columnss={SpcreateSparesColumn}/></div>
+    <div><ServiceProvidertable title={'ADD SPARES'} buttonName={'ADD SPARES'} key={'spareKey'} DialogButton={SpCreateSpareDialog} columnss={SpcreateSparesColumn} URL={'http://localhost:3008/api/serviceprovider/getAllPendingAppointment'}/></div>
   )
 }
 

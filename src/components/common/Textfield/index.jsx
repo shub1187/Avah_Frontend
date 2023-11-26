@@ -52,7 +52,7 @@ useEffect(() => {
             <TextField
             //   size="small"
               fullWidth
-              // value={field.defaultValue }
+              value={formField[field.name] || "" }
               onChange={(e) => onChange(field.name, e.target.value)}
               rows={field.row}
               multiline={field.multiine}

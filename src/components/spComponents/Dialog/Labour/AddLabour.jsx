@@ -1,25 +1,38 @@
 import React,{useState} from 'react'
 import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
 import CreateTextFields from 'components/common/Textfield';
-import { useFetch } from 'hooks/useFetch';
+import { useFetch, useFetchFunction } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
 import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
 import { requiredTextfield } from 'utils/customFunctions';
+import URL from 'url/apiURL';
+
+
+const {} = URL.SERVICE_PROVIDER.SPARES
 const SpAddLabourDialog = ({height,width,color}) => {
   const {handleClose,handleFieldChange,handleOpen,formData,setFormData,setIsSubmitted,isMobile,isSubmitted} = useDialogWrapperContext()
+  const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
 
-  console.log(formData)
-    const handleSubmit = ()=>{
+  const handleSubmit = async()=>{
       setIsSubmitted(true)
       let isRequired = requiredTextfield(LabourList,formData)
-        if(isRequired) {
-            setTimeout(() => {
-                setIsSubmitted(false)
-            }, [2000]);
-            return
-        }
-    // console.log(formData);
-    setFormData({})
+      if(isRequired) {
+          setTimeout(() => {
+              setIsSubmitted(false)
+          }, [2000]);
+          return
+      }
+
+      const obj = {
+        payload : formData,
+        method : "POST",
+        url : ''
+      }
+
+      await fetchData(obj)
+      setIsSubmitted(false)
+      setFormData({})
+      setTimeout(()=>handleClose(),2000)
     }
 
 
@@ -65,13 +78,6 @@ const SpAddLabourDialog = ({height,width,color}) => {
     ]
   return (
     <div>
-      {/* <Button sx={{height:height,width:width}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
-        ADD LABOUR
-      </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth='lg'>
-      <div style={{width: 1200}}> */}
-
-        {/* <DialogTitle > ADD LABOUR</DialogTitle> */}
         <DialogContent>
             <Grid container xs={12} mt={3}>
               <Grid item xs={5.5} mr={4}>
@@ -86,26 +92,13 @@ const SpAddLabourDialog = ({height,width,color}) => {
                 </Grid>
               </Grid>
             </Grid>
-          {/* <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText> */}
-          {/* <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          /> */}
         </DialogContent>
         <DialogActions>
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
-        {/* </div>
-      </Dialog> */}
+        {snackbar}
+        {loadingIndicator}
     </div>  )
 }
 

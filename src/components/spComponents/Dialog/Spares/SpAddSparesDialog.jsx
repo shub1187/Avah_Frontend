@@ -11,48 +11,36 @@ const {addspare} = URL.SERVICE_PROVIDER.SPARES
 
 const SpCreateSpareDialog = ({height,width,color}) => {
    const {isSubmitted,isMobile,formData,setFormData,setIsSubmitted,handleOpen,handleClose} = useDialogWrapperContext()
-   const {fetchData} = useFetchFunction()
+   const {fetchData, loadingIndicator, snackbar} = useFetchFunction()
 
     const handleFieldChange = (fieldName, value) => {
       setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
     };
 
-    // const handleClickOpen = () => {
-    //   setOpen(true);
-    // };
-  
-    // const handleClose = () => {
-    //   setOpen(false);
-    // };
     const handleSubmit = async ()=>{
       setIsSubmitted(true)
       
       let isRequired = requiredTextfield(addSparesTextfield,formData)
       console.log(" ln 29", isRequired)
       
-        if(isRequired) {
-            setTimeout(() => {
-                setIsSubmitted(false)
-            }, [2000]);
-            return
-        }
-        const obj = {
-          payload : formData,
-          method : "POST",
-          url : addspare
-        }
-        await fetchData(obj)
-    setFormData({})
+      if(isRequired) {
+          setTimeout(() => {
+              setIsSubmitted(false)
+          }, [2000]);
+          return
+      }
+      const obj = {
+        payload : formData,
+        method : "POST",
+        url : addspare
+      }
+      await fetchData(obj)
+      setIsSubmitted(false)
+      setFormData({})
+      setTimeout(()=>handleClose(),2000)
+      
     }
-    console.log(formData)
-    // const theme = createTheme({
-      // palette:{
-      //   mainy:{
-      //     main:'#ad4970',
-      //     contrastText:"#ffffff"
-      //   }
-      // }
-    // })
+
     const addSparesTextfield = [
         {
             label:'Spare Name',
@@ -144,13 +132,6 @@ const SpCreateSpareDialog = ({height,width,color}) => {
     ]
   return (
     <div>
-      {/* <Button sx={{height:height,width:width}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
-        ADD SPARES
-      </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth='lg'>
-      <div style={{width: 1200}}> */}
-
-        {/* <DialogTitle >ADD SPARES</DialogTitle> */}
         <DialogContent>
             <Grid container xs={12} mt={3}>
               <Grid item xs={3.6} mr={4}>
@@ -166,27 +147,13 @@ const SpCreateSpareDialog = ({height,width,color}) => {
                   {/* <TextField values={formData[]}/> */}
               </Grid>
             </Grid>
-
-          {/* <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText> */}
-          {/* <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          /> */}
         </DialogContent>
         <DialogActions>
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
-        {/* </div> */}
-      {/* </Dialog> */}
+        {snackbar}
+        {loadingIndicator}
     </div>
   )
 }

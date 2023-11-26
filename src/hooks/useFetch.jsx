@@ -144,7 +144,7 @@ const useFetchFunction = ()=>{
                                                 alignItems:"center"
                                                 }
                                             }}
-                                            ><CircularProgress size="4rem"/>
+                                            ><CircularProgress thickness={2} size="4rem"/>
                                         </Dialog> : null;
 
     return {
