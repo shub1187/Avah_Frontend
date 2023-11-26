@@ -29,6 +29,7 @@ const SpCreateSpareDialog = ({height,width,color}) => {
       
       let isRequired = requiredTextfield(addSparesTextfield,formData)
       console.log(" ln 29", isRequired)
+      
         if(isRequired) {
             setTimeout(() => {
                 setIsSubmitted(false)
