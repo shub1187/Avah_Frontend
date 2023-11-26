@@ -3,29 +3,30 @@ import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogCont
 import CreateTextFields from 'components/common/Textfield';
 import { useFetch } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
-const AddLabourDialog = ({height,width,color}) => {
-    const [open, setOpen] = React.useState(false);
+import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
+import { requiredTextfield } from 'utils/customFunctions';
+const SpAddLabourDialog = ({height,width,color}) => {
+  const {handleClose,handleFieldChange,handleOpen,formData,setFormData,setIsSubmitted,isMobile,isSubmitted} = useDialogWrapperContext()
 
-    const [formData, setFormData] = useState({});
-    const handleFieldChange = (fieldName, value) => {
-      setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
-    };
-
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
+  console.log(formData)
     const handleSubmit = ()=>{
-    console.log(formData);
+      setIsSubmitted(true)
+      let isRequired = requiredTextfield(LabourList,formData)
+        if(isRequired) {
+            setTimeout(() => {
+                setIsSubmitted(false)
+            }, [2000]);
+            return
+        }
+    // console.log(formData);
     setFormData({})
     }
+
+
     const LabourList = [
         {
             label:'Name',
-            name:"name",
+            name:"labour_name",
             type:'text',
             fullWidth:true
         },
@@ -37,38 +38,49 @@ const AddLabourDialog = ({height,width,color}) => {
     
         },
         {
-            label: 'Category',
-            name: "category",
+            label: 'Amount',
+            name: "price",
             type: 'text',
             fullWidth:true
     
         },
         {
-            label: 'Amount',
-            name: "amount",
+            label: 'SCGST',
+            name: "scgst",
             type: 'number',
-            fullWidth:true
+            fullWidth:true,
+            rightIcon:'percentage',
+            defaultValue:'0'
     
+        },
+                {
+            label: 'CGST',
+            name: "cgst",
+            type: 'number',
+            fullWidth:true,
+            rightIcon:'percentage',
+            defaultValue:'0'
+
         },
     ]
   return (
     <div>
-      <Button sx={{height:height,width:width}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
+      {/* <Button sx={{height:height,width:width}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
         ADD LABOUR
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth='lg'>
-      <div style={{width: 1200}}>
+      <div style={{width: 1200}}> */}
 
-        <DialogTitle > ADD LABOUR</DialogTitle>
+        {/* <DialogTitle > ADD LABOUR</DialogTitle> */}
         <DialogContent>
             <Grid container xs={12} mt={3}>
               <Grid item xs={5.5} mr={4}>
                   <CreateTextFields  fields={LabourList.slice(0,3)} onChange={handleFieldChange}  formField={formData}/>
                   {/* <TextField values={formData[]}/> */}
               </Grid>
-              <Grid item xs={6} >
+              <Grid item xs={5.5} >
                 <Grid container xs={12}>
-                  <Grid  xs={12} item><CreateTextFields fields={LabourList.slice(3,4)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={LabourList.slice(3,5)} onChange={handleFieldChange} formField={formData}/></Grid>
 
                   <Grid xs={12}><ControlledRadioButtonsGroup onChange={handleFieldChange} title={'STATUS'} formField={formData} name={'status'}/></Grid>
                 </Grid>
@@ -92,9 +104,9 @@ const AddLabourDialog = ({height,width,color}) => {
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
-        </div>
-      </Dialog>
+        {/* </div>
+      </Dialog> */}
     </div>  )
 }
 
-export default AddLabourDialog
+export default SpAddLabourDialog

@@ -1,5 +1,7 @@
 import ServiceProviderHome from 'pages/serviceProvider/Home'
+import SpLabourPage from 'pages/serviceProvider/Labour/SpLabourPage'
 import SpAppointmentPage from 'pages/serviceProvider/Service/AppointmentList'
+import SpEstimateList from 'pages/serviceProvider/Service/EstimateList'
 import SparesList from 'pages/serviceProvider/Spares/SpSparesPage'
 import SpCustomerPage from 'pages/serviceProvider/Users/Customers/SpCustomerPage'
 import React from 'react'
@@ -36,6 +38,7 @@ const serviceProviderRoutes = [
       {
         id:4,
         link:'dashboard/labour',
+        component:<SpLabourPage/>
       },
       {
         id:5,
@@ -48,6 +51,7 @@ const serviceProviderRoutes = [
           {
             id:61,
             link:'estimatesList',
+            component:<SpEstimateList/>
           },
           {
             id:62,

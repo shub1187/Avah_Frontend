@@ -1,11 +1,10 @@
-import { createSparesColumn } from 'components/spComponents/Table/Columns/Spares/CreateSparesColumn'
+import SpCreateSpareDialog from 'components/spComponents/Dialog/Spares/SpAddSparesDialog'
+import { SpcreateSparesColumn } from 'components/spComponents/Table/Columns/Spares/SpSparesColumn'
 import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderTable'
-import React from 'react'
-import SpareAddDialog from 'serviceprovider/page/dashboard/spares/SpareAddDialog'
 
 const SpSparesPage = () => {
   return (
-    <div><ServiceProvidertable DialogButton={SpareAddDialog} columnss={createSparesColumn}/></div>
+    <div><ServiceProvidertable title={'ADD SPARES'} buttonName={'ADD SPARES'} key={'spareKey'} DialogButton={SpCreateSpareDialog} columnss={SpcreateSparesColumn}/></div>
   )
 }
 

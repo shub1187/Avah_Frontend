@@ -224,7 +224,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             fullWidth: true,
             select:true,
             selectArray:customerVehicleList?.data,
-            rightIcon:true,
+            // rightIcon:true,
             required: true, // Add the required property
             errormessage: 'Select Your Vehicle', // Add the error message
         },

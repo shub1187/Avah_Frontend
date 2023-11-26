@@ -3,6 +3,8 @@ import { globalAppTheme } from 'components/common/Themes/GlobalAppTheme'
 import CustomerLayout from 'components/layout/CustomerLayout'
 import MainLayout from 'components/layout/MainLayout'
 import ServiceProviderLayout from 'components/layout/ServiceProviderLayout'
+import CustomerDashboard from 'pages/Customer/Dashboard/CustomerDashboard'
+import CustomerHome from 'pages/Customer/Home/CustomerHome'
 import RaeesLoginComponent from 'pages/login/RaeesLoginComponent'
 import React from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
@@ -39,7 +41,11 @@ const Appy = () => {
                     <Route path="/" element={<CustomerLayout />}>{customerRoute}</Route>
                   </>
                   :
+                  <>
+                  <Route path='/' element={<CustomerHome />}></Route>
                   <Route path="/login" element={<RaeesLoginComponent />} />
+                  </>
+
         }
       </Routes>
     </ThemeProvider>

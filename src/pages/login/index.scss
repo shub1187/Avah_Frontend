@@ -42,7 +42,13 @@
             min-height: 70px;
             border-radius: 15px;
             box-shadow: 20px;
-        
+            a{
+                text-decoration: none;
+                color: black;
+                &:hover{
+                    color: var(--purple-font);
+                }
+            }
             div{
                 cursor: pointer;
             }

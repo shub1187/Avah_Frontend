@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Box, IconButton, InputAdornment, InputLabel, MenuItem, TextField, Tooltip } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import PercentIcon from '@mui/icons-material/Percent';
+
 const CreateTextFields = ({ fields , onChange, formField,isSubmitted , onSearchIconClick}) => {
 //   const [formField, setFormField] = useState({});
 
@@ -12,10 +14,18 @@ const CreateTextFields = ({ fields , onChange, formField,isSubmitted , onSearchI
 useEffect(() => {
   fields.forEach((field) => {
     if (!formField.hasOwnProperty(field.name)) {
-      onChange(field.name, '');
+      console.log(field.defaultValue)
+      if(field.defaultValue || field.defaultValue===0){
+        console.log('entered')
+        onChange(field.name, field.defaultValue);
+      }
+      else{
+        onChange(field.name, '');
+      }
     }
   });
 }, []);
+
   return (
     <>
       {fields.map((field) => {
@@ -42,7 +52,7 @@ useEffect(() => {
             <TextField
             //   size="small"
               fullWidth
-              value={formField[field.name] || ""}
+              // value={field.defaultValue }
               onChange={(e) => onChange(field.name, e.target.value)}
               rows={field.row}
               multiline={field.multiine}
@@ -51,13 +61,19 @@ useEffect(() => {
               disabled={field.disabled}
               size={'small'}
               error={isError}
+              defaultValue={field.defaultValue }
               helperText={isError ? field.errormessage : ''}
               InputProps={{
                 endAdornment: field.rightIcon && (
                   <InputAdornment position="end" sx={{mr:1}}>
-                    <IconButton onClick={()=>onSearchIconClick(field.name)} >
-                      <SearchIcon/> {/* Replace with your desired icon */}
-                    </IconButton>
+                    {field.rightIcon ==='percentage' && (
+                      <IconButton onClick={()=>onSearchIconClick(field.name)} >
+                        <PercentIcon/> {/* Replace with your desired icon */}
+                      </IconButton>
+                    )}
+                    {/* <IconButton onClick={()=>onSearchIconClick(field.name)} > */}
+                      {/* <SearchIcon/> Replace with your desired icon */}
+                    {/* </IconButton> */}
                   </InputAdornment>
                 ),
               }}            >

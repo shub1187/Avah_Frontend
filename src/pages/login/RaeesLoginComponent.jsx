@@ -9,7 +9,7 @@ import CreateTextFields from 'components/common/Textfield'
 import URL from 'url/apiURL'
 import { useFetchFunction } from 'hooks/useFetch'
 import { requiredTextfield } from 'utils/customFunctions'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const RaeesLoginComponent = () => {
     const [formData, setFormData] = useState({});
@@ -306,11 +306,11 @@ const RaeesLoginComponent = () => {
             <Box className='floating-navbar-container'>
                 <Grid className='thick-container'></Grid>
                 <Grid className='navbar-floating-img-container'>
-                    <img src={LogoImage} alt="logo Img" />
+                    <Link to={'/'}><img src={LogoImage} alt="logo Img" /></Link>
                 </Grid>
                 <Grid className='navbar-floating-content-container' >
                     <Box className="navbar-flex">
-                        <Box>Home</Box>
+                        <Box><Link to={'/'}>Home</Link></Box>
                         <Box>How We Work</Box>
                         <Box>Services</Box>
                         <Box>Providers</Box>

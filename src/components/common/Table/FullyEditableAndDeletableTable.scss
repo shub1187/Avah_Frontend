@@ -1,0 +1,23 @@
+.table-body{
+    // border: 1px solid var(--light-grey-font);
+    // border-radius: 1rem;
+    padding:0.5rem;
+    .table{
+        font-size: 0.8rem;
+        .MuiInputBase-root input{
+            font-size: 0.8rem;
+        }
+        .fieldset {
+            border: 'none' 
+        }
+         
+        .thead{
+            background-color: #f4f8f9;
+            border-bottom: 5px solid #e6e8e8;
+        }
+        .tbody{
+            background-color: #f4f8f9;
+        }
+    }
+
+}

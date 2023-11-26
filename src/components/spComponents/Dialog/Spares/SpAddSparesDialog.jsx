@@ -3,26 +3,37 @@ import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogCont
 import CreateTextFields from 'components/common/Textfield';
 import { useFetch } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
+import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
+import { requiredTextfield } from 'utils/customFunctions';
 
-const CreateSpareDialog = ({height,width,color}) => {
-    const [open, setOpen] = React.useState(false);
-
-    const [formData, setFormData] = useState({});
-  console.log(formData,"RAEES")
+const SpCreateSpareDialog = ({height,width,color}) => {
+   const {isSubmitted,isMobile,formData,setFormData,setIsSubmitted,handleOpen,handleClose} = useDialogWrapperContext()
+    // const [open, setOpen] = React.useState(false);
+    // const [formData, setFormData] = useState({});
+  // console.log(formData,"RAEES")
     const handleFieldChange = (fieldName, value) => {
       setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
     };
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
+    // const handleClickOpen = () => {
+    //   setOpen(true);
+    // };
   
-    const handleClose = () => {
-      setOpen(false);
-    };
+    // const handleClose = () => {
+    //   setOpen(false);
+    // };
     const handleSubmit = ()=>{
+      setIsSubmitted(true)
+      let isRequired = requiredTextfield(addSparesTextfield,formData)
+        if(isRequired) {
+            setTimeout(() => {
+                setIsSubmitted(false)
+            }, [2000]);
+            return
+        }
     setFormData({})
     }
+    console.log(formData)
     // const theme = createTheme({
       // palette:{
       //   mainy:{
@@ -31,30 +42,32 @@ const CreateSpareDialog = ({height,width,color}) => {
       //   }
       // }
     // })
-    const addSpares = [
+    const addSparesTextfield = [
         {
-            label:'Name',
+            label:'Spare Name',
             name:"name",
             type:'text',
-            fullWidth:true
+            fullWidth:true,
+            required:true,
+            errormessage:'Spare Name is Required'
         },
         {
             label:'HSN/SAC',
             name:"hsn/sac",
-            type:'email',
+            type:'text',
             fullWidth:true
 
         },
         {
             label: 'Part Number',
-            name: "partNumber",
+            name: "part_number",
             type: 'number',
             fullWidth:true
 
         },
         {
             label: 'FuelType',
-            name: "fuelType",
+            name: "fuel_type",
             type: 'text',
             fullWidth:true
 
@@ -74,13 +87,15 @@ const CreateSpareDialog = ({height,width,color}) => {
         },
         {
             label: 'Purchase Price',
-            name: "purchasePrice",
+            name: "purchase_price",
             type: 'text'
         },
         {
             label: 'Selling Price',
-            name: "sellingPrice",
-            type: 'text'
+            name: "selling_price",
+            type: 'text',
+            required:true,
+            errormessage:'Please enter the Selling Price'
         },
         {
             label: 'Manufacturer',
@@ -101,38 +116,42 @@ const CreateSpareDialog = ({height,width,color}) => {
         },
         {
           label: 'SGST',
-          name: "sgst",
-          type: 'text',
-          fullWidth:true
+          name: "scgst",
+          type: 'number',
+          defaultValue:'0',
+          fullWidth:true,
+          rightIcon:'percentage'
         },
         {
           label: 'CGST',
           name: "cgst",
-          type: 'text',
-          fullWidth:true
+          type: 'number',
+          fullWidth:true,
+          defaultValue:'0',
+          rightIcon:'percentage'
         }
     ]
   return (
     <div>
-      <Button sx={{height:height,width:width}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
+      {/* <Button sx={{height:height,width:width}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
         ADD SPARES
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth='lg'>
-      <div style={{width: 1200}}>
+      <div style={{width: 1200}}> */}
 
-        <DialogTitle >ADD SPARES</DialogTitle>
+        {/* <DialogTitle >ADD SPARES</DialogTitle> */}
         <DialogContent>
             <Grid container xs={12} mt={3}>
               <Grid item xs={3.6} mr={4}>
-                  <CreateTextFields  fields={addSpares.slice(0,5)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  fields={addSparesTextfield.slice(0,5)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
                   {/* <TextField values={formData[]}/> */}
               </Grid>
               <Grid item xs={3.6} mr={4}>
-                  <CreateTextFields  fields={addSpares.slice(5,10)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  fields={addSparesTextfield.slice(5,10)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
                   {/* <TextField values={formData[]}/> */}
               </Grid>
               <Grid item xs={3.6}>
-                  <CreateTextFields  fields={addSpares.slice(10,13)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  fields={addSparesTextfield.slice(10,13)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
                   {/* <TextField values={formData[]}/> */}
               </Grid>
             </Grid>
@@ -155,10 +174,10 @@ const CreateSpareDialog = ({height,width,color}) => {
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
-        </div>
-      </Dialog>
+        {/* </div> */}
+      {/* </Dialog> */}
     </div>
   )
 }
 
-export default CreateSpareDialog
+export default SpCreateSpareDialog

@@ -11,9 +11,10 @@ import SkeletonLoading from "components/common/Skeleton";
 import CreateEmployeeDialog from "../Dialog/Users/createEmployeeDialog";
 import AddLabourDialog from "../Dialog/Labour/AddLabour";
 import AddServiceDialog from "../Dialog/Service/AddServiceDialog";
-import CreateSpareDialog from "../Dialog/Spares/AddSparesDialog";
+import CreateSpareDialog from "../Dialog/Spares/SpAddSparesDialog";
+import DialogWrapper from "components/common/Dialog/DialogWrapper";
 
-const ServiceProvidertable = ({DialogButton,columnss,URL,key})=>{
+const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName})=>{
   const tableRef = createRef();
   const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
   const sp_id = localStorage.getItem('sp_id'); // Retrieve the token from local storage
@@ -162,7 +163,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key})=>{
             <MTableToolbar {...props} />
           </div>
           <div>
-            {DialogButton && <DialogButton height={isMobileResolution?"30px":'50px'} width={isMobileResolution?"100px":'250px'} color={'options'} />}
+            {DialogButton && <DialogWrapper title={title} buttonName={buttonName}><DialogButton height={isMobileResolution?"30px":'50px'} width={isMobileResolution?"100px":'250px'} color={'options'} /></DialogWrapper>}
           </div>
         </Box>
         </>

@@ -10,6 +10,7 @@ import React, { createContext, useContext, useState } from 'react'
  * @property {()=> void} setIsSubmitted -set Submit for Textfield Error
  * @property {object} formData - formdata
  * @property {()=> void} setFormData - seth the formdata
+ * @property {()=> void} handleFieldChange - change the formdata field
  */
 const DialogWrapperContext = createContext('hi')
 /**
@@ -29,6 +30,9 @@ const DialogWrapper = ({children, title , buttonName}) => {
 
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+    const handleFieldChange = (fieldName, value) => {
+        setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
+      };
 
     const DialogWrapperFuntions = {
         handleOpen,
@@ -37,7 +41,8 @@ const DialogWrapper = ({children, title , buttonName}) => {
         isSubmitted,
         isMobile,
         setFormData,
-        formData
+        formData,
+        handleFieldChange
     }
     return (
         <div>
