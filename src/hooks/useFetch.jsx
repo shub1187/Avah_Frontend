@@ -93,6 +93,7 @@ const useFetchFunction = ()=>{
             if(sp_id){
             const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
              headers = { Authorization: `Bearer ${token}`  };      
+             payload = {...payload, sp_id: sp_id}     
             }
             if (customer_id){
                 const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
