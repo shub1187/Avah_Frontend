@@ -1,16 +1,18 @@
 import React,{useState} from 'react'
 import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
 import CreateTextFields from 'components/common/Textfield';
-import { useFetch } from 'hooks/useFetch';
+import { useFetch, useFetchFunction } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
 import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
 import { requiredTextfield } from 'utils/customFunctions';
+import URL from 'url/apiURL';
+
+const {addspare} = URL.SERVICE_PROVIDER.SPARES
 
 const SpCreateSpareDialog = ({height,width,color}) => {
    const {isSubmitted,isMobile,formData,setFormData,setIsSubmitted,handleOpen,handleClose} = useDialogWrapperContext()
-    // const [open, setOpen] = React.useState(false);
-    // const [formData, setFormData] = useState({});
-  // console.log(formData,"RAEES")
+   const {fetchData} = useFetchFunction()
+
     const handleFieldChange = (fieldName, value) => {
       setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
     };
@@ -22,15 +24,23 @@ const SpCreateSpareDialog = ({height,width,color}) => {
     // const handleClose = () => {
     //   setOpen(false);
     // };
-    const handleSubmit = ()=>{
+    const handleSubmit = async ()=>{
       setIsSubmitted(true)
+      
       let isRequired = requiredTextfield(addSparesTextfield,formData)
+      console.log(" ln 29", isRequired)
         if(isRequired) {
             setTimeout(() => {
                 setIsSubmitted(false)
             }, [2000]);
             return
         }
+        const obj = {
+          payload : formData,
+          method : "POST",
+          url : addspare
+        }
+        await fetchData(obj)
     setFormData({})
     }
     console.log(formData)
