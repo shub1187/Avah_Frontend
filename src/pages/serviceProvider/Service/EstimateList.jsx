@@ -5,14 +5,18 @@ import { Box, Button, Select, TextField } from '@mui/material';
 import { spLabourColumns } from 'components/spComponents/Table/Columns/Labours/SpLabourColumn';
 import FullyEditableAndDeletableTable from 'components/common/Table/FullyEditableAndDeletableTable';
 import CreateAutoCompleteTextfield from 'components/common/Textfield/AutoCompleteTextfield';
-import {  useFetchFunction } from 'hooks/useFetch';
+import {  useFetch, useFetchFunction } from 'hooks/useFetch';
+import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderTable';
+import { SpEstimateListColumn } from 'components/spComponents/Table/Columns/Service/SpEstimateColumn';
 const SpEstimateList = () => {
-    const [page, setPage] = useState('estimate')
+    const [page, setPage] = useState('table')
     const [sparePayload, setSparePayload] = useState([])
     const [labourPayload, setLabourSparePayload] = useState([])
     console.log(sparePayload,labourPayload)
 
     const {fetchData} = useFetchFunction()
+    const {data:VehicleList} = useFetch('')
+
     const handleSubmit = async()=>{
         const obj = {
             payload:{
@@ -82,7 +86,12 @@ const SpEstimateList = () => {
     }
     return (
         <div>
-            bb
+            <ServiceProvidertable
+                URL={`http://localhost:3008/api/serviceprovider/getAllPendingAppointment`}
+                columnss={SpEstimateListColumn}
+                clickButton= {()=>setPage('estimate')}
+                buttonName={'CREATE ESTIMATE'}
+            />
         </div>
     )
 }

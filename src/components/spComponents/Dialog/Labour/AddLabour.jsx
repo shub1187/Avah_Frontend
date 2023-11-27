@@ -10,7 +10,7 @@ import URL from 'url/apiURL';
 
 const {} = URL.SERVICE_PROVIDER.SPARES
 const SpAddLabourDialog = ({height,width,color}) => {
-  const {handleClose,handleFieldChange,handleOpen,formData,setFormData,setIsSubmitted,isMobile,isSubmitted} = useDialogWrapperContext()
+  const {handleClose,handleFieldChange,handleOpen,formData,setFormData,setIsSubmitted,isMobile,isSubmitted, tableRef} = useDialogWrapperContext()
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
 
   const handleSubmit = async()=>{
@@ -33,6 +33,7 @@ const SpAddLabourDialog = ({height,width,color}) => {
       setIsSubmitted(false)
       setFormData({})
       setTimeout(()=>handleClose(),2000)
+      tableRef.current.onQueryChange()
     }
 
 
@@ -82,7 +83,6 @@ const SpAddLabourDialog = ({height,width,color}) => {
             <Grid container xs={12} mt={3}>
               <Grid item xs={5.5} mr={4}>
                   <CreateTextFields  fields={LabourList.slice(0,3)} onChange={handleFieldChange}  formField={formData}/>
-                  {/* <TextField values={formData[]}/> */}
               </Grid>
               <Grid item xs={5.5} >
                 <Grid container xs={12}>

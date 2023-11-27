@@ -11,6 +11,8 @@ import React, { createContext, useContext, useState } from 'react'
  * @property {object} formData - formdata
  * @property {()=> void} setFormData - seth the formdata
  * @property {()=> void} handleFieldChange - change the formdata field
+ * @property {()=> void} tableRef - To Reload the Table
+
  */
 const DialogWrapperContext = createContext('hi')
 /**
@@ -19,7 +21,7 @@ const DialogWrapperContext = createContext('hi')
  */
 export const useDialogWrapperContext = ()=> useContext(DialogWrapperContext)
 
-const DialogWrapper = ({children, title , buttonName}) => {
+const DialogWrapper = ({children, title , buttonName , tableRef}) => {
     const [formData, setFormData] = useState({});
 
     const [open,setOpen] = useState(false)
@@ -42,7 +44,8 @@ const DialogWrapper = ({children, title , buttonName}) => {
         isMobile,
         setFormData,
         formData,
-        handleFieldChange
+        handleFieldChange,
+        tableRef
     }
     return (
         <div>

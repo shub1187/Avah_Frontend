@@ -9,7 +9,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
 
     useEffect(()=>{
         setTableValues(data)
-        setPayload(data)
+        setPayload && setPayload(data)
     },[data])
 
     const handleInputChange = (e,col,rowIndex)=>{
@@ -19,17 +19,14 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
             [col]:e.target.value
         }
         setTableValues(newValue)
-        setPayload(newValue)
-        // updatePayload((prev)=>({...prev,newValue}))
+        setPayload && setPayload(newValue)
     }
 
     const deleteRow = (rowIndex) => {
         const newInputValues = [...tableValues]
         newInputValues.splice(rowIndex,1)
         setTableValues(newInputValues)
-        setPayload(newInputValues)
-        // updatePayload((prev)=>({...prev,newInputValues}))
-
+        setPayload &&setPayload(newInputValues)
     }
 
     const addRow = ()=>{
@@ -38,13 +35,11 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
             newRow[val.field]=''
         })
         setTableValues([...tableValues,newRow])
-        setPayload([...tableValues,newRow])
-        // updatePayload((prev)=>([...tableValues,newRow]))
+        setPayload && setPayload([...tableValues,newRow])
     }
     return (
         <div className='table-body'>    
-            {/* <Button onClick={() => setPage('table')} variant='outlined' color='options'>Back <ArrowBackIcon /></Button> */}
-            <Box fontSize={'1.1rem'} className='ml-2 flex ai-center'>
+            <Box fontSize={'1.1rem'} className=' flex ai-center'>
                 <Box>{title}</Box>
                 <Box className='ml-2'>
                     <TextField
@@ -53,7 +48,6 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                     fullWidth
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    // sx={{ height:'30px'}}
                     size='small'
                     sx={{
                         width:'150px',
@@ -61,13 +55,13 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                             height: '8px',
                           },
                         "&.Mui-focused fieldset": {
-                        borderColor:"#ad4970", // Remove border color when focused
+                        borderColor:"#ad4970",
                         },
         
                     }}
                     InputLabelProps={{
                         sx:{
-                            top:'-0.6vh',
+                            top:'-1vh',
                         },
                         shrink:false
                     }}

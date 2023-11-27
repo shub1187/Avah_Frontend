@@ -4,17 +4,11 @@ import MaterialTable, { MTableToolbar } from "material-table";
 import './ServiceProviderTable.css'
 import { createRef, useState } from "react";
 import CreateCustomerDialog from "../Dialog/Users/createCustomerDialog";
-import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import ActionDialog from "../../common/Dialog/ActionDialog";
-import SkeletonLoading from "components/common/Skeleton";
-import CreateEmployeeDialog from "../Dialog/Users/createEmployeeDialog";
-import AddLabourDialog from "../Dialog/Labour/AddLabour";
-import AddServiceDialog from "../Dialog/Service/AddServiceDialog";
-import CreateSpareDialog from "../Dialog/Spares/SpAddSparesDialog";
 import DialogWrapper from "components/common/Dialog/DialogWrapper";
 
-const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName})=>{
+const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName, clickButton})=>{
   const tableRef = createRef();
   const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
   const sp_id = localStorage.getItem('sp_id'); // Retrieve the token from local storage
@@ -108,7 +102,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName}
   //           "pickup_address": null,
   //           "appointment_date": "2023-10-23T18:30:00.000Z",
   //           "appointment_time": "11am",
-  //           "appointment_status": "approved",
+  //           "appointment_status": "Approved",
   //           "estimate_status": "pending"
   //       },
   //       {
@@ -126,7 +120,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName}
   //           "pickup_address": "Flat No.-02 Sawan Mansion Plot no-27 Kopar Khairane Navi Mumbai",
   //           "appointment_date": "2023-08-19T18:30:00.000Z",
   //           "appointment_time": "11am",
-  //           "appointment_status": "pending",
+  //           "appointment_status": "Pending",
   //           "estimate_status": "pending"
   //       }
   //   ],
@@ -136,6 +130,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName}
     <>
     <ThemeProvider theme={theme}>
     <MaterialTable
+    tableRef={tableRef}
     title=""
     columns={columnss}
     options={{debounceInterval:700,emptyRowsWhenPaging:false,
@@ -163,7 +158,8 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName}
             <MTableToolbar {...props} />
           </div>
           <div>
-            {DialogButton && <DialogWrapper title={title} buttonName={buttonName}><DialogButton height={isMobileResolution?"30px":'50px'} width={isMobileResolution?"100px":'250px'} color={'options'} /></DialogWrapper>}
+            {DialogButton && <DialogWrapper tableRef={tableRef} title={title} buttonName={buttonName}><DialogButton height={isMobileResolution?"30px":'50px'} width={isMobileResolution?"100px":'250px'} color={'options'} /></DialogWrapper>}
+            {clickButton && <Button variant="contained" color="options" onClick={clickButton}>{buttonName}</Button>}
           </div>
         </Box>
         </>
@@ -201,14 +197,14 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName}
         };
       }
     }}
-    actions={[
-      {
-        icon: 'refresh',
-        tooltip: 'Refresh Data',
-        isFreeAction: true,
-        onClick: () => tableRef.current && tableRef.current.onQueryChange(),
-      }
-    ]}
+    // actions={[
+    //   {
+    //     icon: 'refresh',
+    //     tooltip: 'Refresh Data',
+    //     isFreeAction: true,
+    //     onClick: () => tableRef.current && tableRef.current.onQueryChange(),
+    //   }
+    // ]}
   />
   </ThemeProvider>
   </>

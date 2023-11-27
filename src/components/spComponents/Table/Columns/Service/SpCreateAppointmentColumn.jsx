@@ -1,7 +1,7 @@
 import { Box } from "@mui/material"
 import ActionDialog from "components/common/Dialog/ActionDialog"
 import MoreActionDialog from "components/common/Dialog/MoreActionDialog"
-export const createAppointmentColumn =(reLoadTable)=>( [
+export const spCreateAppointmentColumn =(setPage,setEyeIconValue)=>( [
     { title: "Name", field: "name" },
     { title: "Vehicle Number", field: "vehicle_number" },
     { title: "Appointment Date", field: "appointment_date"},
@@ -14,7 +14,6 @@ export const createAppointmentColumn =(reLoadTable)=>( [
                                                                 key="approve"
                                                                 approve
                                                                 url={'http://localhost:3008/api/serviceprovider/approveCustAppointment'}
-                                                                reLoadTable={reLoadTable}
                                                                 payload={{ 'appointment_id': rowData.appointment_id,'appointment_status': 'Approved' }}
 
                                                                 />
@@ -23,7 +22,6 @@ export const createAppointmentColumn =(reLoadTable)=>( [
                                                                 key="reject"
                                                                 reject
                                                                 url={'http://localhost:3008/api/serviceprovider/approveCustAppointment'}
-                                                                reLoadTable={reLoadTable}
                                                                 payload={{ 'appointment_id': rowData.appointment_id, 'appointment_status': 'Rejected By SP' }}
 
                                                                 />
@@ -32,7 +30,9 @@ export const createAppointmentColumn =(reLoadTable)=>( [
                                                                 key="createEstimate"
                                                                 createEstimate
                                                                 url={'http://localhost:3008/api/serviceprovider/createEstimate'}
-                                                                reLoadTable={reLoadTable}
+                                                                setPage={setPage}
+                                                                setEyeIconValue={setEyeIconValue}
+                                                                rowData={rowData}
                                                                 />
                                                             ]
                                                             :

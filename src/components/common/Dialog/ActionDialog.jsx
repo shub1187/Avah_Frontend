@@ -10,7 +10,7 @@ import { useFetchFunction } from 'hooks/useFetch'
 import { useRef, useState } from 'react'
 import CreateTextFields from 'components/common/Textfield'
 
-const ActionDialog = ({ changePassword, edit, status, view, approve, reject,createEstimate, payload, params, url ,reLoadTable, noLoading, noSnackbar,handleMainClose}) => {
+const ActionDialog = ({ changePassword, edit, status, view, approve, reject,createEstimate, payload, params, url , noLoading, noSnackbar,handleMainClose ,setPage, setEyeIconValue, rowData}) => {
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
   const timerRef = useRef(null);
 
@@ -73,9 +73,6 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
         setFormData({})
 
     }finally{
-      if(reLoadTable){
-        reLoadTable()
-      }
       if(timerRef.current){
         clearTimeout(timerRef.current);
       }
@@ -113,18 +110,9 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
         }
         {createEstimate && 
           <>
-          <Button variant='outlined' color='info'  onClick={handleClickOpen} >
+          <Button variant='outlined' color='info'  onClick={()=>{setPage();setEyeIconValue(rowData)}} >
             <PlaylistAddIcon style={{color:'rgb(204,16,16)',cursor:'pointer',marginRight:'5px'}}/> Create Estimate
           </Button>
-          <Dialog  fullWidth open={open} onClose={handleClose} maxWidth='xs'>
-            <Box m={4}>
-            <CreateTextFields  fields={RejectList} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
-            </Box>
-          <DialogActions sx={{mt:3}}>
-          <Button color='options' onClick={handleClose}>CANCEL</Button>
-          <Button variant={'contained'} color='options' onClick={StatusUpdate}>SUBMIT</Button>
-          </DialogActions>
-          </Dialog>
           </>
         }
         {snackbar}
