@@ -1,18 +1,26 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
 import CreateTextFields from 'components/common/Textfield';
 import { useFetch, useFetchFunction } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/spComponents/Radio';
 import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
-import { requiredTextfield } from 'utils/customFunctions';
+import { getFuelArray, requiredTextfield } from 'utils/customFunctions';
 import URL from 'url/apiURL';
 
-const {addspare} = URL.SERVICE_PROVIDER.SPARES
+const {addspare,getAllFuelTypes} = URL.SERVICE_PROVIDER.SPARES
 
-const SpCreateSpareDialog = ({height,width,color}) => {
+const SpCreateSpareDialog = () => {
    const {isSubmitted,isMobile,formData,setFormData,setIsSubmitted,handleOpen,handleClose} = useDialogWrapperContext()
    const {fetchData, loadingIndicator, snackbar} = useFetchFunction()
+   const [fuelArray,setFuelArray] = useState([])
+   const {data} = useFetch(getAllFuelTypes)
 
+   useEffect(()=>{
+    if(data?.data?.results?.length){
+      let fuelArray = getFuelArray(data?.data?.results)
+      setFuelArray(fuelArray)
+    }
+   },[data])
     const handleFieldChange = (fieldName, value) => {
       setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
     };
@@ -68,7 +76,9 @@ const SpCreateSpareDialog = ({height,width,color}) => {
             label: 'FuelType',
             name: "fuel_type",
             type: 'text',
-            fullWidth:true
+            fullWidth:true,
+            select:true,
+            selectArray:fuelArray
 
         },
         {
@@ -132,19 +142,16 @@ const SpCreateSpareDialog = ({height,width,color}) => {
     ]
   return (
     <div>
-        <DialogContent>
-            <Grid container xs={12} mt={3}>
+        <DialogContent sx={{pt:1}}>
+            <Grid container xs={12}>
               <Grid item xs={3.6} mr={4}>
                   <CreateTextFields  fields={addSparesTextfield.slice(0,5)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
-                  {/* <TextField values={formData[]}/> */}
               </Grid>
               <Grid item xs={3.6} mr={4}>
                   <CreateTextFields  fields={addSparesTextfield.slice(5,10)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
-                  {/* <TextField values={formData[]}/> */}
               </Grid>
               <Grid item xs={3.6}>
                   <CreateTextFields  fields={addSparesTextfield.slice(10,13)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
-                  {/* <TextField values={formData[]}/> */}
               </Grid>
             </Grid>
         </DialogContent>

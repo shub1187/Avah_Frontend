@@ -28,7 +28,8 @@ const URL = {
     SERVICE_PROVIDER:{
         SPARES : {
             addspare: replaceUrl(`${BASE_URL}/api/serviceprovider/addspare`),
-            getAllSpares : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllSpares`)
+            getAllSpares : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllSpares`),
+            getAllFuelTypes:replaceUrl(`${BASE_URL}/api/admin/getAllFuelTypes`)
         },
         LABOURS : {
             addlabour: replaceUrl(`${BASE_URL}/api/serviceprovider/addlabour`),

@@ -88,7 +88,7 @@ const SpAddLabourDialog = ({height,width,color}) => {
                 <Grid container xs={12}>
                   <Grid  xs={12} item><CreateTextFields fields={LabourList.slice(3,5)} onChange={handleFieldChange} formField={formData}/></Grid>
 
-                  <Grid xs={12}><ControlledRadioButtonsGroup onChange={handleFieldChange} title={'STATUS'} formField={formData} name={'status'}/></Grid>
+                  {/* <Grid xs={12}><ControlledRadioButtonsGroup onChange={handleFieldChange} title={'STATUS'} formField={formData} name={'status'}/></Grid> */}
                 </Grid>
               </Grid>
             </Grid>

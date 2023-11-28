@@ -60,6 +60,14 @@ const getCities = (formDataState,apiData)=>{
     console.log(citiesList)
     return citiesList
 }
+
+const getFuelArray = (data)=>{
+    return data.map((fuel)=>{
+      return {
+        label:fuel.fuel_name,
+        value:fuel.fuel_name
+      }})
+   }
 export {
-    logout , requiredTextfield, getBrandData, getModelData, getStates, getCities
+    logout , requiredTextfield, getBrandData, getModelData, getStates, getCities, getFuelArray
 }
