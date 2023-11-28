@@ -23,7 +23,11 @@ const URL = {
     },
     SERVICE_PROVIDER:{
         SPARES : {
-            addspare: replaceUrl(`${BASE_URL}/api/serviceprovider/addspare`)
+            addspare: replaceUrl(`${BASE_URL}/api/serviceprovider/addspare`),
+            
+        },
+        LABOURS : {
+            addlabour: replaceUrl(`${BASE_URL}/api/serviceprovider/addlabour`)
         }
 
     },

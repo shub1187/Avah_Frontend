@@ -8,7 +8,7 @@ import { requiredTextfield } from 'utils/customFunctions';
 import URL from 'url/apiURL';
 
 
-const {} = URL.SERVICE_PROVIDER.SPARES
+const {addlabour} = URL.SERVICE_PROVIDER.LABOURS
 const SpAddLabourDialog = ({height,width,color}) => {
   const {handleClose,handleFieldChange,handleOpen,formData,setFormData,setIsSubmitted,isMobile,isSubmitted, tableRef} = useDialogWrapperContext()
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
@@ -26,7 +26,7 @@ const SpAddLabourDialog = ({height,width,color}) => {
       const obj = {
         payload : formData,
         method : "POST",
-        url : ''
+        url : addlabour
       }
 
       await fetchData(obj)
