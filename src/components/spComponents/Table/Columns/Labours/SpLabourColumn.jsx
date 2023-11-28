@@ -1,6 +1,6 @@
 export const spLabourColumns = [
-    { title: "Labour Name", field: "labour_name" },
+    { title: "Item Description", field: "labour_name" },
     { title: "HSN/SAC", field: "hsn_sac" },
-    { title: "Amount", field: "amount" },
-    { title: "Status", field: "status" },
+    { title: "Price", field: "price" },
+    { title: "Tax", field: "tax" },
 ]

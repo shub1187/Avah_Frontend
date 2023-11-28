@@ -1,12 +1,10 @@
 import UserPageLayout from "../pages/dashboard/UserPageLayout";
 import { RouteType } from "./config";
 import CustomersPage from "../pages/dashboard/user/page/CustomersPage";
- import ChangelogPage from "../pages/changelog/ChangelogPage";
 import ServiceProviderPage from "../pages/dashboard/user/page/ServiceProviderPage";
 import DealersPage from "../pages/dashboard/user/page/DealersPage";
 import ModeratorsPage from "../pages/dashboard/user/page/ModeratorsPage";
 import Homepage from "../pages/home/HomePage";
-import RolesPageLayout from "../pages/dashboard/RolesPageLayout";
 import ManufacturersPage from "../pages/dashboard/roles/page/ManufacturersPage";
 import ModelsPage from "../pages/dashboard/roles/page/ModelsPage";
 import FuelTypePage from "../pages/dashboard/roles/page/FuelTypePage";

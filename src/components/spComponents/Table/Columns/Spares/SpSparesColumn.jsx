@@ -1,14 +1,15 @@
+import { Box } from "@mui/material"
+import MoreActionDialog from "components/common/Dialog/MoreActionDialog"
+
 export const SpcreateSparesColumn = [
     { title: "Spare Name", field: "spare_name" },
     { title: "HSN/SAC", field: "hsn_sac" },
     { title: "Part Number", field: "part_number" },
-    { title: "Fuel Type", field: "fuel_type" },
-    { title: "Threshold", field: "threshold" },
-    { title: "Units", field: "units" },
-    { title: "Purchase Price", field: "purchase_price" },
-    { title: "Manufacturer", field: "manufacturer" },
-    { title: "Location", field: "location" },
-    { title: "Expiry", field: "expiry" },
+    { title:'Selling Price', field : 'selling_price'},
     { title: "Tax", field: "tax" },
-
+    { title :'Action', render : (rowData)=>{
+        <Box display='flex'>
+            <MoreActionDialog rowData={rowData}/>
+        </Box>
+    }}
 ]

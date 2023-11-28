@@ -3,6 +3,10 @@ const BASE_URL = "http://localhost:3008"
 
 const PRODUCTION_URL = ''
 
+const LOCAL_STORAGE = {
+    sp_id:localStorage.getItem('sp_id')
+}
+
 const replaceUrl =(url)=>{
     if(PRODUCTION_URL && process.env.NODE_ENV==='production'){
         return url.replace(BASE_URL,PRODUCTION_URL)
@@ -24,10 +28,11 @@ const URL = {
     SERVICE_PROVIDER:{
         SPARES : {
             addspare: replaceUrl(`${BASE_URL}/api/serviceprovider/addspare`),
-            
+            getAllSpares : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllSpares`)
         },
         LABOURS : {
-            addlabour: replaceUrl(`${BASE_URL}/api/serviceprovider/addlabour`)
+            addlabour: replaceUrl(`${BASE_URL}/api/serviceprovider/addlabour`),
+            getAllLabour : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllLabour`)
         }
 
     },
