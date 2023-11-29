@@ -133,14 +133,6 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName,
     tableRef={tableRef}
     title=""
     columns={columnss}
-    cellEditable={{
-      cellStyle: {},
-      onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
-          return new Promise((resolve, reject) => {
-              console.log('newValue: ' + newValue);
-              setTimeout(resolve, 4000);
-          });
-      }}}
     options={{debounceInterval:700,emptyRowsWhenPaging:false,
        rowStyle: {backgroundColor: "rgb(244, 248, 249)" },
        headerStyle:{backgroundColor:'rgb(244, 248, 249)',color:"black",fontSize:"14px",fontWeight:'bold',borderBottom:'5px solid rgb(230,230,230)'},

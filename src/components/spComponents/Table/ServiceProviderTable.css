@@ -4,7 +4,7 @@
 
 .MuiTableCell-root{
   .MuiToolbar-root{
-    .MuiTablePagination-selectLabel, .MuiInputBase-root, .MuiTablePagination-displayedRows{
+    .MuiTablePagination-displayedRows{
       display: none;
     }
 }
