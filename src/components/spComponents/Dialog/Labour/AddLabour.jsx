@@ -42,7 +42,9 @@ const SpAddLabourDialog = ({height,width,color}) => {
             label:'Name',
             name:"labour_name",
             type:'text',
-            fullWidth:true
+            fullWidth:true,
+            required : true,
+            errormessage : 'Labour name is required'
         },
         {
             label:'HSN/SAC',
@@ -55,7 +57,9 @@ const SpAddLabourDialog = ({height,width,color}) => {
             label: 'Amount',
             name: "price",
             type: 'text',
-            fullWidth:true
+            fullWidth:true,
+            required : true,
+            errormessage : 'Labour Amount is required'
     
         },
         {
@@ -82,11 +86,11 @@ const SpAddLabourDialog = ({height,width,color}) => {
         <DialogContent>
             <Grid container xs={12} mt={3}>
               <Grid item xs={5.5} mr={4}>
-                  <CreateTextFields  fields={LabourList.slice(0,3)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields  fields={LabourList.slice(0,3)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/>
               </Grid>
               <Grid item xs={5.5} >
                 <Grid container xs={12}>
-                  <Grid  xs={12} item><CreateTextFields fields={LabourList.slice(3,5)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={LabourList.slice(3,5)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
 
                   {/* <Grid xs={12}><ControlledRadioButtonsGroup onChange={handleFieldChange} title={'STATUS'} formField={formData} name={'status'}/></Grid> */}
                 </Grid>
