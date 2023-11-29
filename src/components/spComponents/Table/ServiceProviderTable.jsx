@@ -136,8 +136,9 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName,
     options={{debounceInterval:700,emptyRowsWhenPaging:false,
        rowStyle: {backgroundColor: "rgb(244, 248, 249)" },
        headerStyle:{backgroundColor:'rgb(244, 248, 249)',color:"black",fontSize:"14px",fontWeight:'bold',borderBottom:'5px solid rgb(230,230,230)'},
-       searchFieldStyle:{marginLeft:'-50px'},       
-  }}
+       searchFieldStyle:{marginLeft:'-50px'},   
+       showFirstLastPageButtons:false,
+    }}
   // page={page}
   // totalCount={count}
     components={{

@@ -4,11 +4,23 @@ import URL from "url/apiURL";
 
 
 const logout = ()=>{
-    localStorage.clear();
-    window.history.replaceState(null, "", "/login")
-    window.location.reload();
+    const logoutChannel = new BroadcastChannel('logout-channel')
+    logoutChannel.postMessage('logout')
+    // localStorage.clear();
+    // window.history.replaceState(null, "", "/login")
+    // window.location.reload();
 }
 
+const addBroadcastListenerForLoggingOutOfAllTabs = ()=>{
+    const logoutChannel = new BroadcastChannel('logout-channel')
+    logoutChannel.onmessage = (e)=>{
+        if(e.data==='logout'){
+            localStorage.clear();
+            window.history.replaceState(null, "", "/login")
+            window.location.reload();
+        }
+    }   
+}
 /**
  * @param {Function} - check if in createTextfield if any of required fields are empty
  * @description - eg: formData.email = "" => this indicates falsey value,if i use ! then the output is true
@@ -61,13 +73,13 @@ const getCities = (formDataState,apiData)=>{
     return citiesList
 }
 
-const getFuelArray = (data)=>{
-    return data.map((fuel)=>{
-      return {
-        label:fuel.fuel_name,
-        value:fuel.fuel_name
-      }})
-   }
+const getFuelArray = (data)=>
+    data.map(({fuel_name})=>
+        ({
+        label:fuel_name,
+        value:fuel_name
+        }))
+   
 export {
-    logout , requiredTextfield, getBrandData, getModelData, getStates, getCities, getFuelArray
+    logout , addBroadcastListenerForLoggingOutOfAllTabs , requiredTextfield, getBrandData, getModelData, getStates, getCities, getFuelArray
 }

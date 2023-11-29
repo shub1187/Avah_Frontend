@@ -6,15 +6,18 @@ import ServiceProviderLayout from 'components/layout/ServiceProviderLayout'
 import CustomerDashboard from 'pages/Customer/Dashboard/CustomerDashboard'
 import CustomerHome from 'pages/Customer/Home/CustomerHome'
 import RaeesLoginComponent from 'pages/login/RaeesLoginComponent'
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { customerRoute, raeesRoute, routes } from 'routes'
-import { loginFunction } from 'utils/customFunctions'
+import { addBroadcastListenerForLoggingOutOfAllTabs, loginFunction } from 'utils/customFunctions'
 const Appy = () => {
 
   const location = useLocation();
   const isAdminPage = location.pathname.includes('/admin');
 
+  useEffect(()=>{
+    addBroadcastListenerForLoggingOutOfAllTabs()
+  },[])
   return (
     <ThemeProvider theme={globalAppTheme}>
       <Routes>

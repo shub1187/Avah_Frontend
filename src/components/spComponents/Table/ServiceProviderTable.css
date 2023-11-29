@@ -1,3 +1,11 @@
 .my-temp-class {
     min-height: '500px !important';
   }
+
+.MuiTableCell-root{
+  .MuiToolbar-root{
+    .MuiTablePagination-selectLabel, .MuiInputBase-root, .MuiTablePagination-displayedRows{
+      display: none;
+    }
+}
+}

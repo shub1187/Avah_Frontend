@@ -85,7 +85,7 @@ const RaeesLoginComponent = () => {
                 localStorage.setItem('access_tokenSP', loginDetails.token);
                 localStorage.setItem('isLoggedInSP', "true"); 
                 localStorage.setItem('profile_name', loginDetails.profile_name); 
-            }
+            }            
         }
         setIsSubmitted(false)
         setFormData({})
