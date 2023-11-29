@@ -43,8 +43,8 @@ const SpAddLabourDialog = ({height,width,color}) => {
             name:"labour_name",
             type:'text',
             fullWidth:true,
-            required : true,
-            errormessage : 'Labour name is required'
+            required:true,
+            errormessage:'Spare Name is Required'
         },
         {
             label:'HSN/SAC',
@@ -58,8 +58,8 @@ const SpAddLabourDialog = ({height,width,color}) => {
             name: "price",
             type: 'text',
             fullWidth:true,
-            required : true,
-            errormessage : 'Labour Amount is required'
+            required:true,
+            errormessage:'Spare Name is Required'
     
         },
         {
