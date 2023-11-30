@@ -11,7 +11,7 @@ import { useFetchFunction } from 'hooks/useFetch'
 import { useRef, useState } from 'react'
 import CreateTextFields from 'components/common/Textfield'
 
-const ActionDialog = ({ changePassword, edit, status, view, approve, reject,createEstimate, deleteSpare, payload, params, url , noLoading, noSnackbar ,setPage, setEyeIconValue, rowData}) => {
+const ActionDialog = ({ changePassword, edit, status, view, approve, reject,createEstimate, deleteSpare, deleteLabour, payload, params, url , noLoading, noSnackbar ,setPage, setEyeIconValue, rowData}) => {
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
   // const timerRef = useRef(null);
 
@@ -122,7 +122,23 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
               <DeleteIcon  style={{cursor:'pointer',marginRight:'5px'}}/>
               </IconButton>
             <Dialog fullWidth open={open} onClose={handleClose} maxWidth='xs'>
-              <DialogTitle>Labour {rowData?.labour_name} will be deleted. Please click on <span style={{color:'#ad4970'}}>Delete</span> to proceed </DialogTitle>
+              <DialogTitle>Spare <span style={{color:'#ad4970'}}>{rowData?.spare_id}</span> will be deleted. Please click on <span style={{color:'#ad4970'}}>Delete</span> to proceed </DialogTitle>
+              <DialogActions sx={{mt:3}}>
+                <Button color='options' onClick={handleClose}>CANCEL</Button>
+                <Button variant={'contained'} color='options' onClick={StatusUpdate}>DELETE</Button>
+              </DialogActions>
+
+            </Dialog>
+          </>
+
+        }
+        {deleteLabour && 
+          <>
+              <IconButton color='black' onClick={handleClickOpen}>
+              <DeleteIcon  style={{cursor:'pointer',marginRight:'5px'}}/>
+              </IconButton>
+            <Dialog fullWidth open={open} onClose={handleClose} maxWidth='xs'>
+              <DialogTitle>Labour <span style={{color:'#ad4970'}}>{rowData?.sparelabour_name_id}</span> will be deleted. Please click on <span style={{color:'#ad4970'}}>Delete</span> to proceed </DialogTitle>
               <DialogActions sx={{mt:3}}>
                 <Button color='options' onClick={handleClose}>CANCEL</Button>
                 <Button variant={'contained'} color='options' onClick={StatusUpdate}>DELETE</Button>

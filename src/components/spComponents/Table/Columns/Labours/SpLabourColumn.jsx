@@ -7,7 +7,7 @@ export const spLabourColumns =  [
     { title: "Tax %", field: "tax" },
     { title: 'Action', render: (rowData) => 
             <ActionDialog
-                deleteSpare
+                deleteLabour
                 url='http://localhost:3008/api/serviceprovider/deleteLabour'
                 payload={{'labour_id':rowData?.labour_id}} 
                 rowData={ rowData}
