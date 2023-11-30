@@ -1,4 +1,4 @@
-import { Box, Button ,Dialog, DialogActions, InputLabel, MenuItem, Select, TextField} from '@mui/material'
+import { Box, Button ,Dialog, DialogActions, DialogTitle, IconButton, InputLabel, MenuItem, Select, TextField, Typography} from '@mui/material'
 import ChangePasswordDialog from '../../spComponents/Dialog/ChangePasswordDialog'
 import EditDialog from '../../spComponents/Dialog/EditDialog'
 import StatusDialog from '../../spComponents/Dialog/StatusDialog'
@@ -6,13 +6,14 @@ import ViewDialog from '../../spComponents/Dialog/ViewDialog'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useFetchFunction } from 'hooks/useFetch'
 import { useRef, useState } from 'react'
 import CreateTextFields from 'components/common/Textfield'
 
-const ActionDialog = ({ changePassword, edit, status, view, approve, reject,createEstimate, payload, params, url , noLoading, noSnackbar,handleMainClose ,setPage, setEyeIconValue, rowData}) => {
+const ActionDialog = ({ changePassword, edit, status, view, approve, reject,createEstimate, deleteSpare, payload, params, url , noLoading, noSnackbar ,setPage, setEyeIconValue, rowData, tableRef}) => {
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
-  const timerRef = useRef(null);
+  // const timerRef = useRef(null);
 
   //Dialog Popups
   const [open, setOpen] = useState(false);
@@ -20,7 +21,6 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
   const handleClose = () => {setOpen(false)};
 
   //Formdata Related And Required Checks
-
   const [formData, setFormData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const handleFieldChange = (fieldName, value) => {setFormData((prevData) => ({ ...prevData, [fieldName]: value }))}
@@ -67,18 +67,19 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
         }
         setFormData({})
         setOpen(false)
+        tableRef?.current?.onQueryChange()
     }
     catch(error){
         console.log(error)
         setFormData({})
 
     }finally{
-      if(timerRef.current){
-        clearTimeout(timerRef.current);
-      }
-      else{
-        timerRef.current = setTimeout(() => handleMainClose(), 2000);
-      }
+      // if(timerRef.current){
+      //   clearTimeout(timerRef.current);
+      // }
+      // else{
+      //   timerRef.current = setTimeout(() => handleMainClose(), 2000);
+      // }
   }
   setIsSubmitted(false)
 
@@ -114,6 +115,22 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
             <PlaylistAddIcon style={{color:'rgb(204,16,16)',cursor:'pointer',marginRight:'5px'}}/> Create Estimate
           </Button>
           </>
+        }
+        {deleteSpare && 
+          <>
+              <IconButton color='black' onClick={handleClickOpen}>
+              <DeleteIcon  style={{cursor:'pointer',marginRight:'5px'}}/>
+              </IconButton>
+            <Dialog fullWidth open={open} onClose={handleClose} maxWidth='xs'>
+              <DialogTitle>Labour {rowData?.labour_name} will be deleted. Please click on <span style={{color:'#ad4970'}}>Delete</span> to proceed </DialogTitle>
+              <DialogActions sx={{mt:3}}>
+                <Button color='options' onClick={handleClose}>CANCEL</Button>
+                <Button variant={'contained'} color='options' onClick={StatusUpdate}>DELETE</Button>
+              </DialogActions>
+
+            </Dialog>
+          </>
+
         }
         {snackbar}
         {loadingIndicator}

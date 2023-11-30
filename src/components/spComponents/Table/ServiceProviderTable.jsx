@@ -7,7 +7,7 @@ import CreateCustomerDialog from "../Dialog/Users/createCustomerDialog";
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import ActionDialog from "../../common/Dialog/ActionDialog";
 import DialogWrapper from "components/common/Dialog/DialogWrapper";
-
+import { globalAppTheme } from "components/common/Themes/GlobalAppTheme";
 const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName, clickButton})=>{
   const tableRef = createRef();
   const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
@@ -16,7 +16,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName,
   const isMobileResolution = useMediaQuery((theme) =>
   theme.breakpoints.down('sm')
   );
-  const theme = createTheme({
+  const theme = createTheme(globalAppTheme,{
     palette:{
       addUser:{
         main:'#000000',
@@ -103,7 +103,10 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName,
   //           "appointment_date": "2023-10-23T18:30:00.000Z",
   //           "appointment_time": "11am",
   //           "appointment_status": "Approved",
-  //           "estimate_status": "pending"
+  //           "estimate_status": "pending",
+  //           'labour_name':"sds",
+  //           'hsn_sac':'sdsds',
+  //           'tax':'232'
   //       },
   //       {
   //           "appointment_id": 3,
@@ -125,14 +128,13 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName,
   //       }
   //   ],
   // }
-
   return(
     <>
     <ThemeProvider theme={theme}>
     <MaterialTable
     tableRef={tableRef}
     title=""
-    columns={columnss}
+    columns={typeof columnss==='function'?columnss(tableRef):columnss}
     options={{debounceInterval:700,emptyRowsWhenPaging:false,
        rowStyle: {backgroundColor: "rgb(244, 248, 249)" },
        headerStyle:{backgroundColor:'rgb(244, 248, 249)',color:"black",fontSize:"14px",fontWeight:'bold',borderBottom:'5px solid rgb(230,230,230)'},
@@ -168,7 +170,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName,
     }}
     isLoading={false}
     key={key || 'default'}
-    // data={mock.results}
+    // data={mock?.results || []}
     data={async (query) => {
       try {
         let url = `${URL}?sp_id=${sp_id}&`;

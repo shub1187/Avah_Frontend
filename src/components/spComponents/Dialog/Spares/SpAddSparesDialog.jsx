@@ -10,7 +10,7 @@ import URL from 'url/apiURL';
 const {addspare,getAllFuelTypes} = URL.SERVICE_PROVIDER.SPARES
 
 const SpCreateSpareDialog = () => {
-   const {isSubmitted,isMobile,formData,setFormData,setIsSubmitted,handleOpen,handleClose} = useDialogWrapperContext()
+   const {isSubmitted,isMobile,formData,setFormData,setIsSubmitted,handleOpen,handleClose, tableRef} = useDialogWrapperContext()
    const {fetchData, loadingIndicator, snackbar} = useFetchFunction()
    const [fuelArray,setFuelArray] = useState([])
    const {data} = useFetch(getAllFuelTypes)
@@ -32,6 +32,7 @@ const SpCreateSpareDialog = () => {
       console.log(" ln 29", isRequired)
       
       if(isRequired) {
+          //IF ERROR THEN CLOSE THE ERROR MESSAGES AFTER 2 SECOND
           setTimeout(() => {
               setIsSubmitted(false)
           }, [2000]);
@@ -46,7 +47,8 @@ const SpCreateSpareDialog = () => {
       setIsSubmitted(false)
       setFormData({})
       setTimeout(()=>handleClose(),2000)
-      
+      tableRef?.current?.onQueryChange()
+
     }
 
     const addSparesTextfield = [

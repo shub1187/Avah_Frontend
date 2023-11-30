@@ -7,9 +7,9 @@ import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper'
 import { requiredTextfield } from 'utils/customFunctions';
 import URL from 'url/apiURL';
 
-
 const {addlabour} = URL.SERVICE_PROVIDER.LABOURS
-const SpAddLabourDialog = ({height,width,color}) => {
+
+const SpAddLabourDialog = () => {
   const {handleClose,handleFieldChange,handleOpen,formData,setFormData,setIsSubmitted,isMobile,isSubmitted, tableRef} = useDialogWrapperContext()
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
 
@@ -32,8 +32,8 @@ const SpAddLabourDialog = ({height,width,color}) => {
       await fetchData(obj)
       setIsSubmitted(false)
       setFormData({})
+      tableRef?.current?.onQueryChange()
       setTimeout(()=>handleClose(),2000)
-      tableRef.current.onQueryChange()
     }
 
 
@@ -91,8 +91,6 @@ const SpAddLabourDialog = ({height,width,color}) => {
               <Grid item xs={5.5} >
                 <Grid container xs={12}>
                   <Grid  xs={12} item><CreateTextFields fields={LabourList.slice(3,5)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
-
-                  {/* <Grid xs={12}><ControlledRadioButtonsGroup onChange={handleFieldChange} title={'STATUS'} formField={formData} name={'status'}/></Grid> */}
                 </Grid>
               </Grid>
             </Grid>
