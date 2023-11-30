@@ -25,6 +25,11 @@ export const globalAppTheme = createTheme({
         main:'#e2e8f0',
         contrastText:'#000000',
 
+      },
+      black:{
+        main:'#000000',
+        contrastText:'#ffffff',
+
       }
     },
   })
