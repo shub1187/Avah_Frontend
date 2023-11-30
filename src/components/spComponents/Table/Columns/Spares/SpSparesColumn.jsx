@@ -14,7 +14,7 @@ export const SpcreateSparesColumn = [
             <ActionDialog
                 deleteSpare
                 url='http://localhost:3008/api/serviceprovider/deleteSpare'
-                payload={{'labour_id':rowData?.spare_id}} 
+                payload={{'spare_id':rowData?.spare_id}} 
                 rowData={ rowData}
                 />
         </Box>
