@@ -134,7 +134,8 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName,
     <MaterialTable
     tableRef={tableRef}
     title=""
-    columns={typeof columnss==='function'?columnss(tableRef):columnss}
+    // columns={typeof columnss==='function'?columnss(tableRef):columnss}
+    columns={columnss}
     options={{debounceInterval:700,emptyRowsWhenPaging:false,
        rowStyle: {backgroundColor: "rgb(244, 248, 249)" },
        headerStyle:{backgroundColor:'rgb(244, 248, 249)',color:"black",fontSize:"14px",fontWeight:'bold',borderBottom:'5px solid rgb(230,230,230)'},

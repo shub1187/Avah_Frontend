@@ -11,7 +11,7 @@ import { useFetchFunction } from 'hooks/useFetch'
 import { useRef, useState } from 'react'
 import CreateTextFields from 'components/common/Textfield'
 
-const ActionDialog = ({ changePassword, edit, status, view, approve, reject,createEstimate, deleteSpare, payload, params, url , noLoading, noSnackbar ,setPage, setEyeIconValue, rowData, tableRef}) => {
+const ActionDialog = ({ changePassword, edit, status, view, approve, reject,createEstimate, deleteSpare, payload, params, url , noLoading, noSnackbar ,setPage, setEyeIconValue, rowData}) => {
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
   // const timerRef = useRef(null);
 
@@ -67,7 +67,7 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
         }
         setFormData({})
         setOpen(false)
-        tableRef?.current?.onQueryChange()
+       
     }
     catch(error){
         console.log(error)
