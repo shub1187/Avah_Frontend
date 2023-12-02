@@ -29,11 +29,13 @@ const URL = {
         SPARES : {
             addspare: replaceUrl(`${BASE_URL}/api/serviceprovider/addspare`),
             getAllSpares : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllSpares`),
-            getAllFuelTypes:replaceUrl(`${BASE_URL}/api/admin/getAllFuelTypes`)
+            getAllFuelTypes:replaceUrl(`${BASE_URL}/api/admin/getAllFuelTypes`),
+            deleteSpare : replaceUrl(`${BASE_URL}/api/serviceprovider/deleteSpare`)
         },
         LABOURS : {
             addlabour: replaceUrl(`${BASE_URL}/api/serviceprovider/addlabour`),
-            getAllLabour : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllLabour`)
+            getAllLabour : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllLabour`),
+            deleteLabour : replaceUrl(`${BASE_URL}/api/serviceprovider/deleteLabour`),
         }
 
     },

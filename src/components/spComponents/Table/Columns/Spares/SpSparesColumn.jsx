@@ -1,6 +1,9 @@
 import { Box } from "@mui/material"
 import ActionDialog from "components/common/Dialog/ActionDialog"
 import MoreActionDialog from "components/common/Dialog/MoreActionDialog"
+import URL from "url/apiURL"
+
+const {deleteSpare} = URL.SERVICE_PROVIDER.SPARES
 
 export const SpcreateSparesColumn = [
     { title: "Spare Name", field: "spare_name" },
@@ -13,7 +16,7 @@ export const SpcreateSparesColumn = [
             <MoreActionDialog rowData={rowData}/>
             <ActionDialog
                 deleteSpare
-                url='http://localhost:3008/api/serviceprovider/deleteSpare'
+                url={deleteSpare}
                 payload={{'spare_id':rowData?.spare_id}} 
                 rowData={ rowData}
                 />

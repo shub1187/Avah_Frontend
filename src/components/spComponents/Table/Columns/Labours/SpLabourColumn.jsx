@@ -1,4 +1,7 @@
 import ActionDialog from "components/common/Dialog/ActionDialog"
+import URL from "url/apiURL"
+
+const {deleteLabour} = URL.SERVICE_PROVIDER.LABOURS
 
 export const spLabourColumns =  [
     { title: "Labour Description", field: "labour_name" },
@@ -8,10 +11,10 @@ export const spLabourColumns =  [
     { title: 'Action', render: (rowData) => 
             <ActionDialog
                 deleteLabour
-                url='http://localhost:3008/api/serviceprovider/deleteLabour'
+                url={deleteLabour}
                 payload={{'labour_id':rowData?.labour_id}} 
                 rowData={ rowData}
-               
+                params={'sdjhgxzajhgsadjhg'}
                 />
         
     }
