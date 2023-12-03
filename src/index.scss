@@ -72,7 +72,10 @@ $max-size: 100;
 }
 
 
-
+.small-button.MuiButtonBase-root {
+    height:2rem;
+    font-size:0.7rem;
+}
 .nav-contianer {
   --bs-nav-link-padding-x: 1rem !important;
   --bs-nav-link-padding-y: 0rem !important;

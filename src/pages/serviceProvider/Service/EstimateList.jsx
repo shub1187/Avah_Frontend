@@ -69,16 +69,16 @@ const SpEstimateList = () => {
                 <div>
                     <Box className='flex jc-space-between mb-3'>
                         <CreateAutoCompleteTextfield options={[]} whiteColor label={'Vehicle No'}/>
-                        <Button onClick={() => setPage('table')} variant='outlined' color='options'>Back <ArrowBackIcon /></Button>
+                        <Button className='small-button' onClick={() => setPage('table')} variant='outlined' color='options'>Back <ArrowBackIcon /></Button>
                     </Box>
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3'>
-                        <FullyEditableAndDeletableTable title={'SPARES'} buttonName={'Add Spares'} data={mock} column={spLabourColumns} setPayload = {setSparePayload}/>
+                        <FullyEditableAndDeletableTable title={'SPARES'} buttonName={'Add Spares'} data={sparePayload} column={spLabourColumns} setPayload = {setSparePayload}/>
                     </Box>
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3' >
-                        <FullyEditableAndDeletableTable title={'LABOURS'} buttonName={'Add Labours'} data={mock} column={spLabourColumns} setPayload = {setLabourSparePayload} />
+                        <FullyEditableAndDeletableTable title={'LABOURS'} buttonName={'Add Labours'} data={labourPayload} column={spLabourColumns} setPayload = {setLabourSparePayload} />
                     </Box>
                     <Box className='flex jc-flex-end'>
-                        <Button color='options' variant='contained' onClick={handleSubmit}>SUBMIT</Button>
+                        <Button className='small-button' color='options' variant='contained' onClick={handleSubmit}>SUBMIT</Button>
                     </Box>
                 </div>
             </>

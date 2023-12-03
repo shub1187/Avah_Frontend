@@ -14,11 +14,15 @@ const AppointmentList = () => {
   
   const [tableCalled,setTableCalled] = useState(false)
   const [toggle,setToggle] = useState('appointment')
+  const [sparePayload, setSparePayload] = useState([])
+  const [labourPayload, setLabourSparePayload] = useState([])
   const [page,setPage] = useState('table')
   const [eyeIconValue,setEyeIconValue] = useState([])
 
   console.log(eyeIconValue)
-  const handleSubmit = ()=>{}
+  const handleSubmit = ()=>{
+    console.log(sparePayload,labourPayload)
+  }
   if (page === 'estimate') {
     return (
         <>
@@ -64,17 +68,17 @@ const AppointmentList = () => {
                       </Box>
                     </Box>
                     </Box>
-                    <Box><Button onClick={() => setPage('table')} variant='outlined' color='options'>Back <ArrowBackIcon /></Button></Box>
+                    <Box><Button className='small-button' onClick={() => setPage('table')} variant='outlined' color='options'>Back <ArrowBackIcon /></Button></Box>
 
                 </Box>
                 <Box maxHeight={'400px'} overflow={'auto'} className='mb-3'>
-                    <FullyEditableAndDeletableTable title={'SPARES'} buttonName={'Add Spares'} data={[]} column={spLabourColumns} />
+                    <FullyEditableAndDeletableTable title={'SPARES'} buttonName={'Spares'} data={sparePayload} column={spLabourColumns} setPayload={setSparePayload}/>
                 </Box>
                 <Box maxHeight={'400px'} overflow={'auto'} className='mb-3' >
-                    <FullyEditableAndDeletableTable title={'LABOURS'} buttonName={'Add Labours'} data={[]} column={spLabourColumns} />
+                    <FullyEditableAndDeletableTable title={'LABOURS'} buttonName={'Labours'} data={labourPayload} column={spLabourColumns} setPayload={setLabourSparePayload}/>
                 </Box>
                 <Box className='flex jc-flex-end'>
-                    <Button color='options' variant='contained' onClick={handleSubmit}>SUBMIT</Button>
+                    <Button className='small-button' color='options' variant='contained' onClick={handleSubmit}>SUBMIT</Button>
                 </Box>
             </div>
         </>

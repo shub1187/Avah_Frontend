@@ -1,5 +1,11 @@
 .table-body{
     padding:0.5rem;
+
+    .MuiButtonBase-root {
+        height:2rem;
+        font-size:0.7rem;
+    }
+    
     .table{
         font-size: 0.8rem;
         .MuiInputBase-root input{
