@@ -5,7 +5,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import CreateAppointmentDialog from 'components/spComponents/Dialog/Service/CreateAppointmentDialog';
+import CreateAppointmentDialog from 'components/spComponents/Dialog/Service/SpCreateAppointmentDialog';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { useMobileResponsive } from 'hooks/useMobileResponsive';
 const bull = (

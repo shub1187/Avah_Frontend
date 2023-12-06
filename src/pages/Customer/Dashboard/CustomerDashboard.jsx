@@ -16,7 +16,7 @@ import SpQuickPayment from 'components/spComponents/Card/SpHomeCards/SpQuickPaym
 import SpRating from 'components/spComponents/Card/SpHomeCards/SpRating';
 import CustomerApexCharts from './charts';
 import {useFetch,useFetchFunction} from 'hooks/useFetch';
-import CreateAppointmentDialog from 'components/spComponents/Dialog/Service/CreateAppointmentDialog';
+import CreateAppointmentDialog from 'components/spComponents/Dialog/Service/SpCreateAppointmentDialog';
 import axios from 'axios';
 import { useMobileResponsive } from 'hooks/useMobileResponsive';
 const CustomerDashboard = (props) => {

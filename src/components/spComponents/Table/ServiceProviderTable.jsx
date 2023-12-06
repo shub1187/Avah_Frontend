@@ -8,7 +8,7 @@ import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDiss
 import ActionDialog from "../../common/Dialog/ActionDialog";
 import DialogWrapper from "components/common/Dialog/DialogWrapper";
 import { globalAppTheme } from "components/common/Themes/GlobalAppTheme";
-const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName, clickButton})=>{
+const ServiceProvidertable = ({DialogButton,columnss,URL,key, dialogTitle, dialogButtonName, clickButton , buttonName})=>{
   const tableRef = createRef();
   const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
   const sp_id = localStorage.getItem('sp_id'); // Retrieve the token from local storage
@@ -162,7 +162,19 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key, title, buttonName,
             <MTableToolbar {...props} />
           </div>
           <div>
-            {DialogButton && <DialogWrapper tableRef={tableRef} title={title} buttonName={buttonName}><DialogButton height={isMobileResolution?"30px":'50px'} width={isMobileResolution?"100px":'250px'} color={'options'} /></DialogWrapper>}
+            {DialogButton && 
+              (<DialogWrapper
+                  tableRef={tableRef} 
+                  title={dialogTitle} 
+                  buttonName={dialogButtonName}
+                >
+                  <DialogButton
+                    height={isMobileResolution?"30px":'50px'} 
+                    width={isMobileResolution?"100px":'250px'} 
+                    color={'options'} 
+                  />
+                </DialogWrapper>)
+              }
             {clickButton && <Button variant="contained" color="options" onClick={clickButton}>{buttonName}</Button>}
           </div>
         </Box>

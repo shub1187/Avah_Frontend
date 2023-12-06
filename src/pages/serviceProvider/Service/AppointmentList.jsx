@@ -1,6 +1,6 @@
 import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderTable'
 import React, { useEffect, useState } from 'react'
-import CreateAppointmentDialog from 'components/spComponents/Dialog/Service/CreateAppointmentDialog'
+import CreateAppointmentDialog from 'components/spComponents/Dialog/Service/SpCreateAppointmentDialog'
 import { spCreateAppointmentColumn } from 'components/spComponents/Table/Columns/Service/SpCreateAppointmentColumn'
 import { Box, Button, Typography } from '@mui/material'
 import CreateCustomerDialog from 'components/spComponents/Dialog/Users/createCustomerDialog'
@@ -93,7 +93,14 @@ const AppointmentList = () => {
       
       </Box>
       {toggle==='appointment'?
-          <ServiceProvidertable key={'appointment'} DialogButton={CreateAppointmentDialog} columnss={spCreateAppointmentColumn(()=>setPage('estimate'),setEyeIconValue)} URL={`http://localhost:3008/api/serviceprovider/getAllPendingAppointment`}/>
+          <ServiceProvidertable
+            key={'appointment'}
+            DialogButton={CreateAppointmentDialog} 
+            columnss={spCreateAppointmentColumn(()=>setPage('estimate'),setEyeIconValue)} 
+            URL={`http://localhost:3008/api/serviceprovider/getAllPendingAppointment`}
+            dialogButtonName={'CREATE APPOINTMENT'}
+            dialogTitle={'CREATE APPOINTMENT'}
+          />
        :
        <ServiceProvidertable key={'rejected'} columnss={spCreateAppointmentColumn()} URL={`http://localhost:3008/api/serviceprovider/getAllRejectedAndCancelledAppointment`}/>
         }

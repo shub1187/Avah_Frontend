@@ -59,6 +59,7 @@ useEffect(() => {
               type={field.type}
               select={field.select}
               disabled={field.disabled}
+              name={field.name}
               size={'small'}
               error={isError}
               defaultValue={field.defaultValue }

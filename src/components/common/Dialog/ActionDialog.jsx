@@ -93,6 +93,7 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
         {approve && <Button variant='outlined' color='success'  onClick={StatusUpdate}>
                       <CheckCircleIcon style={{color:'rgb(5,131,30)',cursor:'pointer',marginRight:'5px'}}/> Approve
                      </Button>}
+                     
         {reject && 
         <>
           <Button variant='outlined' color='error'  onClick={handleClickOpen} >

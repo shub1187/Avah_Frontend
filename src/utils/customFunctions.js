@@ -28,7 +28,10 @@ const addBroadcastListenerForLoggingOutOfAllTabs = ()=>{
  * - else it will be false
  */
 const requiredTextfield = (fields,formData) => {
-    return fields.filter(field => field.required).some(field => !formData[field.name]) ;
+    // return fields.filter(field => field.required).some(field => !formData[field.name]) ;
+    return fields
+    .filter(field => field.required)
+    .some(field => field.name in formData && !formData[field.name]);
 }
 
 const getBrandData = (data)=>{
