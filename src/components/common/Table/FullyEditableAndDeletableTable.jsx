@@ -78,7 +78,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
             let newData = [...data]
             newData[rowIndex] = {
                 ...newData[rowIndex],
-                ['autocompleteData']:autoCompleteData
+                ['autocompleteData']:autoCompleteData.data
             }
         
         }
