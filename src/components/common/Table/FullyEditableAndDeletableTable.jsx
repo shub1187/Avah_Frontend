@@ -74,6 +74,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
             method:"GET",
             url:`${getAllSpareListForAutoFill}?q=${e.target.value}&sp_id=${localStorage.getItem('sp_id')}`,
         }
+        if(e.target.value!=0 || e.target.value){
         let {data:autoCompleteData} =await fetchData(obj)
         if(autoCompleteData){
             console.log("ln 77",autoCompleteData)
@@ -83,7 +84,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                 ['autocompleteData']:autoCompleteData.data
             }
             setPayload &&setPayload(newData)
-        }
+        }}
     },1000)
 
     //DELETE ROW WHEN CLIKED ON DELETE ICON
