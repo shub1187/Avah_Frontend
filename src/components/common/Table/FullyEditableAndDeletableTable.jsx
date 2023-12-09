@@ -70,7 +70,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
     const  debouncedApiCall= debounce(async(e,col,rowIndex,everyRowData)=>{
         const obj = {
             method:"GET",
-            url:`${getAllSpareListForAutoFill}?q=${e.target.value}`,
+            url:`${getAllSpareListForAutoFill}?q=${e.target.value}&sp_id=${localStorage.getItem('sp_id')}`,
         }
         let {data:autoCompleteData} =await fetchData(obj)
         if(autoCompleteData){
