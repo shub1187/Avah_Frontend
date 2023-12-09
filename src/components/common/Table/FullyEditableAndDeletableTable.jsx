@@ -114,9 +114,9 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
             url:getAllSpareListForAutoFill
         }
         // let autoCompleteData = fetchData(obj)
-        let autoCompleteData = [{label:"sdsdsd"},{label:"rr"},{label:"e"},{label:"w"},{label:"a"}]
+        // let autoCompleteData = [{label:"sdsdsd"},{label:"rr"},{label:"e"},{label:"w"},{label:"a"}]
         // let {data:autoCompleteData} = await fetchData(obj)
-        newRow['autocompleteData'] = autoCompleteData
+        newRow['autocompleteData'] = []
         // setTableValues([...tableValues,newRow])
         setPayload && setPayload([...data,newRow])
     }
