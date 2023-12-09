@@ -34,7 +34,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
 
     //WHENEVER ANY AUTOCOMPLETE ROW'S IS ADDED THEN API CALLED TO FILL AUTOMCPTE LIST
     //THEN ON CLICK OF ANY VALUE MAKE A API CALL AND THAT WILL FILL THAT ROW DATA
-    const autoCompleteInputChange = (e,col,rowIndex)=>{
+    const autoCompleteInputChange = async(e,col,rowIndex)=>{
         const newValue = [...data]
         console.log(e.target.value)
         if(e.target.value){
@@ -42,7 +42,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                 method:"GET",
                 url:`${getSpecificSpareDetailsForEstimate}?sp_id=${localStorage.getItem('sp_id')}&spare_name=${e.target.value}`
             }
-            let {data:apiData} =  fetchData(obj)
+            let {data:apiData} =  await fetchData(obj)
             // let apiData = {
             //     labour_name:'sdsds',
             //     hsn_sac:'sdsd',
@@ -52,17 +52,20 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
             // data.results = {
 
             // }
-            const newRow = {}
-            column.forEach((val)=>{
-                newRow[val.field]=apiData[val.field]
-            })
+            if(apiData){
+                const newRow = {}
+                column.forEach((val)=>{
+                    newRow[val.field]=apiData[val.field]
+                })
 
-            newValue[rowIndex] = {
-                ...newValue[rowIndex],
-                ...newRow
+                newValue[rowIndex] = {
+                    ...newValue[rowIndex],
+                    ...newRow
+                }
+                // setTableValues(newValue)
+                setPayload &&setPayload(newValue)
             }
-            // setTableValues(newValue)
-            setPayload &&setPayload(newValue)
+
         }
 
     }
