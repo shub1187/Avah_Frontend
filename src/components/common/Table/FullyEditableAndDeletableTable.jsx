@@ -7,7 +7,7 @@ import { useFetchFunction } from 'hooks/useFetch';
 import URL from 'url/apiURL';
 import { debounce } from '@mui/material/utils'
 
-const {getAllSpareListForAutoFill} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
+const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
 const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayload}) => {
 
@@ -40,7 +40,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         if(e.target.value){
             const obj = {
                 method:"GET",
-                url:getAllSpareListForAutoFill
+                url:`${getSpecificSpareDetailsForEstimate}?sp_id=${localStorage.getItem('sp_id')}&spare_name=${e.target.value}`
             }
             let {data:apiData} =  fetchData(obj)
             // let apiData = {
