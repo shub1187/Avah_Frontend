@@ -7,7 +7,19 @@ const {getAllSpares} = URL.SERVICE_PROVIDER.SPARES
 
 const SpSparesPage = () => {
   return (
-    <div><ServiceProvidertable title={'ADD SPARES'} buttonName={'ADD SPARES'} key={'spareKey'} DialogButton={SpCreateSpareDialog} columnss={SpcreateSparesColumn} URL={getAllSpares}/></div>
+    <div>
+      <ServiceProvidertable 
+          title={'ADD SPARES'} 
+          buttonName={'ADD SPARES'} 
+          key={'spareKey'} 
+          DialogButton={SpCreateSpareDialog} 
+          columnss={SpcreateSparesColumn} 
+          URL={getAllSpares}
+          dialogButtonName={'ADD SPARE'}
+          dialogTitle={'ADD SPARE'}
+      />
+
+      </div>
   )
 }
 

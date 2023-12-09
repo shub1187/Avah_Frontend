@@ -35,7 +35,7 @@ const ServiceProviderHome = (props) => {
         <Grid  container spacing={2}>
           <Grid item xs>
           {/* <ServiceProviderDashboardIconCards img={createAppointmentIcon} DialogButton={CreateAppointmentDialog}/> */}
-          <CreateAppointmentDialog color={'whiteBackground'} maxWidth={isMobile?'100px':'198px'} minHeight={isMobile?'100px':"137px"} img={createAppointmentIcon} borderRadius={'16px'} my={1.2}/>
+          {/* <CreateAppointmentDialog color={'whiteBackground'} maxWidth={isMobile?'100px':'198px'} minHeight={isMobile?'100px':"137px"} img={createAppointmentIcon} borderRadius={'16px'} my={1.2}/> */}
           </Grid>
           <Grid item xs>
           {/* <CreateAppointmentDialog color={'whiteBackground'} maxWidth={isMobile?'100px':'198px'} minHeight={isMobile?'100px':"137px"} img={createAppointmentIcon} borderRadius={'16px'} my={1.2}/> */}

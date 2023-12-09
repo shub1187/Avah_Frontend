@@ -6,7 +6,7 @@ const {deleteLabour} = URL.SERVICE_PROVIDER.LABOURS
 export const spLabourColumns =  [
     { title: "Labour Description", field: "labour_name" },
     { title: "HSN/SAC", field: "hsn_sac" },
-    { title: "Price", field: "price" },
+    { title: "Price", field: "selling_price" },
     { title: "Tax %", field: "tax" },
     { title: 'Action', render: (rowData) => 
             <ActionDialog
@@ -14,7 +14,6 @@ export const spLabourColumns =  [
                 url={deleteLabour}
                 payload={{'labour_id':rowData?.labour_id}} 
                 rowData={ rowData}
-                params={'sdjhgxzajhgsadjhg'}
                 />
         
     }

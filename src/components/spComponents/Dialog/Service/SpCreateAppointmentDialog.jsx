@@ -8,13 +8,9 @@ import { DatePicker } from '@mui/x-date-pickers';
 import SkeletonLoading from 'components/common/Skeleton';
 import { useMobileResponsive } from 'hooks/useMobileResponsive';
 import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
-import PhoneInput from 'react-phone-input-2';
 import { requiredTextfield } from 'utils/customFunctions';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import './SpCreateAppointmentDialog.scss'
-import { auth } from 'configs/firebase.config';
-import {useAuthState} from 'react-firebase-hooks/auth'
-import {RecaptchaVerifier, signInWithPhoneNumber} from 'firebase/auth'
 import emailjs from '@emailjs/browser'
 
 const generateRandom5Digit = ()=> {

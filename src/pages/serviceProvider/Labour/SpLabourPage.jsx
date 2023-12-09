@@ -16,9 +16,13 @@ const SpLabourPage = () => {
             columnss={spLabourColumns}
             key={'Add LAbour'}
             URL={getAllLabour}
+            dialogButtonName={'ADD LABOUR'}
+            dialogTitle={'ADD LABOUR'}
         />
     </div>
   )
 }
+
+
 
 export default SpLabourPage

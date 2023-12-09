@@ -70,7 +70,7 @@ const SpCreateSpareDialog = () => {
         {
             label: 'Part Number',
             name: "part_number",
-            type: 'number',
+            type: 'text',
             fullWidth:true
 
         },
@@ -93,18 +93,18 @@ const SpCreateSpareDialog = () => {
         {
             label: 'Units',
             name: "units",
-            type: 'text',
+            type: 'number',
             fullWidth:true,
         },
         {
             label: 'Purchase Price',
             name: "purchase_price",
-            type: 'text'
+            type: 'number',
         },
         {
             label: 'Selling Price',
             name: "selling_price",
-            type: 'text',
+            type: 'number',
             required:true,
             errormessage:'Please enter the Selling Price'
         },
