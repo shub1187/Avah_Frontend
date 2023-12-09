@@ -39,8 +39,9 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         console.log(e.target.value)
         if(e.target.value){
             const obj = {
-                method:"GET",
-                url:`${getAllSpareListForAutoFill}?q=${e.target.value}`
+                method:"POST",
+                payload:e.target.value,
+                url:getAllSpareListForAutoFill
             }
             let {data:apiData} =  fetchData(obj)
             // let apiData = {
