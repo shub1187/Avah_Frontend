@@ -39,8 +39,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         console.log(e.target.value)
         if(e.target.value){
             const obj = {
-                method:"POST",
-                payload:e.target.value,
+                method:"GET",
                 url:getAllSpareListForAutoFill
             }
             let {data:apiData} =  fetchData(obj)
@@ -71,7 +70,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
     const  debouncedApiCall= debounce(async(e,col,rowIndex,everyRowData)=>{
         const obj = {
             method:"GET",
-            url:getAllSpareListForAutoFill
+            url:`${getAllSpareListForAutoFill}?q=${e.target.value}`,
         }
         let {data:autoCompleteData} =await fetchData(obj)
         if(autoCompleteData){
