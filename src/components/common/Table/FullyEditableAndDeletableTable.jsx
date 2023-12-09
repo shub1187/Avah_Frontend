@@ -34,11 +34,15 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
 
     //WHENEVER ANY AUTOCOMPLETE ROW'S IS ADDED THEN API CALLED TO FILL AUTOMCPTE LIST
     //THEN ON CLICK OF ANY VALUE MAKE A API CALL AND THAT WILL FILL THAT ROW DATA
-    const autoCompleteInputChange = async(e,col,rowIndex)=>{
+    const autoCompleteInputChange = (e,col,rowIndex)=>{
         const newValue = [...data]
-
+        console.log(e.target.value)
         if(e.target.value){
-        let {data:apiData} = await fetchData(getAllSpareListForAutoFill)
+            const obj = {
+                method:"GET",
+                url:`${getAllSpareListForAutoFill}?q=${e.target.value}`
+            }
+            let {data:apiData} =  fetchData(obj)
             // let apiData = {
             //     labour_name:'sdsds',
             //     hsn_sac:'sdsd',
@@ -62,6 +66,23 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         }
 
     }
+
+    const  debouncedApiCall= debounce(async(e,col,rowIndex,everyRowData)=>{
+        const obj = {
+            method:"GET",
+            url:getAllSpareListForAutoFill
+        }
+        let {data:autoCompleteData} =await fetchData(obj)
+        if(autoCompleteData){
+            
+            let newData = [...data]
+            newData[rowIndex] = {
+                ...newData[rowIndex],
+                ['autocompleteData']:autoCompleteData
+            }
+        
+        }
+    },1000)
 
     //DELETE ROW WHEN CLIKED ON DELETE ICON
     const deleteRow = (rowIndex) => {
@@ -90,10 +111,11 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         console.log(newRow)
         const obj = {
             method:"GET",
-            url:"l0oda"
+            url:getAllSpareListForAutoFill
         }
         // let autoCompleteData = fetchData(obj)
         let autoCompleteData = [{label:"sdsdsd"},{label:"rr"},{label:"e"},{label:"w"},{label:"a"}]
+        // let {data:autoCompleteData} = await fetchData(obj)
         newRow['autocompleteData'] = autoCompleteData
         // setTableValues([...tableValues,newRow])
         setPayload && setPayload([...data,newRow])
@@ -128,6 +150,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                                         options={everyRowData.autocompleteData}
                                                         renderInput={(params) => <TextField {...params}  size='small'/>}
                                                         onChange={(e)=>autoCompleteInputChange(e, col.field, rowIndex)}
+                                                        onInputChange={(e)=>debouncedApiCall(e,col.field,rowIndex,everyRowData.autocomplete)}
                                                     />
                                                 </td>)
                                     }
