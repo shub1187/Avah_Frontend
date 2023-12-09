@@ -36,7 +36,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
     //THEN ON CLICK OF ANY VALUE MAKE A API CALL AND THAT WILL FILL THAT ROW DATA
     const autoCompleteInputChange = async(e,col,rowIndex)=>{
         const newValue = [...data]
-        console.log(e.target.value)
+        console.log(e)
         if(e.target.value){
             const obj = {
                 method:"GET",
