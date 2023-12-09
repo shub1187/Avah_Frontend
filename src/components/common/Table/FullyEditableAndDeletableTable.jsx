@@ -74,13 +74,13 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         }
         let {data:autoCompleteData} =await fetchData(obj)
         if(autoCompleteData){
-            
+            console.log("ln 77",autoCompleteData)
             let newData = [...data]
             newData[rowIndex] = {
                 ...newData[rowIndex],
                 ['autocompleteData']:autoCompleteData.data
             }
-        
+            setPayload &&setPayload(newData)
         }
     },1000)
 
