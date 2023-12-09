@@ -8,6 +8,10 @@ import CreateAutoCompleteTextfield from 'components/common/Textfield/AutoComplet
 import {  useFetch, useFetchFunction } from 'hooks/useFetch';
 import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderTable';
 import { SpEstimateListColumn } from 'components/spComponents/Table/Columns/Service/SpEstimateColumn';
+import URL from 'url/apiURL';
+
+const {getAllSpareListForAutoFill} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
+
 const SpEstimateList = () => {
     const [page, setPage] = useState('table')
     const [sparePayload, setSparePayload] = useState([])

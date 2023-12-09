@@ -4,6 +4,10 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import './FullyEditableAndDeletableTable.scss'
 import CreateAutoCompleteTextfield from '../Textfield/AutoCompleteTextfield';
 import { useFetchFunction } from 'hooks/useFetch';
+import URL from 'url/apiURL';
+import { debounce } from '@mui/material/utils'
+
+const {getAllSpareListForAutoFill} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
 const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayload}) => {
 
@@ -30,29 +34,33 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
 
     //WHENEVER ANY AUTOCOMPLETE ROW'S IS ADDED THEN API CALLED TO FILL AUTOMCPTE LIST
     //THEN ON CLICK OF ANY VALUE MAKE A API CALL AND THAT WILL FILL THAT ROW DATA
-    const autoCompleteInputChange = (e,col,rowIndex)=>{
+    const autoCompleteInputChange = async(e,col,rowIndex)=>{
         const newValue = [...data]
-        // let {data} = await fetchData('getDEtails')
-        let apiData = {
-            labour_name:'sdsds',
-            hsn_sac:'sdsd',
-            price:'sdsd',
-            tax:'sdsds'
-        }
-        // data.results = {
 
-        // }
-        const newRow = {}
-        column.forEach((val)=>{
-            newRow[val.field]=apiData[val.field]
-        })
+        if(e.target.value){
+        let {data:apiData} = await fetchData(getAllSpareListForAutoFill)
+            // let apiData = {
+            //     labour_name:'sdsds',
+            //     hsn_sac:'sdsd',
+            //     price:'sdsd',
+            //     tax:'sdsds'
+            // }
+            // data.results = {
 
-        newValue[rowIndex] = {
-            ...newValue[rowIndex],
-            ...newRow
+            // }
+            const newRow = {}
+            column.forEach((val)=>{
+                newRow[val.field]=apiData[val.field]
+            })
+
+            newValue[rowIndex] = {
+                ...newValue[rowIndex],
+                ...newRow
+            }
+            // setTableValues(newValue)
+            setPayload &&setPayload(newValue)
         }
-        // setTableValues(newValue)
-        setPayload &&setPayload(newValue)
+
     }
 
     //DELETE ROW WHEN CLIKED ON DELETE ICON
