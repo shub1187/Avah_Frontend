@@ -34,13 +34,12 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
 
     //WHENEVER ANY AUTOCOMPLETE ROW'S IS ADDED THEN API CALLED TO FILL AUTOMCPTE LIST
     //THEN ON CLICK OF ANY VALUE MAKE A API CALL AND THAT WILL FILL THAT ROW DATA
-    const autoCompleteInputChange = async(e,col,rowIndex)=>{
+    const autoCompleteInputChange = async(e,col,rowIndex,value)=>{
         const newValue = [...data]
-        console.log(e)
-        if(e.target.value){
+        if(value){
             const obj = {
                 method:"GET",
-                url:`${getSpecificSpareDetailsForEstimate}?sp_id=${localStorage.getItem('sp_id')}&spare_name=${e.target.value}`
+                url:`${getSpecificSpareDetailsForEstimate}?sp_id=${localStorage.getItem('sp_id')}&spare_name=${value}`
             }
             let {data:apiData} =  await fetchData(obj)
             // let apiData = {
@@ -152,7 +151,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                                     <Autocomplete
                                                         options={everyRowData.autocompleteData}
                                                         renderInput={(params) => <TextField {...params}  size='small'/>}
-                                                        onChange={(e)=>autoCompleteInputChange(e, col.field, rowIndex)}
+                                                        onChange={(e,value)=>autoCompleteInputChange(e, col.field, rowIndex,value)}
                                                         onInputChange={(e)=>debouncedApiCall(e,col.field,rowIndex,everyRowData.autocomplete)}
                                                     />
                                                 </td>)
