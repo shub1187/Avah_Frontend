@@ -40,7 +40,10 @@ const URL = {
         SERVICE:{
             ESTIMATE:{
                 getAllSpareListForAutoFill: replaceUrl(`${BASE_URL}/api/serviceprovider/getAllSpareListForAutoFill`),
-                getSpecificSpareDetailsForEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/getSpecificSpareDetailsForEstimate`)
+                getSpecificSpareDetailsForEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/getSpecificSpareDetailsForEstimate`),
+                getAllLabourListForAutoFill : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllLabourListForAutoFill`),
+                getSpecificLabourDetailsForEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/getSpecificLabourDetailsForEstimate`)
+
             }
         }
 

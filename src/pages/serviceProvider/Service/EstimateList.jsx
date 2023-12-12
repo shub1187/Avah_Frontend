@@ -12,7 +12,7 @@ import URL from 'url/apiURL';
 import { SpCreateSpareEstimateColumn, createEstimateColumn, createSpareEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreate EstimateColumn';
 import { SpCreateLabourEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreateLabourEstimateColumn';
 
-const {getAllSpareListForAutoFill} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
+const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill, getSpecificLabourDetailsForEstimate} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
 const SpEstimateList = () => {
     const [page, setPage] = useState('table')
@@ -78,10 +78,31 @@ const SpEstimateList = () => {
                         <Button className='small-button' onClick={() => setPage('table')} variant='outlined' color='options'>Back <ArrowBackIcon /></Button>
                     </Box>
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3'>
-                        <FullyEditableAndDeletableTable title={'SPARES'} buttonName={'Add Spares'} data={sparePayload} column={SpCreateSpareEstimateColumn} setPayload = {setSparePayload} autoCompleteFieldName={'spare_name'}/>
+                        <FullyEditableAndDeletableTable
+                            title={'SPARES'} 
+                            buttonName={'Add Spares'} 
+                            data={sparePayload} 
+                            column={SpCreateSpareEstimateColumn} 
+                            setPayload = {setSparePayload} 
+                            autoCompleteFieldName={'spare_name'}
+                            getApiUrlForAutoComplete={getAllSpareListForAutoFill}
+                            getApiUrlForAutoCompleteParams={'spare_name'}
+                            getDebouncedApiUrlForInputChange={getSpecificSpareDetailsForEstimate}
+                        />
                     </Box>
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3' >
-                        <FullyEditableAndDeletableTable title={'LABOURS'} buttonName={'Add Labours'} data={labourPayload} column={SpCreateLabourEstimateColumn} setPayload = {setLabourSparePayload} autoCompleteFieldName={'labour_name'}/>
+                        <FullyEditableAndDeletableTable 
+                            title={'LABOURS'} 
+                            buttonName={'Add Labours'} 
+                            data={labourPayload} 
+                            olumn={SpCreateLabourEstimateColumn} 
+                            setPayload = {setLabourSparePayload} 
+                            autoCompleteFieldName={'labour_name'}
+                            getApiUrlForAutoComplete={getAllLabourListForAutoFill}
+                            getApiUrlForAutoCompleteParams={'labour_name'}
+                            getDebouncedApiUrlForInputChange={getSpecificLabourDetailsForEstimate}
+
+                        />
                     </Box>
                     <Box className='flex jc-flex-end'>
                         <Button className='small-button' color='options' variant='contained' onClick={handleSubmit}>SUBMIT</Button>

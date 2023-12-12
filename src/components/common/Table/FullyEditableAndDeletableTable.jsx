@@ -7,9 +7,9 @@ import { useFetchFunction } from 'hooks/useFetch';
 import URL from 'url/apiURL';
 import { debounce } from '@mui/material/utils'
 
-const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
+const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
-const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayload, autoCompleteFieldName}) => {
+const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayload, autoCompleteFieldName, getApiUrlForAutoComplete, getApiUrlForAutoCompleteParams, getDebouncedApiUrlForInputChange}) => {
 
     const {fetchData} = useFetchFunction()
 
@@ -35,7 +35,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         if(e.target.innerHTML){
             const obj = {
                 method:"GET",
-                url:`${getSpecificSpareDetailsForEstimate}?sp_id=${localStorage.getItem('sp_id')}&spare_name=${e.target.innerHTML}`
+                url:`${getApiUrlForAutoComplete}?sp_id=${localStorage.getItem('sp_id')}&${getApiUrlForAutoCompleteParams}=${e.target.innerHTML}`
             }
             let {data:apiData} =  await fetchData(obj)
 
@@ -57,7 +57,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
     const  debouncedApiCall= debounce(async(e,col,rowIndex,everyRowData)=>{
         const obj = {
             method:"GET",
-            url:`${getAllSpareListForAutoFill}?q=${e.target.value}&sp_id=${localStorage.getItem('sp_id')}`,
+            url:`${getDebouncedApiUrlForInputChange}?q=${e.target.value}&sp_id=${localStorage.getItem('sp_id')}`,
         }
         if(e.target.value!=0 || e.target.value){
         let {data:autoCompleteData} =await fetchData(obj)
