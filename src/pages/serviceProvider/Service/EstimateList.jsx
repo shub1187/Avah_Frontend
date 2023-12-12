@@ -95,7 +95,7 @@ const SpEstimateList = () => {
                             title={'LABOURS'} 
                             buttonName={'Add Labours'} 
                             data={labourPayload} 
-                            olumn={SpCreateLabourEstimateColumn} 
+                            column={SpCreateLabourEstimateColumn} 
                             setPayload = {setLabourSparePayload} 
                             autoCompleteFieldName={'labour_name'}
                             getApiUrlForAutoComplete={getAllLabourListForAutoFill}
