@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Box, Button, Select, TextField } from '@mui/material';
+import { Autocomplete, Box, Button, Select, TextField } from '@mui/material';
 import { spLabourColumns } from 'components/spComponents/Table/Columns/Labours/SpLabourColumn';
 import FullyEditableAndDeletableTable from 'components/common/Table/FullyEditableAndDeletableTable';
 import CreateAutoCompleteTextfield from 'components/common/Textfield/AutoCompleteTextfield';
@@ -12,29 +12,38 @@ import URL from 'url/apiURL';
 import { SpCreateSpareEstimateColumn, createEstimateColumn, createSpareEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreate EstimateColumn';
 import { SpCreateLabourEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreateLabourEstimateColumn';
 
-const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill, getSpecificLabourDetailsForEstimate} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
+const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill, getSpecificLabourDetailsForEstimate, addEstimate,getEstimatePendingVehcileList ,getSpecificVechicleDetailsToCreateEstimate} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
 const SpEstimateList = () => {
     const [page, setPage] = useState('table')
     const [sparePayload, setSparePayload] = useState([])
     const [labourPayload, setLabourSparePayload] = useState([])
     console.log(sparePayload,labourPayload)
-
+    const {} = useFetch()
     const {fetchData} = useFetchFunction()
-    const {data:VehicleList} = useFetch('')
+    const {data:PendingVehicleList} = useFetch(getEstimatePendingVehcileList)
 
     const handleSubmit = async()=>{
         const obj = {
             payload:{
+                appointment_id:PendingVehicleList?.data?.appointment_id,
+                sp_id:localStorage.getItem('sp_id'),
                 sparePayload,
                 labourPayload
             },
             method:"POST",
-            url:''
+            url:addEstimate
         }
         await fetchData(obj)
     }
 
+    const getPendingVehicleDetails = (SelectValue)=>{
+        const obj = {
+            method:"POST",
+            url:`${getSpecificVechicleDetailsToCreateEstimate}?sp_id=${localStorage.getItem('sp_id')}&vehicle_number=${SelectValue}`
+        }
+        fetchData(obj)
+    }
     const mock = useMemo(
         ()=>
         [
@@ -74,7 +83,11 @@ const SpEstimateList = () => {
             <>
                 <div>
                     <Box className='flex jc-space-between mb-3'>
-                        <CreateAutoCompleteTextfield options={[]} whiteColor label={'Vehicle No'}/>
+                        <Autocomplete
+                          options={PendingVehicleList?.data}
+                          renderInput={(params) => <TextField {...params} label={'Vehicle No'}  size='small'/>}
+                          onChange={getPendingVehicleDetails}
+                           />
                         <Button className='small-button' onClick={() => setPage('table')} variant='outlined' color='options'>Back <ArrowBackIcon /></Button>
                     </Box>
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3'>
