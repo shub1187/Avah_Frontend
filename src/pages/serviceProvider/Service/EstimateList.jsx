@@ -31,7 +31,7 @@ const SpEstimateList = () => {
                 sparePayload,
                 labourPayload
             },
-            method:"GET",
+            method:"POST",
             url:addEstimate
         }
         await fetchData(obj)
@@ -39,7 +39,7 @@ const SpEstimateList = () => {
 
     const getPendingVehicleDetails = async(SelectValue)=>{
         const obj = {
-            method:"POST",
+            method:"GET",
             url:`${getSpecificVechicleDetailsToCreateEstimate}?sp_id=${localStorage.getItem('sp_id')}&vehicle_number=${SelectValue}`
         }
         const newData = await fetchData(obj)
@@ -87,7 +87,7 @@ const SpEstimateList = () => {
                         <Autocomplete
                           options={PendingVehicleList?.data || []}
                           renderInput={(params) => <TextField {...params} label={'Vehicle No'}  size='small'/>}
-                          onChange={getPendingVehicleDetails}
+                          onChange={(e,value)=>getPendingVehicleDetails(value)}
                            />
                         <Button className='small-button' onClick={() => setPage('table')} variant='outlined' color='options'>Back <ArrowBackIcon /></Button>
                     </Box>
