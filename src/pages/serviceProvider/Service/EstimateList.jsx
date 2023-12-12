@@ -31,7 +31,7 @@ const SpEstimateList = () => {
                 sparePayload,
                 labourPayload
             },
-            method:"POST",
+            method:"GET",
             url:addEstimate
         }
         await fetchData(obj)
