@@ -23,6 +23,7 @@ const SpEstimateList = () => {
     const {fetchData} = useFetchFunction()
     const {data:PendingVehicleList} = useFetch(`${getEstimatePendingVehcileList}?sp_id=${localStorage.getItem('sp_id')}`)
     const [pendingVehicleApiData,setPendingVehicleApiData] = useState({})
+    console.log("ln 26",pendingVehicleApiData)
     const handleSubmit = async()=>{
         const obj = {
             payload:{
@@ -40,11 +41,13 @@ const SpEstimateList = () => {
     }
 
     const getPendingVehicleDetails = async(SelectValue)=>{
+        // console.log("ln 41", SelectValue?.value)
         const obj = {
             method:"GET",
-            url:`${getSpecificVechicleDetailsToCreateEstimate}?sp_id=${localStorage.getItem('sp_id')}&vehicle_number=${SelectValue.value}`
+            url:`${getSpecificVechicleDetailsToCreateEstimate}?sp_id=${localStorage.getItem('sp_id')}&vehicle_number=${SelectValue?.value}`
         }
         const newData = await fetchData(obj)
+        console.log("ln 48",newData)
         setPendingVehicleApiData(newData?.data?.data)
     }
     const mock = useMemo(
