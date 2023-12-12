@@ -85,9 +85,9 @@ const SpEstimateList = () => {
                             column={SpCreateSpareEstimateColumn} 
                             setPayload = {setSparePayload} 
                             autoCompleteFieldName={'spare_name'}
-                            getApiUrlForAutoComplete={getAllSpareListForAutoFill}
-                            getApiUrlForAutoCompleteParams={'spare_name'}
-                            getDebouncedApiUrlForInputChange={getSpecificSpareDetailsForEstimate}
+                            getAllItemListForAutoFillDebounceOnInputChange={getAllSpareListForAutoFill}
+                            getApiUrlOnAutocompleteItemSelect={getSpecificSpareDetailsForEstimate}
+                            getApiUrlOnAutocompleteItemSelectParams={'spare_name'}
                         />
                     </Box>
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3' >
@@ -98,9 +98,9 @@ const SpEstimateList = () => {
                             column={SpCreateLabourEstimateColumn} 
                             setPayload = {setLabourSparePayload} 
                             autoCompleteFieldName={'labour_name'}
-                            getApiUrlForAutoComplete={getAllLabourListForAutoFill}
-                            getApiUrlForAutoCompleteParams={'labour_name'}
-                            getDebouncedApiUrlForInputChange={getSpecificLabourDetailsForEstimate}
+                            getAllItemListForAutoFillDebounceOnInputChange={getAllLabourListForAutoFill}
+                            getApiUrlOnAutocompleteItemSelect={getSpecificLabourDetailsForEstimate}
+                            getApiUrlOnAutocompleteItemSelectParams={'labour_name'}
 
                         />
                     </Box>
