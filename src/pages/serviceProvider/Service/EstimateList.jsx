@@ -21,12 +21,12 @@ const SpEstimateList = () => {
     console.log(sparePayload,labourPayload)
     const {} = useFetch()
     const {fetchData} = useFetchFunction()
-    const {data:PendingVehicleList} = useFetch(getEstimatePendingVehcileList)
-
+    const {data:PendingVehicleList} = useFetch(`${getEstimatePendingVehcileList}?sp_id=${localStorage.getItem('sp_id')}`)
+    const [pendingVehicleApiData,setPendingVehicleApiData] = useState({})
     const handleSubmit = async()=>{
         const obj = {
             payload:{
-                appointment_id:PendingVehicleList?.data?.appointment_id,
+                appointment_id:pendingVehicleApiData?.appointment_id,
                 sp_id:localStorage.getItem('sp_id'),
                 sparePayload,
                 labourPayload
@@ -37,12 +37,13 @@ const SpEstimateList = () => {
         await fetchData(obj)
     }
 
-    const getPendingVehicleDetails = (SelectValue)=>{
+    const getPendingVehicleDetails = async(SelectValue)=>{
         const obj = {
             method:"POST",
             url:`${getSpecificVechicleDetailsToCreateEstimate}?sp_id=${localStorage.getItem('sp_id')}&vehicle_number=${SelectValue}`
         }
-        fetchData(obj)
+        const newData = await fetchData(obj)
+        setPendingVehicleApiData(newData?.data)
     }
     const mock = useMemo(
         ()=>
@@ -84,7 +85,7 @@ const SpEstimateList = () => {
                 <div>
                     <Box className='flex jc-space-between mb-3'>
                         <Autocomplete
-                          options={PendingVehicleList?.data}
+                          options={PendingVehicleList?.data || []}
                           renderInput={(params) => <TextField {...params} label={'Vehicle No'}  size='small'/>}
                           onChange={getPendingVehicleDetails}
                            />
