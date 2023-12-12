@@ -132,7 +132,17 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                                     />
                                                 </td>)
                                     }
-
+                                    if(col.field==='amount'){
+                                        return(
+                                        <td key={colIndex}>
+                                            <TextField
+                                                size='small'
+                                                value={everyRowData[col['tax']] == 0? everyRowData[col['selling_price']] : parseFloat(everyRowData[col['tax']]) * parseFloat(everyRowData[col['selling_price']]) || '0'}
+                                                sx={{"& fieldset": { border: 'none' }}}
+                                                disabled
+                                            />
+                                        </td>)
+                                    }
                                     //ELSE CREATED TEXTFIELD WITH DISABLED
                                     return (<td key={colIndex}>
                                     <TextField
