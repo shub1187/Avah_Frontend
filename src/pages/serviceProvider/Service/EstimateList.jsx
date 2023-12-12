@@ -97,6 +97,44 @@ const SpEstimateList = () => {
                            />
                         <Button className='small-button' onClick={() => setPage('table')} variant='outlined' color='options'>Back <ArrowBackIcon /></Button>
                     </Box>
+
+                    <Box className='flex'>
+                    <Box className='mr-10'>
+                      <Typography fontWeight={'bold'}>VEHICLE DETAILS</Typography>
+                      <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
+                        <Box>
+                          <Box>VEHICLE NUMBER</Box>
+                          <Box >MODEL</Box>  
+                          <Box >MANUFACTURER</Box>  
+                          <Box >VEHICLE TYPE</Box>  
+                        </Box>
+                        <Box>
+                          <Box>: {pendingVehicleApiData?.vehicle_number}</Box>
+                          <Box >: {pendingVehicleApiData?.model}</Box>  
+                          <Box >: {pendingVehicleApiData?.brand}</Box>  
+                          <Box >: {pendingVehicleApiData?.fuel_type}</Box>  
+                        </Box>
+                      </Box>
+                    </Box>
+                    <Box>
+                      <Typography fontWeight={'bold'}>CUSTOMER DETAILS</Typography>
+                      <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
+                        <Box>
+                          <Box>NAME</Box>
+                          <Box >ADDRESS</Box>  
+                          <Box >MOBILE</Box>  
+                          <Box >EMAIL</Box>  
+                        </Box>
+                        <Box>
+                          <Box>: {pendingVehicleApiData?.name}</Box>
+                          <Box >: {pendingVehicleApiData?.address}</Box>  
+                          <Box >: {pendingVehicleApiData?.mobile_number}</Box>  
+                          <Box >: {pendingVehicleApiData?.email}</Box>  
+                        </Box>
+                      </Box>
+                    </Box>
+                    </Box>
+
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3'>
                         <FullyEditableAndDeletableTable
                             title={'SPARES'} 
