@@ -9,6 +9,8 @@ import {  useFetch, useFetchFunction } from 'hooks/useFetch';
 import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderTable';
 import { SpEstimateListColumn } from 'components/spComponents/Table/Columns/Service/SpEstimateColumn';
 import URL from 'url/apiURL';
+import { SpCreateSpareEstimateColumn, createEstimateColumn, createSpareEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreate EstimateColumn';
+import { SpCreateLabourEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreateLabourEstimateColumn';
 
 const {getAllSpareListForAutoFill} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
@@ -76,10 +78,10 @@ const SpEstimateList = () => {
                         <Button className='small-button' onClick={() => setPage('table')} variant='outlined' color='options'>Back <ArrowBackIcon /></Button>
                     </Box>
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3'>
-                        <FullyEditableAndDeletableTable title={'SPARES'} buttonName={'Add Spares'} data={sparePayload} column={spLabourColumns} setPayload = {setSparePayload} autoCompleteFieldName={'spare_name'}/>
+                        <FullyEditableAndDeletableTable title={'SPARES'} buttonName={'Add Spares'} data={sparePayload} column={SpCreateSpareEstimateColumn} setPayload = {setSparePayload} autoCompleteFieldName={'spare_name'}/>
                     </Box>
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3' >
-                        <FullyEditableAndDeletableTable title={'LABOURS'} buttonName={'Add Labours'} data={labourPayload} column={spLabourColumns} setPayload = {setLabourSparePayload} autoCompleteFieldName={'labour_name'}/>
+                        <FullyEditableAndDeletableTable title={'LABOURS'} buttonName={'Add Labours'} data={labourPayload} column={SpCreateLabourEstimateColumn} setPayload = {setLabourSparePayload} autoCompleteFieldName={'labour_name'}/>
                     </Box>
                     <Box className='flex jc-flex-end'>
                         <Button className='small-button' color='options' variant='contained' onClick={handleSubmit}>SUBMIT</Button>
