@@ -35,7 +35,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         if(e.target.innerHTML){
             const obj = {
                 method:"GET",
-                url:`${getApiUrlOnAutocompleteItemSelect}?sp_id=${localStorage.getItem('sp_id')}&${getApiUrlOnAutocompleteItemSelectParams}=${e.target.innerHTML}`
+                url:`${getApiUrlOnAutocompleteItemSelect}?sp_id=${localStorage.getItem('sp_id')}&name=${e.target.innerHTML}`
             }
             let {data:apiData} =  await fetchData(obj)
 

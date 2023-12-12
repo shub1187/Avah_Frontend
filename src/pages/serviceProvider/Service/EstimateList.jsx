@@ -34,7 +34,9 @@ const SpEstimateList = () => {
             method:"POST",
             url:addEstimate
         }
-        await fetchData(obj)
+        if((sparePayload && sparePayload.length) || (labourPayload && labourPayload.length) ){
+            await fetchData(obj)
+        }
     }
 
     const getPendingVehicleDetails = async(SelectValue)=>{
