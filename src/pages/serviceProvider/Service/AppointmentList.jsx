@@ -72,10 +72,10 @@ const AppointmentList = () => {
 
                 </Box>
                 <Box maxHeight={'400px'} overflow={'auto'} className='mb-3'>
-                    <FullyEditableAndDeletableTable title={'SPARES'} buttonName={'Spares'} data={sparePayload} column={spLabourColumns} setPayload={setSparePayload}/>
+                    <FullyEditableAndDeletableTable title={'SPARES'} buttonName={'Spares'} data={sparePayload} column={spLabourColumns} setPayload={setSparePayload} autoCompleteFieldName={'spare_name'}/>
                 </Box>
                 <Box maxHeight={'400px'} overflow={'auto'} className='mb-3' >
-                    <FullyEditableAndDeletableTable title={'LABOURS'} buttonName={'Labours'} data={labourPayload} column={spLabourColumns} setPayload={setLabourSparePayload}/>
+                    <FullyEditableAndDeletableTable title={'LABOURS'} buttonName={'Labours'} data={labourPayload} column={spLabourColumns} setPayload={setLabourSparePayload} autoCompleteFieldName={'labour_name'}/>
                 </Box>
                 <Box className='flex jc-flex-end'>
                     <Button className='small-button' color='options' variant='contained' onClick={handleSubmit}>SUBMIT</Button>

@@ -9,15 +9,12 @@ import { debounce } from '@mui/material/utils'
 
 const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
-const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayload}) => {
+const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayload, autoCompleteFieldName}) => {
 
-    // const [tableValues, setTableValues] = useState([])
     const {fetchData} = useFetchFunction()
-    // console.log(tableValues)
 
     //WHENEVER API DATA CHANGES RERUN AND UPDATE
     useEffect(()=>{
-        // setTableValues(data)
         setPayload && setPayload(data)
     },[data])
 
@@ -28,7 +25,6 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
             ...newValue[rowIndex],
             [col]:e.target.value
         }
-        // setTableValues(newValue)
         setPayload && setPayload(newValue)
     }
 
@@ -42,15 +38,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                 url:`${getSpecificSpareDetailsForEstimate}?sp_id=${localStorage.getItem('sp_id')}&spare_name=${e.target.innerHTML}`
             }
             let {data:apiData} =  await fetchData(obj)
-            // let apiData = {
-            //     labour_name:'sdsds',
-            //     hsn_sac:'sdsd',
-            //     price:'sdsd',
-            //     tax:'sdsds'
-            // }
-            // data.results = {
 
-            // }
             if(apiData){
                 const newRow = {}
                 column.forEach((val)=>{
@@ -61,12 +49,9 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                     ...newValue[rowIndex],
                     ...newRow
                 }
-                // setTableValues(newValue)
                 setPayload &&setPayload(newValue)
             }
-
         }
-
     }
 
     const  debouncedApiCall= debounce(async(e,col,rowIndex,everyRowData)=>{
@@ -91,7 +76,6 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
     const deleteRow = (rowIndex) => {
         const newInputValues = [...data]
         newInputValues.splice(rowIndex,1)
-        // setTableValues(newInputValues)
         setPayload &&setPayload(newInputValues)
     }
 
@@ -101,7 +85,6 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         column.forEach((val)=>{
             newRow[val.field]=''
         })
-        // setTableValues([...tableValues,newRow])
         setPayload && setPayload([...data,newRow])
     }
 
@@ -111,18 +94,10 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         column.forEach((val)=>{
             newRow[val.field]=''
         })
-        console.log(newRow)
-        const obj = {
-            method:"GET",
-            url:getAllSpareListForAutoFill
-        }
-        // let autoCompleteData = fetchData(obj)
-        // let autoCompleteData = [{label:"sdsdsd"},{label:"rr"},{label:"e"},{label:"w"},{label:"a"}]
-        // let {data:autoCompleteData} = await fetchData(obj)
         newRow['autocompleteData'] = []
-        // setTableValues([...tableValues,newRow])
         setPayload && setPayload([...data,newRow])
     }
+    
     return (
         <div className='table-body'>    
             <Box fontSize={'1.1rem'} className=' flex ai-center'>
@@ -147,7 +122,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                 if(everyRowData.autocomplete){
                                     
                                     //IF ONLY ITS THIS FIELD THEN CREATE AUTOCOMPLETE
-                                    if(col.field==='labour_name'){
+                                    if(col.field===autoCompleteFieldName){
                                         return (<td>
                                                     <Autocomplete
                                                         options={everyRowData.autocompleteData}
