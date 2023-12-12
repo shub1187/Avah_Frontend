@@ -36,10 +36,10 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
     //THEN ON CLICK OF ANY VALUE MAKE A API CALL AND THAT WILL FILL THAT ROW DATA
     const autoCompleteInputChange = async(e,col,rowIndex,value)=>{
         const newValue = [...data]
-        if(value){
+        if(e.target.innerHTML){
             const obj = {
                 method:"GET",
-                url:`${getSpecificSpareDetailsForEstimate}?sp_id=${localStorage.getItem('sp_id')}&spare_name=${value}`
+                url:`${getSpecificSpareDetailsForEstimate}?sp_id=${localStorage.getItem('sp_id')}&spare_name=${e.target.innerHTML}`
             }
             let {data:apiData} =  await fetchData(obj)
             // let apiData = {
@@ -54,7 +54,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
             if(apiData){
                 const newRow = {}
                 column.forEach((val)=>{
-                    newRow[val.field]=apiData[val.field]
+                    newRow[val.field]=apiData.data[val.field]
                 })
 
                 newValue[rowIndex] = {
