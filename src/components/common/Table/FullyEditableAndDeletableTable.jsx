@@ -137,7 +137,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                         <td key={colIndex}>
                                             <TextField
                                                 size='small'
-                                                value={everyRowData[col['tax']] == 0? everyRowData[col['selling_price']] : parseFloat(everyRowData[col['tax']]) * parseFloat(everyRowData[col['selling_price']]) || '0'}
+                                                value={everyRowData[col['tax']] == 0? everyRowData[col['selling_price']] : parseFloat(everyRowData[col['tax']]) * parseFloat(everyRowData[col['selling_price']]) }
                                                 sx={{"& fieldset": { border: 'none' }}}
                                                 disabled
                                             />
