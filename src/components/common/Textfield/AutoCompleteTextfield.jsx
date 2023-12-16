@@ -7,9 +7,9 @@ export default function CreateAutoCompleteTextfield({ options, label, onChange, 
     // let Value = autoCompleteName
 
     useEffect(() => {
-        fields.forEach((field) => {
+        fields?.forEach((field) => {
             if (!formField.hasOwnProperty(field.name)) {
-                onChange(field.name, '');
+                onChange && onChange(field.name, '');
             }
         });
     }, []);
@@ -19,7 +19,7 @@ export default function CreateAutoCompleteTextfield({ options, label, onChange, 
     // }
     return (
         <>
-            {fields.map((field) => {
+            {fields?.map((field) => {
                 const isError = isSubmitted && field.required && !formField[field.name];
 
                 return (
