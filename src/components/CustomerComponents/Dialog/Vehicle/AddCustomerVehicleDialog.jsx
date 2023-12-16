@@ -20,6 +20,7 @@ const AddCustomerVehicleDialog = ({ height, width, color }) => {
     let {data} = useFetch(getAllModelPerBrand)
     let { data: fuelType } = useFetch(getAllFuelTypes)
     const { fetchCustomerData, snackbar, loadingIndicator } = useCustomerFetchFunction()
+    console.log(formData)
     console.log("ln 23",data)
     useEffect(()=>{
         let fuelArray = []
@@ -68,7 +69,7 @@ const AddCustomerVehicleDialog = ({ height, width, color }) => {
         }
 
         await fetchCustomerData(obj)
-        setFormData({})
+        // setFormData({})
         setIsSubmitted(false)
         setTimeout(()=>handleClose(),2000)
     }

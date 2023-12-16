@@ -14,12 +14,13 @@ const CreateTextFields = ({ fields , onChange, formField,isSubmitted , onSearchI
 useEffect(() => {
   fields.forEach((field) => {
     if (!formField.hasOwnProperty(field.name)) {
-      console.log(field.defaultValue)
+      // console.log(field.defaultValue)
       if(field.defaultValue || field.defaultValue===0){
-        console.log('entered')
+        // console.log('entered')
         onChange(field.name, field.defaultValue);
       }
       else{
+        // console.log(field.name)
         onChange(field.name, '');
       }
     }
@@ -55,7 +56,7 @@ useEffect(() => {
               value={formField[field.name] || "" }
               onChange={(e) => onChange(field.name, e.target.value)}
               rows={field.row}
-              multiline={field.multiine}
+              multiline={field.multiline}
               type={field.type}
               select={field.select}
               disabled={field.disabled}

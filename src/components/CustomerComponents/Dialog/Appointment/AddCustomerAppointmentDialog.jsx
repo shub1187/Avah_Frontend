@@ -30,17 +30,17 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     useEffect(()=>{
       const matchingSP = spList.find((sp) => sp.address === formData.address);
       if (matchingSP) {
-        setFormData({
-          ...formData,
+        setFormData((prev)=>({
+          ...prev,
           address: matchingSP.address,
           sp_mobile:matchingSP.sp_mobile
-        });
+        }));
       } else {
-        setFormData({
-          ...formData,
+        setFormData((prev)=>({
+          ...prev,
           address: "",
           sp_mobile:""
-        });
+        }));
       }
     },[formData.select_service_provider])
 
@@ -48,18 +48,12 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     label: cityName
   }));
   const handleSelectCity = (selectedValue) => {
-    // if(city){
-    // const selectedCityData = citiesSpData?.data?.[city] || [];
-    // setSpList(selectedCityData);
-    // }
-    // else{
       setAutocompleteSpName('')
       setAutocompleteCityName(selectedValue.label)
       setCity(selectedValue.label);
       const selectedCityData = citiesSpData?.data?.[selectedValue.label] || [];
       setSpList(selectedCityData);
       setFormData((prev)=>({...prev,address:'',sp_mobile:''}))
-    // }
 
   };
   console.log(formData,"RAEES")
@@ -116,22 +110,15 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           }
     };
     const handleSearchIconClick = async(fieldName) => {
-        // setIsSubmitted(true); // Set the form as submitted
-         setAutocompleteVehicleName(fieldName.label)
+        setIsSubmitted(true); // Set the form as submitted
+        setAutocompleteVehicleName(fieldName.label)
          if(!fieldName) return
-        // const requiredFields = appointmentList.filter((field) => field.required && field.name=='select_vehicle');
-        // const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
-        // console.log(emptyRequiredFields)
-
-        // if (emptyRequiredFields.length > 0) {
-        //   return;
-        // }
         const obj = {
           payload:fieldName.label,
           method:"GET",
           url:`http://localhost:3008/api/customer/vehicleSearch?VehicleNumber=${fieldName.label}`
         }
-
+        console.log('handleSearchIConcliked')
         const {isSuccess,data,error} = await fetchCustomerData(obj)
         if(error && !isSuccess){
             throw new Error(error)
@@ -139,53 +126,46 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         if(data && isSuccess){
         setFormData((prev)=>({...prev,...data?.result[0]}))
         }
-        // setIsSubmitted(false); // Set the form as submitted
+        setIsSubmitted(false); // Set the form as submitted
     };
 
-    // const handleClickOpen = () => {setOpen(true)};
-    // const handleClose = () => {setOpen(false);};
 
     const handleServiceProviderChange = (obj) => {
       setAutocompleteSpName(obj.label)
       setFormData(p=>({...p,address:'',sp_mobile:''}))
       const selectedSp = spList.find((sp) => sp.sp_id === obj.sp_id);
-      console.log("ln 168", selectedSp,obj)
       if (selectedSp) {
         setFormData((prev)=>({...prev,address:selectedSp.address,sp_mobile:selectedSp.sp_mobile, sp_id : selectedSp.sp_id, business_name : selectedSp.value,}))
       }
     };
 
     const handleSubmit = async()=>{
-        try{
-          setIsSubmitted(true); // Set the form as submitted
-          let isRequired = requiredTextfield(appointmentList,formData)  
-          if(isRequired) {
-            setTimeout(() => {
-                setIsSubmitted(false)
-            }, [2000]);
-            return
-          } 
-          // const requiredFields = appointmentList.filter((field) => field.required);
-          // const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
+        setIsSubmitted(true); // Set the form as submitted
+        let isRequired = requiredTextfield(appointmentList,formData)  
+        if(isRequired) {
+          setTimeout(() => {
+              setIsSubmitted(false)
+          }, [2000]);
+          return
+        } 
+        // const requiredFields = appointmentList.filter((field) => field.required);
+        // const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
 
-          // if (emptyRequiredFields.length > 0) {
-          //   return;
-          // }
-          const obj = {
-                payload:formData,
-                method:"POST",
-                url:"http://localhost:3008/api/customer/createAppointment"
-            }
-  
-            await fetchCustomerData(obj)
-            setFormData({})
-        }
-        catch(error){
-            setFormData({})
-        }
+        // if (emptyRequiredFields.length > 0) {
+        //   return;
+        // }
+        // console.log('why running')
+        const obj = {
+              payload:formData,
+              method:"POST",
+              url:"http://localhost:3008/api/customer/createAppointment"
+          }
+
+        await fetchCustomerData(obj)
+        setFormData({})
         setIsSubmitted(false)
-        handleClose();
-    }
+        setTimeout(()=>handleClose(),2000)
+      }
 
     const appointmentList = [
         {
@@ -193,8 +173,8 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           name: "select_city",
           type: 'text',
           fullWidth: true,
-          select: true,
-          selectArray: [],
+          // select: true,
+          // selectArray: [],
           required: true, // Add the required property
           errormessage: 'Select desired City', // Add the error message
         },
@@ -203,8 +183,8 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           name: "select_service_provider",
           type: 'text',
           fullWidth: true,
-          select: true,
-          selectArray: spList,
+          // select: true,
+          // selectArray: spList,
           required: true, // Add the required property
           errormessage: 'Select Service Provider', // Add the error message
         },
@@ -341,23 +321,38 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     ]
   return (
     <div>
-      {/* <Button sx={{height:height,width:width,fontWeight:"bold",minHeight:minHeight,borderRadius:borderRadius,maxWidth:maxWidth}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
-        <Grid container><Grid my={my} xs={12} item>{img && <img  src={img} alt="Card Image" />}</Grid><Grid fontSize={isMobile && 8} xs={12} item>CREATE APPOINTMENT</Grid></Grid>
-      </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth='lg'> */}
-
-        {/* <DialogTitle >  CREATE APPOINTMENT</DialogTitle> */}
         <DialogContent  sx={{pt:2,pb:0}}>
             <Grid container xs={12} mt={3}>
               <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>  
-                  <Box mb={1} fontSize={18}>Select City</Box>  
-                  <CreateAutoCompleteTextfield fullWidth whiteColor height options = {cityArray} onChange={handleSelectCity} autocompleteCityName={autocompleteCityName}/> 
-                  <Box mt={1} fontSize={18}>Select Service Provider</Box>   
-                  <CreateAutoCompleteTextfield fullWidth whiteColor height options = {spList} onChange={handleServiceProviderChange} autocompleteSpName={autocompleteSpName}/>
+                  {/* <Box mb={1} fontSize={18}>Select City</Box>   */}
+                  {/* <CreateAutoCompleteTextfield
+                   fullWidth 
+                   whiteColor 
+                   height 
+                   options = {cityArray} 
+                   onChange={handleSelectCity} 
+                   autoCompleteName={autocompleteCityName} 
+                   isSubmitted={isSubmitted}
+                   errorMessage={'City Required'}
+                   />  */}
+                  {/* <Box mt={1} fontSize={18}>Select Service Provider</Box>    */}
+                  {/* <CreateAutoCompleteTextfield 
+                  fullWidth
+                  whiteColor 
+                  height 
+                  options = {spList} 
+                  onChange={handleServiceProviderChange} 
+                  autoCompleteName={autocompleteSpName} 
+                  isSubmitted={isSubmitted}
+                  errorMessage={'Service Provider Required'}
+                  /> */}
+                  <CreateAutoCompleteTextfield fullWidth whiteColor height options={cityArray} fields={appointmentList.slice(0,1)} onChange={handleFieldChange} onSelect={handleSelectCity}  formField={formData} isSubmitted={isSubmitted}/>
+                  <CreateAutoCompleteTextfield  fullWidth whiteColor height options={spList} fields={appointmentList.slice(1,2)} onChange={handleFieldChange} onSelect={handleServiceProviderChange}  formField={formData} isSubmitted={isSubmitted}/>
+
                   <CreateTextFields  fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData} />
                   <CreateTextFields  fields={appointmentList.slice(3,4)} onChange={handleFieldChange}  formField={formData} />
-                  <Box mt={1} fontSize={18}>Select Vehicle</Box>   
-                  <CreateAutoCompleteTextfield fullWidth whiteColor height options = {customerVehicleList.data} onChange={handleSearchIconClick} autocompleteVehicleName={autocompleteVehicleName}/>
+                  {/* <Box mt={1} fontSize={18}>Select Vehicle</Box>    */}
+                  <CreateAutoCompleteTextfield fullWidth whiteColor height options={customerVehicleList?.data} fields={appointmentList.slice(4,5)} onChange={handleFieldChange} onSelect={handleSearchIconClick} formField={formData} isSubmitted={isSubmitted} />
                   {/* <CreateTextFields  onSearchIconClick={handleSearchIconClick} fields={appointmentList.slice(4,5)} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted}/> */}
               </Grid>
               <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>
@@ -383,7 +378,6 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
-      {/* </Dialog> */}
       {snackbar}
       {loadingIndicator}
     </div>  )

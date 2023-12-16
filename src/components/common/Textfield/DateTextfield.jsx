@@ -13,7 +13,7 @@ const CreateDateFields = ({ fields , onChange, formField,isSubmitted}) => {
 useEffect(() => {
   fields.forEach((field) => {
     if (!formField.hasOwnProperty(field.name)) {
-      onChange(field.name, null);
+      onChange(field.name, '');
     }
   });
 }, []);
@@ -38,7 +38,6 @@ const handleDateChange = (fieldName, selectedDate) => {
         // //   setFormField((prev) => ({ ...prev, [field.name]: "" }));
         // }
         const isError = isSubmitted && field.required && !formField[field.name];
-
         return (
           <Box key={field.name} mb={2}>
             <InputLabel sx={{ color: "black", marginBottom: 1 }}>
@@ -49,7 +48,7 @@ const handleDateChange = (fieldName, selectedDate) => {
                     // value={formField[field.name] || null}
                     minDate={dayjs()}
                     onChange={(selectedDate) => handleDateChange(field.name, selectedDate)}
-                    slotProps={{ textField: { fullWidth: true,size:'small',error:{isError} ,helperText: isError ?field.errormessage :'' } }}
+                    slotProps={{ textField: { fullWidth: true,size:'small',error:isError ,helperText: isError ?field.errormessage :'' } }}
                     
                 />
             </LocalizationProvider>
