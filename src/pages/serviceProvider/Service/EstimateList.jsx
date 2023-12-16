@@ -63,7 +63,7 @@ const SpEstimateList = () => {
     const [labourPayload, setLabourSparePayload] = useState([])
     console.log(sparePayload,labourPayload)
     const {} = useFetch()
-    const {fetchData} = useFetchFunction()
+    const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
     const {data:PendingVehicleList} = useFetch(`${getEstimatePendingVehcileList}?sp_id=${localStorage.getItem('sp_id')}`)
     const [pendingVehicleApiData,setPendingVehicleApiData] = useState({})
     console.log("ln 26",pendingVehicleApiData)
@@ -181,7 +181,7 @@ const SpEstimateList = () => {
                         </Box>
                         <Box>
                           <Box>: {pendingVehicleApiData?.name}</Box>
-                          <Box >: {pendingVehicleApiData?.address}</Box>  
+                          <Box >: {pendingVehicleApiData?.pickup_address}</Box>  
                           <Box >: {pendingVehicleApiData?.mobile_number}</Box>  
                           <Box >: {pendingVehicleApiData?.email}</Box>  
                         </Box>
@@ -220,6 +220,8 @@ const SpEstimateList = () => {
                         <Button className='small-button' color='options' variant='contained' onClick={handleSubmit}>SUBMIT</Button>
                     </Box>
                 </div>
+                {snackbar}
+                {loadingIndicator}
             </>
         )
     }
