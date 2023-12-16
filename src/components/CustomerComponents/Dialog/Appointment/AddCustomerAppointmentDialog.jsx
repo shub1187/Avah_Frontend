@@ -110,7 +110,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           }
     };
     const handleSearchIconClick = async(fieldName) => {
-        setIsSubmitted(true); // Set the form as submitted
+        // setIsSubmitted(true); // Set the form as submitted
         setAutocompleteVehicleName(fieldName.label)
          if(!fieldName) return
         const obj = {
