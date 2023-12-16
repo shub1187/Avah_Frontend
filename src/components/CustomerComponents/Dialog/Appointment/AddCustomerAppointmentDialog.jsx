@@ -11,6 +11,7 @@ import CreateAutoCompleteTextfield from 'components/common/Textfield/AutoComplet
 import { useCity } from 'hooks/useCustomContext';
 import {getHours,format,isToday, parse} from 'date-fns'
 import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
+import { requiredTextfield } from 'utils/customFunctions';
 const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,borderRadius,my}) => {
     // const [open, setOpen] = React.useState(false);
     // const [formData, setFormData] = useState({});
@@ -156,14 +157,21 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
 
     const handleSubmit = async()=>{
         try{
-          setIsSubmitted(true); // Set the form as submitted    
-          const requiredFields = appointmentList.filter((field) => field.required);
-          const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
+          setIsSubmitted(true); // Set the form as submitted
+          let isRequired = requiredTextfield(appointmentList,formData)  
+          if(isRequired) {
+            setTimeout(() => {
+                setIsSubmitted(false)
+            }, [2000]);
+            return
+          } 
+          // const requiredFields = appointmentList.filter((field) => field.required);
+          // const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
 
-          if (emptyRequiredFields.length > 0) {
-            return;
-          }
-                const obj = {
+          // if (emptyRequiredFields.length > 0) {
+          //   return;
+          // }
+          const obj = {
                 payload:formData,
                 method:"POST",
                 url:"http://localhost:3008/api/customer/createAppointment"
