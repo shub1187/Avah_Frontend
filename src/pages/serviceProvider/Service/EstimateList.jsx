@@ -11,6 +11,7 @@ import { SpEstimateListColumn } from 'components/spComponents/Table/Columns/Serv
 import URL from 'url/apiURL';
 import { SpCreateSpareEstimateColumn, createEstimateColumn, createSpareEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreate EstimateColumn';
 import { SpCreateLabourEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreateLabourEstimateColumn';
+import './EstimateList.scss'
 
 const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill, getSpecificLabourDetailsForEstimate, addEstimate,getEstimatePendingVehcileList ,getSpecificVechicleDetailsToCreateEstimate} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
@@ -92,6 +93,23 @@ const SpEstimateList = () => {
         const newData = await fetchData(obj)
         console.log("ln 48",newData)
         setPendingVehicleApiData(newData?.data?.data)
+    }
+
+    const calculateTotalAmount = (sparePayload,labourPayload)=>{
+
+        let TotalAmount = 0
+
+        const addAmount = (payload)=>{
+            payload.forEach((obj)=>{
+                if(obj.amount){
+                    TotalAmount+=parseFloat(obj.amount)
+                }
+            })
+        }
+        addAmount(sparePayload)
+        addAmount(labourPayload)
+
+        return TotalAmount
     }
     // const mock = useMemo(
     //     ()=>
@@ -216,7 +234,20 @@ const SpEstimateList = () => {
 
                         />
                     </Box>
-                    <Box className='flex jc-flex-end'>
+                    <Box className='flex jc-flex-end ai-center'>
+                        <Box className='flex jc-flex-end ai-center'>
+                            <Box className='bold' >Grand Total = </Box>
+                            <Box className='mr-1'> Total Amount of Spares * Total Amount of Labour</Box>
+                            <Box className='mr-4 textfield-grey-background'>
+                                <TextField 
+                                size='small' 
+                                disabled 
+                                value={
+                                    calculateTotalAmount(sparePayload,labourPayload)
+                                }
+                                />
+                            </Box>
+                        </Box>
                         <Button className='small-button' color='options' variant='contained' onClick={handleSubmit}>SUBMIT</Button>
                     </Box>
                 </div>
