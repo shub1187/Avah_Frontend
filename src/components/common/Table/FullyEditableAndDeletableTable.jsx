@@ -145,7 +145,17 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                             />
                                         </td>)
                                     }
-                                    
+                                    if(col.field==='tax_amount'){
+                                        return(
+                                            <td key={colIndex}>
+                                                <TextField
+                                                    size='small'
+                                                    value={everyRowData.tax == 0? 0 :(parseFloat(everyRowData.tax)/100) * parseFloat(everyRowData.selling_price) }
+                                                    sx={{"& fieldset": { border: 'none' }}}
+                                                    disabled
+                                                />
+                                            </td>)
+                                    }
                                     //ELSE CREATED TEXTFIELD WITH DISABLED
                                     return (<td key={colIndex}>
                                     <TextField
@@ -176,7 +186,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                         <td key={colIndex}>
                                             <TextField
                                                 size='small'
-                                                value={everyRowData.tax == 0? everyRowData.selling_price : (parseFloat(everyRowData.tax)) * parseFloat(everyRowData.selling_price) }
+                                                value={everyRowData.tax == 0? 0 :(parseFloat(everyRowData.tax)/100) * parseFloat(everyRowData.selling_price) }
                                                 sx={{"& fieldset": { border: 'none' }}}
                                                 disabled
                                             />

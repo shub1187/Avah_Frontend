@@ -175,7 +175,7 @@ const SpEstimateList = () => {
                       <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
                         <Box>
                           <Box>NAME</Box>
-                          <Box >ADDRESS</Box>  
+                          <Box >PICKUP ADDRESS</Box>  
                           <Box >MOBILE</Box>  
                           <Box >EMAIL</Box>  
                         </Box>
