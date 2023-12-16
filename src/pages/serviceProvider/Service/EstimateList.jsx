@@ -14,6 +14,49 @@ import { SpCreateLabourEstimateColumn } from 'components/spComponents/Table/Colu
 
 const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill, getSpecificLabourDetailsForEstimate, addEstimate,getEstimatePendingVehcileList ,getSpecificVechicleDetailsToCreateEstimate} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
+const mock = 
+    [
+        {
+            labour_name: 'ab',
+            hsn_sac: '2000',
+            amount: '200',
+            selling_price:'2000',
+            status: '5',
+            tax:'10'
+        },
+        {
+            labour_name: 'bb',
+            hsn_sac: '33',
+            amount: '',
+            selling_price:'2000',
+            status: '5',
+            tax:'0'
+        },
+        {
+            labour_name: 'qq',
+            hsn_sac: '55',
+            amount: '',
+            selling_price:'2000',
+            tax:'0',
+            status: '5',
+        },
+        {
+            labour_name: 'ee',
+            hsn_sac: '121',
+            amount: '',
+            selling_price:'2000',
+            tax:'10',
+            status: '5',
+        },
+        {
+            labour_name: 'gg',
+            hsn_sac: '23',
+            amount: '',
+            selling_price:'2000',
+            status: '52',
+            tax:'10'
+
+        }]
 const SpEstimateList = () => {
     const [page, setPage] = useState('table')
     const [sparePayload, setSparePayload] = useState([])
@@ -50,39 +93,50 @@ const SpEstimateList = () => {
         console.log("ln 48",newData)
         setPendingVehicleApiData(newData?.data?.data)
     }
-    const mock = useMemo(
-        ()=>
-        [
-            {
-                labour_name: 'ab',
-                hsn_sac: '2000',
-                amount: '20',
-                status: '5',
-            },
-            {
-                labour_name: 'bb',
-                hsn_sac: '33',
-                amount: '63',
-                status: '5',
-            },
-            {
-                labour_name: 'qq',
-                hsn_sac: '55',
-                amount: '55',
-                status: '5',
-            },
-            {
-                labour_name: 'ee',
-                hsn_sac: '121',
-                amount: '23',
-                status: '5',
-            },
-            {
-                labour_name: 'gg',
-                hsn_sac: '23',
-                amount: '1',
-                status: '52',
-            }],[])
+    // const mock = useMemo(
+    //     ()=>
+    //     [
+    //         {
+    //             labour_name: 'ab',
+    //             hsn_sac: '2000',
+    //             amount: '',
+    //             selling_price:'2000',
+    //             status: '5',
+    //             tax:'10'
+    //         },
+    //         {
+    //             labour_name: 'bb',
+    //             hsn_sac: '33',
+    //             amount: '',
+    //             selling_price:'2000',
+    //             status: '5',
+    //             tax:'0'
+    //         },
+    //         {
+    //             labour_name: 'qq',
+    //             hsn_sac: '55',
+    //             amount: '',
+    //             selling_price:'2000',
+    //             tax:'0',
+    //             status: '5',
+    //         },
+    //         {
+    //             labour_name: 'ee',
+    //             hsn_sac: '121',
+    //             amount: '',
+    //             selling_price:'2000',
+    //             tax:'10',
+    //             status: '5',
+    //         },
+    //         {
+    //             labour_name: 'gg',
+    //             hsn_sac: '23',
+    //             amount: '',
+    //             selling_price:'2000',
+    //             status: '52',
+    //             tax:'10'
+
+    //         }],[])
 
     if (page === 'estimate') {
         return (

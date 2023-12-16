@@ -28,9 +28,9 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         setPayload && setPayload(newValue)
     }
 
-    //WHENEVER ANY AUTOCOMPLETE ROW'S IS ADDED THEN API CALLED TO FILL AUTOMCPTE LIST
-    //THEN ON CLICK OF ANY VALUE MAKE A API CALL AND THAT WILL FILL THAT ROW DATA
-    const autoCompleteInputChange = async(e,col,rowIndex,value)=>{
+    //OUT OF THE OPTIONS OF AUTOCOMPTE , WHICHEVER OPTIONS WE SELECT THAT WILL BE SENT AS PARAMS TO GET 
+    //THE DATA WHICH WILL AUTOFILL THE REMAINING COLUMN OF THAT ROW
+    const autoCompleteOnSelect = async(e,col,rowIndex,value)=>{
         const newValue = [...data]
         if(e.target.innerHTML){
             const obj = {
@@ -54,7 +54,8 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         }
     }
 
-    const  debouncedApiCall= debounce(async(e,col,rowIndex,everyRowData)=>{
+    //WHENEVER A AUTOCOMPETE IS CREATED A DEBOUNCED API IS CALLED TO FILL THE AUTCOMPLETE WITH DATA
+    const  debouncedApiCallOnInputChange= debounce(async(e,col,rowIndex,everyRowData)=>{
         const obj = {
             method:"GET",
             url:`${getAllItemListForAutoFillDebounceOnInputChange}?q=${e.target.value}&sp_id=${localStorage.getItem('sp_id')}`,
@@ -127,22 +128,24 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                                     <Autocomplete
                                                         options={everyRowData.autocompleteData}
                                                         renderInput={(params) => <TextField {...params}  size='small'/>}
-                                                        onChange={(e,value)=>autoCompleteInputChange(e, col.field, rowIndex,value)}
-                                                        onInputChange={(e)=>debouncedApiCall(e,col.field,rowIndex,everyRowData.autocomplete)}
+                                                        onChange={(e,value)=>autoCompleteOnSelect(e, col.field, rowIndex,value)}
+                                                        onInputChange={(e)=>debouncedApiCallOnInputChange(e,col.field,rowIndex,everyRowData.autocomplete)}
                                                     />
                                                 </td>)
                                     }
+                                    //IF AMOUNT THEN WE WILL MULTIPLY TAX * SELLING_PRICE
                                     if(col.field==='amount'){
                                         return(
                                         <td key={colIndex}>
                                             <TextField
                                                 size='small'
-                                                value={everyRowData[col['tax']] == 0? everyRowData[col['selling_price']] : parseFloat(everyRowData[col['tax']]) * parseFloat(everyRowData[col['selling_price']]) }
+                                                value={everyRowData.tax == 0? everyRowData.selling_price : parseFloat(everyRowData.tax) * parseFloat(everyRowData.selling_price) }
                                                 sx={{"& fieldset": { border: 'none' }}}
                                                 disabled
                                             />
                                         </td>)
                                     }
+                                    
                                     //ELSE CREATED TEXTFIELD WITH DISABLED
                                     return (<td key={colIndex}>
                                     <TextField
@@ -155,8 +158,21 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                     </td>)
                                     
                                 }
-
                                 //IF NOT AUTOCOMPLETE KEY THEN CREATE FULLY EDITABLE TEXTFIELD
+                                //WITH EXCEPTION IF AMOUNT THEN WE WILL MULTIPLY TAX * SELLING_PRICE WITH DISABLED AS TRUE
+                                if(col.field==='amount'){
+                                    console.log(everyRowData)
+                                    return(
+                                    <td key={colIndex}>
+                                        <TextField
+                                            size='small'
+                                            value={everyRowData.tax == 0? everyRowData.selling_price : parseFloat(everyRowData.tax) * parseFloat(everyRowData.selling_price) }
+                                            sx={{"& fieldset": { border: 'none' }}}
+                                            disabled
+                                        />
+                                    </td>)
+                                }
+
                                 return(<td key={colIndex}>
                                     <TextField
                                         size='small'
