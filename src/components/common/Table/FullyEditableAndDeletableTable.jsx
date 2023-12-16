@@ -161,7 +161,6 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                 //IF NOT AUTOCOMPLETE KEY THEN CREATE FULLY EDITABLE TEXTFIELD
                                 //WITH EXCEPTION IF AMOUNT THEN WE WILL MULTIPLY TAX * SELLING_PRICE WITH DISABLED AS TRUE
                                 if(col.field==='amount'){
-                                    console.log(everyRowData)
                                     return(
                                     <td key={colIndex}>
                                         <TextField
@@ -172,7 +171,17 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                         />
                                     </td>)
                                 }
-
+                                if(col.field==='tax_amount'){
+                                    return(
+                                        <td key={colIndex}>
+                                            <TextField
+                                                size='small'
+                                                value={everyRowData.tax == 0? everyRowData.selling_price : (parseFloat(everyRowData.tax)) * parseFloat(everyRowData.selling_price) }
+                                                sx={{"& fieldset": { border: 'none' }}}
+                                                disabled
+                                            />
+                                        </td>)
+                                }
                                 return(<td key={colIndex}>
                                     <TextField
                                         size='small'
