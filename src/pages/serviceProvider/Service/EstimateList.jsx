@@ -9,8 +9,8 @@ import {  useFetch, useFetchFunction } from 'hooks/useFetch';
 import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderTable';
 import { SpEstimateListColumn } from 'components/spComponents/Table/Columns/Service/SpEstimateColumn';
 import URL from 'url/apiURL';
-import { SpCreateSpareEstimateColumn, createEstimateColumn, createSpareEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreate EstimateColumn';
-import { SpCreateLabourEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreateLabourEstimateColumn';
+import { SpCreateSpareEstimateColumn, SpEditSpareEstimateColumn, createEstimateColumn, createSpareEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreate EstimateColumn';
+import { SpCreateLabourEstimateColumn, SpEditLabourEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreateLabourEstimateColumn';
 import './EstimateList.scss'
 
 const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill, getSpecificLabourDetailsForEstimate, addEstimate,getEstimatePendingVehcileList ,getSpecificVechicleDetailsToCreateEstimate, getAllCreatedEstimateList, getEstimateDetails} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
@@ -48,13 +48,22 @@ const SpEstimateList = () => {
 
     }
 
-    const getEstimateDetails = async()=>{
+    useEffect(() => {
+        if (page === 'eye-icon') {
+          getEstimateDetailsApi();
+        }
+      }, [page]);
+
+    const getEstimateDetailsApi = async()=>{
         
         const obj = {
+            method:"GET",
             url:`${getEstimateDetails}?sp_id=${localStorage.getItem('sp_id')}&estimate_number=${eyeIconValue?.estimate_number}`
         }
 
         const {data} = await fetchData(obj)
+
+        
         setSparePayload(data?.data?.spares)
         setLabourSparePayload(data?.data?.labours)
 
@@ -86,7 +95,7 @@ const SpEstimateList = () => {
     }
 
     if (page === 'estimate') {
-        getEstimateDetails()
+      
         return (
             <>
                 <div>
@@ -188,6 +197,7 @@ const SpEstimateList = () => {
     }
 
     if(page ==='eye-icon'){
+        // getEstimateDetailsApi()
         return (
             <>
                 <div>
@@ -251,7 +261,7 @@ const SpEstimateList = () => {
                             title={'SPARES'} 
                             buttonName={'Add Spares'} 
                             data={sparePayload} 
-                            column={SpCreateSpareEstimateColumn} 
+                            column={SpEditSpareEstimateColumn} 
                             setPayload = {setSparePayload} 
                             autoCompleteFieldName={'spare_name'}
                             getAllItemListForAutoFillDebounceOnInputChange={getAllSpareListForAutoFill}
@@ -264,7 +274,7 @@ const SpEstimateList = () => {
                             title={'LABOURS'} 
                             buttonName={'Add Labours'} 
                             data={labourPayload} 
-                            column={SpCreateLabourEstimateColumn} 
+                            column={SpEditLabourEstimateColumn} 
                             setPayload = {setLabourSparePayload} 
                             autoCompleteFieldName={'labour_name'}
                             getAllItemListForAutoFillDebounceOnInputChange={getAllLabourListForAutoFill}
