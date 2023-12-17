@@ -1,10 +1,8 @@
 export const SpEstimateListColumn = [
     {title:'Name',field:'name'},
-    {title:'Vehicel No',field:'vehicle_number'},
-    {title:'Model',field:'model'},
-    {title:'Mobile',field:'mobile'},
-    {title:'Email',field:'email'},
-    {title:'Date',field:'date'},
-    {title:'Estimate',field:'estimate'},
+    {title:'Vehicle No',field:'vehicle_number'},
+    {title:'Mobile',field:'mobile_number'},
+    {title:'Estimate Status',field:'estimate_status'},
+    {title:'Estimate Number',field:'estimate_number'},
 
 ]

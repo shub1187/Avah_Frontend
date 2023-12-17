@@ -13,7 +13,7 @@ import { SpCreateSpareEstimateColumn, createEstimateColumn, createSpareEstimateC
 import { SpCreateLabourEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreateLabourEstimateColumn';
 import './EstimateList.scss'
 
-const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill, getSpecificLabourDetailsForEstimate, addEstimate,getEstimatePendingVehcileList ,getSpecificVechicleDetailsToCreateEstimate} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
+const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill, getSpecificLabourDetailsForEstimate, addEstimate,getEstimatePendingVehcileList ,getSpecificVechicleDetailsToCreateEstimate, getAllCreatedEstimateList} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
 const mock = 
     [
@@ -210,7 +210,7 @@ const SpEstimateList = () => {
     return (
         <div>
             <ServiceProvidertable
-                URL={`http://localhost:3008/api/serviceprovider/getAllPendingAppointment`}
+                URL={getAllCreatedEstimateList}
                 columnss={SpEstimateListColumn}
                 clickButton= {()=>setPage('estimate')}
                 buttonName={'CREATE ESTIMATE'}
