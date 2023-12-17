@@ -219,7 +219,7 @@ const SpEstimateList = () => {
             <>
                 <div>
                     <Box className='flex jc-space-between mb-3'>
-                        <Button className='small-button' onClick={() => setPage('table')} variant='outlined' color='options'>Back <ArrowBackIcon /></Button>
+                        <Button className='small-button' onClick={() =>{ setPage('table');setDisabledUpdate(true)}} variant='outlined' color='options'>Back <ArrowBackIcon /></Button>
                     </Box>
                     <Box className='flex'>
                     <Box className='mr-10'>
