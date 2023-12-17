@@ -280,7 +280,7 @@ const SpEstimateList = () => {
                             data={sparePayload} 
                             column={SpEditSpareEstimateColumn} 
                             setPayload = {setSparePayload} 
-                            autoCompleteFieldName={'spare_name'}
+                            autoCompleteFieldName={'name'}
                             getAllItemListForAutoFillDebounceOnInputChange={getAllSpareListForAutoFill}
                             getApiUrlOnAutocompleteItemSelect={getSpecificSpareDetailsForEstimate}
                             getApiUrlOnAutocompleteItemSelectParams={'spare_name'}
@@ -293,7 +293,7 @@ const SpEstimateList = () => {
                             data={labourPayload} 
                             column={SpEditLabourEstimateColumn} 
                             setPayload = {setLabourSparePayload} 
-                            autoCompleteFieldName={'labour_name'}
+                            autoCompleteFieldName={'name'}
                             getAllItemListForAutoFillDebounceOnInputChange={getAllLabourListForAutoFill}
                             getApiUrlOnAutocompleteItemSelect={getSpecificLabourDetailsForEstimate}
                             getApiUrlOnAutocompleteItemSelectParams={'labour_name'}
