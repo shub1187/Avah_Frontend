@@ -62,12 +62,10 @@ const SpEstimateList = () => {
     const [page, setPage] = useState('table')
     const [sparePayload, setSparePayload] = useState([])
     const [labourPayload, setLabourSparePayload] = useState([])
-    console.log(sparePayload,labourPayload)
     const {} = useFetch()
     const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
     const {data:PendingVehicleList} = useFetch(`${getEstimatePendingVehcileList}?sp_id=${localStorage.getItem('sp_id')}`)
     const [pendingVehicleApiData,setPendingVehicleApiData] = useState({})
-    console.log("ln 26",pendingVehicleApiData)
     const handleSubmit = async()=>{
         const obj = {
             payload:{
@@ -85,13 +83,11 @@ const SpEstimateList = () => {
     }
 
     const getPendingVehicleDetails = async(SelectValue)=>{
-        // console.log("ln 41", SelectValue?.value)
         const obj = {
             method:"GET",
             url:`${getSpecificVechicleDetailsToCreateEstimate}?sp_id=${localStorage.getItem('sp_id')}&vehicle_number=${SelectValue?.value}`
         }
         const newData = await fetchData(obj)
-        console.log("ln 48",newData)
         setPendingVehicleApiData(newData?.data?.data)
     }
 
@@ -111,50 +107,6 @@ const SpEstimateList = () => {
 
         return TotalAmount
     }
-    // const mock = useMemo(
-    //     ()=>
-    //     [
-    //         {
-    //             labour_name: 'ab',
-    //             hsn_sac: '2000',
-    //             amount: '',
-    //             selling_price:'2000',
-    //             status: '5',
-    //             tax:'10'
-    //         },
-    //         {
-    //             labour_name: 'bb',
-    //             hsn_sac: '33',
-    //             amount: '',
-    //             selling_price:'2000',
-    //             status: '5',
-    //             tax:'0'
-    //         },
-    //         {
-    //             labour_name: 'qq',
-    //             hsn_sac: '55',
-    //             amount: '',
-    //             selling_price:'2000',
-    //             tax:'0',
-    //             status: '5',
-    //         },
-    //         {
-    //             labour_name: 'ee',
-    //             hsn_sac: '121',
-    //             amount: '',
-    //             selling_price:'2000',
-    //             tax:'10',
-    //             status: '5',
-    //         },
-    //         {
-    //             labour_name: 'gg',
-    //             hsn_sac: '23',
-    //             amount: '',
-    //             selling_price:'2000',
-    //             status: '52',
-    //             tax:'10'
-
-    //         }],[])
 
     if (page === 'estimate') {
         return (

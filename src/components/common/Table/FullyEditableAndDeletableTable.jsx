@@ -20,10 +20,36 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
 
     //WHENEVER ANY ROW'S PARTICULAR COLUMN DATA CHANGES HANDLE THAT AND UPDATE
     const handleInputChange = (e,col,rowIndex)=>{
+        // value={everyRowData.tax == 0? everyRowData.selling_price : (parseFloat(everyRowData.tax)/100) * parseFloat(everyRowData.selling_price) +  parseFloat(everyRowData.selling_price) }
         const newValue = [...data]
+        if(col==='selling_price'){
+            let amount = newValue[rowIndex].tax==0  ? parseFloat(e.target.value) :!newValue[rowIndex].tax===0 ? 0 :(parseFloat(newValue[rowIndex].tax)/100) * parseFloat(e.target.value) +  parseFloat(e.target.value) 
+            let tax_amount = !newValue[rowIndex].tax ? 0 : newValue[rowIndex]===0 ? 0 : parseFloat(newValue[rowIndex].tax/100) * parseFloat(e.target.value)
+            newValue[rowIndex] = {
+                ...newValue[rowIndex],
+                ['amount']:amount, 
+                ['tax_amount']:tax_amount,
+                [col]:e.target.value
+            }
+        }
+
+        else if(col==='tax'){
+            let tax_amount =isNaN(parseFloat(newValue[rowIndex].selling_price)) ? 0 :e.target.value===0? parseFloat(newValue[rowIndex].selling_price) : !e.target.value ? 0 :(parseFloat(e.target.value)/100) * parseFloat(newValue[rowIndex].selling_price) 
+            let amount = isNaN(parseFloat(newValue[rowIndex].selling_price)) ? 0 : tax_amount + parseFloat(newValue[rowIndex].selling_price)
+
+            // let amount = 0
+            newValue[rowIndex] = {
+                ...newValue[rowIndex],
+                ['tax_amount']:tax_amount,
+                ['amount']:amount,
+                [col]:e.target.value
+            }
+        }
+        else{
         newValue[rowIndex] = {
             ...newValue[rowIndex],
             [col]:e.target.value
+        }
         }
         setPayload && setPayload(newValue)
     }
@@ -133,35 +159,36 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                                     />
                                                 </td>)
                                     }
-                                    //IF AMOUNT THEN WE WILL MULTIPLY TAX * SELLING_PRICE
-                                    if(col.field==='amount'){
-                                        return(
-                                        <td key={colIndex}>
-                                            <TextField
-                                                size='small'
-                                                value={everyRowData.tax == 0? everyRowData.selling_price : (parseFloat(everyRowData.tax)/100) * parseFloat(everyRowData.selling_price)+parseFloat(everyRowData.selling_price) }
-                                                sx={{"& fieldset": { border: 'none' }}}
-                                                disabled
-                                            />
-                                        </td>)
-                                    }
-                                    if(col.field==='tax_amount'){
-                                        return(
-                                            <td key={colIndex}>
-                                                <TextField
-                                                    size='small'
-                                                    value={everyRowData.tax == 0? 0 :(parseFloat(everyRowData.tax)/100) * parseFloat(everyRowData.selling_price) }
-                                                    sx={{"& fieldset": { border: 'none' }}}
-                                                    disabled
-                                                />
-                                            </td>)
-                                    }
+                                    // //IF AMOUNT THEN WE WILL MULTIPLY TAX * SELLING_PRICE
+                                    // if(col.field==='amount'){
+                                    //     return(
+                                    //     <td key={colIndex}>
+                                    //         <TextField
+                                    //             size='small'
+                                    //             value={everyRowData.tax == 0? everyRowData.selling_price : (parseFloat(everyRowData.tax)/100) * parseFloat(everyRowData.selling_price)+parseFloat(everyRowData.selling_price) }
+                                    //             sx={{"& fieldset": { border: 'none' }}}
+                                    //             disabled
+                                    //         />
+                                    //     </td>)
+                                    // }
+                                    // if(col.field==='tax_amount'){
+                                    //     return(
+                                    //         <td key={colIndex}>
+                                    //             <TextField
+                                    //                 size='small'
+                                    //                 value={everyRowData.tax == 0? 0 :(parseFloat(everyRowData.tax)/100) * parseFloat(everyRowData.selling_price) }
+                                    //                 sx={{"& fieldset": { border: 'none' }}}
+                                    //                 disabled
+                                    //             />
+                                    //         </td>)
+                                    // }
                                     //ELSE CREATED TEXTFIELD WITH DISABLED
                                     return (<td key={colIndex}>
                                     <TextField
                                         size='small'
                                         value={everyRowData[col.field]}
                                         // onChange={(e) => handleInputChange(e, col.field, rowIndex)}
+                                        onChange={(e) => handleInputChange(e, col.field, rowIndex)}
                                         sx={{"& fieldset": { border: 'none' }}}
                                         disabled
                                     />
@@ -170,28 +197,32 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                 }
                                 //IF NOT AUTOCOMPLETE KEY THEN CREATE FULLY EDITABLE TEXTFIELD
                                 //WITH EXCEPTION IF AMOUNT THEN WE WILL MULTIPLY TAX * SELLING_PRICE WITH DISABLED AS TRUE
-                                if(col.field==='amount'){
-                                    return(
-                                    <td key={colIndex}>
-                                        <TextField
-                                            size='small'
-                                            value={everyRowData.tax == 0? everyRowData.selling_price : (parseFloat(everyRowData.tax)/100) * parseFloat(everyRowData.selling_price) +  parseFloat(everyRowData.selling_price) }
-                                            sx={{"& fieldset": { border: 'none' }}}
-                                            disabled
-                                        />
-                                    </td>)
-                                }
-                                if(col.field==='tax_amount'){
-                                    return(
-                                        <td key={colIndex}>
-                                            <TextField
-                                                size='small'
-                                                value={everyRowData.tax == 0? 0 :(parseFloat(everyRowData.tax)/100) * parseFloat(everyRowData.selling_price) }
-                                                sx={{"& fieldset": { border: 'none' }}}
-                                                disabled
-                                            />
-                                        </td>)
-                                }
+                                // if(col.field==='amount'){
+                                //     return(
+                                //     <td key={colIndex}>
+                                //         <TextField
+                                //             size='small'
+                                //             // value={everyRowData.tax == 0? everyRowData.selling_price : (parseFloat(everyRowData.tax)/100) * parseFloat(everyRowData.selling_price) +  parseFloat(everyRowData.selling_price) }
+                                //             value={everyRowData[col.field]}
+                                //             sx={{"& fieldset": { border: 'none' }}}
+                                //             onChange={(e) => handleInputChange(e, col.field, rowIndex)}
+                                //             disabled
+                                //         />
+                                //     </td>)
+                                // }
+                                // if(col.field==='tax_amount'){
+                                //     return(
+                                //         <td key={colIndex}>
+                                //             <TextField
+                                //                 size='small'
+                                //                 // value={everyRowData.tax == 0? 0 :(parseFloat(everyRowData.tax)/100) * parseFloat(everyRowData.selling_price) }
+                                //                 value={everyRowData[col.field]}
+                                //                 onChange={(e) => handleInputChange(e, col.field, rowIndex)}
+                                //                 sx={{"& fieldset": { border: 'none' }}}
+                                //                 disabled
+                                //             />
+                                //         </td>)
+                                // }
                                 return(<td key={colIndex}>
                                     <TextField
                                         size='small'
