@@ -47,7 +47,9 @@ const URL = {
                 getEstimatePendingVehcileList : replaceUrl(`${BASE_URL}/api/serviceprovider/getEstimatePendingVehcileList`),
                 getSpecificVechicleDetailsToCreateEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/getSpecificVechicleDetailsToCreateEstimate`),
                 getAllCreatedEstimateList : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllCreatedEstimateList`),
-                getEstimateDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getEstimateDetails`)
+                getEstimateDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getEstimateDetails`),
+                editEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/editEstimate`)
+
 
             },
             APPOINTMENT:{

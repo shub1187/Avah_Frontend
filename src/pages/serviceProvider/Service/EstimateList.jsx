@@ -13,7 +13,7 @@ import { SpCreateSpareEstimateColumn, SpEditSpareEstimateColumn, createEstimateC
 import { SpCreateLabourEstimateColumn, SpEditLabourEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreateLabourEstimateColumn';
 import './EstimateList.scss'
 
-const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill, getSpecificLabourDetailsForEstimate, addEstimate,getEstimatePendingVehcileList ,getSpecificVechicleDetailsToCreateEstimate, getAllCreatedEstimateList, getEstimateDetails} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
+const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill, getSpecificLabourDetailsForEstimate, addEstimate,getEstimatePendingVehcileList ,getSpecificVechicleDetailsToCreateEstimate, getAllCreatedEstimateList, getEstimateDetails, editEstimate} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
 const SpEstimateList = () => {
     const [page, setPage] = useState('table')
@@ -41,8 +41,20 @@ const SpEstimateList = () => {
         }
     }
 
-    const updateEstimate = ()=>{
-
+    const updateEstimate = async()=>{
+        const obj = {
+            payload:{
+                appointment_id:eyeIconValue?.appointment_id,
+                sp_id:localStorage.getItem('sp_id'),
+                sparePayload,
+                labourPayload
+            },
+            method:"POST",
+            url:editEstimate
+        }
+        if((sparePayload && sparePayload.length) || (labourPayload && labourPayload.length) ){
+            await fetchData(obj)
+        }
     }
 
     const deleteEstimate = ()=>{
