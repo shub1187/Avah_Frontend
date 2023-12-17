@@ -24,6 +24,7 @@ const SpEstimateList = () => {
     const [pendingVehicleApiData,setPendingVehicleApiData] = useState({})
     const [eyeIconValue,setEyeIconValue] = useState([])
     const [openDeleteEstimateConfirmation, setOpenDeleteEstimateConfirmation] = useState(false)
+    const[disabledUpdate,setDisabledUpdate] = useState(true)
     const createEstimate = async()=>{
         const obj = {
             payload:{
@@ -80,6 +81,10 @@ const SpEstimateList = () => {
         setSparePayload(data?.data?.spares)
         setLabourSparePayload(data?.data?.labours)
     }
+
+    useEffect(()=>{
+
+    },[])
     const getPendingVehicleDetails = async(SelectValue)=>{
         const obj = {
             method:"GET",
@@ -279,6 +284,7 @@ const SpEstimateList = () => {
                             getAllItemListForAutoFillDebounceOnInputChange={getAllSpareListForAutoFill}
                             getApiUrlOnAutocompleteItemSelect={getSpecificSpareDetailsForEstimate}
                             getApiUrlOnAutocompleteItemSelectParams={'spare_name'}
+                            setDisabledUpdate
                         />
                     </Box>
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3' >
@@ -292,7 +298,7 @@ const SpEstimateList = () => {
                             getAllItemListForAutoFillDebounceOnInputChange={getAllLabourListForAutoFill}
                             getApiUrlOnAutocompleteItemSelect={getSpecificLabourDetailsForEstimate}
                             getApiUrlOnAutocompleteItemSelectParams={'labour_name'}
-
+                            setDisabledUpdate
                         />
                     </Box>
                     <Box className='flex jc-flex-end ai-center'>
@@ -309,8 +315,8 @@ const SpEstimateList = () => {
                                 />
                             </Box>
                         </Box>
-                        <Button className='small-button' color='options' variant='contained' onClick={()=>setOpenDeleteEstimateConfirmation(true)}>DELETE</Button>
-                        <Button disabled className='small-button' color='options' variant='contained' onClick={updateEstimate}>UPDATE</Button>
+                        <Button className={'small-button mr-2'} color='options' variant='contained' onClick={()=>setOpenDeleteEstimateConfirmation(true)}>DELETE</Button>
+                        <Button disabled={disabledUpdate} className='small-button' color='options' variant='contained' onClick={updateEstimate}>UPDATE</Button>
                     </Box>
                 </div>
                 {openDeleteEstimateConfirmation && (
