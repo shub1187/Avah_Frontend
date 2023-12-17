@@ -229,7 +229,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                         value={everyRowData[col.field]}
                                         onChange={(e) => handleInputChange(e, col.field, rowIndex)}
                                         sx={{"& fieldset": { border: 'none' }}}
-                                        disabled={col.field==='tax_amount'|| cold.field === 'amount'}
+                                        disabled={col.field==='tax_amount'|| col.field === 'amount'}
                                     />
                                 </td>
                             )})}
