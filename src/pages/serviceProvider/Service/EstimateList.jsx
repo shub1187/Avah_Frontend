@@ -69,11 +69,13 @@ const SpEstimateList = () => {
         spareData.forEach((obj)=>{
             obj.amount = isNaN(parseFloat(obj.selling_price)) ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) + parseFloat(obj.selling_price)
             obj.tax_amount = !obj.tax ? 0 : obj.tax===0 ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price)
+            obj.backendDisabled = true
         })
 
         labourData.forEach((obj)=>{
             obj.amount = isNaN(parseFloat(obj.selling_price)) ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) + parseFloat(obj.selling_price)
             obj.tax_amount = !obj.tax ? 0 : obj.tax===0 ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price)
+            obj.backendDisabled = true
         })
         setSparePayload(data?.data?.spares)
         setLabourSparePayload(data?.data?.labours)
