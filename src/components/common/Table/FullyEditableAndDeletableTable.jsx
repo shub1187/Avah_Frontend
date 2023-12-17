@@ -9,7 +9,7 @@ import { debounce } from '@mui/material/utils'
 
 const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
-const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayload, autoCompleteFieldName, getAllItemListForAutoFillDebounceOnInputChange, getApiUrlOnAutocompleteItemSelect, getApiUrlOnAutocompleteItemSelectParams, setDisabledUpdate}) => {
+const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayload, autoCompleteFieldName, getAllItemListForAutoFillDebounceOnInputChange, getApiUrlOnAutocompleteItemSelect, getApiUrlOnAutocompleteItemSelectParams}) => {
 
     const {fetchData} = useFetchFunction()
 
@@ -21,7 +21,6 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
     //WHENEVER ANY ROW'S PARTICULAR COLUMN DATA CHANGES HANDLE THAT AND UPDATE
     const handleInputChange = (e,col,rowIndex)=>{
         // value={everyRowData.tax == 0? everyRowData.selling_price : (parseFloat(everyRowData.tax)/100) * parseFloat(everyRowData.selling_price) +  parseFloat(everyRowData.selling_price) }
-        setDisabledUpdate && setDisabledUpdate(false)
         const newValue = [...data]
         if(col==='selling_price'){
             let amount = newValue[rowIndex].tax==0  ? parseFloat(e.target.value) :!newValue[rowIndex].tax===0 ? 0 :(parseFloat(newValue[rowIndex].tax)/100) * parseFloat(e.target.value) +  parseFloat(e.target.value) 
@@ -102,7 +101,6 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
 
     //DELETE ROW WHEN CLIKED ON DELETE ICON
     const deleteRow = (rowIndex) => {
-        setDisabledUpdate && setDisabledUpdate(false)
         const newInputValues = [...data]
         newInputValues.splice(rowIndex,1)
         setPayload &&setPayload(newInputValues)
@@ -110,7 +108,6 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
 
     //ADDS A NEW ROW WITH ALL KEYS AS EMPTY STRINGS
     const addEditableRow = ()=>{
-        setDisabledUpdate && setDisabledUpdate(false)
         const newRow = {}
         column.forEach((val)=>{
             newRow[val.field]=''
