@@ -12,6 +12,8 @@ import FullyEditableAndDeletableTable from 'components/common/Table/FullyEditabl
 import { spLabourColumns } from 'components/spComponents/Table/Columns/Labours/SpLabourColumn'
 import URL from 'url/apiURL'
 import { useFetch, useFetchFunction } from 'hooks/useFetch'
+import { SpCreateSpareEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreate EstimateColumn'
+import { SpCreateLabourEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreateLabourEstimateColumn'
 
 const {addEstimate, getAllLabourListForAutoFill, getAllSpareListForAutoFill, getSpecificLabourDetailsForEstimate, getSpecificSpareDetailsForEstimate} = URL.SERVICE_PROVIDER.SERVICE.APPOINTMENT
 
@@ -95,7 +97,7 @@ const AppointmentList = () => {
                       title={'SPARES'} 
                       buttonName={'Spares'} 
                       data={sparePayload} 
-                      column={spLabourColumns} 
+                      column={SpCreateSpareEstimateColumn} 
                       setPayload={setSparePayload} 
                       autoCompleteFieldName={'spare_name'}
                       getAllItemListForAutoFillDebounceOnInputChange={getAllSpareListForAutoFill}
@@ -108,7 +110,7 @@ const AppointmentList = () => {
                       title={'LABOURS'} 
                       buttonName={'Labours'} 
                       data={labourPayload} 
-                      column={spLabourColumns} 
+                      column={SpCreateLabourEstimateColumn} 
                       setPayload={setLabourSparePayload} 
                       autoCompleteFieldName={'labour_name'}
                       getAllItemListForAutoFillDebounceOnInputChange={getAllLabourListForAutoFill}
