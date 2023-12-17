@@ -284,6 +284,7 @@ const SpEstimateList = () => {
                             getAllItemListForAutoFillDebounceOnInputChange={getAllSpareListForAutoFill}
                             getApiUrlOnAutocompleteItemSelect={getSpecificSpareDetailsForEstimate}
                             getApiUrlOnAutocompleteItemSelectParams={'spare_name'}
+                            setDisabledUpdate={setDisabledUpdate}
                         />
                     </Box>
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3' >
@@ -297,7 +298,7 @@ const SpEstimateList = () => {
                             getAllItemListForAutoFillDebounceOnInputChange={getAllLabourListForAutoFill}
                             getApiUrlOnAutocompleteItemSelect={getSpecificLabourDetailsForEstimate}
                             getApiUrlOnAutocompleteItemSelectParams={'labour_name'}
-
+                            setDisabledUpdate={setDisabledUpdate}
                         />
                     </Box>
                     <Box className='flex jc-flex-end ai-center'>
