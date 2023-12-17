@@ -18,7 +18,9 @@ const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLab
 const SpEstimateList = () => {
     const [page, setPage] = useState('table')
     const [sparePayload, setSparePayload] = useState([])
+    console.log("Spare Payload", sparePayload)
     const [labourPayload, setLabourSparePayload] = useState([])
+    console.log("Labour Payload", labourPayload)
     const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
     const {data:PendingVehicleList} = useFetch(`${getEstimatePendingVehcileList}?sp_id=${localStorage.getItem('sp_id')}`)
     const [pendingVehicleApiData,setPendingVehicleApiData] = useState({})
@@ -46,6 +48,7 @@ const SpEstimateList = () => {
             payload:{
                 appointment_id:eyeIconValue?.appointment_id,
                 sp_id:localStorage.getItem('sp_id'),
+                estimate_number : eyeIconValue?.estimate_number,
                 sparePayload,
                 labourPayload
             },
@@ -182,7 +185,7 @@ const SpEstimateList = () => {
                             data={sparePayload} 
                             column={SpCreateSpareEstimateColumn} 
                             setPayload = {setSparePayload} 
-                            autoCompleteFieldName={'spare_name'}
+                            autoCompleteFieldName={'name'}
                             getAllItemListForAutoFillDebounceOnInputChange={getAllSpareListForAutoFill}
                             getApiUrlOnAutocompleteItemSelect={getSpecificSpareDetailsForEstimate}
                             getApiUrlOnAutocompleteItemSelectParams={'spare_name'}
@@ -195,7 +198,7 @@ const SpEstimateList = () => {
                             data={labourPayload} 
                             column={SpCreateLabourEstimateColumn} 
                             setPayload = {setLabourSparePayload} 
-                            autoCompleteFieldName={'labour_name'}
+                            autoCompleteFieldName={'name'}
                             getAllItemListForAutoFillDebounceOnInputChange={getAllLabourListForAutoFill}
                             getApiUrlOnAutocompleteItemSelect={getSpecificLabourDetailsForEstimate}
                             getApiUrlOnAutocompleteItemSelectParams={'labour_name'}
@@ -275,11 +278,15 @@ const SpEstimateList = () => {
                           <Box>Appointment Status</Box>
                           <Box >Appointment Time</Box>  
                           <Box >Appointment Date</Box>  
+                          <Box >Appointment Id</Box>  
+                          <Box >Estimate Number</Box>  
                         </Box>
                         <Box>
                           <Box>: {eyeIconValue?.appointment_status}</Box>
                           <Box >: {eyeIconValue?.appointment_time}</Box>  
                           <Box >: {eyeIconValue?.appointment_date}</Box>  
+                          <Box >: {eyeIconValue?.appointment_id}</Box>  
+                          <Box >: {eyeIconValue?.estimate_number}</Box>  
                         </Box>
                       </Box>
                     </Box>
@@ -290,7 +297,7 @@ const SpEstimateList = () => {
                             title={'SPARES'} 
                             buttonName={'Add Spares'} 
                             data={sparePayload} 
-                            column={SpEditSpareEstimateColumn} 
+                            column={SpCreateSpareEstimateColumn} 
                             setPayload = {setSparePayload} 
                             autoCompleteFieldName={'name'}
                             getAllItemListForAutoFillDebounceOnInputChange={getAllSpareListForAutoFill}
@@ -304,7 +311,7 @@ const SpEstimateList = () => {
                             title={'LABOURS'} 
                             buttonName={'Add Labours'} 
                             data={labourPayload} 
-                            column={SpEditLabourEstimateColumn} 
+                            column={SpCreateLabourEstimateColumn} 
                             setPayload = {setLabourSparePayload} 
                             autoCompleteFieldName={'name'}
                             getAllItemListForAutoFillDebounceOnInputChange={getAllLabourListForAutoFill}

@@ -116,7 +116,7 @@ const AppointmentList = () => {
                       data={sparePayload} 
                       column={SpCreateSpareEstimateColumn} 
                       setPayload={setSparePayload} 
-                      autoCompleteFieldName={'spare_name'}
+                      autoCompleteFieldName={'name'}
                       getAllItemListForAutoFillDebounceOnInputChange={getAllSpareListForAutoFill}
                       getApiUrlOnAutocompleteItemSelect={getSpecificSpareDetailsForEstimate}
                       getApiUrlOnAutocompleteItemSelectParams={'spare_name'}
@@ -129,7 +129,7 @@ const AppointmentList = () => {
                       data={labourPayload} 
                       column={SpCreateLabourEstimateColumn} 
                       setPayload={setLabourSparePayload} 
-                      autoCompleteFieldName={'labour_name'}
+                      autoCompleteFieldName={'name'}
                       getAllItemListForAutoFillDebounceOnInputChange={getAllLabourListForAutoFill}
                       getApiUrlOnAutocompleteItemSelect={getSpecificLabourDetailsForEstimate}
                       getApiUrlOnAutocompleteItemSelectParams={'labour_name'}
