@@ -11,7 +11,7 @@ import { useFetchFunction } from 'hooks/useFetch'
 import { useRef, useState } from 'react'
 import CreateTextFields from 'components/common/Textfield'
 
-const ActionDialog = ({ changePassword, edit, status, view, approve, reject,createEstimate, deleteSpare, deleteLabour, payload, params, url , noLoading, noSnackbar ,setPage, setEyeIconValue, rowData}) => {
+const ActionDialog = ({ changePassword, edit, status, view, approve, reject,createEstimate, editEstimate, deleteSpare, deleteLabour, payload, params, url , noLoading, noSnackbar ,setPage, setEyeIconValue, rowData}) => {
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
   // const timerRef = useRef(null);
 
@@ -110,10 +110,19 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
           </Dialog>
         </>
         }
+
         {createEstimate && 
           <>
           <Button variant='outlined' color='info'  onClick={()=>{setPage();setEyeIconValue(rowData)}} >
             <PlaylistAddIcon style={{color:'rgb(204,16,16)',cursor:'pointer',marginRight:'5px'}}/> Create Estimate
+          </Button>
+          </>
+        }
+
+        {editEstimate && 
+          <>
+          <Button variant='outlined' color='options'  onClick={()=>{setPage();setEyeIconValue(rowData)}} >
+            <PlaylistAddIcon style={{color:'rgb(204,16,16)',cursor:'pointer',marginRight:'5px'}}/>
           </Button>
           </>
         }
