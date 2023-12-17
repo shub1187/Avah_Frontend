@@ -62,7 +62,6 @@ const SpEstimateList = () => {
     const [page, setPage] = useState('table')
     const [sparePayload, setSparePayload] = useState([])
     const [labourPayload, setLabourSparePayload] = useState([])
-    const {} = useFetch()
     const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
     const {data:PendingVehicleList} = useFetch(`${getEstimatePendingVehcileList}?sp_id=${localStorage.getItem('sp_id')}`)
     const [pendingVehicleApiData,setPendingVehicleApiData] = useState({})

@@ -10,6 +10,11 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CreateAutoCompleteTextfield from 'components/common/Textfield/AutoCompleteTextfield'
 import FullyEditableAndDeletableTable from 'components/common/Table/FullyEditableAndDeletableTable'
 import { spLabourColumns } from 'components/spComponents/Table/Columns/Labours/SpLabourColumn'
+import URL from 'url/apiURL'
+import { useFetch, useFetchFunction } from 'hooks/useFetch'
+
+const {addEstimate, getAllLabourListForAutoFill, getAllSpareListForAutoFill, getSpecificLabourDetailsForEstimate, getSpecificSpareDetailsForEstimate} = URL.SERVICE_PROVIDER.SERVICE.APPOINTMENT
+
 const AppointmentList = () => {
   
   const [tableCalled,setTableCalled] = useState(false)
@@ -18,11 +23,25 @@ const AppointmentList = () => {
   const [labourPayload, setLabourSparePayload] = useState([])
   const [page,setPage] = useState('table')
   const [eyeIconValue,setEyeIconValue] = useState([])
+  const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
 
-  console.log(eyeIconValue)
-  const handleSubmit = ()=>{
-    console.log(sparePayload,labourPayload)
+
+  const handleSubmit = async()=>{
+    const obj = {
+      payload:{
+          appointment_id:eyeIconValue?.appointment_id,
+          sp_id:localStorage.getItem('sp_id'),
+          sparePayload,
+          labourPayload
+      },
+      method:"POST",
+      url:addEstimate
+    }
+    if((sparePayload && sparePayload.length) || (labourPayload && labourPayload.length) ){
+        await fetchData(obj)
+    }  
   }
+
   if (page === 'estimate') {
     return (
         <>
@@ -55,7 +74,7 @@ const AppointmentList = () => {
                       <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
                         <Box>
                           <Box>NAME</Box>
-                          <Box >ADDRESS</Box>  
+                          <Box >PICKUP ADDRESS</Box>  
                           <Box >MOBILE</Box>  
                           <Box >EMAIL</Box>  
                         </Box>
@@ -72,15 +91,37 @@ const AppointmentList = () => {
 
                 </Box>
                 <Box maxHeight={'400px'} overflow={'auto'} className='mb-3'>
-                    <FullyEditableAndDeletableTable title={'SPARES'} buttonName={'Spares'} data={sparePayload} column={spLabourColumns} setPayload={setSparePayload} autoCompleteFieldName={'spare_name'}/>
+                    <FullyEditableAndDeletableTable 
+                      title={'SPARES'} 
+                      buttonName={'Spares'} 
+                      data={sparePayload} 
+                      column={spLabourColumns} 
+                      setPayload={setSparePayload} 
+                      autoCompleteFieldName={'spare_name'}
+                      getAllItemListForAutoFillDebounceOnInputChange={getAllSpareListForAutoFill}
+                      getApiUrlOnAutocompleteItemSelect={getSpecificSpareDetailsForEstimate}
+                      getApiUrlOnAutocompleteItemSelectParams={'spare_name'}
+                      />
                 </Box>
                 <Box maxHeight={'400px'} overflow={'auto'} className='mb-3' >
-                    <FullyEditableAndDeletableTable title={'LABOURS'} buttonName={'Labours'} data={labourPayload} column={spLabourColumns} setPayload={setLabourSparePayload} autoCompleteFieldName={'labour_name'}/>
+                    <FullyEditableAndDeletableTable 
+                      title={'LABOURS'} 
+                      buttonName={'Labours'} 
+                      data={labourPayload} 
+                      column={spLabourColumns} 
+                      setPayload={setLabourSparePayload} 
+                      autoCompleteFieldName={'labour_name'}
+                      getAllItemListForAutoFillDebounceOnInputChange={getAllLabourListForAutoFill}
+                      getApiUrlOnAutocompleteItemSelect={getSpecificLabourDetailsForEstimate}
+                      getApiUrlOnAutocompleteItemSelectParams={'labour_name'}
+                      />
                 </Box>
                 <Box className='flex jc-flex-end'>
                     <Button className='small-button' color='options' variant='contained' onClick={handleSubmit}>SUBMIT</Button>
                 </Box>
             </div>
+            {snackbar}
+            {loadingIndicator}
         </>
     )
 }
