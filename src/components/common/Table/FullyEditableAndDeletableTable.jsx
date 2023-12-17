@@ -37,7 +37,6 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
             let tax_amount =isNaN(parseFloat(newValue[rowIndex].selling_price)) ? 0 :e.target.value===0? parseFloat(newValue[rowIndex].selling_price) : !e.target.value ? 0 :(parseFloat(e.target.value)/100) * parseFloat(newValue[rowIndex].selling_price) 
             let amount = isNaN(parseFloat(newValue[rowIndex].selling_price)) ? 0 : tax_amount + parseFloat(newValue[rowIndex].selling_price)
 
-            // let amount = 0
             newValue[rowIndex] = {
                 ...newValue[rowIndex],
                 ['tax_amount']:tax_amount,
@@ -70,7 +69,8 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                 column.forEach((val)=>{
                     newRow[val.field]=apiData.data[val.field]
                 })
-
+                newRow.tax_amount =parseFloat(apiData?.data?.tax/100 ) * parseFloat(apiData?.data?.selling_price)
+                newRow.amount = newRow.tax_amount + parseFloat(apiData?.data?.selling_price)
                 newValue[rowIndex] = {
                     ...newValue[rowIndex],
                     ...newRow
