@@ -188,7 +188,7 @@ const SpEstimateList = () => {
                     <Box className='flex jc-flex-end ai-center'>
                         <Box className='flex jc-flex-end ai-center'>
                             <Box className='bold' >Grand Total = </Box>
-                            <Box className='mr-1'> Total Amount of Spares * Total Amount of Labour</Box>
+                            <Box className='mr-1'> Total Amount of Spares + Total Amount of Labour</Box>
                             <Box className='mr-4 textfield-grey-background'>
                                 <TextField 
                                 size='small' 

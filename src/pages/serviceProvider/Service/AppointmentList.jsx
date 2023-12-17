@@ -2,7 +2,7 @@ import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderT
 import React, { useEffect, useState } from 'react'
 import CreateAppointmentDialog from 'components/spComponents/Dialog/Service/SpCreateAppointmentDialog'
 import { spCreateAppointmentColumn } from 'components/spComponents/Table/Columns/Service/SpCreateAppointmentColumn'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, TextField, Typography } from '@mui/material'
 import CreateCustomerDialog from 'components/spComponents/Dialog/Users/createCustomerDialog'
 import { createCustomerColumn } from 'components/spComponents/Table/Columns/Users/CreateCustomerColumn'
 import CustomerTable from 'components/CustomerComponents/Table/CustomerTable'
@@ -14,7 +14,7 @@ import URL from 'url/apiURL'
 import { useFetch, useFetchFunction } from 'hooks/useFetch'
 import { SpCreateSpareEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreate EstimateColumn'
 import { SpCreateLabourEstimateColumn } from 'components/spComponents/Table/Columns/Service/SpCreateLabourEstimateColumn'
-
+import './EstimateList.scss'
 const {addEstimate, getAllLabourListForAutoFill, getAllSpareListForAutoFill, getSpecificLabourDetailsForEstimate, getSpecificSpareDetailsForEstimate} = URL.SERVICE_PROVIDER.SERVICE.APPOINTMENT
 
 const AppointmentList = () => {
@@ -43,6 +43,23 @@ const AppointmentList = () => {
         await fetchData(obj)
     }  
   }
+
+  const calculateTotalAmount = (sparePayload,labourPayload)=>{
+
+    let TotalAmount = 0
+
+    const addAmount = (payload)=>{
+        payload.forEach((obj)=>{
+            if(obj.amount){
+                TotalAmount+=parseFloat(obj.amount)
+            }
+        })
+    }
+    addAmount(sparePayload)
+    addAmount(labourPayload)
+
+    return TotalAmount
+}
 
   if (page === 'estimate') {
     return (
@@ -118,9 +135,25 @@ const AppointmentList = () => {
                       getApiUrlOnAutocompleteItemSelectParams={'labour_name'}
                       />
                 </Box>
-                <Box className='flex jc-flex-end'>
+                <Box className='flex jc-flex-end ai-center'>
+                        <Box className='flex jc-flex-end ai-center'>
+                            <Box className='bold' >Grand Total = </Box>
+                            <Box className='mr-1'> Total Amount of Spares + Total Amount of Labour</Box>
+                            <Box className='mr-4 textfield-grey-background'>
+                                <TextField 
+                                size='small' 
+                                disabled 
+                                value={
+                                    calculateTotalAmount(sparePayload,labourPayload)
+                                }
+                                />
+                            </Box>
+                        </Box>
+                        <Button className='small-button' color='options' variant='contained' onClick={handleSubmit}>SUBMIT</Button>
+                    </Box>
+                {/* <Box className='flex jc-flex-end'>
                     <Button className='small-button' color='options' variant='contained' onClick={handleSubmit}>SUBMIT</Button>
-                </Box>
+                </Box> */}
             </div>
             {snackbar}
             {loadingIndicator}
