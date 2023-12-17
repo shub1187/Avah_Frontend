@@ -63,10 +63,20 @@ const SpEstimateList = () => {
 
         const {data} = await fetchData(obj)
 
-        
+        let spareData = data?.data.spares
+        let labourData = data?.data.labours
+
+        spareData.forEach((obj)=>{
+            obj.amount = isNaN(parseFloat(obj.selling_price)) ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) + parseFloat(obj.selling_price)
+            obj.tax_amount = !obj.tax ? 0 : obj.tax===0 ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price)
+        })
+
+        labourData.forEach((obj)=>{
+            obj.amount = isNaN(parseFloat(obj.selling_price)) ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) + parseFloat(obj.selling_price)
+            obj.tax_amount = !obj.tax ? 0 : obj.tax===0 ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price)
+        })
         setSparePayload(data?.data?.spares)
         setLabourSparePayload(data?.data?.labours)
-
     }
     const getPendingVehicleDetails = async(SelectValue)=>{
         const obj = {
