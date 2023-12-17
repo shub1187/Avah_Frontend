@@ -122,7 +122,7 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
         {editEstimate && 
           <>
           <Button variant='outlined' color='options'  onClick={()=>{setPage();setEyeIconValue(rowData)}} >
-            <PlaylistAddIcon style={{color:'rgb(204,16,16)',cursor:'pointer',marginRight:'5px'}}/>
+            <PlaylistAddIcon />
           </Button>
           </>
         }
