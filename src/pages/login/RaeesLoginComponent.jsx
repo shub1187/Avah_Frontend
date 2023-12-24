@@ -67,12 +67,15 @@ const RaeesLoginComponent = () => {
                 setTimeout(() => {
                     navigate('/dashboard/home');
                 }, 0);
+                // localStorage.setItem('TYPE_OF_USER', loginDetails.TYPE_OF_USER);       
                 localStorage.setItem('TYPE_OF_USER', "2");
-                localStorage.setItem('role', "Service Provider");
+                localStorage.setItem('role', loginDetails.designation);
+                // localStorage.setItem('role', "Service Provider");
                 localStorage.setItem('access_tokenSP', loginDetails.token);
                 localStorage.setItem('isLoggedInSP', "true");
                 localStorage.setItem('sp_id', loginDetails.sp_id);  
                 localStorage.setItem('profile_name', loginDetails.profile_name);
+                localStorage.setItem('permission_granted',loginDetails.permission_granted)
             }
             else if(payload.role==='customer'){
                 setTimeout(() => {
