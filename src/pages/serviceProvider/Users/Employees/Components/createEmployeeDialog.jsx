@@ -14,7 +14,7 @@ const {createEmployee} = URL.SERVICE_PROVIDER.USERS.EMPLOYEES//ADD URL
 const CreateEmployeeDialog = ({height,width,color}) => {
     const {handleClose,isMobile,isSubmitted,setIsSubmitted,formData,setFormData} = useDialogWrapperContext()
     const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
-    const {data:rolesList} = useFetch()//PUT THE URL 
+    const {data:rolesList} = useFetch()//PUT THE URL //AFTER THAT REPLACE LINE 148
     
     const handleFieldChange = (fieldName, value) => setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
     const handleRoleSelect = (value)=> setFormData((prev)=>({ ...prev, 'role': value.label ,'permissions':value.permissions}))
@@ -25,7 +25,7 @@ const CreateEmployeeDialog = ({height,width,color}) => {
       {label:'Bye',value:'Bye',permissions:['Service','Labour','Setting']},
       {label:'Dell',value:'HEllo',permissions:['Spare','Service','Setting']}
     ]
-    
+
     const handleSubmit = async()=>{
           const obj = {
               payload:formData,
