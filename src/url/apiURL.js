@@ -31,7 +31,8 @@ const URL = {
 
             },
             EMPLOYEES:{
-                getAllEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllEmployee`)
+                getAllEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllEmployee`),
+                createEmployee :replaceUrl(`${BASE_URL}/api/serviceprovider/createEmployee`)
             }
         },
         SPARES : {

@@ -1,80 +1,41 @@
 import React,{useState, useEffect} from 'react'
-import { Alert, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Snackbar, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
+import { Alert, Autocomplete, Box, Button, Checkbox, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, InputLabel, Snackbar, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
 import CreateTextFields from 'components/common/Textfield';
 import { useFetch } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/common/Radio';
 import { useFetchFunction } from 'hooks/useFetch';
 import SkeletonLoading from 'components/common/Skeleton';
+import URL from 'url/apiURL'
+import CreateAutoCompleteTextfield from 'components/common/Textfield/AutoCompleteTextfield';
+import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
+
+const {createEmployee} = URL.SERVICE_PROVIDER.USERS.EMPLOYEES//ADD URL
+
 const CreateEmployeeDialog = ({height,width,color}) => {
-    const [open, setOpen] = React.useState(false);
-    const {fetchData} = useFetchFunction()
-    const [status,setStatus] = useState({
-      isVisible:false,
-      message:"",
-      loading:false,
-      error:'',
-      responseStatus:''
-  })
-    const [snackbar,handleSnackBar] = useState(true)
-    const [formData, setFormData] = useState({});
-  console.log(formData,"RAEES")
-
-    useEffect(()=>{
-        if(!status.loading && status.error)handleSnackBar(true)
-    },[status.error])
-    const handleFieldChange = (fieldName, value) => {
-      setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
-    };
-
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
-    // const handleSubmit = ()=>{
-
-    // }
+    const {handleClose,isMobile,isSubmitted,setIsSubmitted,formData,setFormData} = useDialogWrapperContext()
+    const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
+    const {data:rolesList} = useFetch()//PUT THE URL 
     
-    const handleSnackBarFunction = ()=>{
-      handleSnackBar(false)
-  }
+    const handleFieldChange = (fieldName, value) => setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
+    const handleRoleSelect = (value)=> setFormData((prev)=>({ ...prev, 'role': value.label ,'permissions':value.permissions}))
+
+    const results = [
+      {label:'Hello',value:'Hello',permissions:['Spare','Labour','Setting']},
+      {label:'Hell',value:'Hell',permissions:['Role','User','Setting']},
+      {label:'Bye',value:'Bye',permissions:['Service','Labour','Setting']},
+      {label:'Dell',value:'HEllo',permissions:['Spare','Service','Setting']}
+    ]
+    
     const handleSubmit = async()=>{
-      try{
-        
-          setStatus({loading:true,message:'',isVisible:true})
-          // const payload = {
-          //     status:'Active '  // Active or Inactive
-          // }
           const obj = {
               payload:formData,
               method:"POST",
-              url:"http://localhost:3008/api/serviceprovider/createEmployee"
+              url:createEmployee
           }
-
-          const {isSuccess,data,error} = await fetchData(obj)
-          if(error && !isSuccess){
-              throw new Error(error)
-          }
-          if(data && isSuccess){
-              setStatus({loading:false,responseStatus:data?.status})  //status has bee nactiveated or status has been inactivated
-          }
+          await fetchData(obj)
           setFormData({})
-      }
-      catch(error){
-          setStatus({error:error?.message,message:'',loading:false})
-          setFormData({})
-      }
   }
-    // const theme = createTheme({
-      // palette:{
-      //   mainy:{
-      //     main:'#ad4970',
-      //     contrastText:"#ffffff"
-      //   }
-      // }
-    // })
+
     const employeeTextField = [
         {
             label:'Name',
@@ -115,6 +76,13 @@ const CreateEmployeeDialog = ({height,width,color}) => {
 
         },
         {
+          label: 'Address',
+          name: "address",
+          type: 'text',
+          fullWidth:true,
+          row:4
+      },
+        {
             label: 'Role',
             name: "role",
             type: 'text',
@@ -122,12 +90,13 @@ const CreateEmployeeDialog = ({height,width,color}) => {
 
         },
         {
-            label: 'Address',
-            name: "address",
-            type: 'text',
-            fullWidth:true,
-            row:4
-        },
+          label: 'Permission',
+          name: "permission_granted",
+          type: 'text',
+          fullWidth:true
+
+      },
+
         {
             label: 'Country',
             name: "country",
@@ -167,108 +136,50 @@ const CreateEmployeeDialog = ({height,width,color}) => {
         },
     ]
 
-    const businessTextfield=[
-      {
-        label:'Business Name',
-        name:"businessName",
-        type:'text',
-        fullWidth:true
-    },
-    {
-        label:'Business Type',
-        name:"businessType",
-        type:'text',
-        fullWidth:true
-
-    },
-    {
-        label: 'Business Contact Number ',
-        name: "businessContactNumber",
-        type: 'number',
-        fullWidth:true
-
-    },
-    {
-        label: 'Concern Person Name',
-        name: "gender",
-        type: 'text',
-        fullWidth:true
-
-    },
-    {
-      label: 'Email',
-      name: "email",
-      type: 'email',
-      fullWidth:true
-    },
-    {
-      label: 'Mobile',
-      name: "mobile",
-      type: 'number',
-      fullWidth:true
-
-  },
-  {
-      label: 'Gender',
-      name: "gender",
-      type: 'text',
-      fullWidth:true
-
-  },
-  {
-    label: 'GST Number',
-    name: "gstNumber",
-    type: 'text',
-    fullWidth:true
-  },
-  {
-    label: 'Address',
-    name: "address",
-    type: 'text',
-    fullWidth:true,
-    row:4
-},
-{
-    label: 'Country',
-    name: "country",
-    type: 'text'
-},
-{
-    label: 'State',
-    name: "state",
-    type: 'text'
-},
-{
-    label: 'City',
-    name: "city",
-    type: 'text'
-},
-{
-    label: 'Pincode',
-    name: "pincode",
-    type: 'number',
-    fullWidth:true
-},
-]
   return (
     <div>
         <DialogContent>
             <Grid container xs={12} mt={3}>
               <Grid item xs={3.6} mr={4}>
-                  <CreateTextFields  fields={employeeTextField.slice(0,5)} onChange={handleFieldChange}  formField={formData}/>
+                  <CreateTextFields fields={employeeTextField.slice(0,5)} onChange={handleFieldChange}  formField={formData}/>
               </Grid>
               <Grid item xs={3.6} mr={4}>
                 <Grid container xs={12}>
-                <Grid xs={12} item><CreateTextFields  fields={employeeTextField.slice(5,6)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  <Grid  xs={5.7} item mr={2}><CreateTextFields fields={employeeTextField.slice(6,7)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={5.7} item><CreateTextFields fields={employeeTextField.slice(7,8)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={5.7} item mr={2}><CreateTextFields fields={employeeTextField.slice(8,9)} onChange={handleFieldChange}  formField={formData}/></Grid>
-                  <Grid  xs={5.7} item><CreateTextFields fields={employeeTextField.slice(9,10)} onChange={handleFieldChange}  formField={formData}/></Grid>
+                <Grid item xs={12}><CreateAutoCompleteTextfield options={results}  whiteColor fullWidth  fields={employeeTextField.slice(5,6)} onSelect={handleRoleSelect}  formField={formData}/></Grid>
+                <Grid item xs={12} mb={2}>
+                  <InputLabel sx={{mb:1}}>Permissions</InputLabel>
+                  <Autocomplete
+                    freeSolo
+                    disabled
+                      multiple
+                      id="fixed-tags-demo"
+                      value={formData.permissions || '' }
+                      options={[]}
+                      getOptionLabel={''}
+                      renderTags={(tagValue, getTagProps) =>
+                        tagValue.map((option, index) => (
+                          <Chip
+                            label={formData.permissions[index] }
+                            {...getTagProps({ index })}
+                            disabled={formData.permissions[index] }
+                          />
+                        ))
+                      }
+                      renderInput={(params) => (
+                        <TextField {...params} size='small'/>
+                      )}
+                    />
+                </Grid>
+                {/* <Grid xs={12} item><CreateTextFields  fields={employeeTextField.slice(6,7)} onChange={handleFieldChange} formField={formData}/></Grid> */}
+                  <Grid  xs={5.7} item mr={1}><CreateTextFields fields={employeeTextField.slice(7,8)} onChange={handleFieldChange}  formField={formData}/></Grid>
+                  <Grid  xs={5.7} item><CreateTextFields fields={employeeTextField.slice(8,9)} onChange={handleFieldChange}  formField={formData}/></Grid>
+                  <Grid  xs={5.7} item mr={1}><CreateTextFields fields={employeeTextField.slice(9,10)} onChange={handleFieldChange}  formField={formData}/></Grid>
+                  <Grid  xs={5.7} item><CreateTextFields fields={employeeTextField.slice(10,11)} onChange={handleFieldChange}  formField={formData}/></Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={3.6} mr={4}>
+              <Grid item xs={3.6} >
                 <Grid container xs={12}>
-                  <Grid  xs={12} item><CreateTextFields fields={employeeTextField.slice(10,13)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={employeeTextField.slice(11,14)} onChange={handleFieldChange} formField={formData}/></Grid>
                   <Grid xs={12}><ControlledRadioButtonsGroup onChange={handleFieldChange} title={'STATUS'} formField={formData} name={'status'}/></Grid>
                 </Grid>
               </Grid>
@@ -278,8 +189,6 @@ const CreateEmployeeDialog = ({height,width,color}) => {
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
-      {status.loading && <SkeletonLoading />}
-            {(!status.loading && status.error ) &&<Snackbar open={snackbar} autoHideDuration={2000} onClose={handleSnackBarFunction}  color='error'><Alert severity='error'>{status.error}</Alert></Snackbar>}
     </div>
   )
 }
