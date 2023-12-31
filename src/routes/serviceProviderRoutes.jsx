@@ -35,6 +35,7 @@ const serviceProviderRoutes = [
       {
         id:3,
         link:'dashboard/roles',
+        role:'Roles',
         component:<SpRolesPage/>,
       },
       {
@@ -51,7 +52,9 @@ const serviceProviderRoutes = [
       },
       {
         id:6,
-        link:'dashboard/serviceType',    
+        link:'dashboard/serviceType', 
+        role:'Service Type',
+   
       },
       {
         id:7,
@@ -77,6 +80,7 @@ const serviceProviderRoutes = [
       {
         id:8,
         link:'dashboard/billing',
+        role:'Billing',
         subList:[
           {
             id:81,
@@ -91,6 +95,7 @@ const serviceProviderRoutes = [
       {
         id:9,
         link:'dashboard/accounts',
+        role:'Accounts',
         subList:[
           {
             id:91,
@@ -105,15 +110,17 @@ const serviceProviderRoutes = [
       {
         id:10,
         link:'/dashboard/packages',
+        role:'Packages',
       },
       {
         id:11,
         link:'/dashboard/reviews',
-    
+        role:'Reviews',
       },
       {
         id:12,
         link:'/dashboard/settings',
+        role:'Settings',
       },
 ]
 

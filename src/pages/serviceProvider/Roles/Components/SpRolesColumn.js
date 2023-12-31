@@ -1,7 +1,6 @@
 export const SpRolesColumn = [
-    { title: "Role ", field: "spare_name" },
-    { title: "Permission", field: "hsn_sac" },
-    { title: "Part Number", field: "part_number" },
-    { title:'Selling Price', field : 'selling_price'},
-    { title: "Tax %", field: "tax" },
+    { title: "Role Id ", field: "role_id" },
+    { title: "Role ", field: "role_name" },
+    { title: "Permission", field: "permission_granted" },
+    { title: "Actions" }  
 ]

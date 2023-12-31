@@ -64,8 +64,10 @@ const RaeesLoginComponent = () => {
                 localStorage.setItem('isLoggedIn', "true");  
             }
             else if (payload.role=='service provider'){
+                // console.log("ln 67", payload)
                 setTimeout(() => {
                     navigate('/dashboard/home');
+                    window.location.reload();
                 }, 0);
                 // localStorage.setItem('TYPE_OF_USER', loginDetails.TYPE_OF_USER);       
                 localStorage.setItem('TYPE_OF_USER', "2");
@@ -76,6 +78,8 @@ const RaeesLoginComponent = () => {
                 localStorage.setItem('sp_id', loginDetails.sp_id);  
                 localStorage.setItem('profile_name', loginDetails.profile_name);
                 localStorage.setItem('permission_granted',loginDetails.permission_granted)
+                localStorage.setItem('business_name',loginDetails.business_name)
+
             }
             else if(payload.role==='customer'){
                 setTimeout(() => {

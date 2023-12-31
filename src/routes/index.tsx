@@ -42,16 +42,17 @@ const generateRoute = (routes: RouteType[]): ReactNode => {
 
 const generateRouty = (SideBarList:any)=>{
 
-    // let permission = localStorage.getItem('permission_granted')
-    let permission =  [
-      "Users",
-      "Spares",
-      "Labour",
-      "Service Type",
-      "Service"
-    ]
+    let permission = localStorage.getItem('permission_granted')
+    // let permission =  [
+    //   "Users",
+    //   "Spares",
+    //   "Labour",
+    //   "Service Type",
+    //   "Service"
+    // ]
     return SideBarList.map((route:any,index:any)=>{
-      if(!route.role || permission?.includes(route?.role)){
+      console.log("Not Rendered", permission)
+      if(!route.role || permission?.includes(route?.role) ||  permission?.includes('All') ){
         return (<Route
           path={route.link}
           element={route.component}

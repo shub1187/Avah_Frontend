@@ -45,6 +45,7 @@ export const SpSideBarList = [
     link:'/dashboard/roles',
     icon:RolesIcon,
     name:"Roles",
+    role:"Roles"
   },
   {
     id:4,
@@ -96,6 +97,7 @@ export const SpSideBarList = [
     link:'/dashboard/billing/invoiceList',
     icon:BillingsIcon,
     name:"Billing",
+    role: "Billing",
     subList:[
       {
         id:81,
@@ -114,6 +116,7 @@ export const SpSideBarList = [
     link:'/dashboard/accounts/account',
     icon:AccountsIcon,
     name:"Accounts",
+    role: "Accounts",
     subList:[
       {
         id:91,
@@ -132,19 +135,22 @@ export const SpSideBarList = [
     link:'/dashboard/packages',
     icon:PackageIcon,
     name:"Packages",
+    role:"Packages"
   },
   {
     id:11,
     link:'/dashboard/reviews',
     icon:ReviewsIcon,
     name:"Reviews",
+    role:"Reviews"
 
   },
   {
     id:12,
     link:'/dashboard/settings',
     icon:SettingsIcon,
-    name:"SETTINGS",
+    name:"Settings",
+    role:"Settings"
 
   },
 ]
@@ -272,15 +278,15 @@ const ServiderProviderSidebar = ({})=>{
         <>
         <List>
             {SpSideBarList.map((list,listIndex)=>{
-                // let permission = localStorage.getItem('permission_granted')
-                let permission =  [
-                  "Users",
-                  "Spares",
-                  "Labour",
-                  "Service Type",
-                  "Service"
-                ]
-                if (!list.role || permission?.includes(list?.role)){
+                let permission = localStorage.getItem('permission_granted')
+                // let permission =  [
+                //   "Users",
+                //   "Spares",
+                //   "Labour",
+                //   "Service Type",
+                //   "Service"
+                // ]
+                if (!list.role || permission?.includes(list?.role) ||  permission?.includes('All')){
                 return (
                     <Link to={list.link} className='link-text' key={listIndex}>
                     <Box className='sidebar-button'>

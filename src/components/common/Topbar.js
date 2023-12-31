@@ -43,7 +43,7 @@ const Topbar = ({isMobile,handleDrawerToggle,customer}) => {
           </Grid>
           <Grid item >
               <TopBarSpIcon/>
-              <Box component={'span'} className='ml-3'>{localStorage.getItem('business_name') ?? 'Pranish Poojary Service'}</Box>
+              <Box fontSize={20} component={'span'} className='ml-3'>{localStorage.getItem('business_name') ?? ''}</Box>
           </Grid>
           <Grid item>
             <Grid container spacing={2} alignItems={'center'}>

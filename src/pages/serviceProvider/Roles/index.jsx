@@ -9,13 +9,17 @@ import URL from 'url/apiURL';
 
 const {addEmployeeRole,getAllEmployeeRoles} = URL.SERVICE_PROVIDER.ROLE
 const checkboxList = [
-  { name:'ROLES',permission:'role'},
-  { name:'SPARES',permission:'role'},
-  { name:'SERVICE',permission:'role'},
-  { name:'ACCOUNT',permission:'role'},
-  { name:'BILLING',permission:'role'},
-  { name:'FINANCE',permission:'role'}
-
+  { name:'Roles'},
+  { name:'Spares'},
+  { name:'Labour'},
+  { name:'Service'},
+  { name:'Service Type'},
+  { name:'Accounts'},
+  { name:'Billing'},
+  { name:'Finance'},
+  { name:'Packages'},
+  { name:'Reviews'},
+  { name:'Settings'}
 ]
 
 const SpRolesPage = () => {
@@ -39,7 +43,7 @@ const SpRolesPage = () => {
       permission_granted:Object.keys(roleInfo.permissions).filter(permission=>roleInfo.permissions[permission] )
     }
     const obj = {
-      method:'GET',
+      method:'POST',
       payload,
       url:addEmployeeRole
     }
