@@ -26,6 +26,14 @@ const URL = {
 
     },
     SERVICE_PROVIDER:{
+        USERS:{
+            CUSTOMER:{
+
+            },
+            EMPLOYEES:{
+                getAllEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllEmployee`)
+            }
+        },
         SPARES : {
             addspare: replaceUrl(`${BASE_URL}/api/serviceprovider/addspare`),
             getAllSpares : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllSpares`),

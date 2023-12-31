@@ -252,13 +252,6 @@ const CreateEmployeeDialog = ({height,width,color}) => {
 ]
   return (
     <div>
-      <Button sx={{height:height,width:width}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
-        ADD NEW EMPLOYEE
-      </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth='lg'>
-      <div style={{width: 1200}}>
-
-        <DialogTitle >CREATE EMPLOYEE</DialogTitle>
         <DialogContent>
             <Grid container xs={12} mt={3}>
               <Grid item xs={3.6} mr={4}>
@@ -285,8 +278,6 @@ const CreateEmployeeDialog = ({height,width,color}) => {
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
-        </div>
-      </Dialog>
       {status.loading && <SkeletonLoading />}
             {(!status.loading && status.error ) &&<Snackbar open={snackbar} autoHideDuration={2000} onClose={handleSnackBarFunction}  color='error'><Alert severity='error'>{status.error}</Alert></Snackbar>}
     </div>

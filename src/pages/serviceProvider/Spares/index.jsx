@@ -9,7 +9,6 @@ const SpSparesPage = () => {
   return (
     <div>
       <ServiceProvidertable 
-          title={'ADD SPARES'} 
           buttonName={'ADD SPARES'} 
           key={'spareKey'} 
           DialogButton={SpCreateSpareDialog} 

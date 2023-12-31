@@ -4,8 +4,14 @@ import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderT
 
 const SpCustomerPage = () => {
   return (
-    <div><ServiceProvidertable DialogButton={CreateCustomerDialog} columnss={createCustomerColumn}/></div>
+    <div>
+      <ServiceProvidertable
+        title={'ADD CUSTOMER'} 
+        DialogButton={CreateCustomerDialog} 
+        columnss={createCustomerColumn}
+      />
+    </div>
   )
 }
-
+ 
 export default SpCustomerPage

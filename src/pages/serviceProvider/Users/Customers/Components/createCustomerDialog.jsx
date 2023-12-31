@@ -193,13 +193,6 @@ const CreateCustomerDialog = ({height,width,color}) => {
 ]
   return (
     <div>
-      <Button sx={{height:isMobileResolution?'50px':height,width:width,fontSize:isMobileResolution?"0.6rem":'0.875rem'}} variant="contained" color={color || 'success'} onClick={handleClickOpen}>
-        Create New Customer
-      </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth='lg'>
-      <div style={{width: 1200}}>
-
-        <DialogTitle >CREATE CUSTOMER</DialogTitle>
         <DialogContent>
           <Box display={'flex'} justifyContent={'center'}>
             <Button sx={{minHeight:'52px', minWidth:"235px"}} variant={toggle==='individual'?'contained':'outlined'} color='options' onClick={()=>setToggle('individual')}>INDIVIDUAL</Button>
@@ -244,26 +237,11 @@ const CreateCustomerDialog = ({height,width,color}) => {
               </Grid>
             </Grid>
           }
-          {/* <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText> */}
-          {/* <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          /> */}
         </DialogContent>
         <DialogActions>
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
-        </div>
-      </Dialog>
     </div>
   )
 }
