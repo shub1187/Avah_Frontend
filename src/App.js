@@ -5,12 +5,12 @@ import LoginComponent from "./pages/login/LoginComponent";
 import { customerRoute, raeesRoute, routes, spRoutes } from "./routes";
 import ServiceProviderLayout from "./components/layout/ServiceProviderLayout";
 import AdminLoginComponent from "pages/login/AdminLoginComponent";
-import RaeesLoginComponent from "pages/login/RaeesLoginComponent";
+import RaeesLoginComponent from "pages/login";
 import { useEffect } from "react";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { globalAppTheme } from "components/common/Themes/GlobalAppTheme";
 import CustomerLayout from "components/layout/CustomerLayout";
-import LandingPage from "pages/Customer/Home/CustomerHome";
+import LandingPage from "pages/Customer/LandingPageHome";
 function App() {
   const loginState = useSelector((state) => state.appState.login);
   console.log(localStorage.getItem('TYPE_OF_USER'))

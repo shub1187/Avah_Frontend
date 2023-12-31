@@ -3,7 +3,7 @@ import axios from "axios";
 import MaterialTable, { MTableToolbar } from "material-table";
 import './ServiceProviderTable.css'
 import { createRef, useState } from "react";
-import CreateCustomerDialog from "../Dialog/Users/createCustomerDialog";
+import CreateCustomerDialog from "../../../pages/serviceProvider/Users/Customers/Components/createCustomerDialog";
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import ActionDialog from "../../common/Dialog/ActionDialog";
 import DialogWrapper from "components/common/Dialog/DialogWrapper";
@@ -175,7 +175,7 @@ const ServiceProvidertable = ({DialogButton,columnss,URL,key, dialogTitle, dialo
                   />
                 </DialogWrapper>)
               }
-            {clickButton && <Button variant="contained" color="options" onClick={clickButton}>{buttonName}</Button>}
+            {clickButton && <Button className="mr-1 mt-3" variant="contained" color="options" onClick={clickButton}>{buttonName}</Button>}
           </div>
         </Box>
         </>

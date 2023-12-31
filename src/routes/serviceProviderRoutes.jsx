@@ -1,22 +1,24 @@
 import ServiceProviderHome from 'pages/serviceProvider/Home'
-import SpLabourPage from 'pages/serviceProvider/Labour/SpLabourPage'
-import SpAppointmentPage from 'pages/serviceProvider/Service/AppointmentList'
-import SpEstimateList from 'pages/serviceProvider/Service/EstimateList'
+import SpLabourPage from 'pages/serviceProvider/Labour'
+import SpRolesPage from 'pages/serviceProvider/Roles'
+import SpAppointmentPage from 'pages/serviceProvider/Service/Appointment'
+import SpEstimateList from 'pages/serviceProvider/Service/Estimate'
 import SparesList from 'pages/serviceProvider/Spares/SpSparesPage'
-import SpCustomerPage from 'pages/serviceProvider/Users/Customers/SpCustomerPage'
+import SpCustomerPage from 'pages/serviceProvider/Users/Customers'
+import SpEmployeesPage from 'pages/serviceProvider/Users/Employees'
 import React from 'react'
 import SpCustomersPage from 'serviceprovider/page/dashboard/user/page/SpCustomersPage'
-import SpEmployeePage from 'serviceprovider/page/dashboard/user/page/SpEmployeePage'
 
 const serviceProviderRoutes = [
     {
         id:1,
         link:'dashboard/home',
-        component:<ServiceProviderHome/>
+        component:<ServiceProviderHome/>,
       },
       {
         id:2,
         link:'dashboard/user',
+        role:'Users',
         subList:[
           {
             id:21,
@@ -26,85 +28,92 @@ const serviceProviderRoutes = [
           {
             id:22,
             link:'employees',
-            component:<SpEmployeePage/>
+            component:<SpEmployeesPage/>,
           },
         ]
       },
       {
         id:3,
-        link:'dashboard/spares',
-        component:<SparesList/>
+        link:'dashboard/roles',
+        component:<SpRolesPage/>,
       },
       {
         id:4,
-        link:'dashboard/labour',
-        component:<SpLabourPage/>
+        link:'dashboard/spares',
+        role:'Spares',
+        component:<SparesList/>,
       },
       {
         id:5,
-        link:'dashboard/serviceType',    
+        link:'dashboard/labour',
+        role:'Labour',
+        component:<SpLabourPage/>
       },
       {
         id:6,
+        link:'dashboard/serviceType',    
+      },
+      {
+        id:7,
         link:'dashboard/service',
+        role:'Service',
         subList:[
           {
-            id:61,
+            id:71,
             link:'estimatesList',
             component:<SpEstimateList/>
           },
           {
-            id:62,
+            id:72,
             link:'appointmentList',
             component:<SpAppointmentPage/>
           },
           {
-            id:63,
+            id:73,
             link:'jobCardsList',
           },
         ]
       },
       {
-        id:7,
+        id:8,
         link:'dashboard/billing',
         subList:[
           {
-            id:71,
+            id:81,
             link:'invoiceList',
           },
           {
-            id:72,
+            id:82,
             link:'pendingPayments',
           },
         ]
       },
       {
-        id:8,
+        id:9,
         link:'dashboard/accounts',
         subList:[
           {
-            id:81,
+            id:91,
             link:'account',
           },
           {
-            id:82,
+            id:92,
             link:'ledger',
           },
         ]
       },
       {
-        id:9,
+        id:10,
         link:'/dashboard/packages',
       },
       {
-        id:10,
+        id:11,
         link:'/dashboard/reviews',
     
       },
       {
-        id:11,
+        id:12,
         link:'/dashboard/settings',
-    
       },
 ]
 

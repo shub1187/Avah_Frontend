@@ -1,5 +1,5 @@
-import SpCreateSpareDialog from 'components/spComponents/Dialog/Spares/SpAddSparesDialog'
-import { SpcreateSparesColumn } from 'components/spComponents/Table/Columns/Spares/SpSparesColumn'
+import SpCreateSpareDialog from 'pages/serviceProvider/Spares/Components/SpAddSparesDialog'
+import { SpcreateSparesColumn } from 'pages/serviceProvider/Spares/Components/SpSparesColumn'
 import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderTable'
 import URL from 'url/apiURL'
 

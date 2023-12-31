@@ -8,23 +8,23 @@ import createInvoiceIcon from 'assets/img/serviceProviderDashboard/createInvoice
 import serviceDueIcon from 'assets/img/serviceProviderDashboard/serviceDueIcon.png'
 import pendingServicesIcon from 'assets/img/serviceProviderDashboard/pendingServicesIcon.png'
 import totalCustomersIcon from 'assets/img/serviceProviderDashboard/totalCustomersIcon.png'
-import serviceProviderHomeTheme from './Components/theme';
+import customerHomeTheme from './Components/theme';
 import SpRevenueSingleCard from 'components/common/Cards/HomePageCards/spRevenueSingleCard';
 import SpRevenueSplitCard from 'components/common/Cards/HomePageCards/spRevenueSplitCard';
 import SpLatestActivityCard from 'components/common/Cards/HomePageCards/SpLatestActivityCard';
 import SpQuickPayment from 'components/common/Cards/HomePageCards/SpQuickPayment';
 import SpRating from 'components/common/Cards/HomePageCards/SpRating';
-import ApexCharts from './Components/charts';
+import CustomerApexCharts from './Components/charts';
 import {useFetch,useFetchFunction} from 'hooks/useFetch';
 import CreateAppointmentDialog from 'pages/serviceProvider/Service/Appointment/Components/SpCreateAppointmentDialog';
 import axios from 'axios';
 import { useMobileResponsive } from 'hooks/useMobileResponsive';
-const ServiceProviderHome = (props) => {
+const CustomerDashboard = (props) => {
   const {data} = useFetch('https://jsonplaceholder.typicode.com/todos/1')
   const {isMobile} = useMobileResponsive()
   return (
     <>
-      <ThemeProvider theme={serviceProviderHomeTheme}>
+      <ThemeProvider theme={customerHomeTheme}>
       <Box sx={{backgroundImage:"linear-gradient(to bottom, rgb(233,56,72) , rgb(119,53,98))"  }} className='total-usage'>
         {!isMobile && 
           <Box sx={{display:"flex",justifyContent:"center",color:"white",fontWeight:"700"}}>
@@ -74,7 +74,7 @@ const ServiceProviderHome = (props) => {
                   <Grid xl={8} md={12} item><SpRevenueSplitCard/></Grid>
                 </Grid>
                 <Card sx={{marginTop:"100px"}} ele vation={4} >
-                  <ApexCharts/>
+                  <CustomerApexCharts/>
                 </Card>
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -95,4 +95,4 @@ const ServiceProviderHome = (props) => {
   );
 };
 
-export default ServiceProviderHome;
+export default CustomerDashboard;

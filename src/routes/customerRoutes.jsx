@@ -1,8 +1,8 @@
-import CustomerAppointment from "pages/Customer/Appointment/CustomerAppointment";
-import CustomerDashboard from "pages/Customer/Dashboard/CustomerDashboard";
-import CustomerHome from "pages/Customer/Home/CustomerHome";
-import UpdateCustomerProfile from "pages/Customer/UpdateProfile/UpdateProfile";
-import CustomerVehicle from "pages/Customer/Vehicle/CustomerVehicle";
+import CustomerAppointment from "pages/Customer/Appointment";
+import CustomerDashboard from "pages/Customer/Dashboard";
+import CustomerHome from "pages/Customer/LandingPageHome";
+import UpdateCustomerProfile from "pages/Customer/UpdateProfile";
+import CustomerVehicle from "pages/Customer/Vehicle";
 
 
 

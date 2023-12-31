@@ -2,6 +2,7 @@ import HomeIconImage from './home.svg'
 import UserIconImage from './user.png'
 import SparesIconImage from './spares.png'
 import LabourIconImage from './labour.png'
+import RolesIconImage from './role.png'
 import ServiceTypeIconImage from './serviceType.png'
 import ServiceIconImage from './service.png'
 import BillingIconImage from './billing.png'
@@ -60,6 +61,13 @@ const HomeIcon = ({ isSelected }) => (
     />
   );
 
+  const RolesIcon = ({ isSelected }) => (
+    <img
+      src={RolesIconImage}
+      alt="user"
+      style={{ filter: isSelected ? 'brightness(0) invert(1)' : 'none' }}
+    />
+  );
   const BillingsIcon = ({ isSelected }) => (
     <img
       src={BillingIconImage}
@@ -120,5 +128,6 @@ export {
     ReviewsIcon,
     SettingsIcon,
     DashBoardIcons,
-    AppointmentIcon
+    AppointmentIcon,
+    RolesIcon
 }

@@ -1,8 +1,4 @@
 import { Box, Button ,Dialog, DialogActions, DialogTitle, IconButton, InputLabel, MenuItem, Select, TextField, Typography} from '@mui/material'
-import ChangePasswordDialog from '../../spComponents/Dialog/ChangePasswordDialog'
-import EditDialog from '../../spComponents/Dialog/EditDialog'
-import StatusDialog from '../../spComponents/Dialog/StatusDialog'
-import ViewDialog from '../../spComponents/Dialog/ViewDialog'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
@@ -86,10 +82,10 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject,crea
 }
   return (
     <>
-        {changePassword && <ChangePasswordDialog/>}
+        {/* {changePassword && <ChangePasswordDialog/>}
         {edit && <EditDialog/>}
         {status && <StatusDialog/>}
-        {view && <ViewDialog/>}
+        {view && <ViewDialog/>} */}
         {approve && <Button variant='outlined' color='success'  onClick={StatusUpdate}>
                       <CheckCircleIcon style={{color:'rgb(5,131,30)',cursor:'pointer',marginRight:'5px'}}/> Approve
                      </Button>}

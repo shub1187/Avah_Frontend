@@ -37,6 +37,10 @@ const URL = {
             getAllLabour : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllLabour`),
             deleteLabour : replaceUrl(`${BASE_URL}/api/serviceprovider/deleteLabour`),
         },
+        ROLE:{
+            addEmployeeRole : replaceUrl(`${BASE_URL}/api/serviceprovider/addEmployeeRole`),
+            getAllEmployeeRoles : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllEmployeeRoles`)
+        },  
         SERVICE:{
             ESTIMATE:{
                 getAllSpareListForAutoFill: replaceUrl(`${BASE_URL}/api/serviceprovider/getAllSpareListForAutoFill`),

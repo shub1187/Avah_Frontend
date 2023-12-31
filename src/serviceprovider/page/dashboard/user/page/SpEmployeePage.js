@@ -9,9 +9,9 @@ import { RELOAD_PAGE, RESET_PAGE } from '../../../../../network/ApiConstant';
 import PaginationPage from '../../../../../redux/pagination_layout/pagination/PaginationPage';
 import AddEmployeeDialog from '../common/dialog/AddEmployeeDialog';
 import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderTable';
-import { createEmployeeColumn } from 'components/spComponents/Table/Columns/Users/CreateEmployeeColumn';
-import CreateEmployeeDialog from 'components/spComponents/Dialog/Users/createEmployeeDialog';
-const SpEmployeePage = (props) => {
+import { createEmployeeColumn } from 'pages/serviceProvider/Users/Employees/Components/CreateEmployeeColumn';
+import CreateEmployeeDialog from 'pages/serviceProvider/Users/Employees/Components/createEmployeeDialog';
+const SpEmployeePagee = (props) => {
   const theme = createTheme()
   const dispatch = useDispatch()
   const userState = useSelector((state) => state.appState.user);
@@ -76,4 +76,4 @@ const SpEmployeePage = (props) => {
   );
 };
 
-export default SpEmployeePage;
+export default SpEmployeePagee;

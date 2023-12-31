@@ -90,7 +90,6 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         if(e.target.value!=0 || e.target.value){
         let {data:autoCompleteData} =await fetchData(obj)
         if(autoCompleteData){
-            console.log("ln 77",autoCompleteData)
             let newData = [...data]
             newData[rowIndex] = {
                 ...newData[rowIndex],
@@ -156,6 +155,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                     if(col.field===autoCompleteFieldName){
                                         return (<td>
                                                     <Autocomplete
+                                                        noOptionsText={'Search Here'}
                                                         options={everyRowData.autocompleteData}
                                                         renderInput={(params) => <TextField {...params}  size='small'/>}
                                                         onChange={(e,value)=>autoCompleteOnSelect(e, col.field, rowIndex,value)}
@@ -232,7 +232,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                         size='small'
                                         value={everyRowData[col.field]}
                                         onChange={(e) => handleInputChange(e, col.field, rowIndex)}
-                                        sx={{"& fieldset": { border: 'none' }}}
+                                        // sx={{"& fieldset": { border: 'none' }}}
                                         disabled={col.field==='tax_amount'|| col.field === 'amount' || everyRowData.backendDisabled }
                                     />
                                 </td>

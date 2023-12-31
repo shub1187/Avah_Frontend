@@ -10,12 +10,7 @@ import { useMobileResponsive } from "hooks/useMobileResponsive";
 // import { RootState } from "../../redux/store";
 
 const ServiceProviderLayout = () => {
-  const { appState } = useSelector((state) => state.appState);
-  // const [isMobileResolution,setIsMobileResolution] = useState(false)
 
-  // const MobileResolution = (res)=>{
-  //   setIsMobileResolution(!res)
-  // }
   const [open, setOpen] = useState(false);
   const handleDrawerToggle = () => {
     setOpen(!open);

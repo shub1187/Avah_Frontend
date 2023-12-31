@@ -1,6 +1,7 @@
 import TopBarHomeNotificationImage from 'assets/img/TopBar/TopBarNotificationIcon.png'
 import TopBarHomeUsersImage from 'assets/img/TopBar/TopBarUserIcon.png'
 import TopBarHomeSettingsImage from 'assets/img/TopBar/TopBarSettingsIcon.png'
+import TopBarSpIconImage from './TopBarSpIcon.png'
 import { Box, Button, Dialog, DialogTitle, Grid, Popover, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -63,12 +64,18 @@ const TopBarSettingsIcon = ({ isSelected }) => (
 <img
     src={TopBarHomeSettingsImage}
     alt="settings"
-    style={{ filter: isSelected ? 'brightness(0) invert(1)' : 'none' }}
 />
 );
 
+const TopBarSpIcon = ({ isSelected }) => (
+  <img
+      src={TopBarSpIconImage}
+      alt="spIcon"
+  />
+  );
 export {
     TopBarHomeNotificationIcon,
     TopBarSettingsIcon,
-    TopBarUserIcon
+    TopBarUserIcon,
+    TopBarSpIcon
 }

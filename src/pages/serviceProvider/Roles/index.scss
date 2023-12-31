@@ -1,0 +1,43 @@
+.role-body{
+    margin-left: 1rem;
+    .role-title{
+        color: var(--purple-font);
+        font-weight: bold;
+    }
+    .role-textfield.MuiBox-root input{
+        background-color: #ecf1f6;
+        font-size: 0.8rem;
+        // color:red
+    }
+    .role-textfield.MuiBox-root .Mui-focused fieldset,.role-textfield.MuiBox-root .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline{
+        border:1px solid #8f8f8f
+    }
+    // .role-textfield.MuiBox-root .Mui-focused fieldset{
+    //     border: rgba(0, 0, 0, 0.23);
+    //     color:red
+    // }
+}
+
+.grey-container{
+    background-color: #f4f8f9;
+    margin-top: 1rem;
+    .permission-title{
+        // border-bottom: 5px solid #d5dde7;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding-left: 1rem;
+        padding-bottom: 1rem;
+        padding-top:1rem;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    }
+    .checkbox{
+
+            path{
+                color:grey
+            }
+    }
+    .checkbox-name{
+        font-size: 0.7em;
+        font-weight: bold;
+    }
+}

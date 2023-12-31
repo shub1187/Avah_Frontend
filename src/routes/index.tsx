@@ -41,41 +41,28 @@ const generateRoute = (routes: RouteType[]): ReactNode => {
 
 
 const generateRouty = (SideBarList:any)=>{
-  return SideBarList.map((route:any,index:any)=>(
-    <Route
-      path={route.link}
-      element={route.component}
-      key={index}
-    >
-      {route.subList && generateRouty(route.subList)}
-    </Route>
-  ))
-  return (
-    <Route>
-      <Route element={<ServiceProviderHome/>} path="dashboard/home"></Route>
-      <Route path="dashboard/user">
-        <Route element={<SpCustomersPage/>} path="customer"></Route>
-        <Route element={<SpEmployeePage/>} path="employees"></Route>
-      </Route>
-      <Route>
 
-      </Route>
-    </Route>
-  )
+    // let permission = localStorage.getItem('permission_granted')
+    let permission =  [
+      "Users",
+      "Spares",
+      "Labour",
+      "Service Type",
+      "Service"
+    ]
+    return SideBarList.map((route:any,index:any)=>{
+      if(!route.role || permission?.includes(route?.role)){
+        return (<Route
+          path={route.link}
+          element={route.component}
+          key={index}
+        >
+          {route.subList && generateRouty(route.subList)}
+        </Route>)}
+    })
 }
 
-// const generateRouty = (routes: any[]): ReactNode => {
-//   return routes.map((route: any, index: number) => (
-//     <Route
-//       path={route.link}
-//       element={route.component}
-//       key={index}
-//     >
-//       {route.subList && generateRouty(route.subList)} {/* Recursively handle subList */}
-//     </Route>
-//   ));
-// };
+
 export const routes: ReactNode = generateRoute(appRoutes);
-// export const spRoutes: ReactNode = generateRoute(spAppRoutes);
 export const raeesRoute:any = generateRouty(serviceRoutes)
 export const customerRoute:any = generateRouty(customerRoutes)

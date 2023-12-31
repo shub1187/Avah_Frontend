@@ -51,7 +51,7 @@ const DialogWrapper = ({children, title , buttonName , tableRef}) => {
         <div>
             <DialogWrapperContext.Provider value={DialogWrapperFuntions}>
             {buttonName && (
-                <Button  variant="contained" color={'options'} onClick={handleOpen}>
+                <Button className='mr-1 mt-3'  variant="contained" color={'options'} onClick={handleOpen}>
                     {buttonName || ''}
                 </Button>
             )}

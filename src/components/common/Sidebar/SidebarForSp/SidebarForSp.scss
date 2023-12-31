@@ -3,3 +3,30 @@
   max-width: 360px;
   background-color: white;
 }
+
+.link-text{
+  text-decoration: none;
+  color:black
+}
+
+.sidebar-button .MuiButtonBase-root{
+  background-color: white;
+  color: black;
+}
+.sidebar-button .MuiButtonBase-root:hover{
+  background-color: #f4f8f9;
+  color: black;
+}
+
+.sidebar-button .MuiButtonBase-root.selected{
+  background: linear-gradient(to bottom, rgb(233, 56, 72), rgb(119, 53, 98));
+  color: white;
+}
+
+.sub-item-sidebar .MuiButtonBase-root{
+  background-color: #edf4fb;
+}
+
+.sub-item-sidebar .MuiButtonBase-root.sub-selected{
+  color:var(--purple)
+}

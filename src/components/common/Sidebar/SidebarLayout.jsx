@@ -6,7 +6,7 @@ import appRoutes from "../../../routes/appRoutes";
 import SidebarItem from "../SidebarItem";
 import SidebarItemCollapse from "../SidebarItemCollapse";
 // import spAppRoutes from "../../../routes/spRoutes";
-import ServiderProviderSidebar, { SpSideBarList } from "./SidebarForSp/SidebarForSp";
+import  { ServiderProviderSidebar } from "./SidebarForSp/SidebarForSp";
 import AvahSideBarImage from 'assets/img/AvahSideBarImage.png'
 import { useState } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
@@ -72,7 +72,6 @@ const Sidebar = ({isMobile,open,handleDrawerToggle,customer}) => {
         </Toolbar>
           <div className="mx-3">
             {   
-
             getRole == "1" ?  
                appRoutes.map((route, index) => (
                 route.sidebarProps ? (
@@ -83,23 +82,14 @@ const Sidebar = ({isMobile,open,handleDrawerToggle,customer}) => {
                   )
                 ) : null
               )) 
-              :
-              getRole == "2" ?
-              // spAppRoutes.map((route, index) => (
-              //   route.sidebarProps ? (
-              //     route.child ? (
-              //       <SidebarItemCollapse item={route} key={index} />
-              //     ) : (
-              //       <SidebarItem item={route}   key={index} />
-              //     )
-              //   ) : null
-              // )) :
-              // null
-              <ServiderProviderSidebar/>:
-              getRole=="3"?
-              <CustomerSideBar/>
-              :
-              null
+            :
+            getRole == "2"?<ServiderProviderSidebar/>
+            :
+            getRole=="3" ? <CustomerSideBar/>
+            :
+            getRole =='5' ? <ServiderProviderSidebar/>
+            :
+            null
             }        
 
          
