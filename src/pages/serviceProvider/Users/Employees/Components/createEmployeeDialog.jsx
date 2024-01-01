@@ -14,7 +14,7 @@ const {createEmployee, getAllPermissionPerRoles} = URL.SERVICE_PROVIDER.USERS.EM
 const CreateEmployeeDialog = ({height,width,color}) => {
     const {handleClose,isMobile,isSubmitted,setIsSubmitted,formData,setFormData} = useDialogWrapperContext()
     const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
-    const {data:{data:rolesList}} = useFetch(getAllPermissionPerRoles)
+    const {data:{data:rolesList}} = useFetch(`${getAllPermissionPerRoles}?sp_id=${localStorage.getItem('sp_id')}`)
     
     const handleFieldChange = (fieldName, value) => setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
     const handleRoleSelect = (value)=> setFormData((prev)=>({ ...prev, 'role': value.label ,'permissions':value.permissions}))

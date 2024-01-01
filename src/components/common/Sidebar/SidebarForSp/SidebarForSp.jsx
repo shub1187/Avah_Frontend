@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import { AccountsIcon, BillingsIcon, HomeIcon, LaboursIcon, PackageIcon, ReviewsIcon, RolesIcon, ServiceIcon, ServiceTypeIcon, SettingsIcon, SparesIcon, UserIcon } from 'assets/img/sidebar/Icons';
 import './SidebarForSp.scss';
 import { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Chip } from '@mui/material';
 import { useFetch } from 'hooks/useFetch';
 import URL from 'url/apiURL';
 
@@ -305,7 +305,7 @@ const ServiderProviderSidebar = ({})=>{
                                         <ListItemText>{subList.name}</ListItemText>
                                         {(subList.name ==='Estimates List' || subList.name ==='Appointment List') && (
                                           <Box className='flex jc-flex-end'>
-                                          <ListItemText>{(subList.name ==='Estimates List' && notifications?.estimate_list) || (subList.name ==='Appointment List' && notifications?.appointment_list) }</ListItemText>
+                                          <ListItemText><Chip>{(subList.name ==='Estimates List' && notifications?.estimate_list) || (subList.name ==='Appointment List' && notifications?.appointment_list) }fsf</Chip></ListItemText>
                                           </Box>
                                         )}
                                     </ListItemButton>
