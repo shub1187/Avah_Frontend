@@ -33,7 +33,7 @@ const URL = {
             EMPLOYEES:{
                 getAllEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllEmployee`),
                 createEmployee :replaceUrl(`${BASE_URL}/api/serviceprovider/createEmployee`),
-                getAllPermissionPerRoles : replaceUrl(`${BASE_URL}http://localhost:3008/api/serviceprovider/getAllPermissionPerRoles`)
+                getAllPermissionPerRoles : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllPermissionPerRoles`)
 
             }
         },
@@ -77,7 +77,7 @@ const URL = {
             }
         },
         NOTIFICATION:{
-            getNotificationNumbers : replaceUrl(`${BASE_URL}http://localhost:3008/api/serviceprovider/getNotificationNumbers`)
+            getNotificationNumbers : replaceUrl(`${BASE_URL}/api/serviceprovider/getNotificationNumbers`)
         },
 
     },
