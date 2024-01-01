@@ -13,6 +13,10 @@ import { AccountsIcon, BillingsIcon, HomeIcon, LaboursIcon, PackageIcon, Reviews
 import './SidebarForSp.scss';
 import { useState } from 'react';
 import { Box } from '@mui/material';
+import { useFetch } from 'hooks/useFetch';
+import URL from 'url/apiURL';
+
+const {getNotificationNumbers}= URL.SERVICE_PROVIDER.NOTIFICATION
 
 export const SpSideBarList = [
   {
@@ -251,6 +255,8 @@ const ServiderProviderSidebar = ({})=>{
     //FOR SIDEBAR - MENU AND SUBMENU
     const [open,setOpen] = useState({})
     const [subListopen,setSubListOpen] = useState({})
+    const {data:notifications} = useFetch(getNotificationNumbers)
+
     //HANDLE MENU
     const onChange = (listIndex)=>setOpen((prev)=>{
         setSubListOpen({})
@@ -279,13 +285,6 @@ const ServiderProviderSidebar = ({})=>{
         <List>
             {SpSideBarList.map((list,listIndex)=>{
                 let permission = localStorage.getItem('permission_granted')
-                // let permission =  [
-                //   "Users",
-                //   "Spares",
-                //   "Labour",
-                //   "Service Type",
-                //   "Service"
-                // ]
                 if (!list.role || permission?.includes(list?.role) ||  permission?.includes('All')){
                 return (
                     <Link to={list.link} className='link-text' key={listIndex}>
@@ -304,6 +303,11 @@ const ServiderProviderSidebar = ({})=>{
                                     <ListItemButton className={`${subListopen[subListIndex] && 'sub-selected'} pl-8 ml-1 mr-1`} onClick={()=>subItemOnChange(subListIndex)} >
                                         {subList.icon && <ListItemIcon><subList.icon/></ListItemIcon>}
                                         <ListItemText>{subList.name}</ListItemText>
+                                        {(subList.name ==='Estimates List' || subList.name ==='Appointment List') && (
+                                          <Box className='flex jc-flex-end'>
+                                          <ListItemText>{(subList.name ==='Estimates List' && notifications.estimate_list) || (subList.name ==='Appointment List' && notifications.appointment_list) }</ListItemText>
+                                          </Box>
+                                        )}
                                     </ListItemButton>
                                     </Box>
                                     </Link>

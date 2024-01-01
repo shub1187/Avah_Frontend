@@ -32,7 +32,9 @@ const URL = {
             },
             EMPLOYEES:{
                 getAllEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllEmployee`),
-                createEmployee :replaceUrl(`${BASE_URL}/api/serviceprovider/createEmployee`)
+                createEmployee :replaceUrl(`${BASE_URL}/api/serviceprovider/createEmployee`),
+                getAllPermissionPerRoles : replaceUrl(`${BASE_URL}http://localhost:3008/api/serviceprovider/getAllPermissionPerRoles`)
+
             }
         },
         SPARES : {
@@ -73,7 +75,10 @@ const URL = {
                 getSpecificLabourDetailsForEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/getSpecificLabourDetailsForEstimate`),
 
             }
-        }
+        },
+        NOTIFICATION:{
+            getNotificationNumbers : replaceUrl(`${BASE_URL}http://localhost:3008/api/serviceprovider/getNotificationNumbers`)
+        },
 
     },
     CUSTOMER:{

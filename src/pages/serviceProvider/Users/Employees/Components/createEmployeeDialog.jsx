@@ -9,22 +9,15 @@ import URL from 'url/apiURL'
 import CreateAutoCompleteTextfield from 'components/common/Textfield/AutoCompleteTextfield';
 import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
 
-const {createEmployee} = URL.SERVICE_PROVIDER.USERS.EMPLOYEES//ADD URL
+const {createEmployee, getAllPermissionPerRoles} = URL.SERVICE_PROVIDER.USERS.EMPLOYEES
 
 const CreateEmployeeDialog = ({height,width,color}) => {
     const {handleClose,isMobile,isSubmitted,setIsSubmitted,formData,setFormData} = useDialogWrapperContext()
     const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
-    const {data:rolesList} = useFetch()//PUT THE URL //AFTER THAT REPLACE LINE 148
+    const {data:{data:rolesList}} = useFetch(getAllPermissionPerRoles)
     
     const handleFieldChange = (fieldName, value) => setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
     const handleRoleSelect = (value)=> setFormData((prev)=>({ ...prev, 'role': value.label ,'permissions':value.permissions}))
-
-    const results = [
-      {label:'Hello',value:'Hello',permissions:['Spare','Labour','Setting']},
-      {label:'Hell',value:'Hell',permissions:['Role','User','Setting']},
-      {label:'Bye',value:'Bye',permissions:['Service','Labour','Setting']},
-      {label:'Dell',value:'HEllo',permissions:['Spare','Service','Setting']}
-    ]
 
     const handleSubmit = async()=>{
           const obj = {
@@ -145,7 +138,7 @@ const CreateEmployeeDialog = ({height,width,color}) => {
               </Grid>
               <Grid item xs={3.6} mr={4}>
                 <Grid container xs={12}>
-                <Grid item xs={12}><CreateAutoCompleteTextfield options={results}  whiteColor fullWidth  fields={employeeTextField.slice(5,6)} onSelect={handleRoleSelect}  formField={formData}/></Grid>
+                <Grid item xs={12}><CreateAutoCompleteTextfield options={rolesList}  whiteColor fullWidth  fields={employeeTextField.slice(5,6)} onSelect={handleRoleSelect}  formField={formData}/></Grid>
                 <Grid item xs={12} mb={2}>
                   <InputLabel sx={{mb:1}}>Permissions</InputLabel>
                   <Autocomplete
@@ -189,6 +182,8 @@ const CreateEmployeeDialog = ({height,width,color}) => {
           <Button color='options' onClick={handleClose}>Cancel</Button>
           <Button variant={'contained'} color='options' onClick={handleSubmit}>SUBMIT</Button>
         </DialogActions>
+        {snackbar}
+        {loadingIndicator}
     </div>
   )
 }
