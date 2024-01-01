@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import { AccountsIcon, BillingsIcon, HomeIcon, LaboursIcon, PackageIcon, ReviewsIcon, RolesIcon, ServiceIcon, ServiceTypeIcon, SettingsIcon, SparesIcon, UserIcon } from 'assets/img/sidebar/Icons';
 import './SidebarForSp.scss';
 import { useState } from 'react';
-import { Box, Chip } from '@mui/material';
+import { Badge, Box, Chip } from '@mui/material';
 import { useFetch } from 'hooks/useFetch';
 import URL from 'url/apiURL';
 
@@ -302,12 +302,13 @@ const ServiderProviderSidebar = ({})=>{
                                     <Box className='sub-item-sidebar'>
                                     <ListItemButton className={`${subListopen[subListIndex] && 'sub-selected'} pl-8 ml-1 mr-1`} onClick={()=>subItemOnChange(subListIndex)} >
                                         {subList.icon && <ListItemIcon><subList.icon/></ListItemIcon>}
-                                        <ListItemText>{subList.name}</ListItemText>
-                                        {(subList.name ==='Estimates List' || subList.name ==='Appointment List') && (
-                                          <Box className='flex jc-flex-end'>
-                                          <ListItemText><Chip>{(subList.name ==='Estimates List' && notifications?.estimate_list) || (subList.name ==='Appointment List' && notifications?.appointment_list) }fsf</Chip></ListItemText>
-                                          </Box>
-                                        )}
+                                        {/* <ListItemText>{subList.name}</ListItemText> */}
+                                        {(subList.name ==='Estimates List' || subList.name ==='Appointment List') ? (
+                                          <ListItemText><Badge badgeContent={(subList.name ==='Estimates List' && notifications?.estimate_list) || (subList.name ==='Appointment List' && notifications?.appointment_list) } color='options'>{subList.name}</Badge></ListItemText>
+                                          )
+                                          :
+                                          <ListItemText>{subList.name}</ListItemText>
+                                        }
                                     </ListItemButton>
                                     </Box>
                                     </Link>
