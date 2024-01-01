@@ -17,7 +17,7 @@ const CreateEmployeeDialog = ({height,width,color}) => {
     const {data:{data:rolesList}} = useFetch(`${getAllPermissionPerRoles}?sp_id=${localStorage.getItem('sp_id')}`)
     
     const handleFieldChange = (fieldName, value) => setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
-    const handleRoleSelect = (value)=> setFormData((prev)=>({ ...prev, 'role': value.label ,'permissions_granted':value.permissions}))
+    const handleRoleSelect = (value)=> setFormData((prev)=>({ ...prev, 'role': value.label ,'permission_granted':value.permissions}))
 
     const handleSubmit = async()=>{
           const obj = {
@@ -146,15 +146,15 @@ const CreateEmployeeDialog = ({height,width,color}) => {
                     disabled
                       multiple
                       id="fixed-tags-demo"
-                      value={formData.permissions_granted || '' }
+                      value={formData.permission_granted || '' }
                       options={[]}
                       getOptionLabel={''}
                       renderTags={(tagValue, getTagProps) =>
                         tagValue.map((option, index) => (
                           <Chip
-                            label={formData.permissions_granted[index] }
+                            label={formData.permission_granted[index] }
                             // {...getTagProps({ index })}
-                            disabled={formData.permissions_granted[index] }
+                            disabled={formData.permission_granted[index] }
                             
                           />
                         ))
