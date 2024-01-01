@@ -305,7 +305,7 @@ const ServiderProviderSidebar = ({})=>{
                                         <ListItemText>{subList.name}</ListItemText>
                                         {(subList.name ==='Estimates List' || subList.name ==='Appointment List') && (
                                           <Box className='flex jc-flex-end'>
-                                          <ListItemText>{(subList.name ==='Estimates List' && notifications.estimate_list) || (subList.name ==='Appointment List' && notifications.appointment_list) }</ListItemText>
+                                          <ListItemText>{(subList.name ==='Estimates List' && notifications?.estimate_list) || (subList.name ==='Appointment List' && notifications?.appointment_list) }</ListItemText>
                                           </Box>
                                         )}
                                     </ListItemButton>
