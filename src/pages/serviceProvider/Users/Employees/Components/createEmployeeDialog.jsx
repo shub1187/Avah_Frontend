@@ -155,9 +155,11 @@ const CreateEmployeeDialog = ({height,width,color}) => {
                             label={formData.permissions[index] }
                             {...getTagProps({ index })}
                             disabled={formData.permissions[index] }
+                            
                           />
                         ))
                       }
+                      disableClearable={true}
                       renderInput={(params) => (
                         <TextField {...params} size='small'/>
                       )}
