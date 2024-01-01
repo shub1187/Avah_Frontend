@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { Box, Button, Dialog, DialogActions, DialogTitle, FormControl, IconButton, InputLabel, TextField } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogTitle, FormControl, IconButton, InputLabel, TextField, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import CreateTextFields from 'components/common/Textfield';
 import { cloneElement } from "react"
@@ -13,9 +13,15 @@ const MoreActionDialog = ({rowData,ActionDialog}) => {
 
     return (
         <>
-            <Button style={{ minWidth: '10px' }} onClick={handleClickOpen}>
+            {/* <Button style={{ minWidth: '10px' }} onClick={handleClickOpen}>
                 <VisibilityIcon style={{ color: 'rgb(145,54,93)', cursor: 'pointer' }} />
-            </Button>
+            </Button> */}
+            <IconButton color='options' onClick={handleClickOpen}>
+                <Box className='flex ai-flex-start column'>
+                  <Typography fontSize={9}> &nbsp;View</Typography>
+                  <VisibilityIcon  style={{cursor:'pointer',marginRight:'5px'}}/>
+                </Box>
+              </IconButton>
             <Dialog fullWidth open={open} onClose={handleClose} maxWidth='md'>
                     <Box display="flex" alignItems="center" justifyContent={'flex-end'}>
                                 <IconButton onClick={handleClose}>

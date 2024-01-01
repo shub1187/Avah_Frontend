@@ -304,7 +304,7 @@ const ServiderProviderSidebar = ({})=>{
                                         {subList.icon && <ListItemIcon><subList.icon/></ListItemIcon>}
                                         {/* <ListItemText>{subList.name}</ListItemText> */}
                                         {(subList.name ==='Estimates List' || subList.name ==='Appointment List') ? (
-                                          <ListItemText><Badge badgeContent={(subList.name ==='Estimates List' && notifications?.estimate_list) || (subList.name ==='Appointment List' && notifications?.appointment_list) } color='options'>{subList.name}</Badge></ListItemText>
+                                          <ListItemText><Badge sx={{fontSize:17}} badgeContent={(subList.name ==='Estimates List' && notifications?.estimate_list) || (subList.name ==='Appointment List' && notifications?.appointment_list) || 0 } color='options'>{subList.name}&nbsp;&nbsp;</Badge></ListItemText>
                                           )
                                           :
                                           <ListItemText>{subList.name}</ListItemText>

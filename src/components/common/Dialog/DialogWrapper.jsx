@@ -1,6 +1,7 @@
 import { Button, Dialog, DialogTitle } from '@mui/material'
 import { useMobileResponsive } from 'hooks/useMobileResponsive'
 import React, { createContext, useContext, useState } from 'react'
+import UnderLine from '../Underline'
 /**
  * @typedef {Object} DialogWrapperContextType
  * @property {() => void} handleOpen - Function to open the dialog.
@@ -57,7 +58,7 @@ const DialogWrapper = ({children, title , buttonName , tableRef}) => {
             )}
 
             <Dialog open={open} onClose={handleClose} maxWidth='md'>
-                <DialogTitle >{title || ''}</DialogTitle>
+                <DialogTitle >{title || ''}<UnderLine/></DialogTitle>
                 {children}
             </Dialog>
             </DialogWrapperContext.Provider>

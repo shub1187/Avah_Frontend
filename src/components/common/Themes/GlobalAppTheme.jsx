@@ -30,6 +30,10 @@ export const globalAppTheme = createTheme({
         main:'#000000',
         contrastText:'#ffffff',
 
+      },
+      silver:{
+        main: '#acb8c8',
+        contrastText:'#ffffff',
       }
     },
   })
