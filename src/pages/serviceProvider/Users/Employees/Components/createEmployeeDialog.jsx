@@ -59,11 +59,11 @@ const CreateEmployeeDialog = ({height,width,color}) => {
             selectArray:[
               {
                 label:'Male',
-                value:"male"
+                value:"Male"
               },
               {
                 label:'Female',
-                value:"female"
+                value:"Female"
               },
             ]
 
