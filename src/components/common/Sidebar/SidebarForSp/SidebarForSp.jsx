@@ -255,7 +255,7 @@ const ServiderProviderSidebar = ({})=>{
     //FOR SIDEBAR - MENU AND SUBMENU
     const [open,setOpen] = useState({})
     const [subListopen,setSubListOpen] = useState({})
-    const {data:notifications} = useFetch(`${getNotificationNumbers}?sp_id=${localStorage.getItem('sp_id')})
+    const {data:{data:notifications}} = useFetch(`${getNotificationNumbers}?sp_id=${localStorage.getItem('sp_id')}`)
 
     //HANDLE MENU
     const onChange = (listIndex)=>setOpen((prev)=>{
