@@ -28,11 +28,6 @@ const CreateEmployeeDialog = ({height,width,color}) => {
           await fetchData(obj)
           setFormData({})
   }
-const datar =  [
-  {label:'Hello',value:'Hello',permissions:['Spare','Labour','Setting']},
-   {label:'Hell',value:'Hell',permissions:['Role','User','Setting']},
-   {label:'Dell',value:'HEllo',permissions:['Spare','Service','Setting']}
-  ]
 
     const employeeTextField = [
         {
@@ -143,7 +138,7 @@ const datar =  [
               </Grid>
               <Grid item xs={3.6} mr={4}>
                 <Grid container xs={12}>
-                <Grid item xs={12}><CreateAutoCompleteTextfield options={datar}  whiteColor fullWidth  fields={employeeTextField.slice(5,6)} onSelect={handleRoleSelect}  formField={formData}/></Grid>
+                <Grid item xs={12}><CreateAutoCompleteTextfield options={rolesList}  whiteColor fullWidth  fields={employeeTextField.slice(5,6)} onSelect={handleRoleSelect}  formField={formData}/></Grid>
                 <Grid item xs={12} mb={2}>
                   <InputLabel sx={{mb:1}}>Permissions</InputLabel>
                   <Autocomplete
