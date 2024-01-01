@@ -17,7 +17,7 @@ const CreateEmployeeDialog = ({height,width,color}) => {
     const {data:{data:rolesList}} = useFetch(`${getAllPermissionPerRoles}?sp_id=${localStorage.getItem('sp_id')}`)
     
     const handleFieldChange = (fieldName, value) => setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
-    const handleRoleSelect = (value)=> setFormData((prev)=>({ ...prev, 'role': value.label ,'permissions':value.permissions}))
+    const handleRoleSelect = (value)=> setFormData((prev)=>({ ...prev, 'role': value.label ,'permissions_granted':value.permissions}))
 
     const handleSubmit = async()=>{
           const obj = {
@@ -88,7 +88,7 @@ const datar =  [
 
         },
         {
-          label: 'Permission',
+          label: 'Permission Granted',
           name: "permission_granted",
           type: 'text',
           fullWidth:true
@@ -119,7 +119,7 @@ const datar =  [
         {
             label: 'PAN Number',
             name: "pan_number",
-            type: 'number'
+            type: 'text'
         },
         {
             label: 'Password',
@@ -151,16 +151,15 @@ const datar =  [
                     disabled
                       multiple
                       id="fixed-tags-demo"
-                      value={formData.permissions || '' }
+                      value={formData.permissions_granted || '' }
                       options={[]}
                       getOptionLabel={''}
                       renderTags={(tagValue, getTagProps) =>
                         tagValue.map((option, index) => (
                           <Chip
-                            
-                            label={formData.permissions[index] }
+                            label={formData.permissions_granted[index] }
                             // {...getTagProps({ index })}
-                            disabled={formData.permissions[index] }
+                            disabled={formData.permissions_granted[index] }
                             
                           />
                         ))
