@@ -27,7 +27,22 @@ const CustomerAppointment = () => {
       getEstimateDetailsApi();
     }
   }, [page]);
+  const calculateTotalAmount = (sparePayload,labourPayload)=>{
 
+    let TotalAmount = 0
+  
+    const addAmount = (payload)=>{
+        payload.forEach((obj)=>{
+            if(obj.amount){
+                TotalAmount+=parseFloat(obj.amount)
+            }
+        })
+    }
+    addAmount(sparePayload)
+    addAmount(labourPayload)
+  
+    return TotalAmount
+  }
   if(page ==='eye-icon'){
     // getEstimateDetailsApi()
     return (
@@ -146,22 +161,7 @@ const CustomerAppointment = () => {
 }
 
 
-const calculateTotalAmount = (sparePayload,labourPayload)=>{
 
-  let TotalAmount = 0
-
-  const addAmount = (payload)=>{
-      payload.forEach((obj)=>{
-          if(obj.amount){
-              TotalAmount+=parseFloat(obj.amount)
-          }
-      })
-  }
-  addAmount(sparePayload)
-  addAmount(labourPayload)
-
-  return TotalAmount
-}
 
 const getEstimateDetailsApi = async()=>{
   
