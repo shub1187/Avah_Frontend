@@ -41,6 +41,39 @@ const CustomerAppointment = () => {
   
     return TotalAmount
   }
+
+  useEffect(() => {
+    // if (page === 'eye-icon') {
+      getEstimateDetailsApi();
+    // }
+  }, [page]);
+  
+  const getEstimateDetailsApi = async()=>{
+    
+    const obj = {
+        method:"GET",
+        url:`${getEstimateDetails}?sp_id=${localStorage.getItem('sp_id')}&estimate_number=${eyeIconValue?.estimate_number}`
+    }
+  
+    const {data} = await fetchData(obj)
+  
+    let spareData = data?.data.spares
+    let labourData = data?.data.labours
+  
+    spareData.forEach((obj)=>{
+        obj.amount = isNaN(parseFloat(obj.selling_price)) ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) + parseFloat(obj.selling_price)
+        obj.tax_amount = !obj.tax ? 0 : obj.tax===0 ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price)
+        obj.backendDisabled = true
+    })
+  
+    labourData.forEach((obj)=>{
+        obj.amount = isNaN(parseFloat(obj.selling_price)) ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) + parseFloat(obj.selling_price)
+        obj.tax_amount = !obj.tax ? 0 : obj.tax===0 ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price)
+        obj.backendDisabled = true
+    })
+    setSparePayload(data?.data?.spares)
+    setLabourSparePayload(data?.data?.labours)
+  }
   if(page ==='eye-icon'){
     // getEstimateDetailsApi()
     return (
@@ -161,37 +194,7 @@ const CustomerAppointment = () => {
 
 
 
-const getEstimateDetailsApi = async()=>{
-  
-  const obj = {
-      method:"GET",
-      url:`${getEstimateDetails}?sp_id=${localStorage.getItem('sp_id')}&estimate_number=${eyeIconValue?.estimate_number}`
-  }
 
-  const {data} = await fetchData(obj)
-
-  let spareData = data?.data.spares
-  let labourData = data?.data.labours
-
-  spareData.forEach((obj)=>{
-      obj.amount = isNaN(parseFloat(obj.selling_price)) ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) + parseFloat(obj.selling_price)
-      obj.tax_amount = !obj.tax ? 0 : obj.tax===0 ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price)
-      obj.backendDisabled = true
-  })
-
-  labourData.forEach((obj)=>{
-      obj.amount = isNaN(parseFloat(obj.selling_price)) ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) + parseFloat(obj.selling_price)
-      obj.tax_amount = !obj.tax ? 0 : obj.tax===0 ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price)
-      obj.backendDisabled = true
-  })
-  setSparePayload(data?.data?.spares)
-  setLabourSparePayload(data?.data?.labours)
-}
-useEffect(() => {
-  if (page === 'eye-icon') {
-    getEstimateDetailsApi();
-  }
-}, [page]);
   return (
     <>
       <Box pb={2} sx={{backgroundColor:'rgb(244,248,249)'}} display={'flex'} justifyContent={'center'} >
