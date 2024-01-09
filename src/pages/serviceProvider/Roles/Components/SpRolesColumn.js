@@ -8,7 +8,7 @@ const {deleteEmployeeRole,editEmployeeRole} = URL.SERVICE_PROVIDER.ROLE
 export const SpRolesColumn = [
     { title: "Role Id ", field: "role_id" },
     { title: "Role ", field: "role_name" },
-    { title: "Permission", field: "permission_granted" },
+    { title: "Permission", field: "permission_granted", render : (rowData)=> rowData?.permission_granted?.join(', ')},
     { title: "Action", render: (rowData)=>
         (<Box>
             <MoreActionDialog rowData={rowData}/>

@@ -94,7 +94,7 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, cre
         { title:'Reviews'},
         { title:'Settings'}
       ]
-      const updatedRowData = {...rowData,permission_granted : rowData.permission_granted.map((permission)=>({"title":permission}))}
+      const updatedRowData = {...rowData,permission_granted : rowData.permission_granted?.map((permission)=>({"title":permission}))}
       const defaultValues = checkboxList.filter((checkbox) =>
       updatedRowData.permission_granted?.some((permission) => permission.title === checkbox.title)     
        
@@ -181,6 +181,7 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, cre
                             options={checkboxList}
                             getOptionLabel={(option) => option.title}
                             defaultValue={defaultValues}
+                            onChange={(event,value)=>setFormData({permission_granted : value.map((val)=>val.title)})}
                             renderInput={(params) => (
                             <TextField
                                 {...params}
