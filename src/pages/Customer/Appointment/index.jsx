@@ -11,7 +11,9 @@ import { SpCreateLabourEstimateColumn } from 'pages/serviceProvider/Service/Esti
 import { SpCreateSpareEstimateColumn } from 'pages/serviceProvider/Service/Estimate/Components/SpareEstimateColumn'
 import FullyEditableAndDeletableTable from 'components/common/Table/FullyEditableAndDeletableTable'
 import { useFetchFunction } from 'hooks/useFetch'
+import URL from 'url/apiURL'
 
+const {getEstimateDetails} = URL.CUSTOMER.APPOINTMENT
 const CustomerAppointment = () => {
   
   const [toggle,setToggle] = useState('appointment')
@@ -167,7 +169,7 @@ const getEstimateDetailsApi = async()=>{
   
   const obj = {
       method:"GET",
-      url:`${getEstimateDetailsApi}?sp_id=${localStorage.getItem('sp_id')}&estimate_number=${eyeIconValue?.estimate_number}`
+      url:`${getEstimateDetails}?sp_id=${localStorage.getItem('sp_id')}&estimate_number=${eyeIconValue?.estimate_number}`
   }
 
   const {data} = await fetchData(obj)

@@ -94,6 +94,10 @@ const URL = {
             getAllCitiesPerState:replaceUrl(`${BASE_URL}/api/customer/getAllCitiesPerState`),
             getCustomerProfile:replaceUrl(`${BASE_URL}/api/customer/getCustomerProfile`),
             profileCompletion:replaceUrl(`${BASE_URL}/api/customer/profileCompletion`),
+        },
+        APPOINTMENT:{
+            getEstimateDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getEstimateDetails`),
+
         }
     }
 
