@@ -159,6 +159,7 @@ const CustomerAppointment = () => {
                         buttonName={'Add Labours'} 
                         data={labourPayload} 
                         column={SpCreateLabourEstimateColumn} 
+                        viewOnly
                         // setPayload = {setLabourSparePayload} 
                         // autoCompleteFieldName={'name'}
                         // getAllItemListForAutoFillDebounceOnInputChange={getAllLabourListForAutoFill}
