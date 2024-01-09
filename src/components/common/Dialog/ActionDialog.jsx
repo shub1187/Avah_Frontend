@@ -9,6 +9,7 @@ import { useFetchFunction } from 'hooks/useFetch'
 import { useRef, useState } from 'react'
 import CreateTextFields from 'components/common/Textfield'
 import UnderLine from '../Underline';
+// import { title } from 'process';
 
 const ActionDialog = ({ changePassword, edit, status, view, approve, reject, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData }) => {
     const { fetchData, snackbar, loadingIndicator } = useFetchFunction()
@@ -79,7 +80,7 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, cre
         role:'Accountant',
         permission_granted:[{title:'Spares'},{title:'Roles'},{title:'Service'}]
     }
-    console.log(rowadata.permission_granted[0])
+    // console.log(rowadata.permission_granted[0])
     const checkboxList = [
         { title:'Roles'},
         { title:'Spares'},
@@ -93,8 +94,10 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, cre
         { title:'Reviews'},
         { title:'Settings'}
       ]
+      const updatedRowData = {...rowData,permission_granted : rowData.permission_granted.map((permission)=>({"title":permission}))}
       const defaultValues = checkboxList.filter((checkbox) =>
-  rowadata.permission_granted.some((permission) => permission.title === checkbox.title)
+      updatedRowData.permission_granted?.some((permission) => permission.title === checkbox.title)     
+       
 );
     return (
         <>
@@ -171,7 +174,7 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, cre
                     <Dialog fullWidth open={open} onClose={handleClose} maxWidth='xs'>
                     <DialogTitle>Role<UnderLine/></DialogTitle>
                     <DialogContent>
-                        <TextField value={rowadata.role} size='small' sx={{mb:1}}/>
+                        <TextField value={rowData.role_name} size='small' sx={{mb:1}}/>
                         <Autocomplete
                             multiple
                             id="tags-standard"
@@ -260,7 +263,7 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, cre
                     </IconButton>
                     <Dialog fullWidth open={open} onClose={handleClose} maxWidth='xs'>
                         <DialogTitle>Role<UnderLine/> </DialogTitle>
-                        <DialogContent><Typography component={'span'} color='#ad4970' >{rowData?.spare_name}</Typography> will be deleted. Please click on <Typography component={'span'} color='#ad4970'>Delete</Typography> to proceed </DialogContent>
+                        <DialogContent><Typography component={'span'} color='#ad4970' >{rowData?.role_name}</Typography> role will be deleted. Please click on <Typography component={'span'} color='#ad4970'>Delete</Typography> to proceed </DialogContent>
                         <DialogActions sx={{ mt: 3 }}>
                             <Button color='options' onClick={handleClose}>CANCEL</Button>
                             <Button variant={'contained'} color='options' onClick={StatusUpdate}>DELETE</Button>
