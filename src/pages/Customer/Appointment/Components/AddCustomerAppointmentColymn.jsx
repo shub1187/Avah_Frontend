@@ -3,7 +3,7 @@ import ActionDialog from 'components/common/Dialog/ActionDialog'
 import MoreActionDialog from 'components/common/Dialog/MoreActionDialog'
 import React from 'react'
 
-const AddCustomerAppointmentColumn = [
+const AddCustomerAppointmentColumn = (setPage,setEyeIconValue)=>([
     { title: "Service Provider", field: "sp_name" },
     { title: "Vehicle Number", field: "vehicle_number" },
     { title: "Appointment Date", field: "appointment_date"},
@@ -14,7 +14,10 @@ const AddCustomerAppointmentColumn = [
             <MoreActionDialog 
                 rowData={rowData} 
             />
+            <ActionDialog
+                viewEstimate
+            />
         </Box>
     }
-]
+])
 export default AddCustomerAppointmentColumn

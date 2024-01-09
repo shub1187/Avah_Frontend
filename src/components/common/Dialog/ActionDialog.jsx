@@ -9,9 +9,10 @@ import { useFetchFunction } from 'hooks/useFetch'
 import { useRef, useState } from 'react'
 import CreateTextFields from 'components/common/Textfield'
 import UnderLine from '../Underline';
+import PreviewIcon from '@mui/icons-material/Preview';
 // import { title } from 'process';
 
-const ActionDialog = ({ changePassword, edit, status, view, approve, reject, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData }) => {
+const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, approve, reject, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData }) => {
     const { fetchData, snackbar, loadingIndicator } = useFetchFunction()
     // const timerRef = useRef(null);
 
@@ -105,6 +106,14 @@ const ActionDialog = ({ changePassword, edit, status, view, approve, reject, cre
             {edit && <EditDialog/>}
             {status && <StatusDialog/>}
             {view && <ViewDialog/>} */}
+            {viewEstimate && (
+                <IconButton color='options' onClick={() => { setPage(); setEyeIconValue(rowData) }}>
+                    <Box className='flex ai-flex-start column'>
+                        <Typography fontSize={9}> &nbsp;View Estimate</Typography>
+                        <PreviewIcon style={{ cursor: 'pointer', marginRight: '5px' }} />
+                    </Box>
+                </IconButton>
+            )}
             {approve && <Button variant='outlined' color='success' onClick={StatusUpdate}>
                 <CheckCircleIcon style={{ color: 'rgb(5,131,30)', cursor: 'pointer', marginRight: '5px' }} /> Approve
             </Button>}

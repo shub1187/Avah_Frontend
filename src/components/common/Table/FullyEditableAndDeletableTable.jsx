@@ -9,7 +9,7 @@ import { debounce } from '@mui/material/utils'
 
 const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
-const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayload, autoCompleteFieldName, getAllItemListForAutoFillDebounceOnInputChange, getApiUrlOnAutocompleteItemSelect, getApiUrlOnAutocompleteItemSelectParams, setDisabledUpdate}) => {
+const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayload, autoCompleteFieldName, getAllItemListForAutoFillDebounceOnInputChange, getApiUrlOnAutocompleteItemSelect, getApiUrlOnAutocompleteItemSelectParams, setDisabledUpdate, viewOnly}) => {
 
     const {fetchData} = useFetchFunction()
 
@@ -246,10 +246,10 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
             </table>
 
             {/* FIRST BUTTON TO ADD AUTOCOMPLETE ROW , SECOND TO ADD FULLY EDITABLE ROW */}
-            <Box className='flex jc-flex-end mt-3 mr-2'>
+            { !viewOnly && (<Box className='flex jc-flex-end mt-3 mr-2'>
                 <Button className='mr-1' onClick={() => addAutocompleteRow()} color='options' variant='contained'> + Add existing {buttonName}</Button>
                 <Button  onClick={() => addEditableRow()} color='options' variant='contained'> + Add new {buttonName}</Button>
-            </Box>
+            </Box>)}
         </div>
     )
 }
