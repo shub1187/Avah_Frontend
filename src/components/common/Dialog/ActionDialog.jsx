@@ -95,7 +95,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, approv
         { title:'Reviews'},
         { title:'Settings'}
       ]
-      const updatedRowData = {...rowData,permission_granted : rowData.permission_granted?.map((permission)=>({"title":permission}))}
+      const updatedRowData = {...rowData,permission_granted : rowData?.permission_granted?.map((permission)=>({"title":permission}))}
       const defaultValues = checkboxList.filter((checkbox) =>
       updatedRowData.permission_granted?.some((permission) => permission.title === checkbox.title)     
        
