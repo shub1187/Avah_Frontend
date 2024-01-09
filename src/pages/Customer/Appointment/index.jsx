@@ -52,7 +52,7 @@ const CustomerAppointment = () => {
     
     const obj = {
         method:"GET",
-        url:`${getEstimateDetails}?sp_id=${localStorage.getItem('sp_id')}&estimate_number=${eyeIconValue?.estimate_number}`
+        url:`${getEstimateDetails}?sp_id=${eyeIconValue?.sp_id}&estimate_number=${eyeIconValue?.estimate_number}`
     }
   
     const {data} = await fetchData(obj)
