@@ -139,7 +139,8 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                         {column.map((field) => (
                             <th>{field.title}</th>
                         ))}
-                        <th>Actions</th>
+
+                        {!viewOnly && (<th>Actions</th>)}
                     </tr>
                 </thead>
                 <tbody className='tbody'>
@@ -239,7 +240,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                             )})}
 
                             {/* DELETE BUTTON FOR EVERY ROW */}
-                            <td><Button onClick={() => deleteRow(rowIndex)} color='options' variant='outlined'><DeleteOutlineIcon /></Button></td>
+                            {!viewOnly && (<td><Button onClick={() => deleteRow(rowIndex)} color='options' variant='outlined'><DeleteOutlineIcon /></Button></td>)}
                         </tr>
                     ))}
                 </tbody>

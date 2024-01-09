@@ -12,6 +12,8 @@ import { SpCreateSpareEstimateColumn } from 'pages/serviceProvider/Service/Estim
 import FullyEditableAndDeletableTable from 'components/common/Table/FullyEditableAndDeletableTable'
 import { useFetchFunction } from 'hooks/useFetch'
 import URL from 'url/apiURL'
+import { CustomerSpareEstimateColum } from './Components/CustomerSpareEstimateColumn'
+import { CustomerLabourEstimateColumn } from './Components/CustomerLabourEstimateColumn'
 
 const {getEstimateDetails} = URL.CUSTOMER.APPOINTMENT
 const CustomerAppointment = () => {
@@ -143,7 +145,7 @@ const CustomerAppointment = () => {
                         title={'SPARES'} 
                         buttonName={'Add Spares'} 
                         data={sparePayload} 
-                        column={SpCreateSpareEstimateColumn}
+                        column={CustomerSpareEstimateColum}
                         viewOnly 
                         // setPayload = {setSparePayload} 
                         // autoCompleteFieldName={'name'}
@@ -158,7 +160,7 @@ const CustomerAppointment = () => {
                         title={'LABOURS'} 
                         buttonName={'Add Labours'} 
                         data={labourPayload} 
-                        column={SpCreateLabourEstimateColumn} 
+                        column={CustomerLabourEstimateColumn} 
                         viewOnly
                         // setPayload = {setLabourSparePayload} 
                         // autoCompleteFieldName={'name'}
