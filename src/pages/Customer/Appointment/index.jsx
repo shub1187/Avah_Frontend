@@ -86,13 +86,13 @@ const CustomerAppointment = () => {
                 </Box>
                 <Box className='flex'>
                 <Box className='mr-10'>
-                  <Typography fontWeight={'bold'}>VEHICLE DETAILS</Typography>
+                  <Typography fontWeight={'bold'}>Vehicle Details</Typography>
                   <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
                     <Box>
-                      <Box>VEHICLE NUMBER</Box>
-                      <Box >MODEL</Box>  
-                      <Box >MANUFACTURER</Box>  
-                      <Box >VEHICLE TYPE</Box>  
+                      <Box>Vehicle Number</Box>
+                      <Box >Model</Box>  
+                      <Box >Manufacturer</Box>  
+                      <Box >Vehicle Type</Box>  
                     </Box>
                     <Box>
                       <Box>: {eyeIconValue?.vehicle_number}</Box>
@@ -103,13 +103,13 @@ const CustomerAppointment = () => {
                   </Box>
                 </Box>
                 <Box className='mr-10'>
-                  <Typography fontWeight={'bold'}>SERVICE PROVIDER DETAILS</Typography>
+                  <Typography fontWeight={'bold'}>Service Provider Details</Typography>
                   <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
                     <Box>
-                      <Box>NAME</Box>
-                      <Box >EMAIL</Box>  
-                      <Box >MOBILE</Box>  
-                      <Box >ADDRESS</Box>  
+                      <Box>Name</Box>
+                      <Box >Email</Box>  
+                      <Box >Mobile</Box>  
+                      <Box >Address</Box>  
                     </Box>
                     <Box>
                       <Box>: {eyeIconValue?.sp_name}</Box>
