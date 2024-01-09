@@ -109,7 +109,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, approv
             {viewEstimate && (
                 <IconButton color='options' onClick={() => { setPage(); setEyeIconValue(rowData) }}>
                     <Box className='flex ai-flex-start column'>
-                        <Typography fontSize={9}> &nbsp;View Estimate</Typography>
+                        <Typography fontSize={9}> &nbsp;Estimate</Typography>
                         <PreviewIcon style={{ cursor: 'pointer', marginRight: '5px' }} />
                     </Box>
                 </IconButton>
