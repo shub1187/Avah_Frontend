@@ -103,19 +103,19 @@ const CustomerAppointment = () => {
                   </Box>
                 </Box>
                 <Box className='mr-10'>
-                  <Typography fontWeight={'bold'}>CUSTOMER DETAILS</Typography>
+                  <Typography fontWeight={'bold'}>SERVICE PROVIDER DETAILS</Typography>
                   <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
                     <Box>
                       <Box>NAME</Box>
-                      <Box >PICKUP ADDRESS</Box>  
-                      <Box >MOBILE</Box>  
                       <Box >EMAIL</Box>  
+                      <Box >MOBILE</Box>  
+                      <Box >ADDRESS</Box>  
                     </Box>
                     <Box>
-                      <Box>: {eyeIconValue?.name}</Box>
-                      <Box >: {eyeIconValue?.pickup_address}</Box>  
-                      <Box >: {eyeIconValue?.mobile_number}</Box>  
-                      <Box >: {eyeIconValue?.email}</Box>  
+                      <Box>: {eyeIconValue?.sp_name}</Box>
+                      <Box >: {eyeIconValue?.sp_email}</Box>  
+                      <Box >: {eyeIconValue?.sp_contact}</Box>  
+                      <Box >: {eyeIconValue?.sp_address}</Box>  
                     </Box>
                   </Box>
                 </Box>
