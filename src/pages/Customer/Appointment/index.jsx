@@ -24,11 +24,7 @@ const CustomerAppointment = () => {
   const [sparePayload, setSparePayload] = useState([])
   const [labourPayload, setLabourSparePayload] = useState([])
 
-  useEffect(() => {
-    if (page === 'eye-icon') {
-      getEstimateDetailsApi();
-    }
-  }, [page]);
+
   const calculateTotalAmount = (sparePayload,labourPayload)=>{
 
     let TotalAmount = 0
@@ -191,6 +187,11 @@ const getEstimateDetailsApi = async()=>{
   setSparePayload(data?.data?.spares)
   setLabourSparePayload(data?.data?.labours)
 }
+useEffect(() => {
+  if (page === 'eye-icon') {
+    getEstimateDetailsApi();
+  }
+}, [page]);
   return (
     <>
       <Box pb={2} sx={{backgroundColor:'rgb(244,248,249)'}} display={'flex'} justifyContent={'center'} >
