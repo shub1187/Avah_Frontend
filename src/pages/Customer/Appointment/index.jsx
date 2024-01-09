@@ -184,7 +184,7 @@ const CustomerAppointment = () => {
                             />
                         </Box>
                     </Box>
-                    <Button className={'small-button mr-2'} color='options' variant='contained' }>Reject</Button>
+                    <Button className={'small-button mr-2'} color='options' variant='contained'>Reject</Button>
                     <Button disabled={disabledUpdate} className='small-button' color='options' variant='contained' onClick={updateEstimate}>Approve</Button>
                 </Box>
             </div>
