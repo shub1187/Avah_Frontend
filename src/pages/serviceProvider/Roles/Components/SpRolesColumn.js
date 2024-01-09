@@ -3,7 +3,7 @@ import ActionDialog from "components/common/Dialog/ActionDialog";
 import MoreActionDialog from "components/common/Dialog/MoreActionDialog";
 import URL from "url/apiURL"
 
-const {deleteSpare} = URL.SERVICE_PROVIDER.SPARES
+const {deleteEmployeeRole} = URL.SERVICE_PROVIDER.ROLE
 
 export const SpRolesColumn = [
     { title: "Role Id ", field: "role_id" },
@@ -20,8 +20,8 @@ export const SpRolesColumn = [
             />
             <ActionDialog
                 deleteRole
-                url={deleteSpare}
-                payload={{'spare_id':rowData?.spare_id}} 
+                url={deleteEmployeeRole}
+                payload={{'role_id':rowData?.role_id}} 
                 rowData={ rowData}
             />
 

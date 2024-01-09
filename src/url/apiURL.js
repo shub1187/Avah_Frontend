@@ -50,7 +50,9 @@ const URL = {
         },
         ROLE:{
             addEmployeeRole : replaceUrl(`${BASE_URL}/api/serviceprovider/addEmployeeRole`),
-            getAllEmployeeRoles : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllEmployeeRoles`)
+            getAllEmployeeRoles : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllEmployeeRoles`),
+            deleteEmployeeRole : replaceUrl(`${BASE_URL}/api/serviceprovider/deleteEmployeeRole`)
+
         },  
         SERVICE:{
             ESTIMATE:{
