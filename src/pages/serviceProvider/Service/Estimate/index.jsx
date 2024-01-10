@@ -141,13 +141,13 @@ const SpEstimateList = () => {
 
                     <Box className='flex'>
                     <Box className='mr-10'>
-                      <Typography fontWeight={'bold'}>VEHICLE DETAILS</Typography>
+                      <Typography fontWeight={'bold'}>Vehicle Details</Typography>
                       <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
                         <Box>
-                          <Box>VEHICLE NUMBER</Box>
-                          <Box >MODEL</Box>  
-                          <Box >MANUFACTURER</Box>  
-                          <Box >VEHICLE TYPE</Box>  
+                          <Box>Vehicle Number</Box>
+                          <Box >Model</Box>  
+                          <Box >Manufacturer</Box>  
+                          <Box >Vehicle Type</Box>  
                         </Box>
                         <Box>
                           <Box>: {pendingVehicleApiData?.vehicle_number}</Box>
@@ -158,13 +158,13 @@ const SpEstimateList = () => {
                       </Box>
                     </Box>
                     <Box>
-                      <Typography fontWeight={'bold'}>CUSTOMER DETAILS</Typography>
+                      <Typography fontWeight={'bold'}>Customer Details</Typography>
                       <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
                         <Box>
-                          <Box>NAME</Box>
-                          <Box >PICKUP ADDRESS</Box>  
-                          <Box >MOBILE</Box>  
-                          <Box >EMAIL</Box>  
+                          <Box>Name</Box>
+                          <Box >Pickup Address</Box>  
+                          <Box >Mobile</Box>  
+                          <Box >Email</Box>  
                         </Box>
                         <Box>
                           <Box>: {pendingVehicleApiData?.name}</Box>
@@ -236,13 +236,13 @@ const SpEstimateList = () => {
                     </Box>
                     <Box className='flex'>
                     <Box className='mr-10'>
-                      <Typography fontWeight={'bold'}>VEHICLE DETAILS</Typography>
+                      <Typography fontWeight={'bold'}>Vehicle Details</Typography>
                       <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
                         <Box>
-                          <Box>VEHICLE NUMBER</Box>
-                          <Box >MODEL</Box>  
-                          <Box >MANUFACTURER</Box>  
-                          <Box >VEHICLE TYPE</Box>  
+                          <Box>Vehicle Number</Box>
+                          <Box >Model</Box>  
+                          <Box >Manufacturer</Box>  
+                          <Box >Vehicle Type</Box>  
                         </Box>
                         <Box>
                           <Box>: {eyeIconValue?.vehicle_number}</Box>
@@ -253,13 +253,13 @@ const SpEstimateList = () => {
                       </Box>
                     </Box>
                     <Box className='mr-10'>
-                      <Typography fontWeight={'bold'}>CUSTOMER DETAILS</Typography>
+                      <Typography fontWeight={'bold'}>Customer Details</Typography>
                       <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
                         <Box>
-                          <Box>NAME</Box>
-                          <Box >PICKUP ADDRESS</Box>  
-                          <Box >MOBILE</Box>  
-                          <Box >EMAIL</Box>  
+                          <Box>Name</Box>
+                          <Box >Pickup Address</Box>  
+                          <Box >Mobile</Box>  
+                          <Box >Email</Box>  
                         </Box>
                         <Box>
                           <Box>: {eyeIconValue?.name}</Box>

@@ -14,7 +14,7 @@ const AddCustomerAppointmentColumn = (setPage,setEyeIconValue)=>([
             <MoreActionDialog 
                 rowData={rowData} 
             />
-            {rowData.estimate_status ==='Created' && (
+            {rowData.estimate_status === 'Created' && (
             <ActionDialog
                 viewEstimate
                 rowData={rowData}
