@@ -28,10 +28,10 @@ const CustomerAppointment = () => {
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
   const [sparePayload, setSparePayload] = useState([])
   const [labourPayload, setLabourSparePayload] = useState([])
-  const [openReject,setOpenReject] = useState({toggle:false,rejectionNote:''})
-  const [isSubmitted,setIsSubmitted] = useState(true)
+  const [openReject,setOpenReject] = useState({toggle:false,estimate_rejection_note:''})
+  const [isSubmitted,setIsSubmitted] = useState(false)
   const calculateTotalAmount = (sparePayload,labourPayload)=>{
-
+    console.log("ln 34 ", openReject.estimate_rejection_note)
     let TotalAmount = 0
   
     const addAmount = (payload)=>{
@@ -49,16 +49,17 @@ const CustomerAppointment = () => {
 
   const rejectTextfield = [
     {
-      label: 'Rejection Note',
+      label: 'Rejection Note*',
       name: "rejection_note",
       type: 'text',
       fullWidth: true,
       required: true, 
-      errormessage: 'Select Your Vehicle', 
+      errormessage: 'Please enter the reason for rejection', 
     },
   ]
 
   const handleFieldChange = (fieldName, value) => {
+    console.log("ln 62", fieldName, value)
     setOpenReject((prevData) => ({ ...prevData, [fieldName]: value }));
   }
   const approveEstimate = async()=>{
@@ -68,11 +69,12 @@ const CustomerAppointment = () => {
       payload:{'appointment_id':eyeIconValue?.appointment_id,'estimate_number':eyeIconValue?.estimate_number}
     }
     await fetchData(obj)
+    setPage('table')
   }
 
   const rejectEstimate = async()=>{
     setIsSubmitted(true); 
-    let isRequired = requiredTextfield(rejectTextfield,openReject.rejectionNote)  
+    let isRequired = requiredTextfield(rejectTextfield,openReject)  
     if(isRequired) {
       setTimeout(() => {
           setIsSubmitted(false)
@@ -82,11 +84,12 @@ const CustomerAppointment = () => {
     const obj={
       method:"POST",
       url:estimateRejection,
-      payload:{'appointment_id':eyeIconValue?.appointment_id,'estimate_number':eyeIconValue?.estimate_number,'estimate_rejection_note':'s'}
+      payload:{'appointment_id':eyeIconValue?.appointment_id,'estimate_number':eyeIconValue?.estimate_number,'estimate_rejection_note':openReject?.estimate_rejection_note}
     }
     await fetchData(obj)
     setIsSubmitted(false)
     setTimeout(()=>setOpenReject(({toggle:false})),2000)
+    setPage('table')
   }
 
   useEffect(() => {
@@ -235,14 +238,14 @@ const CustomerAppointment = () => {
             </div>
             {snackbar}
             {loadingIndicator}
-            {openReject && (
+            {openReject.toggle && (
                               <Dialog open={true}>
                                 <DialogTitle>Are you sure you want to Reject Estimate<UnderLine/></DialogTitle>
                                 <DialogContent>
-                                <CreateTextFields  fields={rejectTextfield} onChange={handleFieldChange}  formField={openReject} />
+                                <CreateTextFields  fields={rejectTextfield} onChange={handleFieldChange}  formField={openReject} isSubmitted={isSubmitted} />
                                   {/* <TextField size='small' value={openReject.rejectionNote||''} onChange={(e)=>setOpenReject((prev)=>({...prev,rejectionNote:e.target.value}))}/> */}
                                 </DialogContent>
-                                <DialogActions><Button color='options' variant='outlined' onClick={()=>setOpenReject((prev)=>({...prev,toggle:true}))}>Cancel</Button><Button onClick={rejectEstimate} variant='contained' color='options'>Delete</Button></DialogActions>
+                                <DialogActions><Button color='options' variant='outlined' onClick={()=>setOpenReject((prev)=>({...prev,toggle:false}))}>Cancel</Button><Button onClick={rejectEstimate} variant='contained' color='options'>Confirm</Button></DialogActions>
                               </Dialog>
             )}
         </>
