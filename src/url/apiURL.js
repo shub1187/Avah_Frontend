@@ -97,6 +97,8 @@ const URL = {
         },
         APPOINTMENT:{
             getEstimateDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getEstimateDetails`),
+            estimateApproval : replaceUrl(`${BASE_URL}/api/customer/estimateApproval`),
+            estimateRejection : replaceUrl(`${BASE_URL}/api/customer/estimateRejection`)
 
         }
     }

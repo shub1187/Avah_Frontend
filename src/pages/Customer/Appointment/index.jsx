@@ -1,5 +1,5 @@
 import  { useEffect, useState } from 'react'
-import { Box, Button, TextField, Typography } from '@mui/material'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from '@mui/material'
 // import CustomerTable from 'components/CustomerComponents/Table/CustomerTable'
 import { useMobileResponsive } from 'hooks/useMobileResponsive'
 import TableCustomerMobileDetails from 'components/common/Mobile/TableCustomerMobileDetails'
@@ -14,8 +14,11 @@ import { useFetchFunction } from 'hooks/useFetch'
 import URL from 'url/apiURL'
 import { CustomerSpareEstimateColum } from './Components/CustomerSpareEstimateColumn'
 import { CustomerLabourEstimateColumn } from './Components/CustomerLabourEstimateColumn'
+import UnderLine from 'components/common/Underline'
+import CreateTextFields from 'components/common/Textfield'
+import { requiredTextfield } from 'utils/customFunctions'
 
-const {getEstimateDetails} = URL.CUSTOMER.APPOINTMENT
+const {getEstimateDetails, estimateApproval, estimateRejection} = URL.CUSTOMER.APPOINTMENT
 const CustomerAppointment = () => {
   
   const [toggle,setToggle] = useState('appointment')
@@ -25,8 +28,8 @@ const CustomerAppointment = () => {
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
   const [sparePayload, setSparePayload] = useState([])
   const [labourPayload, setLabourSparePayload] = useState([])
-
-
+  const [openReject,setOpenReject] = useState({toggle:false,rejectionNote:''})
+  const [isSubmitted,setIsSubmitted] = useState(true)
   const calculateTotalAmount = (sparePayload,labourPayload)=>{
 
     let TotalAmount = 0
@@ -42,6 +45,44 @@ const CustomerAppointment = () => {
     addAmount(labourPayload)
   
     return TotalAmount
+  }
+
+  const rejectTextfield = [
+    {
+      label: 'Rejection Note',
+      name: "rejection_note",
+      type: 'text',
+      fullWidth: true,
+      required: true, 
+      errormessage: 'Select Your Vehicle', 
+  },
+  ]
+  const approveEstimate = async()=>{
+    const obj={
+      method:"POST",
+      url:estimateApproval,
+      payload:{'appointment_id':eyeIconValue?.appointment_id,'estimate_number':eyeIconValue?.estimate_number}
+    }
+    await fetchData(obj)
+  }
+
+  const rejectEstimate = async()=>{
+    setIsSubmitted(true); 
+    let isRequired = requiredTextfield(rejectTextfield,openReject.rejectionNote)  
+    if(isRequired) {
+      setTimeout(() => {
+          setIsSubmitted(false)
+      }, [2000]);
+      return
+    } 
+    const obj={
+      method:"POST",
+      url:estimateRejection,
+      payload:{'appointment_id':eyeIconValue?.appointment_id,'estimate_number':eyeIconValue?.estimate_number,'estimate_rejection_note':'s'}
+    }
+    await fetchData(obj)
+    setIsSubmitted(false)
+    setTimeout(()=>setOpenReject(({toggle:false})),2000)
   }
 
   useEffect(() => {
@@ -62,13 +103,13 @@ const CustomerAppointment = () => {
     let spareData = data?.data.spares
     let labourData = data?.data.labours
   
-    spareData.forEach((obj)=>{
+    spareData?.forEach((obj)=>{
         obj.amount = isNaN(parseFloat(obj.selling_price)) ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) + parseFloat(obj.selling_price)
         obj.tax_amount = !obj.tax ? 0 : obj.tax===0 ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price)
         obj.backendDisabled = true
     })
   
-    labourData.forEach((obj)=>{
+    labourData?.forEach((obj)=>{
         obj.amount = isNaN(parseFloat(obj.selling_price)) ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) + parseFloat(obj.selling_price)
         obj.tax_amount = !obj.tax ? 0 : obj.tax===0 ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price)
         obj.backendDisabled = true
@@ -184,12 +225,22 @@ const CustomerAppointment = () => {
                             />
                         </Box>
                     </Box>
-                    <Button className={'small-button mr-2'} color='options' variant='contained'>Reject</Button>
-                    <Button  className='small-button' color='options' variant='contained' >Approve</Button>
+                    <Button onClick={()=>setOpenReject((prev)=>({...prev,toggle:true}))} className={'small-button mr-2'} color='options' variant='contained'>Reject</Button>
+                    <Button onClick={approveEstimate}  className='small-button' color='options' variant='contained' >Approve</Button>
                 </Box>
             </div>
             {snackbar}
             {loadingIndicator}
+            {openReject && (
+                              <Dialog open={true}>
+                                <DialogTitle>Are you sure you want to Reject Estimate<UnderLine/></DialogTitle>
+                                <DialogContent>
+                                <CreateTextFields  fields={rejectTextfield} onChange={(e)=>setOpenReject((prev)=>({...prev,rejectionNote:e.target.value}))}  formField={openReject.rejectionNote} />
+                                  {/* <TextField size='small' value={openReject.rejectionNote||''} onChange={(e)=>setOpenReject((prev)=>({...prev,rejectionNote:e.target.value}))}/> */}
+                                </DialogContent>
+                                <DialogActions><Button color='options' variant='outlined' onClick={()=>setOpenReject((prev)=>({...prev,toggle:true}))}>Cancel</Button><Button onClick={rejectEstimate} variant='contained' color='options'>Delete</Button></DialogActions>
+                              </Dialog>
+            )}
         </>
     )
 }
