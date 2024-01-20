@@ -55,8 +55,12 @@ const CustomerAppointment = () => {
       fullWidth: true,
       required: true, 
       errormessage: 'Select Your Vehicle', 
-  },
+    },
   ]
+
+  const handleFieldChange = (fieldName, value) => {
+    setOpenReject((prevData) => ({ ...prevData, [fieldName]: value }));
+  }
   const approveEstimate = async()=>{
     const obj={
       method:"POST",
@@ -235,7 +239,7 @@ const CustomerAppointment = () => {
                               <Dialog open={true}>
                                 <DialogTitle>Are you sure you want to Reject Estimate<UnderLine/></DialogTitle>
                                 <DialogContent>
-                                <CreateTextFields  fields={rejectTextfield} onChange={(e)=>setOpenReject((prev)=>({...prev,rejectionNote:e.target.value}))}  formField={openReject.rejectionNote} />
+                                <CreateTextFields  fields={rejectTextfield} onChange={handleFieldChange}  formField={openReject} />
                                   {/* <TextField size='small' value={openReject.rejectionNote||''} onChange={(e)=>setOpenReject((prev)=>({...prev,rejectionNote:e.target.value}))}/> */}
                                 </DialogContent>
                                 <DialogActions><Button color='options' variant='outlined' onClick={()=>setOpenReject((prev)=>({...prev,toggle:true}))}>Cancel</Button><Button onClick={rejectEstimate} variant='contained' color='options'>Delete</Button></DialogActions>
