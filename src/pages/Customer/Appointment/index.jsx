@@ -50,7 +50,7 @@ const CustomerAppointment = () => {
   const rejectTextfield = [
     {
       label: 'Rejection Note*',
-      name: "rejection_note",
+      name: "estimate_rejection_note",
       type: 'text',
       fullWidth: true,
       required: true, 
@@ -69,7 +69,7 @@ const CustomerAppointment = () => {
       payload:{'appointment_id':eyeIconValue?.appointment_id,'estimate_number':eyeIconValue?.estimate_number}
     }
     await fetchData(obj)
-    setPage('table')
+    setTimeout(()=>setPage('table'),2000)
   }
 
   const rejectEstimate = async()=>{
@@ -88,8 +88,10 @@ const CustomerAppointment = () => {
     }
     await fetchData(obj)
     setIsSubmitted(false)
-    setTimeout(()=>setOpenReject(({toggle:false})),2000)
-    setPage('table')
+    // setTimeout(()=>setOpenReject(({toggle:false})),2000)
+    
+    setTimeout(()=>setPage('table'),2000)
+    setOpenReject({toggle:false})
   }
 
   useEffect(() => {

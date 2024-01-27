@@ -80,7 +80,7 @@ const AddCustomerVehicleDialog = ({ height, width, color }) => {
         {
             label: 'Vehicle Number',
             name: "vehicle_number",
-            type: 'number',
+            type: 'text',
             fullWidth: true,
             required: true, // Add the required property
             errormessage: 'Vehicle Number Required', // Add the error message
