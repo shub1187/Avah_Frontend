@@ -12,6 +12,8 @@ import { useCity } from 'hooks/useCustomContext';
 import {getHours,format,isToday, parse} from 'date-fns'
 import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
 import { requiredTextfield } from 'utils/customFunctions';
+import URL from 'url/apiURL';
+const {createAppointment} = URL.CUSTOMER.APPOINTMENT
 const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,borderRadius,my}) => {
 
     const {handleClose,isMobile,isSubmitted,setIsSubmitted,formData,setFormData} = useDialogWrapperContext()
@@ -147,7 +149,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         const obj = {
               payload:formData,
               method:"POST",
-              url:"http://localhost:3008/api/customer/createAppointment"
+              url:createAppointment
         }
 
         await fetchCustomerData(obj)
@@ -200,6 +202,14 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             errormessage: 'Select Your Vehicle', 
         },
         {
+          label: 'Complaints Details',
+          name: "complaints",
+          type: 'text',
+          fullWidth: true,
+          row: 2,
+          multiline : true      
+        },
+        {
           label: 'Vehicle Type',
           name: "vehicle_type",
           type: 'text',
@@ -235,9 +245,13 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             type: 'number',
             fullWidth: true,
             disabled:true
-
-
         },
+        {
+          label: 'KM Driven',
+          name: "kilometers_driven",
+          type: 'number',
+          fullWidth: true,
+      },
         {
           label: 'Fuel Type',
           name: "fuel_type",
@@ -298,6 +312,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             type: 'text',
             fullWidth: true,
             row: 2,
+            multiline:true,
             required: true, 
             errormessage: 'Enter the Pickup Address', 
       },
@@ -312,21 +327,25 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                   <CreateTextFields  fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData} />
                   <CreateTextFields  fields={appointmentList.slice(3,4)} onChange={handleFieldChange}  formField={formData} />
                   <CreateAutoCompleteTextfield fullWidth whiteColor height options={customerVehicleList?.data} fields={appointmentList.slice(4,5)} onChange={handleFieldChange} onSelect={handleSearchIconClick} formField={formData} isSubmitted={isSubmitted} />
+                  <CreateTextFields  fields={appointmentList.slice(5,6)} onChange={handleFieldChange}  formField={formData} />
               </Grid>
               <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>
                 <Grid container xs={12} >
-                <Grid  xs={12} item><CreateTextFields  fields={appointmentList.slice(5,6)} onChange={handleFieldChange}  formField={formData} /></Grid>
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(6,10)} onChange={handleFieldChange} formField={formData} /></Grid>
+                {/* <Grid  xs={12} item><CreateTextFields  fields={appointmentList.slice(5,6)} onChange={handleFieldChange}  formField={formData} /></Grid> */}
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(6,12)} onChange={handleFieldChange} formField={formData} /></Grid>
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={3.6} >
                 <Grid container xs={12}>
-                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(10,11)} onChange={handleFieldChange} formField={formData} /></Grid>
-                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(11,12)} onChange={handleFieldChange} formField={formData}/></Grid>
-                  <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(12,13)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(13,15)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
+                {/* <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(10,11)} onChange={handleFieldChange} formField={formData} /></Grid> */}
+                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(12,13)} onChange={handleFieldChange} formField={formData}/></Grid>
+                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(13,14)} onChange={handleFieldChange} formField={formData}/></Grid>
+                  <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(14,15)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(15,16)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(16,17)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
+
                   {formData.pickup_drop=='Company Executive' &&
-                    <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(15,16)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
+                    <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(17,18)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
                   }
                 </Grid>
               </Grid>

@@ -17,6 +17,7 @@ import { SpCreateLabourEstimateColumn } from 'pages/serviceProvider/Service/Esti
 import './index.scss'
 import { SpCreateSpareAppointmentColumn } from './Components/SparesAppointmentColumn'
 import { SpCreateLabourAppointmentColumn } from './Components/LabourAppointmentColumn'
+import { spRejectedAppointmentColumn } from './Components/RejectAppointmentColumn'
 const {addEstimate, getAllLabourListForAutoFill, getAllSpareListForAutoFill, getSpecificLabourDetailsForEstimate, getSpecificSpareDetailsForEstimate} = URL.SERVICE_PROVIDER.SERVICE.APPOINTMENT
 
 const AppointmentList = () => {
@@ -174,7 +175,7 @@ const AppointmentList = () => {
             dialogTitle={'CREATE APPOINTMENT'}
           />
        :
-       <ServiceProvidertable key={'rejected'} columnss={spCreateAppointmentColumn()} URL={`http://localhost:3008/api/serviceprovider/getAllRejectedAndCancelledAppointment`}/>
+       <ServiceProvidertable key={'rejected'} columnss={spRejectedAppointmentColumn} URL={`http://localhost:3008/api/serviceprovider/getAllRejectedAndCancelledAppointment`}/>
         }
 
     </>
