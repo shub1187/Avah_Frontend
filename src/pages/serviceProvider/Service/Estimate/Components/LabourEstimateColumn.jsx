@@ -1,5 +1,6 @@
 export const SpCreateLabourEstimateColumn = [
     { title: "Labour Description", field: "name" },
+    { title: "Quantity", field: "quantity" },
     { title: "HSN/SAC", field: "hsn_sac" },
     { title: "Price", field: "selling_price" },
     { title: "Tax %", field: "tax" },

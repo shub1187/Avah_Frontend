@@ -20,12 +20,11 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
 
     //WHENEVER ANY ROW'S PARTICULAR COLUMN DATA CHANGES HANDLE THAT AND UPDATE
     const handleInputChange = (e,col,rowIndex)=>{
-        // value={everyRowData.tax == 0? everyRowData.selling_price : (parseFloat(everyRowData.tax)/100) * parseFloat(everyRowData.selling_price) +  parseFloat(everyRowData.selling_price) }
         setDisabledUpdate && setDisabledUpdate(false)
         const newValue = [...data]
         if(col==='selling_price'){
-            let amount = newValue[rowIndex].tax==0  ? parseFloat(e.target.value) :!newValue[rowIndex].tax===0 ? 0 :(parseFloat(newValue[rowIndex].tax)/100) * parseFloat(e.target.value) +  parseFloat(e.target.value) 
-            let tax_amount = !newValue[rowIndex].tax ? 0 : newValue[rowIndex]===0 ? 0 : parseFloat(newValue[rowIndex].tax/100) * parseFloat(e.target.value)
+            let amount = ( ((parseFloat(newValue[rowIndex].tax)/100) * parseFloat(e.target.value) +  parseFloat(e.target.value)) * parseFloat(newValue[rowIndex].quantity) ) || 0
+            let tax_amount = (parseFloat(newValue[rowIndex].tax/100) * parseFloat(e.target.value)) || 0
             newValue[rowIndex] = {
                 ...newValue[rowIndex],
                 ['amount']:amount, 
@@ -36,12 +35,22 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
 
         else if(col==='tax'){
             let tax_amount =isNaN(parseFloat(newValue[rowIndex].selling_price)) ? 0 :e.target.value===0? parseFloat(newValue[rowIndex].selling_price) : !e.target.value ? 0 :(parseFloat(e.target.value)/100) * parseFloat(newValue[rowIndex].selling_price) 
-            let amount = isNaN(parseFloat(newValue[rowIndex].selling_price)) ? 0 : tax_amount + parseFloat(newValue[rowIndex].selling_price)
+            let amount = isNaN(parseFloat(newValue[rowIndex].selling_price)) ? 0 : (tax_amount * parseFloat(newValue[rowIndex].quantity)) + parseFloat(newValue[rowIndex].selling_price) * parseFloat(newValue[rowIndex].quantity)
 
             newValue[rowIndex] = {
                 ...newValue[rowIndex],
                 ['tax_amount']:tax_amount,
                 ['amount']:amount,
+                [col]:e.target.value
+            }
+        }
+        else if(col==='quantity'){
+            let tax_amount = (parseFloat(newValue[rowIndex].selling_price) * parseFloat(newValue[rowIndex].tax/100)) || 0
+            let amount =  parseFloat(e.target.value) *((parseFloat(newValue[rowIndex].selling_price) * parseFloat(newValue[rowIndex].tax/100)) + parseFloat(newValue[rowIndex].selling_price)) || 0
+            newValue[rowIndex] = {
+                ...newValue[rowIndex],
+                ['amount']:amount,
+                ['tax_amount']:tax_amount,
                 [col]:e.target.value
             }
         }
@@ -112,7 +121,8 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         setDisabledUpdate && setDisabledUpdate(false)
         const newRow = {}
         column.forEach((val)=>{
-            newRow[val.field]=''
+            if(val.field==='quantity') newRow[val.field]=1
+            else newRow[val.field]=''
         })
         setPayload && setPayload([...data,newRow])
     }
@@ -122,7 +132,8 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         setDisabledUpdate && setDisabledUpdate(false)
         const newRow = {'autocomplete':true}
         column.forEach((val)=>{
-            newRow[val.field]=''
+            if(val.field==='quantity') newRow[val.field]=1
+            else newRow[val.field]=''
         })
         newRow['autocompleteData'] = []
         setPayload && setPayload([...data,newRow])
@@ -194,8 +205,9 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                         value={everyRowData[col.field]}
                                         // onChange={(e) => handleInputChange(e, col.field, rowIndex)}
                                         onChange={(e) => handleInputChange(e, col.field, rowIndex)}
-                                        sx={{"& fieldset": { border: 'none' }}}
-                                        disabled
+                                        sx={col.field!=='quantity' && {"& fieldset": { border: 'none' }}}
+                                        disabled = {col.field!=='quantity'}
+                                        type={col.field==='quantity' && 'number'}
                                     />
                                     </td>)
                                     
@@ -235,6 +247,12 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                                         onChange={(e) => handleInputChange(e, col.field, rowIndex)}
                                         // sx={{"& fieldset": { border: 'none' }}}
                                         disabled={col.field==='tax_amount'|| col.field === 'amount' || everyRowData.backendDisabled }
+                                        type={col.field==='quantity' && 'number'}
+                                        InputProps={col.field==='quantity' && {
+                                            inputProps: { 
+                                                min: 1
+                                            }
+                                        }}
                                     />
                                 </td>
                             )})}
