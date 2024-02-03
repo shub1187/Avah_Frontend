@@ -332,7 +332,7 @@ const SpEstimateList = () => {
                                 />
                             </Box>
                         </Box>
-                        <Button className={'small-button mr-2'} color='options' variant='contained' onClick={()=>setOpenDeleteEstimateConfirmation(true)}>DELETE</Button>
+                        {/* <Button className={'small-button mr-2'} color='options' variant='contained' onClick={()=>setOpenDeleteEstimateConfirmation(true)}>DELETE</Button> */}
                         <Button disabled={disabledUpdate} className='small-button' color='options' variant='contained' onClick={updateEstimate}>UPDATE</Button>
                     </Box>
                 </div>

@@ -10,9 +10,13 @@ import { useRef, useState } from 'react'
 import CreateTextFields from 'components/common/Textfield'
 import UnderLine from '../Underline';
 import PreviewIcon from '@mui/icons-material/Preview';
+import EngineeringIcon from '@mui/icons-material/Engineering';
+import { GrUserWorker } from "react-icons/gr";
+import { IconContext } from 'react-icons';
+
 // import { title } from 'process';
 
-const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, approve, reject, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData }) => {
+const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJobCard, approve, reject, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData }) => {
     const { fetchData, snackbar, loadingIndicator } = useFetchFunction()
     // const timerRef = useRef(null);
 
@@ -111,6 +115,14 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, approv
                     <Box className='flex ai-flex-start column'>
                         <Typography fontSize={9}> &nbsp;Estimate</Typography>
                         <PreviewIcon style={{ cursor: 'pointer', marginRight: '5px' }} />
+                    </Box>
+                </IconButton>
+            )}
+            {viewJobCard && (
+                <IconButton color='options' onClick={() => { setPage(); setEyeIconValue(rowData) }}>
+                    <Box className='flex ai-flex-start jc-center column'>
+                        <Typography fontSize={9}> JobCard</Typography>
+                        <EngineeringIcon style={{ cursor: 'pointer', marginRight: '5px' }} />
                     </Box>
                 </IconButton>
             )}

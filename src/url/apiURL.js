@@ -77,6 +77,13 @@ const URL = {
                 getSpecificSpareDetailsForEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/getSpecificSpareDetailsForEstimate`),
                 getSpecificLabourDetailsForEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/getSpecificLabourDetailsForEstimate`),
 
+            },
+            JOBCARD:{
+                getJobcardDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getJobcardDetails`),
+                updateJobcard : replaceUrl(`${BASE_URL}/api/serviceprovider/updateJobcard`),
+                getAllTechnicianEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllTechnicianEmployee`),
+                getAllAdminAdvisorEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllAdminAdvisorEmployee?sp_id=30`)
+
             }
         },
         NOTIFICATION:{

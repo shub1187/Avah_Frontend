@@ -3,6 +3,7 @@ import SpLabourPage from 'pages/serviceProvider/Labour'
 import SpRolesPage from 'pages/serviceProvider/Roles'
 import SpAppointmentPage from 'pages/serviceProvider/Service/Appointment'
 import SpEstimateList from 'pages/serviceProvider/Service/Estimate'
+import JobCard from 'pages/serviceProvider/Service/JobCard'
 import SparesList from 'pages/serviceProvider/Spares'
 import SpCustomerPage from 'pages/serviceProvider/Users/Customers'
 import SpEmployeesPage from 'pages/serviceProvider/Users/Employees'
@@ -74,6 +75,7 @@ const serviceProviderRoutes = [
           {
             id:73,
             link:'jobCardsList',
+            component:<JobCard/>
           },
         ]
       },

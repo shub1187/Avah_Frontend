@@ -23,7 +23,8 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         setDisabledUpdate && setDisabledUpdate(false)
         const newValue = [...data]
         if(col==='selling_price'){
-            let amount = ( ((parseFloat(newValue[rowIndex].tax)/100) * parseFloat(e.target.value) +  parseFloat(e.target.value)) * parseFloat(newValue[rowIndex].quantity) ) || 0
+            console.log(parseFloat(e.target.value),parseFloat(newValue[rowIndex].quantity))
+            let amount =  ( ((parseFloat(newValue[rowIndex].tax)/100) || 0 * parseFloat(e.target.value)) +  parseFloat(e.target.value) * parseFloat(newValue[rowIndex].quantity)) || 0
             let tax_amount = (parseFloat(newValue[rowIndex].tax/100) * parseFloat(e.target.value)) || 0
             newValue[rowIndex] = {
                 ...newValue[rowIndex],
