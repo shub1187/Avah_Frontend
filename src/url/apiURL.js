@@ -82,7 +82,8 @@ const URL = {
                 getJobcardDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getJobcardDetails`),
                 updateJobcard : replaceUrl(`${BASE_URL}/api/serviceprovider/updateJobcard`),
                 getAllTechnicianEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllTechnicianEmployee`),
-                getAllAdminAdvisorEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllAdminAdvisorEmployee?sp_id=30`)
+                getAllAdminAdvisorEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllAdminAdvisorEmployee`),
+                getAllCreatedJobcardList :replaceUrl(`${BASE_URL}/api/serviceprovider/getAllCreatedJobcardList`)
 
             }
         },

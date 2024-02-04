@@ -1,7 +1,7 @@
 import { Box } from "@mui/material"
 import ActionDialog from "components/common/Dialog/ActionDialog"
 import MoreActionDialog from "components/common/Dialog/MoreActionDialog"
-export const spRejectedAppointmentColumn =()=> [
+export const spRejectedAppointmentColumn = [
     { title: "Name", field: "name" },
     { title: "Vehicle Number", field: "vehicle_number" },
     { title: "Appointment Date", field: "appointment_date"},

@@ -30,6 +30,11 @@ const CustomerAppointment = () => {
   const [labourPayload, setLabourSparePayload] = useState([])
   const [openReject,setOpenReject] = useState({toggle:false,estimate_rejection_note:''})
   const [isSubmitted,setIsSubmitted] = useState(false)
+
+  // data.map((arr)=> arr.amount = parseFloat(arr?.amount)*parseFloat(arr?.quantity))
+  // sparePayload.map((arr)=> arr.amount = parseFloat(arr?.amount)*parseFloat(arr?.quantity))
+  // labourPayload.map((arr)=> arr.amount = parseFloat(arr?.amount)*parseFloat(arr?.quantity))
+
   const calculateTotalAmount = (sparePayload,labourPayload)=>{
     console.log("ln 34 ", openReject.estimate_rejection_note)
     let TotalAmount = 0

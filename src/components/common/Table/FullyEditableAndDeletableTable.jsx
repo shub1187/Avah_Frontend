@@ -10,11 +10,12 @@ import { debounce } from '@mui/material/utils'
 const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
 const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayload, autoCompleteFieldName, getAllItemListForAutoFillDebounceOnInputChange, getApiUrlOnAutocompleteItemSelect, getApiUrlOnAutocompleteItemSelectParams, setDisabledUpdate, viewOnly}) => {
-
+    console.log("ln 13", data)
     const {fetchData} = useFetchFunction()
 
+    data.map((arr)=> arr.amount = (parseFloat(arr?.selling_price)*parseFloat(arr?.quantity) + parseFloat(arr?.tax_amount)*parseFloat(arr?.quantity)) || 0)
     //WHENEVER API DATA CHANGES RERUN AND UPDATE
-    useEffect(()=>{
+    useEffect(()=>{ 
         setPayload && setPayload(data)
     },[data])
 
@@ -80,11 +81,12 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
                 column.forEach((val)=>{
                     newRow[val.field]=apiData.data[val.field]
                 })
+                newRow.quantity = newRow.quantity || 1
                 newRow.tax_amount =parseFloat(apiData?.data?.tax/100 ) * parseFloat(apiData?.data?.selling_price)
-                newRow.amount = newRow.tax_amount + parseFloat(apiData?.data?.selling_price)
+                newRow.amount = newRow.tax_amount + parseFloat(apiData?.data?.selling_price)        
                 newValue[rowIndex] = {
                     ...newValue[rowIndex],
-                    ...newRow
+                    ...newRow 
                 }
                 setPayload &&setPayload(newValue)
             }

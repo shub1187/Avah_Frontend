@@ -12,10 +12,11 @@ import UnderLine from "components/common/Underline"
 import './index.scss'
 import { set } from "date-fns"
 
-const {getJobcardDetails, updateJobcard, getAllAdminAdvisorEmployee, getAllTechnicianEmployee} =URL.SERVICE_PROVIDER.SERVICE.JOBCARD
+const {getJobcardDetails, updateJobcard, getAllAdminAdvisorEmployee, getAllTechnicianEmployee,getAllCreatedJobcardList} =URL.SERVICE_PROVIDER.SERVICE.JOBCARD
 const JobCard = () => {
 
     const [page, setPage] = useState('table')
+    console.log("ln 19", page)
     const [sparePayload, setSparePayload] = useState([])
     const [labourPayload, setLabourSparePayload] = useState([])
     const [eyeIconValue,setEyeIconValue] = useState([])
@@ -92,9 +93,9 @@ const JobCard = () => {
     }
 
     useEffect(() => {
-        if (page === 'eye-icon') {
-            getJobcardDetailsApi();
-        }
+        // if (page === 'eye-icon') {
+        //     getJobcardDetailsApi();
+        // }
       }, [page]);
 
     const getJobcardDetailsApi = async()=>{
@@ -311,7 +312,7 @@ const JobCard = () => {
   return (
     <div>
             <ServiceProvidertable
-                URL={'http://localhost/api'}
+                URL={getAllCreatedJobcardList}
                 columnss={jobCardColumn(()=>setPage('eye-icon'),setEyeIconValue)}
                 // clickButton= {()=>setPage('create-job-card')}
                 // buttonName={'CREATE JOB CARD'}
