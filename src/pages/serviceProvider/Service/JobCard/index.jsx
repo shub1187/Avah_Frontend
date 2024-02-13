@@ -23,8 +23,8 @@ const JobCard = () => {
     const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
     const[disabledUpdate,setDisabledUpdate] = useState(true)
     const [formData,setFormData] = useState([])
-    const {techAdvList,setTechAdvList} = useState({technicians:[],advisors:[]})
-
+    const [techAdvList,setTechAdvList] = useState({technicians:[],advisors:[]})
+    console.log("ln 27", techAdvList)
     const data ={
         "error": false,
         "message": "success",
@@ -93,9 +93,9 @@ const JobCard = () => {
     }
 
     useEffect(() => {
-        // if (page === 'eye-icon') {
-        //     getJobcardDetailsApi();
-        // }
+        if (page === 'eye-icon') {
+            getJobcardDetailsApi();
+        }
       }, [page]);
 
     const getJobcardDetailsApi = async()=>{
@@ -117,8 +117,7 @@ const JobCard = () => {
         const {data} = await fetchData(obj)
         const {data:advisorData} = await fetchData(advisor)
         const {data:technicianData} = await fetchData(technician)
-        setTechAdvList((prev)=>({...prev,advisor:advisorData?.data, technician:technicianData?.data}))
-
+        
         let spareData = data?.data.spares
         let labourData = data?.data.labours
 
@@ -135,8 +134,11 @@ const JobCard = () => {
         })
         setSparePayload(data?.data?.spares)
         setLabourSparePayload(data?.data?.labours)
+        console.log("ln 137", advisorData , technicianData)
+        setTechAdvList((prev)=>({...prev,advisors:advisorData?.data, technicians:technicianData?.data}))
     }
 
+  
     const updateEstimate = async()=>{
         const obj = {
             payload:{
@@ -153,7 +155,7 @@ const JobCard = () => {
             await fetchData(obj)
         }
     }
-
+    console.log("ln 158 ", techAdvList.technicians)
     if(page ==='eye-icon'){
         // getEstimateDetailsApi()
         return (
@@ -225,7 +227,7 @@ const JobCard = () => {
                                 color="options"
                                 multiple
                                 id="tags-standard"
-                                options={techAdvList.technicians.data}
+                                options={techAdvList?.advisors|| []}
                                 getOptionLabel={(option) => option.label}
                                 // defaultValue={defaultValues}
                                 // onChange={(event,value)=>setFormData({permission_granted : value.map((val)=>val.title)})}
@@ -244,7 +246,7 @@ const JobCard = () => {
                             <Autocomplete
                                 multiple
                                 id="tags-standard"
-                                options={techAdvList.advisors.data}
+                                options={techAdvList?.technicians || []}
                                 getOptionLabel={(option) => option.label}
                                 // defaultValue={defaultValues}
                                 // onChange={(event,value)=>setFormData({permission_granted : value.map((val)=>val.title)})}
