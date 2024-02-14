@@ -91,12 +91,6 @@ const Sidebar = ({isMobile,open,handleDrawerToggle,customer}) => {
             :
             null
             }        
-
-         
-
-
-
-
           </div>
       </List>
     </SwipeableDrawer>

@@ -36,7 +36,6 @@ const CustomerAppointment = () => {
   // labourPayload.map((arr)=> arr.amount = parseFloat(arr?.amount)*parseFloat(arr?.quantity))
 
   const calculateTotalAmount = (sparePayload,labourPayload)=>{
-    console.log("ln 34 ", openReject.estimate_rejection_note)
     let TotalAmount = 0
   
     const addAmount = (payload)=>{

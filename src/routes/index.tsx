@@ -51,7 +51,6 @@ const generateRouty = (SideBarList:any)=>{
     //   "Service"
     // ]
     return SideBarList.map((route:any,index:any)=>{
-      console.log("Not Rendered", permission)
       if(!route.role || permission?.includes(route?.role) ||  permission?.includes('All') ){
         return (<Route
           path={route.link}

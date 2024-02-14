@@ -10,7 +10,6 @@ import { debounce } from '@mui/material/utils'
 const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
 const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayload, autoCompleteFieldName, getAllItemListForAutoFillDebounceOnInputChange, getApiUrlOnAutocompleteItemSelect, getApiUrlOnAutocompleteItemSelectParams, setDisabledUpdate, viewOnly}) => {
-    console.log("ln 13", data)
     const {fetchData} = useFetchFunction()
 
     data.map((arr)=> arr.amount = (parseFloat(arr?.selling_price)*parseFloat(arr?.quantity) + parseFloat(arr?.tax_amount)*parseFloat(arr?.quantity)) || 0)

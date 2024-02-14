@@ -334,7 +334,7 @@ const RaeesLoginComponent = () => {
                             {/* ONLY SHOW IF ITS IN MOBILE VIEW FOR LOGO AND BUTTON AND DONT SHOW IF ITS IN ADMIN*/}
                             {isMobile && (
                             <Box className='mobile-logo-sign-up'>
-                                <Box>{isAdminPage ? <></>:<img src={LogoImage} alt="logo Img" ></img>}</Box>
+                                <Box>{isAdminPage ? <></>:<Link to={'/'}><img src={LogoImage} alt="logo Img" ></img></Link>}</Box>
                                 <Box>{isAdminPage ? <></>: <button onClick={()=>{setLogin(!login);setFormData({})}} className='black-button'>{login?'SIGN UP':"LOGIN"}</button>}</Box>
                             </Box>
                             )}
@@ -373,7 +373,7 @@ const RaeesLoginComponent = () => {
                         <Box className='register-container'>
                             {isMobile && (
                             <Box className='mobile-logo-sign-up'>
-                                <Box>{isAdminPage ? <></>:<img src={LogoImage} alt="logo Img" ></img>}</Box>
+                                <Box>{isAdminPage ? <></>:<Link to={'/'}><img src={LogoImage} alt="logo Img" ></img></Link>}</Box>
                                 <Box>{isAdminPage ? <></>: <button onClick={()=>{setLogin(!login);setFormData({})}} className='black-button'>{login?'SIGN UP':"LOGIN"}</button>}</Box>
                             </Box>
                             )}

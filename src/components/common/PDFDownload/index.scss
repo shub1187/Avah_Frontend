@@ -1,0 +1,35 @@
+.table-body{
+    padding:0.5rem;
+
+    .MuiButtonBase-root {
+        height:2rem;
+        font-size:0.7rem;
+    }
+    
+    .table{
+        font-size: 0.8rem;
+        .MuiInputBase-root input{
+            font-size: 0.8rem;
+        }
+        .fieldset {
+            border: 'none' 
+        }
+         
+        .thead{
+            background-color: #f4f8f9;
+            border-bottom: 5px solid #e6e8e8;
+        }
+        .tbody{
+            background-color: #f4f8f9;
+        }
+    }
+
+}
+
+/* TO HIDE THE COMPONENT WHILE KEEPING IN DOM WITHOUT EFFEECTING HTMLCANVAS */
+.hide-pdf-component {
+    position: fixed;
+    overflow: hidden;
+    height: 0;
+    width: 900px;
+  }

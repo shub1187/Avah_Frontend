@@ -90,7 +90,64 @@ const CustomerTable = ({DialogButton,columnss,URL,key, dialogTitle, dialogButton
   //   { title: "Total", field: 'total' ,render:(rowData)=><Box display={'flex'}><SentimentVeryDissatisfiedIcon/></Box>},
   //   { title :"Action", field:'action',render:(rowData)=><ActionDialog status edit view changePassword/>}
   // ]
-
+    const mock = {
+      "error": false,
+      "message": "Jobcard List fetched successfully",
+      "data": {
+          "results": [
+              {
+                  "appointment_id": 19,
+                  "customer_id": 15,
+                  "sp_id": "30",
+                  "name": "Sakshi patil",
+                  "business_name": "Pranish Auto services",
+                  "vehicle_number": "CH04PP4585",
+                  "vehicle_type": "Personal",
+                  "brand": "Maruti Suzuki",
+                  "model": "Ertiga",
+                  "fuel_type": "CNG",
+                  "email": "sakshi@gmail.com",
+                  "mobile_number": "77884455112",
+                  "pickup_drop": "Self Drive",
+                  "pickup_address": "",
+                  "appointment_time": "1 PM",
+                  "appointment_status": "Approved",
+                  "has_customer_cancelled": false,
+                  "has_sp_rejected": false,
+                  "jobcard_status": "Created",
+                  "cust_cancellation_note": null,
+                  "sp_rejection_note": null,
+                  "is_reschedule_allowed": false,
+                  "customization": "Showroom Fitted",
+                  "has_sp_cancelled": false,
+                  "sp_cancellation_note": null,
+                  "estimate_status": "Approved By Customer",
+                  "appointment_timestamp": "2023-11-05T11:55:22.471Z",
+                  "appointment_date": "2023-11-15",
+                  "estimate_number": "9",
+                  "advisor_assigned": "No",
+                  "estimate_approval_or_rejection_date": "2024-01-22T18:30:00.000Z",
+                  "estimate_rejection_note": null,
+                  "estimate_created_by": null,
+                  "jobcard_number": "3",
+                  "jobcard_created_by": null,
+                  "jobcard_opened_on": null,
+                  "complaints": null,
+                  "kilometers_driven": null,
+                  "estimate_created_on": null,
+                  "advisor_name": null,
+                  "technician_name": null,
+                  "invoice_number": null,
+                  "payment_status": null,
+                  "payment_method": null,
+                  "service_completed_on": null,
+                  "invoice_amount": null,
+                  "invoice_collected_by": null,
+                  "invoice_created_by": null
+              }        ]
+      }
+  }
+  
 
   return(
     <>
@@ -154,37 +211,39 @@ const CustomerTable = ({DialogButton,columnss,URL,key, dialogTitle, dialogButton
     }}
     isLoading={false}
     key={key || 'default'}
-    data={async (query) => {
-      try {
-        let url = `${URL}?customer_id=${customer_id}&`;
+    data={mock?.data?.results || []}
 
-        if(query.search){
-          url+=`q=${query.search}`
-        }
-        if(query.orderBy){
-          url+=`&_sort=${query.orderBy.field}&_order=${query.orderDirection}`
-        }
-        url+=`&_page=${query.page+1}`
-        url+=`&_limit=${query.pageSize}`
-        const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
-        const response = await axios.get(url,{headers});
-        const data = response?.data?.results; // Adjust this based on your API response structure
-        // setDataLength(data.length)
+    // data={async (query) => {
+    //   try {
+    //     let url = `${URL}?customer_id=${customer_id}&`;
+
+    //     if(query.search){
+    //       url+=`q=${query.search}`
+    //     }
+    //     if(query.orderBy){
+    //       url+=`&_sort=${query.orderBy.field}&_order=${query.orderDirection}`
+    //     }
+    //     url+=`&_page=${query.page+1}`
+    //     url+=`&_limit=${query.pageSize}`
+    //     const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
+    //     const response = await axios.get(url,{headers});
+    //     const data = response?.data?.results; // Adjust this based on your API response structure
+    //     // setDataLength(data.length)
        
-        return {
-          data: data || [], // Change this to match your data structure
-          page: query.page,
-          totalCount:20, // Assuming the total count is the length of the data array
-        };
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        return {
-          data: [],
-          page: query.page,
-          totalCount: 0,
-        };
-      }
-    }}
+    //     return {
+    //       data: data || [], // Change this to match your data structure
+    //       page: query.page,
+    //       totalCount:20, // Assuming the total count is the length of the data array
+    //     };
+    //   } catch (error) {
+    //     console.error("Error fetching data:", error);
+    //     return {
+    //       data: [],
+    //       page: query.page,
+    //       totalCount: 0,
+    //     };
+    //   }
+    // }}
   />
   </ThemeProvider>
   </>

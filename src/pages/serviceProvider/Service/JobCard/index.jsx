@@ -15,16 +15,14 @@ import { set } from "date-fns"
 const {getJobcardDetails, updateJobcard, getAllAdminAdvisorEmployee, getAllTechnicianEmployee,getAllCreatedJobcardList} =URL.SERVICE_PROVIDER.SERVICE.JOBCARD
 const JobCard = () => {
 
-    const [page, setPage] = useState('table')
-    console.log("ln 19", page)
+    const [page, setPage] = useState('eye-icon')
     const [sparePayload, setSparePayload] = useState([])
     const [labourPayload, setLabourSparePayload] = useState([])
     const [eyeIconValue,setEyeIconValue] = useState([])
     const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
     const[disabledUpdate,setDisabledUpdate] = useState(true)
-    const [formData,setFormData] = useState([])
     const [techAdvList,setTechAdvList] = useState({technicians:[],advisors:[]})
-    console.log("ln 27", techAdvList)
+    const [techAdvPayload,setTechAdvPayload] = useState({technicians:[],advisor:'',showAutoComplete:true})
     const data ={
         "error": false,
         "message": "success",
@@ -134,28 +132,30 @@ const JobCard = () => {
         })
         setSparePayload(data?.data?.spares)
         setLabourSparePayload(data?.data?.labours)
-        console.log("ln 137", advisorData , technicianData)
         setTechAdvList((prev)=>({...prev,advisors:advisorData?.data, technicians:technicianData?.data}))
     }
 
   
-    const updateEstimate = async()=>{
+    const updateJobcardCall = async()=>{
         const obj = {
             payload:{
                 appointment_id:eyeIconValue?.appointment_id,
                 sp_id:localStorage.getItem('sp_id'),
-                estimate_number : eyeIconValue?.estimate_number,
+                jobcard_number : eyeIconValue?.jobcard_number,
+                jobcard_created_by:localStorage.getItem('profile_name'),
                 sparePayload,
-                labourPayload
+                labourPayload,
+                technician_name: techAdvPayload?.technicians,
+                advisor_name: eyeIconValue?.advisor_name || techAdvPayload?.advisor,
             },
             method:"POST",
             url:updateJobcard
         }
         if((sparePayload && sparePayload.length) || (labourPayload && labourPayload.length) ){
+            setTechAdvPayload((prev)=>({...prev,showAutoComplete:false}))
             await fetchData(obj)
         }
     }
-    console.log("ln 158 ", techAdvList.technicians)
     if(page ==='eye-icon'){
         // getEstimateDetailsApi()
         return (
@@ -219,47 +219,50 @@ const JobCard = () => {
                       </Box>
                     </Box>
                     </Box>
-                    <Grid container className='flex mt-1'>
-                        <Grid xs={6} item className='border mr-2'>
-                            <Typography className="mb-1" fontWeight={'bold'}>Assign Advisor<UnderLine/></Typography>
-                            <Grid item xs={12} mb={2}>
-                            <Autocomplete
-                                color="options"
-                                multiple
-                                id="tags-standard"
-                                options={techAdvList?.advisors|| []}
-                                getOptionLabel={(option) => option.label}
-                                // defaultValue={defaultValues}
-                                // onChange={(event,value)=>setFormData({permission_granted : value.map((val)=>val.title)})}
-                                renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    size='small'
+                    {(eyeIconValue?.advisor_assigned=='yes'||techAdvPayload?.showAutoComplete) && (
+                        <Grid container className='flex mt-1'>
+                            <Grid xs={6} item className='border mr-2'>
+                                <Typography className="mb-1" fontWeight={'bold'}>Assign Advisor<UnderLine/></Typography>
+                                <Grid item xs={12} mb={2}>
+                                <Autocomplete
+                                    color="options"
+                                    multiple
+                                    id="tags-standard"
+                                    options={ techAdvList?.advisors || []}
+                                    getOptionLabel={(option) => option.label}
+                                    onChange={(event,value)=>setTechAdvPayload((prev)=>({...prev,advisor:value.reduce((acc,obj)=>acc = obj.value,'')}))}
+                                    getOptionDisabled={(options)=>techAdvPayload?.advisor?.length?true:false}
+                                    renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        size='small'
+                                    />
+                                    )}
                                 />
-                                )}
-                            />
+                                </Grid>
+                            </Grid>
+                            <Grid xs={5.8} item className='border'>
+                                <Typography className="mb-1" fontWeight={'bold'}>Assign Technician<UnderLine/></Typography>
+                                <Grid item xs={12} mb={2}>
+                                <Autocomplete
+                                    multiple
+                                    id="tags-standard"
+                                    value={techAdvPayload.technicians}
+                                    options={data.data?.map(val=>val.value) || []}
+                                    getOptionLabel={(option) => option}
+                                    onChange={(event,value)=>setTechAdvPayload((prev)=>({...prev,technicians:value}))}
+                                    renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        size='small'
+                                    />
+                                    )}
+                                />
+                                </Grid>
                             </Grid>
                         </Grid>
-                        <Grid xs={5.8} item className='border'>
-                            <Typography className="mb-1" fontWeight={'bold'}>Assign Technician<UnderLine/></Typography>
-                            <Grid item xs={12} mb={2}>
-                            <Autocomplete
-                                multiple
-                                id="tags-standard"
-                                options={techAdvList?.technicians || []}
-                                getOptionLabel={(option) => option.label}
-                                // defaultValue={defaultValues}
-                                // onChange={(event,value)=>setFormData({permission_granted : value.map((val)=>val.title)})}
-                                renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    size='small'
-                                />
-                                )}
-                            />
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                    )}
+
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3'>
                         <FullyEditableAndDeletableTable
                             title={'SPARES'} 
@@ -303,7 +306,9 @@ const JobCard = () => {
                             </Box>
                         </Box>
                         {/* <Button className={'small-button mr-2'} color='options' variant='contained' onClick={()=>setOpenDeleteEstimateConfirmation(true)}>DELETE</Button> */}
-                        <Button disabled={disabledUpdate} className='small-button' color='options' variant='contained' onClick={updateEstimate}>UPDATE</Button>
+                        <Button sx={{mr:2}} disabled={disabledUpdate} className='small-button' color='options' variant='contained' onClick={updateJobcardCall}>Update JobCard</Button>
+                        <Button disabled={disabledUpdate} className='small-button' color='options' variant='contained' onClick={()=>{}}>Generate Invoice</Button>
+
                     </Box>
                 </div>
                 {snackbar}

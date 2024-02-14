@@ -22,7 +22,12 @@ const AddCustomerAppointmentColumn = (setPage,setEyeIconValue)=>([
                 setEyeIconValue={setEyeIconValue}
             />
             )}
-
+            <ActionDialog
+                downloadPdf
+            />
+            <ActionDialog
+                print
+            />
         </Box>
     }
 ])
