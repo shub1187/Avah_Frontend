@@ -12,7 +12,7 @@ import UnderLine from "components/common/Underline"
 import './index.scss'
 import { set } from "date-fns"
 
-const {getJobcardDetails, updateJobcard, getAllAdminAdvisorEmployee, getAllTechnicianEmployee,getAllCreatedJobcardList} =URL.SERVICE_PROVIDER.SERVICE.JOBCARD
+const {getJobcardDetails, updateJobcard, getAllAdminAdvisorEmployee, getAllTechnicianEmployee,getAllCreatedJobcardList,getAllLabourListForAutoFill,getAllSpareListForAutoFill,getSpecificLabourDetailsForEstimate,getSpecificSpareDetailsForEstimate, generateInvoice} =URL.SERVICE_PROVIDER.SERVICE.JOBCARD
 const JobCard = () => {
 
     const [page, setPage] = useState('eye-icon')
@@ -104,12 +104,16 @@ const JobCard = () => {
         }
         const advisor = {
             method:'GET',
-            url:`${getAllAdminAdvisorEmployee}?sp_id=${localStorage.getItem('sp_id')}`
+            url:`${getAllAdminAdvisorEmployee}?sp_id=${localStorage.getItem('sp_id')}`,
+            noLoading : true,
+            noSnackbar : true
 
         }
         const technician = {
             method:'GET',
-            url:`${getAllTechnicianEmployee}?sp_id=${localStorage.getItem('sp_id')}`
+            url:`${getAllTechnicianEmployee}?sp_id=${localStorage.getItem('sp_id')}`,
+            noLoading : true,
+            noSnackbar : true
 
         }
         const {data} = await fetchData(obj)
@@ -156,13 +160,34 @@ const JobCard = () => {
             await fetchData(obj)
         }
     }
+
+    const generateInvoiceCall = async()=>{
+        await updateJobcardCall();
+        const obj = {
+            payload:{
+                appointment_id:eyeIconValue?.appointment_id,
+                sp_id:localStorage.getItem('sp_id'),
+                jobcard_number : eyeIconValue?.jobcard_number,
+                estimate_number : eyeIconValue?.estimate_number,
+                invoice_amount : calculateTotalAmount(sparePayload,labourPayload),
+                vehicle_number :  eyeIconValue?.vehicle_number,
+                invoice_created_by:localStorage.getItem('profile_name')
+            },
+            method:"POST",
+            url:generateInvoice   
+        }
+        if((sparePayload && sparePayload.length) || (labourPayload && labourPayload.length) ){
+            setTechAdvPayload((prev)=>({...prev,showAutoComplete:false}))
+            await fetchData(obj)
+        }
+    }
     if(page ==='eye-icon'){
         // getEstimateDetailsApi()
         return (
             <>
                 <div>
                     <Box className='flex jc-space-between mb-3'>
-                        <Button className='small-button' onClick={() =>{ setPage('table');setDisabledUpdate(true)}} variant='outlined' color='options'>Back <ArrowBackIcon /></Button>
+                        <Button className='small-button' onClick={() =>{ setPage('table');setDisabledUpdate(true); setTechAdvPayload((prev)=>({...prev,showAutoComplete:true}))}} variant='outlined' color='options'>Back <ArrowBackIcon /></Button>
                     </Box>
                     <Box className='flex'>
                     <Box className='mr-10'>
@@ -199,7 +224,7 @@ const JobCard = () => {
                         </Box>
                       </Box>
                     </Box>
-                    <Box>
+                    <Box className='mr-10'>
                       <Typography fontWeight={'bold'}>Appointment Details</Typography>
                       <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
                         <Box>
@@ -218,8 +243,23 @@ const JobCard = () => {
                         </Box>
                       </Box>
                     </Box>
+                    {eyeIconValue?.advisor_name && (
+                         <Box>
+                         <Typography fontWeight={'bold'}>Advisor Details</Typography>
+                         <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
+                           <Box>
+                             <Box>Advisor</Box>
+                             <Box >Technicians</Box>   
+                           </Box>
+                           <Box>
+                             <Box>: {eyeIconValue?.advisor_name}</Box>
+                             <Box >: {eyeIconValue?.technician_name?.map((name)=>name+", ")}</Box>  
+                           </Box>
+                         </Box>
+                       </Box>
+                    )}
                     </Box>
-                    {(eyeIconValue?.advisor_assigned=='yes'||techAdvPayload?.showAutoComplete) && (
+                    {eyeIconValue?.advisor_assigned=='Yes'?<></>:techAdvPayload?.showAutoComplete && (
                         <Grid container className='flex mt-1'>
                             <Grid xs={6} item className='border mr-2'>
                                 <Typography className="mb-1" fontWeight={'bold'}>Assign Advisor<UnderLine/></Typography>
@@ -230,7 +270,10 @@ const JobCard = () => {
                                     id="tags-standard"
                                     options={ techAdvList?.advisors || []}
                                     getOptionLabel={(option) => option.label}
-                                    onChange={(event,value)=>setTechAdvPayload((prev)=>({...prev,advisor:value.reduce((acc,obj)=>acc = obj.value,'')}))}
+                                    onChange={(event,value)=>{
+                                    setTechAdvPayload((prev)=>({...prev,advisor:value.reduce((acc,obj)=>acc = obj.value,'')}));
+                                    setDisabledUpdate(false)
+                                            }}
                                     getOptionDisabled={(options)=>techAdvPayload?.advisor?.length?true:false}
                                     renderInput={(params) => (
                                     <TextField
@@ -271,8 +314,8 @@ const JobCard = () => {
                             column={spJobCardSpareColumn} 
                             setPayload = {setSparePayload} 
                             autoCompleteFieldName={'name'}
-                            // getAllItemListForAutoFillDebounceOnInputChange={getAllSpareListForAutoFill}
-                            // getApiUrlOnAutocompleteItemSelect={getSpecificSpareDetailsForEstimate}
+                            getAllItemListForAutoFillDebounceOnInputChange={getAllSpareListForAutoFill}
+                            getApiUrlOnAutocompleteItemSelect={getSpecificSpareDetailsForEstimate}
                             getApiUrlOnAutocompleteItemSelectParams={'spare_name'}
                             setDisabledUpdate={setDisabledUpdate}
                         />
@@ -285,8 +328,8 @@ const JobCard = () => {
                             column={spJobcardLabourColumn} 
                             setPayload = {setLabourSparePayload} 
                             autoCompleteFieldName={'name'}
-                            // getAllItemListForAutoFillDebounceOnInputChange={getAllLabourListForAutoFill}
-                            // getApiUrlOnAutocompleteItemSelect={getSpecificLabourDetailsForEstimate}
+                            getAllItemListForAutoFillDebounceOnInputChange={getAllLabourListForAutoFill}
+                            getApiUrlOnAutocompleteItemSelect={getSpecificLabourDetailsForEstimate}
                             getApiUrlOnAutocompleteItemSelectParams={'labour_name'}
                             setDisabledUpdate={setDisabledUpdate}
                         />
@@ -307,7 +350,7 @@ const JobCard = () => {
                         </Box>
                         {/* <Button className={'small-button mr-2'} color='options' variant='contained' onClick={()=>setOpenDeleteEstimateConfirmation(true)}>DELETE</Button> */}
                         <Button sx={{mr:2}} disabled={disabledUpdate} className='small-button' color='options' variant='contained' onClick={updateJobcardCall}>Update JobCard</Button>
-                        <Button disabled={disabledUpdate} className='small-button' color='options' variant='contained' onClick={()=>{}}>Generate Invoice</Button>
+                        <Button disabled={disabledUpdate} className='small-button' color='options' variant='contained' onClick={generateInvoiceCall}>Generate Invoice</Button>
 
                     </Box>
                 </div>

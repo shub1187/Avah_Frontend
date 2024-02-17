@@ -8845,10 +8845,10 @@
   "resolved" "https://registry.npmjs.org/react-table/-/react-table-7.8.0.tgz"
   "version" "7.8.0"
 
-"react-to-print@^2.15.0":
-  "integrity" "sha512-B5M2F2Mit1+glO64x9vCcNL2TiAmZ6iegybVvDs6NhNyTo1MXYlODoNky8vboWFnkcO5R/wz6XlTUK9HFIlWiQ=="
-  "resolved" "https://registry.npmjs.org/react-to-print/-/react-to-print-2.15.0.tgz"
-  "version" "2.15.0"
+"react-to-print@^2.15.1":
+  "integrity" "sha512-1foogIFbCpzAVxydkhBiDfMiFYhIMphiagDOfcG4X/EcQ+fBPqJ0rby9Wv/emzY1YLkIQy/rEgOrWQT+rBKhjw=="
+  "resolved" "https://registry.npmjs.org/react-to-print/-/react-to-print-2.15.1.tgz"
+  "version" "2.15.1"
 
 "react-transition-group@^4.3.0", "react-transition-group@^4.4.0", "react-transition-group@^4.4.2", "react-transition-group@^4.4.5":
   "integrity" "sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g=="

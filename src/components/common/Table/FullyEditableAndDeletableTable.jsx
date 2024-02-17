@@ -12,7 +12,7 @@ const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLab
 const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayload, autoCompleteFieldName, getAllItemListForAutoFillDebounceOnInputChange, getApiUrlOnAutocompleteItemSelect, getApiUrlOnAutocompleteItemSelectParams, setDisabledUpdate, viewOnly}) => {
     const {fetchData} = useFetchFunction()
 
-    data.map((arr)=> arr.amount = (parseFloat(arr?.selling_price)*parseFloat(arr?.quantity) + parseFloat(arr?.tax_amount)*parseFloat(arr?.quantity)) || 0)
+    // data.map((arr)=> arr.amount = (parseFloat(arr?.selling_price)*parseFloat(arr?.quantity) + parseFloat(arr?.tax_amount)*parseFloat(arr?.quantity)) || 0)
     //WHENEVER API DATA CHANGES RERUN AND UPDATE
     useEffect(()=>{ 
         setPayload && setPayload(data)
@@ -24,8 +24,9 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         const newValue = [...data]
         if(col==='selling_price'){
             console.log(parseFloat(e.target.value),parseFloat(newValue[rowIndex].quantity))
-            let amount =  ( ((parseFloat(newValue[rowIndex].tax)/100) || 0 * parseFloat(e.target.value)) +  parseFloat(e.target.value) * parseFloat(newValue[rowIndex].quantity)) || 0
-            let tax_amount = (parseFloat(newValue[rowIndex].tax/100) * parseFloat(e.target.value)) || 0
+            // let amount =  ( ((parseFloat(newValue[rowIndex].tax)/100) || 0 * parseFloat(e.target.value)) +  parseFloat(e.target.value) * parseFloat(newValue[rowIndex].quantity)) || 0
+            let amount = (parseFloat(newValue[rowIndex].tax)/100 * parseFloat(e.target.value) * parseFloat(newValue[rowIndex].quantity)) + (parseFloat(e.target.value) * parseFloat(newValue[rowIndex].quantity)) || 0
+            let tax_amount = (parseFloat(newValue[rowIndex].tax/100) * parseFloat(e.target.value) * parseFloat(newValue[rowIndex].quantity)) || 0
             newValue[rowIndex] = {
                 ...newValue[rowIndex],
                 ['amount']:amount, 
@@ -35,7 +36,7 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
         }
 
         else if(col==='tax'){
-            let tax_amount =isNaN(parseFloat(newValue[rowIndex].selling_price)) ? 0 :e.target.value===0? parseFloat(newValue[rowIndex].selling_price) : !e.target.value ? 0 :(parseFloat(e.target.value)/100) * parseFloat(newValue[rowIndex].selling_price) 
+            let tax_amount =isNaN(parseFloat(newValue[rowIndex].selling_price)) ? 0 :e.target.value===0? parseFloat(newValue[rowIndex].selling_price) : !e.target.value ? 0 :(parseFloat(e.target.value)/100) * parseFloat(newValue[rowIndex].selling_price)  * parseFloat(newValue[rowIndex].quantity)
             let amount = isNaN(parseFloat(newValue[rowIndex].selling_price)) ? 0 : (tax_amount * parseFloat(newValue[rowIndex].quantity)) + parseFloat(newValue[rowIndex].selling_price) * parseFloat(newValue[rowIndex].quantity)
 
             newValue[rowIndex] = {
@@ -46,14 +47,16 @@ const FullyEditableAndDeletableTable = ({data,column, title, buttonName ,setPayl
             }
         }
         else if(col==='quantity'){
-            let tax_amount = (parseFloat(newValue[rowIndex].selling_price) * parseFloat(newValue[rowIndex].tax/100)) || 0
+            console.log("ln 49",newValue[rowIndex])
+            let tax_amount = (parseFloat(newValue[rowIndex].selling_price) * parseFloat(newValue[rowIndex].tax/100) * parseFloat(e.target.value)) || 0
             let amount =  parseFloat(e.target.value) *((parseFloat(newValue[rowIndex].selling_price) * parseFloat(newValue[rowIndex].tax/100)) + parseFloat(newValue[rowIndex].selling_price)) || 0
             newValue[rowIndex] = {
                 ...newValue[rowIndex],
-                ['amount']:amount,
                 ['tax_amount']:tax_amount,
+                ['amount']:amount,
                 [col]:e.target.value
             }
+            console.log("ln 58",newValue[rowIndex])
         }
         else{
         newValue[rowIndex] = {
