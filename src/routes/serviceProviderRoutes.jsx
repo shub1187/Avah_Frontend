@@ -1,3 +1,5 @@
+import PaidInvoices from 'pages/serviceProvider/Billing/PaidInvoices'
+import PendingPayments from 'pages/serviceProvider/Billing/PendingPayments'
 import ServiceProviderHome from 'pages/serviceProvider/Home'
 import SpLabourPage from 'pages/serviceProvider/Labour'
 import SpRolesPage from 'pages/serviceProvider/Roles'
@@ -86,12 +88,14 @@ const serviceProviderRoutes = [
         subList:[
           {
             id:81,
-            link:'invoiceList',
+            link:'pendingPayments',
+            component:<PendingPayments/>
           },
           {
             id:82,
-            link:'pendingPayments',
-          },
+            link:'invoiceList',
+            component:<PaidInvoices/>
+          }     
         ]
       },
       {

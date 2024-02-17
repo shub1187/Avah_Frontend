@@ -105,14 +105,14 @@ export const SpSideBarList = [
     subList:[
       {
         id:81,
-        link:'dashboard/billing/invoiceList',
-        name:"Invoice List"
-      },
-      {
-        id:82,
         link:'dashboard/billing/pendingPayments',
         name:"Pending Payments"
       },
+      {
+        id:82,
+        link:'dashboard/billing/invoiceList',
+        name:"Paid Invoices"
+      }
     ]
   },
   {

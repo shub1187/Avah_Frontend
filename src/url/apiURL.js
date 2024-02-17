@@ -92,6 +92,15 @@ const URL = {
 
             }
         },
+        BILLING : {
+            PENDINGPAYMENTS : {
+                getAllPendingPaymentInvoices : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllPendingPaymentInvoices`)
+            },
+            PAIDINVOICES : {
+                getAllPaidInvoices: replaceUrl(`${BASE_URL}/api/serviceprovider/getAllPaidInvoices`)
+            }
+
+        },
         NOTIFICATION:{
             getNotificationNumbers : replaceUrl(`${BASE_URL}/api/serviceprovider/getNotificationNumbers`)
         },
