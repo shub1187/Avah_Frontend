@@ -11,6 +11,8 @@ import pendingPaymentLabourColumn from "./components/labourcolumn"
 import pendingPaymentSparesColumn from "./components/sparescolumn"
 import UnderLine from "components/common/Underline"
 import PaymentPopup from "./components/PaymentPopup"
+import {useNavigate} from 'react-router-dom'
+
 const {getAllPendingPaymentInvoices,getJobcardDetails,recievePayment} = URL.SERVICE_PROVIDER.BILLING.PENDINGPAYMENTS
 
 const PendingPayments = () => {
@@ -30,7 +32,7 @@ const PendingPayments = () => {
     const [labourPayload, setLabourSparePayload] = useState([])
     const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
     const [paymentOption,setPaymentOptions] = useState({popup:false,options:[paymentList[0]],loading:false})
-
+    const navigate = useNavigate();
     const calculateTotalAmount = (sparePayload,labourPayload)=>{
 
         let TotalAmount = 0
@@ -81,18 +83,20 @@ const PendingPayments = () => {
   }
 
     const confirmPayment = async()=>{
-        const obj ={
-            method:'POST',
-            url:recievePayment,
+     
+        const obj ={   
             payload:{      
-                "Invoice_number": eyeIconValue?.invoice_number, 
-                "Sp_id":localStorage.getItem('sp_id'), 
-                "Appointment_id":eyeIconValue?.appointment_id, 
+                "invoice_number": eyeIconValue?.invoice_number, 
+                "sp_id":localStorage.getItem('sp_id'), 
+                "appointment_id":eyeIconValue?.appointment_id, 
                 "invoice_collected_by":localStorage.getItem('profile_name'),
-                "payment_method": paymentOption?.options?.values
-            }
+                "payment_method": paymentOption?.options[0]?.value
+            },
+            method:"POST",  
+            url:recievePayment              
         }
-        await fetch(obj)
+        await fetchData(obj)
+        navigate('/dashboard/billing/invoiceList');
     }
 
 

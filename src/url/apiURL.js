@@ -1,6 +1,5 @@
 
 const BASE_URL = "http://localhost:3008"
-
 const PRODUCTION_URL = ''
 
 const LOCAL_STORAGE = {
