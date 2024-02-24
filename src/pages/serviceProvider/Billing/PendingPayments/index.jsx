@@ -21,7 +21,7 @@ const PendingPayments = () => {
         {label:"PHONE PE",value:'phone_pe'},
         {label:"GOOGLE Pay",value:'google_pay'},
     ],[])
-    const [page, setPage] = useState('eye-icon')
+    const [page, setPage] = useState('table')
     const [eyeIconValue,setEyeIconValue] = useState([])
     const [sparePayload, setSparePayload] = useState([])
     const [labourPayload, setLabourSparePayload] = useState([])
