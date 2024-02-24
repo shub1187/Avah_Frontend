@@ -27,6 +27,7 @@ const LabourEstimateTable = ({ data,column,title }) => {
                                             size='small'
                                             value={everyRowData[col.field]}
                                             disabled={true}
+                                            sx={col.field==='name'&& {width:170}}
                                             type={col.field === 'quantity' && 'number'}
                                             InputProps={col.field === 'quantity' && {
                                                 inputProps: {

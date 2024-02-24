@@ -96,7 +96,7 @@ const PendingPayments = () => {
             url:recievePayment              
         }
         await fetchData(obj)
-        navigate('/dashboard/billing/invoiceList');
+        setTimeout(()=>navigate('/dashboard/billing/invoiceList'),1000);
     }
 
 

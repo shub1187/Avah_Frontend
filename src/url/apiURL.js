@@ -98,7 +98,9 @@ const URL = {
                 recievePayment : replaceUrl(`${BASE_URL}/api/serviceprovider/recievePayment`)
             },
             PAIDINVOICES : {
-                getAllPaidInvoices: replaceUrl(`${BASE_URL}/api/serviceprovider/getAllPaidInvoices`)
+                getAllPaidInvoices: replaceUrl(`${BASE_URL}/api/serviceprovider/getAllPaidInvoices`),
+                getJobcardDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getJobcardDetails`),
+
             }
 
         },

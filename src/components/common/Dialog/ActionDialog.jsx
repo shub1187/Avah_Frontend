@@ -14,9 +14,11 @@ import EngineeringIcon from '@mui/icons-material/Engineering';
 import PrintIcon from '@mui/icons-material/Print';
 import PDF from '../PDFDownload';
 import Print from '../Print';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+
 // import { title } from 'process';
 
-const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJobCard,downloadPdf, print, approve, reject, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData }) => {
+const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJobCard,viewPaidInvoice,downloadPdf, print, approve, reject, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData }) => {
     const { fetchData, snackbar, loadingIndicator } = useFetchFunction()
     // const timerRef = useRef(null);
 
@@ -126,7 +128,13 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
                     </Box>
                 </IconButton>
             )}
-
+            {viewPaidInvoice && 
+                <IconButton color='options' onClick={() => { setPage(); setEyeIconValue(rowData) }}>
+                    <Box className='flex ai-flex-start jc-center column'>
+                        <Typography fontSize={9}>Invoice</Typography>
+                        <VisibilityIcon style={{ cursor: 'pointer', marginRight: '5px' }} />
+                    </Box>
+                </IconButton>}
             {downloadPdf && (<PDF/>)}
 
             {print && (<Print/>)}
