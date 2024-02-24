@@ -1,0 +1,42 @@
+.black-icon-container-height{
+    height:12rem
+}
+
+.text-center{
+    text-align: center;
+}
+
+.border-right{
+    border-right: 1px solid white;
+}
+
+.black-container{
+    text-align: center;
+    background-color: #000000;
+    .per-container{
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        height: 12rem;
+        @media (max-width : 450px){
+            border-right: none;
+            border-bottom: 1px solid white;
+            margin-top: 2rem;
+        }
+        // REMOVE 4th BORDER-RIGHT 
+        border-right: 1px solid white;
+        
+        .item-container{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    :nth-child(1) > :nth-child(4) > :nth-child(1){border-right: none}
+}
+
+.carousal-container{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+}

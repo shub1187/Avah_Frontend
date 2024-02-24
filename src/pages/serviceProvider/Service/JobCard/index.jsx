@@ -15,7 +15,7 @@ import { set } from "date-fns"
 const {getJobcardDetails, updateJobcard, getAllAdminAdvisorEmployee, getAllTechnicianEmployee,getAllCreatedJobcardList,getAllLabourListForAutoFill,getAllSpareListForAutoFill,getSpecificLabourDetailsForEstimate,getSpecificSpareDetailsForEstimate, generateInvoice} =URL.SERVICE_PROVIDER.SERVICE.JOBCARD
 const JobCard = () => {
 
-    const [page, setPage] = useState('table')
+    const [page, setPage] = useState('eye-icon')
     const [sparePayload, setSparePayload] = useState([])
     const [labourPayload, setLabourSparePayload] = useState([])
     const [eyeIconValue,setEyeIconValue] = useState([])
@@ -291,7 +291,7 @@ const JobCard = () => {
                                     multiple
                                     id="tags-standard"
                                     value={techAdvPayload.technicians}
-                                    options={data.data?.map(val=>val.value) || []}
+                                    options={techAdvList?.technicians?.map(val=>val.value) || []}
                                     getOptionLabel={(option) => option}
                                     onChange={(event,value)=>setTechAdvPayload((prev)=>({...prev,technicians:value}))}
                                     renderInput={(params) => (

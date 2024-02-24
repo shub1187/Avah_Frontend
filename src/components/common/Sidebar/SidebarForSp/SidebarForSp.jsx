@@ -98,7 +98,7 @@ export const SpSideBarList = [
   },
   {
     id:8,
-    link:'/dashboard/billing/invoiceList',
+    link:'/dashboard/billing/pendingPayments',
     icon:BillingsIcon,
     name:"Billing",
     role: "Billing",
