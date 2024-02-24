@@ -96,7 +96,7 @@ const URL = {
             PENDINGPAYMENTS : {
                 getAllPendingPaymentInvoices : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllPendingPaymentInvoices`),
                 getJobcardDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getJobcardDetails`),
-
+                recievePayment : replaceUrl(`${BASE_URL}/api/serviceprovider/recievePayment`)
             },
             PAIDINVOICES : {
                 getAllPaidInvoices: replaceUrl(`${BASE_URL}/api/serviceprovider/getAllPaidInvoices`)

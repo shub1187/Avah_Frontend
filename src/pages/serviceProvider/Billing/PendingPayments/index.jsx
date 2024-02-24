@@ -11,15 +11,18 @@ import pendingPaymentLabourColumn from "./components/labourcolumn"
 import pendingPaymentSparesColumn from "./components/sparescolumn"
 import UnderLine from "components/common/Underline"
 import PaymentPopup from "./components/PaymentPopup"
-const {getAllPendingPaymentInvoices,getJobcardDetails} = URL.SERVICE_PROVIDER.BILLING.PENDINGPAYMENTS
+const {getAllPendingPaymentInvoices,getJobcardDetails,recievePayment} = URL.SERVICE_PROVIDER.BILLING.PENDINGPAYMENTS
 
 const PendingPayments = () => {
 
     const paymentList = useMemo(()=>[
-        {label:"UPI",value:'upi'},
-        {label:"CASH",value:'cash'},
-        {label:"PHONE PE",value:'phone_pe'},
-        {label:"GOOGLE Pay",value:'google_pay'},
+        {label:"UPI",value:'UPI'},
+        {label:"CASH",value:'Cash'},
+        {label:"PHONE PE",value:'Phone Pay'},
+        {label:"GOOGLE Pay",value:'Google Pay'},
+        {label:"PAYTM",value:'Paytm'},
+        {label:"CREDIT CARD",value:'Credit Card'},
+        {label:"DEBIT CARD",value:'Debit Card'}
     ],[])
     const [page, setPage] = useState('table')
     const [eyeIconValue,setEyeIconValue] = useState([])
@@ -80,9 +83,13 @@ const PendingPayments = () => {
     const confirmPayment = async()=>{
         const obj ={
             method:'POST',
-            url:'something',
-            payload:{
-
+            url:recievePayment,
+            payload:{      
+                "Invoice_number": eyeIconValue?.invoice_number, 
+                "Sp_id":localStorage.getItem('sp_id'), 
+                "Appointment_id":eyeIconValue?.appointment_id, 
+                "invoice_collected_by":localStorage.getItem('profile_name'),
+                "payment_method": paymentOption?.options?.values
             }
         }
         await fetch(obj)
