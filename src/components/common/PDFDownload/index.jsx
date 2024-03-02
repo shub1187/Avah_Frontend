@@ -19,7 +19,7 @@ const PDF = ({ spareData, labourData, rowData }) => {
     let TotalAmount = 0
 
     const addAmount = (payload) => {
-      payload.forEach((obj) => {
+      payload?.forEach((obj) => {
         if (obj.amount) {
           TotalAmount += parseFloat(obj.amount)
         }

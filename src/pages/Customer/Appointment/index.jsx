@@ -39,7 +39,7 @@ const CustomerAppointment = () => {
     let TotalAmount = 0
   
     const addAmount = (payload)=>{
-        payload.forEach((obj)=>{
+        payload?.forEach((obj)=>{
             if(obj.amount){
                 TotalAmount+=parseFloat(obj.amount)
             }
@@ -270,9 +270,9 @@ const CustomerAppointment = () => {
       
       </Box>
       {toggle==='appointment'?
-        isMobile?
-          <TableCustomerMobileDetails/> 
-        :
+        // isMobile?
+        //   <TableCustomerMobileDetails/> 
+        // :
           
           <CustomerTable
             key={'appointment'}

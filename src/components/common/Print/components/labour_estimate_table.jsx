@@ -17,9 +17,7 @@ const LabourEstimateTable = ({ data,column,title }) => {
                     </tr>
                 </thead>
                 <tbody className='tbody'>
-                    {data
-
-                        .map((everyRowData, rowIndex) => (
+                    {data?.map((everyRowData, rowIndex) => (
                             <tr key={rowIndex}>
                                 {column.map((col, colIndex) => {
                                     return (<td key={colIndex}>
