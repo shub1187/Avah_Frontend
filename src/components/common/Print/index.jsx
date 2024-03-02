@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
+import { Box,Avatar, Button, IconButton, TextField, Typography } from '@mui/material';
 import React, { useRef } from 'react'
 import { ReactToPrint } from 'react-to-print'
 import PrintIcon from '@mui/icons-material/Print';
@@ -6,6 +6,7 @@ import { labour_column } from './components/labour_column';
 import { spare_column } from './components/spare_column';
 import LabourEstimateTable from './components/labour_estimate_table';
 import { mock } from './components/mock';
+import AvahSideBarImage from 'assets/img/AvahSideBarImage.png'
 import UnderLine from '../Underline';
 const Print = ({ spareData, labourData, rowData }) => {
   const ref = useRef();
@@ -32,8 +33,11 @@ const Print = ({ spareData, labourData, rowData }) => {
     <>
       <div className="hide-pdf-component">
         <div ref={ref}>
-
           <div id='pdf-print'>
+          <Box className='flex jc-space-between'>
+              <Box width={'50%'}><Avatar sx={{height:'50px',width:'150px'}}  src={AvahSideBarImage} /></Box>
+              <Box width={'50%'} fontSize={25} color={'options'}>INVOICE<UnderLine/><Box fontSize={15} component={'span'}>{localStorage.getItem('business_name') ?? ''}</Box></Box>
+            </Box>
             <Box className='flex mb-4'>
               <Box className='width-half'>
                 <Typography mb={1} fontWeight={'bold'}>Vehicle Details<UnderLine /></Typography>

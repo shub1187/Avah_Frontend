@@ -3,7 +3,8 @@ import './index.scss'
 import LabourEstimateTable from './components/labour_estimate_table'
 import { spare_column } from './components/spare_column'
 import { labour_column } from './components/labour_column'
-import { Box, Button, IconButton, TextField, Typography } from '@mui/material'
+import { Avatar, Box, Button, IconButton, TextField, Typography } from '@mui/material'
+import AvahSideBarImage from 'assets/img/AvahSideBarImage.png'
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
@@ -90,12 +91,10 @@ const PDF = ({ spareData, labourData, rowData }) => {
 
       <div className="hide-pdf-component">
         <div id='pdf-download'>
-          <Box padding={10}>
-            <Avatar  sx={{ width: "70%",
-              borderRadius:"0",height:'65px'
-            
-            }} src={AvahSideBarImage} />
-          </Box>
+        <Box className='flex jc-space-between'>
+              <Box width={'50%'}><Avatar sx={{height:'50px',width:'150px'}}  src={AvahSideBarImage} /></Box>
+              <Box width={'50%'} fontSize={25} color={'options'}>INVOICE<UnderLine/><Box fontSize={15} component={'span'}>{localStorage.getItem('business_name') ?? ''}</Box></Box>
+            </Box>
           <Box className='flex mb-4'>
             <Box className='width-half'>
               <Typography mb={1} fontWeight={'bold'}>Vehicle Details<UnderLine /></Typography>
