@@ -18,7 +18,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 
 // import { title } from 'process';
 
-const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJobCard,viewPaidInvoice,downloadPdf, print, approve, reject, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData }) => {
+const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJobCard,viewPaidInvoice,downloadPdf, print, approve, reject, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData, setInvoice }) => {
     const { fetchData, snackbar, loadingIndicator } = useFetchFunction()
     // const timerRef = useRef(null);
 
@@ -129,7 +129,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
                 </IconButton>
             )}
             {viewPaidInvoice && 
-                <IconButton color='options' onClick={() => { setPage(); setEyeIconValue(rowData) }}>
+                <IconButton color='options' onClick={() => { setInvoice() || setPage(); setEyeIconValue(rowData) }}>
                     <Box className='flex ai-flex-start jc-center column'>
                         <Typography fontSize={9}>Invoice</Typography>
                         <VisibilityIcon style={{ cursor: 'pointer', marginRight: '5px' }} />

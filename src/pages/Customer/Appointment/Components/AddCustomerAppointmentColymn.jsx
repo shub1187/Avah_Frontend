@@ -3,7 +3,7 @@ import ActionDialog from 'components/common/Dialog/ActionDialog'
 import MoreActionDialog from 'components/common/Dialog/MoreActionDialog'
 import React from 'react'
 
-const AddCustomerAppointmentColumn = (setPage,setEyeIconValue)=>([
+const AddCustomerAppointmentColumn = (setPage,setEyeIconValue,setInvoice)=>([
     { title: "Service Provider", field: "sp_name" },
     { title: "Vehicle Number", field: "vehicle_number" },
     { title: "Appointment Date", field: "appointment_date"},
@@ -22,13 +22,14 @@ const AddCustomerAppointmentColumn = (setPage,setEyeIconValue)=>([
                 setEyeIconValue={setEyeIconValue}
             />
             )}
-            {rowData.payment_status ==='Pending' && (
+            {(rowData.payment_status ==='Pending' ||rowData.payment_status ==='Received' ) && (
                <ActionDialog
                     key='edit Estimate'
                     viewPaidInvoice
                     rowData={rowData}
                     setPage={setPage}
-                    setEyeIconValue={setEyeIconValue}            
+                    setEyeIconValue={setEyeIconValue} 
+                    setInvoice={setInvoice}           
                 />
             )
             }
