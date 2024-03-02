@@ -21,7 +21,7 @@ import PDF from "components/common/PDFDownload"
 import Print from "components/common/Print"
 import CloseIcon from '@mui/icons-material/Close';
 
-const {getEstimateDetails, estimateApproval, estimateRejection} = URL.CUSTOMER.APPOINTMENT
+const {getEstimateDetails, estimateApproval, estimateRejection, getJobcardDetails} = URL.CUSTOMER.APPOINTMENT
 const CustomerAppointment = () => {
   
   const [toggle,setToggle] = useState('appointment')
@@ -102,16 +102,26 @@ const CustomerAppointment = () => {
   }
 
   useEffect(() => {
-    // if (page === 'eye-icon') {
-      getEstimateDetailsApi();
-    // }
+    if (page === 'eye-icon') {
+      getEstimateDetailsApi('estimate');
+    }
+    else if(page==='invoice'){
+      getEstimateDetailsApi('invoice')
+    }
   }, [page]);
   
-  const getEstimateDetailsApi = async()=>{
+  const getEstimateDetailsApi = async(apiType)=>{
     
+    let url = ''
+    if(apiType==='invoice'){
+      url = `${getJobcardDetails}?sp_id=${eyeIconValue?.sp_id}&jobcard_number=${eyeIconValue?.jobcard_number}`
+    }
+    else if(apiType==='estimate'){
+      url = `${getEstimateDetails}?sp_id=${eyeIconValue?.sp_id}&estimate_number=${eyeIconValue?.estimate_number}`
+    }
     const obj = {
         method:"GET",
-        url:`${getEstimateDetails}?sp_id=${eyeIconValue?.sp_id}&estimate_number=${eyeIconValue?.estimate_number}`
+        url
     }
   
     const {data} = await fetchData(obj)

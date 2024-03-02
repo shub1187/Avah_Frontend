@@ -124,7 +124,8 @@ const URL = {
             getEstimateDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getEstimateDetails`),
             estimateApproval : replaceUrl(`${BASE_URL}/api/customer/estimateApproval`),
             estimateRejection : replaceUrl(`${BASE_URL}/api/customer/estimateRejection`),
-            createAppointment :  replaceUrl(`${BASE_URL}/api/customer/createAppointment`)
+            createAppointment :  replaceUrl(`${BASE_URL}/api/customer/createAppointment`),
+            getJobcardDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getJobcardDetails`)
         }
     }
 
