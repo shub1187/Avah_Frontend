@@ -129,7 +129,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
                 </IconButton>
             )}
             {viewPaidInvoice && 
-                <IconButton color='options' onClick={() => { setInvoice() || setPage(); setEyeIconValue(rowData) }}>
+                <IconButton color='options' onClick={() => { setInvoice ? setInvoice() : setPage(); setEyeIconValue(rowData) }}>
                     <Box className='flex ai-flex-start jc-center column'>
                         <Typography fontSize={9}>Invoice</Typography>
                         <VisibilityIcon style={{ cursor: 'pointer', marginRight: '5px' }} />
