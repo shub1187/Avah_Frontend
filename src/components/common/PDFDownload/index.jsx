@@ -3,12 +3,13 @@ import './index.scss'
 import LabourEstimateTable from './components/labour_estimate_table'
 import { spare_column } from './components/spare_column'
 import { labour_column } from './components/labour_column'
-import { Box, Button, IconButton, TextField, Typography } from '@mui/material'
+import { Avatar, Box, Button, IconButton, TextField, Typography } from '@mui/material'
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { mock } from './components/mock'
 import UnderLine from '../Underline'
+import AvahSideBarImage from 'assets/img/AvahSideBarImage.png'
 const PDF = ({ spareData, labourData, rowData }) => {
   // let labourData = mock?.data?.labours
   // let spareData = mock?.data?.spares

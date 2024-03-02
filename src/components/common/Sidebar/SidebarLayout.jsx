@@ -71,8 +71,7 @@ const Sidebar = ({isMobile,open,handleDrawerToggle,customer}) => {
           </Stack>
         </Toolbar>
           <div className="mx-3">
-            <CustomerSideBar/>
-            {/* {   
+            {   
             getRole == "1" ?  
                appRoutes.map((route, index) => (
                 route.sidebarProps ? (
@@ -91,7 +90,7 @@ const Sidebar = ({isMobile,open,handleDrawerToggle,customer}) => {
             getRole =='5' ? <ServiderProviderSidebar/>
             :
             null
-            }         */}
+            }        
           </div>
       </List>
     </SwipeableDrawer>
