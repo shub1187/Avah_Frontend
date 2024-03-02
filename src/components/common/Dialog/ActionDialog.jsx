@@ -15,6 +15,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import PDF from '../PDFDownload';
 import Print from '../Print';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 
 // import { title } from 'process';
 
@@ -132,7 +133,9 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
                 <IconButton color='options' onClick={() => { setInvoice ? setInvoice() : setPage(); setEyeIconValue(rowData) }}>
                     <Box className='flex ai-flex-start jc-center column'>
                         <Typography fontSize={9}>Invoice</Typography>
-                        <VisibilityIcon style={{ cursor: 'pointer', marginRight: '5px' }} />
+                        {setInvoice ? <ReceiptIcon style={{ cursor: 'pointer', marginRight: '5px' }} /> :
+                            <VisibilityIcon style={{ cursor: 'pointer', marginRight: '5px' }} />
+                        }
                     </Box>
                 </IconButton>}
             {downloadPdf && (<PDF/>)}
