@@ -90,6 +90,12 @@ const PDF = ({ spareData, labourData, rowData }) => {
 
       <div className="hide-pdf-component">
         <div id='pdf-download'>
+          <Box padding={10}>
+            <Avatar  sx={{ width: "70%",
+              borderRadius:"0",height:'65px'
+            
+            }} src={AvahSideBarImage} />
+          </Box>
           <Box className='flex mb-4'>
             <Box className='width-half'>
               <Typography mb={1} fontWeight={'bold'}>Vehicle Details<UnderLine /></Typography>
