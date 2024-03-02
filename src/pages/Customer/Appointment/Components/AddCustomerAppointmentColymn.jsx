@@ -22,12 +22,16 @@ const AddCustomerAppointmentColumn = (setPage,setEyeIconValue)=>([
                 setEyeIconValue={setEyeIconValue}
             />
             )}
-            <ActionDialog
-                downloadPdf
-            />
-            <ActionDialog
-                print
-            />
+            {rowData.payment_status ==='Pending' && (
+               <ActionDialog
+                    key='edit Estimate'
+                    viewPaidInvoice
+                    rowData={rowData}
+                    setPage={setPage}
+                    setEyeIconValue={setEyeIconValue}            
+                />
+            )
+            }
         </Box>
     }
 ])
