@@ -211,39 +211,39 @@ const CustomerTable = ({DialogButton,columnss,URL,key, dialogTitle, dialogButton
     }}
     isLoading={false}
     key={key || 'default'}
-    data={mock?.data?.results || []}
+    // data={mock?.data?.results || []}
 
-    // data={async (query) => {
-    //   try {
-    //     let url = `${URL}?customer_id=${customer_id}&`;
+    data={async (query) => {
+      try {
+        let url = `${URL}?customer_id=${customer_id}&`;
 
-    //     if(query.search){
-    //       url+=`q=${query.search}`
-    //     }
-    //     if(query.orderBy){
-    //       url+=`&_sort=${query.orderBy.field}&_order=${query.orderDirection}`
-    //     }
-    //     url+=`&_page=${query.page+1}`
-    //     url+=`&_limit=${query.pageSize}`
-    //     const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
-    //     const response = await axios.get(url,{headers});
-    //     const data = response?.data?.results; // Adjust this based on your API response structure
-    //     // setDataLength(data.length)
+        if(query.search){
+          url+=`q=${query.search}`
+        }
+        if(query.orderBy){
+          url+=`&_sort=${query.orderBy.field}&_order=${query.orderDirection}`
+        }
+        url+=`&_page=${query.page+1}`
+        url+=`&_limit=${query.pageSize}`
+        const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
+        const response = await axios.get(url,{headers});
+        const data = response?.data?.results; // Adjust this based on your API response structure
+        // setDataLength(data.length)
        
-    //     return {
-    //       data: data || [], // Change this to match your data structure
-    //       page: query.page,
-    //       totalCount:20, // Assuming the total count is the length of the data array
-    //     };
-    //   } catch (error) {
-    //     console.error("Error fetching data:", error);
-    //     return {
-    //       data: [],
-    //       page: query.page,
-    //       totalCount: 0,
-    //     };
-    //   }
-    // }}
+        return {
+          data: data || [], // Change this to match your data structure
+          page: query.page,
+          totalCount:20, // Assuming the total count is the length of the data array
+        };
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        return {
+          data: [],
+          page: query.page,
+          totalCount: 0,
+        };
+      }
+    }}
   />
   </ThemeProvider>
   </>
