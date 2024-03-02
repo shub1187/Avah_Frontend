@@ -271,7 +271,7 @@ const CustomerAppointment = () => {
     )
 }
 
-  if(eyeIconValue==='invoice'){
+  if(page==='invoice'){
       return (
           <>
               <div>
