@@ -36,7 +36,7 @@ const Print = ({ spareData, labourData, rowData }) => {
           <div id='pdf-print'>
           <Box className='flex jc-space-between'>
               <Box width={'50%'}><Avatar sx={{height:'50px',width:'150px'}}  src={AvahSideBarImage} /></Box>
-              <Box width={'50%'} fontSize={25} color={'options'}>INVOICE<UnderLine/><Box fontSize={15} component={'span'}>{localStorage.getItem('business_name') ?? ''}</Box></Box>
+              <Box width={'50%'} fontSize={25} color={'options'}>INVOICE<UnderLine/> : {localStorage.getItem('business_name') ?? ''}</Box>
             </Box>
             <Box className='flex mb-4'>
               <Box className='width-half'>
