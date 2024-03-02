@@ -10,6 +10,7 @@ import { jsPDF } from "jspdf";
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { mock } from './components/mock'
 import UnderLine from '../Underline'
+import AvahSideBarImage from 'assets/img/AvahSideBarImage.png'
 const PDF = ({ spareData, labourData, rowData }) => {
   // let labourData = mock?.data?.labours
   // let spareData = mock?.data?.spares
