@@ -11,6 +11,7 @@ import URL from "url/apiURL"
 import UnderLine from "components/common/Underline"
 import './index.scss'
 import { set } from "date-fns"
+import DetailsCardWithTitle from "components/common/Cards/DetailsCardWithTitle"
 
 const {getJobcardDetails, updateJobcard, getAllAdminAdvisorEmployee, getAllTechnicianEmployee,getAllCreatedJobcardList,getAllLabourListForAutoFill,getAllSpareListForAutoFill,getSpecificLabourDetailsForEstimate,getSpecificSpareDetailsForEstimate, generateInvoice} =URL.SERVICE_PROVIDER.SERVICE.JOBCARD
 const JobCard = () => {
@@ -23,6 +24,11 @@ const JobCard = () => {
     const[disabledUpdate,setDisabledUpdate] = useState(true)
     const [techAdvList,setTechAdvList] = useState({technicians:[],advisors:[]})
     const [techAdvPayload,setTechAdvPayload] = useState({technicians:[],advisor:'',showAutoComplete:true})
+
+    const vehicleDetails = {names:['Vehicle Number','Model', 'Manufacturer', 'Fuel Type','Km Driven','Complaints'],values:[eyeIconValue?.vehicle_number, eyeIconValue?.model, eyeIconValue?.brand, eyeIconValue?.fuel_type, eyeIconValue?.kilometers_driven,eyeIconValue?.complaints]}
+    const customerDetails = {names:["Name", "Pickup Address", "Mobile", "Email"],values:[eyeIconValue?.name, eyeIconValue?.pickup_address, eyeIconValue?.mobile_number, eyeIconValue?.email]}
+    const estimateJobcardDetails = {names:['Estimate Created By','Estimate Created On','Estimtate Number','Jobcard Created By','Jobcard Number','Jobcard Opened On','Advisor Name','Technicians Name',],values:[eyeIconValue?.estimate_created_by,eyeIconValue?.estimate_created_on,eyeIconValue?.estimate_number, eyeIconValue?.jobcard_created_by, eyeIconValue?.jobcard_number, eyeIconValue?.jobcard_opened_on, eyeIconValue?.advisor_name, eyeIconValue?.technician_name?.map((name) => name + ", ")]}
+    const appointmentDetails = {names:['Appointment Status','Appointment Time','Appointment Date','Appointment Id'],values:[eyeIconValue?.appointment_status,eyeIconValue?.appointment_time,eyeIconValue?.appointment_date,eyeIconValue?.appointment_id]}
     const data ={
         "error": false,
         "message": "success",
@@ -189,75 +195,21 @@ const JobCard = () => {
                     <Box className='flex jc-space-between mb-3'>
                         <Button className='small-button' onClick={() =>{ setPage('table');setDisabledUpdate(true); setTechAdvPayload((prev)=>({...prev,showAutoComplete:true}))}} variant='outlined' color='options'>Back <ArrowBackIcon /></Button>
                     </Box>
-                    <Box className='flex'>
-                    <Box className='mr-10'>
-                      <Typography fontWeight={'bold'}>Vehicle Details</Typography>
-                      <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
-                        <Box>
-                          <Box>Vehicle Number</Box>
-                          <Box >Model</Box>  
-                          <Box >Manufacturer</Box>  
-                          <Box >Vehicle Type</Box>  
+                    <Box className='flex mb-4'>
+                        <Box className='width-half'>
+                                <DetailsCardWithTitle data={vehicleDetails} underline title={'Vehicle Detail'}/>
                         </Box>
-                        <Box>
-                          <Box>: {eyeIconValue?.vehicle_number}</Box>
-                          <Box >: {eyeIconValue?.model}</Box>  
-                          <Box >: {eyeIconValue?.brand}</Box>  
-                          <Box >: {eyeIconValue?.fuel_type}</Box>  
+                        <Box className='width-half'>
+                                <DetailsCardWithTitle data={customerDetails} underline title={'Customer Details'}/>
                         </Box>
-                      </Box>
                     </Box>
-                    <Box className='mr-10'>
-                      <Typography fontWeight={'bold'}>Customer Details</Typography>
-                      <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
-                        <Box>
-                          <Box>Name</Box>
-                          <Box >Pickup Address</Box>  
-                          <Box >Mobile</Box>  
-                          <Box >Email</Box>  
+                    <Box className='flex mb-4'>
+                        <Box className='width-half'>
+                                <DetailsCardWithTitle data={estimateJobcardDetails} underline title={'Estimate/Jobcard Detail'}/>
                         </Box>
-                        <Box>
-                          <Box>: {eyeIconValue?.name}</Box>
-                          <Box >: {eyeIconValue?.pickup_address}</Box>  
-                          <Box >: {eyeIconValue?.mobile_number}</Box>  
-                          <Box >: {eyeIconValue?.email}</Box>  
+                        <Box className='width-half'>
+                                <DetailsCardWithTitle data={appointmentDetails} underline title={'Appointment Detail'}/>
                         </Box>
-                      </Box>
-                    </Box>
-                    <Box className='mr-10'>
-                      <Typography fontWeight={'bold'}>Appointment Details</Typography>
-                      <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
-                        <Box>
-                          <Box>Appointment Status</Box>
-                          <Box >Appointment Time</Box>  
-                          <Box >Appointment Date</Box>  
-                          <Box >Appointment Id</Box>  
-                          <Box >Estimate Number</Box>  
-                        </Box>
-                        <Box>
-                          <Box>: {eyeIconValue?.appointment_status}</Box>
-                          <Box >: {eyeIconValue?.appointment_time}</Box>  
-                          <Box >: {eyeIconValue?.appointment_date}</Box>  
-                          <Box >: {eyeIconValue?.appointment_id}</Box>  
-                          <Box >: {eyeIconValue?.estimate_number}</Box>  
-                        </Box>
-                      </Box>
-                    </Box>
-                    {eyeIconValue?.advisor_name && (
-                         <Box>
-                         <Typography fontWeight={'bold'}>Advisor Details</Typography>
-                         <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex jc-space-between'>
-                           <Box>
-                             <Box>Advisor</Box>
-                             <Box >Technicians</Box>   
-                           </Box>
-                           <Box>
-                             <Box>: {eyeIconValue?.advisor_name}</Box>
-                             <Box >: {eyeIconValue?.technician_name?.map((name)=>name+", ")}</Box>  
-                           </Box>
-                         </Box>
-                       </Box>
-                    )}
                     </Box>
                     {eyeIconValue?.advisor_assigned=='Yes'?<></>:techAdvPayload?.showAutoComplete && (
                         <Grid container className='flex mt-1'>

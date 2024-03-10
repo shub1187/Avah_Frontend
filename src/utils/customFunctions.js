@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useFetchFunction } from "hooks/useFetch";
 import URL from "url/apiURL";
-
+import {format} from 'date-fns'
 
 const logout = ()=>{
     const logoutChannel = new BroadcastChannel('logout-channel')
@@ -82,7 +82,9 @@ const getFuelArray = (data)=>
         label:fuel_name,
         value:fuel_name
         }))
-   
+
+const formatTimestampToDate = (timestamp) => format(new Date(timestamp), 'yyyy-MM-dd')
+          
 export {
-    logout , addBroadcastListenerForLoggingOutOfAllTabs , requiredTextfield, getBrandData, getModelData, getStates, getCities, getFuelArray
+    logout , addBroadcastListenerForLoggingOutOfAllTabs , requiredTextfield, getBrandData, getModelData, getStates, getCities, getFuelArray, formatTimestampToDate
 }
