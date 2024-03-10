@@ -15,7 +15,7 @@ import { set } from "date-fns"
 const {getJobcardDetails, updateJobcard, getAllAdminAdvisorEmployee, getAllTechnicianEmployee,getAllCreatedJobcardList,getAllLabourListForAutoFill,getAllSpareListForAutoFill,getSpecificLabourDetailsForEstimate,getSpecificSpareDetailsForEstimate, generateInvoice} =URL.SERVICE_PROVIDER.SERVICE.JOBCARD
 const JobCard = () => {
 
-    const [page, setPage] = useState('eye-icon')
+    const [page, setPage] = useState('table')
     const [sparePayload, setSparePayload] = useState([])
     const [labourPayload, setLabourSparePayload] = useState([])
     const [eyeIconValue,setEyeIconValue] = useState([])
