@@ -7,8 +7,8 @@ const DetailsCardWithTitle = ({ data, title, underline }) => {
         <>
             {title && <Typography mb={1} fontWeight={'bold'}>{title}{underline &&<UnderLine/>}</Typography>}
             <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex'>
-                <Box className='mr-3'>{data?.names?.map((name) => name && <Box>{name}</Box>)}</Box>
-                <Box>{data?.values?.map((value) => value && <Box>: {value}</Box>)}</Box>
+                <Box className='mr-3'>{data?.names?.map((name) => <Box>{name}</Box>)}</Box>
+                <Box>{data?.values?.map((value) => <Box>: {value}</Box>)}</Box>
             </Box>
 
         </>
