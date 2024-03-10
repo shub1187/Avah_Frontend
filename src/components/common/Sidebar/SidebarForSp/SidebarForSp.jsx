@@ -32,13 +32,13 @@ export const SpSideBarList = [
     name:"Users",
     role:'Users',
     subList:[
+      // {
+      //   id:21,
+      //   link:'dashboard/user/customer',
+      //   name:"Customer",
+      // },
       {
         id:21,
-        link:'dashboard/user/customer',
-        name:"Customer",
-      },
-      {
-        id:22,
         link:'dashboard/user/employees',
         name:"Employee",
       },
@@ -65,15 +65,15 @@ export const SpSideBarList = [
     name:"Labour",
     role:'Labour',
   },
+  // {
+  //   id:6,
+  //   link:'/dashboard/serviceType',
+  //   icon:ServiceTypeIcon,
+  //   name:"Service Type",
+
+  // },
   {
     id:6,
-    link:'/dashboard/serviceType',
-    icon:ServiceTypeIcon,
-    name:"Service Type",
-
-  },
-  {
-    id:7,
     link:'/dashboard/service/estimatesList',
     icon:ServiceIcon,
     name:"Service",
@@ -115,48 +115,48 @@ export const SpSideBarList = [
       }
     ]
   },
-  {
-    id:9,
-    link:'/dashboard/accounts/account',
-    icon:AccountsIcon,
-    name:"Accounts",
-    role: "Accounts",
-    subList:[
-      {
-        id:91,
-        link:'dashboard/accounts/account',
-        name:"Account"
-      },
-      {
-        id:92,
-        link:'dashboard/accounts/ledger',
-        name:"Ledger"
-      },
-    ]
-  },
-  {
-    id:10,
-    link:'/dashboard/packages',
-    icon:PackageIcon,
-    name:"Packages",
-    role:"Packages"
-  },
-  {
-    id:11,
-    link:'/dashboard/reviews',
-    icon:ReviewsIcon,
-    name:"Reviews",
-    role:"Reviews"
+  // {
+  //   id:9,
+  //   link:'/dashboard/accounts/account',
+  //   icon:AccountsIcon,
+  //   name:"Accounts",
+  //   role: "Accounts",
+  //   subList:[
+  //     {
+  //       id:91,
+  //       link:'dashboard/accounts/account',
+  //       name:"Account"
+  //     },
+  //     {
+  //       id:92,
+  //       link:'dashboard/accounts/ledger',
+  //       name:"Ledger"
+  //     },
+  //   ]
+  // },
+  // {
+  //   id:10,
+  //   link:'/dashboard/packages',
+  //   icon:PackageIcon,
+  //   name:"Packages",
+  //   role:"Packages"
+  // },
+  // {
+  //   id:11,
+  //   link:'/dashboard/reviews',
+  //   icon:ReviewsIcon,
+  //   name:"Reviews",
+  //   role:"Reviews"
 
-  },
-  {
-    id:12,
-    link:'/dashboard/settings',
-    icon:SettingsIcon,
-    name:"Settings",
-    role:"Settings"
+  // },
+  // {
+  //   id:12,
+  //   link:'/dashboard/settings',
+  //   icon:SettingsIcon,
+  //   name:"Settings",
+  //   role:"Settings"
 
-  },
+  // },
 ]
 
 // export  function SpTest({employee}) {
