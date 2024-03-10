@@ -83,7 +83,7 @@ const getFuelArray = (data)=>
         value:fuel_name
         }))
 
-const formatTimestampToDate = (timestamp) => format(new Date(timestamp), 'yyyy-MM-dd')
+const formatTimestampToDate = (timestamp) => timestamp && format(new Date(timestamp), 'yyyy-MM-dd') 
           
 export {
     logout , addBroadcastListenerForLoggingOutOfAllTabs , requiredTextfield, getBrandData, getModelData, getStates, getCities, getFuelArray, formatTimestampToDate
