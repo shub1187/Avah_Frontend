@@ -13,6 +13,7 @@ import UnderLine from "components/common/Underline"
 import PaymentPopup from "./components/PaymentPopup"
 import {useNavigate} from 'react-router-dom'
 import DetailsCardWithTitle from "components/common/Cards/DetailsCardWithTitle"
+import { formatTimestampToDate } from "utils/customFunctions"
 
 const {getAllPendingPaymentInvoices,getJobcardDetails,recievePayment} = URL.SERVICE_PROVIDER.BILLING.PENDINGPAYMENTS
 
@@ -36,7 +37,7 @@ const PendingPayments = () => {
     const navigate = useNavigate();
     const vehicleDetails = {names:['Vehicle Number','Model', 'Manufacturer', 'Fuel Type','Km Driven','Complaints'],values:[eyeIconValue?.vehicle_number, eyeIconValue?.model, eyeIconValue?.brand, eyeIconValue?.fuel_type, eyeIconValue?.kilometers_driven,eyeIconValue?.complaints]}
     const customerDetails = {names:["Name", "Pickup Address", "Mobile", "Email", "Payment Status", "Payment Method"],values:[eyeIconValue?.name, eyeIconValue?.pickup_address, eyeIconValue?.mobile_number, eyeIconValue?.email, eyeIconValue?.payment_status, eyeIconValue?.payment_method]}
-    const estimateJobcardDetails = {names:['Estimate Created By','Estimate Created On','Jobcard Created By','Jobcard Number','Jobcard Opened On','Advisor Name','Technicians Name',],values:[eyeIconValue?.estimate_created_by,eyeIconValue?.estimate_created_on, eyeIconValue?.jobcard_created_by, eyeIconValue?.jobcard_number, eyeIconValue?.jobcard_opened_on, eyeIconValue?.advisor_name, eyeIconValue?.technician_name?.map((name) => name + ", ")]}
+    const estimateJobcardDetails = {names:['Estimate Created By','Estimate Created On','Jobcard Created By','Jobcard Number','Jobcard Opened On','Advisor Name','Technicians Name',],values:[eyeIconValue?.estimate_created_by,formatTimestampToDate(eyeIconValue?.estimate_created_on), eyeIconValue?.jobcard_created_by, eyeIconValue?.jobcard_number, formatTimestampToDate(eyeIconValue?.jobcard_opened_on), eyeIconValue?.advisor_name, eyeIconValue?.technician_name?.map((name) => name + ", ")]}
     const appointmentDetails = {names:['Appointment Status','Appointment Time','Appointment Date','Appointment Id'],values:[eyeIconValue?.appointment_status,eyeIconValue?.appointment_time,eyeIconValue?.appointment_date,eyeIconValue?.appointment_id]}
     const calculateTotalAmount = (sparePayload,labourPayload)=>{
 

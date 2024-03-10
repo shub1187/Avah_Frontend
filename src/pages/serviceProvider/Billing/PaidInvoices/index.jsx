@@ -13,6 +13,7 @@ import PDF from "components/common/PDFDownload"
 import Print from "components/common/Print"
 import CloseIcon from '@mui/icons-material/Close';
 import UnderLine from "components/common/Underline"
+import { formatTimestampToDate } from "utils/customFunctions"
 
 const { getAllPaidInvoices,getJobcardDetails } = URL.SERVICE_PROVIDER.BILLING.PAIDINVOICES
 
@@ -158,7 +159,7 @@ const PaidInvoices = () => {
                             <Typography mb={1} fontWeight={'bold'}>Estimate/JobCard Details<UnderLine/></Typography>
                             <Box color={'#8F8F8E'} fontSize={'0.7rem'} className='flex'>
                                 <Box className='mr-3'>
-                                    <Box>Estimate Date</Box>
+                                    <Box>Estimate Created On</Box>
                                     <Box >Estimate Created By</Box>
                                     <Box >Jobcard Created By</Box>
                                     <Box >Jobcard Opened On</Box>
@@ -168,10 +169,10 @@ const PaidInvoices = () => {
                                     {eyeIconValue?.sp_rejection_note && <Box >Service Provider Rejection Note</Box>}
                                 </Box>
                                 <Box>
-                                    <Box>: {eyeIconValue?.estimate_approval_or_rejection_date}</Box>
+                                    <Box>: {formatTimestampToDate(eyeIconValue?.estimate_created_on)}</Box>
                                     <Box >: {eyeIconValue?.estimate_created_by}</Box>
                                     <Box >: {eyeIconValue?.jobcard_created_by}</Box>
-                                    <Box >: {eyeIconValue?.jobcard_opened_on}</Box>
+                                    <Box >: {formatTimestampToDate(eyeIconValue?.jobcard_opened_on)}</Box>
                                     {eyeIconValue?.estimate_rejection_note && <Box >: {eyeIconValue?.estimate_rejection_note}</Box>}
                                     {eyeIconValue?.cust_cancellation_note && <Box >: {eyeIconValue?.cust_cancellation_note}</Box>}
                                     {eyeIconValue?.sp_cancellation_note && <Box >: {eyeIconValue?.sp_cancellation_note}</Box>}
@@ -186,13 +187,13 @@ const PaidInvoices = () => {
                                     <Box>Invoice Amount</Box>
                                     <Box>Invoice Collected By</Box>
                                     <Box>Invoice Created By</Box>
-                                    <Box >Job Completed On</Box>
+                                    <Box >Service Completed On</Box>
                                 </Box>
                                 <Box>
                                     <Box>: {eyeIconValue?.invoice_amount}</Box>
                                     <Box>: {eyeIconValue?.invoice_collected_by}</Box>
                                     <Box>: {eyeIconValue?.invoice_created_by}</Box>
-                                    <Box>: {eyeIconValue?.service_completed_on}</Box>
+                                    <Box>: {formatTimestampToDate(eyeIconValue?.service_completed_on)}</Box>
                                 </Box>
                             </Box>
                         </Box>
