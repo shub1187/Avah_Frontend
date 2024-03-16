@@ -94,13 +94,8 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
         { title:'Spares'},
         { title:'Labour'},
         { title:'Service'},
-        { title:'Service Type'},
         { title:'Accounts'},
         { title:'Billing'},
-        { title:'Finance'},
-        { title:'Packages'},
-        { title:'Reviews'},
-        { title:'Settings'}
       ]
       const updatedRowData = {...rowData,permission_granted : rowData?.permission_granted?.map((permission)=>({"title":permission}))}
       const defaultValues = checkboxList.filter((checkbox) =>

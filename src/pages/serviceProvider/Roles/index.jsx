@@ -13,13 +13,8 @@ const checkboxList = [
   { name:'Spares'},
   { name:'Labour'},
   { name:'Service'},
-  { name:'Service Type'},
   { name:'Accounts'},
   { name:'Billing'},
-  { name:'Finance'},
-  { name:'Packages'},
-  { name:'Reviews'},
-  { name:'Settings'}
 ]
 
 const SpRolesPage = () => {

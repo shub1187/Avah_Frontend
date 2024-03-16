@@ -12,7 +12,7 @@ const CreateTextFields = ({ fields , onChange, formField,isSubmitted , onSearchI
 //   };
 
 useEffect(() => {
-  fields.forEach((field) => {
+  fields?.forEach((field) => {
     if (!formField.hasOwnProperty(field.name)) {
       // console.log(field.defaultValue)
       if(field.defaultValue || field.defaultValue===0){
@@ -29,7 +29,7 @@ useEffect(() => {
 
   return (
     <>
-      {fields.map((field) => {
+      {fields?.map((field) => {
         // if (!formField.hasOwnProperty(field.name)) {
         //     onChange(field.name, '')
         // //   setFormField((prev) => ({ ...prev, [field.name]: "" }));
@@ -79,7 +79,7 @@ useEffect(() => {
                   </InputAdornment>
                 ),
               }}            >
-              {(field.selectArray && field.selectArray.length) && field.selectArray?.map((textfield)=>{
+              {(field?.selectArray?.length > 0) && field.selectArray?.map((textfield)=>{
                 return(
                 <MenuItem key={textfield.label} value={textfield.value}>
                   {textfield.label}

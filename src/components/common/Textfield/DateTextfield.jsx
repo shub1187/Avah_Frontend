@@ -32,7 +32,7 @@ const handleDateChange = (fieldName, selectedDate) => {
   };
   return (
     <>
-      {fields.map((field) => {
+      {fields?.map((field) => {
         // if (!formField.hasOwnProperty(field.name)) {
         //     onChange(field.name, '')
         // //   setFormField((prev) => ({ ...prev, [field.name]: "" }));
