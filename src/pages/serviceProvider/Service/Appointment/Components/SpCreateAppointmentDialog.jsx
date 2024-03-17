@@ -26,7 +26,7 @@ const generateRandom5Digit = () => {
 const SpCreateAppointmentDialog = ({ height, width, color, minHeight, maxWidth, img, borderRadius, my }) => {
   // const [open, setOpen] = React.useState(false);
   const { handleClose, handleOpen, setIsSubmitted, isSubmitted } = useDialogWrapperContext()
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({business_name : localStorage.getItem('business_name')});
   const [autoCompleteData, setAutocompleteData] = useState({ selectOptions: [], selectedOptionData: {} })
   const form = useRef()
   const [phone, setPhone] = useState({
@@ -201,7 +201,8 @@ const SpCreateAppointmentDialog = ({ height, width, color, minHeight, maxWidth, 
 
     if (e.target.value != 0 || e.target.value) {
       let { data: autoCompleteData } = await fetchData(obj)
-      setAutocompleteData((prev) => ({ ...prev, selectOptions: autoCompleteData }))
+      console.log("ln 204", autoCompleteData)
+      setAutocompleteData((prev) => ({ ...prev, selectOptions: autoCompleteData?.data }))
     }
   }, 1000)
 
@@ -214,7 +215,8 @@ const SpCreateAppointmentDialog = ({ height, width, color, minHeight, maxWidth, 
         noSnackbar: true
       }
       let { data: apiData } = await fetchData(obj)
-      if (apiData) setAutocompleteData((prev) => ({ ...prev, selectedOptionData: apiData }))
+      if (apiData) setFormData((prev) => ({ ...prev, ...apiData?.data}))
+      // if (apiData) setAutocompleteData((prev) => ({ ...prev, selectedOptionData: apiData?.data }))
     }
   }
 
@@ -395,6 +397,8 @@ const SpCreateAppointmentDialog = ({ height, width, color, minHeight, maxWidth, 
       <form ref={form} onSubmit={handleSubmit}>
         <DialogContent sx={{ pt: 2, pb: 0 }}>
           <input type='hidden' value={phone.otp} name={'otp_number'}></input>
+          <input type='hidden' value={formData?.email} name={'email'}></input>
+          <input type='hidden' value={formData?.name} name={'name'}></input>
           <Grid container xs={12} >
             <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>
               <InputLabel sx={{ color: "black", marginBottom: 1 }}>Select Vehicle</InputLabel>

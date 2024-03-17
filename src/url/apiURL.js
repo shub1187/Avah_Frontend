@@ -77,7 +77,7 @@ const URL = {
                 getSpecificLabourDetailsForEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/getSpecificLabourDetailsForEstimate`),
                 getAllVehicleList : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllVehicleList`),
                 getSpecificVehicleDetailsForSpAppt : replaceUrl(`${BASE_URL}/api/serviceprovider/getSpecificVehicleDetailsForSpAppt`),
-                createAppointment: replaceUrl(`${BASE_URL}/api/serviceprovider/createAppointment`)
+                createAppointment: replaceUrl(`${BASE_URL}/api/customer/createAppointment`)
 
 
             },
