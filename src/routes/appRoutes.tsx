@@ -76,31 +76,31 @@ const appRoutes: RouteType[] = [
           icon: ""
         }
       },
-      {
-       path: "/admin/dashboard/user/dealers",
-        element: <DealersPage />,
-        state: "user.dealers",
-        tabIndex:"3",
-         childView:true,
+      // {
+      //  path: "/admin/dashboard/user/dealers",
+      //   element: <DealersPage />,
+      //   state: "user.dealers",
+      //   tabIndex:"3",
+      //    childView:true,
 
-        sidebarProps: {
-          displayText: "Dealers",
-          icon: ""
+      //   sidebarProps: {
+      //     displayText: "Dealers",
+      //     icon: ""
 
-        }
-      },
-      {
-        path: "/admin/dashboard/user/moderators",
-         element: <ModeratorsPage />,
-         state: "user.moderators",
-         tabIndex:"2",
-          childView:true,
+      //   }
+      // },
+      // {
+      //   path: "/admin/dashboard/user/moderators",
+      //    element: <ModeratorsPage />,
+      //    state: "user.moderators",
+      //    tabIndex:"2",
+      //     childView:true,
  
-         sidebarProps: {
-           displayText: "Moderators",
-           icon: ""
-         }
-       }
+      //    sidebarProps: {
+      //      displayText: "Moderators",
+      //      icon: ""
+      //    }
+      //  }
     ]
   },
   // {
@@ -136,16 +136,16 @@ const appRoutes: RouteType[] = [
   //     }
   //   ]
   // },
-  {
-   path: "/admin/dashboard/roles",
-    element: <DashboardIndex />,
-    state: "roles",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Roles",
-      icon: require('./../assets/img/sidebar/role.png')
-    }
-  },
+  // {
+  //  path: "/admin/dashboard/roles",
+  //   element: <DashboardIndex />,
+  //   state: "roles",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Roles",
+  //     icon: require('./../assets/img/sidebar/role.png')
+  //   }
+  // },
   {
    path: "/admin/dashboard/vehicle_settings",
     element: <VehicleSettingsLayout />,
@@ -202,105 +202,105 @@ const appRoutes: RouteType[] = [
       }
     ]
   }
-  ,
-  {
-   path: "/admin/dashboard/category",
-    element: <CategoryLayout />,
-    state: "category",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Category",
-      icon:require('./../assets/img/sidebar/category.png')
-    },
-    child: [
-      {
-        index: true,
-        element: <CategoryComponent />,
-        childView:true,
-        tabIndex:"0",
-        state: "category",
-      },
-      {
+  // ,
+  // {
+  //  path: "/admin/dashboard/category",
+  //   element: <CategoryLayout />,
+  //   state: "category",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Category",
+  //     icon:require('./../assets/img/sidebar/category.png')
+  //   },
+  //   child: [
+  //     {
+  //       index: true,
+  //       element: <CategoryComponent />,
+  //       childView:true,
+  //       tabIndex:"0",
+  //       state: "category",
+  //     },
+  //     {
         
-       path: "/admin/dashboard/category/category",
-        element: <CategoryComponent />,
-         childView:true,
-        tabIndex:"1",
-        state: "category.category",
-        sidebarProps: {
-          displayText: "Manage Categories",
-          icon: ""
+  //      path: "/admin/dashboard/category/category",
+  //       element: <CategoryComponent />,
+  //        childView:true,
+  //       tabIndex:"1",
+  //       state: "category.category",
+  //       sidebarProps: {
+  //         displayText: "Manage Categories",
+  //         icon: ""
 
-        },
-      }
-    ]
-  }
-  ,
-  {
-   path: "/admin/dashboard/subcategory",
-    element: <CategoryLayout />,
-    state: "subcategory",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Sub Category",
-      icon:require('./../assets/img/sidebar/subcategory.png')
-    },
-    child: [
-      {
-        index: true,
-        element: <SubCategoryComponent />,
-        childView:true,
-        tabIndex:"0",
-        state: "subcategory",
-      },
-      {
+  //       },
+  //     }
+  //   ]
+  // }
+  // ,
+  // {
+  //  path: "/admin/dashboard/subcategory",
+  //   element: <CategoryLayout />,
+  //   state: "subcategory",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Sub Category",
+  //     icon:require('./../assets/img/sidebar/subcategory.png')
+  //   },
+  //   child: [
+  //     {
+  //       index: true,
+  //       element: <SubCategoryComponent />,
+  //       childView:true,
+  //       tabIndex:"0",
+  //       state: "subcategory",
+  //     },
+  //     {
         
-       path: "/admin/dashboard/subcategory/subcategory",
-        element: <SubCategoryComponent />,
-         childView:true,
-        tabIndex:"1",
-        state: "subcategory.subcategory",
-        sidebarProps: {
-          displayText: "Manage Sub Categories",
-          icon: ""
+  //      path: "/admin/dashboard/subcategory/subcategory",
+  //       element: <SubCategoryComponent />,
+  //        childView:true,
+  //       tabIndex:"1",
+  //       state: "subcategory.subcategory",
+  //       sidebarProps: {
+  //         displayText: "Manage Sub Categories",
+  //         icon: ""
 
-        },
-      }
-    ]
-  }
-  ,
-  {
-   path: "/admin/dashboard/service_category",
-    element: <CategoryLayout />,
-    state: "service_category",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Service Category",
-      icon:require('./../assets/img/sidebar/service.png')
-    },
-    child: [
-      {
-        index: true,
-        element: <ServiceCategoryComponent />,
-        childView:true,
-        tabIndex:"0",
-        state: "service_category",
-      },
-      {
+  //       },
+  //     }
+  //   ]
+  // }
+  // ,
+  // {
+  //  path: "/admin/dashboard/service_category",
+  //   element: <CategoryLayout />,
+  //   state: "service_category",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Service Category",
+  //     icon:require('./../assets/img/sidebar/service.png')
+  //   },
+  //   child: [
+  //     {
+  //       index: true,
+  //       element: <ServiceCategoryComponent />,
+  //       childView:true,
+  //       tabIndex:"0",
+  //       state: "service_category",
+  //     },
+  //     {
         
-       path: "/admin/dashboard/service_category/service_category",
-        element: <ServiceCategoryComponent />,
-        childView:true,
-        tabIndex:"1",
-        state: "service_category.service_category",
-        sidebarProps: {
-          displayText: "Manage Sub Categories",
-          icon: ""
+  //      path: "/admin/dashboard/service_category/service_category",
+  //       element: <ServiceCategoryComponent />,
+  //       childView:true,
+  //       tabIndex:"1",
+  //       state: "service_category.service_category",
+  //       sidebarProps: {
+  //         displayText: "Manage Sub Categories",
+  //         icon: ""
 
-        },
-      }
-    ]
-  }
+  //       },
+  //     }
+  //   ]
+  // }
   ,
   {
    path: "/admin/dashboard/requests",
@@ -314,108 +314,110 @@ const appRoutes: RouteType[] = [
   }
 
   ,
-  {
-   path: "/admin/dashboard/package",
-    element: <DashboardIndex />,
-    state: "package",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Packages",
-      icon:require('./../assets/img/sidebar/package.png')
-    }
-  }
-  ,
-  {
-   path: "/admin/dashboard/Orders",
-    element: <DashboardIndex />,
-    state: "Orders",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Orders",
-      icon:require('./../assets/img/sidebar/order.png')
-    }
-  }
-  ,
-  {
-   path: "/admin/dashboard/service_records",
-    element: <DashboardIndex />,
-    state: "service_records",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Service Records",
-      icon:require('./../assets/img/sidebar/servicerecords.png')
-    }
-  },
+  // {
+  //  path: "/admin/dashboard/package",
+  //   element: <DashboardIndex />,
+  //   state: "package",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Packages",
+  //     icon:require('./../assets/img/sidebar/package.png')
+  //   }
+  // }
+  // ,
+  // {
+  //  path: "/admin/dashboard/Orders",
+  //   element: <DashboardIndex />,
+  //   state: "Orders",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Orders",
+  //     icon:require('./../assets/img/sidebar/order.png')
+  //   }
+  // }
+  // ,
+  // {
+  //  path: "/admin/dashboard/service_records",
+  //   element: <DashboardIndex />,
+  //   state: "service_records",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Service Records",
+  //     icon:require('./../assets/img/sidebar/servicerecords.png')
+  //   }
+  // },
 
-  {
-   path: "/admin/dashboard/reports",
-    element: <DashboardIndex />,
-    state: "reports",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Reports",
-      icon:require('./../assets/img/sidebar/report.png')
-    }
-  },
-  {
-   path: "/admin/dashboard/reviews",
-    element: <DashboardIndex />,
-    state: "reviews",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Reviews",
-      icon:require('./../assets/img/sidebar/reviews.png')
-    }
-  }
-  ,  {
-   path: "/admin/dashboard/notification",
-    element: <DashboardIndex />,
-    state: "notification",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Notifications",
-      icon:require('./../assets/img/sidebar/notification.png')
-    }
-  },
-  {
-   path: "/admin/dashboard/banner",
-    element: <DashboardIndex />,
-    state: "banner",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Banners",
-      icon:require('./../assets/img/sidebar/banner.png')
-    }
-  }
-  , {
-   path: "/admin/dashboard/webpage",
-    element: <DashboardIndex />,
-    state: "webpage",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Web Pages",
-      icon:require('./../assets/img/sidebar/webpage.png')
-    }
-  }, {
-   path: "/admin/dashboard/support_tickets",
-    element: <DashboardIndex />,
-    state: "support_tickets",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Support Tickets",
-      icon:require('./../assets/img/sidebar/supportreq.png')
-    }
-  },
-  {
-   path: "/admin/dashboard/settings",
-    element: <DashboardIndex />,
-    state: "settings",
-    tabIndex:"0",
-    sidebarProps: {
-      displayText: "Settings",
-      icon:require('./../assets/img/sidebar/setting.png')
-    }
-  }
+  // {
+  //  path: "/admin/dashboard/reports",
+  //   element: <DashboardIndex />,
+  //   state: "reports",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Reports",
+  //     icon:require('./../assets/img/sidebar/report.png')
+  //   }
+  // },
+  // {
+  //  path: "/admin/dashboard/reviews",
+  //   element: <DashboardIndex />,
+  //   state: "reviews",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Reviews",
+  //     icon:require('./../assets/img/sidebar/reviews.png')
+  //   }
+  // }
+  // , 
+  
+  // {
+  //  path: "/admin/dashboard/notification",
+  //   element: <DashboardIndex />,
+  //   state: "notification",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Notifications",
+  //     icon:require('./../assets/img/sidebar/notification.png')
+  //   }
+  // },
+  // {
+  //  path: "/admin/dashboard/banner",
+  //   element: <DashboardIndex />,
+  //   state: "banner",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Banners",
+  //     icon:require('./../assets/img/sidebar/banner.png')
+  //   }
+  // }
+  // , {
+  //  path: "/admin/dashboard/webpage",
+  //   element: <DashboardIndex />,
+  //   state: "webpage",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Web Pages",
+  //     icon:require('./../assets/img/sidebar/webpage.png')
+  //   }
+  // }, {
+  //  path: "/admin/dashboard/support_tickets",
+  //   element: <DashboardIndex />,
+  //   state: "support_tickets",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Support Tickets",
+  //     icon:require('./../assets/img/sidebar/supportreq.png')
+  //   }
+  // },
+  // {
+  //  path: "/admin/dashboard/settings",
+  //   element: <DashboardIndex />,
+  //   state: "settings",
+  //   tabIndex:"0",
+  //   sidebarProps: {
+  //     displayText: "Settings",
+  //     icon:require('./../assets/img/sidebar/setting.png')
+  //   }
+  // }
 ];
 
 export default appRoutes;

@@ -15,7 +15,9 @@ const UserPageLayout = () => {
   let value = "0"
   if (appState == "user.service_providers") {
     value = "1"
-  } else if (appState == "user.dealers") {
+  }
+  
+  else if (appState == "user.dealers") {
     value = "2"
   }
   else if(appState=="user.moderators"){

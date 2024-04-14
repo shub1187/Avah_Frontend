@@ -344,7 +344,7 @@ const RaeesLoginComponent = () => {
                             <Box className='three-buttons'>
                                 <button className={activeButton==='customer'?'active':'inactive'} onClick={()=>handleButtonClick('customer') }>Customer</button>
                                 <button className={activeButton==='service provider'?'active':'inactive'} onClick={()=>handleButtonClick('service provider')}>Service Provider</button>
-                                <button  className={activeButton==='dealers'?'active':'inactive'}onClick={()=>handleButtonClick('dealers')}>Dealer</button>
+                                {/* <button  className={activeButton==='dealers'?'active':'inactive'}onClick={()=>handleButtonClick('dealers')}>Dealer</button> */}
                             </Box>
                             )}
 
@@ -356,12 +356,12 @@ const RaeesLoginComponent = () => {
                                     {/* ONLY SHOW IF LOGIN AND DONT SHOW IF IN ADMIN*/}
                                     {isAdminPage ? <></>: login  && (<Box className='remember-me-container'>
                                         <Box className='checkbox-container'>
-                                            <Box><Checkbox/></Box>
-                                            <Box>Remember Me</Box>
+                                            {/* <Box><Checkbox/></Box>
+                                            <Box>Remember Me</Box> */}
                                         </Box>
                                         <Box>Forgot password ?</Box>
                                     </Box>)}
-                                    <Box className='signup-register-button'><Button onClick={loginFunction}>{login ?'LOGIN':'REGISTER'}</Button></Box>
+                                    <Box className='signup-register-button'><Button onClick={ login ? loginFunction : registerFunction}>{login ?'LOGIN':'REGISTER'}</Button></Box>
                                 </Box>
                             </Box>
 

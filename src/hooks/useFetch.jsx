@@ -107,7 +107,7 @@ const useFetchFunction = ()=>{
             }
                
             const {status,data} = await axios({...axiosRequest, data: method?.toLowerCase()==="post" && payload})
-
+            console.log("ln 110",status, data)
             if(data && status ==200){
                 if(!noSnackbar){
                     setSnackbarSeverity('success');
@@ -120,15 +120,30 @@ const useFetchFunction = ()=>{
 
                 return {isSuccess:true,data}
             }
+            else {
+                console.log("ln 124",status, data)
+                if(!noSnackbar){
+                    setSnackbarSeverity('error');
+                    setSnackbarMessage(data.message);
+                    setOpenSnackbar(true);
+                    setTimeout(() => {
+                      setOpenSnackbar(false);
+                    }, 3000);
+                }
+
+                return {isSuccess:false, error:data.message}
+
+            }
         }
         catch(error){
+            console.log("ln 139", error.response.data.message)
             if(!noSnackbar){
                 setSnackbarSeverity('error');
-                setSnackbarMessage(error.message);
+                setSnackbarMessage(error.response.data.message || error.message);
                 setOpenSnackbar(true);
             }
 
-            return {isSuccess:false, error:error.message}
+            return {isSuccess:false, error:error.response.data.message || error.message}
         }
         finally {
             if(!noLoading)setLoading(false);
