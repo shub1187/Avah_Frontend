@@ -19,7 +19,7 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 
 // import { title } from 'process';
 
-const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJobCard,viewPaidInvoice,downloadPdf, print, approve, reject, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData, setInvoice }) => {
+const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJobCard,viewPaidInvoice,downloadPdf, print, approve, reject, approveSp, rejectSp, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData, setInvoice }) => {
     const { fetchData, snackbar, loadingIndicator } = useFetchFunction()
     // const timerRef = useRef(null);
 
@@ -57,10 +57,12 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
     const StatusUpdate = async () => {
         try {
             setIsSubmitted(true); // Set the form as submitted
-            if (reject) {
+            if (reject || rejectSp) {
                 const requiredFields = RejectList.filter((field) => field.required);
-                const emptyRequiredFields = requiredFields.filter((field) => !formData[field.name]);
-                if (emptyRequiredFields.length > 0) { return }
+                const emptyRequiredFields = requiredFields
+                                            .filter(field => field.required)
+                                            .some(field => field.name in formData && !formData[field.name]);
+                if (emptyRequiredFields) { return }
             }
             const obj = {
                 payload: { ...payload, ...formData },
@@ -104,10 +106,6 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
 );
     return (
         <>
-            {/* {changePassword && <ChangePasswordDialog/>}
-            {edit && <EditDialog/>}
-            {status && <StatusDialog/>}
-            {view && <ViewDialog/>} */}
             {viewEstimate && (
                 <IconButton color='options' onClick={() => { setPage(); setEyeIconValue(rowData) }}>
                     <Box className='flex ai-flex-start column'>
@@ -136,6 +134,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
             {downloadPdf && (<PDF/>)}
 
             {print && (<Print/>)}
+            
             {approve && <Button variant='outlined' color='success' onClick={StatusUpdate}>
                 <CheckCircleIcon style={{ color: 'rgb(5,131,30)', cursor: 'pointer', marginRight: '5px' }} /> Approve
             </Button>}
@@ -157,6 +156,37 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
                 </>
             }
 
+            {approveSp && 
+                <>
+                    <IconButton color='options' onClick={StatusUpdate}>
+                        <Box className='flex ai-flex-start column'>
+                            <Typography fontSize={9}> &nbsp;Approve</Typography>
+                            <CheckCircleIcon style={{ cursor: 'pointer', marginRight: '5px' }} />
+                        </Box>
+                    </IconButton>
+                </>
+            }
+
+            {rejectSp && 
+                <>
+                <IconButton color='options' onClick={() => { handleClickOpen() }}>
+                    <Box className='flex ai-flex-start column'>
+                        <Typography fontSize={9}> &nbsp;Reject</Typography>
+                        <CancelIcon style={{ cursor: 'pointer', marginRight: '5px' }} />
+                    </Box>
+                </IconButton>
+                <Dialog fullWidth open={open} onClose={handleClose} maxWidth='xs'>
+                    <Box m={4}>
+                        <CreateTextFields fields={RejectList.slice(0,1)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted} />
+                    </Box>
+                    <DialogActions sx={{ mt: 3 }}>
+                        <Button color='options' onClick={handleClose}>CANCEL</Button>
+                        <Button variant={'contained'} color='options' onClick={StatusUpdate}>SUBMIT</Button>
+                    </DialogActions>
+                </Dialog>
+                </>
+            }
+            
             {createEstimate &&
                 <>
                     <Button variant='contained' color='options' onClick={() => { setPage(); setEyeIconValue(rowData) }} >

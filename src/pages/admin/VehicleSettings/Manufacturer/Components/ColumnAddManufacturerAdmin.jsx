@@ -1,15 +1,13 @@
 import { Box } from '@mui/material'
-import ActionDialog from 'components/common/Dialog/ActionDialog'
 import MoreActionDialog from 'components/common/Dialog/MoreActionDialog'
 
-export const adminRequestColumn = [
+export const addManufacturerAdminColumn = [
     { title: "Id", field: "register_sp_id" },
     { title: "Name", field: "name" },
-    { title: "Business name", field: "business_name" },
+    { title: "Business", field: "business_name" },
     { title: "Email", field: "email" },
     { title: "Mobile Number", field: "business_contact" },
-    // { title: "Appointment Time", field: "appointment_time" },
-    // { title: "Appointment Status", field: "appointment_status" },
+    { title: "Status", field: "sp_status" },
     {
         title: 'Action', render: (rowData) =>
             <Box display='flex'>

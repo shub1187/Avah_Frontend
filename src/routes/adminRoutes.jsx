@@ -1,6 +1,4 @@
-import AdminApprovedRequestsPage from "pages/admin/Requests/ApprovedRequests";
 import AdminPendingRequestsPage from "pages/admin/Requests/PendingRequests";
-import AdminRejectedRequestsPage from "pages/admin/Requests/RejectedRequests";
 import AdminCustomerPage from "pages/admin/User/Customer";
 import AdminServiceProviderPage from "pages/admin/User/ServiceProvider";
 import AdminVehicleFuelPage from "pages/admin/VehicleSettings/FuelType";

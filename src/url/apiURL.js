@@ -48,15 +48,9 @@ const URL = {
             }
         },
         REQUESTS:{
-            APPROVEDREQUESTS:{
-
-            },
             PENDINGREQUESTS:{
-
-            },
-            REJECTEDREQUESTS:{
-            getAllRejectedSp  :  replaceUrl(`${BASE_URL}/api/admin/getAllRejectedSp`)
-                
+                approveServiceProvider : replaceUrl(`${BASE_URL}/api/admin/approveServiceProvider`)    ,
+                spRequest : replaceUrl(`${BASE_URL}http://localhost:3008/api/admin/spRequest`)  
             }
         }
     },
