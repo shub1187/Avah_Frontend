@@ -1,11 +1,11 @@
 import { Box, Button, Checkbox, TextField } from '@mui/material'
 import { SpRolesColumn } from 'pages/serviceProvider/Roles/Components/SpRolesColumn'
-import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderTable'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {useState} from 'react'
 import './index.scss'
 import { useFetchFunction } from 'hooks/useFetch';
 import URL from 'url/apiURL';
+import CustomMaterialTable from 'components/common/Table/MaterialTable';
 
 const {addEmployeeRole,getAllEmployeeRoles} = URL.SERVICE_PROVIDER.ROLE
 const checkboxList = [
@@ -74,7 +74,7 @@ const SpRolesPage = () => {
     )
   }
   return (
-    <ServiceProvidertable
+    <CustomMaterialTable
         URL={getAllEmployeeRoles}
         columnss={SpRolesColumn}
         key={'roles'}

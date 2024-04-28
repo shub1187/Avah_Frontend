@@ -22,7 +22,39 @@ const URL = {
         register_customer:replaceUrl(`${BASE_URL}/api/customer/registerCustomer`),
     },
     ADMIN:{
+        HOME:{
 
+        },
+        USER:{
+            CUSTOMER:{
+
+            },
+            SERVICEPROVIDER:{
+
+            }
+        },
+        VEHICLESETTINGS:{
+            FUELTYPE:{
+
+            },
+            MANUFACTURER:{
+
+            },
+            MODELS:{
+
+            }
+        },
+        REQUESTS:{
+            APPROVEDREQUESTS:{
+
+            },
+            PENDINGREQUESTS:{
+
+            },
+            REJECTEDREQUESTS:{
+                
+            }
+        }
     },
     SERVICE_PROVIDER:{
         USERS:{

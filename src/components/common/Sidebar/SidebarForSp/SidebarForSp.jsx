@@ -21,129 +21,129 @@ const {getNotificationNumbers}= URL.SERVICE_PROVIDER.NOTIFICATION
 export const SpSideBarList = [
   {
     id:1,
-    link:'dashboard/home',
+    link:'serviceProvider/home',
     icon:HomeIcon,
     name:"Home",
   },
   {
     id:2,
-    link:'dashboard/user/customer',
+    link:'serviceProvider/user/customer',
     icon:UserIcon,
     name:"Users",
     role:'Users',
     subList:[
       // {
       //   id:21,
-      //   link:'dashboard/user/customer',
+      //   link:'serviceProvider/user/customer',
       //   name:"Customer",
       // },
       {
         id:21,
-        link:'dashboard/user/employees',
+        link:'serviceProvider/user/employees',
         name:"Employee",
       },
     ]
   },
   {
     id:3,
-    link:'/dashboard/roles',
+    link:'/serviceProvider/roles',
     icon:RolesIcon,
     name:"Roles",
     role:"Roles"
   },
   {
     id:4,
-    link:'/dashboard/spares',
+    link:'/serviceProvider/spares',
     icon:SparesIcon,
     name:"Spares",
     role:'Spares',
   },
   {
     id:5,
-    link:'/dashboard/labour',
+    link:'/serviceProvider/labour',
     icon:LaboursIcon,
     name:"Labour",
     role:'Labour',
   },
   // {
   //   id:6,
-  //   link:'/dashboard/serviceType',
+  //   link:'/serviceProvider/serviceType',
   //   icon:ServiceTypeIcon,
   //   name:"Service Type",
 
   // },
   {
     id:6,
-    link:'/dashboard/service/estimatesList',
+    link:'/serviceProvider/service/estimatesList',
     icon:ServiceIcon,
     name:"Service",
     role:'Service',
     subList:[
       {
         id:71,
-        link:'dashboard/service/estimatesList',
+        link:'serviceProvider/service/estimatesList',
         name:"Estimates List"
       },
       {
         id:72,
-        link:'dashboard/service/appointmentList',
+        link:'serviceProvider/service/appointmentList',
         name:"Appointment List"
       },
             {
         id:73,
-        link:'dashboard/service/jobCardsList',
+        link:'serviceProvider/service/jobCardsList',
         name:"Job Cards List"
       },
     ]
   },
   {
     id:8,
-    link:'/dashboard/billing/pendingPayments',
+    link:'/serviceProvider/billing/pendingPayments',
     icon:BillingsIcon,
     name:"Billing",
     role: "Billing",
     subList:[
       {
         id:81,
-        link:'dashboard/billing/pendingPayments',
+        link:'serviceProvider/billing/pendingPayments',
         name:"Pending Payments"
       },
       {
         id:82,
-        link:'dashboard/billing/invoiceList',
+        link:'serviceProvider/billing/invoiceList',
         name:"Paid Invoices"
       }
     ]
   },
   // {
   //   id:9,
-  //   link:'/dashboard/accounts/account',
+  //   link:'/serviceProvider/accounts/account',
   //   icon:AccountsIcon,
   //   name:"Accounts",
   //   role: "Accounts",
   //   subList:[
   //     {
   //       id:91,
-  //       link:'dashboard/accounts/account',
+  //       link:'serviceProvider/accounts/account',
   //       name:"Account"
   //     },
   //     {
   //       id:92,
-  //       link:'dashboard/accounts/ledger',
+  //       link:'serviceProvider/accounts/ledger',
   //       name:"Ledger"
   //     },
   //   ]
   // },
   // {
   //   id:10,
-  //   link:'/dashboard/packages',
+  //   link:'/serviceProvider/packages',
   //   icon:PackageIcon,
   //   name:"Packages",
   //   role:"Packages"
   // },
   // {
   //   id:11,
-  //   link:'/dashboard/reviews',
+  //   link:'/serviceProvider/reviews',
   //   icon:ReviewsIcon,
   //   name:"Reviews",
   //   role:"Reviews"
@@ -151,7 +151,7 @@ export const SpSideBarList = [
   // },
   // {
   //   id:12,
-  //   link:'/dashboard/settings',
+  //   link:'/serviceProvider/settings',
   //   icon:SettingsIcon,
   //   name:"Settings",
   //   role:"Settings"

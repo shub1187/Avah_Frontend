@@ -6,12 +6,12 @@ import { spLabourColumns } from 'pages/serviceProvider/Labour/Components/SpLabou
 import FullyEditableAndDeletableTable from 'components/common/Table/FullyEditableAndDeletableTable';
 import CreateAutoCompleteTextfield from 'components/common/Textfield/AutoCompleteTextfield';
 import {  useFetch, useFetchFunction } from 'hooks/useFetch';
-import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderTable';
 import { SpEstimateListColumn } from 'pages/serviceProvider/Service/Estimate/Components/SpEstimateColumn';
 import URL from 'url/apiURL';
 import { SpCreateSpareEstimateColumn, SpEditSpareEstimateColumn, createEstimateColumn, createSpareEstimateColumn } from 'pages/serviceProvider/Service/Estimate/Components/SpareEstimateColumn';
 import { SpCreateLabourEstimateColumn, SpEditLabourEstimateColumn } from 'pages/serviceProvider/Service/Estimate/Components/LabourEstimateColumn';
 import './index.scss'
+import CustomMaterialTable from 'components/common/Table/MaterialTable';
 
 const {getAllSpareListForAutoFill, getSpecificSpareDetailsForEstimate, getAllLabourListForAutoFill, getSpecificLabourDetailsForEstimate, addEstimate,getEstimatePendingVehcileList ,getSpecificVechicleDetailsToCreateEstimate, getAllCreatedEstimateList, getEstimateDetails, editEstimate} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
@@ -349,7 +349,7 @@ const SpEstimateList = () => {
     }
     return (
         <div>
-            <ServiceProvidertable
+            <CustomMaterialTable
                 URL={getAllCreatedEstimateList}
                 columnss={SpEstimateListColumn(()=>setPage('eye-icon'),setEyeIconValue)}
                 clickButton= {()=>setPage('estimate')}

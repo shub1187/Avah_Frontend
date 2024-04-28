@@ -1,4 +1,3 @@
-import ServiceProvidertable from "components/spComponents/Table/ServiceProviderTable"
 import { jobCardColumn } from "./Components/jobcardColumn"
 import { useEffect, useState } from "react"
 import { Autocomplete, Box, Button, Chip, Grid, InputLabel, TextField, Typography } from "@mui/material"
@@ -13,6 +12,7 @@ import './index.scss'
 import { set } from "date-fns"
 import DetailsCardWithTitle from "components/common/Cards/DetailsCardWithTitle"
 import { formatTimestampToDate } from "utils/customFunctions"
+import CustomMaterialTable from "components/common/Table/MaterialTable"
 
 const {getJobcardDetails, updateJobcard, getAllAdminAdvisorEmployee, getAllTechnicianEmployee,getAllCreatedJobcardList,getAllLabourListForAutoFill,getAllSpareListForAutoFill,getSpecificLabourDetailsForEstimate,getSpecificSpareDetailsForEstimate, generateInvoice} =URL.SERVICE_PROVIDER.SERVICE.JOBCARD
 const JobCard = () => {
@@ -314,7 +314,7 @@ const JobCard = () => {
     }
   return (
     <div>
-            <ServiceProvidertable
+            <CustomMaterialTable
                 URL={getAllCreatedJobcardList}
                 columnss={jobCardColumn(()=>setPage('eye-icon'),setEyeIconValue)}
                 // clickButton= {()=>setPage('create-job-card')}

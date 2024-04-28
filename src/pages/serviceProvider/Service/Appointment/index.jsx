@@ -1,11 +1,9 @@
-import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderTable'
 import React, { useEffect, useState } from 'react'
 import CreateAppointmentDialog from 'pages/serviceProvider/Service/Appointment/Components/SpCreateAppointmentDialog'
 import { spCreateAppointmentColumn } from 'pages/serviceProvider/Service/Appointment/Components/SpCreateAppointmentColumn'
 import { Box, Button, TextField, Typography } from '@mui/material'
 import CreateCustomerDialog from 'pages/serviceProvider/Users/Customers/Components/createCustomerDialog'
 import { createCustomerColumn } from 'pages/serviceProvider/Users/Customers/Components/CreateCustomerColumn'
-import CustomerTable from 'components/common/Table/CustomerTable'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CreateAutoCompleteTextfield from 'components/common/Textfield/AutoCompleteTextfield'
 import FullyEditableAndDeletableTable from 'components/common/Table/FullyEditableAndDeletableTable'
@@ -18,6 +16,7 @@ import './index.scss'
 import { SpCreateSpareAppointmentColumn } from './Components/SparesAppointmentColumn'
 import { SpCreateLabourAppointmentColumn } from './Components/LabourAppointmentColumn'
 import { spRejectedAppointmentColumn } from './Components/RejectAppointmentColumn'
+import CustomMaterialTable from 'components/common/Table/MaterialTable'
 const {addEstimate, getAllLabourListForAutoFill, getAllSpareListForAutoFill, getSpecificLabourDetailsForEstimate, getSpecificSpareDetailsForEstimate} = URL.SERVICE_PROVIDER.SERVICE.APPOINTMENT
 
 const AppointmentList = () => {
@@ -166,7 +165,7 @@ const AppointmentList = () => {
       
       </Box>
       {toggle==='appointment'?
-          <ServiceProvidertable
+          <CustomMaterialTable
             key={'appointment'}
             DialogButton={CreateAppointmentDialog} 
             columnss={spCreateAppointmentColumn(()=>setPage('estimate'),setEyeIconValue)} 
@@ -175,7 +174,7 @@ const AppointmentList = () => {
             dialogTitle={'CREATE APPOINTMENT'}
           />
        :
-       <ServiceProvidertable key={'rejected'} columnss={spRejectedAppointmentColumn} URL={`http://localhost:3008/api/serviceprovider/getAllRejectedAndCancelledAppointment`}/>
+       <CustomMaterialTable key={'rejected'} columnss={spRejectedAppointmentColumn} URL={`http://localhost:3008/api/serviceprovider/getAllRejectedAndCancelledAppointment`}/>
         }
 
     </>

@@ -1,13 +1,12 @@
 import { ThemeProvider } from '@mui/material'
 import { globalAppTheme } from 'components/common/Themes/GlobalAppTheme'
 import CustomerLayout from 'components/layout/CustomerLayout'
-import MainLayout from 'components/layout/MainLayout'
 import ServiceProviderLayout from 'components/layout/ServiceProviderLayout'
 import CustomerHome from 'pages/Customer/LandingPageHome'
 import RaeesLoginComponent from 'pages/login'
 import {useEffect} from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import { customerRoute, employeeRoute, raeesRoute, routes } from 'routes'
+import { adminRoute, customerRoute, employeeRoute, raeesRoute, routes } from 'routes'
 import { addBroadcastListenerForLoggingOutOfAllTabs, loginFunction } from 'utils/customFunctions'
 const Appy = () => {
 
@@ -21,14 +20,16 @@ const Appy = () => {
     <ThemeProvider theme={globalAppTheme}>
       <Routes>
         {
+          // isAdminPage && localStorage.getItem('TYPE_OF_USER') == "1" ?
+          //   <>
+          //     <Route path="/admin/dashboard" element={<MainLayout />}> {routes}</Route>
+          //     <Route path="/admin/" element={<MainLayout />}> {routes}</Route>
+
+          //   </>
+
+          //   :
           isAdminPage && localStorage.getItem('TYPE_OF_USER') == "1" ?
-            <>
-              <Route path="/admin/dashboard" element={<MainLayout />}> {routes}</Route>
-              <Route path="/admin/" element={<MainLayout />}> {routes}</Route>
-
-            </>
-
-            :
+            <Route path='/' element={<ServiceProviderLayout/>}>{adminRoute}</Route> :
             isAdminPage ?
               <Route path="/admin" element={<RaeesLoginComponent />} />
               :

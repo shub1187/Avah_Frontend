@@ -14,8 +14,6 @@ import './SidebarForCustomer.scss';
 import { useState } from 'react';
 import { Box } from '@mui/material';
 import { useCustomerContext } from 'hooks/useCustomContext';
-import axios from 'axios'
-import { category_get_full_page_api } from 'network/ApiConstant';
 export const CustomerSidebarList =(customerStatus)=>{
   return (
     [

@@ -6,6 +6,8 @@ import { useMobileResponsive } from 'hooks/useMobileResponsive';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getCities, getStates } from 'utils/customFunctions';
 import URL from 'url/apiURL';
+import UnderLine from 'components/common/Underline';
+import './index.scss'
 const {getAllCitiesPerState,getCustomerProfile,profileCompletion} = URL.CUSTOMER.UPDATEPROFILE
 
 const UpdateCustomerProfile = () => {
@@ -126,8 +128,8 @@ const UpdateCustomerProfile = () => {
         },
     ]
     return (
-        <div>
-            <DialogTitle >  <Typography fontWeight={'bold'} fontSize={25} sx={{ textDecoration: 'underline' }}>PROFILE</Typography><Box component={'span'} ml={4}></Box></DialogTitle>
+        <div className='back'>
+            <DialogTitle >  <Typography fontWeight={'bold'} fontSize={20} >PROFILE<UnderLine/></Typography><Box component={'span'} ml={4}></Box></DialogTitle>
             <DialogContent>
                 <Grid container xs={12} flexDirection={'column'}>
                     <Box display='flex'>
@@ -141,7 +143,7 @@ const UpdateCustomerProfile = () => {
                         </Box>
                     </Box>
                     <Grid item xs={12} sm={12} mr={!isMobile && 4}>
-                        <Accordion>
+                        <Accordion defaultExpanded>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"

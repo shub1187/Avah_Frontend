@@ -4,15 +4,6 @@ import MaterialTable, { MTableToolbar } from "material-table";
 import './CustomerTable.css'
 import { useState } from "react";
 import DialogWrapper from "components/common/Dialog/DialogWrapper";
-// import CreateCustomerDialog from "../Dialog/Users/createCustomerDialog";
-// import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
-// import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-// import ActionDialog from "../Dialog/ActionDialog";
-// import SkeletonLoading from "components/common/Skeleton";
-// import CreateEmployeeDialog from "../Dialog/Users/createEmployeeDialog";
-// import AddLabourDialog from "../Dialog/Labour/AddLabour";
-// import AddServiceDialog from "../Dialog/Service/AddServiceDialog";
-// import CreateSpareDialog from "../Dialog/Spares/AddSparesDialog";
 
 const CustomerTable = ({DialogButton,columnss,URL,key, dialogTitle, dialogButtonName})=>{
   const [dataLength,setDataLength] = useState(0)

@@ -1,13 +1,11 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { Box, Toolbar, useMediaQuery } from "@mui/material";
+import { Box, Toolbar } from "@mui/material";
 import colorConfigs from "../../configs/colorConfigs";
 import sizeConfigs from "../../configs/sizeConfigs";
 import Sidebar from "../common/Sidebar/SidebarLayout";
-import Topbar from "../common/Topbar";
-import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useMobileResponsive } from "hooks/useMobileResponsive";
-// import { RootState } from "../../redux/store";
+import Topbar from "./Topbar";
 
 const ServiceProviderLayout = () => {
 
@@ -22,20 +20,14 @@ const ServiceProviderLayout = () => {
       
       {isMobile && <Topbar isMobile={isMobile} handleDrawerToggle={handleDrawerToggle}/>}
       
-      <Box
-        component="nav"
-        sx={{
-          // width: sizeConfigs.sidebar.width,
-          flexShrink: 0
-        }}
-      >
+      <Box component="nav" sx={{flexShrink: 0}}>
         <Sidebar open={open} handleDrawerToggle={handleDrawerToggle} isMobile={isMobile}/>
       </Box>
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          p:location.pathname==='/dashboard/home' || location.pathname==='/admin/dashboard/home'?0:3 ,
+          p:location.pathname==='/serviceProvider/home' || location.pathname==='/admin/home'?0:3 ,
           width: `calc(100% - ${sizeConfigs.sidebar.width})`,
           minHeight: "100vh",
           backgroundColor: colorConfigs.mainBg

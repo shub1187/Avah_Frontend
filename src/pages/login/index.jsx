@@ -10,6 +10,7 @@ import URL from 'url/apiURL'
 import { useFetchFunction } from 'hooks/useFetch'
 import { requiredTextfield } from 'utils/customFunctions'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { FilepondImageUploader } from 'components/common/FilePondImageUploader'
 
 const RaeesLoginComponent = () => {
     const [formData, setFormData] = useState({});
@@ -400,6 +401,9 @@ const RaeesLoginComponent = () => {
                                 <CreateTextFields fields={registerTextfield.slice(9,11)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
                             </Box>
                             <Box className='eigth-row'>
+                                <FilepondImageUploader/>
+                            </Box>
+                            <Box className='ninth-row'>
                                 <Button onClick={registerFunction}>REGISTER</Button>
                             </Box>
                         </Box>

@@ -2,12 +2,12 @@ import { Box } from '@mui/material'
 import AddCustomerVehicleDialog from 'pages/Customer/Vehicle/Components/AddCustomerVehicleDialog'
 import AddCustomerVehicleColumn from 'pages/Customer/Vehicle/Components/AddCustomerVehicleColumn'
 import React from 'react'
-import CustomerTable from 'components/common/Table/CustomerTable'
+import CustomMaterialTable from 'components/common/Table/MaterialTable'
 
 const CustomerVehicle = () => {
   return (
     <Box backgroundColor='red' mt={2}>
-            <CustomerTable
+            <CustomMaterialTable
              dialogTitle={'ADD VEHICLE'}
              dialogButtonName={'ADD NEW VEHICLE'}
              DialogButton={AddCustomerVehicleDialog} 

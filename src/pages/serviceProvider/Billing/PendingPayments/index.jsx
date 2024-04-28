@@ -2,7 +2,6 @@ import "./index.scss"
 import URL from "url/apiURL"
 import React, { useState ,useMemo,useEffect} from 'react'
 import { pendingPaymentsColumns } from "./components/pendingPaymentsColumns"
-import ServiceProvidertable from "components/spComponents/Table/ServiceProviderTable"
 import { Autocomplete, Box, Button, Chip, Grid, InputLabel, TextField, Typography } from "@mui/material"
 import FullyEditableAndDeletableTable from "components/common/Table/FullyEditableAndDeletableTable"
 import { useFetchFunction } from "hooks/useFetch"
@@ -14,6 +13,7 @@ import PaymentPopup from "./components/PaymentPopup"
 import {useNavigate} from 'react-router-dom'
 import DetailsCardWithTitle from "components/common/Cards/DetailsCardWithTitle"
 import { formatTimestampToDate } from "utils/customFunctions"
+import CustomMaterialTable from "components/common/Table/MaterialTable"
 
 const {getAllPendingPaymentInvoices,getJobcardDetails,recievePayment} = URL.SERVICE_PROVIDER.BILLING.PENDINGPAYMENTS
 
@@ -185,7 +185,7 @@ const PendingPayments = () => {
     }
     return (
         <div>
-                <ServiceProvidertable
+                <CustomMaterialTable
                     URL={getAllPendingPaymentInvoices}
                     columnss={pendingPaymentsColumns(()=>setPage('eye-icon'),setEyeIconValue)}
                     // clickButton= {()=>setPage('create-job-card')}

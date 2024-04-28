@@ -1,10 +1,10 @@
 import { Box, Toolbar } from '@mui/material'
 import Sidebar from 'components/common/Sidebar/SidebarLayout'
-import Topbar from 'components/common/Topbar'
 import sizeConfigs from 'configs/sizeConfigs'
 import { useMobileResponsive } from 'hooks/useMobileResponsive'
 import React, { useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
+import Topbar from './Topbar'
 const CustomerLayout = () => {
     const [open, setOpen] = useState(false);
     const {isMobile}=useMobileResponsive()

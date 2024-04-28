@@ -1,50 +1,21 @@
 import { Avatar, Drawer, IconButton, List, Stack, SwipeableDrawer, Toolbar , useMediaQuery} from "@mui/material";
-import assets from "../../../assets";
 import colorConfigs from "../../../configs/colorConfigs";
 import sizeConfigs from "../../../configs/sizeConfigs";
-import appRoutes from "../../../routes/appRoutes";
-import SidebarItem from "../SidebarItem";
-import SidebarItemCollapse from "../SidebarItemCollapse";
-// import spAppRoutes from "../../../routes/spRoutes";
 import  { ServiderProviderSidebar } from "./SidebarForSp/SidebarForSp";
 import AvahSideBarImage from 'assets/img/AvahSideBarImage.png'
-import { useState } from "react";
-import MenuIcon from '@mui/icons-material/Menu';
 import CustomerSideBar from "./SidebarForCutomer/SidebarForCustomer";
+import SidebarForAdmin from "./SidebarForAdmin";
 
 
 const Sidebar = ({isMobile,open,handleDrawerToggle,customer}) => {
-  // const [checkRole,setCheckRole] = useState("");
   const getRole = localStorage.getItem("TYPE_OF_USER");
-  // setCheckRole(getRole);
-  // const [open, setOpen] = useState(false);
-
-  // Use the useMediaQuery hook to detect mobile resolution
-  // const isMobileResolution = useMediaQuery((theme) =>
-  //   theme.breakpoints.down('sm')
-  // );
-  // const handleDrawerToggle = () => {
-  //   setOpen(!open);
-  // };
   return (
     <>
-    {/* {isMobileResolution && (
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        edge="start"
-        onClick={handleDrawerToggle}
-        sx={{ display: { sm: 'block', md: 'none' } }}  // Show only on mobile
-      >
-        <MenuIcon />
-      </IconButton>
-    )} */}
     <SwipeableDrawer
       disableScrollLock={true}
       variant={(isMobile || customer) ? 'temporary' : 'permanent'}  // Change variant based on resolution
       open={open}
       onClose={handleDrawerToggle}
-      // variant="permanent"
       sx={{
         width: sizeConfigs.sidebar.width,
         flexShrink: 0,
@@ -72,16 +43,7 @@ const Sidebar = ({isMobile,open,handleDrawerToggle,customer}) => {
         </Toolbar>
           <div className="mx-3">
             {   
-            getRole == "1" ?  
-               appRoutes.map((route, index) => (
-                route.sidebarProps ? (
-                  route.child ? (
-                    <SidebarItemCollapse item={route} key={index} />
-                  ) : (
-                    <SidebarItem item={route}   key={index} />
-                  )
-                ) : null
-              )) 
+            getRole == "1" ?  <SidebarForAdmin/>              
             :
             getRole == "2"?<ServiderProviderSidebar/>
             :

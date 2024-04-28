@@ -4,7 +4,6 @@ import { Box, IconButton, Button, Dialog, DialogActions, DialogContent, DialogTi
 import { useMobileResponsive } from 'hooks/useMobileResponsive'
 import TableCustomerMobileDetails from 'components/common/Mobile/TableCustomerMobileDetails'
 import AddCustomerAppointmentColumn from 'pages/Customer/Appointment/Components/AddCustomerAppointmentColymn'
-import CustomerTable from 'components/common/Table/CustomerTable'
 import AddCustomerAppointmentDialog from './Components/AddCustomerAppointmentDialog'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { SpCreateLabourEstimateColumn } from 'pages/serviceProvider/Service/Estimate/Components/LabourEstimateColumn'
@@ -20,6 +19,7 @@ import { requiredTextfield } from 'utils/customFunctions'
 import PDF from "components/common/PDFDownload"
 import Print from "components/common/Print"
 import CloseIcon from '@mui/icons-material/Close';
+import CustomMaterialTable from 'components/common/Table/MaterialTable'
 
 const {getEstimateDetails, estimateApproval, estimateRejection, getJobcardDetails} = URL.CUSTOMER.APPOINTMENT
 const CustomerAppointment = () => {
@@ -464,11 +464,11 @@ const CustomerAppointment = () => {
       
       </Box>
       {toggle==='appointment'?
-        // isMobile?
-        //   <TableCustomerMobileDetails/> 
-        // :
+        isMobile?
+          <TableCustomerMobileDetails/> 
+        :
           
-          <CustomerTable
+          <CustomMaterialTable
             key={'appointment'}
             DialogButton={AddCustomerAppointmentDialog}
             columnss={AddCustomerAppointmentColumn(()=>setPage('eye-icon'),setEyeIconValue,()=>setPage('invoice'))} 
@@ -477,7 +477,7 @@ const CustomerAppointment = () => {
             dialogTitle={'CREATE APPOINTMENT'}
             />
        :
-      <CustomerTable
+      <CustomMaterialTable
         key={'rejected'}
         columnss={AddCustomerAppointmentColumn()} 
         URL={`http://localhost:3008/api/customer/getAllRejectedCancelledAppointment`}

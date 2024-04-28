@@ -1,4 +1,3 @@
-import ServiceProvidertable from "components/spComponents/Table/ServiceProviderTable"
 import "./index.scss"
 import React, { useState,useEffect } from 'react'
 import { paidInvoicesColumns } from "./components/paidInvoicesColumns"
@@ -14,6 +13,7 @@ import Print from "components/common/Print"
 import CloseIcon from '@mui/icons-material/Close';
 import UnderLine from "components/common/Underline"
 import { formatTimestampToDate } from "utils/customFunctions"
+import CustomMaterialTable from "components/common/Table/MaterialTable"
 
 const { getAllPaidInvoices,getJobcardDetails } = URL.SERVICE_PROVIDER.BILLING.PAIDINVOICES
 
@@ -256,7 +256,7 @@ const PaidInvoices = () => {
     }
     return (
         <div>
-            <ServiceProvidertable
+            <CustomMaterialTable
                 URL={getAllPaidInvoices}
                 columnss={paidInvoicesColumns(() => setPage('eye-icon'), setEyeIconValue)}
             // clickButton= {()=>setPage('create-job-card')}

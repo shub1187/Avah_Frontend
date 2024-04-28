@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid, Paper, ThemeProvider } from '@mui/material';
-import SpContinueToPaymentButtonTheme from 'components/LoginRegisterComponents/Button/SpContinueToPaymentButtonTheme';
+// import SpContinueToPaymentButtonTheme from 'components/LoginRegisterComponents/Button/SpContinueToPaymentButtonTheme';
 import SpQuickPaymentCard1 from "assets/img/serviceProviderDashboard/QuickPaymentIcon/spQuickPaymentMasterCard1.png"
 import SpQuickPaymentCard2 from "assets/img/serviceProviderDashboard/QuickPaymentIcon/spQuickPaymentMasterCard2.png"
 import SpQuickPaymentCancelSubscription from './SpQuickPaymentCancelSubscription';
@@ -53,9 +53,9 @@ export default function SpQuickPayment({text}) {
             <Typography fontSize={"20px"} fontWeight={"700"} color={"rgb(173,73,112)"}>$2000 TOTAL</Typography>
           </Box>
           <Box sx={{maxWidth:"100%"}}>
-            <ThemeProvider theme ={SpContinueToPaymentButtonTheme}>
+            {/* <ThemeProvider theme ={SpContinueToPaymentButtonTheme}> */}
                 <Button sx={{maxWidth:"100%"}}>CONTINUE FOR PAYMENT</Button>
-            </ThemeProvider>
+            {/* </ThemeProvider> */}
           </Box>
         </Box>
         </CardContent>

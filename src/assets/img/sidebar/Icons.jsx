@@ -12,6 +12,9 @@ import ReviewsIconImage from './reviews.png'
 import SettingsIconImage from './settings.png'
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import RequestIconImage from './request.png';
+import VehicleIconImage from './vehicle.png'
+
 // const HomeIcon = ()=><img src={HomeIconImage} alt="home" />
 // const UserIcon = ()=><img src={UserIconImage} alt="home" />
 const HomeIcon = ({ isSelected }) => (
@@ -107,6 +110,22 @@ const HomeIcon = ({ isSelected }) => (
       style={{ filter: isSelected ? 'brightness(0) invert(1)' : 'none' }}
     />
   );
+  
+  const RequestIcon = ({ isSelected }) => (
+    <img
+      src={RequestIconImage}
+      alt="user"
+      style={{ filter: isSelected ? 'brightness(0) invert(1)' : 'none' }}
+    />
+  );
+
+  const VehicleIcon = ({ isSelected }) => (
+    <img
+      src={VehicleIconImage}
+      alt="user"
+      style={{ filter: isSelected ? 'brightness(0) invert(1)' : 'none' }}
+    />
+  );
 
   const DashBoardIcons = ({isSelected}) =>(
     <DashboardIcon fontSize={'25px'} color={isSelected ? 'whiteBackground':'options'}/>
@@ -129,5 +148,7 @@ export {
     SettingsIcon,
     DashBoardIcons,
     AppointmentIcon,
-    RolesIcon
+    RolesIcon,
+    RequestIcon,
+    VehicleIcon
 }

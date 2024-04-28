@@ -9,18 +9,16 @@ import JobCard from 'pages/serviceProvider/Service/JobCard'
 import SparesList from 'pages/serviceProvider/Spares'
 import SpCustomerPage from 'pages/serviceProvider/Users/Customers'
 import SpEmployeesPage from 'pages/serviceProvider/Users/Employees'
-import React from 'react'
-import SpCustomersPage from 'serviceprovider/page/dashboard/user/page/SpCustomersPage'
 
 const serviceProviderRoutes = [
     {
         id:1,
-        link:'dashboard/home',
+        link:'serviceProvider/home',
         component:<ServiceProviderHome/>,
       },
       {
         id:2,
-        link:'dashboard/user',
+        link:'serviceProvider/user',
         role:'Users',
         subList:[
           {
@@ -37,31 +35,31 @@ const serviceProviderRoutes = [
       },
       {
         id:3,
-        link:'dashboard/roles',
+        link:'serviceProvider/roles',
         role:'Roles',
         component:<SpRolesPage/>,
       },
       {
         id:4,
-        link:'dashboard/spares',
+        link:'serviceProvider/spares',
         role:'Spares',
         component:<SparesList/>,
       },
       {
         id:5,
-        link:'dashboard/labour',
+        link:'serviceProvider/labour',
         role:'Labour',
         component:<SpLabourPage/>
       },
       {
         id:6,
-        link:'dashboard/serviceType', 
+        link:'serviceProvider/serviceType', 
         role:'Service Type',
    
       },
       {
         id:7,
-        link:'dashboard/service',
+        link:'serviceProvider/service',
         role:'Service',
         subList:[
           {
@@ -83,7 +81,7 @@ const serviceProviderRoutes = [
       },
       {
         id:8,
-        link:'dashboard/billing',
+        link:'serviceProvider/billing',
         role:'Billing',
         subList:[
           {
@@ -100,7 +98,7 @@ const serviceProviderRoutes = [
       },
       {
         id:9,
-        link:'dashboard/accounts',
+        link:'serviceProvider/accounts',
         role:'Accounts',
         subList:[
           {
@@ -115,17 +113,17 @@ const serviceProviderRoutes = [
       },
       {
         id:10,
-        link:'/dashboard/packages',
+        link:'/serviceProvider/packages',
         role:'Packages',
       },
       {
         id:11,
-        link:'/dashboard/reviews',
+        link:'/serviceProvider/reviews',
         role:'Reviews',
       },
       {
         id:12,
-        link:'/dashboard/settings',
+        link:'/serviceProvider/settings',
         role:'Settings',
       },
 ]

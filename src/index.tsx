@@ -1,9 +1,5 @@
 import { CssBaseline } from '@mui/material';
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
-import App from './App';
-import { store } from './redux/store';
 import reportWebVitals from './reportWebVitals';
 import './index.scss';
 import './assets/css/login.css'
@@ -15,18 +11,13 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
- // <React.StrictMode>
     <>
     <CustomerProvider>
     <CityProvider>
-    <Provider store={store}>
       <CssBaseline />
       <BrowserRouter>
-      {/* <App /> */}
       <Appy/>
       </BrowserRouter>
-
-    </Provider>
     </CityProvider>
     </CustomerProvider>
     </>

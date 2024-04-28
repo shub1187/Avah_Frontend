@@ -1,13 +1,13 @@
 import CreateEmployeeDialog from 'pages/serviceProvider/Users/Employees/Components/createEmployeeDialog'
 import { createEmployeeColumn } from 'pages/serviceProvider/Users/Employees/Components/CreateEmployeeColumn'
-import ServiceProvidertable from 'components/spComponents/Table/ServiceProviderTable'
 import URL from 'url/apiURL'
+import CustomMaterialTable from 'components/common/Table/MaterialTable'
 
 const {getAllEmployee} = URL.SERVICE_PROVIDER.USERS.EMPLOYEES
 const SpEmployeesPage = () => {
   return (
     <div>
-      <ServiceProvidertable 
+      <CustomMaterialTable 
         DialogButton={CreateEmployeeDialog} 
         key={'employees'} 
         columnss={createEmployeeColumn} 
