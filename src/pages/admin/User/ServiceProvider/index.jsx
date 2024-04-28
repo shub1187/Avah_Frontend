@@ -1,21 +1,29 @@
 import React, { useState } from 'react'
 import AddCustomerVehicleDialog from 'pages/Customer/Vehicle/Components/AddCustomerVehicleDialog'
-import { Box } from '@mui/material'
+import { Box,Button } from '@mui/material'
 import CustomMaterialTable from 'components/common/Table/MaterialTable'
-import { adminServiceProviderColumn } from './Components/adminServiceProviderColumn'
+import { adminServiceProviderColumn } from './ApprovedServiceProvider/Components/adminServiceProviderColumn'
+import AdminServiceProviderApprovedPage from './ApprovedServiceProvider'
+import AdminServiceProviderRejectedPage from './RejectedServiceProvider'
 
 const AdminServiceProviderPage = () => {
-    const [page, setPage] = useState('table')
-    const [eyeIconValue,setEyeIconValue] = useState([])
+
+    const [toggle,setToggle] = useState('approved')
+
     return (
-        <Box backgroundColor='red' mt={2}>
-                <CustomMaterialTable
-                 dialogTitle={'ADD VEHICLE'}
-                 dialogButtonName={'ADD NEW VEHICLE'}
-                 DialogButton={AddCustomerVehicleDialog} 
-                 columnss={adminServiceProviderColumn} 
-                 URL={"http://localhost:3008/api/customer/getCustomerVehicle"}/>
-        </Box>
+            <>
+                <Box pb={2} sx={{backgroundColor:'rgb(244,248,249)'}} display={'flex'} justifyContent={'center'} >
+                <Button sx={{minHeight:'52px', minWidth:"235px"}} variant={toggle==='approved'?'contained':'outlined'} color='options' onClick={()=>setToggle('approved')}>APPOINTMENT</Button>
+                <Button sx={{minHeight:'52px', minWidth:"235px"}}  variant={toggle==='rejected'?'contained':'outlined'} color='options' onClick={()=>setToggle('rejected')}>REJECTED</Button>
+                
+                </Box>
+                {toggle==='approved'?
+                <AdminServiceProviderApprovedPage/>
+                :
+                <AdminServiceProviderRejectedPage/>
+                }
+    
+            </>
       )
 }
 

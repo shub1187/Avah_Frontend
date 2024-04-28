@@ -65,16 +65,6 @@ const AdminSidebarList = [
                 link:'admin/requests/pendingRequests',
                 name:"Pending Requests"
             },
-            {
-                id:42,
-                link:'admin/requests/approvedRequests',
-                name:"Approved Requests"
-              },
-              {
-                id:43,
-                link:'admin/requests/rejectedRequests',
-                name:"Rejected Requests"
-              },
           ]
     },
 

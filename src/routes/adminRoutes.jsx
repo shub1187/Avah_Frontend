@@ -60,16 +60,6 @@ export const adminRoutes = [
                 link: 'pendingRequests',
                 component: <AdminPendingRequestsPage/>
             },
-            {
-                id: 42,
-                link: 'approvedRequests',
-                component:<AdminApprovedRequestsPage/>
-            },
-            {
-                id: 43,
-                link: 'rejectedRequests',
-                component: <AdminRejectedRequestsPage/>
-            }
         ]
     }
 ]
