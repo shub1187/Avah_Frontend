@@ -5,8 +5,8 @@ import { useFetchFunction } from "hooks/useFetch"
 import { requiredTextfield } from "utils/customFunctions"
 import URL from "url/apiURL"
 
-const {createBrand} = URL.ADMIN.VEHICLESETTINGS.MANUFACTURER
-const AddManufacturerDialog = () => {
+const {getAllModels} = URL.ADMIN.VEHICLESETTINGS.MODELS
+const ModelAdminDialog = () => {
   const { handleClose, handleOpen, setIsSubmitted, isSubmitted ,formData,setFormData} = useDialogWrapperContext()
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
 
@@ -24,7 +24,7 @@ const AddManufacturerDialog = () => {
     const obj = {
           payload:formData,
           method:"POST",
-          url:createBrand
+          url:getAllModels
     }
 
     await fetchData(obj)
@@ -37,7 +37,7 @@ const AddManufacturerDialog = () => {
 
   const manufactureList = [
     {
-      label: 'Brand Name',
+      label: 'Model Name',
       name: "brand_name",
       type: 'text',
       fullWidth: true,
@@ -64,4 +64,4 @@ const AddManufacturerDialog = () => {
   )
 }
 
-export default AddManufacturerDialog
+export default ModelAdminDialog

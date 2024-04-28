@@ -5,15 +5,15 @@ import { useFetchFunction } from "hooks/useFetch"
 import { requiredTextfield } from "utils/customFunctions"
 import URL from "url/apiURL"
 
-const {createBrand} = URL.ADMIN.VEHICLESETTINGS.MANUFACTURER
-const AddManufacturerDialog = () => {
+const {createFuelType} = URL.ADMIN.VEHICLESETTINGS.FUELTYPE
+const DialogFuelTypeAdmin = () => {
   const { handleClose, handleOpen, setIsSubmitted, isSubmitted ,formData,setFormData} = useDialogWrapperContext()
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
 
 
   const handleSubmit = async()=>{
     setIsSubmitted(true); 
-    let isRequired = requiredTextfield(manufactureList,formData)  
+    let isRequired = requiredTextfield(fuelList,formData)  
     if(isRequired) {
       setTimeout(() => {
           setIsSubmitted(false)
@@ -24,7 +24,7 @@ const AddManufacturerDialog = () => {
     const obj = {
           payload:formData,
           method:"POST",
-          url:createBrand
+          url:createFuelType
     }
 
     await fetchData(obj)
@@ -35,10 +35,10 @@ const AddManufacturerDialog = () => {
 
   const handleFieldChange = (fieldName, value) => setFormData((prevData) => ({ ...prevData, [fieldName]: value }))
 
-  const manufactureList = [
+  const fuelList = [
     {
-      label: 'Brand Name',
-      name: "brand_name",
+      label: 'Fuel Name',
+      name: "fuel_name",
       type: 'text',
       fullWidth: true,
       required: true,
@@ -49,7 +49,7 @@ const AddManufacturerDialog = () => {
   return (
     <>
       <DialogContent sx={{mt:2,mb:2}}>
-          <CreateTextFields fields={manufactureList} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted} />
+          <CreateTextFields fields={fuelList} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted} />
       </DialogContent>
       <DialogActions>
           <Button color='options' onClick={handleClose}>Cancel</Button>
@@ -64,4 +64,4 @@ const AddManufacturerDialog = () => {
   )
 }
 
-export default AddManufacturerDialog
+export default DialogFuelTypeAdmin

@@ -38,19 +38,24 @@ const URL = {
         },
         VEHICLESETTINGS:{
             FUELTYPE:{
+                getAllFuelTypes : replaceUrl(`${BASE_URL}/api/admin/getAllFuelTypes`),
+                createFuelType : replaceUrl(`${BASE_URL}/api/admin/createFuelType`)
 
             },
             MANUFACTURER:{
+                createBrand : replaceUrl(`${BASE_URL}/api/admin/createBrand`),
+                getAllBrands : replaceUrl(`${BASE_URL}/api/admin/getAllBrands`)
 
             },
             MODELS:{
+                getAllModels : replaceUrl(`${BASE_URL}/api/admin/getAllModels`)
 
             }
         },
         REQUESTS:{
             PENDINGREQUESTS:{
                 approveServiceProvider : replaceUrl(`${BASE_URL}/api/admin/approveServiceProvider`)    ,
-                spRequest : replaceUrl(`${BASE_URL}http://localhost:3008/api/admin/spRequest`)  
+                spRequest : replaceUrl(`${BASE_URL}/api/admin/spRequest`)  
             }
         }
     },

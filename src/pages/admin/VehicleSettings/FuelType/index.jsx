@@ -1,17 +1,19 @@
 import { Box } from '@mui/material'
 import CustomMaterialTable from 'components/common/Table/MaterialTable'
-import AddCustomerVehicleColumn from 'pages/Customer/Vehicle/Components/AddCustomerVehicleColumn'
-import AddCustomerVehicleDialog from 'pages/Customer/Vehicle/Components/AddCustomerVehicleDialog'
+import { columnAdminFuelType } from './Components/columnAdminFuelType'
+import DialogFuelTypeAdmin from './Components/DialogFuelTypeAdmin'
+import URL from 'url/apiURL'
 
+const {getAllFuelTypes} = URL.ADMIN.VEHICLESETTINGS.FUELTYPE
 const AdminVehicleFuelPage = () => {
     return (
         <Box backgroundColor='red' mt={2}>
                 <CustomMaterialTable
-                 dialogTitle={'ADD VEHICLE'}
-                 dialogButtonName={'ADD NEW VEHICLE'}
-                 DialogButton={AddCustomerVehicleDialog} 
-                 columnss={AddCustomerVehicleColumn} 
-                 URL={"http://localhost:3008/api/customer/getCustomerVehicle"}/>
+                 dialogTitle={'ADD FUEL TYPE'}
+                 dialogButtonName={'ADD FUEL TYPE'}
+                 DialogButton={DialogFuelTypeAdmin} 
+                 columnss={columnAdminFuelType} 
+                 URL={getAllFuelTypes}/>
         </Box>
       )
   }
