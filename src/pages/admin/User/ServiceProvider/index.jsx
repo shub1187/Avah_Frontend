@@ -13,7 +13,7 @@ const AdminServiceProviderPage = () => {
     return (
             <>
                 <Box pb={2} sx={{backgroundColor:'rgb(244,248,249)'}} display={'flex'} justifyContent={'center'} >
-                <Button sx={{minHeight:'52px', minWidth:"235px"}} variant={toggle==='approved'?'contained':'outlined'} color='options' onClick={()=>setToggle('approved')}>APPOINTMENT</Button>
+                <Button sx={{minHeight:'52px', minWidth:"235px"}} variant={toggle==='approved'?'contained':'outlined'} color='options' onClick={()=>setToggle('approved')}>APPROVED</Button>
                 <Button sx={{minHeight:'52px', minWidth:"235px"}}  variant={toggle==='rejected'?'contained':'outlined'} color='options' onClick={()=>setToggle('rejected')}>REJECTED</Button>
                 
                 </Box>
