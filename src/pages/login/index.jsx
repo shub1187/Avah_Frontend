@@ -1,5 +1,5 @@
 import { Box, Button, Checkbox, Chip, Grid, InputLabel, Paper, TextField, ThemeProvider, ToggleButton, ToggleButtonGroup, Typography, createTheme } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LogoImage from "assets/img/logo.png"
 import AvahTransparent from 'assets/img/avah_tranparent .png'
 import { getYear } from 'date-fns'
@@ -7,11 +7,11 @@ import './index.scss'
 import { useMobileResponsive } from 'hooks/useMobileResponsive'
 import CreateTextFields from 'components/common/Textfield'
 import URL from 'url/apiURL'
-import { useFetchFunction } from 'hooks/useFetch'
-import { requiredTextfield } from 'utils/customFunctions'
+import { useFetch, useFetchFunction } from 'hooks/useFetch'
+import { getCities, getStates, requiredTextfield } from 'utils/customFunctions'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 // import { FilepondImageUploader } from 'components/common/FilePondImageUploader'
-
+const {getAllCitiesPerState} = URL.LOGIN_REGISTER
 const RaeesLoginComponent = () => {
     const [formData, setFormData] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -23,6 +23,24 @@ const RaeesLoginComponent = () => {
     const location = useLocation();
     const navigate = useNavigate()
     const isAdminPage = location.pathname.includes('/admin');
+    const {data:cityData} = useFetch(getAllCitiesPerState)
+    const [citiesAndState, setCitiesAndState] = useState({ state: [], cities: [] })
+
+    //TO GET ALL THE STATES
+    useEffect(() => {
+        if (cityData?.result?.length) {
+            let listOfStates = getStates(cityData?.result)
+            setCitiesAndState({ state: listOfStates })
+        }
+    }, [cityData])
+
+    //TO GET CITIES BASED ON SELECTED STATE
+    useEffect(() => {
+        if (formData.state) {
+            let citiesList = getCities(formData.state, cityData?.result)
+            setCitiesAndState((prev) => ({ ...prev, cities: citiesList }))
+        }
+    }, [formData.state])
 
     const handleButtonClick = (buttonText) => {
         setFormData({})
@@ -246,7 +264,7 @@ const RaeesLoginComponent = () => {
             type: 'text',
             fullWidth: true,
             select:true,
-            // selectArray:selectArray,
+            selectArray:citiesAndState?.state,
             size:true,
             required:true,
             errormessage:'Select State'
@@ -257,7 +275,7 @@ const RaeesLoginComponent = () => {
             type: 'text',
             fullWidth: true,
             select:true,
-            // selectArray:selectModel,
+            selectArray:citiesAndState?.cities,
             size:true,
             required:true,
             errormessage:'Select City'
