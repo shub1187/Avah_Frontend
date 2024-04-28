@@ -10,7 +10,7 @@ import URL from 'url/apiURL'
 import { useFetchFunction } from 'hooks/useFetch'
 import { requiredTextfield } from 'utils/customFunctions'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { FilepondImageUploader } from 'components/common/FilePondImageUploader'
+// import { FilepondImageUploader } from 'components/common/FilePondImageUploader'
 
 const RaeesLoginComponent = () => {
     const [formData, setFormData] = useState({});
@@ -57,17 +57,17 @@ const RaeesLoginComponent = () => {
             // if(true){
             if(payload.role==='admin'){
                 setTimeout(() => {
-                    navigate('/admin/dashboard');
+                    navigate('/admin/home');
                 }, 0);
                 localStorage.setItem('TYPE_OF_USER', "1");
                 localStorage.setItem('role', "Administrator");
-                localStorage.setItem('access_token', loginDetails.token);
+                localStorage.setItem('access_tokenSP', loginDetails.token);
                 localStorage.setItem('isLoggedIn', "true");  
             }
             else if (payload.role=='service provider'){
                 // console.log("ln 67", payload)
                 setTimeout(() => {
-                    navigate('/dashboard/home');
+                    navigate('/serviceProvider/home');
                     window.location.reload();
                 }, 0);
                 // localStorage.setItem('TYPE_OF_USER', loginDetails.TYPE_OF_USER);       
@@ -401,7 +401,7 @@ const RaeesLoginComponent = () => {
                                 <CreateTextFields fields={registerTextfield.slice(9,11)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
                             </Box>
                             <Box className='eigth-row'>
-                                <FilepondImageUploader/>
+                                {/* <FilepondImageUploader/> */}
                             </Box>
                             <Box className='ninth-row'>
                                 <Button onClick={registerFunction}>REGISTER</Button>

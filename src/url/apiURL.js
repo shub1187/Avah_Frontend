@@ -27,9 +27,11 @@ const URL = {
         },
         USER:{
             CUSTOMER:{
+                getAllCustomers :  replaceUrl(`${BASE_URL}/api/admin/getAllCustomers`)
 
             },
             SERVICEPROVIDER:{
+                
 
             }
         },
@@ -52,6 +54,7 @@ const URL = {
 
             },
             REJECTEDREQUESTS:{
+            getAllRejectedSp  :  replaceUrl(`${BASE_URL}/api/admin/getAllRejectedSp`)
                 
             }
         }

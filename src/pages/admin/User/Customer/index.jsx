@@ -3,7 +3,9 @@ import CustomMaterialTable from 'components/common/Table/MaterialTable'
 import AddCustomerVehicleDialog from 'pages/Customer/Vehicle/Components/AddCustomerVehicleDialog'
 import React, { useState } from 'react'
 import { adminCustomerColumn } from './Components/adminCustomerColumn'
+import URL from 'url/apiURL'
 
+const {getAllCustomers} = URL.ADMIN.USER.CUSTOMER
 const AdminCustomerPage = () => {
 
     const [page, setPage] = useState('table')
@@ -11,11 +13,11 @@ const AdminCustomerPage = () => {
     return (
         <Box backgroundColor='red' mt={2}>
                 <CustomMaterialTable
-                 dialogTitle={'ADD VEHICLE'}
-                 dialogButtonName={'ADD NEW VEHICLE'}
-                 DialogButton={AddCustomerVehicleDialog} 
+                //  dialogTitle={'ADD VEHICLE'}
+                //  dialogButtonName={'ADD NEW VEHICLE'}
+                //  DialogButton={AddCustomerVehicleDialog} 
                  columnss={adminCustomerColumn} 
-                 URL={"http://localhost:3008/api/customer/getCustomerVehicle"}/>
+                 URL={getAllCustomers}/>
         </Box>
       )
 }
