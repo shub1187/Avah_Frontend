@@ -248,6 +248,7 @@ const RaeesLoginComponent = () => {
             name:"business_contact",
             type:"number",
             required:true,
+            fullWidth: true,
             errormessage:'Business Contact is Required'
         },
         {
@@ -285,6 +286,7 @@ const RaeesLoginComponent = () => {
             name:"pin_code",
             type:"number",
             required:true,
+            fullWidth: true,
             errormessage:'Please Enter Your Pincode'
         },      
         {

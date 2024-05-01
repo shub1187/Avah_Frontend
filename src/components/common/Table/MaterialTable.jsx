@@ -203,35 +203,35 @@ const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialog
       }}
       isLoading={false}
       key={key || 'default'}
-      data={mock?.results || []}
-      // data={async (query) => {
-      //   try {
-      //       let url = `${URL}?${sp_id ? `sp_id=${sp_id}&` :''}${customer_id ? `customer_id=${customer_id}&`:''}`
-      //     if(query.search){
-      //       url+=`q=${query.search}`
-      //     }
-      //     if(query.orderBy){
-      //       url+=`&_sort=${query.orderBy.field}&_order=${query.orderDirection}`
-      //     }
-      //     url+=`&_page=${query.page+1}`
-      //     url+=`&_limit=${query.pageSize}`
-      //     const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
-      //     const response = await axios.get(url,{headers});
-      //     const data = response?.data?.data?.results; // Adjust this based on your API response structure
-      //     return {
-      //       data: data || [], // Change this to match your data structure
-      //       page: query.page,
-      //       totalCount:20, // Assuming the total count is the length of the data array
-      //     };
-      //   } catch (error) {
-      //     console.error("Error fetching data:", error);
-      //     return {
-      //       data: [],
-      //       page: query.page,
-      //       totalCount: 0,
-      //     };
-      //   }
-      // }}
+      // data={mock?.results || []}
+      data={async (query) => {
+        try {
+            let url = `${URL}?${sp_id ? `sp_id=${sp_id}&` :''}${customer_id ? `customer_id=${customer_id}&`:''}`
+          if(query.search){
+            url+=`q=${query.search}`
+          }
+          if(query.orderBy){
+            url+=`&_sort=${query.orderBy.field}&_order=${query.orderDirection}`
+          }
+          url+=`&_page=${query.page+1}`
+          url+=`&_limit=${query.pageSize}`
+          const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
+          const response = await axios.get(url,{headers});
+          const data = response?.data?.data?.results; // Adjust this based on your API response structure
+          return {
+            data: data || [], // Change this to match your data structure
+            page: query.page,
+            totalCount:20, // Assuming the total count is the length of the data array
+          };
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          return {
+            data: [],
+            page: query.page,
+            totalCount: 0,
+          };
+        }
+      }}
       // actions={[
       //   {
       //     icon: 'refresh',

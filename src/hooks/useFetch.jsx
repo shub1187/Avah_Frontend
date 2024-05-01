@@ -90,20 +90,20 @@ const useFetchFunction = ()=>{
             let sp_id =  localStorage.getItem('sp_id');
             let customer_id = localStorage.getItem('customer_id');
             let headers = {}
+            const token = localStorage.getItem('access_tokenSP');
             if(sp_id){
-            const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
-             headers = { Authorization: `Bearer ${token}`  };      
+            // const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
+            //  headers = { Authorization: `Bearer ${token}`  };      
              payload = {...payload, sp_id: sp_id}     
             }
             if (customer_id){
-                const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
-                headers = { Authorization: `Bearer ${token}`  };     
+                // const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
+                // headers = { Authorization: `Bearer ${token}`  };     
             }
             const axiosRequest = {
                 method:method?.toLowerCase()==='get' ? "GET" : "POST",
                 url,
-                headers : headers,
-
+                headers :  { Authorization: `Bearer ${token}`  },
             }
                
             const {status,data} = await axios({...axiosRequest, data: method?.toLowerCase()==="post" && payload})

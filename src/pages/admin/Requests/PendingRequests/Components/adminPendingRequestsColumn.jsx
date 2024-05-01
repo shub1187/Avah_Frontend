@@ -5,7 +5,7 @@ import URL from 'url/apiURL'
 
 const {approveServiceProvider} = URL.ADMIN.REQUESTS.PENDINGREQUESTS
 export const adminPendingRequestsColumn =[
-    { title: "Id", field: "sp_id" },
+    { title: "Id", field: "register_sp_id" },
     { title: "Name", field: "name" },
     { title: "Business", field: "business_name" },
     { title: "Email", field: "email" },
