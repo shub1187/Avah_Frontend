@@ -1,6 +1,3 @@
-import axios from "axios";
-import { useFetchFunction } from "hooks/useFetch";
-import URL from "url/apiURL";
 import {format} from 'date-fns'
 
 const logout = ()=>{
@@ -83,8 +80,11 @@ const getFuelArray = (data)=>
         value:fuel_name
         }))
 
+// Generate a random number between 10000 and 99999 (inclusive)
+const generateRandom5Digit = () => Math.floor(10000 + Math.random() * 90000);
+
 const formatTimestampToDate = (timestamp) => timestamp && format(new Date(timestamp), 'yyyy-MM-dd') 
           
 export {
-    logout , addBroadcastListenerForLoggingOutOfAllTabs , requiredTextfield, getBrandData, getModelData, getStates, getCities, getFuelArray, formatTimestampToDate
+    logout , addBroadcastListenerForLoggingOutOfAllTabs , requiredTextfield, getBrandData, getModelData, getStates, getCities, getFuelArray, generateRandom5Digit, formatTimestampToDate
 }

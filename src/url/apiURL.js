@@ -20,7 +20,11 @@ const URL = {
         login_customer : replaceUrl(`${BASE_URL}/api/customer/login`),
         register_service_provider:replaceUrl(`${BASE_URL}/api/serviceprovider/registerServiceProvider`),
         register_customer:replaceUrl(`${BASE_URL}/api/customer/registerCustomer`),
-        getAllCitiesPerState : replaceUrl(`${BASE_URL}/api/customer/getAllCitiesPerState`)
+        getAllCitiesPerState : replaceUrl(`${BASE_URL}/api/customer/getAllCitiesPerState`),
+        customerResetPassword : replaceUrl(`${BASE_URL}/api/customer/resetPassword`),
+        serviceprovideResetPassword : replaceUrl(`${BASE_URL}/api/serviceprovider/resetPassword`),
+        adminResetPassword : replaceUrl(`${BASE_URL}/api/serviceprovider/resetPassword`)
+
     },
     ADMIN:{
         HOME:{

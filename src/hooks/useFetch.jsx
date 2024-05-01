@@ -136,14 +136,13 @@ const useFetchFunction = ()=>{
             }
         }
         catch(error){
-            console.log("ln 139", error.response.data.message)
             if(!noSnackbar){
                 setSnackbarSeverity('error');
-                setSnackbarMessage(error.response.data.message || error.message);
+                setSnackbarMessage(error?.response?.data?.message || error?.message);
                 setOpenSnackbar(true);
             }
 
-            return {isSuccess:false, error:error.response.data.message || error.message}
+            return {isSuccess:false, error:error?.response?.data?.message || error?.message}
         }
         finally {
             if(!noLoading)setLoading(false);
