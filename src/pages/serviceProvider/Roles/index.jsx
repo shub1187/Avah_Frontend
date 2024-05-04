@@ -52,7 +52,7 @@ const SpRolesPage = () => {
         <Box className='flex jc-space-between'>
           <Box className='role-body'>
             <Box className='role-title'>ROLE NAME</Box>
-            <Box className='role-textfield'><TextField value={roleInfo.role || ''} onChange={(e)=>setRoleInfo((prev)=>({...prev,role:e.target.value}))} size='small'/></Box>
+            <Box className='role-textfield'><TextField placeholder={'Enter Role name here'} value={roleInfo.role || ''} onChange={(e)=>setRoleInfo((prev)=>({...prev,role:e.target.value}))} size='small'/></Box>
           </Box>
           <Box>
             <Box><Button variant='outlined' color='options' onClick={()=>setPage('table')}>BACK <ArrowBackIcon /></Button></Box>

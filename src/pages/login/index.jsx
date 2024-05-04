@@ -370,7 +370,7 @@ const RaeesLoginComponent = () => {
                             </Box>
                             )}
                             {forgotPassword ?
-                                <ForgotPassword goBack={()=>setForgotPasssword(false)} user={activeButton==='customer' ?'customer' : activeButton==='service provider'? 'serviceProvider':isAdminPage ?'admin':''}/>
+                                <ForgotPassword goBack={()=>setForgotPasssword(false)} user={isAdminPage ?'admin': activeButton==='customer' ?'customer' : activeButton==='service provider'? 'serviceProvider':isAdminPage ?'admin':''}/>
                                 :
                                 <>
                                     <Box className='welcome'>{login ? 'Welcome back' : 'Welcome'}</Box>
@@ -379,7 +379,7 @@ const RaeesLoginComponent = () => {
                                         <Box className='smaller-container'>
                                             <CreateTextFields fields={login ? loginTextfield.slice(1, 3) : loginTextfield} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted} />
                                             {/* ONLY SHOW IF LOGIN AND DONT SHOW IF IN ADMIN*/}
-                                            {isAdminPage ? <></> : login && (<Box className='remember-me-container'>
+                                            {login && (<Box className='remember-me-container'>
                                                 <Box className='checkbox-container'>
                                                     {/* <Box><Checkbox/></Box>
                                     <Box>Remember Me</Box> */}

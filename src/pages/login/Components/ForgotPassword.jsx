@@ -9,14 +9,14 @@ import URL from "url/apiURL";
 
 const {customerResetPassword, serviceprovideResetPassword, adminResetPassword} = URL.LOGIN_REGISTER
 const ForgotPassword = ({goBack, user}) => {
-
+console.log("ln 12", user, adminResetPassword)
     const [formData, setFormData] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const {snackbar,loadingIndicator,fetchData} = useFetchFunction()
     const [matchingPasswordError,setMatchingPasswordError] = useState(false)
     const form = useRef()
     const [phone, setPhone] = useState({
-        buttonName: 'Update Password',
+        buttonName: 'Reset Password',
         buttonDisable: false,
         showOtpInput: false,
         inputErrorMessageToggler: false,
@@ -201,7 +201,7 @@ const ForgotPassword = ({goBack, user}) => {
             errormessage:'Confirm Password is Required'
         },
         {
-            label: 'Otp',
+            label: 'Enter Otp',
             name: "otp",
             type: 'number',
             fullWidth: true,
@@ -235,7 +235,7 @@ const ForgotPassword = ({goBack, user}) => {
                     </Box>}
                   </Grid>
                 )}
-                {matchingPasswordError && <Typography mb={1} color={'error'}>Password Needs to be Matching</Typography>}
+                {matchingPasswordError && <Typography mb={1} color={'error'}>Password and confirm password must match</Typography>}
                 <Box className='flex jc-flex-end'>
                     <Button variant={'contained'} color='options' disabled={phone.buttonDisable} type='submit'>
                         {phone.buttonName} &nbsp; {phone.buttonName === 'Sending OTP' && (<CircularProgress color="inherit" thickness={2} size="1rem" />)}

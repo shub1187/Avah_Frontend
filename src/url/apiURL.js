@@ -23,8 +23,7 @@ const URL = {
         getAllCitiesPerState : replaceUrl(`${BASE_URL}/api/customer/getAllCitiesPerState`),
         customerResetPassword : replaceUrl(`${BASE_URL}/api/customer/resetPassword`),
         serviceprovideResetPassword : replaceUrl(`${BASE_URL}/api/serviceprovider/resetPassword`),
-        adminResetPassword : replaceUrl(`${BASE_URL}/api/serviceprovider/resetPassword`)
-
+        adminResetPassword : replaceUrl(`${BASE_URL}/api/admin/resetPassword`)
     },
     ADMIN:{
         HOME:{

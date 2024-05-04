@@ -74,14 +74,14 @@ const PendingPayments = () => {
       let labourData = data?.data.labours
 
       spareData.forEach((obj)=>{
-          obj.amount = isNaN(parseFloat(obj.selling_price)) ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) + parseFloat(obj.selling_price)
-          obj.tax_amount = !obj.tax ? 0 : obj.tax===0 ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price)
+          obj.amount = (isNaN(parseFloat(obj.selling_price)) ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) + parseFloat(obj.selling_price)) *  parseFloat(obj?.quantity)
+          obj.tax_amount = !obj.tax ? 0 : obj.tax===0 ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) *  parseFloat(obj?.quantity)
           obj.backendDisabled = true
       })
 
       labourData.forEach((obj)=>{
-          obj.amount = isNaN(parseFloat(obj.selling_price)) ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) + parseFloat(obj.selling_price)
-          obj.tax_amount = !obj.tax ? 0 : obj.tax===0 ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price)
+          obj.amount = (isNaN(parseFloat(obj.selling_price)) ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price) + parseFloat(obj.selling_price)) *  parseFloat(obj?.quantity)
+          obj.tax_amount = !obj.tax ? 0 : obj.tax===0 ? 0 : parseFloat(obj.tax/100) * parseFloat(obj.selling_price)  *  parseFloat(obj?.quantity)
           obj.backendDisabled = true
       })
       setSparePayload(data?.data?.spares)
@@ -102,7 +102,7 @@ const PendingPayments = () => {
             url:recievePayment              
         }
         await fetchData(obj)
-        setTimeout(()=>navigate('/dashboard/billing/invoiceList'),1000);
+        setTimeout(()=>navigate('/serviceProvider/billing/invoiceList'),1000);
     }
 
 
