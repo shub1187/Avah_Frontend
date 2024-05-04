@@ -1,0 +1,29 @@
+.admin-container{
+    padding-top: 1rem;
+    // background-color: #773562;
+    .purple-container{
+        background-color: #773562;
+        height:250px;
+    }
+    .data-box-container{
+        position: absolute;
+        top: 250px;
+        display: flex;
+        z-index: 300;
+
+        .data-box{
+            margin-left: 3rem;
+            margin-right: 3rem;
+            height: 200px;
+            width: 300px;
+            // background-color:teal;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+        }
+    }
+    .purple-container-2{
+        background-color: #773562;
+        height:300px;
+        margin-top: 150px;
+    }
+}

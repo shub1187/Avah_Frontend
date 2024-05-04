@@ -52,7 +52,10 @@ const URL = {
 
             },
             MODELS:{
-                getAllModels : replaceUrl(`${BASE_URL}/api/admin/getAllModels`)
+                getAllModels : replaceUrl(`${BASE_URL}/api/admin/getAllModels`),
+                getAllBrandsAutoFill : replaceUrl(`${BASE_URL}/api/admin/getAllBrandsAutoFill`),
+                getAllFuelTypeAutoFill : replaceUrl(`${BASE_URL}/api/admin/getAllFuelTypeAutoFill`),
+                createModel : replaceUrl(`${BASE_URL}/api/admin/createModel`)
 
             }
         },
