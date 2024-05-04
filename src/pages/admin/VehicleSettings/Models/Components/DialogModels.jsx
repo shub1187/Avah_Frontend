@@ -75,7 +75,7 @@ const ModelAdminDialog = () => {
             // multiple
             id="fixed-tags-demo"
             value={ formData?.brand_name}
-            options={mappedBrandData}
+            options={mappedBrandData || []}
             onChange={(event, value) => handleFieldChange('brand_name',value)} 
             getOptionLabel={(option)=>option}
             renderTags={(tagValue, getTagProps) =>
@@ -102,7 +102,7 @@ const ModelAdminDialog = () => {
                   multiple
                   id="fixed-tags-demo"
                   value={ formData?.fuel_type}
-                  options={mappedFuelData}
+                  options={mappedFuelData || []}
                   onChange={(event, value) => handleFieldChange('fuel_type',value)} 
                   getOptionLabel={(option)=>option}
                   renderTags={(tagValue, getTagProps) =>
