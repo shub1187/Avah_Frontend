@@ -1,29 +1,238 @@
-.admin-container{
-    padding-top: 1rem;
-    // background-color: #773562;
-    .purple-container{
-        background-color: #773562;
-        height:250px;
-    }
-    .data-box-container{
-        position: absolute;
-        top: 250px;
+.total-usage{
+    .shortcut-container{
         display: flex;
-        z-index: 300;
-
-        .data-box{
-            margin-left: 3rem;
-            margin-right: 3rem;
-            height: 200px;
-            width: 300px;
-            // background-color:teal;
-            border-radius: 10px;
-            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+        @media (max-width : 450px){
+            display: flex;
+            flex-wrap: wrap;
         }
     }
-    .purple-container-2{
-        background-color: #773562;
-        height:300px;
-        margin-top: 150px;
+    .shortcut-container > *{
+        margin-right: 1rem; 
+    }
+
+    .card-icon-button.MuiButton-root{
+        border-radius: 12px;
+        min-width: 100px;
+        padding: 0;
+        @media (max-width : 450px){
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            .image{
+                margin-bottom: 0.5rem;
+                .MuiSvgIcon-root{
+                    font-size: 2rem;
+                }
+            }
+            .text{
+                font-weight: 600;
+                @media (max-width : 450px){
+                    font-size: 0.7rem;
+                    font-weight: 200;
+                    max-width: 80px;
+                }
+            }
+        }
+    }
+}
+.statistics-main-container{
+    display: flex;
+    @media (max-width : 450px){
+        flex-wrap: wrap;
+    }
+    .statistics-container{
+        min-height: 100px;
+        // max-width: 300px;
+        border-radius: 15px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        display: flex;
+        // flex-direction: column;
+        // justify-content: center;
+        // align-items: center;
+        padding: 1rem;
+        .left{
+            width: 100px;
+            margin-bottom: 0.5rem;
+            .MuiSvgIcon-root{
+                font-size: 5rem;
+                &.green{
+                    color: rgb(136,218,132);
+                }
+                &.red{
+                    color:rgb(228,0,53);
+
+                }
+                &.orange{
+                    color:rgb(255,184,107)
+                }
+            }
+        }
+        .right{
+            .count{
+                font-size: 2rem;
+            }
+            .text{
+                color: grey;
+                font-size: 1.2rem;
+            }
+            // @media (min-width : 900px){
+            //     .text{
+            //         font-size: 1rem;
+            //     }
+
+            // }
+
+        }
+
+    }
+}
+
+.statistics-main-container > *{
+    margin-right: 1rem; 
+}
+
+.counts-main-container{
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-between;
+    @media (max-width : 450px){
+        flex-wrap: wrap;
+    }
+    .approved-rej-container{
+        height: 150px;
+        width: 45%;
+        border-radius: 15px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        margin-right: 2rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        @media (max-width : 450px){
+            width: 100%;
+        }
+        .active{
+            display: flex;
+            align-items: center;
+
+            .left{
+                width: 90px;
+                margin-bottom: 0.5rem;
+                margin-left: 0.55rem;
+                .MuiSvgIcon-root{
+                    font-size: 4rem;
+                    &.green{
+                        color: rgb(136,218,132);
+                    }
+                }
+            }
+            .right{
+                .count{
+                    font-size: 1.3rem;
+                }
+                .text{
+                    color: grey;
+                    font-size: 1rem;
+                }
+            }
+        }
+        .rejected{
+            display: flex;
+            align-items: center;
+            .left{
+                width: 100px;
+                margin-bottom: 0.5rem;
+                margin-left: 0.5rem;
+                .MuiSvgIcon-root{
+                    font-size: 4rem;
+                    &.red{
+                        color:rgb(228,0,53);
+    
+                    }
+                }
+            }
+            .right{
+                .count{
+                    font-size: 1.3rem;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+                .text{
+                    color: grey;
+                    font-size: 1rem;
+                    text-align: end;
+
+                }
+            }
+        }
+    }
+    .custService-container{
+        height: 150px;
+        width: 45%;
+        border-radius: 15px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        margin-right: 2rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        @media (max-width : 450px){
+            width: 100%;
+        }
+        .customer{
+            display: flex;
+            align-items: center;
+
+            .left{
+                width: 80px;
+                margin-bottom: 0.5rem;
+                margin-left: 1rem;
+                .MuiSvgIcon-root{
+                    font-size: 4rem;
+                    &.purple{
+                        color: #b16d99;
+                    }
+                }
+            }
+            .right{
+                .count{
+                    font-size: 1.3rem;
+                }
+                .text{
+                    color: grey;
+                    font-size: 1rem;
+                }
+            }
+        }
+        .service-provider{
+            display: flex;
+            align-items: center;
+            .left{
+                width: 80px;
+                margin-bottom: 0.5rem;
+                margin-left: 0.5rem;
+                .MuiSvgIcon-root{
+                    font-size: 4rem;
+                    &.purple{
+                        color:#b16d99;
+                    }
+                }
+            }
+            .right{
+                .count{
+                    font-size: 1.3rem;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+                .text{
+                    color: grey;
+                    font-size: 1rem;
+                    text-align: end;
+
+                }
+            }
+        }
     }
 }

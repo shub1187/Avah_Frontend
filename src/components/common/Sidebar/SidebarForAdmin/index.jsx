@@ -5,6 +5,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './index.scss';
+import { useCustomerContext } from 'hooks/useCustomContext';
 
 const AdminSidebarList = [
     {
@@ -71,32 +72,32 @@ const AdminSidebarList = [
 ]
 const SidebarForAdmin = () => {
     //FOR SIDEBAR - MENU AND SUBMENU
-    const [open,setOpen] = useState({})
-    const [subListopen,setSubListOpen] = useState({})
-
+    // const [open,setOpen] = useState({})
+    // const [subListopen,setSubListOpen] = useState({})
+    const {open,subListopen,onChange,subItemOnChange} = useCustomerContext()
     //HANDLE MENU
-    const onChange = (listIndex)=>setOpen((prev)=>{
-        setSubListOpen({})
-        const updatedOpen = {}
-        updatedOpen[listIndex] = !prev[listIndex] //TOGGLE CLICKED BUTTON
+    // const onChange = (listIndex)=>setOpen((prev)=>{
+    //     setSubListOpen({})
+    //     const updatedOpen = {}
+    //     updatedOpen[listIndex] = !prev[listIndex] //TOGGLE CLICKED BUTTON
 
-        Object.keys(prev).forEach((key)=>{
-            if(Number(key)!==listIndex) updatedOpen[key] = false
-        })
-        return updatedOpen
-    })
+    //     Object.keys(prev).forEach((key)=>{
+    //         if(Number(key)!==listIndex) updatedOpen[key] = false
+    //     })
+    //     return updatedOpen
+    // })
 
     //HANDLE SUBMENU
-    const subItemOnChange = (subListIndex)=>setSubListOpen((prev)=>{
-        const updatedOpen = {}
-        updatedOpen[subListIndex] = !prev[subListIndex] //TOGGLE CLICKED BUTTON
+    // const subItemOnChange = (subListIndex)=>setSubListOpen((prev)=>{
+    //     const updatedOpen = {}
+    //     updatedOpen[subListIndex] = !prev[subListIndex] //TOGGLE CLICKED BUTTON
 
-        Object.keys(prev).forEach((key)=>{
-            if(Number(key)!==subListIndex) updatedOpen[key] = false
-        })
-        return updatedOpen
+    //     Object.keys(prev).forEach((key)=>{
+    //         if(Number(key)!==subListIndex) updatedOpen[key] = false
+    //     })
+    //     return updatedOpen
 
-    })
+    // })
     return (
         <>
         <List>

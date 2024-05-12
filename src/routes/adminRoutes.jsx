@@ -1,3 +1,4 @@
+import { AdminHomePage } from "pages/admin/Home";
 import AdminPendingRequestsPage from "pages/admin/Requests/PendingRequests";
 import AdminCustomerPage from "pages/admin/User/Customer";
 import AdminServiceProviderPage from "pages/admin/User/ServiceProvider";
@@ -10,7 +11,7 @@ export const adminRoutes = [
     {
         id: 1,
         link: 'admin/home',
-        component: <></>
+        component: <AdminHomePage/>
     },
     {
         id: 2,

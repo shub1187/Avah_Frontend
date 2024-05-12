@@ -1,23 +1,47 @@
 // CustomerContext.js
 import React, { createContext, useState, useContext } from 'react';
 
-const CustomerContext = createContext();
+const GlobalContext = createContext();
 
 export const useCustomerContext = () => {
-  return useContext(CustomerContext);
+  return useContext(GlobalContext);
 };
 
-export const CustomerProvider = ({ children }) => {
-  const [customerStatus, setCustomerStatus] = useState('Update Your Profile');
+export const GlobalProvider = ({ children }) => {
+  const [open,setOpen] = useState({})
+  const [subListopen,setSubListOpen] = useState({})
 
-  const updateCustomerStatus = (status) => {
-    setCustomerStatus(status);
-  };
+  //HANDLE MENU
+  const onChange = (listIndex)=>setOpen((prev)=>{
+    console.log(listIndex)
+      setSubListOpen({})
+      const updatedOpen = {}
+      updatedOpen[listIndex] = !prev[listIndex] //TOGGLE CLICKED BUTTON
+
+      Object.keys(prev).forEach((key)=>{
+          if(Number(key)!==listIndex) updatedOpen[key] = false
+      })
+      return updatedOpen
+  })
+
+  //HANDLE SUBMENU
+  const subItemOnChange = (subListIndex)=>setSubListOpen((prev)=>{
+    console.log(subListIndex)
+
+      const updatedOpen = {}
+      updatedOpen[subListIndex] = !prev[subListIndex] //TOGGLE CLICKED BUTTON
+
+      Object.keys(prev).forEach((key)=>{
+          if(Number(key)!==subListIndex) updatedOpen[key] = false
+      })
+      return updatedOpen
+
+  })
 
   return (
-    <CustomerContext.Provider value={{ customerStatus, updateCustomerStatus }}>
+    <GlobalContext.Provider value={{subItemOnChange ,onChange, open, subListopen}}>
       {children}
-    </CustomerContext.Provider>
+    </GlobalContext.Provider>
   
   
   );

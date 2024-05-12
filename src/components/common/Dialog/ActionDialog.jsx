@@ -135,9 +135,20 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
 
             {print && (<Print/>)}
             
-            {approve && <Button variant='outlined' color='success' onClick={StatusUpdate}>
-                <CheckCircleIcon style={{ color: 'rgb(5,131,30)', cursor: 'pointer', marginRight: '5px' }} /> Approve
-            </Button>}
+            {approve &&
+            <>
+                    <Button variant='outlined' color='error' onClick={handleClickOpen} >
+                        <CheckCircleIcon style={{ color: 'rgb(5,131,30)', cursor: 'pointer', marginRight: '5px' }} /> Approve
+                    </Button>
+                    <Dialog fullWidth open={open} onClose={handleClose} maxWidth='xs'>
+                        <DialogContent>Are you sure you wish you approve ?</DialogContent>
+                        <DialogActions sx={{ mt: 3 }}>
+                            <Button color='options' onClick={handleClose}>CANCEL</Button>
+                            <Button variant={'contained'} color='options' onClick={StatusUpdate}>SUBMIT</Button>
+                        </DialogActions>
+                    </Dialog>
+            </>
+            }
 
             {reject &&
                 <>
@@ -158,12 +169,19 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
 
             {approveSp && 
                 <>
-                    <IconButton color='options' onClick={StatusUpdate}>
-                        <Box className='flex ai-flex-start column'>
-                            <Typography fontSize={9}> &nbsp;Approve</Typography>
-                            <CheckCircleIcon style={{ cursor: 'pointer', marginRight: '5px' }} />
-                        </Box>
-                    </IconButton>
+                <IconButton color='options' onClick={() => { handleClickOpen() }}>
+                    <Box className='flex ai-flex-start column'>
+                        <Typography fontSize={9}> &nbsp;Approve</Typography>
+                        <CheckCircleIcon style={{ cursor: 'pointer', marginRight: '5px' }} />
+                    </Box>
+                </IconButton>
+                <Dialog fullWidth open={open} onClose={handleClose} maxWidth='xs'>
+                    <DialogContent>Are you sure you wish you approve ?</DialogContent>
+                    <DialogActions sx={{ mt: 3 }}>
+                        <Button color='options' onClick={handleClose}>CANCEL</Button>
+                        <Button variant={'contained'} color='options' onClick={StatusUpdate}>SUBMIT</Button>
+                    </DialogActions>
+                </Dialog>
                 </>
             }
 

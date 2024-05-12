@@ -1,8 +1,9 @@
-import { Button, Dialog, DialogTitle } from '@mui/material'
+import { Box, Button, Dialog, DialogTitle } from '@mui/material'
 import { useMobileResponsive } from 'hooks/useMobileResponsive'
 import React, { createContext, useContext, useState } from 'react'
 import UnderLine from '../Underline'
 import './index.scss'
+import ServiceProviderDashboardIconCards from '../Cards/HomePageCards/ServiceProviderDashboardIconCards'
 /**
  * @typedef {Object} DialogWrapperContextType
  * @property {() => void} handleOpen - Function to open the dialog.
@@ -23,7 +24,7 @@ const DialogWrapperContext = createContext('hi')
  */
 export const useDialogWrapperContext = ()=> useContext(DialogWrapperContext)
 
-const DialogWrapper = ({children, title , buttonName , tableRef}) => {
+const DialogWrapper = ({children, title , buttonName , tableRef, cardIcon}) => {
     const [formData, setFormData] = useState({});
 
     const [open,setOpen] = useState(false)
@@ -57,7 +58,20 @@ const DialogWrapper = ({children, title , buttonName , tableRef}) => {
                     {buttonName || ''}
                 </Button>
             )}
-
+            {
+                cardIcon && (
+                    <Button className='card-icon-button' variant='contained' color='whiteBackground' onClick={handleOpen}>
+                        <Box className='container'>
+                            <Box className='image'>
+                                {cardIcon.img}
+                            </Box>
+                            <Box className='text'>
+                                {cardIcon.text}
+                            </Box>
+                        </Box>
+                    </Button>
+                )
+            }
             <Dialog className='action-dialog' open={open} onClose={handleClose} maxWidth='md'>
                 <DialogTitle >{title || ''}<UnderLine/></DialogTitle>
                 {children}

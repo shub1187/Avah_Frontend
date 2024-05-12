@@ -27,7 +27,7 @@ const URL = {
     },
     ADMIN:{
         HOME:{
-
+            getStatistics : replaceUrl(`${BASE_URL}/api/admin/getStatistics`)
         },
         USER:{
             CUSTOMER:{

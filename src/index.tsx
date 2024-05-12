@@ -4,7 +4,7 @@ import reportWebVitals from './reportWebVitals';
 import './index.scss';
 import './assets/css/login.css'
 import { BrowserRouter } from 'react-router-dom';
-import { CityProvider, CustomerProvider } from 'hooks/useCustomContext';
+import { CityProvider, GlobalProvider } from 'hooks/useCustomContext';
 import Appy from 'Appy';
 
 const root = ReactDOM.createRoot(
@@ -12,14 +12,14 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <>
-    <CustomerProvider>
+    <GlobalProvider>
     <CityProvider>
       <CssBaseline />
       <BrowserRouter>
       <Appy/>
       </BrowserRouter>
     </CityProvider>
-    </CustomerProvider>
+    </GlobalProvider>
     </>
  // </React.StrictMode>
 );
