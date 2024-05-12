@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Snackbar, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, Card, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Snackbar, TextField, ThemeProvider, Typography, createTheme } from '@mui/material';
 import CreateTextFields from 'components/common/Textfield';
 import { useFetch, useCustomerFetchFunction } from 'hooks/useFetch';
 import { useMobileResponsive } from 'hooks/useMobileResponsive';
@@ -129,19 +129,37 @@ const UpdateCustomerProfile = () => {
     ]
     return (
         <div className='back'>
-            <DialogTitle >  <Typography fontWeight={'bold'} fontSize={20} >PROFILE<UnderLine/></Typography><Box component={'span'} ml={4}></Box></DialogTitle>
+            <DialogTitle >  <Typography fontSize={25} >PROFILE<UnderLine/></Typography><Box component={'span'} ml={4}></Box></DialogTitle>
             <DialogContent>
-                <Grid container xs={12} flexDirection={'column'}>
-                    <Box display='flex'>
-                        <Box>
-                            <Typography my={1} fontWeight={'bold'} fontSize={20}>Name : <Typography fontSize={20} sx={{ color: 'rgb(173,73,112)' }} fontWeight={'bold'} component={'span'}>{profileData?.result?.name ?? ""}</Typography></Typography>
-                            <Typography my={1} fontWeight={'bold'} fontSize={20}>Email : <Typography fontSize={20} sx={{ color: 'rgb(173,73,112)' }} fontWeight={'bold'} component={'span'}>{profileData?.result?.email ?? ""}</Typography></Typography>
+                    <Box mb={3}>
+                        <Box sx={{display:'flex',alignItems:'center',mb:1}}>
+                                <Box sx={{width:'10%'}} mr={1}>Name</Box>
+                                <Box sx={{width:'100%'}}><TextField size='small' multiline fullWidth disabled value={profileData?.result?.name ?? "N/A"}/></Box>
                         </Box>
-                        <Box mx={5}>
-                            <Typography my={1} fontWeight={'bold'} fontSize={20}>Address : <Typography fontSize={20} sx={{ color: 'rgb(173,73,112)' }} fontWeight={'bold'} component={'span'}>{profileData?.result?.address ?? ""}</Typography></Typography>
-                            <Typography my={1} fontWeight={'bold'} fontSize={20}>Mobile Number : <Typography fontSize={20} sx={{ color: 'rgb(173,73,112)' }} fontWeight={'bold'} component={'span'}>{profileData?.result?.mobile_number ?? ""}</Typography></Typography>
+                        <Box sx={{display:'flex',alignItems:'center',mb:1}}>
+                                <Box mr={1} sx={{width:'10%'}}>Email</Box>
+                                <Box sx={{width:'100%'}}><TextField size='small' multiline fullWidth disabled value={profileData?.result?.email ?? "N/A"}/></Box>
+                        </Box>
+                        <Box sx={{display:'flex',alignItems:'center',mb:1}}>
+                                <Box mr={1} sx={{width:'10%'}}>Address</Box>
+                                <Box sx={{width:'100%'}}><TextField size='small' multiline fullWidth disabled value={profileData?.result?.address ?? "N/A"}/></Box>
+                        </Box>
+                        <Box sx={{display:'flex',alignItems:'center'}}>
+                                <Box mr={1} sx={{width:'10%'}}>Mobile Number</Box>
+                                <Box sx={{width:'100%'}}><TextField size='small' multiline fullWidth disabled value={profileData?.result?.mobile_number ?? "N/A"}/></Box>
                         </Box>
                     </Box>
+                    {/* <Box className='flex'>
+                        <Box sx={{width:'300px'}}>
+                            <Box><Typography my={1} fontWeight={'bold'} fontSize={20}>Name : <Typography fontSize={20} sx={{ color: 'rgb(173,73,112)' }} fontWeight={'bold'} component={'span'}>{profileData?.result?.name ?? "hetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetr"}</Typography></Typography></Box>
+                            <Box><Typography my={1} fontWeight={'bold'} fontSize={20}>Email : <Typography fontSize={20} sx={{ color: 'rgb(173,73,112)' }} fontWeight={'bold'} component={'span'}>{profileData?.result?.email ?? "hetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetr"}</Typography></Typography></Box>
+
+                        </Box>
+                        <Box sx={{width:'300px'}}>
+                            <Box><Typography my={1} fontWeight={'bold'} fontSize={20}>Address : <Typography fontSize={20} sx={{ color: 'rgb(173,73,112)' }} fontWeight={'bold'} component={'span'}>{profileData?.result?.address ?? "hetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetr"}</Typography></Typography></Box>
+                            <Box><Typography my={1} fontWeight={'bold'} fontSize={20}>Mobile Number : <Typography fontSize={20} sx={{ color: 'rgb(173,73,112)' }} fontWeight={'bold'} component={'span'}>{profileData?.result?.mobile_number ?? "hetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetrhetrrrrrrrrrhetr"}</Typography></Typography></Box>
+                        </Box>
+                    </Box> */}
                     <Grid item xs={12} sm={12} mr={!isMobile && 4}>
                         <Accordion defaultExpanded>
                             <AccordionSummary
@@ -157,10 +175,8 @@ const UpdateCustomerProfile = () => {
                                     <Button variant={'contained'} color='options' onClick={handleSubmit}>{profileData?.result?.button_name == "Complete your Profile" ? 'Complete your Profile' : 'Update Your Profile'}</Button>
                                 </Box>
                             </AccordionDetails>
-                            {/* <TextField values={formData[]}/> */}
                         </Accordion>
                     </Grid>
-                </Grid>
 
             </DialogContent>
             {snackbar}

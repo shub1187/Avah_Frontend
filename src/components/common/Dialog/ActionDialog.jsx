@@ -43,16 +43,16 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
             required: true, // Add the required property
             errormessage: 'Rejection Message Required', // Add the error message
         },
-        {
-            label: 'Is Reschedule Available?',
-            name: "is_reschedule_allowed",
-            fullWidth: true,
-            required: true, // Add the required property
-            errormessage: 'Confirm Rescheduling', // Add the error message    
-            select: true,
-            selectArray: [{ label: 'Yes', value: true }, { label: 'No', value: false }]
+        // {
+        //     label: 'Is Reschedule Available?',
+        //     name: "is_reschedule_allowed",
+        //     fullWidth: true,
+        //     required: true, // Add the required property
+        //     errormessage: 'Confirm Rescheduling', // Add the error message    
+        //     select: true,
+        //     selectArray: [{ label: 'Yes', value: true }, { label: 'No', value: false }]
 
-        }
+        // }
     ]
     const StatusUpdate = async () => {
         try {
