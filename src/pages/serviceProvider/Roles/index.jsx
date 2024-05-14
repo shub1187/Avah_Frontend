@@ -13,7 +13,6 @@ const checkboxList = [
   { name:'Spares'},
   { name:'Labour'},
   { name:'Service'},
-  { name:'Accounts'},
   { name:'Billing'},
 ]
 
