@@ -33,6 +33,7 @@ const CustomerAppointment = () => {
   const [labourPayload, setLabourSparePayload] = useState([])
   const [openReject,setOpenReject] = useState({toggle:false,estimate_rejection_note:''})
   const [isSubmitted,setIsSubmitted] = useState(false)
+  const [openApprove,setOpenApprove] = useState(false)
 
   // data.map((arr)=> arr.amount = parseFloat(arr?.amount)*parseFloat(arr?.quantity))
   // sparePayload.map((arr)=> arr.amount = parseFloat(arr?.amount)*parseFloat(arr?.quantity))
@@ -99,6 +100,7 @@ const CustomerAppointment = () => {
     
     setTimeout(()=>setPage('table'),2000)
     setOpenReject({toggle:false})
+    setOpenApprove(false)
   }
 
   useEffect(() => {
@@ -252,7 +254,7 @@ const CustomerAppointment = () => {
                         </Box>
                     </Box>
                     <Button onClick={()=>setOpenReject((prev)=>({...prev,toggle:true}))} className={'small-button mr-2'} color='options' variant='contained'>Reject</Button>
-                    <Button onClick={approveEstimate}  className='small-button' color='options' variant='contained' >Approve</Button>
+                    <Button onClick={setApprove(true)}  className='small-button' color='options' variant='contained' >Approve</Button>
                 </Box>
             </div>
             {snackbar}
@@ -266,6 +268,12 @@ const CustomerAppointment = () => {
                                 </DialogContent>
                                 <DialogActions><Button color='options' variant='outlined' onClick={()=>setOpenReject((prev)=>({...prev,toggle:false}))}>Cancel</Button><Button onClick={rejectEstimate} variant='contained' color='options'>Confirm</Button></DialogActions>
                               </Dialog>
+            )}
+            {openApprove && (
+                  <Dialog open={true}>
+                    <DialogTitle>Are you sure you want to Approve Estimate<UnderLine/></DialogTitle>
+                    <DialogActions><Button color='options' variant='outlined' onClick={()=>setOpenApprove(false)}>Cancel</Button><Button onClick={approveEstimate} variant='contained' color='options'>Confirm</Button></DialogActions>
+                  </Dialog>
             )}
         </>
     )
