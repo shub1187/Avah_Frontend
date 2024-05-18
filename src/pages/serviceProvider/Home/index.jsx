@@ -71,7 +71,7 @@ return (
           <Box sx={{ backgroundImage: "linear-gradient(to bottom, rgb(233,56,72) , rgb(119,53,98))" }} className='total-usage'>
               {!isMobile &&
                   <Box sx={{ display: "flex", justifyContent: "center", color: "white", fontWeight: "700" }}>
-                      <Typography fontSize={"57.05px"}>WELCOME TO AVAH CAR SERVICE</Typography>
+                      <Typography fontSize={"45.05px"}>Hi {localStorage.getItem('profile_name')}! Welcome to Avah car services.</Typography>
                   </Box>
               }
               <Box className='shortcut-container'>
@@ -187,7 +187,7 @@ return (
                       </Box>
                       <Box className='rejected'>
                           <Box className='right'>
-                              <Box className='count'>{statistics?.data?.getInactiveServiceProviderCount || 'N/A'}</Box>
+                              <Box className='count'>{statistics?.data?.pendingInvoicesCount || 'N/A'}</Box>
                               <Box className='text'>Pending Invoices</Box>
                           </Box>
                           <Box className='left'>

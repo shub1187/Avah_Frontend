@@ -137,11 +137,11 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
             
             {approve &&
             <>
-                    <Button variant='outlined' color='error' onClick={handleClickOpen} >
+                    <Button variant='outlined' color='success' onClick={handleClickOpen} >
                         <CheckCircleIcon style={{ color: 'rgb(5,131,30)', cursor: 'pointer', marginRight: '5px' }} /> Approve
                     </Button>
                     <Dialog fullWidth open={open} onClose={handleClose} maxWidth='xs'>
-                        <DialogContent>Are you sure you wish you approve ?</DialogContent>
+                        <DialogContent>Are you sure you wish you <Typography component={'span'} fontWeight={'bold'} sx={{color:"#ad4970"}}>Approve</Typography>?</DialogContent>
                         <DialogActions sx={{ mt: 3 }}>
                             <Button color='options' onClick={handleClose}>CANCEL</Button>
                             <Button variant={'contained'} color='options' onClick={StatusUpdate}>SUBMIT</Button>

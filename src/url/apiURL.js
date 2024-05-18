@@ -166,6 +166,7 @@ const URL = {
         LANDINGPAGE:{
             getRandomSp : replaceUrl(`${BASE_URL}/api/customer/getRandomSp`),
             getEstimateDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getEstimateDetails`),
+            getGeneralStatistics :   replaceUrl(`${BASE_URL}/api/customer/getGeneralStatistics`)
 
         },
         VEHICLE:{

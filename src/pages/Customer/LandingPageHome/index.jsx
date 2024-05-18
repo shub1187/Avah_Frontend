@@ -13,46 +13,47 @@ import {Link} from 'react-router-dom'
 import './index.scss'
 import URL from 'url/apiURL'
 
-const {getRandomSp, getEstimateDetails} = URL.CUSTOMER.LANDINGPAGE
+const {getRandomSp, getEstimateDetails,getGeneralStatistics} = URL.CUSTOMER.LANDINGPAGE
 
 const CustomerHome = () => {   
     const { city, setCity } = useCity();
     // console.log(city)
     // const {data} = useFetch('http://localhost:3008/api/customer/getAllApprovedSpCities')
-    // const {data:randomsp} = useFetch(getRandomSp)
+    const {data:randomsp} = useFetch(getRandomSp)
+    const {data:generalstats} = useFetch(getGeneralStatistics)
     // const {data:estimateData} = useFetch(getEstimateDetails)
 
-    const randomsp = {
-      "error": false,
-      "result": {
-          "results": [
-              {
-                  "business_name": "Anil Auto services",
-                  "email": "anil@gmail.com",
-                  "state": "Maharashtra",
-                  "city": "Neral"
-              },
-              {
-                  "business_name": "Balaji Auto services",
-                  "email": "dhanaji@gmail.com",
-                  "state": "Maharashtra",
-                  "city": "Navi Mumbai"
-              },
-              {
-                  "business_name": "Vivaan Auto Services",
-                  "email": "vivaan@gmail.com",
-                  "state": "Maharashtra",
-                  "city": "Alandi"
-              },
-              {
-                  "business_name": "Ketan Auto Mobiles",
-                  "email": "ketan@gmail.com",
-                  "state": "Maharashtra",
-                  "city": "Pune"
-              }
-          ]
-      }
-  }
+  //   const randomsp = {
+  //     "error": false,
+  //     "result": {
+  //         "results": [
+  //             {
+  //                 "business_name": "Anil Auto services",
+  //                 "email": "anil@gmail.com",
+  //                 "state": "Maharashtra",
+  //                 "city": "Neral"
+  //             },
+  //             {
+  //                 "business_name": "Balaji Auto services",
+  //                 "email": "dhanaji@gmail.com",
+  //                 "state": "Maharashtra",
+  //                 "city": "Navi Mumbai"
+  //             },
+  //             {
+  //                 "business_name": "Vivaan Auto Services",
+  //                 "email": "vivaan@gmail.com",
+  //                 "state": "Maharashtra",
+  //                 "city": "Alandi"
+  //             },
+  //             {
+  //                 "business_name": "Ketan Auto Mobiles",
+  //                 "email": "ketan@gmail.com",
+  //                 "state": "Maharashtra",
+  //                 "city": "Pune"
+  //             }
+  //         ]
+  //     }
+  // }
   
     const estimateData = {
       "error": false,
@@ -216,13 +217,13 @@ const CustomerHome = () => {
            <Grid item fontSize={20} fontWeight={'bold'}>VIEW ALL</Grid>
         </Grid> */}
         <Grid mt={2} container sx={{backgroundColor:'#000000'}} >
-            <Grid my={4} xs container flexDirection={'column'} alignItems={'center'} sx={{borderRight:'1px solid white'}}><Grid item><LandingPageTotalVehicleIcon/></Grid><Grid sx={{color:'white',fontSize:30,textAlign:'center'}} item>Total Vehicles</Grid><Grid sx={{color:'white',fontSize:30}} item>15000+</Grid></Grid>
-            <Grid my={4} xs container flexDirection={'column'} alignItems={'center'} sx={{borderRight:'1px solid white'}}><Grid item><LandingPageTotaCustomersIcon/></Grid><Grid sx={{color:'white',fontSize:30,textAlign:'center'}} item>Total Customers</Grid><Grid sx={{color:'white',fontSize:30}} item>26250+</Grid></Grid>
-            <Grid my={4} xs container flexDirection={'column'} alignItems={'center'} sx={{borderRight:'1px solid white'}}><Grid item><LandingPageServiceProviderIcon/></Grid><Grid sx={{color:'white',fontSize:30,textAlign:'center'}} item>Service Providers</Grid><Grid sx={{color:'white',fontSize:30}} item>14132+</Grid></Grid>
+            <Grid my={4} xs container flexDirection={'column'} alignItems={'center'} sx={{borderRight:'1px solid white'}}><Grid item><LandingPageDealersIcon/></Grid><Grid sx={{color:'white',fontSize:30,textAlign:'center'}} item>Total Vehicles</Grid><Grid sx={{color:'white',fontSize:30}} item>{generalstats?.result?.getAllVehiclesCount || '15000+' }</Grid></Grid>
+            <Grid my={4} xs container flexDirection={'column'} alignItems={'center'} sx={{borderRight:'1px solid white'}}><Grid item><LandingPageTotaCustomersIcon/></Grid><Grid sx={{color:'white',fontSize:30,textAlign:'center'}} item>Total Customers</Grid><Grid sx={{color:'white',fontSize:30}} item>{generalstats?.result?.customerCount || '26250+'}</Grid></Grid>
+            <Grid my={4} xs container flexDirection={'column'} alignItems={'center'} sx={{borderRight:'1px solid white'}}><Grid item><LandingPageServiceProviderIcon/></Grid><Grid sx={{color:'white',fontSize:30,textAlign:'center'}} item>Service Providers</Grid><Grid sx={{color:'white',fontSize:30}} item>{generalstats?.result?.approvedServiceProviderCount || '14132+'}</Grid></Grid>
             {/* <Grid my={4} xs container flexDirection={'column'} alignItems={'center'}><Grid item><LandingPageDealersIcon/></Grid><Grid sx={{color:'white',fontSize:30}} item>Dealers</Grid><Grid sx={{color:'white',fontSize:30,textAlign:'center'}} item>20132</Grid></Grid> */}
         </Grid>
         <Grid display={'flex'} flexDirection={'column'} width={'80%'} margin={'auto'} my={3}>
-          {estimateData?.data?.results?.length ? 
+          {/* {estimateData?.data?.results?.length ? 
             <Carousel responsive={responsive}>
               {estimateData?.data?.results?.map((detail,index)=>(<LandingPageServiceStatusCards data={detail}/>))}
             </Carousel>
@@ -231,7 +232,7 @@ const CustomerHome = () => {
             <Carousel responsive={responsive}>
               {estimateData?.data?.results?.map((detail,index)=>(<LandingPageServiceStatusCards empty/>))}
             </Carousel>          
-          }
+          } */}
         </Grid>
         <Grid container><LandingPageSecondBigIcon/></Grid>
         {/* <Grid container my={2}><LandingPageLatestActivity/></Grid> */}
