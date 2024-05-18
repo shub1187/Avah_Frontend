@@ -46,23 +46,24 @@ const { getStatistics} = URL.SERVICE_PROVIDER.HOME
 
 const ServiceProviderHome = () => {
   const {isMobile} = useMobileResponsive()
-  // const {data:statistics} = useFetch(getStatistics)
+  const {data:statistics} = useFetch(`${getStatistics}?sp_id=${localStorage.getItem('sp_id')}`)
+  
   const { onChange, subItemOnChange } = useCustomerContext()
   const navigate = useNavigate()
 
-  const statistics = {
-    "error": false,
-    "data": {
-      "employeeCount": "11",  
-      "pendingInvoicesCount": "1", 
-      "paidInvoicesCount": "2", 
-      "totalBusinessSum": "41416", 
-      "pendingBusinessSum": "9034.14",
-      "pendingAppointmentCount": "3", 
-      "rejectedAppointmentCount": "6" 
-  }
+//   const statistics = {
+//     "error": false,
+//     "data": {
+//       "employeeCount": "11",  
+//       "pendingInvoicesCount": "1", 
+//       "paidInvoicesCount": "2", 
+//       "totalBusinessSum": "41416", 
+//       "pendingBusinessSum": "9034.14",
+//       "pendingAppointmentCount": "3", 
+//       "rejectedAppointmentCount": "6" 
+//   }
 
-}
+// }
 
 return (
   <>

@@ -69,7 +69,7 @@ const URL = {
     },
     SERVICE_PROVIDER:{
         HOME:{
-            getStatistics : replaceUrl(`${BASE_URL}/api/serviceprovider/getStatistics?sp_id=${LOCAL_STORAGE.sp_id}`)
+            getStatistics : replaceUrl(`${BASE_URL}/api/serviceprovider/getStatistics`)
         },
         USERS:{
             CUSTOMER:{
@@ -161,11 +161,11 @@ const URL = {
     },
     CUSTOMER:{
         HOME:{
-            getStatistics : replaceUrl(`${BASE_URL}/api/customer/getStatistics?customer_id=${LOCAL_STORAGE.customer_id}`)
+            getStatistics : replaceUrl(`${BASE_URL}/api/customer/getStatistics`)
         },
         LANDINGPAGE:{
             getRandomSp : replaceUrl(`${BASE_URL}/api/customer/getRandomSp`),
-            getEstimateDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getEstimateDetails?customer_id=${LOCAL_STORAGE.customer_id}`),
+            getEstimateDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getEstimateDetails`),
 
         },
         VEHICLE:{

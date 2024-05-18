@@ -43,21 +43,21 @@ const { getStatistics } = URL.CUSTOMER.HOME
 
 const CustomerDashboard = (props) => {
   const {isMobile} = useMobileResponsive()
-  // const {data:statistics} = useFetch(getStatistics)
+  const {data:statistics} = useFetch(`${getStatistics}?customer_id=${localStorage.getItem('customer_id')}`)
   const { onChange, subItemOnChange } = useCustomerContext()
   const navigate = useNavigate()
 
-  const statistics = {
-    "error": false,
-    "result": {
-        "customerVehicleCount": "15",
-        "appointmentsCount": "20",
-        "servicesCompletedCount": "1",
-        "appointmentApprovedCount": "11",
-        "appointmentPendingCount": "6",
-        "rejectedCancelledAppointmentCount": "3"
-    }
-}
+//   const statistics = {
+//     "error": false,
+//     "result": {
+//         "customerVehicleCount": "15",
+//         "appointmentsCount": "20",
+//         "servicesCompletedCount": "1",
+//         "appointmentApprovedCount": "11",
+//         "appointmentPendingCount": "6",
+//         "rejectedCancelledAppointmentCount": "3"
+//     }
+// }
 
 return (
   <>
