@@ -42,20 +42,20 @@ export const AdminHomePage = () => {
     const [dialog, setDialog] = useState({ modelDialog: true, manufacturerDialog: false, fuelTypeDialog: false })
     const { onChange, subItemOnChange } = useCustomerContext()
     const navigate = useNavigate()
-    // const {data:statistics} = useFetch(getStatistics)
+    const {data:statistics} = useFetch(getStatistics)
     const target = ['Approved Service Provider', 'Rejected Service Provider', 'Customer Count', 'Vehicle Count', 'Active Service Provider', 'Inactive Service Provider', 'Pending Service Provider']
-    const statistics = {
-        "error": false,
-        "data": {
-            "customerCount": "9",
-            "approvedServiceProviderCount": "29",
-            "rejectedServiceProviderCount": "6",
-            "getAllVehiclesCount": "21",
-            "getActiveServiceProviderCount": "25",
-            "getInactiveServiceProviderCount": "4",
-            "getPendingServiceProviderCount": "1"
-        }
-    }
+    // const statistics = {
+    //     "error": false,
+    //     "data": {
+    //         "customerCount": "9",
+    //         "approvedServiceProviderCount": "29",
+    //         "rejectedServiceProviderCount": "6",
+    //         "getAllVehiclesCount": "21",
+    //         "getActiveServiceProviderCount": "25",
+    //         "getInactiveServiceProviderCount": "4",
+    //         "getPendingServiceProviderCount": "1"
+    //     }
+    // }
     return (
         <>
             <ThemeProvider theme={serviceProviderHomeTheme}>
@@ -122,7 +122,7 @@ export const AdminHomePage = () => {
                                 <CheckCircleIcon className="green"/>
                             </Box>
                             <Box className='right'>
-                                <Box className='count'>{statistics.data.approvedServiceProviderCount || 'N/A'}</Box>
+                                <Box className='count'>{statistics?.data?.approvedServiceProviderCount || 'N/A'}</Box>
                                 <Box className='text'>Approved Service Provider</Box>
                             </Box>
                         </Box>
@@ -131,7 +131,7 @@ export const AdminHomePage = () => {
                                 <CancelIcon className="red"/>
                             </Box>
                             <Box className='right'>
-                                <Box className='count'>{statistics.data.rejectedServiceProviderCount || 'N/A'}</Box>
+                                <Box className='count'>{statistics?.data?.rejectedServiceProviderCount || 'N/A'}</Box>
                                 <Box className='text'>Rejected Service Provider</Box>
                             </Box>
                         </Box>
@@ -140,7 +140,7 @@ export const AdminHomePage = () => {
                                 <ErrorIcon className="orange"/>
                             </Box>
                             <Box className='right'>
-                                <Box className='count'>{statistics.data.getPendingServiceProviderCount || 'N/A'}</Box>
+                                <Box className='count'>{statistics?.data?.getPendingServiceProviderCount || 'N/A'}</Box>
                                 <Box className='text'>Pending Service Provider</Box>
                             </Box>
                         </Box>
@@ -152,13 +152,13 @@ export const AdminHomePage = () => {
                                     <AccountCircleIcon className="purple"/>
                                 </Box>
                                 <Box className='right'>
-                                    <Box className='count'>{statistics.data.customerCount || 'N/A'}</Box>
+                                    <Box className='count'>{statistics?.data?.customerCount || 'N/A'}</Box>
                                     <Box className='text'>Customers</Box>
                                 </Box>
                             </Box>
                             <Box className='service-provider'>
                                 <Box className='right'>
-                                    <Box className='count'>{statistics.data.getActiveServiceProviderCount || 'N/A'}</Box>
+                                    <Box className='count'>{statistics?.data?.getActiveServiceProviderCount || 'N/A'}</Box>
                                     <Box className='text'>Service Providers</Box>
                                 </Box>
                                 <Box className='left'>
@@ -173,13 +173,13 @@ export const AdminHomePage = () => {
                                     <CheckCircleIcon className="green"/>
                                 </Box>
                                 <Box className='right'>
-                                    <Box className='count'>{statistics.data.getActiveServiceProviderCount || 'N/A'}</Box>
+                                    <Box className='count'>{statistics?.data?.getActiveServiceProviderCount || 'N/A'}</Box>
                                     <Box className='text'>Active Service Provider</Box>
                                 </Box>
                             </Box>
                             <Box className='rejected'>
                                 <Box className='right'>
-                                    <Box className='count'>{statistics.data.getInactiveServiceProviderCount || 'N/A'}</Box>
+                                    <Box className='count'>{statistics?.data?.getInactiveServiceProviderCount || 'N/A'}</Box>
                                     <Box className='text'>Inactive Service Provider</Box>
                                 </Box>
                                 <Box className='left'>

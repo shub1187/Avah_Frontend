@@ -2,12 +2,11 @@ import { Box } from '@mui/material'
 import MoreActionDialog from 'components/common/Dialog/MoreActionDialog'
 
 export const addModelsAdminColumn = [
-    { title: "Id", field: "register_sp_id" },
-    { title: "Name", field: "name" },
-    { title: "Business", field: "business_name" },
-    { title: "Email", field: "email" },
-    { title: "Mobile Number", field: "business_contact" },
-    { title: "Status", field: "sp_status" },
+    { title: "Brand Name", field: "brand_name" },
+    { title: "Model Name", field: "model_name" },
+    { title: "Fuel Type", field: "fuel_type",
+    render: (rowData) => rowData?.fuel_type?.join(", ")
+     },
     {
         title: 'Action', render: (rowData) =>
             <Box display='flex'>

@@ -80,6 +80,7 @@ const RaeesLoginComponent = () => {
                 }, 0);
                 localStorage.setItem('TYPE_OF_USER', "1");
                 localStorage.setItem('role', "Administrator");
+                localStorage.setItem('profile_name', loginDetails.profile_name);
                 localStorage.setItem('access_tokenSP', loginDetails.token);
                 localStorage.setItem('isLoggedIn', "true");  
             }

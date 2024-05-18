@@ -38,8 +38,8 @@ const Topbar = ({isMobile,handleDrawerToggle,customer}) => {
           </Grid>
           <Grid item>
             <Grid container spacing={2} alignItems={'center'}>
-              <Grid item><TopBarSettingsIcon /></Grid>
-              <Grid item><TopBarHomeNotificationIcon /></Grid>
+              {/* <Grid item><TopBarSettingsIcon /></Grid>
+              <Grid item><TopBarHomeNotificationIcon /></Grid> */}
               <Grid item><TopBarUserIcon logout={logout} /></Grid>
               <Grid item mr={2}>
                 <Grid container flexDirection={'column'}>

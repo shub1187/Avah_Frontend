@@ -38,10 +38,10 @@ const useFetch = (url) => {
                 let sp_id =  localStorage.getItem('sp_id');
                 let customer_id =  localStorage.getItem('customer_id');
                 let headers = {}
-                if(sp_id || customer_id){
+                // if(sp_id || customer_id){
                 const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
                  headers = { Authorization: `Bearer ${token}`  };      
-                }
+                // }
                 const {data, status} = await axios.get(url,{headers})
                 if(data && status==200){
                     setData(data)
