@@ -254,7 +254,7 @@ const CustomerAppointment = () => {
                         </Box>
                     </Box>
                     <Button onClick={()=>setOpenReject((prev)=>({...prev,toggle:true}))} className={'small-button mr-2'} color='options' variant='contained'>Reject</Button>
-                    <Button onClick={setApprove(true)}  className='small-button' color='options' variant='contained' >Approve</Button>
+                    <Button onClick={()=>setOpenApprove(true)}  className='small-button' color='options' variant='contained' >Approve</Button>
                 </Box>
             </div>
             {snackbar}
