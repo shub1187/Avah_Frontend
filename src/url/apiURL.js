@@ -3,7 +3,8 @@ const BASE_URL = "http://localhost:3008"
 const PRODUCTION_URL = ''
 
 const LOCAL_STORAGE = {
-    sp_id:localStorage.getItem('sp_id')
+    sp_id:localStorage.getItem('sp_id'),
+    customer_id : localStorage.getItem('customer_id')
 }
 
 const replaceUrl =(url)=>{
@@ -67,6 +68,9 @@ const URL = {
         }
     },
     SERVICE_PROVIDER:{
+        HOME:{
+            getStatistics : replaceUrl(`${BASE_URL}/api/serviceprovider/getStatistics?sp_id=${LOCAL_STORAGE.sp_id}`)
+        },
         USERS:{
             CUSTOMER:{
 
@@ -156,6 +160,14 @@ const URL = {
 
     },
     CUSTOMER:{
+        HOME:{
+            getStatistics : replaceUrl(`${BASE_URL}/api/customer/getStatistics?customer_id=${LOCAL_STORAGE.customer_id}`)
+        },
+        LANDINGPAGE:{
+            getRandomSp : replaceUrl(`${BASE_URL}/api/customer/getRandomSp`),
+            getEstimateDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getEstimateDetails?customer_id=${LOCAL_STORAGE.customer_id}`),
+
+        },
         VEHICLE:{
             getAllModelPerBrand:replaceUrl(`${BASE_URL}/api/serviceprovider/getAllModelPerBrand`),
             getAllFuelTypes:replaceUrl(`${BASE_URL}/api/admin/getAllFuelTypes`),

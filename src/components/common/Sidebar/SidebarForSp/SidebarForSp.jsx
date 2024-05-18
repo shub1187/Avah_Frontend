@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { Badge, Box, Chip } from '@mui/material';
 import { useFetch } from 'hooks/useFetch';
 import URL from 'url/apiURL';
+import { useCustomerContext } from 'hooks/useCustomContext';
 
 const {getNotificationNumbers}= URL.SERVICE_PROVIDER.NOTIFICATION
 
@@ -27,16 +28,11 @@ export const SpSideBarList = [
   },
   {
     id:2,
-    link:'serviceProvider/user/customer',
+    link:'serviceProvider/user/employees',
     icon:UserIcon,
     name:"Users",
     role:'Users',
     subList:[
-      // {
-      //   id:21,
-      //   link:'serviceProvider/user/customer',
-      //   name:"Customer",
-      // },
       {
         id:21,
         link:'serviceProvider/user/employees',
@@ -65,13 +61,6 @@ export const SpSideBarList = [
     name:"Labour",
     role:'Labour',
   },
-  // {
-  //   id:6,
-  //   link:'/serviceProvider/serviceType',
-  //   icon:ServiceTypeIcon,
-  //   name:"Service Type",
-
-  // },
   {
     id:6,
     link:'/serviceProvider/service/estimatesList',
@@ -115,171 +104,59 @@ export const SpSideBarList = [
       }
     ]
   },
-  // {
-  //   id:9,
-  //   link:'/serviceProvider/accounts/account',
-  //   icon:AccountsIcon,
-  //   name:"Accounts",
-  //   role: "Accounts",
-  //   subList:[
-  //     {
-  //       id:91,
-  //       link:'serviceProvider/accounts/account',
-  //       name:"Account"
-  //     },
-  //     {
-  //       id:92,
-  //       link:'serviceProvider/accounts/ledger',
-  //       name:"Ledger"
-  //     },
-  //   ]
-  // },
-  // {
-  //   id:10,
-  //   link:'/serviceProvider/packages',
-  //   icon:PackageIcon,
-  //   name:"Packages",
-  //   role:"Packages"
-  // },
-  // {
-  //   id:11,
-  //   link:'/serviceProvider/reviews',
-  //   icon:ReviewsIcon,
-  //   name:"Reviews",
-  //   role:"Reviews"
-
-  // },
-  // {
-  //   id:12,
-  //   link:'/serviceProvider/settings',
-  //   icon:SettingsIcon,
-  //   name:"Settings",
-  //   role:"Settings"
-
-  // },
 ]
 
-// export  function SpTest({employee}) {
-//   const [openSublistId, setOpenSublistId] = useState(null);
-//   const [activeItem, setActiveItem] = useState(null);
-//   const [activeSubitem, setActiveSubitem] = useState(null);
-
-//   const handleClick = (id) => {
-//     if (id === openSublistId) {
-//       setOpenSublistId(null); // Close the clicked sublist
-//     } else {
-//       setOpenSublistId(id); // Open the clicked sublist
-//     }
-
-//     setActiveItem(id === activeItem ? null : id);
-//   };
-
-//   const handleSubItemClick = (id) => {
-//     setActiveSubitem(id === activeSubitem ? null : id);
-//   };
-
-//   return (
-//     <List
-//       disablePadding
-//       className='someList'
-//       component="nav"
-//       aria-labelledby="nested-list-subheader"
-//     >
-//       {SpSideBarList.map((list) => {
-//         // let permission = localStorage.getItem('permission_granted')
-//         // if(employee){
-//         // let permission =  [
-//         //   "Users",
-//         //   "Spares",
-//         //   "Labour",
-//         //   "Service Type",
-//         //   "Service"
-//         // ]
-//         // let authorizedRoute =!list.role || permission?.includes(list?.role)
-//         // console.log(authorizedRoute)
-//         // if (authorizedRoute){
-//         return <React.Fragment key={list.id}>
-//           <Link to={list.link} className='link-text' >
-//             <ListItemButton
-//               sx={{
-//                 ...(!list.subList && list.id > 11
-//                   ? { backgroundColor: 'rgb(244, 248, 249)' }
-//                   : openSublistId === list.id
-//                     ? { background: 'linear-gradient(to bottom, rgb(233, 56, 72), rgb(119, 53, 98))', color: 'white' }
-//                     : {}),borderBottom:2,borderColor:'rgb(237, 244, 251)',height:"50px"
-//               }}
-//               onClick={() => handleClick(list.id)}
-//             >
-//               {list?.icon && <ListItemIcon><list.icon isSelected={activeItem === list.id} /></ListItemIcon>}
-
-//               <ListItemText
-//                 sx={{
-//                   ...(!list.subList && list.id > 11 ? { ml: 7 } : ''),
-//                 }}
-//                 primary={list.name}
-//               />
-//               {list.subList && (openSublistId === list.id ? <ExpandLess /> : <ExpandMore />)}
-//             </ListItemButton>
-//           </Link>
-//           {list.subList && (
-//             <Collapse in={openSublistId === list.id} timeout='auto' unmountOnExit>
-//               <Box sx={{ backgroundColor: 'rgb(237, 244, 251)', color: 'black' }}>
-//                 {list.subList.map((subItem) => (
-//                   <Link to={subItem.link} style={{ textDecoration: 'none', color: 'black' }} key={subItem.id}>
-//                     <ListItemButton
-//                       onClick={() => handleSubItemClick(subItem.id)}
-//                       selected={activeSubitem === subItem.id}
-//                     >
-//                       <ListItemText
-//                         sx={{
-//                           color: activeSubitem === subItem.id ? 'rgb(173,73,112)' : 'inherit',ml:7
-//                         }}
-//                         primary={subItem.name}
-//                       />
-//                     </ListItemButton>
-//                   </Link>
-//                 ))}
-//               </Box>
-//             </Collapse>
-//           )}
-//         </React.Fragment>
-//         // }}
-//       })}
-//     </List>
-//   );
-// }
 
 
 const ServiderProviderSidebar = ({})=>{
 
     //FOR SIDEBAR - MENU AND SUBMENU
-    const [open,setOpen] = useState({})
-    const [subListopen,setSubListOpen] = useState({})
+    const {open,subListopen,onChange,subItemOnChange} = useCustomerContext()
     const {data:{data:notifications}} = useFetch(`${getNotificationNumbers}?sp_id=${localStorage.getItem('sp_id')}`)
 
-    //HANDLE MENU
-    const onChange = (listIndex)=>setOpen((prev)=>{
-        setSubListOpen({})
-        const updatedOpen = {}
-        updatedOpen[listIndex] = !prev[listIndex] //TOGGLE CLICKED BUTTON
-
-        Object.keys(prev).forEach((key)=>{
-            if(Number(key)!==listIndex) updatedOpen[key] = false
-        })
-        return updatedOpen
-    })
-
-    //HANDLE SUBMENU
-    const subItemOnChange = (subListIndex)=>setSubListOpen((prev)=>{
-        const updatedOpen = {}
-        updatedOpen[subListIndex] = !prev[subListIndex] //TOGGLE CLICKED BUTTON
-
-        Object.keys(prev).forEach((key)=>{
-            if(Number(key)!==subListIndex) updatedOpen[key] = false
-        })
-        return updatedOpen
-
-    })
+    return (
+      <>
+      <List>
+          {SpSideBarList.map((list,listIndex)=>{
+              let permission = localStorage.getItem('permission_granted')
+              if (!list.role || permission?.includes(list?.role) ||  permission?.includes('All')){
+              return (
+                  <Link to={list.link} className='link-text' key={listIndex}>
+                  <Box className='sidebar-button'>
+                  <ListItemButton className={open[listIndex] && 'selected'} onClick={()=>onChange(listIndex)}>
+                  {list.icon && <ListItemIcon><list.icon isSelected={open[listIndex]}/></ListItemIcon>}
+                  <ListItemText>{list.name}</ListItemText>
+                  {list.subList && (Object.keys(open).find(openKey=>openKey==SpSideBarList[listIndex].id-1 && open[listIndex]) ? <ExpandLess/>: <ExpandMore/>)}
+                  </ListItemButton>
+                  {list.subList && (
+                      <Collapse in={open[listIndex]} unmountOnExit>
+                              <List className='pt-0 pb-1'>
+                              {list.subList.map((subList, subListIndex)=>(
+                                  <Link to={subList.link} className='link-text'  key={subListIndex}>
+                                  <Box className='sub-item-sidebar'>
+                                  <ListItemButton className={`${subListopen[subListIndex] && 'sub-selected'} pl-8 ml-1 mr-1`} onClick={()=>subItemOnChange(subListIndex)} >
+                                      {subList.icon && <ListItemIcon><subList.icon/></ListItemIcon>}
+                                      {(subList.name ==='Estimates List' || subList.name ==='Appointment List') ? (
+                                        <ListItemText><Badge sx={{fontSize:17}} badgeContent={(subList.name ==='Estimates List' && notifications?.estimate_list) || (subList.name ==='Appointment List' && notifications?.appointment_list) || 0 } color='options'>{subList.name}&nbsp;&nbsp;</Badge></ListItemText>
+                                        )
+                                        :
+                                        <ListItemText>{subList.name}</ListItemText>
+                                      }
+                                        {/* <ListItemText>{subList.name}</ListItemText> */}
+                                  </ListItemButton>
+                                  </Box>
+                                  </Link>
+                              ))}
+                              </List>
+                      </Collapse>
+                  )}
+                  </Box>
+                  </Link>
+              )}
+          })}
+      </List>
+      </>
+    );
     return (
         <>
         <List>

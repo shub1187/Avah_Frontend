@@ -4,7 +4,7 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import React from 'react'
 import { LandingPageCardsServiceIcon } from 'assets/img/landingPage/icon';
 
-const LandingPageServiceStatusCards = () => {
+const LandingPageServiceStatusCards = ({empty, data}) => {
     return (
         <Card sx={{ minWidth: 250,maxWidth:250, backgroundColor: 'rgb(226,232,240)', borderRadius: '16px', textAlign: 'center' }}>
             <Grid mt={1} container justifyContent={'center'} alignItems={'center'}><Avatar sx={{ height: '80px', width: '80px', fontSize: 25 }}><LandingPageCardsServiceIcon/></Avatar></Grid>
@@ -17,12 +17,12 @@ const LandingPageServiceStatusCards = () => {
                     </Grid>
                     <Grid item>
                         <Typography fontSize={20} fontWeight={'bold'} color='#ad4970' gutterBottom>
-                            JAIN CAR SERVICE
+                            {empty ? 'BOOK AN APPOINTMENT' :  data?.sp_name || "N/sA"}
                         </Typography>
                     </Grid>
                     <Grid item >
-                        <Typography fontWeight={'bold'}fontSize={16} >Recent Order :<Typography fontWeight={'bold'}  fontSize={16}color={'#858585'} >250</Typography></Typography>
-                        <Typography fontWeight={'bold'}fontSize={16} >Status :<Typography fontWeight={'bold'}  fontSize={16} color={'#858585'}>Pending</Typography></Typography>
+                        <Typography fontWeight={'bold'}fontSize={16} >Vehicle Number :<Typography fontWeight={'bold'}  fontSize={16}color={'#858585'} >{!empty && data?.vehicle_number || 'N/A'}</Typography></Typography>
+                        <Typography fontWeight={'bold'}fontSize={16} >Appointment Status :<Typography fontWeight={'bold'}  fontSize={16} color={'#858585'}>{!empty && data?.appointment_status || 'N/A'}</Typography></Typography>
                     </Grid>
                 </Grid>
             </CardContent>

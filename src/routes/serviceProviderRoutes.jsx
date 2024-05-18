@@ -23,8 +23,8 @@ const serviceProviderRoutes = [
         subList:[
           {
             id:21,
-            link:'customer',
-            component:<SpCustomerPage/>,
+            link:'employees',
+            component:<SpEmployeesPage/>,
           },
           {
             id:22,

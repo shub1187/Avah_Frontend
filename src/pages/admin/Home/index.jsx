@@ -189,46 +189,6 @@ export const AdminHomePage = () => {
                         </Box>
 
                     </Box>
-                    {/* <Grid container spacing={4}>
-              <Grid item xs={12} >
-                    <Grid spacing={2} container> */}
-                    {/* {target.map((dat)=>
-                            <Grid item>
-                                <Box className='statistics-container'>
-                                    <Box className='text'>{dat}</Box>
-                                    <Box className='count'>{statistics.data.approvedServiceProviderCount}</Box>
-                                </Box>
-                            </Grid>
-                        )} */}
-                    {/* <Grid item>
-                                <Box className='statistics-container'>
-                                    <Box className='text'>Approved Service Provider</Box>
-                                    <Box className='count'>{statistics.data.approvedServiceProviderCount}</Box>
-                                </Box>
-                            </Grid>                            
-                            <Grid item>
-                                <Box className='statistics-container'>
-                                    <Box className='text'>Rejected Service Provider</Box>
-                                    <Box className='count'>{statistics.data.rejectedServiceProviderCount}</Box>
-                                </Box>
-                            </Grid>                            
-                            <Grid item>
-                                <Box className='statistics-container'>
-                                    <Box className='text'>Pending Service Provider</Box>
-                                    <Box className='count'>{statistics.data.getPendingServiceProviderCount}</Box>
-                                </Box>
-                            </Grid>
-
-                    </Grid>
-              </Grid> */}
-                    {/* <Grid item xs={12} sm={4}>
-                <Grid xs spacing={2} direction={"row"} container>
-                  <Grid sm={12} item><SpLatestActivityCard/></Grid>
-                  <Grid sm={12} item><SpQuickPayment/></Grid>
-                  <Grid sm={12} item><SpRating/></Grid>
-                </Grid>
-              </Grid> */}
-                    {/* </Grid> */}
                 </Box>
             </ThemeProvider>
         </>
