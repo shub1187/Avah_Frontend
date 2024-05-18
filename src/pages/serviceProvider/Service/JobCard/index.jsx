@@ -24,7 +24,7 @@ const JobCard = () => {
     const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
     const[disabledUpdate,setDisabledUpdate] = useState(true)
     const [techAdvList,setTechAdvList] = useState({technicians:[],advisors:[]})
-    const [techAdvPayload,setTechAdvPayload] = useState({technicians:[],advisor:'',showAutoComplete:true})
+    const [techAdvPayload,setTechAdvPayload] = useState({technicians:[],advisor:'',showAutoComplete:true,advisorError:false})
 
     const vehicleDetails = {names:['Vehicle Number','Model', 'Manufacturer', 'Fuel Type','Km Driven','Complaints'],values:[eyeIconValue?.vehicle_number, eyeIconValue?.model, eyeIconValue?.brand, eyeIconValue?.fuel_type, eyeIconValue?.kilometers_driven,eyeIconValue?.complaints]}
     const customerDetails = {names:["Name", "Pickup Address", "Mobile", "Email"],values:[eyeIconValue?.name, eyeIconValue?.pickup_address, eyeIconValue?.mobile_number, eyeIconValue?.email]}
@@ -148,6 +148,10 @@ const JobCard = () => {
 
   
     const updateJobcardCall = async()=>{
+        if(eyeIconValue?.advisor_assigned!=='Yes'){
+            !techAdvPayload?.advisor &&  setTechAdvPayload((prev)=>({...prev,advisorError:true})) 
+            return
+        }
         const obj = {
             payload:{
                 appointment_id:eyeIconValue?.appointment_id,
@@ -224,7 +228,7 @@ const JobCard = () => {
                                     options={ techAdvList?.advisors || []}
                                     getOptionLabel={(option) => option.label}
                                     onChange={(event,value)=>{
-                                    setTechAdvPayload((prev)=>({...prev,advisor:value.reduce((acc,obj)=>acc = obj.value,'')}));
+                                    setTechAdvPayload((prev)=>({...prev,advisor:value.reduce((acc,obj)=>acc = obj.value,''),advisorError:false}));
                                     setDisabledUpdate(false)
                                             }}
                                     getOptionDisabled={(options)=>techAdvPayload?.advisor?.length?true:false}
@@ -235,6 +239,7 @@ const JobCard = () => {
                                     />
                                     )}
                                 />
+                                {techAdvPayload?.advisorError && <Typography color={'error'}>Advisor Required</Typography>}
                                 </Grid>
                             </Grid>
                             <Grid xs={5.8} item className='border'>
