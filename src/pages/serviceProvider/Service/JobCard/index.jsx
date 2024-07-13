@@ -148,7 +148,8 @@ const JobCard = () => {
 
   
     const updateJobcardCall = async()=>{
-        if(eyeIconValue?.advisor_assigned!=='Yes'){
+        console.log("ln 151", eyeIconValue?.advisor_assigned)
+        if(eyeIconValue?.advisor_assigned!=='Yes' &&  !techAdvPayload?.advisor){
             !techAdvPayload?.advisor &&  setTechAdvPayload((prev)=>({...prev,advisorError:true})) 
             return
         }

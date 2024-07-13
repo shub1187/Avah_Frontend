@@ -78,7 +78,7 @@ const AddCustomerVehicleDialog = ({ height, width, color }) => {
     const customerTextfield = [
 
         {
-            label: 'Vehicle Number',
+            label: 'Vehicle Number*',
             name: "vehicle_number",
             type: 'text',
             fullWidth: true,
@@ -87,7 +87,7 @@ const AddCustomerVehicleDialog = ({ height, width, color }) => {
 
         },
         {
-            label: 'Vehicle Type',
+            label: 'Vehicle Type*',
             name: "vehicle_type",
             type: 'text',
             required: true, // Add the required property
@@ -97,7 +97,7 @@ const AddCustomerVehicleDialog = ({ height, width, color }) => {
             selectArray: [{ label: "Personal", value: "Personal" }, { label: "Commercial", value: "Commercial" }]
         },
         {
-            label: 'Brand',
+            label: 'Brand*',
             name: "brand",
             type: 'text',
             fullWidth: true,
@@ -107,7 +107,7 @@ const AddCustomerVehicleDialog = ({ height, width, color }) => {
             selectArray: vehicleNameAndBrand?.brandArray
         },
         {
-            label: 'Model',
+            label: 'Model*',
             name: "model",
             type: 'text',
             fullWidth: true,
@@ -117,7 +117,7 @@ const AddCustomerVehicleDialog = ({ height, width, color }) => {
             selectArray: vehicleNameAndBrand?.modelArray
         },
         {
-            label: 'Engine Customization',
+            label: 'Engine Customization*',
             name: "customization",
             type: 'text',
             fullWidth: true,
@@ -126,11 +126,11 @@ const AddCustomerVehicleDialog = ({ height, width, color }) => {
             select: true,
             selectArray: [{ label: "Showroom Fitted", value: "Showroom Fitted" }, { label: "Externally Modified", value: "Externally Modified" }],
             tooltip: true,
-            tooltipMessage: 'Showroom fitted means Engine varient provided by manufacturer And Externally modified means if you have customized original engine. Eample: Added outfitted CNG Kit to Petrol Engine'
+            tooltipMessage: 'Showroom fitted means Engine varient provided by manufacturer And Externally modified means if you have customized original engine. Example: Added outfitted CNG Kit to Petrol Engine'
         },
 
         {
-            label: 'Chassis Number',
+            label: 'Chassis Number*',
             name: "chassis_number",
             type: 'text',
             fullWidth: true,
@@ -139,7 +139,7 @@ const AddCustomerVehicleDialog = ({ height, width, color }) => {
 
         },
         {
-            label: 'Fuel Type',
+            label: 'Fuel Type*',
             name: "fuel_type",
             type: 'text',
             fullWidth: true,

@@ -375,7 +375,7 @@ const RaeesLoginComponent = () => {
                                 :
                                 <>
                                     <Box className='welcome'>{login ? 'Welcome back' : 'Welcome'}</Box>
-                                    <Box className='enter-details'>{login ? 'Enter you email and password to sign in' : 'Enter you credentials to register'}</Box>
+                                    <Box className='enter-details'>{login ? 'Enter your email and password to sign in' : 'Enter your credentials to register'}</Box>
                                     <Box className='textfields'>
                                         <Box className='smaller-container'>
                                             <CreateTextFields fields={login ? loginTextfield.slice(1, 3) : loginTextfield} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted} />

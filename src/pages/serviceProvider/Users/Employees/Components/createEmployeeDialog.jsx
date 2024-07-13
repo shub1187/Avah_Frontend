@@ -43,7 +43,7 @@ const CreateEmployeeDialog = ({ height, width, color }) => {
 
   const employeeTextField = [
     {
-      label: 'Name',
+      label: 'Name*',
       name: "name",
       type: 'text',
       fullWidth: true,
@@ -51,7 +51,7 @@ const CreateEmployeeDialog = ({ height, width, color }) => {
       errormessage:'Name is Required'
         },
     {
-      label: 'Email',
+      label: 'Email*',
       name: "email",
       type: 'email',
       fullWidth: true,
@@ -59,7 +59,7 @@ const CreateEmployeeDialog = ({ height, width, color }) => {
       errormessage:'Email is Required'
     },
     {
-      label: 'Mobile',
+      label: 'Mobile*',
       name: "mobile",
       type: 'number',
       fullWidth: true,
@@ -67,7 +67,7 @@ const CreateEmployeeDialog = ({ height, width, color }) => {
       errormessage:'Mobile Number is Required'
     },
     {
-      label: 'Gender',
+      label: 'Gender*',
       name: "gender",
       type: 'text',
       fullWidth: true,
@@ -87,7 +87,7 @@ const CreateEmployeeDialog = ({ height, width, color }) => {
 
     },
     {
-      label: 'Address',
+      label: 'Address*',
       name: "address",
       type: 'text',
       fullWidth: true,
@@ -96,7 +96,7 @@ const CreateEmployeeDialog = ({ height, width, color }) => {
       errormessage:'Address is Required'
     },
     {
-      label: 'Role',
+      label: 'Role*',
       name: "role",
       type: 'text',
       fullWidth: true,
@@ -105,7 +105,7 @@ const CreateEmployeeDialog = ({ height, width, color }) => {
 
     },
     {
-      label: 'Permission Granted',
+      label: 'Permission Granted*',
       name: "permission_granted",
       type: 'text',
       fullWidth: true
@@ -113,28 +113,28 @@ const CreateEmployeeDialog = ({ height, width, color }) => {
     },
 
     {
-      label: 'Country',
+      label: 'Country*',
       name: "country",
       type: 'text',
       required:true,
       errormessage:'Country is Required'
     },
     {
-      label: 'State',
+      label: 'State*',
       name: "state",
       type: 'text',
       required:true,
       errormessage:'State is Required'
     },
     {
-      label: 'City',
+      label: 'City*',
       name: "city",
       type: 'text',
       required:true,
       errormessage:'City is Required'
     },
     {
-      label: 'Pincode',
+      label: 'Pincode*',
       name: "pin_code",
       type: 'number',
       fullWidth: true,
@@ -142,21 +142,21 @@ const CreateEmployeeDialog = ({ height, width, color }) => {
       errormessage:'Pincode Required'
     },
     {
-      label: 'PAN Number',
+      label: 'PAN Number*',
       name: "pan_number",
       type: 'text',
       required:true,
       errormessage:'PAN Number is Required'
     },
     {
-      label: 'Password',
+      label: 'Password*',
       name: "password",
       type: 'password',
       required:true,
       errormessage:'Password is Required'
     },
     {
-      label: 'Re-enter Password',
+      label: 'Re-enter Password*',
       name: "reEnterPassword",
       type: 'rePassword',
       fullWidth: true,

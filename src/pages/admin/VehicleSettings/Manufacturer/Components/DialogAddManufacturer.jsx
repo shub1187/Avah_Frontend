@@ -37,7 +37,7 @@ const AddManufacturerDialog = () => {
 
   const manufactureList = [
     {
-      label: 'Brand Name',
+      label: 'Brand Name*',
       name: "brand_name",
       type: 'text',
       fullWidth: true,

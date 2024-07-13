@@ -160,7 +160,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
 
     const appointmentList = [
         {
-          label: 'Select City',
+          label: 'Select City*',
           name: "select_city",
           type: 'text',
           fullWidth: true,
@@ -168,7 +168,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           errormessage: 'Select desired City', 
         },
         {
-          label: 'Select Service Provider',
+          label: 'Select Service Provider*',
           name: "select_service_provider",
           type: 'text',
           fullWidth: true,
@@ -192,7 +192,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           disabled:true,
         },
         {
-            label: 'Select Vehicle',
+            label: 'Select Vehicle*',
             name: "vehicle_number",
             type: 'text',
             fullWidth: true,
@@ -269,7 +269,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
 
         },
         {
-            label: 'Appointment Date',
+            label: 'Appointment Date*',
             name: "appointment_date",
             type: 'date',
             fullWidth: true,
@@ -278,7 +278,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
 
         },
         {
-          label: 'Appointment Time',
+          label: 'Appointment Time*',
           name: "appointment_time",
           type: 'date',
           fullWidth: true,
@@ -288,7 +288,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
           errormessage: 'Select Appointment Time', 
       },
         {
-          label: 'Pickup And Drop',
+          label: 'Pickup And Drop*',
           name: "pickup_drop",
           type: 'text',
           fullWidth: true,
@@ -307,7 +307,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
             ]
       },
       {
-            label: 'Pickup Address',
+            label: 'Pickup Address*',
             name: "pickup_address",
             type: 'text',
             fullWidth: true,

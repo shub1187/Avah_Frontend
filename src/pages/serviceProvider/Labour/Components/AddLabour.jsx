@@ -39,7 +39,7 @@ const SpAddLabourDialog = () => {
 
     const LabourList = [
         {
-            label:'Name',
+            label:'Name*',
             name:"labour_name",
             type:'text',
             fullWidth:true,
@@ -54,7 +54,7 @@ const SpAddLabourDialog = () => {
     
         },
         {
-            label: 'Amount',
+            label: 'Amount*',
             name: "selling_price",
             type: 'text',
             fullWidth:true,

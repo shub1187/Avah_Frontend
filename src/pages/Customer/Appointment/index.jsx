@@ -261,7 +261,7 @@ const CustomerAppointment = () => {
             {loadingIndicator}
             {openReject.toggle && (
                               <Dialog open={true}>
-                                <DialogTitle>Are you sure you want to Reject Estimate<UnderLine/></DialogTitle>
+                                <DialogTitle>Are you sure you want to <Typography component={'span'} fontWeight={'bold'} sx={{color:"#ad4970"}}>Reject</Typography> the Estimate<UnderLine/></DialogTitle>
                                 <DialogContent>
                                 <CreateTextFields  fields={rejectTextfield} onChange={handleFieldChange}  formField={openReject} isSubmitted={isSubmitted} />
                                   {/* <TextField size='small' value={openReject.rejectionNote||''} onChange={(e)=>setOpenReject((prev)=>({...prev,rejectionNote:e.target.value}))}/> */}
@@ -271,7 +271,7 @@ const CustomerAppointment = () => {
             )}
             {openApprove && (
                   <Dialog open={true}>
-                    <DialogTitle>Are you sure you want to Approve Estimate<UnderLine/></DialogTitle>
+                    <DialogTitle>Are you sure you want to <Typography component={'span'} fontWeight={'bold'} sx={{color:"#ad4970"}}>Approve</Typography>  the Estimate<UnderLine/></DialogTitle>
                     <DialogActions><Button color='options' variant='outlined' onClick={()=>setOpenApprove(false)}>Cancel</Button><Button onClick={approveEstimate} variant='contained' color='options'>Confirm</Button></DialogActions>
                   </Dialog>
             )}

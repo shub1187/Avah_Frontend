@@ -53,7 +53,7 @@ const SpCreateSpareDialog = () => {
 
     const addSparesTextfield = [
         {
-            label:'Spare Name',
+            label:'Spare Name*',
             name:"spare_name",
             type:'text',
             fullWidth:true,
@@ -102,7 +102,7 @@ const SpCreateSpareDialog = () => {
             type: 'number',
         },
         {
-            label: 'Selling Price',
+            label: 'Selling Price*',
             name: "selling_price",
             type: 'number',
             required:true,

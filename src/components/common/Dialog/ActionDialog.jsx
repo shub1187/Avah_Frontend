@@ -141,7 +141,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
                         <CheckCircleIcon style={{ color: 'rgb(5,131,30)', cursor: 'pointer', marginRight: '5px' }} /> Approve
                     </Button>
                     <Dialog fullWidth open={open} onClose={handleClose} maxWidth='xs'>
-                        <DialogContent>Are you sure you wish you <Typography component={'span'} fontWeight={'bold'} sx={{color:"#ad4970"}}>Approve</Typography>?</DialogContent>
+                        <DialogContent>Are you sure you want to <Typography component={'span'} fontWeight={'bold'} sx={{color:"#ad4970"}}>Approve</Typography> the appointment?</DialogContent>
                         <DialogActions sx={{ mt: 3 }}>
                             <Button color='options' onClick={handleClose}>CANCEL</Button>
                             <Button variant={'contained'} color='options' onClick={StatusUpdate}>SUBMIT</Button>
@@ -176,7 +176,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
                     </Box>
                 </IconButton>
                 <Dialog fullWidth open={open} onClose={handleClose} maxWidth='xs'>
-                    <DialogContent>Are you sure you wish you <Typography component={'span'} fontWeight={'bold'} sx={{color:"#ad4970"}}>Approve</Typography>?</DialogContent>
+                    <DialogContent>Are you sure you want to <Typography component={'span'} fontWeight={'bold'} sx={{color:"#ad4970"}}>Approve</Typography>?</DialogContent>
                     <DialogActions sx={{ mt: 3 }}>
                         <Button color='options' onClick={handleClose}>CANCEL</Button>
                         <Button variant={'contained'} color='options' onClick={StatusUpdate}>SUBMIT</Button>

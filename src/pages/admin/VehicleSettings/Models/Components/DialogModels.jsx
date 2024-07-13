@@ -56,7 +56,7 @@ const ModelAdminDialog = () => {
 
   const manufactureList = [
     {
-      label: 'Model Name',
+      label: 'Model Name*',
       name: "model_name",
       type: 'text',
       fullWidth: true,
@@ -68,7 +68,7 @@ const ModelAdminDialog = () => {
   return (
     <>
       <DialogContent sx={{mt:2,mb:2}}>
-      <InputLabel sx={{ mb: 1 }}>Brand Name</InputLabel>
+      <InputLabel sx={{ mb: 1 }}>Brand Name*</InputLabel>
           <Autocomplete
             freeSolo
             // disabled
@@ -95,7 +95,7 @@ const ModelAdminDialog = () => {
             )}
           />
           <CreateTextFields fields={manufactureList} onChange={handleFieldChange}  formField={formData} isSubmitted={isSubmitted} />
-          <InputLabel sx={{ mb: 1 }}>Fuel Type</InputLabel>
+          <InputLabel sx={{ mb: 1 }}>Fuel Type*</InputLabel>
                 <Autocomplete
                   freeSolo
                   // disabled
