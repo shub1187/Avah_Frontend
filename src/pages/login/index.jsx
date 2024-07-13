@@ -469,7 +469,10 @@ const RaeesLoginComponent = () => {
                             </Box>
                             <Box className='sixth-row'>
                                 <CreateTextFields fields={registerTextfield.slice(8,9)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
-                                <Box className='inputy'><input type='file' className='custom' name='business_document' onChange={handleFileChange}></input></Box>
+                                <Box>
+                                      <InputLabel sx={{color:'black', marginBottom:1}}>Business Document</InputLabel>
+                                      <Box className='inputy'><input type='file' className='custom' name='business_document' onChange={handleFileChange}></input></Box>
+                                </Box>         
                             </Box>
                             <Box className='seventh-row'>
                                 <CreateTextFields fields={registerTextfield.slice(9,11)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
