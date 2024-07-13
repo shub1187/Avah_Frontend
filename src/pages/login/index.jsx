@@ -154,11 +154,13 @@ const RaeesLoginComponent = () => {
         if(payload.role === 'service provider'){
             let formData = new FormData()
             formData.append('business_document', files)
-            let jsonBlob = new Blob([JSON.stringify(payload)],{
-            type: 'application/json'
-            })
-            
-            formData?.append('form',jsonBlob)
+            // let jsonBlob = new Blob([JSON.stringify(payload)],{
+            // type: 'application/json'
+            // })
+            for(let key in payload){
+                formData.append(key,payload[key])
+            }
+            // formData?.append('form',jsonBlob)
       
             const config = {
                 headers : {
@@ -472,7 +474,7 @@ const RaeesLoginComponent = () => {
                                 <CreateTextFields fields={registerTextfield.slice(9,11)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
                             </Box>
                             <Box className='eigth-row'>
-                                <input type='file' name='document' onChange={handleFileChange}></input>
+                                <input type='file' name='business_document' onChange={handleFileChange}></input>
                                 {/* <FilepondImageUploader files={files} setFiles={setFiles} formData={form}/> */}
                             </Box>
                             <Box className='ninth-row'>
