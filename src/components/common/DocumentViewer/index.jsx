@@ -19,11 +19,13 @@ const DocumentViewer = ({rowData,type}) => {
                 const typeOfApi = type==='pending'  || type==='rejected' ? 'register_sp_id' :'sp_id'
                 try{
                     const token = localStorage.getItem('access_tokenSP');
-                    const {data} = await axios.get(`${getSpecificPendingSpDocument}?${typeOfApi}=${typeOfApi ==='sp_id' ? rowData?.sp_id: rowData?.register_sp_id}`,{
+                    const response = await axios.get(`${getSpecificPendingSpDocument}?${typeOfApi}=${typeOfApi ==='sp_id' ? rowData?.sp_id: rowData?.register_sp_id}`,{
                         responseType:'blob',
                         headers:{ Authorization: `Bearer ${token}`},
                     })
-                    const url = URL.createObjectURL(new Blob([data?.response.data], { type: 'application/pdf' })); // Adjust MIME type as needed
+                    console.log("ln 25", response)
+                    const url = URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' })); // Adjust MIME type as needed
+                    // window.open(url, '_blank');
                     setFileUrl(url)
                 }
                 catch{
@@ -49,7 +51,7 @@ const DocumentViewer = ({rowData,type}) => {
                 {fileUrl && (
                     <iframe
                     src={fileUrl}
-                    width="600"
+                    width="1480"
                     height="800"
                     title="File Viewer"
                     style={{ border: '1px solid black' }}
