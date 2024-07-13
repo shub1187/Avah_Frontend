@@ -151,8 +151,6 @@ const RaeesLoginComponent = () => {
         // if(payload.role ==='service provider'){
         //     payload = form
         // }
-        console.log("ln 152", payload)
-        console.log("ln 153", form)
         if(payload.role === 'service provider'){
             let formData = new FormData()
             formData.append('business_document', files)
