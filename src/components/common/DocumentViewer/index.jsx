@@ -44,7 +44,7 @@ const DocumentViewer = ({rowData,type}) => {
                 </Box>
             </IconButton>
             :
-            <Dialog fullScreen>
+            <Dialog fullScreen fullWidth open={open}>
                 <DialogContent>
                 {fileUrl && (
                     <iframe
@@ -57,7 +57,7 @@ const DocumentViewer = ({rowData,type}) => {
                 )}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={()=>setOpen(false)}>Close</Button>
+                    <Button color="options" variant="contained" onClick={()=>setOpen(false)}>Close</Button>
                 </DialogActions>
             </Dialog>
         }
