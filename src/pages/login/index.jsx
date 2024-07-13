@@ -11,6 +11,7 @@ import { useFetch, useFetchFunction } from 'hooks/useFetch'
 import { getCities, getStates, requiredTextfield } from 'utils/customFunctions'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import ForgotPassword from './Components/ForgotPassword'
+import FilepondImageUploader  from 'components/common/FilePondImageUploader'
 // import { FilepondImageUploader } from 'components/common/FilePondImageUploader'
 const {getAllCitiesPerState} = URL.LOGIN_REGISTER
 const RaeesLoginComponent = () => {
@@ -27,6 +28,8 @@ const RaeesLoginComponent = () => {
     const {data:cityData} = useFetch(getAllCitiesPerState)
     const [citiesAndState, setCitiesAndState] = useState({ state: [], cities: [] })
     const [forgotPassword, setForgotPasssword] = useState(false)
+    const [files, setFiles] = useState([])
+    const form = new FormData()
     //TO GET ALL THE STATES
     useEffect(() => {
         if (cityData?.result?.length) {
@@ -122,7 +125,6 @@ const RaeesLoginComponent = () => {
     const registerFunction = ()=>{
         let payload ={...formData,role:activeButton,approval_status:false,sp_status:"inactive"}
 
-        setIsSubmitted(true)
         let isRequired = requiredTextfield(registerTextfield,formData)
         if(isRequired) {
             setTimeout(() => {
@@ -131,11 +133,15 @@ const RaeesLoginComponent = () => {
             return
         } 
 
+        const jsonBlob = new Blob([JSON.stringify(payload)])
+        form?.append('form',jsonBlob)
+        setIsSubmitted(true)
+
         let url = ''
         if(payload.role ==='customer') url = URL.LOGIN_REGISTER.register_customer
         if(payload.role === 'service provider')url = URL.LOGIN_REGISTER.register_service_provider
 
-        let {data:regesterDetails} = fetchData({url,method:"POST",payload})
+        let {data:regesterDetails} = fetchData({url,method:"POST",jsonBlob})
         if(regesterDetails){
             setLogin(!login)
         }
@@ -429,7 +435,7 @@ const RaeesLoginComponent = () => {
                                 <CreateTextFields fields={registerTextfield.slice(9,11)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
                             </Box>
                             <Box className='eigth-row'>
-                                {/* <FilepondImageUploader/> */}
+                                <FilepondImageUploader files={files} setFiles={setFiles} formData={form}/>
                             </Box>
                             <Box className='ninth-row'>
                                 <Button onClick={registerFunction}>REGISTER</Button>
