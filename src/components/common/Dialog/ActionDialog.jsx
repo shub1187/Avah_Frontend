@@ -20,7 +20,7 @@ import DocumentViewer from '../DocumentViewer';
 
 // import { title } from 'process';
 
-const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, documentViewer, viewJobCard,viewPaidInvoice,downloadPdf, print, approve, reject, approveSp, rejectSp, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData, setInvoice}) => {
+const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, documentViewer,type, viewJobCard,viewPaidInvoice,downloadPdf, print, approve, reject, approveSp, rejectSp, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData, setInvoice}) => {
     const { fetchData, snackbar, loadingIndicator } = useFetchFunction()
     // const timerRef = useRef(null);
 
@@ -136,7 +136,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
 
             {print && (<Print/>)}
             
-            {documentViewer && (<DocumentViewer sp_id={rowData}/>)}
+            {documentViewer && (<DocumentViewer rowData={rowData} type={type}/>)}
             {approve &&
             <>
                     <Button variant='outlined' color='success' onClick={handleClickOpen} >

@@ -33,9 +33,10 @@ export const adminPendingRequestsColumn =[
                 />
                 <ActionDialog
                     key="documentViewer"
-                    url={`${getSpecificPendingSpDocument}?register_sp_id=${rowData?.register_sp_id}`}
+                    // url={`${getSpecificPendingSpDocument}?register_sp_id=${rowData?.register_sp_id}`}
                     documentViewer
                     rowData={rowData}
+                    type={'pending'}
                 />
             </Box>
     }
