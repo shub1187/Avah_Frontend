@@ -14,22 +14,26 @@ const DocumentViewer = ({rowData,type}) => {
     const [fileUrl, setFileUrl] = useState('');
 
     useEffect(()=>{
-        const fetchDocument = async()=>{
-            const typeOfApi = type==='pending'  || type==='rejected' ? 'register_sp_id' :'sp_id'
-            try{
-                const {data} = await axios.get(`${getSpecificPendingSpDocument}?${typeOfApi}=${typeOfApi ==='sp_id' ? rowData?.sp_id: rowData?.register_sp_id}`,{
-                    responseType:'blob'
-                })
-                const url = URL.createObjectURL(new Blob([data?.response.data], { type: 'application/pdf' })); // Adjust MIME type as needed
-                setFileUrl(url)
+        if(open){
+            const fetchDocument = async()=>{
+                const typeOfApi = type==='pending'  || type==='rejected' ? 'register_sp_id' :'sp_id'
+                try{
+                    const token = localStorage.getItem('access_tokenSP');
+                    const {data} = await axios.get(`${getSpecificPendingSpDocument}?${typeOfApi}=${typeOfApi ==='sp_id' ? rowData?.sp_id: rowData?.register_sp_id}`,{
+                        responseType:'blob',
+                        headers:{ Authorization: `Bearer ${token}`},
+                    })
+                    const url = URL.createObjectURL(new Blob([data?.response.data], { type: 'application/pdf' })); // Adjust MIME type as needed
+                    setFileUrl(url)
+                }
+                catch{
+        
+                }
             }
-            catch{
-    
-            }
+            fetchDocument()
         }
-        fetchDocument()
 
-    },[rowData])
+    },[open])
   return (
     <>
         {!open ? 
