@@ -6,6 +6,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import axios from "axios";
 
 const {getSpecificPendingSpDocument} = URLS.ADMIN.REQUESTS.PENDINGREQUESTS
+const {getSpecificApprovedSpDocument,getSpecificRejectedSpDocument} = URLS.ADMIN.USER.SERVICEPROVIDER
 const DocumentViewer = ({rowData,type}) => {
 
     // const { data } = useFetch(`${getSpecificPendingSpDocument}?${typeOfApi}=${typeOfApi ==='sp_id' ? rowData?.sp_id: rowData?.register_sp_id}`)
@@ -17,9 +18,10 @@ const DocumentViewer = ({rowData,type}) => {
         if(open){
             const fetchDocument = async()=>{
                 const typeOfApi = type==='pending'  || type==='rejected' ? 'register_sp_id' :'sp_id'
+                const getdocurl = type==='pending'?getSpecificPendingSpDocument : type==='rejected'?getSpecificRejectedSpDocument : type ==='approved'?getSpecificApprovedSpDocument : ''
                 try{
                     const token = localStorage.getItem('access_tokenSP');
-                    const response = await axios.get(`${getSpecificPendingSpDocument}?${typeOfApi}=${typeOfApi ==='sp_id' ? rowData?.sp_id: rowData?.register_sp_id}`,{
+                    const response = await axios.get(`${getdocurl}?${typeOfApi}=${typeOfApi ==='sp_id' ? rowData?.sp_id: rowData?.register_sp_id}`,{
                         responseType:'blob',
                         headers:{ Authorization: `Bearer ${token}`},
                     })

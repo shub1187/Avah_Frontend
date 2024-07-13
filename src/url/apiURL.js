@@ -38,7 +38,8 @@ const URL = {
             SERVICEPROVIDER:{
                 getAllApprovedSp : replaceUrl(`${BASE_URL}/api/admin/getAllApprovedSp`),
                 getAllRejectedSp : replaceUrl(`${BASE_URL}/api/admin/getAllRejectedSp`),
-                getSpecificApprovedSpDocument : replaceUrl(`${BASE_URL}/api/admin/getSpecificApprovedSpDocument`)
+                getSpecificApprovedSpDocument : replaceUrl(`${BASE_URL}/api/admin/getSpecificApprovedSpDocument`),
+                getSpecificRejectedSpDocument :  replaceUrl(`${BASE_URL}/api/admin/getSpecificRejectedSpDocument`)
 
             }
         },

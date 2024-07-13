@@ -15,6 +15,13 @@ export const adminServiceProviderRejectedColumn =[
                 <MoreActionDialog
                     rowData={rowData}
                 />
+                 <ActionDialog
+                    key="documentViewer"
+                    // url={`${getSpecificPendingSpDocument}?register_sp_id=${rowData?.register_sp_id}`}
+                    documentViewer
+                    rowData={rowData}
+                    type={'rejected'}
+                />
             </Box>
     }
 ]
