@@ -26,7 +26,7 @@ const FilepondImageUploader = ({files,setFiles, formData})=>{
             }
             else{
               // const formData =new FormData()
-              let appendedFile = formData?.append('document',file)
+              let appendedFile = formData?.append('business_document',file)
               // for (var pair of formData.entries()) {
               //   console.log(pair[0]+ ', ' + pair[1]); 
               // }

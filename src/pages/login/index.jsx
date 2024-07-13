@@ -12,6 +12,7 @@ import { getCities, getStates, requiredTextfield } from 'utils/customFunctions'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import ForgotPassword from './Components/ForgotPassword'
 import FilepondImageUploader  from 'components/common/FilePondImageUploader'
+import axios from 'axios'
 // import { FilepondImageUploader } from 'components/common/FilePondImageUploader'
 const {getAllCitiesPerState} = URL.LOGIN_REGISTER
 const RaeesLoginComponent = () => {
@@ -122,29 +123,58 @@ const RaeesLoginComponent = () => {
         setFormData({})
     }
 
-    const registerFunction = ()=>{
+    const registerFunction = async()=>{
         let payload ={...formData,role:activeButton,approval_status:false,sp_status:"inactive"}
 
-        let isRequired = requiredTextfield(registerTextfield,formData)
-        if(isRequired) {
-            setTimeout(() => {
-                setIsSubmitted(false)
-            }, [2000]);
-            return
-        } 
+        // let isRequired = requiredTextfield(registerTextfield,formData)
+        // if(isRequired) {
+        //     setTimeout(() => {
+        //         setIsSubmitted(false)
+        //     }, [2000]);
+        //     return
+        // } 
 
-        const jsonBlob = new Blob([JSON.stringify(payload)])
-        form?.append('form',jsonBlob)
+      
+    
         setIsSubmitted(true)
 
         let url = ''
         if(payload.role ==='customer') url = URL.LOGIN_REGISTER.register_customer
         if(payload.role === 'service provider')url = URL.LOGIN_REGISTER.register_service_provider
 
-        let {data:regesterDetails} = fetchData({url,method:"POST",jsonBlob})
-        if(regesterDetails){
-            setLogin(!login)
+        // if(payload.role ==='service provider'){
+        //     payload = form
+        // }
+        console.log("ln 152", payload)
+        console.log("ln 153", form)
+        if(payload.role === 'service provider'){
+
+            let jsonBlob = new Blob([JSON.stringify(payload)],{
+            type: 'application/json'
+               })
+             form?.append('form',jsonBlob)
+      
+
+            const config = {   
+                headers : {
+                    "Content-Type" : "multipart/form-data"
+                }
+            }
+            console.log("ln 163 its url", url)
+            const {data,status} = await axios.post({url,payload:jsonBlob,config})
+
+            if(data && status === 200){
+                setLogin(!login)
+            }
+
         }
+        else {
+            let {data:regesterDetails} = fetchData({url,method:"POST",payload})
+            if(regesterDetails){
+                setLogin(!login)
+            }
+        }
+       
         setIsSubmitted(false)
         setFormData({})
     }
