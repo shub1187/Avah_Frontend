@@ -37,7 +37,8 @@ const URL = {
             },
             SERVICEPROVIDER:{
                 getAllApprovedSp : replaceUrl(`${BASE_URL}/api/admin/getAllApprovedSp`),
-                getAllRejectedSp : replaceUrl(`${BASE_URL}/api/admin/getAllRejectedSp`)
+                getAllRejectedSp : replaceUrl(`${BASE_URL}/api/admin/getAllRejectedSp`),
+                getSpecificApprovedSpDocument : replaceUrl(`${BASE_URL}/api/admin/getSpecificApprovedSpDocument`)
 
             }
         },
@@ -63,7 +64,8 @@ const URL = {
         REQUESTS:{
             PENDINGREQUESTS:{
                 approveServiceProvider : replaceUrl(`${BASE_URL}/api/admin/approveServiceProvider`)    ,
-                spRequest : replaceUrl(`${BASE_URL}/api/admin/spRequest`)  
+                spRequest : replaceUrl(`${BASE_URL}/api/admin/spRequest`),
+                getSpecificPendingSpDocument : replaceUrl(`${BASE_URL}/api/admin/getSpecificPendingSpDocument`)
             }
         }
     },

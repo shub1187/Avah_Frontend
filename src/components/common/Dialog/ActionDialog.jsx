@@ -16,10 +16,11 @@ import PDF from '../PDFDownload';
 import Print from '../Print';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ReceiptIcon from '@mui/icons-material/Receipt';
+import DocumentViewer from '../DocumentViewer';
 
 // import { title } from 'process';
 
-const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJobCard,viewPaidInvoice,downloadPdf, print, approve, reject, approveSp, rejectSp, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData, setInvoice }) => {
+const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, documentViewer, viewJobCard,viewPaidInvoice,downloadPdf, print, approve, reject, approveSp, rejectSp, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData, setInvoice}) => {
     const { fetchData, snackbar, loadingIndicator } = useFetchFunction()
     // const timerRef = useRef(null);
 
@@ -135,6 +136,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, viewJo
 
             {print && (<Print/>)}
             
+            {documentViewer && (<DocumentViewer sp_id={rowData}/>)}
             {approve &&
             <>
                     <Button variant='outlined' color='success' onClick={handleClickOpen} >

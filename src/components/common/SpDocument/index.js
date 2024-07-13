@@ -19,7 +19,7 @@ const BinaryViewer = () => {
     } catch (error) {
       console.error('Error fetching document:', error);
     }
-  };
+  }
 
   return (
     <div>

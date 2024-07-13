@@ -3,7 +3,9 @@ import ActionDialog from 'components/common/Dialog/ActionDialog'
 import MoreActionDialog from 'components/common/Dialog/MoreActionDialog'
 import URL from 'url/apiURL'
 
-const {approveServiceProvider} = URL.ADMIN.REQUESTS.PENDINGREQUESTS
+const {approveServiceProvider,getSpecificPendingSpDocument} = URL.ADMIN.REQUESTS.PENDINGREQUESTS
+
+
 export const adminPendingRequestsColumn =[
     { title: "Id", field: "register_sp_id" },
     { title: "Name", field: "name" },
@@ -28,7 +30,12 @@ export const adminPendingRequestsColumn =[
                     rejectSp
                     url={approveServiceProvider}
                     payload={{ sp_status:'inactive',approval_status:false,email:rowData.email}}
-
+                />
+                <ActionDialog
+                    key="documentViewer"
+                    url={`${getSpecificPendingSpDocument}?register_sp_id=${rowData?.register_sp_id}`}
+                    documentViewer
+                    rowData={rowData}
                 />
             </Box>
     }
