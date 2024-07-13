@@ -30,7 +30,12 @@ const RaeesLoginComponent = () => {
     const [citiesAndState, setCitiesAndState] = useState({ state: [], cities: [] })
     const [forgotPassword, setForgotPasssword] = useState(false)
     const [files, setFiles] = useState([])
-    const form = new FormData()
+    // const form = new FormData()
+
+    const handleFileChange = (e)=>{
+        setFiles(e.target.files[0])
+        console.log(e.target.files[0]?.data)
+    }
     //TO GET ALL THE STATES
     useEffect(() => {
         if (cityData?.result?.length) {
@@ -123,7 +128,8 @@ const RaeesLoginComponent = () => {
         setFormData({})
     }
 
-    const registerFunction = async()=>{
+    const registerFunction = async(e)=>{
+        e?.preventDefault()
         let payload ={...formData,role:activeButton,approval_status:false,sp_status:"inactive"}
 
         // let isRequired = requiredTextfield(registerTextfield,formData)
@@ -148,20 +154,21 @@ const RaeesLoginComponent = () => {
         console.log("ln 152", payload)
         console.log("ln 153", form)
         if(payload.role === 'service provider'){
-
+            let formData = new FormData()
+            formData.append('business_document', files)
             let jsonBlob = new Blob([JSON.stringify(payload)],{
             type: 'application/json'
-               })
-             form?.append('form',jsonBlob)
+            })
+            
+            formData?.append('form',jsonBlob)
       
-
-            const config = {   
+            const config = {
                 headers : {
                     "Content-Type" : "multipart/form-data"
                 }
             }
-            console.log("ln 163 its url", url)
-            const {data,status} = await axios.post({url,payload:jsonBlob,config})
+            console.log(typeof url)
+            const {data,status} = await axios.post(url,formData,config)
 
             if(data && status === 200){
                 setLogin(!login)
@@ -436,6 +443,8 @@ const RaeesLoginComponent = () => {
                     // YOURE IN REGISTER, THIS IS FOR DEALER OR SERVICE PROVIDER ,SINCE ADMIN DONT HAVE AND CUSTOMER COVERED INSIDE THE LOGIN
                         
                         <Box className='register-container'>
+                        <form onSubmit={registerFunction}>
+
                             {isMobile && (
                             <Box className='mobile-logo-sign-up'>
                                 <Box>{isAdminPage ? <></>:<Link to={'/'}><img src={LogoImage} alt="logo Img" ></img></Link>}</Box>
@@ -465,11 +474,14 @@ const RaeesLoginComponent = () => {
                                 <CreateTextFields fields={registerTextfield.slice(9,11)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
                             </Box>
                             <Box className='eigth-row'>
-                                <FilepondImageUploader files={files} setFiles={setFiles} formData={form}/>
+                                <input type='file' name='document' onChange={handleFileChange}></input>
+                                {/* <FilepondImageUploader files={files} setFiles={setFiles} formData={form}/> */}
                             </Box>
                             <Box className='ninth-row'>
-                                <Button onClick={registerFunction}>REGISTER</Button>
+                                <button type='submit'>REGISTER</button>
+                                {/* <Button onSubmit={registerFunction}>REGISTER</Button> */}
                             </Box>
+                            </form>
                         </Box>
                         
 
