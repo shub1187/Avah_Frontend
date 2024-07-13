@@ -1,7 +1,7 @@
-import { Button, Dialog, DialogActions, DialogContent, IconButton, Typography } from "@mui/material"
+import { Box, Button, Dialog, DialogActions, DialogContent, IconButton, Typography } from "@mui/material"
 import { useFetch } from "hooks/useFetch"
 import { useEffect, useState } from "react"
-import { URL as URLS } from "url/apiURL"
+import URLS from "url/apiURL"
 import ArticleIcon from '@mui/icons-material/Article';
 import axios from "axios";
 
@@ -14,7 +14,7 @@ const DocumentViewer = ({rowData,type}) => {
     const [fileUrl, setFileUrl] = useState('');
 
     useEffect(()=>{
-        fetchDocument = async()=>{
+        const fetchDocument = async()=>{
             const typeOfApi = type==='pending'  || type==='rejected' ? 'register_sp_id' :'sp_id'
             try{
                 const {data} = await axios.get(`${getSpecificPendingSpDocument}?${typeOfApi}=${typeOfApi ==='sp_id' ? rowData?.sp_id: rowData?.register_sp_id}`,{
