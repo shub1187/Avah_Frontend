@@ -300,7 +300,8 @@ const RaeesLoginComponent = () => {
             label:"Business Address",
             name:"business_address",
             type:"text",
-            row:3,
+            row:2,
+            multiline:true,
             required:true,
             errormessage:'Address is Required'
         }, 
@@ -469,7 +470,7 @@ const RaeesLoginComponent = () => {
                             </Box>
                             <Box className='sixth-row'>
                                 <CreateTextFields fields={registerTextfield.slice(8,9)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
-                                <Box>
+                                <Box className='input-container'>
                                       <InputLabel sx={{color:'black', marginBottom:1}}>Business Document</InputLabel>
                                       <Box className='inputy'><input type='file' className='custom' name='business_document' onChange={handleFileChange}></input></Box>
                                 </Box>         

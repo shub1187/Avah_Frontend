@@ -17,10 +17,10 @@ const LandingPageServiceCards = ({data}) => {
                 </Typography>                
             </Grid>
             <Grid item >
-                <Typography fontSize={12}>Contact : <Typography fontSize={12} component={'span'}>{data?.business_name || 'N/A'}</Typography></Typography>
-                <Typography fontSize={12}>Email : <Typography fontSize={12} component={'span'}>{data?.email || 'N/A'}</Typography></Typography>
-                <Typography fontSize={12}>State : <Typography fontSize={12} component={'span'}>{data?.state || 'N/A'}</Typography></Typography>
-                <Typography fontSize={12}>City : <Typography fontSize={12} component={'span'}>{data?.city || 'N/A'}</Typography></Typography>
+                {/* <Typography fontSize={12}>Contact : <Typography fontSize={12} component={'span'}>{data?.business_name || 'N/A'}</Typography></Typography> */}
+                {/* <Typography fontSize={12}>Email : <Typography fontSize={12} component={'span'}>{data?.email || 'N/A'}</Typography></Typography> */}
+                <Typography fontSize={12}><Typography fontSize={12} component={'span'}>{data?.city || 'N/A'}</Typography></Typography>
+                <Typography fontSize={12}><Typography fontSize={12} component={'span'}>{data?.state || 'N/A'}</Typography></Typography>
             </Grid>
             {/* <Grid item><Typography fontWeight={'bold'}>$150</Typography></Grid> */}
             {/* <Grid item ><Button dis color='options'>View More <ArrowRightAltIcon/></Button></Grid> */}
