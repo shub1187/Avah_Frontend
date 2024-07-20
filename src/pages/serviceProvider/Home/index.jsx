@@ -47,7 +47,8 @@ const { getStatistics} = URL.SERVICE_PROVIDER.HOME
 const ServiceProviderHome = () => {
   const {isMobile} = useMobileResponsive()
   const {data:statistics} = useFetch(`${getStatistics}?sp_id=${localStorage.getItem('sp_id')}`)
-  
+  let permission = localStorage.getItem('permission_granted')
+//   let p= ["Users",'Roles',"Spares","Labour","Service Type","Service",'Billing']
   const { onChange, subItemOnChange } = useCustomerContext()
   const navigate = useNavigate()
 
@@ -75,39 +76,53 @@ return (
                   </Box>
               }
               <Box className='shortcut-container'>
-                  <DialogWrapper title={'Add New Labour'} cardIcon={{ img: <ManageAccountsIcon />, text: 'Add New Labour' }}>
-                    <SpAddLabourDialog/>
-                  </DialogWrapper>
-                  <DialogWrapper title={'Add New Spare'} cardIcon={{ img: <BuildIcon />, text: 'Add New Spare' }}>
-                    <SpCreateSpareDialog/>
-                  </DialogWrapper>
-                  <DialogWrapper title={'Create Appointment'} cardIcon={{ img: <EventAvailableIcon />, text: 'Create Appointment' }}>
-                    <SpCreateAppointmentDialog/>
-                  </DialogWrapper>
-                  <Box>
-                      <Button className='card-icon-button' variant='contained' color='whiteBackground' onClick={() => { navigate('/serviceProvider/roles'); onChange(2) }}>
-                          <Box className='container'>
-                              <Box className='image'>
-                                <AccountCircleIcon/>
-                              </Box>
-                              <Box className='text'>
-                                View Roles
-                              </Box>
-                          </Box>
-                      </Button>
-                  </Box>
-                  <Box>
-                      <Button className='card-icon-button' variant='contained' color='whiteBackground' onClick={() => { navigate('/serviceProvider/billing/pendingPayments'); onChange(6) }}>
-                          <Box className='container'>
-                              <Box className='image'>
-                                <EventNoteIcon className="purple"/>
-                              </Box>
-                              <Box className='text'>
-                                View Billings
-                              </Box>
-                          </Box>
-                      </Button>
-                  </Box>
+                  {permission?.includes('Labour' || 'All')?
+                        <DialogWrapper title={'Add New Labour'} cardIcon={{ img: <ManageAccountsIcon />, text: 'Add New Labour' }}>
+                            <SpAddLabourDialog/>
+                        </DialogWrapper>
+                  :<></>}
+                  {permission?.includes('Spares'|| 'All')?
+                        <DialogWrapper title={'Add New Spare'} cardIcon={{ img: <BuildIcon />, text: 'Add New Spare' }}>
+                            <SpCreateSpareDialog/>
+                        </DialogWrapper>
+                  :<></>}
+                  {permission?.includes('Service' || 'All')?
+                        <DialogWrapper title={'Create Appointment'} cardIcon={{ img: <EventAvailableIcon />, text: 'Create Appointment' }}>
+                            <SpCreateAppointmentDialog/>
+                        </DialogWrapper>
+                  :<></>}
+
+                  {permission?.includes('Roles'||'All')?
+                    <Box>
+                        <Button className='card-icon-button' variant='contained' color='whiteBackground' onClick={() => { navigate('/serviceProvider/roles'); onChange(2) }}>
+                            <Box className='container'>
+                                <Box className='image'>
+                                    <AccountCircleIcon/>
+                                </Box>
+                                <Box className='text'>
+                                    View Roles
+                                </Box>
+                            </Box>
+                        </Button>
+                    </Box>
+                   :
+                  <></>
+                  }
+                  {permission?.includes('All')?
+                    <Box>
+                        <Button className='card-icon-button' variant='contained' color='whiteBackground' onClick={() => { navigate('/serviceProvider/billing/pendingPayments'); onChange(6) }}>
+                            <Box className='container'>
+                                <Box className='image'>
+                                    <EventNoteIcon className="purple"/>
+                                </Box>
+                                <Box className='text'>
+                                    View Billings
+                                </Box>
+                            </Box>
+                        </Button>
+                    </Box>
+                  :<></> }
+                  {permission?.includes('All')?
                   <Box>
                       <Button className='card-icon-button' variant='contained' color='whiteBackground' onClick={() => { navigate('/serviceProvider/service/estimatesList'); onChange(5) }}>
                           <Box className='container'>
@@ -120,6 +135,7 @@ return (
                           </Box>
                       </Button>
                   </Box>
+                  :<></>}
               </Box>
           </Box>
           <Box m={3}>
