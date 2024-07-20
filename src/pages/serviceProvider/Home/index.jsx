@@ -76,23 +76,23 @@ return (
                   </Box>
               }
               <Box className='shortcut-container'>
-                  {permission?.includes('Labour' || 'All')?
+                  {permission?.includes('Labour' ) || permission?.includes('All')?
                         <DialogWrapper title={'Add New Labour'} cardIcon={{ img: <ManageAccountsIcon />, text: 'Add New Labour' }}>
                             <SpAddLabourDialog/>
                         </DialogWrapper>
                   :<></>}
-                  {permission?.includes('Spares'|| 'All')?
+                  {permission?.includes('Spares')|| permission?.includes('All')?
                         <DialogWrapper title={'Add New Spare'} cardIcon={{ img: <BuildIcon />, text: 'Add New Spare' }}>
                             <SpCreateSpareDialog/>
                         </DialogWrapper>
                   :<></>}
-                  {permission?.includes('Service' || 'All')?
+                  {permission?.includes('Service')|| permission?.includes('All')?
                         <DialogWrapper title={'Create Appointment'} cardIcon={{ img: <EventAvailableIcon />, text: 'Create Appointment' }}>
                             <SpCreateAppointmentDialog/>
                         </DialogWrapper>
                   :<></>}
 
-                  {permission?.includes('Roles'||'All')?
+                  {permission?.includes('Roles') || permission?.includes('All')?
                     <Box>
                         <Button className='card-icon-button' variant='contained' color='whiteBackground' onClick={() => { navigate('/serviceProvider/roles'); onChange(2) }}>
                             <Box className='container'>

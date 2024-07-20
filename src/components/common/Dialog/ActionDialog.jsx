@@ -1,4 +1,4 @@
-import { Autocomplete, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Input, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Autocomplete, Box, Button, Chip, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, Input, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
@@ -18,6 +18,9 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import DocumentViewer from '../DocumentViewer';
 import emailjs from '@emailjs/browser'
+import ControlledRadioButtonsGroup from '../Radio';
+import CreateAutoCompleteTextfield from '../Textfield/AutoCompleteTextfield';
+import EditFieldsDialog from './EditFieldsDialog';
 
 // import { title } from 'process';
 
@@ -246,19 +249,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
 
             {editEmployee &&
                 <>
-                    <IconButton color='options' onClick={handleClickOpen}>
-                        <Box className='flex ai-flex-start column'>
-                            <Typography fontSize={9}> &nbsp;Edit</Typography>
-                            <FiEdit style={{ cursor: 'pointer', marginRight: '5px' }} />
-                        </Box>
-                    </IconButton>
-                    <Dialog fullWidth open={open} onClose={handleClose} maxWidth='xs'>
-                    <DialogTitle>Employee<UnderLine/></DialogTitle>
-                    <DialogActions sx={{ mt: 3 }}>
-                        <Button color='options' onClick={handleClose}>CANCEL</Button>
-                        <Button variant={'contained'} color='options' onClick={StatusUpdate}>UPDATE</Button>
-                    </DialogActions>
-                    </Dialog>
+                    <EditFieldsDialog rowData={rowData}/>
                 </>
             }
 
