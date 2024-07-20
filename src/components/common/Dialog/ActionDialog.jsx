@@ -17,6 +17,7 @@ import Print from '../Print';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import DocumentViewer from '../DocumentViewer';
+import emailjs from '@emailjs/browser'
 
 // import { title } from 'process';
 
@@ -28,6 +29,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
     const [open, setOpen] = useState(false);
     const handleClickOpen = () => { setOpen(true) };
     const handleClose = () => { setOpen(false) };
+    const form = useRef()
 
     //Formdata Related And Required Checks
     const [formData, setFormData] = useState({});
@@ -55,7 +57,17 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
 
         // }
     ]
-    const StatusUpdate = async () => {
+
+
+    const StatusUpdate = async (email) => {
+        if(email==='email'){
+            await emailjs.sendForm(
+                'service_g3zcdsq',
+                'template_31iekfm',
+                form.current,
+                'DOdYs7DMCnx0zCOM7'
+            )
+        }
         try {
             setIsSubmitted(true); // Set the form as submitted
             if (reject || rejectSp) {
@@ -171,6 +183,11 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
 
             {approveSp && 
                 <>
+                <form ref={form} onSubmit={()=>StatusUpdate('email')}>
+                    <input type='hidden' value={rowData?.email} name={'email'}></input>
+                    <input type='hidden' value={rowData?.name} name={'name'}></input>
+                    <input type='hidden' value={true} name={'confirmation'}></input>
+
                 <IconButton color='options' onClick={() => { handleClickOpen() }}>
                     <Box className='flex ai-flex-start column'>
                         <Typography fontSize={9}> &nbsp;Approve</Typography>
@@ -181,9 +198,10 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
                     <DialogContent>Are you sure you want to <Typography component={'span'} fontWeight={'bold'} sx={{color:"#ad4970"}}>Approve</Typography>?</DialogContent>
                     <DialogActions sx={{ mt: 3 }}>
                         <Button color='options' onClick={handleClose}>CANCEL</Button>
-                        <Button variant={'contained'} color='options' onClick={StatusUpdate}>SUBMIT</Button>
+                        <Button type='submit' variant={'contained'} color='options' >SUBMIT</Button>
                     </DialogActions>
                 </Dialog>
+                </form>
                 </>
             }
 

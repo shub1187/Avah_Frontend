@@ -24,6 +24,7 @@ export const adminPendingRequestsColumn =[
                     approveSp
                     url={approveServiceProvider}
                     payload={{ sp_status:'active',approval_status:true,email:rowData.email}}
+                    rowData={rowData}
                 />
                 <ActionDialog
                     key="rejectServiceProvider"
