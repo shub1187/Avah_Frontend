@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { Autocomplete, Box, Button, Dialog, DialogActions, DialogTitle, FormControl, IconButton, InputLabel, TextField, Typography } from '@mui/material';
+import { Autocomplete, Box, Button, Chip, Dialog, DialogActions, DialogTitle, FormControl, IconButton, InputLabel, TextField, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import CreateTextFields from 'components/common/Textfield';
 import { cloneElement } from "react"
@@ -35,11 +35,28 @@ const MoreActionDialog = ({rowData,ActionDialog}) => {
                             return <Box width={'200px'} m={1}><InputLabel>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</InputLabel><TextField size='small' multiline={key=='pickup_address' || key =='sp_rejection_note'?true:true} rows={key=='pickup_address' || key =='sp_rejection_note'  ? 3:1} fullWidth  value={rowData[key]} disabled/></Box>
                         }
                         else if(Array.isArray(rowData[key])){
+                            return (<Box width={'420px'} m={1}>
+                            <InputLabel>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</InputLabel>
                             <Autocomplete
+                                value={rowData[key] || []}
                                 options={rowData[key] || []}
                                 disabled
+                                multiple
+                                readOnly
+                                // CloseIcon={null}
+                                // freeSolo
+                                // sx = {{width : '48%'}}  
                                 getOptionLabel={(option)=>option}
+                                renderInput={(params) => (
+                                    <TextField 
+                                    {...params} 
+                                    size='small'   
+                                                               
+                                   />
+                                )}
+                                // disableClearable={true}
                             />
+                            </Box>)
                         }
                     })}
                 </Box>

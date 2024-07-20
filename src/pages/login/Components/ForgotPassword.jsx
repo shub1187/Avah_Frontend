@@ -185,7 +185,7 @@ console.log("ln 12", user, adminResetPassword)
 
         },
         {
-            label:"Password",
+            label:"Enter New Password",
             name:"password",
             type:"password",
             fullWidth:true,
@@ -193,7 +193,7 @@ console.log("ln 12", user, adminResetPassword)
             errormessage:'Password is Required'
         },
         {
-            label:"Confirm Password",
+            label:"Confirm New Password",
             name:"cnfPassword",
             type:"password",
             fullWidth:true,
