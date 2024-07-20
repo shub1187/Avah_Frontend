@@ -18,6 +18,7 @@ const {getAllCitiesPerState,getAllBrandsMultiSelect} = URL.LOGIN_REGISTER
 
 const RaeesLoginComponent = () => {
     const [formData, setFormData] = useState({isBrandError:false});
+    console.log(formData)
     const [isSubmitted, setIsSubmitted] = useState(false);
     const {snackbar,loadingIndicator,fetchData} = useFetchFunction()
     const [login,setLogin] = useState(true)
@@ -135,6 +136,7 @@ const RaeesLoginComponent = () => {
     const registerFunction = async(e)=>{
         e?.preventDefault()
         let payload ={...formData,role:activeButton,approval_status:false,sp_status:"inactive"}
+        console.log(payload)
         setIsSubmitted(true)
         let isRequired = requiredTextfield(registerTextfield,formData)
         if(isRequired) {
@@ -142,7 +144,7 @@ const RaeesLoginComponent = () => {
                 setIsSubmitted(false)
             }, [2000]);
             if(payload.role==='service provider'){
-                if(formData?.brand_name?.length===0 || !formData?.brand_name){
+                if(formData?.serviced_brands?.length===0 || !formData?.serviced_brands){
                     setFormData((prev)=>({...prev,isBrandError:true}))
                     setTimeout(() => {
                         setFormData((prev)=>({...prev,isBrandError:false}))
@@ -472,9 +474,9 @@ const RaeesLoginComponent = () => {
                                     // disabled
                                     multiple
                                     id="fixed-tags-demo"
-                                    value={ formData?.brandName}
+                                    value={ formData?.serviced_brands}
                                     options={mappedBrandName || []}
-                                    onChange={(event, value) =>setFormData((prevData) => ({ ...prevData, ['brandName']: value }))} 
+                                    onChange={(event, value) =>setFormData((prevData) => ({ ...prevData, ['serviced_brands']: value }))} 
                                     getOptionLabel={(option)=>option}
                                     renderTags={(tagValue, getTagProps) =>
                                         tagValue.map((option, index) => (
