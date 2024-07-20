@@ -34,7 +34,7 @@ export default function ControlledRadioButtonsGroup({title,onChange,formField,na
         row
       >
         <FormControlLabel sx={{mr:4,color: 'rgb(12,143,9)','& .MuiSvgIcon-root': {color: 'rgb(173,73,112)',}}} color='options' value="active" control={<Radio />} label="Active" />
-        <FormControlLabel   sx={{color: 'rgb(233,56,72)','& .MuiSvgIcon-root': {color: 'rgb(173,73,112)',}}} color='options' value="inActive" control={<Radio />} label="Inactive" />
+        <FormControlLabel   sx={{color: 'rgb(233,56,72)','& .MuiSvgIcon-root': {color: 'rgb(173,73,112)',}}} color='options' value="inactive" control={<Radio />} label="Inactive" />
       </RadioGroup>
     </FormControl>
   );

@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Chip, Grid, InputLabel, Paper, TextField, ThemeProvider, ToggleButton, ToggleButtonGroup, Typography, createTheme } from '@mui/material'
+import { Autocomplete, Box, Button, Checkbox, Chip, Grid, InputLabel, Paper, TextField, ThemeProvider, ToggleButton, ToggleButtonGroup, Typography, createTheme } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import LogoImage from "assets/img/logo.png"
 import AvahTransparent from 'assets/img/avah_tranparent .png'
@@ -14,9 +14,10 @@ import ForgotPassword from './Components/ForgotPassword'
 import FilepondImageUploader  from 'components/common/FilePondImageUploader'
 import axios from 'axios'
 // import { FilepondImageUploader } from 'components/common/FilePondImageUploader'
-const {getAllCitiesPerState} = URL.LOGIN_REGISTER
+const {getAllCitiesPerState,getAllBrandsMultiSelect} = URL.LOGIN_REGISTER
+
 const RaeesLoginComponent = () => {
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState({isBrandError:false});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const {snackbar,loadingIndicator,fetchData} = useFetchFunction()
     const [login,setLogin] = useState(true)
@@ -30,6 +31,9 @@ const RaeesLoginComponent = () => {
     const [citiesAndState, setCitiesAndState] = useState({ state: [], cities: [] })
     const [forgotPassword, setForgotPasssword] = useState(false)
     const [files, setFiles] = useState([])
+    const {data:multiSelectBusinessData} = useFetch(getAllBrandsMultiSelect)
+    let mappedBrandName = multiSelectBusinessData?.data?.map((val)=>val?.value)
+
     // const form = new FormData()
 
     const handleFileChange = (e)=>{
@@ -132,16 +136,22 @@ const RaeesLoginComponent = () => {
         e?.preventDefault()
         let payload ={...formData,role:activeButton,approval_status:false,sp_status:"inactive"}
 
-        // let isRequired = requiredTextfield(registerTextfield,formData)
-        // if(isRequired) {
-        //     setTimeout(() => {
-        //         setIsSubmitted(false)
-        //     }, [2000]);
-        //     return
-        // } 
-
-      
-    
+        let isRequired = requiredTextfield(registerTextfield,formData)
+        if(isRequired) {
+            setTimeout(() => {
+                setIsSubmitted(false)
+            }, [2000]);
+            return
+        }
+        if(payload.role==='service provider'){
+            if(formData?.brand_name?.length===0 || !formData?.brand_name){
+                setFormData((prev)=>({...prev,isBrandError:true}))
+                setTimeout(() => {
+                    setFormData((prev)=>({...prev,brand:false}))
+                  }, [2000])
+                return
+            }
+        }       
         setIsSubmitted(true)
 
         let url = ''
@@ -455,6 +465,32 @@ const RaeesLoginComponent = () => {
                             <Box className='welcome'>Welcome {activeButton==='service provider'?'Service Provider':activeButton==='dealers'?'Dealer':''}</Box>
                             <Box className='first-row'>
                                 <CreateTextFields fields={registerTextfield.slice(0,1)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
+                                <InputLabel sx={{ mb: 1 }}>Brand Service*</InputLabel>
+                                <Autocomplete
+                                freeSolo
+                                // disabled
+                                multiple
+                                id="fixed-tags-demo"
+                                value={ formData?.brandName}
+                                options={mappedBrandName || []}
+                                onChange={(event, value) =>setFormData((prevData) => ({ ...prevData, ['brandName']: value }))} 
+                                getOptionLabel={(option)=>option}
+                                renderTags={(tagValue, getTagProps) =>
+                                    tagValue.map((option, index) => (
+                                    <Chip
+                                        label={option|| ''}
+                                        {...getTagProps({ index })}
+                                    />
+                                    ))
+                                }
+                                renderInput={(params) => (
+                                    <TextField 
+                                    {...params} 
+                                    size='small'                                 
+                                    error={formData?.isBrandError}
+                                    helperText={formData?.isBrandError ? 'Must Select One Brand Atleast' : ''}/>
+                                )}
+                                />
                             </Box>
                             <Box className='second-row'>
                                 <CreateTextFields fields={registerTextfield.slice(1,3)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
@@ -472,7 +508,7 @@ const RaeesLoginComponent = () => {
                                 <CreateTextFields fields={registerTextfield.slice(8,9)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
                                 <Box className='input-container'>
                                       <InputLabel sx={{color:'black', marginBottom:1}}>Business Document</InputLabel>
-                                      <Box className='inputy'><input type='file' className='custom' name='business_document' onChange={handleFileChange}></input></Box>
+                                      <Box className='inputy'><input accept='.pdf' type='file' className='custom' name='business_document' onChange={handleFileChange}></input></Box>
                                 </Box>         
                             </Box>
                             <Box className='seventh-row'>
