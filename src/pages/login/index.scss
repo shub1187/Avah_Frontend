@@ -245,8 +245,13 @@
 
             .first-row{
                 display: flex;
+                justify-content: space-between;
+
                 & > :first-child{
                     flex:0.49
+                }
+                :nth-child(2){
+                    flex:0.49;
                 }
             }
             .second-row{

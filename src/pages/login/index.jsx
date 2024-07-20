@@ -135,24 +135,24 @@ const RaeesLoginComponent = () => {
     const registerFunction = async(e)=>{
         e?.preventDefault()
         let payload ={...formData,role:activeButton,approval_status:false,sp_status:"inactive"}
-
+        setIsSubmitted(true)
         let isRequired = requiredTextfield(registerTextfield,formData)
         if(isRequired) {
             setTimeout(() => {
                 setIsSubmitted(false)
             }, [2000]);
+            if(payload.role==='service provider'){
+                if(formData?.brand_name?.length===0 || !formData?.brand_name){
+                    setFormData((prev)=>({...prev,isBrandError:true}))
+                    setTimeout(() => {
+                        setFormData((prev)=>({...prev,isBrandError:false}))
+                      }, [2000])
+                    return
+                }
+            }       
             return
         }
-        if(payload.role==='service provider'){
-            if(formData?.brand_name?.length===0 || !formData?.brand_name){
-                setFormData((prev)=>({...prev,isBrandError:true}))
-                setTimeout(() => {
-                    setFormData((prev)=>({...prev,brand:false}))
-                  }, [2000])
-                return
-            }
-        }       
-        setIsSubmitted(true)
+
 
         let url = ''
         if(payload.role ==='customer') url = URL.LOGIN_REGISTER.register_customer
@@ -465,32 +465,35 @@ const RaeesLoginComponent = () => {
                             <Box className='welcome'>Welcome {activeButton==='service provider'?'Service Provider':activeButton==='dealers'?'Dealer':''}</Box>
                             <Box className='first-row'>
                                 <CreateTextFields fields={registerTextfield.slice(0,1)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
-                                <InputLabel sx={{ mb: 1 }}>Brand Service*</InputLabel>
-                                <Autocomplete
-                                freeSolo
-                                // disabled
-                                multiple
-                                id="fixed-tags-demo"
-                                value={ formData?.brandName}
-                                options={mappedBrandName || []}
-                                onChange={(event, value) =>setFormData((prevData) => ({ ...prevData, ['brandName']: value }))} 
-                                getOptionLabel={(option)=>option}
-                                renderTags={(tagValue, getTagProps) =>
-                                    tagValue.map((option, index) => (
-                                    <Chip
-                                        label={option|| ''}
-                                        {...getTagProps({ index })}
+                                <Box>
+                                    <InputLabel sx={{ mb: 1 }}>Brand Service*</InputLabel>
+                                    <Autocomplete
+                                    freeSolo
+                                    // disabled
+                                    multiple
+                                    id="fixed-tags-demo"
+                                    value={ formData?.brandName}
+                                    options={mappedBrandName || []}
+                                    onChange={(event, value) =>setFormData((prevData) => ({ ...prevData, ['brandName']: value }))} 
+                                    getOptionLabel={(option)=>option}
+                                    renderTags={(tagValue, getTagProps) =>
+                                        tagValue.map((option, index) => (
+                                        <Chip
+                                            label={option|| ''}
+                                            {...getTagProps({ index })}
+                                        />
+                                        ))
+                                    }
+                                    renderInput={(params) => (
+                                        <TextField 
+                                        {...params} 
+                                        size='small'                                 
+                                        error={formData?.isBrandError}
+                                        helperText={formData?.isBrandError ? 'Must Select One Brand Atleast' : ''}/>
+                                    )}
                                     />
-                                    ))
-                                }
-                                renderInput={(params) => (
-                                    <TextField 
-                                    {...params} 
-                                    size='small'                                 
-                                    error={formData?.isBrandError}
-                                    helperText={formData?.isBrandError ? 'Must Select One Brand Atleast' : ''}/>
-                                )}
-                                />
+                                </Box>
+
                             </Box>
                             <Box className='second-row'>
                                 <CreateTextFields fields={registerTextfield.slice(1,3)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
