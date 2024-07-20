@@ -170,10 +170,13 @@ const RaeesLoginComponent = () => {
             // type: 'application/json'
             // })
             for(let key in payload){
-                formData.append(key,payload[key])
-            }
-            // formData?.append('form',jsonBlob)
-      
+                if(key==='serviced_brands'){
+                    formData.append(key,JSON.stringify(payload[key]))
+                }
+                else{
+                    formData.append(key,payload[key])
+                }
+            }      
             const config = {
                 headers : {
                     "Content-Type" : "multipart/form-data"
