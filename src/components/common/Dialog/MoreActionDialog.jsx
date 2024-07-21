@@ -35,7 +35,7 @@ const MoreActionDialog = ({rowData,ActionDialog}) => {
                             return <Box width={'200px'} m={1}><InputLabel>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</InputLabel><TextField size='small' multiline={key=='pickup_address' || key =='sp_rejection_note'?true:true} rows={key=='pickup_address' || key =='sp_rejection_note'  ? 3:1} fullWidth  value={rowData[key]} disabled/></Box>
                         }
                         else if(Array.isArray(rowData[key])){
-                            return (<Box width={'420px'} m={1}>
+                            return (<Box width={rowData?.permission_granted?'210px': '420px'} m={1}>
                             <InputLabel>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</InputLabel>
                             <Autocomplete
                                 value={rowData[key] || []}
