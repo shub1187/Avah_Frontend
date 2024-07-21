@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { Alert, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, IconButton, MenuItem, Select, Snackbar, TextField, ThemeProvider, Tooltip, Typography, createTheme } from '@mui/material';
+import { Alert, Autocomplete, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, IconButton, InputLabel, MenuItem, Select, Snackbar, TextField, ThemeProvider, Tooltip, Typography, createTheme } from '@mui/material';
 import CreateTextFields from 'components/common/Textfield';
 import { useCustomerFetchFunction, useFetch, useFetchFunction } from 'hooks/useFetch';
 import ControlledRadioButtonsGroup from 'components/common/Radio';
@@ -26,17 +26,20 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
   
     useEffect(()=>{
       const matchingSP = spList.find((sp) => sp.address === formData.address);
+      console.log(matchingSP)
       if (matchingSP) {
         setFormData((prev)=>({
           ...prev,
           address: matchingSP.address,
-          sp_mobile:matchingSP.sp_mobile
+          sp_mobile:matchingSP.sp_mobile,
+          brands_serviced:matchingSP.brands_serviced
         }));
       } else {
         setFormData((prev)=>({
           ...prev,
           address: "",
-          sp_mobile:""
+          sp_mobile:"",
+          brands_serviced:[]
         }));
       }
     },[formData.select_service_provider])
@@ -321,29 +324,49 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     <div>
         <DialogContent  sx={{pt:2,pb:0}}>
             <Grid container xs={12} mt={3}>
-              <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>  
+              <Grid item xs={12} sm={2.6} mr={!isMobile && 4}>  
                   <CreateAutoCompleteTextfield fullWidth whiteColor height options={cityArray} fields={appointmentList.slice(0,1)} onChange={handleFieldChange} onSelect={handleSelectCity}  formField={formData} isSubmitted={isSubmitted}/>
                   <CreateAutoCompleteTextfield  fullWidth whiteColor height options={spList} fields={appointmentList.slice(1,2)} onChange={handleFieldChange} onSelect={handleServiceProviderChange}  formField={formData} isSubmitted={isSubmitted}/>
                   <CreateTextFields  fields={appointmentList.slice(2,3)} onChange={handleFieldChange}  formField={formData} />
                   <CreateTextFields  fields={appointmentList.slice(3,4)} onChange={handleFieldChange}  formField={formData} />
-                  <CreateAutoCompleteTextfield fullWidth whiteColor height options={customerVehicleList?.data} fields={appointmentList.slice(4,5)} onChange={handleFieldChange} onSelect={handleSearchIconClick} formField={formData} isSubmitted={isSubmitted} />
-                  <CreateTextFields  fields={appointmentList.slice(5,6)} onChange={handleFieldChange}  formField={formData} />
+                  <Box>
+                            <InputLabel>Brands Serviced</InputLabel>
+                            <Autocomplete
+                                value={formData?.brands_serviced || []}
+                                options={formData?.brands_serviced|| []}
+                                disabled
+                                multiple
+                                readOnly
+                                getOptionLabel={(option)=>option}
+                                renderInput={(params) => (
+                                    <TextField 
+                                    {...params} 
+                                    size='small'   
+                                                               
+                                   />
+                                )}
+                            />
+                  </Box>
               </Grid>
-              <Grid item xs={12} sm={3.6} mr={!isMobile && 4}>
+              <Grid item xs={12} sm={2.6} mr={!isMobile && 4}>
                 <Grid container xs={12} >
-                {/* <Grid  xs={12} item><CreateTextFields  fields={appointmentList.slice(5,6)} onChange={handleFieldChange}  formField={formData} /></Grid> */}
-                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(6,12)} onChange={handleFieldChange} formField={formData} /></Grid>
+                <Grid  xs={12} item><CreateAutoCompleteTextfield fullWidth whiteColor height options={customerVehicleList?.data} fields={appointmentList.slice(4,5)} onChange={handleFieldChange} onSelect={handleSearchIconClick} formField={formData} isSubmitted={isSubmitted} /></Grid>
+                  <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(6,9)} onChange={handleFieldChange} formField={formData} /></Grid>
+                  <Grid  xs={12} item><CreateTextFields  fields={appointmentList.slice(5,6)} onChange={handleFieldChange}  formField={formData} /></Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={12} sm={3.6} >
+              <Grid item xs={12} sm={2.6} mr={!isMobile && 4}>
                 <Grid container xs={12}>
-                {/* <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(10,11)} onChange={handleFieldChange} formField={formData} /></Grid> */}
+                <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(9,12)} onChange={handleFieldChange} formField={formData} /></Grid>
                 <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(12,13)} onChange={handleFieldChange} formField={formData}/></Grid>
                 <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(13,14)} onChange={handleFieldChange} formField={formData}/></Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={12} sm={2.6} >
+                <Grid container xs={12}>
                   <Grid  xs={12} item><CreateDateFields fields={appointmentList.slice(14,15)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
                   <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(15,16)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
                   <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(16,17)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
-
                   {formData.pickup_drop=='Company Executive' &&
                     <Grid  xs={12} item><CreateTextFields fields={appointmentList.slice(17,18)} onChange={handleFieldChange} formField={formData} isSubmitted={isSubmitted}/></Grid>
                   }
