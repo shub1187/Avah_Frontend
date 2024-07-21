@@ -9,7 +9,7 @@ export const adminServiceProviderApprovedColumn =[
     { title: "Email", field: "email" },
     { title: "Mobile Number", field: "business_contact" },
     { title: "Status", field: "sp_status", render:(rowData)=>
-        <Chip label={`${rowData?.sp_status==='active'?'Active':'Inactive'}`} color={`${rowData?.sp_status==='active'?'success':'error'}`}/>
+        <Chip label={`${rowData?.sp_status==='Active'?'Active':'Inactive'}`} color={`${rowData?.sp_status==='Active'?'success':'error'}`}/>
     },
     {
         title: 'Action', render: (rowData) =>
