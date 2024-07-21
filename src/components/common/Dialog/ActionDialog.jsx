@@ -20,7 +20,7 @@ import DocumentViewer from '../DocumentViewer';
 import emailjs from '@emailjs/browser'
 import ControlledRadioButtonsGroup from '../Radio';
 import CreateAutoCompleteTextfield from '../Textfield/AutoCompleteTextfield';
-import EditFieldsDialog from './EditFieldsDialog';
+import EditFieldsDialog from '../../../pages/serviceProvider/Users/Employees/Components/EditFieldsDialog';
 
 // import { title } from 'process';
 const spApprovedMail = `Congratulations !
