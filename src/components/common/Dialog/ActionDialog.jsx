@@ -68,14 +68,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
 
 
     const StatusUpdate = async (email) => {
-        if(email==='email' ){
-            await emailjs.sendForm(
-                'service_g3zcdsq',
-                'template_31iekfm',
-                form.current,
-                'DOdYs7DMCnx0zCOM7'
-            )
-        }
+
         try {
             setIsSubmitted(true); // Set the form as submitted
             if (reject || rejectSp) {
@@ -94,14 +87,14 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
             }
             if (url) {
                 let {isSuccess} =await fetchData(obj)
-                // if(email==='email' && isSuccess){
-                //     await emailjs.sendForm(
-                //         'service_g3zcdsq',
-                //         'template_31iekfm',
-                //         form.current,
-                //         'DOdYs7DMCnx0zCOM7'
-                //     )
-                // }
+                if(email==='email' && isSuccess){
+                    await emailjs.sendForm(
+                        'service_g3zcdsq',
+                        'template_31iekfm',
+                        form.current,
+                        'DOdYs7DMCnx0zCOM7'
+                    )
+                }
             }
             setFormData({})
             setOpen(false)
