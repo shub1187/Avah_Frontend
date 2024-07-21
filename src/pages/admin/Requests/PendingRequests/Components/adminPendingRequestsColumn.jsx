@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Chip } from '@mui/material'
 import ActionDialog from 'components/common/Dialog/ActionDialog'
 import MoreActionDialog from 'components/common/Dialog/MoreActionDialog'
 import URL from 'url/apiURL'
@@ -12,7 +12,9 @@ export const adminPendingRequestsColumn =[
     { title: "Business", field: "business_name" },
     { title: "Email", field: "email" },
     { title: "Mobile Number", field: "business_contact" },
-    { title: "Status", field: "sp_status" },
+    { title: "Status", field: "sp_status", render:(rowData)=>
+        <Chip label={`${rowData?.sp_status==='Active'?'Active':'Inactive'}`} color={`${rowData?.sp_status==='Active'?'success':'error'}`}/>
+    },
     {
         title: 'Action', render: (rowData) =>
             <Box display='flex'>
