@@ -23,6 +23,11 @@ import CreateAutoCompleteTextfield from '../Textfield/AutoCompleteTextfield';
 import EditFieldsDialog from './EditFieldsDialog';
 
 // import { title } from 'process';
+const spApprovedMail = `Congratulations !
+Your account have been approved
+Kindly login to proceed`
+
+const spRejectedMail = `Your account have been rejected for the following reason`
 
 const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, documentViewer,type, viewJobCard,viewPaidInvoice,downloadPdf, print, approve, reject, approveSp, rejectSp, createEstimate, editEstimate, editRole, editEmployee, deleteSpare, deleteLabour ,deleteEmployee, deleteRole, payload, params, url, noLoading, noSnackbar, setPage, setEyeIconValue, rowData, setInvoice}) => {
     const { fetchData, snackbar, loadingIndicator } = useFetchFunction()
@@ -63,7 +68,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
 
 
     const StatusUpdate = async (email) => {
-        if(email==='email'){
+        if(email==='email' ){
             await emailjs.sendForm(
                 'service_g3zcdsq',
                 'template_31iekfm',
@@ -88,7 +93,15 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
                 noSnackbar: noSnackbar || false
             }
             if (url) {
-                await fetchData(obj)
+                let {isSuccess} =await fetchData(obj)
+                // if(email==='email' && isSuccess){
+                //     await emailjs.sendForm(
+                //         'service_g3zcdsq',
+                //         'template_31iekfm',
+                //         form.current,
+                //         'DOdYs7DMCnx0zCOM7'
+                //     )
+                // }
             }
             setFormData({})
             setOpen(false)
@@ -190,6 +203,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
                     <input type='hidden' value={rowData?.email} name={'email'}></input>
                     <input type='hidden' value={rowData?.name} name={'name'}></input>
                     <input type='hidden' value={true} name={'confirmation'}></input>
+                    <input type='hidden' value={spApprovedMail} name={'sp_confirmation_note'}></input>
 
                 <IconButton color='options' onClick={() => { handleClickOpen() }}>
                     <Box className='flex ai-flex-start column'>
@@ -201,7 +215,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
                     <DialogContent>Are you sure you want to <Typography component={'span'} fontWeight={'bold'} sx={{color:"#ad4970"}}>Approve</Typography>?</DialogContent>
                     <DialogActions sx={{ mt: 3 }}>
                         <Button color='options' onClick={handleClose}>CANCEL</Button>
-                        <Button type='submit' variant={'contained'} color='options' >SUBMIT</Button>
+                        <Button type="submit" variant={'contained'} color='options' onClick={()=>StatusUpdate('email')}>SUBMIT</Button>
                     </DialogActions>
                 </Dialog>
                 </form>
@@ -210,6 +224,11 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
 
             {rejectSp && 
                 <>
+                <form ref={form} onSubmit={()=>StatusUpdate('email')}>
+                    <input type='hidden' value={rowData?.email} name={'email'}></input>
+                    <input type='hidden' value={rowData?.name} name={'name'}></input>
+                    <input type='hidden' value={true} name={'confirmation'}></input>
+                    <input type='hidden' value={`${spRejectedMail}\n${formData?.sp_rejection_note}`} name={'sp_rejection_note'}></input>
                 <IconButton color='options' onClick={() => { handleClickOpen() }}>
                     <Box className='flex ai-flex-start column'>
                         <Typography fontSize={9}> &nbsp;Reject</Typography>
@@ -222,9 +241,10 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
                     </Box>
                     <DialogActions sx={{ mt: 3 }}>
                         <Button color='options' onClick={handleClose}>CANCEL</Button>
-                        <Button variant={'contained'} color='options' onClick={StatusUpdate}>SUBMIT</Button>
+                        <Button variant={'contained'} color='options' onClick={()=>StatusUpdate('email')}>SUBMIT</Button>
                     </DialogActions>
                 </Dialog>
+                </form>
                 </>
             }
             

@@ -88,64 +88,48 @@ const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialog
     // put your mock and test here
     const mock = {
       "results": [
-          {
-              "appointment_id": 10,
-              "name": "shadab shaikh",
-              "vehicle_number": "GJ85UU9988",
-              "vehicle_type": "Commercial",
-              "brand": "Maruti Suzuki",
-              "model": "Swift",
-              "customization": "Showroom Fitted",
-              "fuel_type": "Electric",
-              "email": "shadab@gmail.com",
-              "mobile_number": "000025418",
-              "pickup_drop": "Self Drive",
-              "pickup_address": 'MM Street Kodaikanl, Building Society,624101.TamilNadu Kodianalas',
-              "appointment_date": "2023-10-23T18:30:00.000Z",
-              "appointment_time": "11am",
-              "appointment_status": "Approved",
-              "estimate_status": "pending",
-              'labour_name':"sds",
-              'hsn_sac':'sdsds',
-              'tax':'232',
-              'advisor_name':'Manmohan Singh',
-              'technician_name':['Rahul','Amit','Pullav'],
-              'kilometers_driven':6000,
-              "payment_status": 'Paid',
-              "payment_method": "Google Pay",
-              "service_completed_on": '22-Feb-2022',
-              "invoice_amount": '7522',
-              "invoice_collected_by": 'Bablue',
-              "invoice_created_by": 'Valoiya',
-  
-              "estimate_approval_or_rejection_date": "2024-01-22",
-              "estimate_created_by": '2024-02-22',
-              "jobcard_created_by": '2024-02-20',
-              "jobcard_opened_on": '2024-02-24',
-              "estimate_rejection_note": 'No Money',
-  
-              "cust_cancellation_note": null,
-              "sp_rejection_note": null,
-              "sp_cancellation_note": 'Bla bal',
-          },
-          {
-              "appointment_id": 3,
-              "name": "Sakshi Patil",
-              "vehicle_number": "MH43AB3133",
-              "vehicle_type": "personal",
-              "brand": "Maruti Suzuki",
-              "model": "Swift",
-              "customization": "Showroom Fitted",
-              "fuel_type": "Diesel",
-              "email": "sakshi@gmailcom",
-              "mobile_number": "7755663322",
-              "pickup_drop": "Company Executive",
-              "pickup_address": "Flat No.-02 Sawan Mansion Plot no-27 Kopar Khairane Navi Mumbai",
-              "appointment_date": "2023-08-19T18:30:00.000Z",
-              "appointment_time": "11am",
-              "appointment_status": "Pending",
-              "estimate_status": "pending"
-          }
+        {
+          "register_sp_id": 62,
+          "approval_status": false,
+          "is_deleted": false,
+          "business_type": "Partnership",
+          "full_address": "Charoli Phata Pune Alandi Maharashtra 784512",
+          "role": "service provider",
+          "business_address": "Charoli Phata Pune",
+          "sp_status": "inactive",
+          "business_contact": "784512012",
+          "sp_rejection_note": null,
+          "state": "Maharashtra",
+          "city": "Alandi",
+          "pin_code": "784512",
+          "name": "Avanti Nikam",
+          "email": "mohamedraees2@gmail.com",
+          "business_name": "Avanti Auto Services",
+          "serviced_brands": [
+              "Maruti Suzuki",
+              "Morris Garage"
+          ]
+      },
+      {
+          "register_sp_id": 60,
+          "approval_status": false,
+          "is_deleted": false,
+          "business_type": "Limited Liability Partnership",
+          "full_address": "Warjhe Pune Wakad Maharashtra 412105",
+          "role": "service provider",
+          "business_address": "Warjhe Pune",
+          "sp_status": "inactive",
+          "business_contact": "7845121245",
+          "sp_rejection_note": null,
+          "state": "Maharashtra",
+          "city": "Wakad",
+          "pin_code": "412105",
+          "name": "Pavan Kumbhar",
+          "email": "pavan@gmail.com",
+          "business_name": "Pavan Auto services",
+          "serviced_brands": null
+      },
+
       ],
     }
     return(
@@ -203,35 +187,35 @@ const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialog
       }}
       isLoading={false}
       key={key || 'default'}
-      // data={mock?.results || []}
-      data={async (query) => {
-        try {
-            let url = `${URL}?${sp_id ? `sp_id=${sp_id}&` :''}${customer_id ? `customer_id=${customer_id}&`:''}`
-          if(query.search){
-            url+=`q=${query.search}`
-          }
-          if(query.orderBy){
-            url+=`&_sort=${query.orderBy.field}&_order=${query.orderDirection}`
-          }
-          url+=`&_page=${query.page+1}`
-          url+=`&_limit=${query.pageSize}`
-          const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
-          const response = await axios.get(url,{headers});
-          const data = response?.data?.data?.results; // Adjust this based on your API response structure
-          return {
-            data: data || [], // Change this to match your data structure
-            page: query.page,
-            totalCount:20, // Assuming the total count is the length of the data array
-          };
-        } catch (error) {
-          console.error("Error fetching data:", error);
-          return {
-            data: [],
-            page: query.page,
-            totalCount: 0,
-          };
-        }
-      }}
+      data={mock?.results || []}
+      // data={async (query) => {
+      //   try {
+      //       let url = `${URL}?${sp_id ? `sp_id=${sp_id}&` :''}${customer_id ? `customer_id=${customer_id}&`:''}`
+      //     if(query.search){
+      //       url+=`q=${query.search}`
+      //     }
+      //     if(query.orderBy){
+      //       url+=`&_sort=${query.orderBy.field}&_order=${query.orderDirection}`
+      //     }
+      //     url+=`&_page=${query.page+1}`
+      //     url+=`&_limit=${query.pageSize}`
+      //     const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
+      //     const response = await axios.get(url,{headers});
+      //     const data = response?.data?.data?.results; // Adjust this based on your API response structure
+      //     return {
+      //       data: data || [], // Change this to match your data structure
+      //       page: query.page,
+      //       totalCount:20, // Assuming the total count is the length of the data array
+      //     };
+      //   } catch (error) {
+      //     console.error("Error fetching data:", error);
+      //     return {
+      //       data: [],
+      //       page: query.page,
+      //       totalCount: 0,
+      //     };
+      //   }
+      // }}
       // actions={[
       //   {
       //     icon: 'refresh',
