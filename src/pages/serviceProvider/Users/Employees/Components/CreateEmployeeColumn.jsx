@@ -4,7 +4,7 @@ import MoreActionDialog from "components/common/Dialog/MoreActionDialog";
 import URL from "url/apiURL"
 import EditFieldsDialog from "./EditFieldsDialog";
 
-const {deleteSpare} = URL.SERVICE_PROVIDER.SPARES
+const {deleteEmployee} = URL.SERVICE_PROVIDER.USERS.EMPLOYEES
 export const createEmployeeColumn = [
     { title: "Name", field: "name" },
     { title: "Email", field: "email" },
@@ -22,12 +22,12 @@ export const createEmployeeColumn = [
                 payload={{'spare_id':rowData?.spare_id}} 
                 rowData={ rowData}
             /> */}
-            {/* <ActionDialog
+            <ActionDialog
                 deleteEmployee
-                url={deleteSpare}
-                payload={{'spare_id':rowData?.spare_id}} 
+                url={deleteEmployee}
+                payload={{'emp_id':rowData?.emp_id}} 
                 rowData={ rowData}
-            /> */}
+            />
 
         </Box>)
     }

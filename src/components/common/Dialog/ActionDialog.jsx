@@ -346,7 +346,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
                     </IconButton>
                     <Dialog fullWidth open={open} onClose={handleClose} maxWidth='xs'>
                         <DialogTitle>Employee<UnderLine/> </DialogTitle>
-                        <DialogContent><Typography component={'span'} color='#ad4970' >{rowData?.spare_name}</Typography> will be deleted. Please click on <Typography component={'span'} color='#ad4970'>Delete</Typography> to proceed </DialogContent>
+                        <DialogContent><Typography component={'span'} color='#ad4970' >{rowData?.name}</Typography> will be deleted. Please click on <Typography component={'span'} color='#ad4970'>Delete</Typography> to proceed </DialogContent>
                         <DialogActions sx={{ mt: 3 }}>
                             <Button color='options' onClick={handleClose}>CANCEL</Button>
                             <Button variant={'contained'} color='options' onClick={StatusUpdate}>DELETE</Button>

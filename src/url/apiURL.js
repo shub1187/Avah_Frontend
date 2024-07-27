@@ -84,7 +84,8 @@ const URL = {
                 getAllEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllEmployee`),
                 createEmployee :replaceUrl(`${BASE_URL}/api/serviceprovider/createEmployee`),
                 getAllPermissionPerRoles : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllPermissionPerRoles`),
-                updateEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/updateEmployee`)
+                updateEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/updateEmployee`),
+                deleteEmployee :replaceUrl(`${BASE_URL}/api/serviceprovider/deleteEmployee`)
 
             }
         },
