@@ -33,11 +33,17 @@ const Appy = () => {
             isAdminPage ?
               <Route path="/admin" element={<RaeesLoginComponent />} />
               :
-              localStorage.getItem('TYPE_OF_USER') == "2" || localStorage.getItem('TYPE_OF_USER') == '5' ?
+              localStorage.getItem('TYPE_OF_USER') == "2" ?
               <>
                 <Route path="/" element={<ServiceProviderLayout />}> {raeesRoute}</Route>
               </>
               :
+              localStorage.getItem('TYPE_OF_USER') == '5' ? 
+              <>
+              <Route path="/" element={<ServiceProviderLayout />}> {raeesRoute}</Route>
+            </>
+              :
+
               localStorage.getItem('TYPE_OF_USER') == '3' ?
               <>
                 <Route path="/" element={<CustomerLayout />}>{customerRoute}</Route>

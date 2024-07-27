@@ -102,10 +102,11 @@ const RaeesLoginComponent = () => {
                 // console.log("ln 67", payload)
                 setTimeout(() => {
                     navigate('/serviceProvider/home');
-                    window.location.reload();
+                    navigate(0)
+                    // window.location.reload();
                 }, 0);
                 // localStorage.setItem('TYPE_OF_USER', loginDetails.TYPE_OF_USER);       
-                localStorage.setItem('TYPE_OF_USER', "2");
+                localStorage.setItem('TYPE_OF_USER', loginDetails.TYPE_OF_USER);
                 localStorage.setItem('role', loginDetails.designation);
                 // localStorage.setItem('role', "Service Provider");
                 localStorage.setItem('access_tokenSP', loginDetails.token);
