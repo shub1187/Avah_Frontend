@@ -55,7 +55,6 @@ const SpEstimateList = () => {
         }
         if((sparePayload && sparePayload.length) || (labourPayload && labourPayload.length) ){
             await fetchData(obj)
-            tableRef?.current?.onQueryChange()
         }
     }
 

@@ -10,7 +10,7 @@ import { globalAppTheme } from "components/common/Themes/GlobalAppTheme";
 
 
 const CustomerMaterialTableContext = createContext()
-export const useCustomMaterialTableContext = useContext(CustomerMaterialTableContext)
+export const useCustomMaterialTableContext = ()=>useContext(CustomerMaterialTableContext)
 
 const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialogButtonName, clickButton , buttonName}) => {
     const tableRef = createRef();
