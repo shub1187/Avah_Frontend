@@ -252,7 +252,7 @@ const SpEstimateList = () => {
                           <Box >: {eyeIconValue?.brand}</Box>  
                           <Box >: {eyeIconValue?.fuel_type}</Box>  
                           <Box >: {eyeIconValue?.kilometers_driven}</Box>  
-                          <Box sx={{maxWidth:100}}>: {eyeIconValue?.complaints}</Box>  
+                          <Box sx={{maxWidth:200, textAlign:'justify'}}>: {eyeIconValue?.complaints}</Box>  
                         </Box>
                       </Box>
                     </Box>

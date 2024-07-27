@@ -25,7 +25,7 @@ const CreateEmployeeDialog = ({ height, width, color }) => {
 
     setIsSubmitted(true)
     if(requiredTextfield(employeeTextField,formData)){
-      setTimeout(()=>{setIsSubmitted(false);tableRef.current.onQueryChange()},2000)
+      setTimeout(()=>{setIsSubmitted(false);},2000)
       return
     }
     if(formData.password !==formData.reEnterPassword){
@@ -37,7 +37,7 @@ const CreateEmployeeDialog = ({ height, width, color }) => {
       url: createEmployee
     }
     let {data,isSuccess} = await fetchData(obj)
-    if(data && isSuccess)setTimeout(()=>{handleClose()},3000)
+    if(data && isSuccess)setTimeout(()=>{handleClose();tableRef.current.onQueryChange()},3000)
     setFormData({})
     setIsSubmitted(false)
 
