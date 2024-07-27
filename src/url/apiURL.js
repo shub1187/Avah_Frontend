@@ -42,7 +42,7 @@ const URL = {
                 getAllRejectedSp : replaceUrl(`${BASE_URL}/api/admin/getAllRejectedSp`),
                 getSpecificApprovedSpDocument : replaceUrl(`${BASE_URL}/api/admin/getSpecificApprovedSpDocument`),
                 getSpecificRejectedSpDocument :  replaceUrl(`${BASE_URL}/api/admin/getSpecificRejectedSpDocument`)
-
+               
             }
         },
         VEHICLESETTINGS:{
@@ -83,7 +83,8 @@ const URL = {
             EMPLOYEES:{
                 getAllEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllEmployee`),
                 createEmployee :replaceUrl(`${BASE_URL}/api/serviceprovider/createEmployee`),
-                getAllPermissionPerRoles : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllPermissionPerRoles`)
+                getAllPermissionPerRoles : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllPermissionPerRoles`),
+                updateEmployee : replaceUrl(`${BASE_URL}/api/serviceprovider/updateEmployee`)
 
             }
         },

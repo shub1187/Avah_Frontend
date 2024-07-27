@@ -7,60 +7,61 @@ import CreateAutoCompleteTextfield from '../../../../../components/common/Textfi
 import UnderLine from '../../../../../components/common/Underline';
 import { useFetch, useFetchFunction } from 'hooks/useFetch';
 import { useState } from 'react';
-const { createEmployee, getAllPermissionPerRoles } = URL.SERVICE_PROVIDER.USERS.EMPLOYEES
+import { requiredTextfield } from 'utils/customFunctions';
+const {  getAllPermissionPerRoles,updateEmployee } = URL.SERVICE_PROVIDER.USERS.EMPLOYEES
 
 const EditFieldsDialog = ({rowData}) => {
 
-    // const { data: { data: rolesList } } = useFetch(`${getAllPermissionPerRoles}?sp_id=${localStorage.getItem('sp_id')}`)
-    const { data: rolesList } = {
-        "error": false,
-        "message": "Permissions per  role fetched successfully",
-        "data": [
-            {
-                "label": "Advisor",
-                "value": "Advisor",
-                "permissions": [
-                    "Users",
-                    "Spares",
-                    "Labour",
-                    "Service Type",
-                    "Service"
-                ]
-            },
-            {
-                "label": "Technician",
-                "value": "Technician",
-                "permissions": [
-                    "Spares",
-                    "Labour",
-                    "Service Type",
-                    "Service"
-                ]
-            },
-            {
-                "label": "HR",
-                "value": "HR",
-                "permissions": [
-                    "Users",
-                    "Spares",
-                    "Labour",
-                    "Service Type",
-                    "Service"
-                ]
-            },
-            {
-                "label": "Junior Advisor",
-                "value": "Junior Advisor",
-                "permissions": [
-                    "Spares",
-                    "Labour",
-                    "Service",
-                    "Service Type",
-                    "Accounts"
-                ]
-            }
-        ]
-    }
+    const { data: { data: rolesList } } = useFetch(`${getAllPermissionPerRoles}?sp_id=${localStorage.getItem('sp_id')}`)
+    // const { data: rolesList } = {
+    //     "error": false,
+    //     "message": "Permissions per  role fetched successfully",
+    //     "data": [
+    //         {
+    //             "label": "Advisor",
+    //             "value": "Advisor",
+    //             "permissions": [
+    //                 "Users",
+    //                 "Spares",
+    //                 "Labour",
+    //                 "Service Type",
+    //                 "Service"
+    //             ]
+    //         },
+    //         {
+    //             "label": "Technician",
+    //             "value": "Technician",
+    //             "permissions": [
+    //                 "Spares",
+    //                 "Labour",
+    //                 "Service Type",
+    //                 "Service"
+    //             ]
+    //         },
+    //         {
+    //             "label": "HR",
+    //             "value": "HR",
+    //             "permissions": [
+    //                 "Users",
+    //                 "Spares",
+    //                 "Labour",
+    //                 "Service Type",
+    //                 "Service"
+    //             ]
+    //         },
+    //         {
+    //             "label": "Junior Advisor",
+    //             "value": "Junior Advisor",
+    //             "permissions": [
+    //                 "Spares",
+    //                 "Labour",
+    //                 "Service",
+    //                 "Service Type",
+    //                 "Accounts"
+    //             ]
+    //         }
+    //     ]
+    // }
     console.log(rowData)
     const { fetchData, snackbar, loadingIndicator } = useFetchFunction()
     // const timerRef = useRef(null);
@@ -78,16 +79,17 @@ const EditFieldsDialog = ({rowData}) => {
     const handleSubmit = async () => {
   
       setIsSubmitted(true)
-    //   if(requiredTextfield(employeeTextField,formData)){
-    //     setTimeout(()=>setIsSubmitted(false),2000)
-    //     return
-    //   }
+      if(requiredTextfield(employeeTextField,formData)){
+        setTimeout(()=>setIsSubmitted(false),2000)
+        return
+      }
       const obj = {
         payload: formData,
         method: "POST",
-        url: createEmployee
+        url: updateEmployee
       }
       await fetchData(obj)
+      setTimeout(()=>setOpen(false),2000)
     //   setFormData({})
     //   setIsSubmitted(false)
   
