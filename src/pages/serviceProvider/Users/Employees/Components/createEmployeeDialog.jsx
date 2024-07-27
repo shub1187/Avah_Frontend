@@ -9,6 +9,7 @@ import URL from 'url/apiURL'
 import CreateAutoCompleteTextfield from 'components/common/Textfield/AutoCompleteTextfield';
 import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
 import { requiredTextfield } from 'utils/customFunctions';
+import { useCustomMaterialTableContext } from 'components/common/Table/MaterialTable';
 
 const { createEmployee, getAllPermissionPerRoles } = URL.SERVICE_PROVIDER.USERS.EMPLOYEES
 
@@ -19,12 +20,12 @@ const CreateEmployeeDialog = ({ height, width, color }) => {
 
   const handleFieldChange = (fieldName, value) => setFormData((prevData) => ({ ...prevData, [fieldName]: value }));
   const handleRoleSelect = (value) => setFormData((prev) => ({ ...prev, 'role': value.label, 'permission_granted': value.permissions }))
-
+  const {tableRef} = useCustomMaterialTableContext()
   const handleSubmit = async () => {
 
     setIsSubmitted(true)
     if(requiredTextfield(employeeTextField,formData)){
-      setTimeout(()=>setIsSubmitted(false),2000)
+      setTimeout(()=>{setIsSubmitted(false);tableRef.current.onQueryChange()},2000)
       return
     }
     if(formData.password !==formData.reEnterPassword){
@@ -35,7 +36,8 @@ const CreateEmployeeDialog = ({ height, width, color }) => {
       method: "POST",
       url: createEmployee
     }
-    await fetchData(obj)
+    let {data,isSuccess} = await fetchData(obj)
+    if(data && isSuccess)setTimeout(()=>{handleClose()},3000)
     setFormData({})
     setIsSubmitted(false)
 

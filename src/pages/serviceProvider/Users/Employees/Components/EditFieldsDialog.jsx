@@ -8,63 +8,14 @@ import UnderLine from '../../../../../components/common/Underline';
 import { useFetch, useFetchFunction } from 'hooks/useFetch';
 import { useState } from 'react';
 import { requiredTextfield } from 'utils/customFunctions';
+import { useCustomMaterialTableContext } from 'components/common/Table/MaterialTable';
 const {  getAllPermissionPerRoles,updateEmployee } = URL.SERVICE_PROVIDER.USERS.EMPLOYEES
 
 const EditFieldsDialog = ({rowData}) => {
 
     const { data: { data: rolesList } } = useFetch(`${getAllPermissionPerRoles}?sp_id=${localStorage.getItem('sp_id')}`)
-    // const { data: rolesList } = {
-    //     "error": false,
-    //     "message": "Permissions per  role fetched successfully",
-    //     "data": [
-    //         {
-    //             "label": "Advisor",
-    //             "value": "Advisor",
-    //             "permissions": [
-    //                 "Users",
-    //                 "Spares",
-    //                 "Labour",
-    //                 "Service Type",
-    //                 "Service"
-    //             ]
-    //         },
-    //         {
-    //             "label": "Technician",
-    //             "value": "Technician",
-    //             "permissions": [
-    //                 "Spares",
-    //                 "Labour",
-    //                 "Service Type",
-    //                 "Service"
-    //             ]
-    //         },
-    //         {
-    //             "label": "HR",
-    //             "value": "HR",
-    //             "permissions": [
-    //                 "Users",
-    //                 "Spares",
-    //                 "Labour",
-    //                 "Service Type",
-    //                 "Service"
-    //             ]
-    //         },
-    //         {
-    //             "label": "Junior Advisor",
-    //             "value": "Junior Advisor",
-    //             "permissions": [
-    //                 "Spares",
-    //                 "Labour",
-    //                 "Service",
-    //                 "Service Type",
-    //                 "Accounts"
-    //             ]
-    //         }
-    //     ]
-    // }
     console.log(rowData)
     const { fetchData, snackbar, loadingIndicator } = useFetchFunction()
-    // const timerRef = useRef(null);
 
     //Dialog Popups
     const [open, setOpen] = useState(false);
@@ -73,7 +24,7 @@ const EditFieldsDialog = ({rowData}) => {
     const [formData, setFormData] = useState(rowData);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const handleFieldChange = (fieldName, value) => { setFormData((prevData) => ({ ...prevData, [fieldName]: value })) }
-
+    const {tableRef} =useCustomMaterialTableContext()
     const handleRoleSelect = (value) => setFormData((prev) => ({ ...prev, 'role': value.label, 'permission_granted': value.permissions }))
   
     const handleSubmit = async () => {
@@ -89,7 +40,7 @@ const EditFieldsDialog = ({rowData}) => {
         url: updateEmployee
       }
       await fetchData(obj)
-      setTimeout(()=>setOpen(false),2000)
+      setTimeout(()=>{setOpen(false);tableRef.current.onQueryChange()},2000)
     //   setFormData({})
     //   setIsSubmitted(false)
   

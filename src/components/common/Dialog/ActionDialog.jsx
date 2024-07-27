@@ -21,6 +21,7 @@ import emailjs from '@emailjs/browser'
 import ControlledRadioButtonsGroup from '../Radio';
 import CreateAutoCompleteTextfield from '../Textfield/AutoCompleteTextfield';
 import EditFieldsDialog from '../../../pages/serviceProvider/Users/Employees/Components/EditFieldsDialog';
+import { useCustomMaterialTableContext } from '../Table/MaterialTable';
 
 // import { title } from 'process';
 const spApprovedMail = `Congratulations !
@@ -43,6 +44,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
     const [formData, setFormData] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const handleFieldChange = (fieldName, value) => { setFormData((prevData) => ({ ...prevData, [fieldName]: value })) }
+    const {tableRef} =useCustomMaterialTableContext()
 
     //IF YOUR ACTION IS REJECT
     const RejectList = [
@@ -87,6 +89,7 @@ const ActionDialog = ({ changePassword, edit, status, view, viewEstimate, docume
             }
             if (url) {
                 let {isSuccess} =await fetchData(obj)
+                tableRef.current.onQueryChange()
                 if(email==='email' && isSuccess){
                     await emailjs.sendForm(
                         'service_g3zcdsq',

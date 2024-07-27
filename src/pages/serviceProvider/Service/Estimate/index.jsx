@@ -55,6 +55,7 @@ const SpEstimateList = () => {
         }
         if((sparePayload && sparePayload.length) || (labourPayload && labourPayload.length) ){
             await fetchData(obj)
+            tableRef?.current?.onQueryChange()
         }
     }
 
@@ -243,12 +244,16 @@ const SpEstimateList = () => {
                           <Box >Model</Box>  
                           <Box >Manufacturer</Box>  
                           <Box >Vehicle Type</Box>  
+                          <Box >Kilometers Driven</Box>  
+                          <Box >Complaints</Box>  
                         </Box>
                         <Box>
                           <Box>: {eyeIconValue?.vehicle_number}</Box>
                           <Box >: {eyeIconValue?.model}</Box>  
                           <Box >: {eyeIconValue?.brand}</Box>  
                           <Box >: {eyeIconValue?.fuel_type}</Box>  
+                          <Box >: {eyeIconValue?.kilometers_driven}</Box>  
+                          <Box >: {eyeIconValue?.complaints}</Box>  
                         </Box>
                       </Box>
                     </Box>

@@ -1,12 +1,16 @@
 import { Box, Button, createTheme,TableCell,TableHead,TableRow,ThemeProvider, useMediaQuery } from "@mui/material";
 import axios from "axios";
 import MaterialTable, { MTableToolbar } from "material-table";
-import { createRef, useState } from "react";
+import { createContext, createRef, useContext, useState } from "react";
 import CreateCustomerDialog from "../../../pages/serviceProvider/Users/Customers/Components/createCustomerDialog";
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import ActionDialog from "../../common/Dialog/ActionDialog";
 import DialogWrapper from "components/common/Dialog/DialogWrapper";
 import { globalAppTheme } from "components/common/Themes/GlobalAppTheme";
+
+
+const CustomerMaterialTableContext = createContext()
+export const useCustomMaterialTableContext = useContext(CustomerMaterialTableContext)
 
 const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialogButtonName, clickButton , buttonName}) => {
     const tableRef = createRef();
@@ -134,6 +138,7 @@ const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialog
     }
     return(
       <>
+      <CustomerMaterialTableContext.Provider value={{tableRef}}>
       <ThemeProvider theme={theme}>
       <MaterialTable
       tableRef={tableRef}
@@ -226,6 +231,7 @@ const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialog
       // ]}
     />
     </ThemeProvider>
+    </CustomerMaterialTableContext.Provider>
     </>
     )
 }

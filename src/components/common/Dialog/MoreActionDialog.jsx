@@ -11,6 +11,24 @@ const MoreActionDialog = ({rowData,ActionDialog}) => {
     const handleClose = () => {setOpen(false)};
     // const StatusUpdate = ()=>{}
 
+    const renderStringData = (rowData,key)=>{
+        if(rowData?.[key] && (rowData?.[key] ==='updated_timestamp')){
+            return ''
+        }
+        if(rowData?.[key] && (rowData?.[key] ==='pickup_address' || rowData?.[key] ==='sp_rejection_note')){
+            return (<Box width={'200px'} m={1}>
+                <InputLabel>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</InputLabel>
+                <TextField multiline rows={3} disabled size='small' value={rowData?.[key]} fullWidth/>
+            </Box>)
+        }
+        else if(rowData?.[key]){
+            return (<Box width={'200px'} m={1}>
+                <InputLabel>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</InputLabel>
+                <TextField disabled size='small' value={rowData?.[key]} fullWidth/>
+            </Box>)
+        }
+        return ''
+    }
     return (
         <>
             {/* <Button style={{ minWidth: '10px' }} onClick={handleClickOpen}>
@@ -31,9 +49,8 @@ const MoreActionDialog = ({rowData,ActionDialog}) => {
 
                 <Box p={1} display={'flex'} flexWrap={"wrap"} flexGrow={1}>
                     {Object.keys(rowData).map((key)=>{
-                        if(typeof rowData[key] ==='string'){
-                            return <Box width={'200px'} m={1}><InputLabel>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</InputLabel><TextField size='small' multiline={key=='pickup_address' || key =='sp_rejection_note'?true:true} rows={key=='pickup_address' || key =='sp_rejection_note'  ? 3:1} fullWidth  value={rowData[key]} disabled/></Box>
-                        }
+                        if(typeof rowData[key] ==='string') renderStringData()
+                        
                         else if((Array.isArray(rowData[key]) && key==='serviced_brands') || (Array.isArray(rowData[key]) && key==='permission_granted')){
                             return (<Box width={'420px'} m={1}>
                             <InputLabel>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</InputLabel>
