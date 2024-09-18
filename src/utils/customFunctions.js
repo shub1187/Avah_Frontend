@@ -84,7 +84,9 @@ const getFuelArray = (data)=>
 const generateRandom5Digit = () => Math.floor(10000 + Math.random() * 90000);
 
 const formatTimestampToDate = (timestamp) => timestamp && format(new Date(timestamp), 'yyyy-MM-dd') 
-          
+
+const capitalizeFirstLetter = word => 
+    word ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() : "";      
 export {
-    logout , addBroadcastListenerForLoggingOutOfAllTabs , requiredTextfield, getBrandData, getModelData, getStates, getCities, getFuelArray, generateRandom5Digit, formatTimestampToDate
+    logout , addBroadcastListenerForLoggingOutOfAllTabs , requiredTextfield, getBrandData, getModelData, getStates, getCities, getFuelArray, generateRandom5Digit, formatTimestampToDate, capitalizeFirstLetter
 }

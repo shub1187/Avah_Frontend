@@ -8,7 +8,7 @@ import { useState } from "react"
 
 const {createModel, getAllBrandsAutoFill, getAllFuelTypeAutoFill} = URL.ADMIN.VEHICLESETTINGS.MODELS
 const ModelAdminDialog = () => {
-  const { handleClose, handleOpen, setIsSubmitted, isSubmitted ,formData,setFormData} = useDialogWrapperContext()
+  const { handleClose, handleOpen, setIsSubmitted, isSubmitted ,formData,setFormData,tableRef} = useDialogWrapperContext()
   const [isError,setIsError] = useState({fuel:false,brand:false})
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
   let {data:brandData} = useFetch(getAllBrandsAutoFill)
@@ -47,7 +47,8 @@ const ModelAdminDialog = () => {
     }
 
     await fetchData(obj)
-    setFormData({})
+    tableRef?.current?.onQueryChange()
+    setFormData({fuel_type : []})
     setIsSubmitted(false)
     setTimeout(()=>handleClose(),2000)
   }
@@ -101,7 +102,7 @@ const ModelAdminDialog = () => {
                   // disabled
                   multiple
                   id="fixed-tags-demo"
-                  value={ formData?.fuel_type}
+                  value={ formData?.fuel_type || []}
                   options={mappedFuelData || []}
                   onChange={(event, value) => handleFieldChange('fuel_type',value)} 
                   getOptionLabel={(option)=>option}

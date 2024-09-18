@@ -15,7 +15,7 @@ export const adminCustomerColumn = [
                 <MoreActionDialog
                     rowData={rowData}
                 />
-                <ActionDialog
+                {/* <ActionDialog
                     key='edit Estimate'
                     editEmployee
                     rowData={rowData}
@@ -24,7 +24,7 @@ export const adminCustomerColumn = [
                     key='edit Estimate'
                     deleteEmployee
                     rowData={rowData}
-                />
+                /> */}
             </Box>
     }
 ]

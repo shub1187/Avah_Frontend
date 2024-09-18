@@ -2,12 +2,12 @@ import { Button, DialogActions, DialogContent } from "@mui/material"
 import { useDialogWrapperContext } from "components/common/Dialog/DialogWrapper"
 import CreateTextFields from "components/common/Textfield"
 import { useFetchFunction } from "hooks/useFetch"
-import { requiredTextfield } from "utils/customFunctions"
+import { capitalizeFirstLetter, requiredTextfield } from "utils/customFunctions"
 import URL from "url/apiURL"
 
 const {createBrand} = URL.ADMIN.VEHICLESETTINGS.MANUFACTURER
 const AddManufacturerDialog = () => {
-  const { handleClose, handleOpen, setIsSubmitted, isSubmitted ,formData,setFormData} = useDialogWrapperContext()
+  const { handleClose, handleOpen, setIsSubmitted, isSubmitted ,formData,setFormData,tableRef} = useDialogWrapperContext()
   const {fetchData,snackbar,loadingIndicator} = useFetchFunction()
 
 
@@ -22,12 +22,13 @@ const AddManufacturerDialog = () => {
     } 
 
     const obj = {
-          payload:formData,
+          payload:{brand_name : capitalizeFirstLetter(formData?.brand_name)},
           method:"POST",
           url:createBrand
     }
 
     await fetchData(obj)
+    tableRef?.current?.onQueryChange()
     setFormData({})
     setIsSubmitted(false)
     setTimeout(()=>handleClose(),2000)

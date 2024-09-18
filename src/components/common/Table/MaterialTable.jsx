@@ -210,7 +210,7 @@ const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialog
           return {
             data: data || [], // Change this to match your data structure
             page: query.page,
-            totalCount:20, // Assuming the total count is the length of the data array
+            totalCount: response?.data?.data?.totalRecords || 0, // Assuming the total count is the length of the data array
           };
         } catch (error) {
           console.error("Error fetching data:", error);
