@@ -1,5 +1,6 @@
 
-const BASE_URL = "http://localhost:3008"
+const BASE_URL = "http://localhost:3008" // To be used in local env
+// const BASE_URL = "https://avahservices.com/service"   // To be used in production env
 const PRODUCTION_URL = ''
 
 const LOCAL_STORAGE = {
