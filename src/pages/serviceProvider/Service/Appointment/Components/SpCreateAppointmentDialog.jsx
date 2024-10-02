@@ -16,7 +16,7 @@ import { parse, isToday, getHours } from 'date-fns';
 import { debounce } from '@mui/material/utils'
 import URL from 'url/apiURL';
 
-const { getAllVehicleList, getSpecificVehicleDetailsForSpAppt, createAppointment } = URL.SERVICE_PROVIDER.SERVICE.APPOINTMENT
+const { getAllVehicleList, getSpecificVehicleDetailsForSpAppt, createAppointment, getAllModelPerBrand } = URL.SERVICE_PROVIDER.SERVICE.APPOINTMENT
 
 const generateRandom5Digit = () => {
   // Generate a random number between 10000 and 99999 (inclusive)
@@ -45,7 +45,7 @@ const SpCreateAppointmentDialog = ({ height, width, color, minHeight, maxWidth, 
 
   const { fetchData, snackbar, loadingIndicator } = useFetchFunction()
   const { isMobile } = useMobileResponsive()
-  let { data } = useFetch('http://localhost:3008/api/serviceprovider/getAllModelPerBrand')
+  let { data } = useFetch(getAllModelPerBrand)
   let brandData = data?.data?.results || []
 
   const selectArray = brandData.map((brandEntry) => {

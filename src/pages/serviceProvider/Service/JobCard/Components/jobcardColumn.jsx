@@ -1,5 +1,8 @@
 import { Box } from "@mui/material";
 import ActionDialog from "components/common/Dialog/ActionDialog";
+import URL from "url/apiURL";
+
+const {approveCustAppointment} = URL.SERVICE_PROVIDER.SERVICE.JOBCARD
 
 export const jobCardColumn =(setPage,setEyeIconValue)=> [
     {title:'Jobcard Number',field:'jobcard_number'},
@@ -12,7 +15,7 @@ export const jobCardColumn =(setPage,setEyeIconValue)=> [
             <ActionDialog
                 key='edit Estimate'
                 viewJobCard
-                url={'http://localhost:3008/api/serviceprovider/approveCustAppointment'}
+                url={approveCustAppointment}
                 rowData={rowData}
                 setPage={setPage}
                 setEyeIconValue={setEyeIconValue}

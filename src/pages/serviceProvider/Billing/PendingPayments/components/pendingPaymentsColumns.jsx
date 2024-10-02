@@ -1,5 +1,8 @@
 import { Box } from "@mui/material";
 import ActionDialog from "components/common/Dialog/ActionDialog";
+import URL from "url/apiURL";
+
+const {approveCustAppointment} = URL.SERVICE_PROVIDER.BILLING.PENDINGPAYMENTS
 
 export const pendingPaymentsColumns =(setPage,setEyeIconValue)=> [
     {title:'Invoice Number',field:'invoice_number'},
@@ -14,7 +17,7 @@ export const pendingPaymentsColumns =(setPage,setEyeIconValue)=> [
             <ActionDialog
                 key='edit Estimate'
                 viewJobCard
-                url={'http://localhost:3008/api/serviceprovider/approveCustAppointment'}
+                url={approveCustAppointment}
                 rowData={rowData}
                 setPage={setPage}
                 setEyeIconValue={setEyeIconValue}

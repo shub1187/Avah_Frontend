@@ -17,7 +17,7 @@ import { SpCreateSpareAppointmentColumn } from './Components/SparesAppointmentCo
 import { SpCreateLabourAppointmentColumn } from './Components/LabourAppointmentColumn'
 import { spRejectedAppointmentColumn } from './Components/RejectAppointmentColumn'
 import CustomMaterialTable from 'components/common/Table/MaterialTable'
-const {addEstimate, getAllLabourListForAutoFill, getAllSpareListForAutoFill, getSpecificLabourDetailsForEstimate, getSpecificSpareDetailsForEstimate} = URL.SERVICE_PROVIDER.SERVICE.APPOINTMENT
+const {addEstimate, getAllLabourListForAutoFill, getAllSpareListForAutoFill, getSpecificLabourDetailsForEstimate, getSpecificSpareDetailsForEstimate,getAllPendingAppointment,getAllRejectedAndCancelledAppointment} = URL.SERVICE_PROVIDER.SERVICE.APPOINTMENT
 
 const AppointmentList = () => {
   
@@ -169,12 +169,12 @@ const AppointmentList = () => {
             key={'appointment'}
             DialogButton={CreateAppointmentDialog} 
             columnss={spCreateAppointmentColumn(()=>setPage('estimate'),setEyeIconValue)} 
-            URL={`http://localhost:3008/api/serviceprovider/getAllPendingAppointment`}
+            URL={getAllPendingAppointment}
             dialogButtonName={'CREATE APPOINTMENT'}
             dialogTitle={'CREATE APPOINTMENT'}
           />
        :
-       <CustomMaterialTable key={'rejected'} columnss={spRejectedAppointmentColumn} URL={`http://localhost:3008/api/serviceprovider/getAllRejectedAndCancelledAppointment`}/>
+       <CustomMaterialTable key={'rejected'} columnss={spRejectedAppointmentColumn} URL={getAllRejectedAndCancelledAppointment}/>
         }
 
     </>

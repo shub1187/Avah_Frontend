@@ -21,7 +21,7 @@ import Print from "components/common/Print"
 import CloseIcon from '@mui/icons-material/Close';
 import CustomMaterialTable from 'components/common/Table/MaterialTable'
 
-const {getEstimateDetails, estimateApproval, estimateRejection, getJobcardDetails} = URL.CUSTOMER.APPOINTMENT
+const {getEstimateDetails, estimateApproval, estimateRejection, getJobcardDetails,getAllPendingApprovedAppointment,getAllRejectedCancelledAppointment} = URL.CUSTOMER.APPOINTMENT
 const CustomerAppointment = () => {
   
   const [toggle,setToggle] = useState('appointment')
@@ -480,7 +480,7 @@ const CustomerAppointment = () => {
             key={'appointment'}
             DialogButton={AddCustomerAppointmentDialog}
             columnss={AddCustomerAppointmentColumn(()=>setPage('eye-icon'),setEyeIconValue,()=>setPage('invoice'))} 
-            URL={`http://localhost:3008/api/customer/getAllPendingApprovedAppointment`}
+            URL={getAllPendingApprovedAppointment}
             dialogButtonName={'CREATE APPOINTMENT'}
             dialogTitle={'CREATE APPOINTMENT'}
             />
@@ -488,7 +488,7 @@ const CustomerAppointment = () => {
       <CustomMaterialTable
         key={'rejected'}
         columnss={AddCustomerAppointmentColumn()} 
-        URL={`http://localhost:3008/api/customer/getAllRejectedCancelledAppointment`}
+        URL={getAllRejectedCancelledAppointment}
         dialogButtonName={'CREATE APPOINTMENT'}
         dialogTitle={'CREATE APPOINTMENT'}        />
 

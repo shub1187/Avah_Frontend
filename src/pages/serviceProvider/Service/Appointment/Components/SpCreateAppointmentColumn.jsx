@@ -1,6 +1,9 @@
 import { Box } from "@mui/material"
 import ActionDialog from "components/common/Dialog/ActionDialog"
 import MoreActionDialog from "components/common/Dialog/MoreActionDialog"
+import URL from "url/apiURL"
+
+const {approveCustAppointment, createEstimate} = URL.SERVICE_PROVIDER.SERVICE.APPOINTMENT
 export const spCreateAppointmentColumn =(setPage,setEyeIconValue)=>( [
     { title: "Name", field: "name" },
     { title: "Vehicle Number", field: "vehicle_number" },
@@ -13,7 +16,7 @@ export const spCreateAppointmentColumn =(setPage,setEyeIconValue)=>( [
                                                                 <ActionDialog
                                                                 key="approve"
                                                                 approve
-                                                                url={'http://localhost:3008/api/serviceprovider/approveCustAppointment'}
+                                                                url={approveCustAppointment}
                                                                 payload={{ 'appointment_id': rowData.appointment_id,'appointment_status': 'Approved' }}
 
                                                                 />
@@ -21,7 +24,7 @@ export const spCreateAppointmentColumn =(setPage,setEyeIconValue)=>( [
                                                                 <ActionDialog
                                                                 key="reject"
                                                                 reject
-                                                                url={'http://localhost:3008/api/serviceprovider/approveCustAppointment'}
+                                                                url={approveCustAppointment}
                                                                 payload={{ 'appointment_id': rowData.appointment_id, 'appointment_status': 'Rejected By SP' }}
 
                                                                 />
@@ -29,7 +32,7 @@ export const spCreateAppointmentColumn =(setPage,setEyeIconValue)=>( [
                                                                 <ActionDialog
                                                                 key="createEstimate"
                                                                 createEstimate
-                                                                url={'http://localhost:3008/api/serviceprovider/createEstimate'}
+                                                                url={createEstimate}
                                                                 setPage={setPage}
                                                                 setEyeIconValue={setEyeIconValue}
                                                                 rowData={rowData}

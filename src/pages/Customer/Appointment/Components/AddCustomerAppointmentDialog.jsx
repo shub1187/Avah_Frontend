@@ -13,7 +13,7 @@ import {getHours,format,isToday, parse} from 'date-fns'
 import { useDialogWrapperContext } from 'components/common/Dialog/DialogWrapper';
 import { requiredTextfield } from 'utils/customFunctions';
 import URL from 'url/apiURL';
-const {createAppointment} = URL.CUSTOMER.APPOINTMENT
+const {createAppointment, getSpDetailsPerCity, getCustomerVehicleNumbers, vehicleSearch} = URL.CUSTOMER.APPOINTMENT
 const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img,borderRadius,my}) => {
 
     const {handleClose,isMobile,isSubmitted,setIsSubmitted,formData,setFormData} = useDialogWrapperContext()
@@ -21,8 +21,8 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
     const { city, setCity } = useCity();
     const {fetchCustomerData,snackbar,loadingIndicator} = useCustomerFetchFunction()
  
-    let {data:citiesSpData} = useFetch('http://localhost:3008/api/customer/getSpDetailsPerCity')
-    let {data:customerVehicleList} = useFetch(`http://localhost:3008/api/customer/getCustomerVehicleNumbers?customer_id=${localStorage.getItem('customer_id')}`)
+    let {data:citiesSpData} = useFetch(getSpDetailsPerCity)
+    let {data:customerVehicleList} = useFetch(`${getCustomerVehicleNumbers}?customer_id=${localStorage.getItem('customer_id')}`)
   
     useEffect(()=>{
       const matchingSP = spList.find((sp) => sp.address === formData.address);
@@ -118,7 +118,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
         const obj = {
           payload:fieldName.label,
           method:"GET",
-          url:`http://localhost:3008/api/customer/vehicleSearch?VehicleNumber=${fieldName.label}`
+          url:`${vehicleSearch}?VehicleNumber=${fieldName.label}`
         }
         const {isSuccess,data,error} = await fetchCustomerData(obj)
         if(error && !isSuccess){

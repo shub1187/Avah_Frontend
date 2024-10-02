@@ -1,19 +1,17 @@
 
-const BASE_URL = "http://localhost:3008" // To be used in local env
-// const BASE_URL = "https://avahservices.com/service"   // To be used in production env
-const PRODUCTION_URL = ''
-
-const LOCAL_STORAGE = {
-    sp_id:localStorage.getItem('sp_id'),
-    customer_id : localStorage.getItem('customer_id')
-}
+let BASE_URL = 'http://localhost:3008'
+let PRODUCTION_URL = 'https://avahservices.com/service'
 
 const replaceUrl =(url)=>{
-    if(PRODUCTION_URL && process.env.NODE_ENV==='production'){
+    if(process.env.NODE_ENV=='production'){
         return url.replace(BASE_URL,PRODUCTION_URL)
     }
+    console.log("line 9 checking url : ", url)
+    console.log("line 10 checking env : ", process.env.NODE_ENV )
     return url
 }
+
+console.log("ln 12 ", PRODUCTION_URL)
 
 const URL = {
     LOGIN_REGISTER:{
@@ -119,7 +117,9 @@ const URL = {
                 getSpecificVechicleDetailsToCreateEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/getSpecificVechicleDetailsToCreateEstimate`),
                 getAllCreatedEstimateList : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllCreatedEstimateList`),
                 getEstimateDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getEstimateDetails`),
-                editEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/editEstimate`)
+                editEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/editEstimate`),
+                approveCustAppointment : replaceUrl(`${BASE_URL}/api/serviceprovider/approveCustAppointment`),
+
 
 
             },
@@ -131,9 +131,12 @@ const URL = {
                 getSpecificLabourDetailsForEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/getSpecificLabourDetailsForEstimate`),
                 getAllVehicleList : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllVehicleList`),
                 getSpecificVehicleDetailsForSpAppt : replaceUrl(`${BASE_URL}/api/serviceprovider/getSpecificVehicleDetailsForSpAppt`),
-                createAppointment: replaceUrl(`${BASE_URL}/api/customer/createAppointment`)
-
-
+                createAppointment: replaceUrl(`${BASE_URL}/api/customer/createAppointment`),
+                getAllPendingAppointment : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllPendingAppointment`),
+                getAllRejectedAndCancelledAppointment : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllRejectedAndCancelledAppointment`),
+                approveCustAppointment : replaceUrl(`${BASE_URL}/api/serviceprovider/approveCustAppointment`),
+                createEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/createEstimate`),
+                getAllModelPerBrand : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllModelPerBrand`),
             },
             JOBCARD:{
                 getJobcardDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getJobcardDetails`),
@@ -145,7 +148,8 @@ const URL = {
                 getSpecificSpareDetailsForEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/getSpecificSpareDetailsForEstimate`),
                 getAllLabourListForAutoFill : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllLabourListForAutoFill`),
                 getSpecificLabourDetailsForEstimate : replaceUrl(`${BASE_URL}/api/serviceprovider/getSpecificLabourDetailsForEstimate`),
-                generateInvoice :   replaceUrl(`${BASE_URL}/api/serviceprovider/generateInvoice`)
+                generateInvoice :   replaceUrl(`${BASE_URL}/api/serviceprovider/generateInvoice`),
+                approveCustAppointment : replaceUrl(`${BASE_URL}/api/serviceprovider/approveCustAppointment`),
 
             }
         },
@@ -153,11 +157,13 @@ const URL = {
             PENDINGPAYMENTS : {
                 getAllPendingPaymentInvoices : replaceUrl(`${BASE_URL}/api/serviceprovider/getAllPendingPaymentInvoices`),
                 getJobcardDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getJobcardDetails`),
-                recievePayment : replaceUrl(`${BASE_URL}/api/serviceprovider/recievePayment`)
+                recievePayment : replaceUrl(`${BASE_URL}/api/serviceprovider/recievePayment`),
+                approveCustAppointment : replaceUrl(`${BASE_URL}/api/serviceprovider/approveCustAppointment`),
             },
             PAIDINVOICES : {
                 getAllPaidInvoices: replaceUrl(`${BASE_URL}/api/serviceprovider/getAllPaidInvoices`),
                 getJobcardDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getJobcardDetails`),
+                approveCustAppointment : replaceUrl(`${BASE_URL}/api/serviceprovider/approveCustAppointment`),
 
             }
 
@@ -181,6 +187,7 @@ const URL = {
             getAllModelPerBrand:replaceUrl(`${BASE_URL}/api/serviceprovider/getAllModelPerBrand`),
             getAllFuelTypes:replaceUrl(`${BASE_URL}/api/admin/getAllFuelTypes`),
             vehicleRegistration:replaceUrl(`${BASE_URL}/api/customer/vehicleRegistration`),
+            getCustomerVehicle : replaceUrl(`${BASE_URL}/api/customer/getCustomerVehicle`),
         },
         UPDATEPROFILE:{
             getAllCitiesPerState:replaceUrl(`${BASE_URL}/api/customer/getAllCitiesPerState`),
@@ -192,7 +199,13 @@ const URL = {
             estimateApproval : replaceUrl(`${BASE_URL}/api/customer/estimateApproval`),
             estimateRejection : replaceUrl(`${BASE_URL}/api/customer/estimateRejection`),
             createAppointment :  replaceUrl(`${BASE_URL}/api/customer/createAppointment`),
-            getJobcardDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getJobcardDetails`)
+            getJobcardDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getJobcardDetails`),
+            getAllPendingApprovedAppointment : replaceUrl(`${BASE_URL}/api/customer/getAllPendingApprovedAppointment`),
+            getAllRejectedCancelledAppointment : replaceUrl(`${BASE_URL}/api/customer/getAllRejectedCancelledAppointment`),
+            getSpDetailsPerCity : replaceUrl(`${BASE_URL}/api/customer/getSpDetailsPerCity`),
+            getCustomerVehicleNumbers : replaceUrl(`${BASE_URL}/api/customer/getCustomerVehicleNumbers`),
+            vehicleSearch : replaceUrl(`${BASE_URL}/api/customer/vehicleSearch`),
+           
         }
     }
 

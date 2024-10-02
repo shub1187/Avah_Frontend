@@ -3,7 +3,9 @@ import AddCustomerVehicleDialog from 'pages/Customer/Vehicle/Components/AddCusto
 import AddCustomerVehicleColumn from 'pages/Customer/Vehicle/Components/AddCustomerVehicleColumn'
 import React from 'react'
 import CustomMaterialTable from 'components/common/Table/MaterialTable'
+import URL from 'url/apiURL'
 
+const {getCustomerVehicle} = URL.CUSTOMER.VEHICLE
 const CustomerVehicle = () => {
   return (
     <Box backgroundColor='red' mt={2}>
@@ -12,7 +14,7 @@ const CustomerVehicle = () => {
              dialogButtonName={'ADD NEW VEHICLE'}
              DialogButton={AddCustomerVehicleDialog} 
              columnss={AddCustomerVehicleColumn} 
-             URL={"http://localhost:3008/api/customer/getCustomerVehicle"}/>
+             URL={getCustomerVehicle}/>
     </Box>
   )
 }

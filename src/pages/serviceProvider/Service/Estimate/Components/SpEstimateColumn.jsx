@@ -1,5 +1,8 @@
 import { Box } from "@mui/material";
 import ActionDialog from "components/common/Dialog/ActionDialog";
+import URL from "url/apiURL"; 
+
+const {approveCustAppointment} = URL.SERVICE_PROVIDER.SERVICE.ESTIMATE
 
 export const SpEstimateListColumn =(setPage,setEyeIconValue)=>( [
     {title:'Estimate Number',field:'estimate_number'},
@@ -12,7 +15,7 @@ export const SpEstimateListColumn =(setPage,setEyeIconValue)=>( [
             <ActionDialog
                 key='edit Estimate'
                 editEstimate
-                url={'http://localhost:3008/api/serviceprovider/approveCustAppointment'}
+                url={approveCustAppointment}
                 rowData={rowData}
                 setPage={setPage}
                 setEyeIconValue={setEyeIconValue}
