@@ -6,12 +6,12 @@ const replaceUrl =(url)=>{
     if(process.env.NODE_ENV=='production'){
         return url.replace(BASE_URL,PRODUCTION_URL)
     }
-    console.log("line 9 checking url : ", url)
-    console.log("line 10 checking env : ", process.env.NODE_ENV )
+    // console.log("line 9 checking url : ", url)
+    // console.log("line 10 checking env : ", process.env.NODE_ENV )
     return url
 }
 
-console.log("ln 12 ", PRODUCTION_URL)
+// console.log("ln 12 ", PRODUCTION_URL)
 
 const URL = {
     LOGIN_REGISTER:{

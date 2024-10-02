@@ -299,6 +299,9 @@
                 justify-content: space-between;
                 & > :first-child{
                     width: 49%;
+                    & > :first-child{
+                        margin-bottom: 12px;
+                    }
                 }
                 .input-container{
                     width: 49%;
@@ -316,6 +319,13 @@
                             border-radius: 4px;
         
                           }
+                    }
+                    .redError{
+                        & >:nth-child(1){
+                            color: rgb(199, 3, 3);
+                            font-size: 12px;
+                            margin-top: 5px;
+                        }
                     }
                 }
 

@@ -1,4 +1,4 @@
-import { Autocomplete, Box, Button, Checkbox, Chip, Grid, InputLabel, Paper, TextField, ThemeProvider, ToggleButton, ToggleButtonGroup, Typography, createTheme } from '@mui/material'
+import { Autocomplete, Box, Button, Checkbox, Chip, Grid, IconButton, InputLabel, Paper, TextField, ThemeProvider, ToggleButton, ToggleButtonGroup, Tooltip, Typography, createTheme } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import LogoImage from "assets/img/logo.png"
 import AvahTransparent from 'assets/img/avah_tranparent .png'
@@ -13,12 +13,12 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import ForgotPassword from './Components/ForgotPassword'
 import FilepondImageUploader  from 'components/common/FilePondImageUploader'
 import axios from 'axios'
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 // import { FilepondImageUploader } from 'components/common/FilePondImageUploader'
 const {getAllCitiesPerState,getAllBrandsMultiSelect} = URL.LOGIN_REGISTER
 
 const RaeesLoginComponent = () => {
     const [formData, setFormData] = useState({isBrandError:false});
-    console.log(formData)
     const [isSubmitted, setIsSubmitted] = useState(false);
     const {snackbar,loadingIndicator,fetchData} = useFetchFunction()
     const [login,setLogin] = useState(true)
@@ -31,7 +31,8 @@ const RaeesLoginComponent = () => {
     const {data:cityData} = useFetch(getAllCitiesPerState)
     const [citiesAndState, setCitiesAndState] = useState({ state: [], cities: [] })
     const [forgotPassword, setForgotPasssword] = useState(false)
-    const [files, setFiles] = useState([])
+    const [files, setFiles] = useState(null)
+    const [fileError,setFileError] = useState(false)
     const {data:multiSelectBusinessData} = useFetch(getAllBrandsMultiSelect)
     let mappedBrandName = multiSelectBusinessData?.data?.map((val)=>val?.value)
 
@@ -39,7 +40,6 @@ const RaeesLoginComponent = () => {
 
     const handleFileChange = (e)=>{
         setFiles(e.target.files[0])
-        console.log(e.target.files[0]?.data)
     }
     //TO GET ALL THE STATES
     useEffect(() => {
@@ -137,19 +137,30 @@ const RaeesLoginComponent = () => {
     const registerFunction = async(e)=>{
         e?.preventDefault()
         let payload ={...formData,role:activeButton,approval_status:false,sp_status:"inactive"}
-        console.log(payload)
         setIsSubmitted(true)
         let isRequired = requiredTextfield(registerTextfield,formData)
-        if(isRequired) {
+        if(isRequired || files?.type!=='application/pdf') {
             setTimeout(() => {
                 setIsSubmitted(false)
             }, [2000]);
             if(payload.role==='service provider'){
-                if(formData?.serviced_brands?.length===0 || !formData?.serviced_brands){
-                    setFormData((prev)=>({...prev,isBrandError:true}))
-                    setTimeout(() => {
-                        setFormData((prev)=>({...prev,isBrandError:false}))
-                      }, [2000])
+                if(formData?.serviced_brands?.length===0 || !formData?.serviced_brands || files?.type!=='application/pdf'){
+                    if(formData?.serviced_brands?.length===0 || !formData?.serviced_brands){
+                        setFormData((prev)=>({...prev,isBrandError:true}))
+                        setTimeout(() => {
+                            setFormData((prev)=>({...prev,isBrandError:false}))
+                          }, [2000])
+                    }
+                    if(files?.type!=='application/pdf'){
+                        if(files!==null){
+                            setTimeout(() => {
+                                setFileError(false)
+                                setFiles([])
+                            }, [2000])
+                            setFileError(true)
+                        }
+
+                    }
                     return
                 }
             }       
@@ -183,7 +194,6 @@ const RaeesLoginComponent = () => {
                     "Content-Type" : "multipart/form-data"
                 }
             }
-            console.log(typeof url)
             const {data,status} = await axios.post(url,formData,config)
 
             if(data && status === 200){
@@ -516,8 +526,16 @@ const RaeesLoginComponent = () => {
                             <Box className='sixth-row'>
                                 <CreateTextFields fields={registerTextfield.slice(8,9)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
                                 <Box className='input-container'>
-                                      <InputLabel sx={{color:'black', marginBottom:1}}>Business Document</InputLabel>
-                                      <Box className='inputy'><input accept='.pdf' type='file' className='custom' name='business_document' onChange={handleFileChange}></input></Box>
+                                      <InputLabel sx={{color:'black', marginBottom:1}}>
+                                        Business Document
+                                        <Tooltip title={'Only pdf files are supported'}>
+                                            <IconButton size="small">
+                                            <QuestionMarkIcon sx={{fontSize:16}}/>
+                                            </IconButton>
+                                        </Tooltip>
+                                      </InputLabel>
+                                      <Box className='inputy'><input  type='file' className='custom' name='business_document' onChange={handleFileChange}></input></Box>
+                                      {fileError ?<Box className='redError'><InputLabel>Only Pdf files are supported</InputLabel></Box>:<></>}
                                 </Box>         
                             </Box>
                             <Box className='seventh-row'>
