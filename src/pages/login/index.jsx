@@ -14,11 +14,13 @@ import ForgotPassword from './Components/ForgotPassword'
 import FilepondImageUploader  from 'components/common/FilePondImageUploader'
 import axios from 'axios'
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import CloseIcon from '@mui/icons-material/Close';
+import { SuccessLoader } from './Components/SuccessLoader'
 // import { FilepondImageUploader } from 'components/common/FilePondImageUploader'
 const {getAllCitiesPerState,getAllBrandsMultiSelect} = URL.LOGIN_REGISTER
 
 const RaeesLoginComponent = () => {
-    const [formData, setFormData] = useState({isBrandError:false});
+    const [formData, setFormData] = useState({isBrandError:false,success:false,error:false});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const {snackbar,loadingIndicator,fetchData} = useFetchFunction()
     const [login,setLogin] = useState(true)
@@ -31,8 +33,9 @@ const RaeesLoginComponent = () => {
     const {data:cityData} = useFetch(getAllCitiesPerState)
     const [citiesAndState, setCitiesAndState] = useState({ state: [], cities: [] })
     const [forgotPassword, setForgotPasssword] = useState(false)
-    const [files, setFiles] = useState(null)
+    const [files, setFiles] = useState({})
     const [fileError,setFileError] = useState(false)
+    // console.log(formData)
     const {data:multiSelectBusinessData} = useFetch(getAllBrandsMultiSelect)
     let mappedBrandName = multiSelectBusinessData?.data?.map((val)=>val?.value)
 
@@ -99,7 +102,6 @@ const RaeesLoginComponent = () => {
                 localStorage.setItem('isLoggedIn', "true");  
             }
             else if (payload.role=='service provider'){
-                // console.log("ln 67", payload)
                 setTimeout(() => {
                     navigate('/serviceProvider/home');
                     navigate(0)
@@ -139,28 +141,29 @@ const RaeesLoginComponent = () => {
         let payload ={...formData,role:activeButton,approval_status:false,sp_status:"inactive"}
         setIsSubmitted(true)
         let isRequired = requiredTextfield(registerTextfield,formData)
-        if(isRequired || files?.type!=='application/pdf') {
+        if(isRequired || (files?.name && files?.type!=='application/pdf') || formData?.serviced_brands?.length===0 || !formData?.serviced_brands) {
             setTimeout(() => {
                 setIsSubmitted(false)
             }, [2000]);
             if(payload.role==='service provider'){
                 if(formData?.serviced_brands?.length===0 || !formData?.serviced_brands || files?.type!=='application/pdf'){
+                    console.log(formData?.serviced_brands)
                     if(formData?.serviced_brands?.length===0 || !formData?.serviced_brands){
                         setFormData((prev)=>({...prev,isBrandError:true}))
                         setTimeout(() => {
                             setFormData((prev)=>({...prev,isBrandError:false}))
                           }, [2000])
+                        return
                     }
-                    if(files?.type!=='application/pdf'){
-                        if(files!==null){
-                            setTimeout(() => {
-                                setFileError(false)
-                                setFiles([])
-                            }, [2000])
-                            setFileError(true)
-                        }
-
+                    if(files?.name && files?.type!=='application/pdf'){
+                        setTimeout(() => {
+                            setFileError(false)
+                            // setFiles({})
+                        }, [2000])
+                        setFileError(true)
+                        return
                     }
+                    else setFileError(false)
                     return
                 }
             }       
@@ -197,19 +200,31 @@ const RaeesLoginComponent = () => {
             const {data,status} = await axios.post(url,formData,config)
 
             if(data && status === 200){
-                setLogin(!login)
+                setTimeout(()=>{setFormData({success:false,error:false}); setLogin(!login)},2000)
+                setFormData({success:true,error:false})
+            }
+            else{
+                setTimeout(()=>{setFormData({success:false,error:false}); setLogin(!login)},2000)
+                setFormData({success:false,error:true})
             }
 
         }
         else {
             let {data:regesterDetails} = fetchData({url,method:"POST",payload})
             if(regesterDetails){
+                setTimeout(()=>{setFormData({success:false,error:false}); setLogin(!login)},2000)
+                setFormData({success:true,error:false})
                 setLogin(!login)
+            }
+            else{
+                setTimeout(()=>{setFormData({success:false,error:false}); setLogin(!login)},2000)
+                setFormData({success:false,error:true})
             }
         }
        
         setIsSubmitted(false)
-        setFormData({})
+        // setFormData({})
+        setTimeout(()=>setFormData({}),2000)
     }
     let loginTextfield = [
         {
@@ -409,7 +424,7 @@ const RaeesLoginComponent = () => {
                         <Box>Services</Box>
                         <Box>Providers</Box>
                         <Box>Blogs</Box>
-                        <Box><button onClick={()=>{setLogin(!login);setFormData({})}}>{login?'SIGN UP':"LOGIN"}</button></Box>
+                        <Box><button onClick={()=>{setLogin(!login);setFormData({});setFiles({});setFileError(false)}}>{login?'SIGN UP':"LOGIN"}</button></Box>
                     </Box>
                 </Grid>
             </Box>
@@ -428,7 +443,7 @@ const RaeesLoginComponent = () => {
                             {isMobile && (
                             <Box className='mobile-logo-sign-up'>
                                 <Box>{isAdminPage ? <></>:<Link to={'/'}><img src={LogoImage} alt="logo Img" ></img></Link>}</Box>
-                                <Box>{isAdminPage ? <></>: <button onClick={()=>{setLogin(!login);setFormData({})}} className='black-button'>{login?'SIGN UP':"LOGIN"}</button>}</Box>
+                                <Box>{isAdminPage ? <></>: <button onClick={()=>{setLogin(!login);setFormData({});setFiles({});setFileError(false)}} className='black-button'>{login?'SIGN UP':"LOGIN"}</button>}</Box>
                             </Box>
                             )}
 
@@ -475,7 +490,7 @@ const RaeesLoginComponent = () => {
                             {isMobile && (
                             <Box className='mobile-logo-sign-up'>
                                 <Box>{isAdminPage ? <></>:<Link to={'/'}><img src={LogoImage} alt="logo Img" ></img></Link>}</Box>
-                                <Box>{isAdminPage ? <></>: <button onClick={()=>{setLogin(!login);setFormData({})}} className='black-button'>{login?'SIGN UP':"LOGIN"}</button>}</Box>
+                                <Box>{isAdminPage ? <></>: <button onClick={()=>{setLogin(!login);setFormData({});setFiles({});setFileError(false)}} className='black-button'>{login?'SIGN UP':"LOGIN"}</button>}</Box>
                             </Box>
                             )}
                             <Box className='welcome'>Welcome {activeButton==='service provider'?'Service Provider':activeButton==='dealers'?'Dealer':''}</Box>
@@ -485,12 +500,13 @@ const RaeesLoginComponent = () => {
                                     <InputLabel sx={{ mb: 1 }}>Brand Service*</InputLabel>
                                     <Autocomplete
                                     freeSolo
-                                    // disabled
+                                    autoComplete
                                     multiple
                                     id="fixed-tags-demo"
                                     value={ formData?.serviced_brands}
                                     options={mappedBrandName || []}
                                     onChange={(event, value) =>setFormData((prevData) => ({ ...prevData, ['serviced_brands']: value }))} 
+                                    // onSelect={(e,v)=>console.log(e,v,'raees')}
                                     getOptionLabel={(option)=>option}
                                     renderTags={(tagValue, getTagProps) =>
                                         tagValue.map((option, index) => (
@@ -507,6 +523,7 @@ const RaeesLoginComponent = () => {
                                         error={formData?.isBrandError}
                                         helperText={formData?.isBrandError ? 'Must Select One Brand Atleast' : ''}/>
                                     )}
+
                                     />
                                 </Box>
 
@@ -534,7 +551,10 @@ const RaeesLoginComponent = () => {
                                             </IconButton>
                                         </Tooltip>
                                       </InputLabel>
-                                      <Box className='inputy'><input  type='file' className='custom' name='business_document' onChange={handleFileChange}></input></Box>
+                                      <Box className='inputy'>
+                                        <input id='inputy'  type='file' className='fileInput' name='business_document' onChange={handleFileChange}></input>
+                                        {files?.name && <Box onClick={()=>{ setFiles({}); document.getElementById('inputy').value='' }} ><CloseIcon/></Box>}
+                                      </Box>
                                       {fileError ?<Box className='redError'><InputLabel>Only Pdf files are supported</InputLabel></Box>:<></>}
                                 </Box>         
                             </Box>
@@ -542,7 +562,6 @@ const RaeesLoginComponent = () => {
                                 <CreateTextFields fields={registerTextfield.slice(9,11)} formField={formData} onChange={handleFieldChange} isSubmitted={isSubmitted}/>
                             </Box>
                             <Box className='eigth-row'>
-                                {/* <FilepondImageUploader files={files} setFiles={setFiles} formData={form}/> */}
                             </Box>
                             <Box className='ninth-row'>
                                 <button type='submit'>REGISTER</button>
@@ -575,6 +594,7 @@ const RaeesLoginComponent = () => {
     </Grid>
     {snackbar}
     {loadingIndicator}
+    {(formData.success || formData?.error) && <SuccessLoader success={formData?.success}/>}
     </>
 
   )

@@ -306,6 +306,10 @@
                 .input-container{
                     width: 49%;
                     .inputy{
+                        display: flex;
+                        .fileInput{
+                            width: 100%;
+                        }
                         input[type=file]::file-selector-button {
                             height: 40px;
                             border: 1px solid lightgray;
