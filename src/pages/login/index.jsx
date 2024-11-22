@@ -276,12 +276,12 @@ const RaeesLoginComponent = () => {
             let {data:regesterDetails} = fetchData({url,method:"POST",payload})
             if(regesterDetails){
                 setTimeout(()=>{setFormData({success:false,error:false}); setLogin(!login)},2000)
-                setFormData({success:true,error:false})
+                setFormData({success:false,error:false})
                 setLogin(!login)
             }
             else{
                 setTimeout(()=>{setFormData({success:false,error:false}); setLogin(!login)},2000)
-                setFormData({success:false,error:true})
+                setFormData({success:false,error:false})
             }
         }
        
