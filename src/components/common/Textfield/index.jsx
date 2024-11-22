@@ -10,7 +10,6 @@ const CreateTextFields = ({ fields , onChange, formField,isSubmitted , onSearchI
 //   const handleChange = (fieldName, value) => {
 //     setFormField((prev) => ({ ...prev, [fieldName]: value }));
 //   };
-
 useEffect(() => {
   fields?.forEach((field) => {
     if (!formField.hasOwnProperty(field.name)) {
@@ -25,7 +24,7 @@ useEffect(() => {
       }
     }
   });
-}, []);
+}, [formField]);
 
   return (
     <>

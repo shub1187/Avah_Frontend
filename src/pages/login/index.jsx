@@ -35,7 +35,8 @@ const RaeesLoginComponent = () => {
     const [forgotPassword, setForgotPasssword] = useState(false)
     const [files, setFiles] = useState({})
     const [fileError,setFileError] = useState(false)
-    // console.log(formData)
+    const [fileRequiredError,setFileRequiredError] = useState(false)
+    console.log(fileRequiredError)
     const {data:multiSelectBusinessData} = useFetch(getAllBrandsMultiSelect)
     let mappedBrandName = multiSelectBusinessData?.data?.map((val)=>val?.value)
 
@@ -76,6 +77,7 @@ const RaeesLoginComponent = () => {
         }
         setIsSubmitted(true)
         let isRequired = requiredTextfield(loginTextfield.slice(1,3),formData)
+        // console.log(isRequired,formData)
         if(isRequired) {
             setTimeout(() => {
                 setIsSubmitted(false)
@@ -141,34 +143,95 @@ const RaeesLoginComponent = () => {
         let payload ={...formData,role:activeButton,approval_status:false,sp_status:"inactive"}
         setIsSubmitted(true)
         let isRequired = requiredTextfield(registerTextfield,formData)
-        if(isRequired || (files?.name && files?.type!=='application/pdf') || formData?.serviced_brands?.length===0 || !formData?.serviced_brands) {
-            setTimeout(() => {
-                setIsSubmitted(false)
-            }, [2000]);
-            if(payload.role==='service provider'){
-                if(formData?.serviced_brands?.length===0 || !formData?.serviced_brands || files?.type!=='application/pdf'){
-                    console.log(formData?.serviced_brands)
-                    if(formData?.serviced_brands?.length===0 || !formData?.serviced_brands){
-                        setFormData((prev)=>({...prev,isBrandError:true}))
-                        setTimeout(() => {
-                            setFormData((prev)=>({...prev,isBrandError:false}))
-                          }, [2000])
-                        return
-                    }
-                    if(files?.name && files?.type!=='application/pdf'){
-                        setTimeout(() => {
-                            setFileError(false)
-                            // setFiles({})
-                        }, [2000])
-                        setFileError(true)
-                        return
-                    }
-                    else setFileError(false)
-                    return
+        // console.log(payload.role)
+        if(payload.role==='service provider'){
+            // console.log(isRequired,files,formData?.serviced_brands)
+            if(isRequired || !files?.name || files?.type!=='application/pdf' || formData?.serviced_brands?.length===0 || !formData?.serviced_brands) {
+                // console.log(isRequired,files,formData?.serviced_brands)
+                if(isRequired){
+                    setTimeout(() => {
+                        setIsSubmitted(false)
+                    }, [2000]);
                 }
-            }       
-            return
+                if(formData?.serviced_brands?.length===0 || !formData?.serviced_brands){
+                    setFormData((prev)=>({...prev,isBrandError:true}))
+                    setTimeout(() => {
+                        setFormData((prev)=>({...prev,isBrandError:false}))
+                      }, [2000])
+                    // return
+                }
+                // console.log(files,!files?.name)
+                if(files?.name && files?.type!=='application/pdf'){
+                    setTimeout(() => {
+                        setFileError(false)
+                        // setFiles({})
+                    }, [2000])
+                    setFileError(true)
+                    // return
+                }
+                else if(!files?.name){
+                    console.log('yes')
+                    setFileRequiredError(true)
+                    setTimeout(()=>{setFileRequiredError(false)},2000)
+                }
+                // setFileError(false)
+                // setFileRequiredError(false)
+                return
+            }
         }
+        else{
+            console.log('cust')
+            if(isRequired){
+                setTimeout(() => {
+                    setIsSubmitted(false)
+                }, [2000]);
+                return
+            }
+        }
+        // if(isRequired || (!files?.name || files?.type!=='application/pdf') || formData?.serviced_brands?.length===0 || !formData?.serviced_brands) {
+        //     if(payload.role==='service provider'){
+        //         if(formData?.serviced_brands?.length===0 || !formData?.serviced_brands || files?.type!=='application/pdf'){
+        //             console.log(formData?.serviced_brands)
+        //             if(formData?.serviced_brands?.length===0 || !formData?.serviced_brands){
+        //                 setFormData((prev)=>({...prev,isBrandError:true}))
+        //                 setTimeout(() => {
+        //                     setFormData((prev)=>({...prev,isBrandError:false}))
+        //                   }, [2000])
+        //                 // return
+        //             }
+        //             if(files?.name && files?.type!=='application/pdf'){
+        //                 setTimeout(() => {
+        //                     setFileError(false)
+        //                     // setFiles({})
+        //                 }, [2000])
+        //                 setFileError(true)
+        //                 // return
+        //             }
+        //             else if(!files?.name){
+        //                 setFileRequiredError(true)
+        //                 setTimeout(()=>{setFileRequiredError(false)},2000)
+        //             }
+        //             else {
+        //                 setFileError(false)
+        //                 setFileRequiredError(false)
+        //             }
+        //             // return
+        //         }
+        //     }
+            // CUSTOMER
+            // else{
+            //     if(isRequired){
+            //         setTimeout(() => {
+            //             setIsSubmitted(false)
+            //         }, [2000]);
+            //         return
+            //     }
+            // } 
+            // setTimeout(() => {
+            //     setIsSubmitted(false)
+            // }, [2000]);      
+            // return
+        // }
 
 
         let url = ''
@@ -424,7 +487,7 @@ const RaeesLoginComponent = () => {
                         <Box>Services</Box>
                         <Box>Providers</Box>
                         <Box>Blogs</Box>
-                        <Box><button onClick={()=>{setLogin(!login);setFormData({});setFiles({});setFileError(false)}}>{login?'SIGN UP':"LOGIN"}</button></Box>
+                        <Box><button onClick={()=>{setLogin(!login);setFormData({});setFiles({});setFileError(false);setFileRequiredError(false)}}>{login?'SIGN UP':"LOGIN"}</button></Box>
                     </Box>
                 </Grid>
             </Box>
@@ -443,7 +506,7 @@ const RaeesLoginComponent = () => {
                             {isMobile && (
                             <Box className='mobile-logo-sign-up'>
                                 <Box>{isAdminPage ? <></>:<Link to={'/'}><img src={LogoImage} alt="logo Img" ></img></Link>}</Box>
-                                <Box>{isAdminPage ? <></>: <button onClick={()=>{setLogin(!login);setFormData({});setFiles({});setFileError(false)}} className='black-button'>{login?'SIGN UP':"LOGIN"}</button>}</Box>
+                                <Box>{isAdminPage ? <></>: <button onClick={()=>{setLogin(!login);setFormData({});setFiles({});setFileError(false);setFileRequiredError(false)}} className='black-button'>{login?'SIGN UP':"LOGIN"}</button>}</Box>
                             </Box>
                             )}
 
@@ -490,7 +553,7 @@ const RaeesLoginComponent = () => {
                             {isMobile && (
                             <Box className='mobile-logo-sign-up'>
                                 <Box>{isAdminPage ? <></>:<Link to={'/'}><img src={LogoImage} alt="logo Img" ></img></Link>}</Box>
-                                <Box>{isAdminPage ? <></>: <button onClick={()=>{setLogin(!login);setFormData({});setFiles({});setFileError(false)}} className='black-button'>{login?'SIGN UP':"LOGIN"}</button>}</Box>
+                                <Box>{isAdminPage ? <></>: <button onClick={()=>{setLogin(!login);setFormData({});setFiles({});setFileError(false);setFileRequiredError(false)}} className='black-button'>{login?'SIGN UP':"LOGIN"}</button>}</Box>
                             </Box>
                             )}
                             <Box className='welcome'>Welcome {activeButton==='service provider'?'Service Provider':activeButton==='dealers'?'Dealer':''}</Box>
@@ -555,7 +618,7 @@ const RaeesLoginComponent = () => {
                                         <input id='inputy'  type='file' className='fileInput' name='business_document' onChange={handleFileChange}></input>
                                         {files?.name && <Box onClick={()=>{ setFiles({}); document.getElementById('inputy').value='' }} ><CloseIcon/></Box>}
                                       </Box>
-                                      {fileError ?<Box className='redError'><InputLabel>Only Pdf files are supported</InputLabel></Box>:<></>}
+                                      {(fileError || fileRequiredError) ?<Box className='redError'><InputLabel>{fileError ? 'Only Pdf files are supported' : 'File is required'}</InputLabel></Box>:<></>}
                                 </Box>         
                             </Box>
                             <Box className='seventh-row'>
