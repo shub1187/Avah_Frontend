@@ -179,7 +179,7 @@ const SpEstimateList = () => {
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3'>
                         <FullyEditableAndDeletableTable
                             title={'SPARES'} 
-                            buttonName={'Add Spares'} 
+                            buttonName={'Spares'} 
                             data={sparePayload} 
                             column={SpCreateSpareEstimateColumn} 
                             setPayload = {setSparePayload} 
@@ -192,7 +192,7 @@ const SpEstimateList = () => {
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3' >
                         <FullyEditableAndDeletableTable 
                             title={'LABOURS'} 
-                            buttonName={'Add Labours'} 
+                            buttonName={'Labours'} 
                             data={labourPayload} 
                             column={SpCreateLabourEstimateColumn} 
                             setPayload = {setLabourSparePayload} 
@@ -297,7 +297,7 @@ const SpEstimateList = () => {
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3'>
                         <FullyEditableAndDeletableTable
                             title={'SPARES'} 
-                            buttonName={'Add Spares'} 
+                            buttonName={'Spares'} 
                             data={sparePayload} 
                             column={SpCreateSpareEstimateColumn} 
                             setPayload = {setSparePayload} 
@@ -311,7 +311,7 @@ const SpEstimateList = () => {
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3' >
                         <FullyEditableAndDeletableTable 
                             title={'LABOURS'} 
-                            buttonName={'Add Labours'} 
+                            buttonName={'Labours'} 
                             data={labourPayload} 
                             column={SpCreateLabourEstimateColumn} 
                             setPayload = {setLabourSparePayload} 

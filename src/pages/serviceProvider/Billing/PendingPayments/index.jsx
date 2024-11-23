@@ -135,7 +135,7 @@ const PendingPayments = () => {
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3'>
                         <FullyEditableAndDeletableTable
                             title={'SPARES'} 
-                            buttonName={'Add Spares'} 
+                            buttonName={'Spares'} 
                             data={sparePayload} 
                             column={pendingPaymentSparesColumn} 
                             setPayload = {setSparePayload} 
@@ -149,7 +149,7 @@ const PendingPayments = () => {
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3' >
                         <FullyEditableAndDeletableTable 
                             title={'LABOURS'} 
-                            buttonName={'Add Labours'} 
+                            buttonName={'Labours'} 
                             data={labourPayload} 
                             column={pendingPaymentLabourColumn} 
                             setPayload = {setLabourSparePayload} 

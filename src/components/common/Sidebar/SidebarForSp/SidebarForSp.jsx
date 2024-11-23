@@ -136,12 +136,13 @@ const ServiderProviderSidebar = ({})=>{
                                   <Box className='sub-item-sidebar'>
                                   <ListItemButton className={`${subListopen[subListIndex] && 'sub-selected'} pl-8 ml-1 mr-1`} onClick={()=>subItemOnChange(subListIndex)} >
                                       {subList.icon && <ListItemIcon><subList.icon/></ListItemIcon>}
-                                      {(subList.name ==='Estimates List' || subList.name ==='Appointment List') ? (
+                                      {/* NOTIFICATION ON SIDEBAR COMMNETED */}
+                                      {/* {(subList.name ==='Estimates List' || subList.name ==='Appointment List') ? (
                                         <ListItemText><Badge sx={{fontSize:17}} badgeContent={(subList.name ==='Estimates List' && notifications?.estimate_list) || (subList.name ==='Appointment List' && notifications?.appointment_list) || 0 } color='options'>{subList.name}&nbsp;&nbsp;</Badge></ListItemText>
                                         )
-                                        :
+                                        : */}
                                         <ListItemText>{subList.name}</ListItemText>
-                                      }
+                                      {/* } */}
                                         {/* <ListItemText>{subList.name}</ListItemText> */}
                                   </ListItemButton>
                                   </Box>

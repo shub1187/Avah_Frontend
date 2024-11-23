@@ -268,7 +268,7 @@ const JobCard = () => {
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3'>
                         <FullyEditableAndDeletableTable
                             title={'SPARES'} 
-                            buttonName={'Add Spares'} 
+                            buttonName={'Spares'} 
                             data={sparePayload} 
                             column={spJobCardSpareColumn} 
                             setPayload = {setSparePayload} 
@@ -282,7 +282,7 @@ const JobCard = () => {
                     <Box maxHeight={'400px'} overflow={'auto'} className='mb-3' >
                         <FullyEditableAndDeletableTable 
                             title={'LABOURS'} 
-                            buttonName={'Add Labours'} 
+                            buttonName={'Labours'} 
                             data={labourPayload} 
                             column={spJobcardLabourColumn} 
                             setPayload = {setLabourSparePayload} 
