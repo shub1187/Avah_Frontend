@@ -27,7 +27,7 @@ const ServiceProviderLayout = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          p:location.pathname==='/serviceProvider/home' || location.pathname==='/admin/home'?0:3 ,
+          p:location.pathname==='/serviceProvider/home' || location.pathname==='/admin/home' || location.pathname==='/admin'?0:3 ,
           width: `calc(100% - ${sizeConfigs.sidebar.width})`,
           minHeight: "100vh",
           backgroundColor: colorConfigs.mainBg

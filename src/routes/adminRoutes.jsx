@@ -60,5 +60,10 @@ export const adminRoutes = [
                 component: <AdminPendingRequestsPage/>
             },
         ]
+    },
+    {
+        id: 5,
+        link: 'admin',
+        component: <AdminHomePage/>
     }
 ]
