@@ -12,7 +12,7 @@ export const adminServiceProviderApprovedColumn =[
     { title: "Status", field: "sp_status", render:(rowData)=>
         <>
             <CustomSwitch rowData={rowData}/>
-            <Chip label={`${rowData?.sp_status==='Active'?'Active':'Inactive'}`} color={`${rowData?.sp_status==='Active'?'success':'error'}`}/>
+            {/* <Chip label={`${rowData?.sp_status==='Active'?'Active':'Inactive'}`} color={`${rowData?.sp_status==='Active'?'success':'error'}`}/> */}
         </>
     },
     {
