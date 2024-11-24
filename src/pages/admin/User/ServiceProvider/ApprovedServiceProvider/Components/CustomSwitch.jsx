@@ -74,10 +74,9 @@ export const CustomSwitch = ({rowData})=>{
             />
             {state?.popupOpen && (
                 (<Dialog open={state?.popupOpen}>
-                    <DialogTitle>Are you sure you want to {rowData?.sp_status==='Active'?'disable':'enable'} {rowData.name}</DialogTitle>
+                    <DialogTitle>Are you sure you want to {rowData?.sp_status==='Active'?'deactivate?':'activate?'} {rowData.name}</DialogTitle>
                     <DialogContent>
                         {state?.loading ?  <SkeletonLoading/>:<></>}
-                        {state?.status ? <>Status Updated</>:<></>}
                     </DialogContent>
                     <DialogActions>
                         <Button color='options' variant="outlined" onClick={no}>No</Button>
