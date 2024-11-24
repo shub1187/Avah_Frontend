@@ -74,9 +74,12 @@ export const CustomSwitch = ({rowData})=>{
             />
             {state?.popupOpen && (
                 (<Dialog open={state?.popupOpen}>
-                    <DialogTitle>Are you sure you want to {rowData?.sp_status==='Active'?'deactivate?':'activate?'} {rowData.name}</DialogTitle>
+                    <DialogTitle>Are you sure you want to {rowData?.sp_status==='Active'?'deactivate':'activate'} {rowData.name}?</DialogTitle>
                     <DialogContent>
                         {state?.loading ?  <SkeletonLoading/>:<></>}
+                        {rowData?.sp_status==='Active'?`This will not allow ${rowData?.name} to login to service provider portal.`:
+                         `This will allow ${rowData?.name} to login to service provider portal.`
+                        }
                     </DialogContent>
                     <DialogActions>
                         <Button color='options' variant="outlined" onClick={no}>No</Button>
