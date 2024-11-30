@@ -43,7 +43,7 @@ const CustomerHome = () => {
         }
       }; 
   return (
-    <Box >
+    <Box className='landingPage'>
         <Grid alignItems={'center'} justifyContent={'space-between'} container >
             <Grid item><LandingPageLogo/></Grid>
             { !isMobile && (
