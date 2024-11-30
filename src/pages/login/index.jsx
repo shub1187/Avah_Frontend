@@ -643,8 +643,8 @@ const RaeesLoginComponent = () => {
             }
 
             {/* THIS EXIST FOR ALL */}
-            {/* <Box className='login-footer'>
-                <Box className="left-footer">© {currentYear} Made with Love By <Box component={'span'} className='purple'>AVAH Services</Box></Box> */}
+            <Box className='login-footer'>
+                <Box className="left-footer">© {currentYear} Made with Love By <Box component={'span'} className='purple'>AVAH Services</Box></Box>
                 {/* ONLY SHOW IF NOT IN MOBILE VIEW */}
                 {/* {!isMobile && (
                 <Box className="right-footer">
@@ -653,8 +653,8 @@ const RaeesLoginComponent = () => {
                     <Box mr={2}>FAQ's</Box>
                     <Box mr={2}>Privacy Policy</Box>
                     <Box mr={2}>Contact Us</Box>
-                </Box>)}
-            </Box> */}
+                </Box>)} */}
+            </Box>
         </Grid>
         {/* THIS IS RIGHT SIDE CONTAINER */}
         <Grid item className="right-side-container">
