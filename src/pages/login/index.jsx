@@ -491,6 +491,7 @@ const RaeesLoginComponent = () => {
                             </Box>
 
                             <Box><Link to={'/whatWeDo'}>What we do</Link></Box>
+                            <Box><button onClick={()=>{setLogin(!login);setFormData({});setFiles({});setFileError(false);setFileRequiredError(false)}}>{login?'SIGN UP':"LOGIN"}</button></Box>
                         </Box>
                     {/* </> */}
                 </Box>
