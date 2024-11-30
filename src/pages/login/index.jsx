@@ -480,18 +480,23 @@ const RaeesLoginComponent = () => {
                 <Grid className='navbar-floating-img-container'>
                     <Link to={'/'}><img src={LogoImage} alt="logo Img" /></Link>
                 </Grid>
-                <Grid className='navbar-floating-content-container' >
-                    <Box className="navbar-flex">
-                        <Box><Link to={'/'}>Home</Link></Box>
-                        <Box>How We Work</Box>
-                        <Box>Services</Box>
-                        <Box>Providers</Box>
-                        <Box>Blogs</Box>
-                        <Box><button onClick={()=>{setLogin(!login);setFormData({});setFiles({});setFileError(false);setFileRequiredError(false)}}>{login?'SIGN UP':"LOGIN"}</button></Box>
-                    </Box>
-                </Grid>
+                <Box className='sticky-navbar-container'>
+                <Box className="navbar-flex">
+                    <Box><Link to={'/'}>Home</Link></Box>
+                            <Box>
+                                <Box>About Us</Box>
+                                <Box >
+                                Coined from a Sanskrit word "<span className="purple">A Vahan</span> ". The founder had a vision to open a garage out of passion for cars. <br/> He had experienced a lack of services for discontinued vehicles and found it very difficult to find the right service executive for the same. Though local mechanics were an option, how to identify and be assured that he is the right guy for your vehicle service? Every startup originates from a problem faced by the public but the solution to that problem lies in the answer of an entrepreneur and there came a vision which was to provide transparency and clarity and connect car owners to their right service provider.<br/> The unauthorized service market is very huge and that's where the founder saw the opportunity to set up a link between car owners and local mechanics. There are a lot of gray areas and no record when and where vehicles are maintained by the car owner through unauthorized local mechanics and there is no accountability for the same. Believing to just have trust in your mechanic and hand over your second home won't suffice this solution when it comes to driving that vehicle on a daily basis.<br/> We need a setup to look into the same and strengthen that trust into reality as this is the need of the current situation. This platform is the solution that caters to the problem rather than an obstacle which we face on our daily chores. Consider it as a medicine from a certified and recognized place which has no room for ambiguity.
+                                </Box>
+                            </Box>
+
+                            <Box><Link to={'/whatWeDo'}>What we do</Link></Box>
+                        </Box>
+                    {/* </> */}
+                </Box>
             </Box>
         )
+                
     }
     <Grid container className='login'>
         <Grid item className="left-side-container">
@@ -637,10 +642,10 @@ const RaeesLoginComponent = () => {
             }
 
             {/* THIS EXIST FOR ALL */}
-            <Box className='login-footer'>
-                <Box className="left-footer">© {currentYear} Made with Love By <Box component={'span'} className='purple'>AVAH Services</Box></Box>
+            {/* <Box className='login-footer'>
+                <Box className="left-footer">© {currentYear} Made with Love By <Box component={'span'} className='purple'>AVAH Services</Box></Box> */}
                 {/* ONLY SHOW IF NOT IN MOBILE VIEW */}
-                {!isMobile && (
+                {/* {!isMobile && (
                 <Box className="right-footer">
                     <Box mr={2}>About Us</Box>
                     <Box mr={2}>Terms & Conditions</Box>
@@ -648,7 +653,7 @@ const RaeesLoginComponent = () => {
                     <Box mr={2}>Privacy Policy</Box>
                     <Box mr={2}>Contact Us</Box>
                 </Box>)}
-            </Box>
+            </Box> */}
         </Grid>
         {/* THIS IS RIGHT SIDE CONTAINER */}
         <Grid item className="right-side-container">

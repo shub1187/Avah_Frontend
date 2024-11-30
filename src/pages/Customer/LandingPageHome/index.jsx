@@ -12,14 +12,15 @@ import "react-multi-carousel/lib/styles.css";
 import {Link} from 'react-router-dom'
 import './index.scss'
 import URL from 'url/apiURL'
-
+import { useMobileResponsive } from 'hooks/useMobileResponsive'
+import LogoImage from "assets/img/logo.png"
 const {getRandomSp, getEstimateDetails,getGeneralStatistics} = URL.CUSTOMER.LANDINGPAGE
 
 const CustomerHome = () => {   
     const { city, setCity } = useCity();
     const {data:randomsp} = useFetch(getRandomSp)
     const {data:generalstats} = useFetch(getGeneralStatistics)
-  
+    const {isMobile} = useMobileResponsive()
     const handleSelectCity = (selectedValue) => {
         setCity(selectedValue);
       };
@@ -45,6 +46,24 @@ const CustomerHome = () => {
     <Box >
         <Grid alignItems={'center'} justifyContent={'space-between'} container >
             <Grid item><LandingPageLogo/></Grid>
+            { !isMobile && (
+                <Box className='sticky-navbar-container'>
+                    {/* <Grid className='sticky-floating-content-container' > */}
+                        <Box className="navbar-flex">
+                            <Box><Link to={'/'}>Home</Link></Box>
+                            {/* <Box><Link to={'/aboutUs'}>About Us</Link></Box> */}
+                            <Box>
+                              <Box>About Us</Box>
+                              <Box >
+                              Coined from a Sanskrit word "<span className="purple">A Vahan</span> ". The founder had a vision to open a garage out of passion for cars. <br/> He had experienced a lack of services for discontinued vehicles and found it very difficult to find the right service executive for the same. Though local mechanics were an option, how to identify and be assured that he is the right guy for your vehicle service? Every startup originates from a problem faced by the public but the solution to that problem lies in the answer of an entrepreneur and there came a vision which was to provide transparency and clarity and connect car owners to their right service provider.<br/> The unauthorized service market is very huge and that's where the founder saw the opportunity to set up a link between car owners and local mechanics. There are a lot of gray areas and no record when and where vehicles are maintained by the car owner through unauthorized local mechanics and there is no accountability for the same. Believing to just have trust in your mechanic and hand over your second home won't suffice this solution when it comes to driving that vehicle on a daily basis.<br/> We need a setup to look into the same and strengthen that trust into reality as this is the need of the current situation. This platform is the solution that caters to the problem rather than an obstacle which we face on our daily chores. Consider it as a medicine from a certified and recognized place which has no room for ambiguity.
+                              </Box>
+                            </Box>
+
+                            <Box><Link to={'/whatWeDo'}>What we do</Link></Box>
+                        </Box>
+                    {/* </Grid> */}
+                </Box>
+            )}
             <Grid item>
                 <Grid container spacing={2}>
                     {/* <Grid item mt={1}>Home</Grid>
@@ -54,7 +73,7 @@ const CustomerHome = () => {
                     {/* <Grid item><CreateAutoCompleteTextfield  options = {data?.result} label={'Select City'} onSelect={handleSelectCity}/></Grid> */}
                     {/* <Grid item><Button sx={{fontSize:10,minHeight:35}}variant='contained' color='darkerpink'>Select City</Button></Grid> */}
                     {!localStorage.getItem('TYPE_OF_USER')?
-                      <Grid item mr={2}><Link to={'/login'}><Button sx={{fontSize:10,minHeight:35}} variant='contained' color="darkerpink">Login</Button></Link></Grid>
+                      <Grid item mr={2}><Link to={'/login'}><Button sx={{fontSize:10,minHeight:35}} variant='contained' color="darkerpink">Login / Signup</Button></Link></Grid>
                       :
                       <Grid item mr={2}><Link to={'/customer/dashboard'}><Button sx={{fontSize:10,minHeight:35}} variant='contained' color="darkerpink">Dashboard</Button></Link></Grid>
                     } 

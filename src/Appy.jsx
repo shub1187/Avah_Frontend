@@ -3,6 +3,7 @@ import { globalAppTheme } from 'components/common/Themes/GlobalAppTheme'
 import CustomerLayout from 'components/layout/CustomerLayout'
 import ServiceProviderLayout from 'components/layout/ServiceProviderLayout'
 import CustomerHome from 'pages/Customer/LandingPageHome'
+import { WhatWeDo } from 'pages/Landing/whatWeDo'
 import RaeesLoginComponent from 'pages/login'
 import {useEffect} from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
@@ -52,6 +53,8 @@ const Appy = () => {
               <>
               <Route path='/' element={<CustomerHome />}></Route>
               <Route path="/login" element={<RaeesLoginComponent />} />
+              <Route path="/whatWeDo" element={<WhatWeDo />} />
+
               </>
 
         }
