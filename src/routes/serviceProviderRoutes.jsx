@@ -2,6 +2,7 @@ import PaidInvoices from 'pages/serviceProvider/Billing/PaidInvoices'
 import PendingPayments from 'pages/serviceProvider/Billing/PendingPayments'
 import ServiceProviderHome from 'pages/serviceProvider/Home'
 import SpLabourPage from 'pages/serviceProvider/Labour'
+import Review from 'pages/serviceProvider/Review'
 import SpRolesPage from 'pages/serviceProvider/Roles'
 import SpAppointmentPage from 'pages/serviceProvider/Service/Appointment'
 import SpEstimateList from 'pages/serviceProvider/Service/Estimate'
@@ -98,18 +99,9 @@ const serviceProviderRoutes = [
       },
       {
         id:9,
-        link:'serviceProvider/accounts',
-        role:'Accounts',
-        subList:[
-          {
-            id:91,
-            link:'account',
-          },
-          {
-            id:92,
-            link:'ledger',
-          },
-        ]
+        link:'serviceProvider/review',
+        role:'Review',
+        component:<Review/>
       },
       {
         id:10,

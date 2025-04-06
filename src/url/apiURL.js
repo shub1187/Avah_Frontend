@@ -8,6 +8,7 @@ const replaceUrl =(url)=>{
     }
     // console.log("line 9 checking url : ", url)
     // console.log("line 10 checking env : ", process.env.NODE_ENV )
+    return url.replace(BASE_URL,PRODUCTION_URL)
     return url
 }
 
@@ -171,6 +172,9 @@ const URL = {
         NOTIFICATION:{
             getNotificationNumbers : replaceUrl(`${BASE_URL}/api/serviceprovider/getNotificationNumbers`)
         },
+        REVIEW:{
+            getServiceProviderFeedbackWithAvg: replaceUrl(`${BASE_URL}/api/serviceprovider/getServiceProviderFeedbackWithAvg`)
+        }
 
     },
     CUSTOMER:{
@@ -206,6 +210,10 @@ const URL = {
             getCustomerVehicleNumbers : replaceUrl(`${BASE_URL}/api/customer/getCustomerVehicleNumbers`),
             vehicleSearch : replaceUrl(`${BASE_URL}/api/customer/vehicleSearch`),
            
+        },
+        REVIEW:{
+            getPaidServices: replaceUrl(`${BASE_URL}/api/customer/getPaidServices`),
+            rateServiceProvider:replaceUrl(`${BASE_URL}/api/customer/rateServiceProvider`)
         }
     }
 

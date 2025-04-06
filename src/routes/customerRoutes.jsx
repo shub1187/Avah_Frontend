@@ -1,6 +1,7 @@
 import CustomerAppointment from "pages/Customer/Appointment";
 import CustomerDashboard from "pages/Customer/Dashboard";
 import CustomerHome from "pages/Customer/LandingPageHome";
+import ReviewCustomer from "pages/Customer/Review";
 import UpdateCustomerProfile from "pages/Customer/UpdateProfile";
 import CustomerVehicle from "pages/Customer/Vehicle";
 
@@ -40,7 +41,12 @@ const customerRoutes = [
         link:'customer/profile',
         component:<UpdateCustomerProfile/>
 
-    }
+    },
+    {
+        id:6,
+        link:'customer/review',
+        component:<ReviewCustomer/>
+    },
 ]
 
 export default customerRoutes

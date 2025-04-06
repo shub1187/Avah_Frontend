@@ -14,9 +14,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import RequestIconImage from './request.png';
 import VehicleIconImage from './vehicle.png'
+import GradeIcon from '@mui/icons-material/Grade';
 
-// const HomeIcon = ()=><img src={HomeIconImage} alt="home" />
-// const UserIcon = ()=><img src={UserIconImage} alt="home" />
 const HomeIcon = ({ isSelected }) => (
     <img
       src={HomeIconImage}
@@ -134,7 +133,11 @@ const HomeIcon = ({ isSelected }) => (
   const AppointmentIcon = ({isSelected}) =>(
     <CalendarTodayIcon fontSize={'25px'} color={isSelected ? 'whiteBackground':'options'}/>
   )
-export {
+
+  const ReviewIcon = ({isSelected}) =>(
+    <GradeIcon fontSize={'25px'} color={isSelected ? 'whiteBackground':'options'}/>
+  )
+  export {
     HomeIcon,
     UserIcon,
     SparesIcon,
@@ -150,5 +153,6 @@ export {
     AppointmentIcon,
     RolesIcon,
     RequestIcon,
-    VehicleIcon
+    VehicleIcon,
+    ReviewIcon
 }

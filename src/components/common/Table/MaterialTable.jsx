@@ -93,46 +93,30 @@ const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialog
     const mock = {
       "results": [
         {
-          "register_sp_id": 62,
-          "approval_status": false,
-          "is_deleted": false,
-          "business_type": "Partnership",
-          "full_address": "Charoli Phata Pune Alandi Maharashtra 784512",
-          "role": "service provider",
-          "business_address": "Charoli Phata Pune",
-          "sp_status": "inactive",
-          "business_contact": "784512012",
-          "sp_rejection_note": null,
-          "state": "Maharashtra",
-          "city": "Alandi",
-          "pin_code": "784512",
-          "name": "Avanti Nikam",
-          "email": "mohamedraees2@gmail.com",
-          "business_name": "Avanti Auto Services",
-          "serviced_brands": [
-              "Maruti Suzuki",
-              "Morris Garage"
-          ]
+          "appointment_id": 38, // Show This
+          "customer_id": 15,
+          "sp_id": "30",
+          "business_name": "Pranish Auto services", // Show This as Provider
+          "vehicle_number": "OP88UJ5612", // Show This
+          "invoice_amount": "12000", // Show this as Service Cost in UI
+          "rating_provided": false, // This is the game changer
+          "rating": 0,
+          "feedback": null, // Show this is rating_provided is TRue
+          "invoice_collected_on": "2024-11-23T18:30:00.000Z" // Show this as service completed On in UI and only Date
       },
       {
-          "register_sp_id": 60,
-          "approval_status": false,
-          "is_deleted": false,
-          "business_type": "Limited Liability Partnership",
-          "full_address": "Warjhe Pune Wakad Maharashtra 412105",
-          "role": "service provider",
-          "business_address": "Warjhe Pune",
-          "sp_status": "inactive",
-          "business_contact": "7845121245",
-          "sp_rejection_note": null,
-          "state": "Maharashtra",
-          "city": "Wakad",
-          "pin_code": "412105",
-          "name": "Pavan Kumbhar",
-          "email": "pavan@gmail.com",
-          "business_name": "Pavan Auto services",
-          "serviced_brands": null
-      },
+          "appointment_id": 19,
+          "customer_id": 15,
+          "sp_id": "30",
+          "business_name": "Pranish Auto services",
+          "vehicle_number": "CH04PP4585",
+          "invoice_amount": "31416",
+          "rating_provided": true,
+          "rating": 4,
+          "feedback": "Technicians were qualified and delivered car in time",
+          "invoice_collected_on": "2024-02-23T18:30:00.000Z"
+      }
+
 
       ],
     }

@@ -9,7 +9,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { Link } from 'react-router-dom';
-import { AccountsIcon, AppointmentIcon, BillingsIcon, DashBoardIcons, HomeIcon, LaboursIcon, PackageIcon, ReviewsIcon, ServiceIcon, ServiceTypeIcon, SettingsIcon, SparesIcon, UserIcon } from 'assets/img/sidebar/Icons';
+import { AccountsIcon, AppointmentIcon, BillingsIcon, DashBoardIcons, HomeIcon, LaboursIcon, PackageIcon, ReviewIcon, ReviewsIcon, ServiceIcon, ServiceTypeIcon, SettingsIcon, SparesIcon, UserIcon } from 'assets/img/sidebar/Icons';
 import './SidebarForCustomer.scss';
 import { useState } from 'react';
 import { Box } from '@mui/material';
@@ -51,6 +51,12 @@ export const CustomerSidebarList = [
           name:"Appointment List"
         },
       ]
+    },
+    {
+      id:6,
+      link:'customer/review',
+      icon:ReviewIcon,
+      name:"Review",
     },
   ]
 

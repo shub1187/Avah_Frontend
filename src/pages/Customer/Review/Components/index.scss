@@ -1,0 +1,14 @@
+.feedbackPopup{
+    .purple{
+        color: #ad4970;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease;
+        padding: 4px; /* Slow animation */
+    }
+    .purple:hover{
+        background-color: rgb(238, 236, 236);
+        border-radius: 6px;
+    }
+}

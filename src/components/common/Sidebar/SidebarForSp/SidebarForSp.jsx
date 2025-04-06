@@ -9,13 +9,14 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { Link } from 'react-router-dom';
-import { AccountsIcon, BillingsIcon, HomeIcon, LaboursIcon, PackageIcon, ReviewsIcon, RolesIcon, ServiceIcon, ServiceTypeIcon, SettingsIcon, SparesIcon, UserIcon } from 'assets/img/sidebar/Icons';
+import { AccountsIcon, BillingsIcon, HomeIcon, LaboursIcon, PackageIcon, ReviewsIcon, RolesIcon, ServiceIcon, ServiceTypeIcon, SettingsIcon, SparesIcon, UserIcon, ReviewIcon } from 'assets/img/sidebar/Icons';
 import './SidebarForSp.scss';
 import { useState } from 'react';
 import { Badge, Box, Chip } from '@mui/material';
 import { useFetch } from 'hooks/useFetch';
 import URL from 'url/apiURL';
 import { useCustomerContext } from 'hooks/useCustomContext';
+
 
 const {getNotificationNumbers}= URL.SERVICE_PROVIDER.NOTIFICATION
 
@@ -103,6 +104,13 @@ export const SpSideBarList = [
         name:"Paid Invoices"
       }
     ]
+  },
+  {
+    id:9,
+    link:'/serviceProvider/review',
+    icon:ReviewIcon,
+    name:"Review",
+    role:'Review',
   },
 ]
 
