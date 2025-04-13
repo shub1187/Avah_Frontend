@@ -45,7 +45,7 @@ const FeedbackPopup = ({ rowData }) => {
                     </Box>
                     :
                     <Box>
-                        <Box className='purple' onClick={() => setRateUs((prev)=>({...prev,open:true}))}>Rate Us</Box>
+                        <Box className='purple' onClick={() => setRateUs((prev)=>({...prev,open:true}))}>Rate Service Provider</Box>
                     </Box>
                 }
 
