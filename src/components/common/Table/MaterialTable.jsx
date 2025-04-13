@@ -7,17 +7,17 @@ import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDiss
 import ActionDialog from "../../common/Dialog/ActionDialog";
 import DialogWrapper from "components/common/Dialog/DialogWrapper";
 import { globalAppTheme } from "components/common/Themes/GlobalAppTheme";
-
+import StarIcon from '@mui/icons-material/Star';
 
 const CustomerMaterialTableContext = createContext()
 export const useCustomMaterialTableContext = ()=>useContext(CustomerMaterialTableContext)
 
-const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialogButtonName, clickButton , buttonName}) => {
+const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialogButtonName, clickButton , buttonName,reviewDesign}) => {
     const tableRef = createRef();
     const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
     const sp_id = localStorage.getItem('sp_id'); // Retrieve the token from local storage
     const customer_id = localStorage.getItem('customer_id'); // Retrieve the token from local storage
-
+    const [data,setData] = useState([])
     const isMobileResolution = useMediaQuery((theme) =>
     theme.breakpoints.down('sm')
     );
@@ -155,6 +155,17 @@ const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialog
               <MTableToolbar {...props} />
             </div>
             <div>
+              {reviewDesign && (
+                <div className="reviewTableDesign">
+                  <div className="reviewTableDesign__rating">
+                    <div className="title">{data?.average_rating || 0}</div>
+                    <div><StarIcon/></div>
+                  </div>
+                  <div className="reviewTableDesign__count">
+                    <div>{data?.total_reviews || 0} Ratings</div>
+                  </div>
+                </div>
+              )}
               {DialogButton && 
                 (<DialogWrapper
                     tableRef={tableRef} 
@@ -191,6 +202,7 @@ const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialog
           const headers = { Authorization: `Bearer ${token}` }; // Include the token in headers
           const response = await axios.get(url,{headers});
           const data = response?.data?.data?.results; // Adjust this based on your API response structure
+          setData(response?.data?.data)
           return {
             data: data || [], // Change this to match your data structure
             page: query.page,

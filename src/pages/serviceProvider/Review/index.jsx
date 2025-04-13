@@ -8,6 +8,7 @@ const Review  = ()=>{
         <CustomMaterialTable
         URL={getServiceProviderFeedbackWithAvg}
         columnss={reviewServiceColumn}
+        reviewDesign
         />
     </div>
     )

@@ -25,3 +25,32 @@
     }
 
 }
+.reviewTableDesign{
+    display: flex;
+    align-items: center;
+    &__rating{
+        display: flex;
+        align-items: flex-end;
+        background-color:#a8436a ;
+        display: flex;
+        padding: 6px 16px;
+        border-radius: 6px;
+        min-width: 40px;
+        margin-right: 10px;
+        color: white;
+        &:nth-child(1){
+            margin-right: 10px;
+        }
+        svg{
+        margin-left: 10px;
+            color: rgb(248, 197, 45);
+            color: white;
+        }
+    }
+    &__count{
+        font-weight: bold;
+        color: rgb(170, 169, 169);
+        font-size: 14px;
+        margin-right: 10px;
+    }
+}
