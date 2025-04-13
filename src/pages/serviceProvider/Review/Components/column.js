@@ -1,4 +1,6 @@
-import FeedbackPopup from "pages/Customer/Review/Components/FeedBackPopup";
+// import FeedbackPopup from "pages/Customer/Review/Components/FeedBackPopup";
+
+import FeedbackPopup from "./FeedBackPopup";
 
 export const reviewServiceColumn = [
     { title: "Customer Name", field: "customer_name" },

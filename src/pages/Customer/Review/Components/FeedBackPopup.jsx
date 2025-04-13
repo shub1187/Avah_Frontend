@@ -20,7 +20,8 @@ const FeedbackPopup = ({ rowData }) => {
                 customer_id:rowData?.customer_id,
                 appointment_id:rowData?.appointment_id,
                 rating:rateUs?.rating,
-                feedback:rateUs?.value
+                feedback:rateUs?.value,
+                sp_id:rowData?.sp_id
             },
             method: "POST",
             url: rateServiceProvider
