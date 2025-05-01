@@ -1,3 +1,4 @@
+import LandingPage from "pages/_Landing";
 import CustomerAppointment from "pages/Customer/Appointment";
 import CustomerDashboard from "pages/Customer/Dashboard";
 import CustomerHome from "pages/Customer/LandingPageHome";
@@ -10,8 +11,8 @@ import CustomerVehicle from "pages/Customer/Vehicle";
 const customerRoutes = [
     {
         id:1,
-        link:'customer/home',
-        component:<CustomerHome/>
+        link:'/',
+        component:<LandingPage/>
 
     },
     {

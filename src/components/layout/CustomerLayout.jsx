@@ -12,7 +12,7 @@ const CustomerLayout = () => {
         setOpen(!open);
         };
     const location = useLocation()
-    const isLanding = location.pathname==='/customer/home'
+    const isLanding = location.pathname==='/'
   return (
       <Box>
         {!isLanding && <Topbar customer={isLanding} isMobile={isMobile} handleDrawerToggle={handleDrawerToggle} />}
@@ -30,7 +30,7 @@ const CustomerLayout = () => {
               component="main"
               sx={{
                   flexGrow: 1,
-                  p: location.pathname === '/customer/dashboard' || location.pathname === '/customer/home' ? 0 : 3,
+                  p: location.pathname === '/customer/dashboard' || location.pathname === '/' ? 0 : 3,
                   width: (isMobile || isLanding)?'none':`calc(100% - ${sizeConfigs.sidebar.width})`,
                   minHeight: "100vh",
                   float:!isMobile && 'right',

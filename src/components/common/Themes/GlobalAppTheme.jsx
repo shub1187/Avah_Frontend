@@ -16,6 +16,15 @@ export const globalAppTheme = createTheme({
         contrastText:"#ffffff"
   
       },
+      reddy:{
+        main: '#D6384C',
+        contrastText:'#ffffff',
+
+      },
+      redder:{
+        main:'white',
+        contrastText:"#D6384C"
+      },
       whiteBackground:{
         main:'#ffffff',
         contrastText:'#000000',

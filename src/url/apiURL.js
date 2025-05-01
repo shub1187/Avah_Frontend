@@ -184,8 +184,8 @@ const URL = {
         LANDINGPAGE:{
             getRandomSp : replaceUrl(`${BASE_URL}/api/customer/getRandomSp`),
             getEstimateDetails : replaceUrl(`${BASE_URL}/api/serviceprovider/getEstimateDetails`),
-            getGeneralStatistics :   replaceUrl(`${BASE_URL}/api/customer/getGeneralStatistics`)
-
+            getGeneralStatistics :   replaceUrl(`${BASE_URL}/api/customer/getGeneralStatistics`),
+            searchServiceProvidersHomepage : replaceUrl(`${BASE_URL}/api/serviceprovider/searchServiceProvidersHomepage`)
         },
         VEHICLE:{
             getAllModelPerBrand:replaceUrl(`${BASE_URL}/api/serviceprovider/getAllModelPerBrand`),

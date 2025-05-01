@@ -2,8 +2,9 @@ import { ThemeProvider } from '@mui/material'
 import { globalAppTheme } from 'components/common/Themes/GlobalAppTheme'
 import CustomerLayout from 'components/layout/CustomerLayout'
 import ServiceProviderLayout from 'components/layout/ServiceProviderLayout'
+import LandingPage from 'pages/_Landing'
+import WhatWeDo from 'pages/_Landing/Components/WhatWeDo'
 import CustomerHome from 'pages/Customer/LandingPageHome'
-import { WhatWeDo } from 'pages/Landing/whatWeDo'
 import RaeesLoginComponent from 'pages/login'
 import {useEffect} from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
@@ -48,12 +49,25 @@ const Appy = () => {
               localStorage.getItem('TYPE_OF_USER') == '3' ?
               <>
                 <Route path="/" element={<CustomerLayout />}>{customerRoute}</Route>
+                <Route path="/aboutUs" element={<LandingPage />} />
+                <Route path="/whatWeDo" element={<LandingPage />} />
+                <Route path="/howWeDo" element={<LandingPage />} />
+                <Route path="/providers" element={<LandingPage />} />
+                <Route path="/contactUs" element={<LandingPage />} />
+
               </>
               :
               <>
-              <Route path='/' element={<CustomerHome />}></Route>
+              <Route path='/' element={<LandingPage />}></Route>
+              <Route path="/aboutUs" element={<LandingPage />} />
+              <Route path="/whatWeDo" element={<LandingPage />} />
+              <Route path="/howWeDo" element={<LandingPage />} />
+              <Route path="/providers" element={<LandingPage />} />
+              <Route path="/contactUs" element={<LandingPage />} />
+
+
               <Route path="/login" element={<RaeesLoginComponent />} />
-              <Route path="/whatWeDo" element={<WhatWeDo />} />
+              {/* <Route path="/whatWeDo" element={<WhatWeDo />} /> */}
 
               </>
 

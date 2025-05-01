@@ -17,7 +17,7 @@ import { useCustomerContext } from 'hooks/useCustomContext';
 export const CustomerSidebarList = [
     {
       id:1,
-      link:'customer/home',
+      link:'/',
       icon:HomeIcon,
       name:"Home",
     },

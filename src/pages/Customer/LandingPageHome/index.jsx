@@ -48,10 +48,8 @@ const CustomerHome = () => {
             <Grid item><LandingPageLogo/></Grid>
             { !isMobile && (
                 <Box className='sticky-navbar-container'>
-                    {/* <Grid className='sticky-floating-content-container' > */}
                         <Box className="navbar-flex">
                             <Box><Link to={'/'}>Home</Link></Box>
-                            {/* <Box><Link to={'/aboutUs'}>About Us</Link></Box> */}
                             <Box>
                               <Box>About Us</Box>
                               <Box >
@@ -61,37 +59,19 @@ const CustomerHome = () => {
 
                             <Box><Link to={'/whatWeDo'}>What we do</Link></Box>
                         </Box>
-                    {/* </Grid> */}
                 </Box>
             )}
             <Grid item>
                 <Grid container spacing={2}>
-                    {/* <Grid item mt={1}>Home</Grid>
-                    <Grid item mt={1}>Services</Grid>
-                    <Grid item mt={1}>Providers</Grid> */}
-                    {/* <Grid item><Button sx={{fontSize:10,minHeight:35}} variant='contained' color='darkerpink'>My Location</Button></Grid> */}
-                    {/* <Grid item><CreateAutoCompleteTextfield  options = {data?.result} label={'Select City'} onSelect={handleSelectCity}/></Grid> */}
-                    {/* <Grid item><Button sx={{fontSize:10,minHeight:35}}variant='contained' color='darkerpink'>Select City</Button></Grid> */}
                     {!localStorage.getItem('TYPE_OF_USER')?
                       <Grid item mr={2}><Link to={'/login'}><Button sx={{fontSize:10,minHeight:35}} variant='contained' color="darkerpink">Login / Signup</Button></Link></Grid>
                       :
                       <Grid item mr={2}><Link to={'/customer/dashboard'}><Button sx={{fontSize:10,minHeight:35}} variant='contained' color="darkerpink">Dashboard</Button></Link></Grid>
                     } 
-                    {/* <Grid item mr={2}><Link to={'/customer/dashboard'}><Button sx={{fontSize:10,minHeight:35}} variant='contained' color="darkerpink">Login</Button></Link></Grid> */}
                 </Grid>
             </Grid>
         </Grid>
         <Grid container ><LandingPageFirstImage/></Grid>
-        {/* <Grid sx={{position:'relative'}}>
-            <Grid justifyContent={'center'} container spacing={0.5} style={{position:'absolute',bottom:'-20px',zIndex:'999'}}>
-                <Grid item><Button size='large' variant='contained' color='greyButton'>Service Center/ Dealers</Button></Grid>
-                <Grid item><Button size='large' variant='contained' color='greyButton'>Ratings</Button></Grid>
-                <Grid item><Button size='large' variant='contained' color='greyButton'>Pricing</Button></Grid>
-                <Grid item><Button size='large'variant='contained' color='greyButton'>Category</Button></Grid>
-                <Grid item><Button size='large'variant='contained' color='greyButton'>Sub Category</Button></Grid>
-                <Grid item><Button size='large' variant='contained' color='options'>Search</Button></Grid>
-            </Grid>
-        </Grid> */}
 
         <Grid container justifyContent={'center'} spacing={2} mt={2}>
           {randomsp?.result?.results?.map((card,index)=>{
@@ -99,33 +79,15 @@ const CustomerHome = () => {
             return (<><Grid item><LandingPageServiceCards data={card}/></Grid></>)
           }
           )}
-            
-            {/* <Grid item><LandingPageServiceCards/></Grid>
-            <Grid item><LandingPageServiceCards/></Grid> */}
         </Grid>
-        {/* <Grid container justifyContent={'center'} my={3}>
-           <Grid item fontSize={20} fontWeight={'bold'}>VIEW ALL</Grid>
-        </Grid> */}
         <Grid mt={2} container sx={{backgroundColor:'#000000'}} >
             <Grid my={4} xs container flexDirection={'column'} alignItems={'center'} sx={{borderRight:'1px solid white'}}><Grid item><LandingPageDealersIcon/></Grid><Grid sx={{color:'white',fontSize:30,textAlign:'center'}} item>Total Vehicles</Grid><Grid sx={{color:'white',fontSize:30}} item>{generalstats?.result?.getAllVehiclesCount || '15000+' }</Grid></Grid>
             <Grid my={4} xs container flexDirection={'column'} alignItems={'center'} sx={{borderRight:'1px solid white'}}><Grid item><LandingPageTotaCustomersIcon/></Grid><Grid sx={{color:'white',fontSize:30,textAlign:'center'}} item>Total Customers</Grid><Grid sx={{color:'white',fontSize:30}} item>{generalstats?.result?.customerCount || '26250+'}</Grid></Grid>
             <Grid my={4} xs container flexDirection={'column'} alignItems={'center'} sx={{borderRight:'1px solid white'}}><Grid item><LandingPageServiceProviderIcon/></Grid><Grid sx={{color:'white',fontSize:30,textAlign:'center'}} item>Service Providers</Grid><Grid sx={{color:'white',fontSize:30}} item>{generalstats?.result?.approvedServiceProviderCount || '14132+'}</Grid></Grid>
-            {/* <Grid my={4} xs container flexDirection={'column'} alignItems={'center'}><Grid item><LandingPageDealersIcon/></Grid><Grid sx={{color:'white',fontSize:30}} item>Dealers</Grid><Grid sx={{color:'white',fontSize:30,textAlign:'center'}} item>20132</Grid></Grid> */}
         </Grid>
         <Grid display={'flex'} flexDirection={'column'} width={'80%'} margin={'auto'} my={3}>
-          {/* {estimateData?.data?.results?.length ? 
-            <Carousel responsive={responsive}>
-              {estimateData?.data?.results?.map((detail,index)=>(<LandingPageServiceStatusCards data={detail}/>))}
-            </Carousel>
-
-          :
-            <Carousel responsive={responsive}>
-              {estimateData?.data?.results?.map((detail,index)=>(<LandingPageServiceStatusCards empty/>))}
-            </Carousel>          
-          } */}
         </Grid>
         <Grid container><LandingPageSecondBigIcon/></Grid>
-        {/* <Grid container my={2}><LandingPageLatestActivity/></Grid> */}
     </Box>
   )
 }

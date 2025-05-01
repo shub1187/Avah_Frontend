@@ -1,0 +1,103 @@
+.landingPageContainer{
+    &__redBar{
+        display: flex;
+        background-color: #D6384C;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        &__left{
+            color: white;
+            img{
+                margin-right: 10px;
+            }
+        }
+        &__right{
+            display: flex;
+            align-items: center;
+            color: white;
+            margin-right: 30px;
+            gap: 20px;
+            img{
+                margin-right: 10px;
+            }
+            &__signIn{
+                a{
+                    text-decoration: none;
+                    color: white;
+                }
+            }
+        }
+    }
+    &__navbar{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &__logo{
+            margin-left: 32px;
+        }
+        &__links{
+            display: flex;
+            gap: 20px;
+            font-weight: bold;
+            margin-right: 56px;
+            button{
+                outline: none;
+                border: none;
+                background-color: white;
+                font-weight: 700;
+            }
+            button:hover{
+                transition: 0.5s;
+                font-weight: 800;
+                color: #D6384C;
+            }
+        }
+    }
+    &__footer{
+        &__logo{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        &__links{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 56px;
+            .line{
+                border-right: 4px solid #D6384C;
+                align-self: center;
+                height: 20px;
+                margin-left: 32px;
+                margin-right: 32px;
+
+            }
+            button{
+                outline: none;
+                border: none;
+                background-color: white;
+                color: #D6384C;
+                font-weight: 700;
+                font-size: 32px;
+                border-radius: 8px;
+
+            }
+            button:hover{
+                transition: 0.5s;
+                background-color: #F5F7FB;
+            }
+        }
+        &__tradeMark{
+            display: flex;
+            justify-content: space-between;
+            margin: 0 56px 56px;
+            padding-top: 56px;
+            border-top: 3px solid black;
+            &__right{
+                img{
+                    margin-right: 16px;
+                }
+            }
+        }
+    }
+}

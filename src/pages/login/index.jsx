@@ -123,7 +123,7 @@ const RaeesLoginComponent = () => {
             }
             else if(payload.role==='customer'){
                 setTimeout(() => {
-                    navigate('/customer/home');
+                    navigate('/customer/dashboard');
                 }, 0);
                 localStorage.setItem('TYPE_OF_USER', "3");
                 localStorage.setItem('role', "Customer");
@@ -484,10 +484,10 @@ const RaeesLoginComponent = () => {
                 <Box className="navbar-flex">
                     <Box><Link to={'/'}>Home</Link></Box>
                             <Box>
-                                <Box>About Us</Box>
-                                <Box >
-                                Coined from a Sanskrit word "<span className="purple">A Vahan</span> ". The founder had a vision to open a garage out of passion for cars. <br/> He had experienced a lack of services for discontinued vehicles and found it very difficult to find the right service executive for the same. Though local mechanics were an option, how to identify and be assured that he is the right guy for your vehicle service? Every startup originates from a problem faced by the public but the solution to that problem lies in the answer of an entrepreneur and there came a vision which was to provide transparency and clarity and connect car owners to their right service provider.<br/> The unauthorized service market is very huge and that's where the founder saw the opportunity to set up a link between car owners and local mechanics. There are a lot of gray areas and no record when and where vehicles are maintained by the car owner through unauthorized local mechanics and there is no accountability for the same. Believing to just have trust in your mechanic and hand over your second home won't suffice this solution when it comes to driving that vehicle on a daily basis.<br/> We need a setup to look into the same and strengthen that trust into reality as this is the need of the current situation. This platform is the solution that caters to the problem rather than an obstacle which we face on our daily chores. Consider it as a medicine from a certified and recognized place which has no room for ambiguity.
-                                </Box>
+                                <Box><Link to={'/aboutUs'}>About Us</Link></Box>
+                                {/* <Box > */}
+                                {/* Coined from a Sanskrit word "<span className="purple">A Vahan</span> ". The founder had a vision to open a garage out of passion for cars. <br/> He had experienced a lack of services for discontinued vehicles and found it very difficult to find the right service executive for the same. Though local mechanics were an option, how to identify and be assured that he is the right guy for your vehicle service? Every startup originates from a problem faced by the public but the solution to that problem lies in the answer of an entrepreneur and there came a vision which was to provide transparency and clarity and connect car owners to their right service provider.<br/> The unauthorized service market is very huge and that's where the founder saw the opportunity to set up a link between car owners and local mechanics. There are a lot of gray areas and no record when and where vehicles are maintained by the car owner through unauthorized local mechanics and there is no accountability for the same. Believing to just have trust in your mechanic and hand over your second home won't suffice this solution when it comes to driving that vehicle on a daily basis.<br/> We need a setup to look into the same and strengthen that trust into reality as this is the need of the current situation. This platform is the solution that caters to the problem rather than an obstacle which we face on our daily chores. Consider it as a medicine from a certified and recognized place which has no room for ambiguity. */}
+                                {/* </Box> */}
                             </Box>
 
                             <Box><Link to={'/whatWeDo'}>What we do</Link></Box>
