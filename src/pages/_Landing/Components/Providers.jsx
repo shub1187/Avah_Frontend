@@ -36,22 +36,23 @@ const Providers = ()=>{
     const [maxHeight, setMaxHeight] = useState('0px');
     const cardsRef = useRef(null);
     const [result,setResult] = useState([
-        {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
+        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
+        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
+        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
+        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
+        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
+        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
+        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
+        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
+        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
+        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
+        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
+        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
+        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
+        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
 
     ])
+    console.log('ln 55', result)
     const onSelect = (e)=>{
         setState((prev)=>({...prev,state:e.target.textContent,city:''}))
         let citiesList = getCities(e.target.textContent, cityData?.result)
@@ -76,9 +77,9 @@ const Providers = ()=>{
         }
 
         let {data}=await fetchData({url:`${searchServiceProvidersHomepage}?city=${state?.city}&state=${state?.state}&business_name=${state?.business_name}`,method:'get'})
-        console.log(data)
-        if(data?.result?.length){
-
+        console.log('ln 79 ',data.data)
+        if(data?.data?.length){
+            setResult(data?.data)
         }
     }
     
@@ -167,7 +168,7 @@ const Providers = ()=>{
                 transition: 'max-height 0.3s ease',
             }}>
                 <Box className='providers__cards__title'>Our <span className="redText">Service Providers</span></Box>
-                <Box className={`providers__cards__card `}>
+                <Box className={`providers__cards__card `} key={result}>
                 {
                     result?.map((obj, ind) => {
                         const imageIndex = ind % cardImages.length; // Cycle through cardImages
@@ -176,15 +177,17 @@ const Providers = ()=>{
                                 <Box>
                                     <img src={cardImages[imageIndex]} alt={obj?.name} />
                                 </Box>
-                                <Box className='redText'>{obj?.name}</Box>
-                                <Box className='desc'>{obj?.description}</Box>
-                                <Box className='location'>{obj?.location}</Box>
+                                <Box className='redText'>{obj?.business_name}</Box>
+                                <Box className='desc'>{obj?.email}</Box>
+                                <Box className='desc'>{obj?.mobile_number}</Box>
+                                <Box className='desc'>{obj?.address}</Box>
+                                <Box className='location'>{obj?.state} {obj?.city}</Box>
                                 <Box className='underline'></Box>
                                 <Box>
                                     <Rating
                                         sx={{ marginBottom: 5 }}
                                         name="simple-controlled"
-                                        value={obj?.rating}
+                                        value={obj?.average_rating}
                                         disabled
                                     />
                                 </Box>

@@ -31,24 +31,9 @@ const {getRandomSp} = URL.CUSTOMER.LANDINGPAGE
 
 const HomePage = ()=>{
     const a = useLocation()
-    // const {data:randomsp} = useFetch(getRandomSp)
-    const [randomsp,setResult] = useState([
-            {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-            {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-            {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-            {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-            {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-            {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-            {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-            {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-            {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-            {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-            {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-            {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-            {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-            {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-    
-    ])
+    const data = useFetch(getRandomSp);
+    const randomsp = data?.data?.result?.results;
+
     const cardImages = [Card1, Card2, Card3, Card4, Card5, Card6, Card7, Card8, Card9];
 
     return(
@@ -114,15 +99,16 @@ const HomePage = ()=>{
                                     <Box>
                                         <img src={cardImages[imageIndex]} alt={obj?.name} />
                                     </Box>
-                                    <Box className='redText'>{obj?.name}</Box>
-                                    <Box className='desc'>{obj?.description}</Box>
-                                    <Box className='location'>{obj?.location}</Box>
+                                    <Box className='redText'>{obj?.business_name}</Box>
+                                    <Box className='desc'>{obj?.business_contact}</Box>
+                                    <Box className='desc'>{obj?.email}</Box>
+                                    <Box className='location'>{obj?.state} {obj?.city}</Box>
                                     <Box className='underline'></Box>
                                     <Box>
                                         <Rating
                                             sx={{ marginBottom: 5 }}
                                             name="simple-controlled"
-                                            value={obj?.rating}
+                                            value={obj?.average_rating}
                                             disabled
                                         />
                                     </Box>

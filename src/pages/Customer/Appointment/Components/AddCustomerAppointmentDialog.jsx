@@ -335,6 +335,7 @@ const AddCustomerAppointmentDialog = ({height,width,color,minHeight,maxWidth,img
                           sx={{ marginBottom: 1 }}
                           name="simple-controlled"
                           value={formData?.average_rating}
+                          key = {formData?.average_rating}
                           disabled
                       />
                   </Box>
