@@ -48,7 +48,7 @@ const ContactUs = ()=>{
             if(!state?.comments || !state?.firstName || !state?.lastName || !state?.email || !state?.number || !state?.reason) return
             const result = await emailjs.sendForm(
                 'service_g3zcdsq',
-                'template_31iekfm',
+                'template_zs5r709',
                 form.current,
                 'DOdYs7DMCnx0zCOM7'
             );
@@ -101,12 +101,12 @@ const ContactUs = ()=>{
             <Box className='contactUs__second'>
                 <Box className='contactUs__second__left'>
                     <div className='heading'>Email *</div>
-                    <input name='email' value={state?.email} onChange={(e)=>Change(e,'email')}/>
+                    <input name='emaila' value={state?.email} onChange={(e)=>Change(e,'email')}/>
                     {state?.emailError&&  <div className='error'>Required</div>}
                 </Box>
                 <Box className='contactUs__second__right'>
                     <div className='heading'>Mobile No. *</div>
-                    <input name='email' type='number' value={state?.number} onChange={(e)=>Change(e,'number')}/>
+                    <input name='number' type='number' value={state?.number} onChange={(e)=>Change(e,'number')}/>
                     {state?.numberError&&  <div className='error'>Required</div>}
                 </Box>
             </Box>
