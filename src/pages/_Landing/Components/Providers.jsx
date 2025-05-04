@@ -112,6 +112,7 @@ const Providers = ()=>{
         <Box className='providers'>
             <Box className='providers__image'>
                 <img src={AVAH}/>
+                <Box className='providers__image__overlay'></Box>
                 <Box className='providers__image__text'> <span className="red">AVAH </span>PROVIDERS</Box>
                 <Box className='providers__image__underline'></Box>
             </Box>

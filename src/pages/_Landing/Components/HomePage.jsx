@@ -40,9 +40,11 @@ const HomePage = ()=>{
 
     return(
         <Box className='homePage'>
-            <Box className='homePage__getStartedImage'><img src={Home}/>
+            <Box className='homePage__getStartedImage'>
+                <img src={Home}/>
+                <Box className='homePage__getStartedImage__overlay'></Box>
                 <Box className='homePage__getStartedImage__text'>Effortless Car Servicing with Avah Services</Box>
-                <Box className='homePage__getStartedImage__button'><Link to='/login'><button>Get Started</button></Link></Box>
+                <Box className='homePage__getStartedImage__button'><Link to={localStorage.getItem('customer_id')?'/customer/dashboard':'/login'}><button>Get Started</button></Link></Box>
             </Box>
             <Box className='homePage__about'>
                 <Box className='homePage__about__left'>
@@ -152,7 +154,7 @@ const HomePage = ()=>{
                     <Box className='smallContent'>Provide Feedback</Box>
                 </Box> */}
                 <Box className='homePage__howWeWorkImage__10'>
-                <Link to='/login'><button>Get Started</button></Link>
+                <Link to={localStorage.getItem('customer_id')?'/customer/dashboard':'/login'}><button>Get Started</button></Link>
                 </Box>
 
             </Box>

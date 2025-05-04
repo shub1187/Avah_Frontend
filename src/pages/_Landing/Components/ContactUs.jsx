@@ -78,6 +78,7 @@ const ContactUs = ()=>{
     return (
         <Box className='contactUs'>
             <Box className='contactUs__image'>
+                <Box className='contactUs__image__overlay'></Box>
                 <img src={Contact}/>
                 <Box className='contactUs__image__text'>CONTACT <span className="red">AVAH</span></Box>
                 <Box className='contactUs__image__underline'></Box>
@@ -175,7 +176,7 @@ const ContactUs = ()=>{
                     <Box className='howWeDo__join__image__underline'></Box>
                     <Box className='howWeDo__join__image__text'>Whether you're a car owner looking for hassle-free servicing or a service provider
                     wanting to expand your business, AVAH is the platform for you!</Box>
-                    <Box className='howWeDo__join__image__button'><Link to='/login'><button>Get Registered Now</button></Link></Box>
+                    <Box className='howWeDo__join__image__button'><Link to={localStorage.getItem('customer_id')?'/customer/dashboard':'/login'}><button>Get Registered Now</button></Link></Box>
 
                 </Box>
             </Box>

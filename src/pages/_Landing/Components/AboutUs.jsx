@@ -16,6 +16,7 @@ const AboutUs = () => {
         <Box className='aboutUs'>
             <Box className='aboutUs__image'>
                 <img src={Main}/>
+                <Box className='aboutUs__image__overlay'></Box>
                 <Box className='aboutUs__image__text'>ABOUT <span className="red">AVAH</span></Box>
                 <Box className='aboutUs__image__underline'></Box>
             </Box>
@@ -150,7 +151,7 @@ const AboutUs = () => {
                 <Box className='aboutUs__getStarted__title1'>your vehicle is just a click away.</Box>
 
                 <Box className='aboutUs__getStarted__content'>Your car deserves the best, and AVAH ensures it gets nothing less!</Box>
-                <Box className='aboutUs__getStarted__button'><Link to='/login'><button>Get Started</button></Link></Box>
+                <Box className='aboutUs__getStarted__button'><Link to={localStorage.getItem('customer_id')?'/customer/dashboard':'/login'}><button>Get Started</button></Link></Box>
             </Box>
         </Box>
     )

@@ -11,6 +11,7 @@ const HowWeDo = ()=>{
         <Box className='howWeDo'>
             <Box className='howWeDo__image'>
                 <img src={How}/>
+                <Box className='howWeDo__image__overlay'></Box>
                 <Box className='howWeDo__image__text'>HOW <span className="red">AVAH WORK</span></Box>
                 <Box className='howWeDo__image__underline'></Box>
             </Box>
@@ -186,7 +187,7 @@ const HowWeDo = ()=>{
                     <Box className='howWeDo__join__image__underline'></Box>
                     <Box className='howWeDo__join__image__text'>Whether you're a car owner looking for hassle-free servicing or a service provider
                     wanting to expand your business, AVAH is the platform for you!</Box>
-                    <Box className='howWeDo__join__image__button'><Link to='/login'><button>Get Registered Now</button></Link></Box>
+                    <Box className='howWeDo__join__image__button'><Link to={localStorage.getItem('customer_id')?'/customer/dashboard':'/login'}><button>Get Registered Now</button></Link></Box>
 
                 </Box>
             </Box>
