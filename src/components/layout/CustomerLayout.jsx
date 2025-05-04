@@ -31,9 +31,9 @@ const CustomerLayout = () => {
               sx={{
                   flexGrow: 1,
                   p: location.pathname === '/customer/dashboard' || location.pathname === '/' ? 0 : 3,
-                  width: (isMobile || isLanding)?'none':`calc(100% - ${sizeConfigs.sidebar.width})`,
+                  width: (isMobile || isLanding || !location.pathname==='/')?'none':`calc(100% - 330px)`,
                   minHeight: "100vh",
-                  float:!isMobile && 'right',
+                  float:(!isMobile && location.pathname!=='/') ? 'right':'none',
                 //   backgroundColor: colorConfigs.mainBg
               }}
           >

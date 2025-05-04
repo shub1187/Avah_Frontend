@@ -42,7 +42,7 @@ const LandingPage = ()=>{
                     <Box><Link to={'/aboutUs'}><button style={{color:location.pathname?.includes('aboutUs')?'#D6384C':'black'}}>About Us</button></Link></Box>
                     <Box><Link to={'/whatWeDo'}><button style={{color:location.pathname?.includes('whatWeDo')?'#D6384C':'black'}}>What We Do</button></Link></Box>
                     <Box><Link to={'/howWeDo'}><button style={{color:location.pathname?.includes('howWeDo')?'#D6384C':'black'}}>How We Do</button></Link></Box>
-                    <Box><Link to={'/providers'}><button>Providers</button></Link></Box>
+                    <Box><Link to={'/providers'}><button style={{color:location.pathname?.includes('providers')?'#D6384C':'black'}}>Providers</button></Link></Box>
                     <Box><Link to={'/contactUs'}><button style={{color:location.pathname?.includes('contactUs')?'#D6384C':'black'}}>Contact Us</button></Link></Box>
                 </Box>
             </Box>
