@@ -14,6 +14,8 @@ import One from '../../../../src/assets/landingPage/homePage/One.svg'
 import Two from '../../../../src/assets/landingPage/homePage/two.svg'
 import Three from '../../../../src/assets/landingPage/homePage/three.svg'
 import Home from '../../../../src/assets/landingPage/homePage/Home.png'
+import HOWWEWORK from '../../../../src/assets/landingPage/homePage/Screenshot 2025-05-04 at 11.47.31 AM.png'
+
 import Card1 from '../../../../src/assets/landingPage/Providers/Card1.png'
 import Card2 from '../../../../src/assets/landingPage/Providers/Card2.png'
 import Card3 from '../../../../src/assets/landingPage/Providers/Card3.png'
@@ -122,7 +124,8 @@ const HomePage = ()=>{
                 </Box>
             </Box>
             <Box className='homePage__howWeWorkImage'>
-                <img src={HowWeWork}/>
+                <img src={HOWWEWORK}/>
+                {/* <img src={HowWeWork}/>
                 <Box className='homePage__howWeWorkImage__title'>How We Work</Box>
                 <Box className='homePage__howWeWorkImage__1'>
                     <Box className='bigTitle'>01.</Box>
@@ -147,7 +150,7 @@ const HomePage = ()=>{
                 <Box className='homePage__howWeWorkImage__9'>
                     <Box className='bigTitle'>05.</Box>
                     <Box className='smallContent'>Provide Feedback</Box>
-                </Box>
+                </Box> */}
                 <Box className='homePage__howWeWorkImage__10'>
                 <Link to='/login'><button>Get Started</button></Link>
                 </Box>

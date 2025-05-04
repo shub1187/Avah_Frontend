@@ -3,9 +3,11 @@ import Home from '../../../../src/assets/landingPage//WhatWeDo/WHAT DOES AVAH DO
 import Scope1 from '../../../../src/assets/landingPage//WhatWeDo/ScopeImage1.png'
 import Scope2 from '../../../../src/assets/landingPage//WhatWeDo/ScopeImage2.png'
 import Scope3 from '../../../../src/assets/landingPage//WhatWeDo/ScopeImage3.png'
-import Why1 from '../../../../src/assets/landingPage//WhatWeDo/WhyImage1.png'
+// import Why1 from '../../../../src/assets/landingPage//WhatWeDo/WhyImage1.png'
 import Why2 from '../../../../src/assets/landingPage//WhatWeDo/WhyImage2.png'
 import Why3 from '../../../../src/assets/landingPage//WhatWeDo/WhyImage3.png'
+import Why1 from '../../../../src/assets/landingPage//WhatWeDo/Mask group-2.png'
+
 import Tick from '../../../../src/assets/landingPage/AboutUs/Tick.svg'
 import Ellipse from '../../../../src/assets/landingPage//WhatWeDo/Ellipse.png'
 import GetStarted from '../../../../src/assets/landingPage/AboutUs/getStarted.png'

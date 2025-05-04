@@ -846,11 +846,11 @@
             z-index: 100;
             color: white;
             font-weight: 400;
-            font-size: 72px;
+            font-size: 7vw;
             border-bottom: 1px solid white;
         }
         .bigTitle{
-            font-size: 72px;
+            font-size: 4vw;
         }
         .smallContent{
             font-size: 32px;
@@ -859,7 +859,6 @@
             position: absolute;
             top: 28%;
             left: 5%;
-            font-size: 72px;
             .bigTitle{
                 display: flex;
                 justify-content: center;
@@ -929,18 +928,24 @@
         }
         &__10{
             position: absolute;
-            bottom: 10%;
+            bottom: 5%;
             left: 50%;
             transform: translateX(-50%);
+
             button{
-                width: 450px;
-                height: 89px;
+                width: 40vw;
+                height: 9vh;
                 outline: none;
                 border: none;background-color: #D6384C;
                 font-size: 32px;
                 color: white;
                 font-weight: 700;
                 border-radius: 24px;
+            }
+            @media (max-width:'1000px') {
+                button{
+                    height: 8vh;
+                }
             }
         }
     }
@@ -1000,7 +1005,7 @@
             margin-bottom: 56px;
         }
         &__left{
-            width: 55%;
+            width: 50%;
             margin-left: 56px;
             &__box{
                 display: flex;
@@ -1387,11 +1392,23 @@
         max-height: none;
         transition: 0.3s ease;
     }
-
+    &__errorMessage{
+        font-size: 40px;
+        font-weight: 400;
+        // text-align: center;
+        margin-bottom: 50px;
+        display: flex;
+        justify-content: center;
+        >:nth-child(1){
+            border: 1px solid rgb(216, 216, 216);
+            border-radius: 8px;
+            padding: 16px;
+        }
+    }
     &__button{
         display: flex;
         justify-content: center;
-        padding: 56px;
+        padding: 0 56px 56px 56px;
         text-align: center;
         button{
             color: black;
@@ -1618,6 +1635,7 @@
                 font-weight: 700;
                 padding: 32px 0 32px 56px;
                 min-width: 52%;
+                max-width: 52%;
                 .line{
                     margin-bottom: 32px;
                     display: flex;
@@ -1723,31 +1741,41 @@
             }
             &__img1{
                 img{
-                    width: 96%;
+                    width: 30vw;
                 }
                 position: absolute;
-                bottom: -15%;
+                bottom: -10vh;
                 left: 2%;
+                @media (min-width:'1200px') {
+                    bottom: -20vh;
+                }
                 // border-radius: 30px;
                 // border: 1px solid black;
             }
             &__img2{
                 img{
-                    width: 98%;
+                    width: 30vw;
                 }
+                
                 position: absolute;
-                bottom: -18%;
+                bottom: -10vh;
                 left: 34%;
-                border-radius: 30px;            
+                border-radius: 30px;  
+                @media (min-width:'1200px') {
+                    bottom: -20vh;
+                }          
             }
             &__img3{
                 img{
-                    width: 100%;
+                    width: 30vw;
                 }
                 position: absolute;
-                bottom: -18%;
+                bottom: -10vh;
                 left: 67%;
-                border-radius: 30px;            
+                border-radius: 30px;   
+                @media (min-width:'1200px') {
+                    bottom: -20vh;
+                }         
             }
     
         }

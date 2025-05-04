@@ -27,32 +27,18 @@ const Providers = ()=>{
 
     // http://localhost:3008/api/serviceprovider/searchServiceProvidersHomepage?city=Yellapur&state=Karnataka
     
-    const [state,setState] =useState({business_name:'',state:'',city:'',snackbarMessage:''})
+    const [state,setState] =useState({business_name:'',state:'',city:'',snackbarMessage:'',errorMessage:'Search to find providers'})
     const {data:cityData} = useFetch(getAllCitiesPerState)
     const [citiesAndState, setCitiesAndState] = useState({ state: [], cities: [] })
     const cardImages = [Card1, Card2, Card3, Card4, Card5, Card6, Card7, Card8, Card9];
     const {fetchData} = useFetchFunction()
     const [expand, setExpand] = useState(false);
-    const [maxHeight, setMaxHeight] = useState('0px');
+    const [maxHeight, setMaxHeight] = useState('800px');
+    const [height,setHeight] = useState({maxHeight:'none',fullHeight:'0',expandButton:false})
     const cardsRef = useRef(null);
     const [result,setResult] = useState([
-        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-        // {name:'Firestone Complete Auto Care',description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla...',location:'70 Bright St New York, USA',rating:4},
-
     ])
-    console.log('ln 55', result)
+    console.log(height)
     const onSelect = (e)=>{
         setState((prev)=>({...prev,state:e.target.textContent,city:''}))
         let citiesList = getCities(e.target.textContent, cityData?.result)
@@ -80,26 +66,40 @@ const Providers = ()=>{
         console.log('ln 79 ',data.data)
         if(data?.data?.length){
             setResult(data?.data)
+            setState((prev)=>({...prev,errorMessage:''}))
+        }
+        else{
+            setResult([])
+            setState((prev)=>({...prev,errorMessage:'Service providers not found'}))
         }
     }
     
     useEffect(() => {
         if (cardsRef.current) {
           const fullHeight = cardsRef.current.scrollHeight;
-          const collapsedHeight = fullHeight * 0.6; // 60% visible, 40% hidden
-          setMaxHeight(`${collapsedHeight}px`);
+            if(fullHeight > 1600){
+                setHeight((prev)=>({...prev,fullHeight:fullHeight,maxHeight:1600,expandButton:true}))
+            }
+            else{
+                setHeight((prev)=>({...prev,fullHeight:fullHeight,maxHeight:1600,expandButton:false}))
+            }
+
         }
-      }, []); // Only run once on mount
+      }, [result]); 
     
     // Toggle expand/collapse
     const toggleExpand = () => {
-    if (expand) {
-        const fullHeight = cardsRef.current.scrollHeight;
-        setMaxHeight(`${fullHeight * 0.6}px`);
-    } else {
-        setMaxHeight('none'); // Expand fully
-    }
-    setExpand(true);
+        setHeight((prev)=>({...prev,maxHeight:'none',expandButton:false}))
+
+    // if (expand) {
+    //     const fullHeight = cardsRef.current.scrollHeight;
+    //     setMaxHeight(`800px`);
+    //     setHeight((prev)=>({...prev,maxHeight:'none'}))
+    // } 
+    // else {
+    //     setHeight((prev)=>({...prev,maxHeight:'none'}))
+    //     setMaxHeight('none'); // Expand fully
+    // }
     };
 
     useEffect(() => {
@@ -162,12 +162,12 @@ const Providers = ()=>{
                     />}/>
                 <Button className="buttony" onClick={onSubmit} sx={{textTransform:'none',minWidth:'100px',fontSize:'16px',maxHeight:'56px'}} color="reddy" variant="contained">Search</Button>
             </Box>
-            <Box className={`providers__cards ${expand ? 'expand' : ''}`} ref={cardsRef} sx={{
-                maxHeight: expand ? 'none' : maxHeight,
+            <Box className={`providers__cards`} ref={cardsRef} sx={{
+                maxHeight: height?.fullHeight>height?.maxHeight? '1600px' : 'none',
                 overflowY: 'hidden',
                 transition: 'max-height 0.3s ease',
             }}>
-                <Box className='providers__cards__title'>Our <span className="redText">Service Providers</span></Box>
+                <Box className='providers__cards__title' sx={{marginBottom:result?.length?'50px':'0'}}>Our <span className="redText">Service Providers</span></Box>
                 <Box className={`providers__cards__card `} key={result}>
                 {
                     result?.map((obj, ind) => {
@@ -197,7 +197,8 @@ const Providers = ()=>{
                 }
                 </Box>
             </Box>
-            {expand ?<></>:<Box className='providers__button'><Button focusRipple={false} color="whiteBackground" variant="text" onClick={toggleExpand}>{'View More > > '}</Button></Box>}
+            {state?.errorMessage && <Box className='providers__errorMessage'><Box>{state?.errorMessage}</Box></Box>}
+            {height?.expandButton?<Box className='providers__button'><Button focusRipple={false} color="whiteBackground" variant="text" onClick={toggleExpand}>{'View More > > '}</Button></Box>:<></>}
             <Box className='providers__join'>
                 <Box className='howWeDo__join__image'>
                         <img src={GetStarted}/>
