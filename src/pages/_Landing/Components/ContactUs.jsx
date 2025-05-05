@@ -1,4 +1,4 @@
-import { Alert, Box, Radio, Snackbar } from '@mui/material'
+import { Alert, Box, CircularProgress, Dialog, DialogContent, Radio, Snackbar } from '@mui/material'
 import Contact from '../../../../src/assets/landingPage/ContactUs/Contact AVAH.png'
 import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
@@ -10,7 +10,7 @@ const ContactUs = ()=>{
     const [state,setState] = useState({
         firstName:'',firstNameError:'',lastName:'',lastNameError:'',email:'',emailError:'',number:'',numberError:'',
         city:'',state:'',pincode:'',country:'India',dayPhone:'',eveningPhone:'',reason:'',reasonError:'',comments:'',commentsError:'',
-        success:false,error:false
+        success:false,error:false,loading:false
     })
     console.log(state)
     const form = useRef()
@@ -46,6 +46,7 @@ const ContactUs = ()=>{
     
             },2000)
             if(!state?.comments || !state?.firstName || !state?.lastName || !state?.email || !state?.number || !state?.reason) return
+            setState((prev)=>({...prev,loading:true}))
             const result = await emailjs.sendForm(
                 'service_g3zcdsq',
                 'template_zs5r709',
@@ -53,23 +54,28 @@ const ContactUs = ()=>{
                 'DOdYs7DMCnx0zCOM7'
             );
             if(result?.status===200){
-                setState((prev)=>({...prev,success:true}))
+                setState((prev)=>({...prev,success:true,
+                    firstName:'',firstNameError:'',lastName:'',lastNameError:'',email:'',emailError:'',number:'',numberError:'',
+                    city:'',state:'',pincode:'',country:'India',dayPhone:'',eveningPhone:'',reason:'',reasonError:'',comments:'',commentsError:'',
+                    loading:false
+
+                }))
                 setTimeout(()=>{
-                    setState((prev)=>({...prev,success:false}))
+                    setState((prev)=>({...prev,success:false,loading:false}))
                 },3000)
     
             }
             else{
-                setState((prev)=>({...prev,error:true}))
+                setState((prev)=>({...prev,error:true,loading:false}))
                 setTimeout(()=>{
-                    setState((prev)=>({...prev,error:false}))
+                    setState((prev)=>({...prev,error:false,loading:false}))
                 },3000)
             }
         }
         catch(e){
-            setState((prev)=>({...prev,error:true}))
+            setState((prev)=>({...prev,error:true ,loading:false}))
             setTimeout(()=>{
-                setState((prev)=>({...prev,error:false}))
+                setState((prev)=>({...prev,error:false ,loading:false}))
             },3000)
         }
 
@@ -146,12 +152,12 @@ const ContactUs = ()=>{
 
                 <Box className='contactUs__sixth__bigWrap'>
                     <Box className='contactUs__sixth__bigWrap__wrap'>
-                        <input name='reason' type='radio' value={'general'} onClick={(e)=>setState((prev)=>({...prev,reason:e.target.value}))} checked={state?.reason==='general'}></input>
+                        <input name='reason' type='radio' value={'Store Experience'} onClick={(e)=>setState((prev)=>({...prev,reason:e.target.value}))} checked={state?.reason==='Store Experience'}></input>
                         <div className='heading1'>Store Experience</div>
                     </Box>
 
                     <Box className='contactUs__sixth__bigWrap__wrap'>
-                        <input name='reason' type='radio' value={'store'} onClick={(e)=>setState((prev)=>({...prev,reason:e.target.value}))} checked={state?.reason==='store'}></input>
+                        <input name='reason' type='radio' value={'General Comment / Inquiry'} onClick={(e)=>setState((prev)=>({...prev,reason:e.target.value}))} checked={state?.reason==='General Comment / Inquiry'}></input>
                         <div className='heading1'>General Comment / Inquiry</div>
                     </Box>
                 </Box>
@@ -164,9 +170,12 @@ const ContactUs = ()=>{
             </Box>
             <Box className='contactUs__button'><button type="submit">Submit</button></Box>
             </form>
-            {state?.success ||state?.error && <Snackbar anchorOrigin={{"vertical":'top',"horizontal":'center'}} autoHideDuration={3000} open={state?.success || state?.error}>
-                <Alert severity={state?.success?'success':'error'}>{state?.success?'Submitted Successfully':'Unable to submit due to server error'}</Alert>
-                </Snackbar>}
+            {(state?.success ||state?.error )&& 
+                (
+                <Snackbar anchorOrigin={{"vertical":'top',"horizontal":'center'}} autoHideDuration={3000} open={state?.success || state?.error}>
+                    <Alert severity={state?.success?'success':'error'}>{state?.success?'Submitted Successfully':'Unable to submit due to server error'}</Alert>
+                </Snackbar>
+            )}
 
             <Box className='contactUs_join'>
                 <Box className='contactUs__join__image'>
@@ -180,6 +189,7 @@ const ContactUs = ()=>{
 
                 </Box>
             </Box>
+            {state?.loading && (<Dialog open={state?.loading}><DialogContent><CircularProgress/></DialogContent></Dialog>)}
         </Box>
     )
 }
