@@ -9,7 +9,7 @@ import Why3 from '../../../../src/assets/landingPage//WhatWeDo/WhyImage3.png'
 import Why1 from '../../../../src/assets/landingPage//WhatWeDo/Mask group-2.png'
 
 import Tick from '../../../../src/assets/landingPage/AboutUs/Tick.svg'
-import Ellipse from '../../../../src/assets/landingPage//WhatWeDo/Ellipse.png'
+import Ellipse from '../../../../src/assets/landingPage//WhatWeDo/Screenshot 2025-05-10 at 12.13.14 AM.png'
 import GetStarted from '../../../../src/assets/landingPage/AboutUs/getStarted.png'
 import { Link } from "react-router-dom"
 
@@ -132,12 +132,14 @@ const WhatWeDo = ()=>{
                 <Box className='whatWeDo__who__title'>Who Benefits from <span className='redText'>AVAH?</span></Box>
                 <Box className='whatWeDo__who__ellipse'>
                     <Box className='whatWeDo__who__ellipse__image'><img src={Ellipse}/></Box>
-                    <Box className='whatWeDo__who__ellipse__one'>Authorised Service Centre </Box>
+
+
+                    {/* <Box className='whatWeDo__who__ellipse__one'>Authorised Service Centre </Box>
                     <Box className='whatWeDo__who__ellipse__two'>Motor Oil Companies & Spare Part Vendors for Surveys and R&D Related Purposes </Box>
                     <Box className='whatWeDo__who__ellipse__three'>Insurance Companies </Box>
                     <Box className='whatWeDo__who__ellipse__four'>Prospective Buyers in Case of Sale Purchase </Box>
                     <Box className='whatWeDo__who__ellipse__five'>Used Car Market Dealers </Box>
-                    <Box className='whatWeDo__who__ellipse__six'>Private Workshops/ Local Mechanics </Box>
+                    <Box className='whatWeDo__who__ellipse__six'>Private Workshops/ Local Mechanics </Box> */}
 
                 </Box>
             </Box>

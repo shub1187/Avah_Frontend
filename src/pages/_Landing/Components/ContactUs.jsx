@@ -177,7 +177,7 @@ const ContactUs = ()=>{
                 </Snackbar>
             )}
 
-            <Box className='contactUs_join'>
+            <Box className='contactUs__join'>
                 <Box className='contactUs__join__image'>
                     <img src={GetStarted}/>
                     <Box className='howWeDo__join__image__title1'>Drive Worry-Free </Box>

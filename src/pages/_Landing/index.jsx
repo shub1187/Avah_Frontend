@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material"
+import { Box, Button, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText } from "@mui/material"
 import { useState } from "react"
 import HomePage from "./Components/HomePage"
 import AvahLogo from '../../../src/assets/landingPage/avahLogo.svg'
@@ -17,19 +17,22 @@ import WhatWeDo from "./Components/WhatWeDo"
 import HowWeDo from "./Components/HowWeDo"
 import ContactUs from "./Components/ContactUs"
 import Providers from "./Components/Providers"
+import MenuIcon from '@mui/icons-material/Menu';
+
 const LandingPage = ()=>{
     const location = useLocation()
-    console.log(location.pathname?.includes('aboutUs'))
+
+    const [open,setOpen] = useState(false)
     return(
         <Box className='landingPageContainer'>
             <Box className='landingPageContainer__redBar'>
                 <Box className='landingPageContainer__redBar__left'>
-                    <img src={Gmail}/>levin@gmail.com
+                    <img src={Gmail}/>info@avahservices.com
                 </Box>
                 <Box className='landingPageContainer__redBar__right'>
-                    <Box className='landingPageContainer__redBar__right__number'>
+                    {/* <Box className='landingPageContainer__redBar__right__number'>
                         <img src={Phone}/>1234567890
-                    </Box>
+                    </Box> */}
                     <Box className='landingPageContainer__redBar__right__signIn'>
                         {localStorage.getItem('profile_name') ? <Link to={'/customer/dashboard'}><Button style={{textTransform:'none'}} endIcon={<ArrowRightAltIcon/>} variant="contained" color="redder">Dashboard</Button></Link>:<Link to='/login'><img src={Profile}/>Sign In /Register</Link>}
                     </Box>
@@ -37,14 +40,57 @@ const LandingPage = ()=>{
             </Box>
             <Box className='landingPageContainer__navbar'>
                 <Box className='landingPageContainer__navbar__logo'><img src={AvahLogo}/></Box>
-                <Box className='landingPageContainer__navbar__links'>
-                    <Box><Link to={'/'}><button style={{color:location.pathname==='/'?'#D6384C':'black'}}>Home</button></Link></Box>
-                    <Box><Link to={'/aboutUs'}><button style={{color:location.pathname?.includes('aboutUs')?'#D6384C':'black'}}>About Us</button></Link></Box>
-                    <Box><Link to={'/whatWeDo'}><button style={{color:location.pathname?.includes('whatWeDo')?'#D6384C':'black'}}>What We Do</button></Link></Box>
-                    <Box><Link to={'/howWeDo'}><button style={{color:location.pathname?.includes('howWeDo')?'#D6384C':'black'}}>How We Do</button></Link></Box>
-                    <Box><Link to={'/providers'}><button style={{color:location.pathname?.includes('providers')?'#D6384C':'black'}}>Providers</button></Link></Box>
-                    <Box><Link to={'/contactUs'}><button style={{color:location.pathname?.includes('contactUs')?'#D6384C':'black'}}>Contact Us</button></Link></Box>
-                </Box>
+                {window.innerWidth<450 ?
+                 <>
+                    <Box>
+                        <IconButton onClick={()=>setOpen(true)}><MenuIcon/></IconButton>
+                    </Box>
+                    <Drawer variant="temporary" onClose={()=>setOpen(false)} open={open} anchor="right">
+                    <List sx={{width:250}}>
+                        <ListItem>
+                            <ListItemButton onClick={()=>setOpen(false)}>
+                            <Link style={{color:location.pathname==='/'?'#D6384C':'black',textDecoration:'none'}} to={'/'}>Home</Link>
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemButton onClick={()=>setOpen(false)}>
+                            <Link style={{color:location.pathname?.includes('aboutUs')?'#D6384C':'black',textDecoration:'none'}} to={'/aboutUs'}>About Us</Link>
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemButton onClick={()=>setOpen(false)}>
+                            <Link style={{color:location.pathname?.includes('whatWeDo')?'#D6384C':'black',textDecoration:'none'}} to={'/whatWeDo'}>What We Do</Link>
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemButton onClick={()=>setOpen(false)}>
+                            <Link style={{color:location.pathname?.includes('howWeDo')?'#D6384C':'black',textDecoration:'none'}} to={'/howWeDo'}>How We Do</Link>
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemButton onClick={()=>setOpen(false)}>
+                            <Link style={{color:location.pathname?.includes('providers')?'#D6384C':'black',textDecoration:'none'}} to={'/providers'}>Providers</Link>
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemButton onClick={()=>setOpen(false)}>
+                            <Link style={{color:location.pathname?.includes('contactUs')?'#D6384C':'black',textDecoration:'none'}} to={'/contactUs'}>Contact Us</Link>
+                            </ListItemButton>
+                        </ListItem>
+                    </List>
+                </Drawer>
+                </>:
+
+                    <Box className='landingPageContainer__navbar__links'>
+                        <Box><Link to={'/'}><button style={{color:location.pathname==='/'?'#D6384C':'black'}}>Home</button></Link></Box>
+                        <Box><Link to={'/aboutUs'}><button style={{color:location.pathname?.includes('aboutUs')?'#D6384C':'black'}}>About Us</button></Link></Box>
+                        <Box><Link to={'/whatWeDo'}><button style={{color:location.pathname?.includes('whatWeDo')?'#D6384C':'black'}}>What We Do</button></Link></Box>
+                        <Box><Link to={'/howWeDo'}><button style={{color:location.pathname?.includes('howWeDo')?'#D6384C':'black'}}>How We Do</button></Link></Box>
+                        <Box><Link to={'/providers'}><button style={{color:location.pathname?.includes('providers')?'#D6384C':'black'}}>Providers</button></Link></Box>
+                        <Box><Link to={'/contactUs'}><button style={{color:location.pathname?.includes('contactUs')?'#D6384C':'black'}}>Contact Us</button></Link></Box>
+                    </Box>
+                }
+
             </Box>
             <Box className='landingPageContainer__content'>
                 {location.pathname?.includes('aboutUs') &&  <AboutUs/>}

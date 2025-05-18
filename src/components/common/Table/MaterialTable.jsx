@@ -12,7 +12,7 @@ import StarIcon from '@mui/icons-material/Star';
 const CustomerMaterialTableContext = createContext()
 export const useCustomMaterialTableContext = ()=>useContext(CustomerMaterialTableContext)
 
-const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialogButtonName, clickButton , buttonName,reviewDesign}) => {
+const CustomMaterialTable = ({DialogButton,openSnackBar,columnss,URL,key, dialogTitle, dialogButtonName, clickButton , buttonName,reviewDesign}) => {
     const tableRef = createRef();
     const token = localStorage.getItem('access_tokenSP'); // Retrieve the token from local storage
     const sp_id = localStorage.getItem('sp_id'); // Retrieve the token from local storage
@@ -171,6 +171,7 @@ const CustomMaterialTable = ({DialogButton,columnss,URL,key, dialogTitle, dialog
                     tableRef={tableRef} 
                     title={dialogTitle} 
                     buttonName={dialogButtonName}
+                    openSnackBar={openSnackBar}
                   >
                     <DialogButton
                       height={isMobileResolution?"30px":'50px'} 

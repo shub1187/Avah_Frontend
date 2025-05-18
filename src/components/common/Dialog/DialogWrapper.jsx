@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogTitle } from '@mui/material'
+import { Alert, Box, Button, Dialog, DialogTitle, Snackbar } from '@mui/material'
 import { useMobileResponsive } from 'hooks/useMobileResponsive'
 import React, { createContext, useContext, useState } from 'react'
 import UnderLine from '../Underline'
@@ -24,11 +24,20 @@ const DialogWrapperContext = createContext('hi')
  */
 export const useDialogWrapperContext = ()=> useContext(DialogWrapperContext)
 
-const DialogWrapper = ({children, title , buttonName , tableRef, cardIcon}) => {
+const DialogWrapper = ({children, title , buttonName , tableRef, cardIcon,openSnackBar}) => {
     const [formData, setFormData] = useState({});
 
     const [open,setOpen] = useState(false)
-    const handleOpen = ()=>setOpen(true)
+    const [snackbar,setSnackbar] = useState(false)
+    const handleOpen = ()=>{
+        if(openSnackBar) {
+            setSnackbar(true)
+            setTimeout(()=>setSnackbar(false),2000)
+        }
+        else{
+            setOpen(true)
+        }
+    }
     const handleClose = ()=>{setOpen(false)}
 
     const {isMobile} = useMobileResponsive()
@@ -52,6 +61,7 @@ const DialogWrapper = ({children, title , buttonName , tableRef, cardIcon}) => {
     }
     return (
         <div>
+            { snackbar &&<Snackbar anchorOrigin={{vertical:"top",horizontal:'center'}} open={snackbar}><Alert severity="error">Kindly fill in last appointment review before creating a new appointment</Alert></Snackbar>}
             <DialogWrapperContext.Provider value={DialogWrapperFuntions}>
             {buttonName && (
                 <Button className='mr-1 mt-3'  variant="contained" color={'options'} onClick={handleOpen}>

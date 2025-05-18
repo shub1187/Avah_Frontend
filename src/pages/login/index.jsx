@@ -71,7 +71,7 @@ const RaeesLoginComponent = () => {
     };
 
     const loginFunction = async()=>{
-        let payload ={...formData,role:activeButton}
+        let payload ={...formData,role:activeButton,email:formData?.email?.toLowerCase()}
         if(isAdminPage){
             payload = {...formData,role:"admin"}
         }
@@ -140,7 +140,7 @@ const RaeesLoginComponent = () => {
 
     const registerFunction = async(e)=>{
         e?.preventDefault()
-        let payload ={...formData,role:activeButton,approval_status:false,sp_status:"inactive"}
+        let payload ={...formData,role:activeButton,approval_status:false,sp_status:"inactive",email:formData?.email?.toLowerCase()}
         setIsSubmitted(true)
         let isRequired = requiredTextfield(registerTextfield,formData)
         // console.log(payload.role)
@@ -512,7 +512,7 @@ const RaeesLoginComponent = () => {
                             {isMobile && (
                             <Box className='mobile-logo-sign-up'>
                                 <Box>{isAdminPage ? <></>:<Link to={'/'}><img src={LogoImage} alt="logo Img" ></img></Link>}</Box>
-                                <Box>{isAdminPage ? <></>: <button onClick={()=>{setLogin(!login);setFormData({});setFiles({});setFileError(false);setFileRequiredError(false)}} className='black-button'>{login?'SIGN UP':"LOGIN"}</button>}</Box>
+                                <Box>{isAdminPage ? <></>: <button style={{width:'100px'}} onClick={()=>{setLogin(!login);setFormData({});setFiles({});setFileError(false);setFileRequiredError(false)}} className='black-button'>{login?'SIGN UP':"LOGIN"}</button>}</Box>
                             </Box>
                             )}
 

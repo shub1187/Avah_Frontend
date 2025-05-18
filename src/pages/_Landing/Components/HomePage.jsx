@@ -14,8 +14,8 @@ import One from '../../../../src/assets/landingPage/homePage/One.svg'
 import Two from '../../../../src/assets/landingPage/homePage/two.svg'
 import Three from '../../../../src/assets/landingPage/homePage/three.svg'
 import Home from '../../../../src/assets/landingPage/homePage/Home.png'
-import HOWWEWORK from '../../../../src/assets/landingPage/homePage/Screenshot 2025-05-04 at 11.47.31 AM.png'
-
+import HOWWEWORK from '../../../../src/assets/landingPage/homePage/Screenshot 2025-05-10 at 12.01.06 AM.png'
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Card1 from '../../../../src/assets/landingPage/Providers/Card1.png'
 import Card2 from '../../../../src/assets/landingPage/Providers/Card2.png'
 import Card3 from '../../../../src/assets/landingPage/Providers/Card3.png'
@@ -25,6 +25,8 @@ import Card6 from '../../../../src/assets/landingPage/Providers/Card6.png'
 import Card7 from '../../../../src/assets/landingPage/Providers/Card7.png'
 import Card8 from '../../../../src/assets/landingPage/Providers/Card8.png'
 import Card9 from '../../../../src/assets/landingPage/Providers/Card9.png'
+import Carousel from "react-multi-carousel";
+
 import { Link, useLocation } from "react-router-dom"
 import URL from "url/apiURL"
 import { useFetch } from "hooks/useFetch"
@@ -37,7 +39,25 @@ const HomePage = ()=>{
     const randomsp = data?.data?.result?.results;
 
     const cardImages = [Card1, Card2, Card3, Card4, Card5, Card6, Card7, Card8, Card9];
-
+    const responsive = {
+        superLargeDesktop: {
+          // the naming can be any, depends on you.
+          breakpoint: { max: 4000, min: 2000 },
+          items: 5
+        },
+        desktop: {
+          breakpoint: { max: 2000, min: 1200 },
+          items: 3
+        },
+        tablet: {
+          breakpoint: { max: 1400, min: 950 },
+          items: 2
+        },
+        mobile: {
+          breakpoint: { max: 950, min: 0 },
+          items: 1
+        }
+      };
     return(
         <Box className='homePage'>
             <Box className='homePage__getStartedImage'>
@@ -95,8 +115,10 @@ const HomePage = ()=>{
             <Box className='homePage__serviceProviders'>
                 <Box className='homePage__serviceProviders__title'>Our <span className="redColor">Service Providers</span></Box>
                 <Box className='homePage__serviceProviders__card'>
+                <Carousel containerClass="carousel-container" responsive={responsive} ssr={true} infinite={true}>
+
                     {
-                        randomsp?.map((obj, ind) => {
+                        randomsp?.length ?randomsp?.map((obj, ind) => {
                             const imageIndex = ind % cardImages.length; // Cycle through cardImages
                             return (
                                 <Box className='cardContainer' key={ind}>
@@ -104,9 +126,8 @@ const HomePage = ()=>{
                                         <img src={cardImages[imageIndex]} alt={obj?.name} />
                                     </Box>
                                     <Box className='redText'>{obj?.business_name}</Box>
-                                    <Box className='desc'>{obj?.business_contact}</Box>
-                                    <Box className='desc'>{obj?.email}</Box>
-                                    <Box className='location'>{obj?.state} {obj?.city}</Box>
+                                    <Box className='desc'>{obj?.business_address}</Box>
+                                    <Box className='location'><LocationOnIcon sx={{color:'#D6384C'}}/>{obj?.state} {obj?.city}</Box>
                                     <Box className='underline'></Box>
                                     <Box>
                                         <Rating
@@ -119,7 +140,11 @@ const HomePage = ()=>{
                                 </Box>
                             );
                         })
+                        :<div></div>
+                        
                     }
+                </Carousel>
+
                 </Box>
                 <Box className='homePage__serviceProviders__viewAllButton'>
                 <Link to='/providers'><button>View all {'> >'}</button></Link>

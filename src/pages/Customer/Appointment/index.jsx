@@ -22,6 +22,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import CustomMaterialTable from 'components/common/Table/MaterialTable'
 
 const {getEstimateDetails, estimateApproval, estimateRejection, getJobcardDetails,getAllPendingApprovedAppointment,getAllRejectedCancelledAppointment} = URL.CUSTOMER.APPOINTMENT
+const {getPaidServices} = URL.CUSTOMER.REVIEW
+
 const CustomerAppointment = () => {
   
   const [toggle,setToggle] = useState('appointment')
@@ -34,7 +36,7 @@ const CustomerAppointment = () => {
   const [openReject,setOpenReject] = useState({toggle:false,estimate_rejection_note:''})
   const [isSubmitted,setIsSubmitted] = useState(false)
   const [openApprove,setOpenApprove] = useState(false)
-
+  const [openSnackbar,setOpenSnackbar] = useState(false)
   // data.map((arr)=> arr.amount = parseFloat(arr?.amount)*parseFloat(arr?.quantity))
   // sparePayload.map((arr)=> arr.amount = parseFloat(arr?.amount)*parseFloat(arr?.quantity))
   // labourPayload.map((arr)=> arr.amount = parseFloat(arr?.amount)*parseFloat(arr?.quantity))
@@ -112,6 +114,20 @@ const CustomerAppointment = () => {
     }
   }, [page]);
   
+  useEffect(()=>{
+    const run = async()=>{
+      let {data} = await fetchData({url:`${getPaidServices}?customer_id=${localStorage.getItem('customer_id')}&&_page=1&_limit=5`,method:'GET'})
+      let datar = [...data?.data?.results,{rating_provided:false}]
+      const notOpenSnackbar = data?.data?.results?.every((obj)=>obj?.rating_provided)
+      console.log(notOpenSnackbar)
+      // dont ope
+      if(!notOpenSnackbar){
+        setOpenSnackbar(true)
+      }
+    }
+     run()
+
+  },[])
   const getEstimateDetailsApi = async(apiType)=>{
     
     let url = ''
@@ -483,6 +499,7 @@ const CustomerAppointment = () => {
             URL={getAllPendingApprovedAppointment}
             dialogButtonName={'CREATE APPOINTMENT'}
             dialogTitle={'CREATE APPOINTMENT'}
+            openSnackBar={openSnackbar}
             />
        :
       <CustomMaterialTable

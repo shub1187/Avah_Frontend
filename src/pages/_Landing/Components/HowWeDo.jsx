@@ -163,11 +163,11 @@ const HowWeDo = ()=>{
                         <Box className='howWeDo__service__leftRight__right__box'>
                             <Box className='howWeDo__service__leftRight__right__box__circleAndArrow'>
                                 <Box className='howWeDo__service__leftRight__right__box__circleAndArrow__circle'><Box>5</Box><Box className='howWeDo__service__leftRight__right__box__circleAndArrow__circle__circle1'></Box></Box>
-                                <Box className='howWeDo__service__leftRight__right__box__circleAndArrow__arrow'>
+                                {/* <Box className='howWeDo__service__leftRight__right__box__circleAndArrow__arrow'>
                                     <Box className='howWeDo__service__leftRight__right__box__circleAndArrow__arrow__line'></Box>
                                     <Box className='howWeDo__service__leftRight__right__box__circleAndArrow__arrow__pointer'></Box>
 
-                                </Box>
+                                </Box> */}
 
                             </Box>
                             <Box className='howWeDo__service__leftRight__right__box__text'>

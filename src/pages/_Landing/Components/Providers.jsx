@@ -179,10 +179,8 @@ const Providers = ()=>{
                                     <img src={cardImages[imageIndex]} alt={obj?.name} />
                                 </Box>
                                 <Box className='redText'>{obj?.business_name}</Box>
-                                <Box className='desc'>{obj?.email}</Box>
-                                <Box className='desc'>{obj?.mobile_number}</Box>
                                 <Box className='desc'>{obj?.address}</Box>
-                                <Box className='location'>{obj?.state} {obj?.city}</Box>
+                                <Box className='location'><LocationOnIcon sx={{color:'#D6384C'}}/>{obj?.state} {obj?.city}</Box>
                                 <Box className='underline'></Box>
                                 <Box>
                                     <Rating
