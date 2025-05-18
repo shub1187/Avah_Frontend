@@ -6,8 +6,8 @@ import './index.scss'
 const {rateServiceProvider} = URL.CUSTOMER.REVIEW
 
 const AddCustomerReview = () => {
-    const { handleClose, isMobile, isSubmitted, setIsSubmitted, formData, setFormData } = useDialogWrapperContext()
-    const { fetchCustomerData, snackbar, loadingIndicator } = useCustomerFetchFunction()
+    const { handleClose, isMobile, isSubmitted, setIsSubmitted, formData, setFormData,tableRef } = useDialogWrapperContext()
+    const { fetchCustomerData, snackbar, loadingIndicator,ta } = useCustomerFetchFunction()
 
     const handleSubmit = async () => {
         setIsSubmitted(true); // Set the form as submitted
@@ -30,6 +30,8 @@ const AddCustomerReview = () => {
         // setFormData({})
         setIsSubmitted(false)
         setTimeout(()=>handleClose(),2000)
+        tableRef?.current?.onQueryChange()
+
     }
     return (
         <>

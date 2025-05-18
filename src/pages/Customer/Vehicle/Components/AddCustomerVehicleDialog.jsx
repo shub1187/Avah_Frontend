@@ -14,7 +14,7 @@ import URL from 'url/apiURL';
 const {getAllFuelTypes,getAllModelPerBrand,vehicleRegistration} = URL.CUSTOMER.VEHICLE
 
 const AddCustomerVehicleDialog = ({ height, width, color }) => {
-    const { handleClose, isMobile, isSubmitted, setIsSubmitted, formData, setFormData } = useDialogWrapperContext()
+    const { handleClose, isMobile, isSubmitted, setIsSubmitted, formData, setFormData ,tableRef} = useDialogWrapperContext()
     const [vehicleNameAndBrand, setVehicleNameAndBrand] = useState({})
     const [fuelArray,setFuelArray] = useState([])
     let {data} = useFetch(getAllModelPerBrand)
@@ -72,6 +72,8 @@ const AddCustomerVehicleDialog = ({ height, width, color }) => {
         // setFormData({})
         setIsSubmitted(false)
         setTimeout(()=>handleClose(),2000)
+        tableRef?.current?.onQueryChange()
+
     }
 
 
