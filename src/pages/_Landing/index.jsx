@@ -18,10 +18,11 @@ import HowWeDo from "./Components/HowWeDo"
 import ContactUs from "./Components/ContactUs"
 import Providers from "./Components/Providers"
 import MenuIcon from '@mui/icons-material/Menu';
+import { useMobileResponsive } from "hooks/useMobileResponsive"
 
 const LandingPage = ()=>{
     const location = useLocation()
-
+    const {isMobile} = useMobileResponsive()
     const [open,setOpen] = useState(false)
     return(
         <Box className='landingPageContainer'>
@@ -40,7 +41,7 @@ const LandingPage = ()=>{
             </Box>
             <Box className='landingPageContainer__navbar'>
                 <Box className='landingPageContainer__navbar__logo'><img src={AvahLogo}/></Box>
-                {window.innerWidth<450 ?
+                {isMobile ?
                  <>
                     <Box>
                         <IconButton onClick={()=>setOpen(true)}><MenuIcon/></IconButton>

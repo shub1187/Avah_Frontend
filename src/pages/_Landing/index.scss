@@ -135,8 +135,15 @@
                 }
                 margin: 0 16px 56px;
                 justify-content: space-between;
+                &__left{
+                    font-size: 12px;
+                }
                 &__right{
                     display: flex;
+                    img{
+                        height: 30px;
+                        width: 30px;
+                    }
                 }
             }
         }
